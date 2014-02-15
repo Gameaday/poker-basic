@@ -1,0 +1,28 @@
+name : Jenny
+Chips: 500
+Cards: [8, 23, 36, 37, 49]
+Hand : [King of Spades, Nine of Clubs, Six of Spades, Five of Hearts, Two of Hearts]
+Card multiples: [High King]
+Hand Value: 11
+
+name : Jenny
+Chips: 300
+Cards: [8, 23, 36, 37, 49]
+Hand : [King of Spades, Nine of Clubs, Six of Spades, Five of Hearts, Two of Hearts]
+Card multiples: [High King]
+Hand Value: 11
+
+name : Jenny
+Chips: 300
+Cards: [5, 10, 14, 17, 29]
+Hand : [King of Hearts, Queen of Diamonds, Jack of Diamonds, Ten of Hearts, Seven of Hearts]
+Card multiples: [High King]
+Hand Value: 11
+
+name : Jenny
+Chips: 550
+Cards: [5, 10, 14, 17, 29]
+Hand : [King of Hearts, Queen of Diamonds, Jack of Diamonds, Ten of Hearts, Seven of Hearts]
+Card multiples: [High King]
+Hand Value: 11
+

@@ -1,0 +1,8 @@
+name : Wesley
+Chips: 500
+Cards: [12, 18, 20, 25, 32]
+Hand : [Queen of Spades, Ten of Diamonds, Ten of Spades, Eight of Hearts, Seven of Spades]
+Card multiples: [Pair Ten, High Queen]
+Two of a Kind: true
+Hand Value: 21
+

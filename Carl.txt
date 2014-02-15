@@ -1,0 +1,53 @@
+name : Carl
+Chips: 500
+Cards: [7, 15, 34, 49, 50]
+Hand : [King of Clubs, Jack of Clubs, Six of Diamonds, Two of Hearts, Two of Diamonds]
+Card multiples: [Pair Two, High King]
+Two of a Kind: true
+Hand Value: 13
+
+name : Carl
+Chips: 2500
+Cards: [4, 10, 18, 30, 34]
+Hand : [Ace of Spades, Queen of Diamonds, Ten of Diamonds, Seven of Diamonds, Six of Diamonds]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : Carl
+Chips: 500
+Cards: [16, 21, 40, 43, 50]
+Hand : [Jack of Spades, Nine of Hearts, Five of Spades, Four of Clubs, Two of Diamonds]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : Carl
+Chips: 500
+Cards: [16, 21, 40, 43, 50]
+Hand : [Jack of Spades, Nine of Hearts, Five of Spades, Four of Clubs, Two of Diamonds]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : Carl
+Chips: 500
+Cards: [3, 9, 28, 49, 51]
+Hand : [Ace of Clubs, Queen of Hearts, Eight of Spades, Two of Hearts, Two of Clubs]
+Card multiples: [Pair Two, High Ace]
+Two of a Kind: true
+Hand Value: 13
+
+name : Carl
+Chips: 500
+Cards: [3, 9, 28, 49, 51]
+Hand : [Ace of Clubs, Queen of Hearts, Eight of Spades, Two of Hearts, Two of Clubs]
+Card multiples: [Pair Two, High Ace]
+Two of a Kind: true
+Hand Value: 13
+
+name : Carl
+Chips: 500
+Cards: [8, 33, 41, 43, 50]
+Hand : [King of Spades, Six of Hearts, Four of Hearts, Four of Clubs, Two of Diamonds]
+Card multiples: [Pair Four, High King]
+Two of a Kind: true
+Hand Value: 15
+

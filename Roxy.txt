@@ -1,0 +1,23 @@
+name : Roxy
+Chips: 0
+Cards: [4, 5, 12, 24, 47]
+Hand : [Ace of Spades, King of Hearts, Queen of Spades, Nine of Spades, Three of Clubs]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : Roxy
+Chips: 2500
+Cards: [2, 29, 30, 33, 36]
+Hand : [Ace of Diamonds, Seven of Hearts, Seven of Diamonds, Six of Hearts, Six of Spades]
+Card multiples: [Pair Seven, Pair Six, High Ace]
+Two Pairs: true
+Hand Value: 30
+
+name : Roxy
+Chips: 100
+Cards: [1, 10, 29, 30, 33]
+Hand : [Ace of Hearts, Queen of Diamonds, Seven of Hearts, Seven of Diamonds, Six of Hearts]
+Card multiples: [Pair Seven, High Ace]
+Two of a Kind: true
+Hand Value: 18
+

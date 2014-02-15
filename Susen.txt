@@ -1,0 +1,24 @@
+name : Susen
+Chips: 500
+Cards: [9, 12, 21, 30, 51]
+Hand : [Queen of Hearts, Queen of Spades, Nine of Hearts, Seven of Diamonds, Two of Clubs]
+Card multiples: [Pair Queen, High Nine]
+Two of a Kind: true
+Hand Value: 23
+
+name : Susen
+Chips: 500
+Cards: [22, 24, 27, 43, 46]
+Hand : [Nine of Diamonds, Nine of Spades, Eight of Clubs, Four of Clubs, Three of Diamonds]
+Card multiples: [Pair Nine, High Eight]
+Two of a Kind: true
+Hand Value: 20
+
+name : Susen
+Chips: 7
+Cards: [22, 24, 27, 43, 46]
+Hand : [Nine of Diamonds, Nine of Spades, Eight of Clubs, Four of Clubs, Three of Diamonds]
+Card multiples: [Pair Nine, High Eight]
+Two of a Kind: true
+Hand Value: 20
+

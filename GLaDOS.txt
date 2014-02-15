@@ -1,0 +1,98 @@
+name : GLaDOS
+Chips: 500
+Cards: [25, 34, 38, 41, 44]
+Hand : [Eight of Hearts, Six of Diamonds, Five of Diamonds, Four of Hearts, Four of Spades]
+Card multiples: [Pair Four, High Eight]
+Two of a Kind: true
+Hand Value: 15
+
+name : GLaDOS
+Chips: 500
+Cards: [25, 34, 38, 41, 44]
+Hand : [Eight of Hearts, Six of Diamonds, Five of Diamonds, Four of Hearts, Four of Spades]
+Card multiples: [Pair Four, High Eight]
+Two of a Kind: true
+Hand Value: 15
+
+name : GLaDOS
+Chips: 500
+Cards: [2, 8, 11, 31, 37]
+Hand : [Ace of Diamonds, King of Spades, Queen of Clubs, Seven of Clubs, Five of Hearts]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : GLaDOS
+Chips: 500
+Cards: [2, 8, 11, 31, 37]
+Hand : [Ace of Diamonds, King of Spades, Queen of Clubs, Seven of Clubs, Five of Hearts]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : GLaDOS
+Chips: 2500
+Cards: [2, 3, 26, 28, 37]
+Hand : [Ace of Diamonds, Ace of Clubs, Eight of Diamonds, Eight of Spades, Five of Hearts]
+Card multiples: [Pair Ace, Pair Eight, High Five]
+Two Pairs: true
+Hand Value: 37
+
+name : GLaDOS
+Chips: 500
+Cards: [13, 14, 19, 36, 38]
+Hand : [Jack of Hearts, Jack of Diamonds, Ten of Clubs, Six of Spades, Five of Diamonds]
+Card multiples: [Pair Jack, High Ten]
+Two of a Kind: true
+Hand Value: 22
+
+name : GLaDOS
+Chips: 610
+Cards: [13, 14, 19, 36, 38]
+Hand : [Jack of Hearts, Jack of Diamonds, Ten of Clubs, Six of Spades, Five of Diamonds]
+Card multiples: [Pair Jack, High Ten]
+Two of a Kind: true
+Hand Value: 22
+
+name : GLaDOS
+Chips: 610
+Cards: [5, 16, 18, 26, 51]
+Hand : [King of Hearts, Jack of Spades, Ten of Diamonds, Eight of Diamonds, Two of Clubs]
+Card multiples: [High King]
+Hand Value: 11
+
+name : GLaDOS
+Chips: 610
+Cards: [5, 16, 18, 26, 51]
+Hand : [King of Hearts, Jack of Spades, Ten of Diamonds, Eight of Diamonds, Two of Clubs]
+Card multiples: [High King]
+Hand Value: 11
+
+name : GLaDOS
+Chips: 610
+Cards: [5, 6, 17, 36, 45]
+Hand : [King of Hearts, King of Diamonds, Ten of Hearts, Six of Spades, Three of Hearts]
+Card multiples: [Pair King, High Ten]
+Two of a Kind: true
+Hand Value: 24
+
+name : GLaDOS
+Chips: 980
+Cards: [5, 6, 17, 36, 45]
+Hand : [King of Hearts, King of Diamonds, Ten of Hearts, Six of Spades, Three of Hearts]
+Card multiples: [Pair King, High Ten]
+Two of a Kind: true
+Hand Value: 24
+
+name : GLaDOS
+Chips: 500
+Cards: [2, 19, 37, 44, 47]
+Hand : [Ace of Diamonds, Ten of Clubs, Five of Hearts, Four of Spades, Three of Clubs]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : GLaDOS
+Chips: 150
+Cards: [2, 19, 37, 44, 47]
+Hand : [Ace of Diamonds, Ten of Clubs, Five of Hearts, Four of Spades, Three of Clubs]
+Card multiples: [High Ace]
+Hand Value: 12
+

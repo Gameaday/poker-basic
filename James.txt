@@ -1,0 +1,143 @@
+name : James
+Chips: 500
+Cards: [1, 16, 29, 34, 43]
+Hand : [Ace of Hearts, Jack of Spades, Seven of Hearts, Six of Diamonds, Four of Clubs]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : James
+Chips: 2500
+Cards: [17, 20, 26, 27, 40]
+Hand : [Ten of Hearts, Ten of Spades, Eight of Diamonds, Eight of Clubs, Five of Spades]
+Card multiples: [Pair Ten, Pair Eight, High Five]
+Two Pairs: true
+Hand Value: 33
+
+name : James
+Chips: 500
+Cards: [3, 9, 15, 23, 34]
+Hand : [Ace of Clubs, Queen of Hearts, Jack of Clubs, Nine of Clubs, Six of Diamonds]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : James
+Chips: 500
+Cards: [3, 9, 15, 23, 34]
+Hand : [Ace of Clubs, Queen of Hearts, Jack of Clubs, Nine of Clubs, Six of Diamonds]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : James
+Chips: 500
+Cards: [20, 33, 41, 42, 47]
+Hand : [Ten of Spades, Six of Hearts, Four of Hearts, Four of Diamonds, Three of Clubs]
+Card multiples: [Pair Four, High Ten]
+Two of a Kind: true
+Hand Value: 15
+
+name : James
+Chips: 500
+Cards: [20, 33, 41, 42, 47]
+Hand : [Ten of Spades, Six of Hearts, Four of Hearts, Four of Diamonds, Three of Clubs]
+Card multiples: [Pair Four, High Ten]
+Two of a Kind: true
+Hand Value: 15
+
+name : James
+Chips: 500
+Cards: [30, 36, 41, 47, 49]
+Hand : [Seven of Diamonds, Six of Spades, Four of Hearts, Three of Clubs, Two of Hearts]
+Card multiples: [High Seven]
+Hand Value: 5
+
+name : James
+Chips: 500
+Cards: [30, 36, 41, 47, 49]
+Hand : [Seven of Diamonds, Six of Spades, Four of Hearts, Three of Clubs, Two of Hearts]
+Card multiples: [High Seven]
+Hand Value: 5
+
+name : James
+Chips: 500
+Cards: [2, 5, 12, 14, 51]
+Hand : [Ace of Diamonds, King of Hearts, Queen of Spades, Jack of Diamonds, Two of Clubs]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : James
+Chips: 500
+Cards: [2, 5, 12, 14, 51]
+Hand : [Ace of Diamonds, King of Hearts, Queen of Spades, Jack of Diamonds, Two of Clubs]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : James
+Chips: 500
+Cards: [6, 19, 29, 41, 43]
+Hand : [King of Diamonds, Ten of Clubs, Seven of Hearts, Four of Hearts, Four of Clubs]
+Card multiples: [Pair Four, High King]
+Two of a Kind: true
+Hand Value: 15
+
+name : James
+Chips: 2500
+Cards: [10, 12, 22, 23, 44]
+Hand : [Queen of Diamonds, Queen of Spades, Nine of Diamonds, Nine of Clubs, Four of Spades]
+Card multiples: [Pair Queen, Pair Nine, High Four]
+Two Pairs: true
+Hand Value: 35
+
+name : James
+Chips: 250
+Cards: [10, 12, 22, 23, 44]
+Hand : [Queen of Diamonds, Queen of Spades, Nine of Diamonds, Nine of Clubs, Four of Spades]
+Card multiples: [Pair Queen, Pair Nine, High Four]
+Two Pairs: true
+Hand Value: 35
+
+name : James
+Chips: 250
+Cards: [15, 23, 30, 35, 36]
+Hand : [Jack of Clubs, Nine of Clubs, Seven of Diamonds, Six of Clubs, Six of Spades]
+Card multiples: [Pair Six, High Jack]
+Two of a Kind: true
+Hand Value: 17
+
+name : James
+Chips: -50
+Cards: [15, 23, 30, 35, 36]
+Hand : [Jack of Clubs, Nine of Clubs, Seven of Diamonds, Six of Clubs, Six of Spades]
+Card multiples: [Pair Six, High Jack]
+Two of a Kind: true
+Hand Value: 17
+
+name : James
+Chips: -50
+Cards: [26, 28, 32, 33, 42]
+Hand : [Eight of Diamonds, Eight of Spades, Seven of Spades, Six of Hearts, Four of Diamonds]
+Card multiples: [Pair Eight, High Seven]
+Two of a Kind: true
+Hand Value: 19
+
+name : James
+Chips: 522
+Cards: [26, 28, 32, 33, 42]
+Hand : [Eight of Diamonds, Eight of Spades, Seven of Spades, Six of Hearts, Four of Diamonds]
+Card multiples: [Pair Eight, High Seven]
+Two of a Kind: true
+Hand Value: 19
+
+name : James
+Chips: 522
+Cards: [15, 19, 34, 42, 49]
+Hand : [Jack of Clubs, Ten of Clubs, Six of Diamonds, Four of Diamonds, Two of Hearts]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : James
+Chips: -100
+Cards: [15, 19, 34, 42, 49]
+Hand : [Jack of Clubs, Ten of Clubs, Six of Diamonds, Four of Diamonds, Two of Hearts]
+Card multiples: [High Jack]
+Hand Value: 9
+

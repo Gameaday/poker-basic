@@ -1,0 +1,106 @@
+name : Alphonse
+Chips: 2500
+Cards: [18, 19, 21, 36, 48]
+Hand : [Ten of Diamonds, Ten of Clubs, Nine of Hearts, Six of Spades, Three of Spades]
+Card multiples: [Pair Ten, High Nine]
+Two of a Kind: true
+Hand Value: 21
+
+name : Alphonse
+Chips: 2750
+Cards: [18, 19, 21, 36, 48]
+Hand : [Ten of Diamonds, Ten of Clubs, Nine of Hearts, Six of Spades, Three of Spades]
+Card multiples: [Pair Ten, High Nine]
+Two of a Kind: true
+Hand Value: 21
+
+name : Alphonse
+Chips: 500
+Cards: [10, 19, 23, 42, 48]
+Hand : [Queen of Diamonds, Ten of Clubs, Nine of Clubs, Four of Diamonds, Three of Spades]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : Alphonse
+Chips: -50
+Cards: [10, 19, 23, 42, 48]
+Hand : [Queen of Diamonds, Ten of Clubs, Nine of Clubs, Four of Diamonds, Three of Spades]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : Alphonse
+Chips: -50
+Cards: [6, 16, 40, 43, 50]
+Hand : [King of Diamonds, Jack of Spades, Five of Spades, Four of Clubs, Two of Diamonds]
+Card multiples: [High King]
+Hand Value: 11
+
+name : Alphonse
+Chips: -100
+Cards: [6, 16, 40, 43, 50]
+Hand : [King of Diamonds, Jack of Spades, Five of Spades, Four of Clubs, Two of Diamonds]
+Card multiples: [High King]
+Hand Value: 11
+
+name : Alphonse
+Chips: 2500
+Cards: [24, 39, 40, 47, 50]
+Hand : [Nine of Spades, Five of Clubs, Five of Spades, Three of Clubs, Two of Diamonds]
+Card multiples: [Pair Five, High Nine]
+Two of a Kind: true
+Hand Value: 16
+
+name : Alphonse
+Chips: -50
+Cards: [24, 39, 40, 47, 50]
+Hand : [Nine of Spades, Five of Clubs, Five of Spades, Three of Clubs, Two of Diamonds]
+Card multiples: [Pair Five, High Nine]
+Two of a Kind: true
+Hand Value: 16
+
+name : Alphonse
+Chips: 2500
+Cards: [6, 28, 33, 39, 42]
+Hand : [King of Diamonds, Eight of Spades, Six of Hearts, Five of Clubs, Four of Diamonds]
+Card multiples: [High King]
+Hand Value: 11
+
+name : Alphonse
+Chips: 2300
+Cards: [6, 28, 33, 39, 42]
+Hand : [King of Diamonds, Eight of Spades, Six of Hearts, Five of Clubs, Four of Diamonds]
+Card multiples: [High King]
+Hand Value: 11
+
+name : Alphonse
+Chips: 2300
+Cards: [26, 27, 41, 46, 49]
+Hand : [Eight of Diamonds, Eight of Clubs, Four of Hearts, Three of Diamonds, Two of Hearts]
+Card multiples: [Pair Eight, High Four]
+Two of a Kind: true
+Hand Value: 19
+
+name : Alphonse
+Chips: 2150
+Cards: [26, 27, 41, 46, 49]
+Hand : [Eight of Diamonds, Eight of Clubs, Four of Hearts, Three of Diamonds, Two of Hearts]
+Card multiples: [Pair Eight, High Four]
+Two of a Kind: true
+Hand Value: 19
+
+name : Alphonse
+Chips: 2150
+Cards: [5, 14, 16, 32, 43]
+Hand : [King of Hearts, Jack of Diamonds, Jack of Spades, Seven of Spades, Four of Clubs]
+Card multiples: [Pair Jack, High King]
+Two of a Kind: true
+Hand Value: 22
+
+name : Alphonse
+Chips: 3810
+Cards: [5, 14, 16, 32, 43]
+Hand : [King of Hearts, Jack of Diamonds, Jack of Spades, Seven of Spades, Four of Clubs]
+Card multiples: [Pair Jack, High King]
+Two of a Kind: true
+Hand Value: 22
+

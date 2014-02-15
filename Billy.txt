@@ -1,0 +1,75 @@
+name : Billy
+Chips: 2500
+Cards: [13, 15, 30, 33, 47]
+Hand : [Jack of Hearts, Jack of Clubs, Seven of Diamonds, Six of Hearts, Three of Clubs]
+Card multiples: [Pair Jack, High Seven]
+Two of a Kind: true
+Hand Value: 22
+
+name : Billy
+Chips: 500
+Cards: [4, 13, 35, 46, 50]
+Hand : [Ace of Spades, Jack of Hearts, Six of Clubs, Three of Diamonds, Two of Diamonds]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : Billy
+Chips: 2500
+Cards: [6, 16, 19, 28, 30]
+Hand : [King of Diamonds, Jack of Spades, Ten of Clubs, Eight of Spades, Seven of Diamonds]
+Card multiples: [High King]
+Hand Value: 11
+
+name : Billy
+Chips: 2500
+Cards: [8, 14, 17, 32, 44]
+Hand : [King of Spades, Jack of Diamonds, Ten of Hearts, Seven of Spades, Four of Spades]
+Card multiples: [High King]
+Hand Value: 11
+
+name : Billy
+Chips: -10
+Cards: [6, 16, 19, 28, 30]
+Hand : [King of Diamonds, Jack of Spades, Ten of Clubs, Eight of Spades, Seven of Diamonds]
+Card multiples: [High King]
+Hand Value: 11
+
+name : Billy
+Chips: 2500
+Cards: [8, 14, 17, 32, 44]
+Hand : [King of Spades, Jack of Diamonds, Ten of Hearts, Seven of Spades, Four of Spades]
+Card multiples: [High King]
+Hand Value: 11
+
+name : Billy
+Chips: -10
+Cards: [12, 18, 20, 38, 47]
+Hand : [Queen of Spades, Ten of Diamonds, Ten of Spades, Five of Diamonds, Three of Clubs]
+Card multiples: [Pair Ten, High Queen]
+Two of a Kind: true
+Hand Value: 21
+
+name : Billy
+Chips: 2500
+Cards: [4, 19, 45, 46, 51]
+Hand : [Ace of Spades, Ten of Clubs, Three of Hearts, Three of Diamonds, Two of Clubs]
+Card multiples: [Pair Three, High Ace]
+Two of a Kind: true
+Hand Value: 14
+
+name : Billy
+Chips: 199
+Cards: [12, 18, 20, 38, 47]
+Hand : [Queen of Spades, Ten of Diamonds, Ten of Spades, Five of Diamonds, Three of Clubs]
+Card multiples: [Pair Ten, High Queen]
+Two of a Kind: true
+Hand Value: 21
+
+name : Billy
+Chips: 2700
+Cards: [4, 19, 45, 46, 51]
+Hand : [Ace of Spades, Ten of Clubs, Three of Hearts, Three of Diamonds, Two of Clubs]
+Card multiples: [Pair Three, High Ace]
+Two of a Kind: true
+Hand Value: 14
+

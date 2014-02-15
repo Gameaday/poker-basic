@@ -1,0 +1,144 @@
+name : Smallie
+Chips: 500
+Cards: [21, 25, 28, 44, 48]
+Hand : [Nine of Hearts, Eight of Hearts, Eight of Spades, Four of Spades, Three of Spades]
+Card multiples: [Pair Eight, High Nine]
+Two of a Kind: true
+Hand Value: 19
+
+name : Smallie
+Chips: 500
+Cards: [1, 12, 25, 31, 36]
+Hand : [Ace of Hearts, Queen of Spades, Eight of Hearts, Seven of Clubs, Six of Spades]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : Smallie
+Chips: 700
+Cards: [1, 12, 25, 31, 36]
+Hand : [Ace of Hearts, Queen of Spades, Eight of Hearts, Seven of Clubs, Six of Spades]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : Smallie
+Chips: 0
+Cards: [21, 34, 40, 49, 51]
+Hand : [Nine of Hearts, Six of Diamonds, Five of Spades, Two of Hearts, Two of Clubs]
+Card multiples: [Pair Two, High Nine]
+Two of a Kind: true
+Hand Value: 13
+
+name : Smallie
+Chips: 0
+Cards: [21, 34, 40, 49, 51]
+Hand : [Nine of Hearts, Six of Diamonds, Five of Spades, Two of Hearts, Two of Clubs]
+Card multiples: [Pair Two, High Nine]
+Two of a Kind: true
+Hand Value: 13
+
+name : Smallie
+Chips: 500
+Cards: [7, 9, 11, 18, 25]
+Hand : [King of Clubs, Queen of Hearts, Queen of Clubs, Ten of Diamonds, Eight of Hearts]
+Card multiples: [Pair Queen, High King]
+Two of a Kind: true
+Hand Value: 23
+
+name : Smallie
+Chips: 17
+Cards: [7, 9, 11, 18, 25]
+Hand : [King of Clubs, Queen of Hearts, Queen of Clubs, Ten of Diamonds, Eight of Hearts]
+Card multiples: [Pair Queen, High King]
+Two of a Kind: true
+Hand Value: 23
+
+name : Smallie
+Chips: 17
+Cards: [9, 15, 32, 34, 42]
+Hand : [Queen of Hearts, Jack of Clubs, Seven of Spades, Six of Diamonds, Four of Diamonds]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : Smallie
+Chips: 0
+Cards: [9, 15, 32, 34, 42]
+Hand : [Queen of Hearts, Jack of Clubs, Seven of Spades, Six of Diamonds, Four of Diamonds]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : Smallie
+Chips: 0
+Cards: [8, 22, 24, 26, 35]
+Hand : [King of Spades, Nine of Diamonds, Nine of Spades, Eight of Diamonds, Six of Clubs]
+Card multiples: [Pair Nine, High King]
+Two of a Kind: true
+Hand Value: 20
+
+name : Smallie
+Chips: 0
+Cards: [8, 22, 24, 26, 35]
+Hand : [King of Spades, Nine of Diamonds, Nine of Spades, Eight of Diamonds, Six of Clubs]
+Card multiples: [Pair Nine, High King]
+Two of a Kind: true
+Hand Value: 20
+
+name : Smallie
+Chips: 0
+Cards: [8, 16, 25, 28, 49]
+Hand : [King of Spades, Jack of Spades, Eight of Hearts, Eight of Spades, Two of Hearts]
+Card multiples: [Pair Eight, High King]
+Two of a Kind: true
+Hand Value: 19
+
+name : Smallie
+Chips: 0
+Cards: [8, 16, 25, 28, 49]
+Hand : [King of Spades, Jack of Spades, Eight of Hearts, Eight of Spades, Two of Hearts]
+Card multiples: [Pair Eight, High King]
+Two of a Kind: true
+Hand Value: 19
+
+name : Smallie
+Chips: 0
+Cards: [1, 16, 22, 23, 41]
+Hand : [Ace of Hearts, Jack of Spades, Nine of Diamonds, Nine of Clubs, Four of Hearts]
+Card multiples: [Pair Nine, High Ace]
+Two of a Kind: true
+Hand Value: 20
+
+name : Smallie
+Chips: 653
+Cards: [1, 16, 22, 23, 41]
+Hand : [Ace of Hearts, Jack of Spades, Nine of Diamonds, Nine of Clubs, Four of Hearts]
+Card multiples: [Pair Nine, High Ace]
+Two of a Kind: true
+Hand Value: 20
+
+name : Smallie
+Chips: 653
+Cards: [11, 17, 26, 34, 42]
+Hand : [Queen of Clubs, Ten of Hearts, Eight of Diamonds, Six of Diamonds, Four of Diamonds]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : Smallie
+Chips: -10
+Cards: [11, 17, 26, 34, 42]
+Hand : [Queen of Clubs, Ten of Hearts, Eight of Diamonds, Six of Diamonds, Four of Diamonds]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : Smallie
+Chips: 100
+Cards: [1, 12, 22, 28, 36]
+Hand : [Ace of Hearts, Queen of Spades, Nine of Diamonds, Eight of Spades, Six of Spades]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : Smallie
+Chips: 100
+Cards: [1, 12, 22, 28, 36]
+Hand : [Ace of Hearts, Queen of Spades, Nine of Diamonds, Eight of Spades, Six of Spades]
+Card multiples: [High Ace]
+Hand Value: 12
+

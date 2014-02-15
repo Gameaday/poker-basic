@@ -1,0 +1,46 @@
+name : Karkat
+Chips: 2500
+Cards: [10, 11, 22, 47, 50]
+Hand : [Queen of Diamonds, Queen of Clubs, Nine of Diamonds, Three of Clubs, Two of Diamonds]
+Card multiples: [Pair Queen, High Nine]
+Two of a Kind: true
+Hand Value: 23
+
+name : Karkat
+Chips: 3150
+Cards: [10, 11, 22, 47, 50]
+Hand : [Queen of Diamonds, Queen of Clubs, Nine of Diamonds, Three of Clubs, Two of Diamonds]
+Card multiples: [Pair Queen, High Nine]
+Two of a Kind: true
+Hand Value: 23
+
+name : Karkat
+Chips: 3150
+Cards: [14, 21, 35, 37, 50]
+Hand : [Jack of Diamonds, Nine of Hearts, Six of Clubs, Five of Hearts, Two of Diamonds]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : Karkat
+Chips: 3000
+Cards: [14, 21, 35, 37, 50]
+Hand : [Jack of Diamonds, Nine of Hearts, Six of Clubs, Five of Hearts, Two of Diamonds]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : Karkat
+Chips: 3000
+Cards: [6, 33, 37, 49, 50]
+Hand : [King of Diamonds, Six of Hearts, Five of Hearts, Two of Hearts, Two of Diamonds]
+Card multiples: [Pair Two, High King]
+Two of a Kind: true
+Hand Value: 13
+
+name : Karkat
+Chips: 2930
+Cards: [6, 33, 37, 49, 50]
+Hand : [King of Diamonds, Six of Hearts, Five of Hearts, Two of Hearts, Two of Diamonds]
+Card multiples: [Pair Two, High King]
+Two of a Kind: true
+Hand Value: 13
+

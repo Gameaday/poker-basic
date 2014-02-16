@@ -1,8 +1,0 @@
-name : Joe
-Chips: 2500
-Cards: [9, 22, 25, 38, 39]
-Hand : [Queen of Hearts, Nine of Diamonds, Eight of Hearts, Five of Diamonds, Five of Clubs]
-Card multiples: [Pair Five, High Queen]
-Two of a Kind: true
-Hand Value: 16
-

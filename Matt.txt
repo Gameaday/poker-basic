@@ -1,0 +1,94 @@
+name : Matt
+Chips: 500
+Cards: [16, 28, 30, 35, 40]
+Hand : [Jack of Spades, Eight of Spades, Seven of Diamonds, Six of Clubs, Five of Spades]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : Matt
+Chips: 600
+Cards: [16, 28, 30, 35, 40]
+Hand : [Jack of Spades, Eight of Spades, Seven of Diamonds, Six of Clubs, Five of Spades]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : Matt
+Chips: 500
+Cards: [25, 26, 37, 44, 49]
+Hand : [Eight of Hearts, Eight of Diamonds, Five of Hearts, Four of Spades, Two of Hearts]
+Card multiples: [Pair Eight, High Five]
+Two of a Kind: true
+Hand Value: 19
+
+name : Matt
+Chips: 500
+Cards: [16, 20, 21, 43, 44]
+Hand : [Jack of Spades, Ten of Spades, Nine of Hearts, Four of Clubs, Four of Spades]
+Card multiples: [Pair Four, High Jack]
+Two of a Kind: true
+Hand Value: 15
+
+name : Matt
+Chips: 30
+Cards: [16, 20, 21, 43, 44]
+Hand : [Jack of Spades, Ten of Spades, Nine of Hearts, Four of Clubs, Four of Spades]
+Card multiples: [Pair Four, High Jack]
+Two of a Kind: true
+Hand Value: 15
+
+name : Matt
+Chips: 30
+Cards: [8, 17, 25, 29, 31]
+Hand : [King of Spades, Ten of Hearts, Eight of Hearts, Seven of Hearts, Seven of Clubs]
+Card multiples: [Pair Seven, High King]
+Two of a Kind: true
+Hand Value: 18
+
+name : Matt
+Chips: 148
+Cards: [8, 17, 25, 29, 31]
+Hand : [King of Spades, Ten of Hearts, Eight of Hearts, Seven of Hearts, Seven of Clubs]
+Card multiples: [Pair Seven, High King]
+Two of a Kind: true
+Hand Value: 18
+
+name : Matt
+Chips: 148
+Cards: [30, 37, 38, 39, 50]
+Hand : [Seven of Diamonds, Five of Hearts, Five of Diamonds, Five of Clubs, Two of Diamonds]
+Card multiples: [Three of a kind Five, High Seven]
+Three of a Kind: true
+Hand Value: 43
+
+name : Matt
+Chips: 500
+Cards: [4, 31, 33, 35, 39]
+Hand : [Ace of Spades, Seven of Clubs, Six of Hearts, Six of Clubs, Five of Clubs]
+Card multiples: [Pair Six, High Ace]
+Two of a Kind: true
+Hand Value: 17
+
+name : Matt
+Chips: 500
+Cards: [5, 8, 32, 43, 51]
+Hand : [King of Hearts, King of Spades, Seven of Spades, Four of Clubs, Two of Clubs]
+Card multiples: [Pair King, High Seven]
+Two of a Kind: true
+Hand Value: 24
+
+name : Matt
+Chips: 500
+Cards: [21, 24, 25, 37, 48]
+Hand : [Nine of Hearts, Nine of Spades, Eight of Hearts, Five of Hearts, Three of Spades]
+Card multiples: [Pair Nine, High Eight]
+Two of a Kind: true
+Hand Value: 20
+
+name : Matt
+Chips: 90
+Cards: [21, 24, 25, 37, 48]
+Hand : [Nine of Hearts, Nine of Spades, Eight of Hearts, Five of Hearts, Three of Spades]
+Card multiples: [Pair Nine, High Eight]
+Two of a Kind: true
+Hand Value: 20
+

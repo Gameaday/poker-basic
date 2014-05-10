@@ -1,0 +1,2039 @@
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [7, 29, 30, 33, 43]
+Hand : [King of Clubs, Seven of Hearts, Seven of Diamonds, Six of Hearts, Four of Clubs]
+Card multiples: [Pair Seven, High King]
+Two of a Kind: true
+Hand Value: 18
+
+name : A(n) Drew Hussie
+Chips: 2650
+Cards: [7, 13, 29, 30, 36]
+Hand : [King of Clubs, Jack of Hearts, Seven of Hearts, Seven of Diamonds, Six of Spades]
+Card multiples: [Pair Seven, High King]
+Two of a Kind: true
+Hand Value: 18
+
+name : A(n) Drew Hussie
+Chips: 0
+Cards: [33, 39, 40, 46, 50]
+Hand : [Six of Hearts, Five of Clubs, Five of Spades, Three of Diamonds, Two of Diamonds]
+Card multiples: [Pair Five, High Six]
+Two of a Kind: true
+Hand Value: 16
+
+name : A(n) Drew Hussie
+Chips: 300
+Cards: [18, 28, 38, 39, 40]
+Hand : [Ten of Diamonds, Eight of Spades, Five of Diamonds, Five of Clubs, Five of Spades]
+Card multiples: [Three of a kind Five, High Ten]
+Three of a Kind: true
+Hand Value: 43
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [7, 14, 21, 39, 47]
+Hand : [King of Clubs, Jack of Diamonds, Nine of Hearts, Five of Clubs, Three of Clubs]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 440
+Cards: [7, 14, 21, 39, 47]
+Hand : [King of Clubs, Jack of Diamonds, Nine of Hearts, Five of Clubs, Three of Clubs]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 0
+Cards: [10, 21, 22, 44, 49]
+Hand : [Queen of Diamonds, Nine of Hearts, Nine of Diamonds, Four of Spades, Two of Hearts]
+Card multiples: [Pair Nine, High Queen]
+Two of a Kind: true
+Hand Value: 20
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [11, 14, 26, 35, 40]
+Hand : [Queen of Clubs, Jack of Diamonds, Eight of Diamonds, Six of Clubs, Five of Spades]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : A(n) Drew Hussie
+Chips: 0
+Cards: [13, 29, 35, 40, 46]
+Hand : [Jack of Hearts, Seven of Hearts, Six of Clubs, Five of Spades, Three of Diamonds]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [4, 22, 40, 44, 49]
+Hand : [Ace of Spades, Nine of Diamonds, Five of Spades, Four of Spades, Two of Hearts]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [11, 13, 14, 27, 44]
+Hand : [Queen of Clubs, Jack of Hearts, Jack of Diamonds, Eight of Clubs, Four of Spades]
+Card multiples: [Pair Jack, High Queen]
+Two of a Kind: true
+Hand Value: 22
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [8, 18, 19, 30, 39]
+Hand : [King of Spades, Ten of Diamonds, Ten of Clubs, Seven of Diamonds, Five of Clubs]
+Card multiples: [Pair Ten, High King]
+Two of a Kind: true
+Hand Value: 21
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [1, 2, 29, 31, 49]
+Hand : [Ace of Hearts, Ace of Diamonds, Seven of Hearts, Seven of Clubs, Two of Hearts]
+Card multiples: [Pair Ace, Pair Seven, High Two]
+Two Pairs: true
+Hand Value: 37
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [9, 18, 36, 43, 48]
+Hand : [Queen of Hearts, Ten of Diamonds, Six of Spades, Four of Clubs, Three of Spades]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [8, 14, 17, 32, 34]
+Hand : [King of Spades, Jack of Diamonds, Ten of Hearts, Seven of Spades, Six of Diamonds]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [6, 8, 19, 27, 47]
+Hand : [King of Diamonds, King of Spades, Ten of Clubs, Eight of Clubs, Three of Clubs]
+Card multiples: [Pair King, High Ten]
+Two of a Kind: true
+Hand Value: 24
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [3, 8, 13, 18, 21]
+Hand : [Ace of Clubs, King of Spades, Jack of Hearts, Ten of Diamonds, Nine of Hearts]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [24, 25, 27, 37, 46]
+Hand : [Nine of Spades, Eight of Hearts, Eight of Clubs, Five of Hearts, Three of Diamonds]
+Card multiples: [Pair Eight, High Nine]
+Two of a Kind: true
+Hand Value: 19
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [2, 18, 24, 35, 36]
+Hand : [Ace of Diamonds, Ten of Diamonds, Nine of Spades, Six of Clubs, Six of Spades]
+Card multiples: [Pair Six, High Ace]
+Two of a Kind: true
+Hand Value: 17
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [12, 16, 27, 38, 42]
+Hand : [Queen of Spades, Jack of Spades, Eight of Clubs, Five of Diamonds, Four of Diamonds]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [9, 32, 36, 46, 51]
+Hand : [Queen of Hearts, Seven of Spades, Six of Spades, Three of Diamonds, Two of Clubs]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : A(n) Drew Hussie
+Chips: 520
+Cards: [9, 32, 36, 46, 51]
+Hand : [Queen of Hearts, Seven of Spades, Six of Spades, Three of Diamonds, Two of Clubs]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : A(n) Drew Hussie
+Chips: 0
+Cards: [2, 8, 28, 32, 36]
+Hand : [Ace of Diamonds, King of Spades, Eight of Spades, Seven of Spades, Six of Spades]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: -50
+Cards: [2, 8, 28, 32, 36]
+Hand : [Ace of Diamonds, King of Spades, Eight of Spades, Seven of Spades, Six of Spades]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 0
+Cards: [8, 17, 26, 33, 46]
+Hand : [King of Spades, Ten of Hearts, Eight of Diamonds, Six of Hearts, Three of Diamonds]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 0
+Cards: [8, 17, 26, 33, 46]
+Hand : [King of Spades, Ten of Hearts, Eight of Diamonds, Six of Hearts, Three of Diamonds]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 0
+Cards: [7, 14, 25, 34, 42]
+Hand : [King of Clubs, Jack of Diamonds, Eight of Hearts, Six of Diamonds, Four of Diamonds]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 0
+Cards: [7, 14, 25, 34, 42]
+Hand : [King of Clubs, Jack of Diamonds, Eight of Hearts, Six of Diamonds, Four of Diamonds]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 0
+Cards: [3, 29, 33, 35, 36]
+Hand : [Ace of Clubs, Seven of Hearts, Six of Hearts, Six of Clubs, Six of Spades]
+Card multiples: [Three of a kind Six, High Ace]
+Three of a Kind: true
+Hand Value: 44
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [3, 30, 35, 36, 42]
+Hand : [Ace of Clubs, Seven of Diamonds, Six of Clubs, Six of Spades, Four of Diamonds]
+Card multiples: [Pair Six, High Ace]
+Two of a Kind: true
+Hand Value: 17
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [4, 13, 14, 35, 43]
+Hand : [Ace of Spades, Jack of Hearts, Jack of Diamonds, Six of Clubs, Four of Clubs]
+Card multiples: [Pair Jack, High Ace]
+Two of a Kind: true
+Hand Value: 22
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [2, 21, 29, 32, 47]
+Hand : [Ace of Diamonds, Nine of Hearts, Seven of Hearts, Seven of Spades, Three of Clubs]
+Card multiples: [Pair Seven, High Ace]
+Two of a Kind: true
+Hand Value: 18
+
+name : A(n) Drew Hussie
+Chips: 600
+Cards: [2, 21, 29, 32, 47]
+Hand : [Ace of Diamonds, Nine of Hearts, Seven of Hearts, Seven of Spades, Three of Clubs]
+Card multiples: [Pair Seven, High Ace]
+Two of a Kind: true
+Hand Value: 18
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [13, 17, 20, 24, 33]
+Hand : [Jack of Hearts, Ten of Hearts, Ten of Spades, Nine of Spades, Six of Hearts]
+Card multiples: [Pair Ten, High Jack]
+Two of a Kind: true
+Hand Value: 21
+
+name : A(n) Drew Hussie
+Chips: 100
+Cards: [15, 16, 20, 34, 49]
+Hand : [Jack of Clubs, Jack of Spades, Ten of Spades, Six of Diamonds, Two of Hearts]
+Card multiples: [Pair Jack, High Ten]
+Two of a Kind: true
+Hand Value: 22
+
+name : A(n) Drew Hussie
+Chips: -100
+Cards: [15, 16, 20, 34, 49]
+Hand : [Jack of Clubs, Jack of Spades, Ten of Spades, Six of Diamonds, Two of Hearts]
+Card multiples: [Pair Jack, High Ten]
+Two of a Kind: true
+Hand Value: 22
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [4, 8, 40, 42, 46]
+Hand : [Ace of Spades, King of Spades, Five of Spades, Four of Diamonds, Three of Diamonds]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [2, 22, 27, 33, 35]
+Hand : [Ace of Diamonds, Nine of Diamonds, Eight of Clubs, Six of Hearts, Six of Clubs]
+Card multiples: [Pair Six, High Ace]
+Two of a Kind: true
+Hand Value: 17
+
+name : A(n) Drew Hussie
+Chips: 3000
+Cards: [20, 25, 27, 33, 35]
+Hand : [Ten of Spades, Eight of Hearts, Eight of Clubs, Six of Hearts, Six of Clubs]
+Card multiples: [Pair Eight, Pair Six, High Ten]
+Two Pairs: true
+Hand Value: 31
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [7, 15, 18, 43, 48]
+Hand : [King of Clubs, Jack of Clubs, Ten of Diamonds, Four of Clubs, Three of Spades]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 600
+Cards: [14, 18, 27, 43, 48]
+Hand : [Jack of Diamonds, Ten of Diamonds, Eight of Clubs, Four of Clubs, Three of Spades]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [6, 21, 22, 45, 48]
+Hand : [King of Diamonds, Nine of Hearts, Nine of Diamonds, Three of Hearts, Three of Spades]
+Card multiples: [Pair Nine, Pair Three, High King]
+Two Pairs: true
+Hand Value: 32
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [19, 24, 26, 33, 38]
+Hand : [Ten of Clubs, Nine of Spades, Eight of Diamonds, Six of Hearts, Five of Diamonds]
+Card multiples: [High Ten]
+Hand Value: 8
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [1, 3, 16, 25, 44]
+Hand : [Ace of Hearts, Ace of Clubs, Jack of Spades, Eight of Hearts, Four of Spades]
+Card multiples: [Pair Ace, High Jack]
+Two of a Kind: true
+Hand Value: 25
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [3, 17, 30, 42, 48]
+Hand : [Ace of Clubs, Ten of Hearts, Seven of Diamonds, Four of Diamonds, Three of Spades]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 2480
+Cards: [2, 37, 39, 41, 48]
+Hand : [Ace of Diamonds, Five of Hearts, Five of Clubs, Four of Hearts, Three of Spades]
+Card multiples: [Pair Five, High Ace]
+Two of a Kind: true
+Hand Value: 16
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [29, 30, 40, 43, 50]
+Hand : [Seven of Hearts, Seven of Diamonds, Five of Spades, Four of Clubs, Two of Diamonds]
+Card multiples: [Pair Seven, High Five]
+Two of a Kind: true
+Hand Value: 18
+
+name : A(n) Drew Hussie
+Chips: 640
+Cards: [2, 4, 23, 43, 50]
+Hand : [Ace of Diamonds, Ace of Spades, Nine of Clubs, Four of Clubs, Two of Diamonds]
+Card multiples: [Pair Ace, High Nine]
+Two of a Kind: true
+Hand Value: 25
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [14, 21, 31, 43, 46]
+Hand : [Jack of Diamonds, Nine of Hearts, Seven of Clubs, Four of Clubs, Three of Diamonds]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : A(n) Drew Hussie
+Chips: 400
+Cards: [16, 31, 39, 43, 46]
+Hand : [Jack of Spades, Seven of Clubs, Five of Clubs, Four of Clubs, Three of Diamonds]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [12, 22, 39, 42, 45]
+Hand : [Queen of Spades, Nine of Diamonds, Five of Clubs, Four of Diamonds, Three of Hearts]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : A(n) Drew Hussie
+Chips: 520
+Cards: [15, 38, 39, 42, 45]
+Hand : [Jack of Clubs, Five of Diamonds, Five of Clubs, Four of Diamonds, Three of Hearts]
+Card multiples: [Pair Five, High Jack]
+Two of a Kind: true
+Hand Value: 16
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [4, 7, 11, 15, 33]
+Hand : [Ace of Spades, King of Clubs, Queen of Clubs, Jack of Clubs, Six of Hearts]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [3, 15, 35, 38, 51]
+Hand : [Ace of Clubs, Jack of Clubs, Six of Clubs, Five of Diamonds, Two of Clubs]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [25, 29, 35, 38, 45]
+Hand : [Eight of Hearts, Seven of Hearts, Six of Clubs, Five of Diamonds, Three of Hearts]
+Card multiples: [High Eight]
+Hand Value: 6
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [7, 10, 18, 35, 37]
+Hand : [King of Clubs, Queen of Diamonds, Ten of Diamonds, Six of Clubs, Five of Hearts]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 2400
+Cards: [9, 18, 25, 35, 37]
+Hand : [Queen of Hearts, Ten of Diamonds, Eight of Hearts, Six of Clubs, Five of Hearts]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [18, 20, 28, 44, 51]
+Hand : [Ten of Diamonds, Ten of Spades, Eight of Spades, Four of Spades, Two of Clubs]
+Card multiples: [Pair Ten, High Eight]
+Two of a Kind: true
+Hand Value: 21
+
+name : A(n) Drew Hussie
+Chips: 520
+Cards: [21, 26, 42, 44, 51]
+Hand : [Nine of Hearts, Eight of Diamonds, Four of Diamonds, Four of Spades, Two of Clubs]
+Card multiples: [Pair Four, High Nine]
+Two of a Kind: true
+Hand Value: 15
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [13, 14, 17, 22, 33]
+Hand : [Jack of Hearts, Jack of Diamonds, Ten of Hearts, Nine of Diamonds, Six of Hearts]
+Card multiples: [Pair Jack, High Ten]
+Two of a Kind: true
+Hand Value: 22
+
+name : A(n) Drew Hussie
+Chips: 2400
+Cards: [5, 22, 23, 33, 42]
+Hand : [King of Hearts, Nine of Diamonds, Nine of Clubs, Six of Hearts, Four of Diamonds]
+Card multiples: [Pair Nine, High King]
+Two of a Kind: true
+Hand Value: 20
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [10, 13, 15, 34, 38]
+Hand : [Queen of Diamonds, Jack of Hearts, Jack of Clubs, Six of Diamonds, Five of Diamonds]
+Card multiples: [Pair Jack, High Queen]
+Two of a Kind: true
+Hand Value: 22
+
+name : A(n) Drew Hussie
+Chips: 520
+Cards: [5, 10, 13, 15, 43]
+Hand : [King of Hearts, Queen of Diamonds, Jack of Hearts, Jack of Clubs, Four of Clubs]
+Card multiples: [Pair Jack, High King]
+Two of a Kind: true
+Hand Value: 22
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [5, 11, 22, 27, 31]
+Hand : [King of Hearts, Queen of Clubs, Nine of Diamonds, Eight of Clubs, Seven of Clubs]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [2, 9, 12, 37, 39]
+Hand : [Ace of Diamonds, Queen of Hearts, Queen of Spades, Five of Hearts, Five of Clubs]
+Card multiples: [Pair Queen, Pair Five, High Ace]
+Two Pairs: true
+Hand Value: 35
+
+name : A(n) Drew Hussie
+Chips: 2800
+Cards: [9, 12, 34, 37, 39]
+Hand : [Queen of Hearts, Queen of Spades, Six of Diamonds, Five of Hearts, Five of Clubs]
+Card multiples: [Pair Queen, Pair Five, High Six]
+Two Pairs: true
+Hand Value: 35
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [25, 30, 31, 36, 51]
+Hand : [Eight of Hearts, Seven of Diamonds, Seven of Clubs, Six of Spades, Two of Clubs]
+Card multiples: [Pair Seven, High Eight]
+Two of a Kind: true
+Hand Value: 18
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [11, 13, 21, 43, 51]
+Hand : [Queen of Clubs, Jack of Hearts, Nine of Hearts, Four of Clubs, Two of Clubs]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : A(n) Drew Hussie
+Chips: 2480
+Cards: [5, 11, 33, 43, 51]
+Hand : [King of Hearts, Queen of Clubs, Six of Hearts, Four of Clubs, Two of Clubs]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [6, 21, 24, 50, 51]
+Hand : [King of Diamonds, Nine of Hearts, Nine of Spades, Two of Diamonds, Two of Clubs]
+Card multiples: [Pair Nine, Pair Two, High King]
+Two Pairs: true
+Hand Value: 32
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [1, 12, 13, 18, 43]
+Hand : [Ace of Hearts, Queen of Spades, Jack of Hearts, Ten of Diamonds, Four of Clubs]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 600
+Cards: [1, 10, 12, 13, 18]
+Hand : [Ace of Hearts, Queen of Diamonds, Queen of Spades, Jack of Hearts, Ten of Diamonds]
+Card multiples: [Pair Queen, High Ace]
+Two of a Kind: true
+Hand Value: 23
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [4, 13, 21, 29, 36]
+Hand : [Ace of Spades, Jack of Hearts, Nine of Hearts, Seven of Hearts, Six of Spades]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [17, 18, 19, 35, 39]
+Hand : [Ten of Hearts, Ten of Diamonds, Ten of Clubs, Six of Clubs, Five of Clubs]
+Card multiples: [Three of a kind Ten, High Six]
+Three of a Kind: true
+Hand Value: 48
+
+name : A(n) Drew Hussie
+Chips: 3000
+Cards: [12, 16, 17, 18, 19]
+Hand : [Queen of Spades, Jack of Spades, Ten of Hearts, Ten of Diamonds, Ten of Clubs]
+Card multiples: [Three of a kind Ten, High Queen]
+Three of a Kind: true
+Hand Value: 48
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [8, 9, 14, 17, 26]
+Hand : [King of Spades, Queen of Hearts, Jack of Diamonds, Ten of Hearts, Eight of Diamonds]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 2480
+Cards: [8, 9, 14, 17, 50]
+Hand : [King of Spades, Queen of Hearts, Jack of Diamonds, Ten of Hearts, Two of Diamonds]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 0
+Cards: [3, 28, 37, 38, 49]
+Hand : [Ace of Clubs, Eight of Spades, Five of Hearts, Five of Diamonds, Two of Hearts]
+Card multiples: [Pair Five, High Ace]
+Two of a Kind: true
+Hand Value: 16
+
+name : A(n) Drew Hussie
+Chips: -100
+Cards: [3, 37, 38, 44, 49]
+Hand : [Ace of Clubs, Five of Hearts, Five of Diamonds, Four of Spades, Two of Hearts]
+Card multiples: [Pair Five, High Ace]
+Two of a Kind: true
+Hand Value: 16
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [15, 20, 23, 24, 26]
+Hand : [Jack of Clubs, Ten of Spades, Nine of Clubs, Nine of Spades, Eight of Diamonds]
+Card multiples: [Pair Nine, High Jack]
+Two of a Kind: true
+Hand Value: 20
+
+name : A(n) Drew Hussie
+Chips: 2700
+Cards: [2, 8, 10, 23, 24]
+Hand : [Ace of Diamonds, King of Spades, Queen of Diamonds, Nine of Clubs, Nine of Spades]
+Card multiples: [Pair Nine, High Ace]
+Two of a Kind: true
+Hand Value: 20
+
+name : A(n) Drew Hussie
+Chips: 0
+Cards: [9, 27, 29, 30, 41]
+Hand : [Queen of Hearts, Eight of Clubs, Seven of Hearts, Seven of Diamonds, Four of Hearts]
+Card multiples: [Pair Seven, High Queen]
+Two of a Kind: true
+Hand Value: 18
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [9, 27, 29, 30, 41]
+Hand : [Queen of Hearts, Eight of Clubs, Seven of Hearts, Seven of Diamonds, Four of Hearts]
+Card multiples: [Pair Seven, High Queen]
+Two of a Kind: true
+Hand Value: 18
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [7, 10, 25, 38, 51]
+Hand : [King of Clubs, Queen of Diamonds, Eight of Hearts, Five of Diamonds, Two of Clubs]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [7, 21, 35, 42, 48]
+Hand : [King of Clubs, Nine of Hearts, Six of Clubs, Four of Diamonds, Three of Spades]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [25, 35, 44, 49, 51]
+Hand : [Eight of Hearts, Six of Clubs, Four of Spades, Two of Hearts, Two of Clubs]
+Card multiples: [Pair Two, High Eight]
+Two of a Kind: true
+Hand Value: 13
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [8, 14, 30, 35, 49]
+Hand : [King of Spades, Jack of Diamonds, Seven of Diamonds, Six of Clubs, Two of Hearts]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [3, 18, 29, 31, 37]
+Hand : [Ace of Clubs, Ten of Diamonds, Seven of Hearts, Seven of Clubs, Five of Hearts]
+Card multiples: [Pair Seven, High Ace]
+Two of a Kind: true
+Hand Value: 18
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [16, 26, 28, 37, 40]
+Hand : [Jack of Spades, Eight of Diamonds, Eight of Spades, Five of Hearts, Five of Spades]
+Card multiples: [Pair Eight, Pair Five, High Jack]
+Two Pairs: true
+Hand Value: 31
+
+name : A(n) Drew Hussie
+Chips: 800
+Cards: [16, 26, 28, 37, 40]
+Hand : [Jack of Spades, Eight of Diamonds, Eight of Spades, Five of Hearts, Five of Spades]
+Card multiples: [Pair Eight, Pair Five, High Jack]
+Two Pairs: true
+Hand Value: 31
+
+name : A(n) Drew Hussie
+Chips: 0
+Cards: [3, 6, 8, 43, 51]
+Hand : [Ace of Clubs, King of Diamonds, King of Spades, Four of Clubs, Two of Clubs]
+Card multiples: [Pair King, High Ace]
+Two of a Kind: true
+Hand Value: 24
+
+name : A(n) Drew Hussie
+Chips: 600
+Cards: [3, 6, 8, 12, 19]
+Hand : [Ace of Clubs, King of Diamonds, King of Spades, Queen of Spades, Ten of Clubs]
+Card multiples: [Pair King, High Ace]
+Two of a Kind: true
+Hand Value: 24
+
+name : A(n) Drew Hussie
+Chips: 0
+Cards: [35, 44, 46, 47, 50]
+Hand : [Six of Clubs, Four of Spades, Three of Diamonds, Three of Clubs, Two of Diamonds]
+Card multiples: [Pair Three, High Six]
+Two of a Kind: true
+Hand Value: 14
+
+name : A(n) Drew Hussie
+Chips: 820
+Cards: [10, 18, 35, 46, 50]
+Hand : [Queen of Diamonds, Ten of Diamonds, Six of Clubs, Three of Diamonds, Two of Diamonds]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [9, 21, 22, 24, 32]
+Hand : [Queen of Hearts, Nine of Hearts, Nine of Diamonds, Nine of Spades, Seven of Spades]
+Card multiples: [Three of a kind Nine, High Queen]
+Three of a Kind: true
+Hand Value: 47
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [1, 17, 26, 32, 37]
+Hand : [Ace of Hearts, Ten of Hearts, Eight of Diamonds, Seven of Spades, Five of Hearts]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [19, 27, 43, 48, 51]
+Hand : [Ten of Clubs, Eight of Clubs, Four of Clubs, Three of Spades, Two of Clubs]
+Card multiples: [High Ten]
+Hand Value: 8
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [1, 10, 29, 35, 45]
+Hand : [Ace of Hearts, Queen of Diamonds, Seven of Hearts, Six of Clubs, Three of Hearts]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [1, 8, 13, 41, 48]
+Hand : [Ace of Hearts, King of Spades, Jack of Hearts, Four of Hearts, Three of Spades]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [31, 36, 38, 45, 50]
+Hand : [Seven of Clubs, Six of Spades, Five of Diamonds, Three of Hearts, Two of Diamonds]
+Card multiples: [High Seven]
+Hand Value: 5
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [4, 17, 19, 38, 51]
+Hand : [Ace of Spades, Ten of Hearts, Ten of Clubs, Five of Diamonds, Two of Clubs]
+Card multiples: [Pair Ten, High Ace]
+Two of a Kind: true
+Hand Value: 21
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [7, 13, 18, 42, 48]
+Hand : [King of Clubs, Jack of Hearts, Ten of Diamonds, Four of Diamonds, Three of Spades]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [19, 39, 43, 44, 50]
+Hand : [Ten of Clubs, Five of Clubs, Four of Clubs, Four of Spades, Two of Diamonds]
+Card multiples: [Pair Four, High Ten]
+Two of a Kind: true
+Hand Value: 15
+
+name : A(n) Drew Hussie
+Chips: 2400
+Cards: [18, 28, 43, 44, 51]
+Hand : [Ten of Diamonds, Eight of Spades, Four of Clubs, Four of Spades, Two of Clubs]
+Card multiples: [Pair Four, High Ten]
+Two of a Kind: true
+Hand Value: 15
+
+name : A(n) Drew Hussie
+Chips: 0
+Cards: [9, 27, 33, 38, 46]
+Hand : [Queen of Hearts, Eight of Clubs, Six of Hearts, Five of Diamonds, Three of Diamonds]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : A(n) Drew Hussie
+Chips: -20
+Cards: [9, 25, 33, 38, 46]
+Hand : [Queen of Hearts, Eight of Hearts, Six of Hearts, Five of Diamonds, Three of Diamonds]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : A(n) Drew Hussie
+Chips: 0
+Cards: [1, 12, 15, 16, 40]
+Hand : [Ace of Hearts, Queen of Spades, Jack of Clubs, Jack of Spades, Five of Spades]
+Card multiples: [Pair Jack, High Ace]
+Two of a Kind: true
+Hand Value: 22
+
+name : A(n) Drew Hussie
+Chips: 320
+Cards: [1, 12, 15, 16, 21]
+Hand : [Ace of Hearts, Queen of Spades, Jack of Clubs, Jack of Spades, Nine of Hearts]
+Card multiples: [Pair Jack, High Ace]
+Two of a Kind: true
+Hand Value: 22
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [5, 7, 25, 29, 34]
+Hand : [King of Hearts, King of Clubs, Eight of Hearts, Seven of Hearts, Six of Diamonds]
+Card multiples: [Pair King, High Eight]
+Two of a Kind: true
+Hand Value: 24
+
+name : A(n) Drew Hussie
+Chips: 600
+Cards: [5, 6, 7, 44, 45]
+Hand : [King of Hearts, King of Diamonds, King of Clubs, Four of Spades, Three of Hearts]
+Card multiples: [Three of a kind King, High Four]
+Three of a Kind: true
+Hand Value: 51
+
+name : A(n) Drew Hussie
+Chips: 0
+Cards: [8, 9, 27, 31, 41]
+Hand : [King of Spades, Queen of Hearts, Eight of Clubs, Seven of Clubs, Four of Hearts]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: -20
+Cards: [8, 9, 27, 31, 41]
+Hand : [King of Spades, Queen of Hearts, Eight of Clubs, Seven of Clubs, Four of Hearts]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 0
+Cards: [3, 13, 18, 21, 51]
+Hand : [Ace of Clubs, Jack of Hearts, Ten of Diamonds, Nine of Hearts, Two of Clubs]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [16, 19, 23, 41, 45]
+Hand : [Jack of Spades, Ten of Clubs, Nine of Clubs, Four of Hearts, Three of Hearts]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : A(n) Drew Hussie
+Chips: 400
+Cards: [6, 16, 19, 23, 43]
+Hand : [King of Diamonds, Jack of Spades, Ten of Clubs, Nine of Clubs, Four of Clubs]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 0
+Cards: [10, 24, 27, 28, 39]
+Hand : [Queen of Diamonds, Nine of Spades, Eight of Clubs, Eight of Spades, Five of Clubs]
+Card multiples: [Pair Eight, High Queen]
+Two of a Kind: true
+Hand Value: 19
+
+name : A(n) Drew Hussie
+Chips: -100
+Cards: [15, 27, 33, 39, 44]
+Hand : [Jack of Clubs, Eight of Clubs, Six of Hearts, Five of Clubs, Four of Spades]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : A(n) Drew Hussie
+Chips: 0
+Cards: [5, 9, 17, 26, 30]
+Hand : [King of Hearts, Queen of Hearts, Ten of Hearts, Eight of Diamonds, Seven of Diamonds]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 100
+Cards: [2, 3, 8, 12, 31]
+Hand : [Ace of Diamonds, Ace of Clubs, King of Spades, Queen of Spades, Seven of Clubs]
+Card multiples: [Pair Ace, High King]
+Two of a Kind: true
+Hand Value: 25
+
+name : A(n) Drew Hussie
+Chips: 100
+Cards: [2, 3, 8, 12, 26]
+Hand : [Ace of Diamonds, Ace of Clubs, King of Spades, Queen of Spades, Eight of Diamonds]
+Card multiples: [Pair Ace, High King]
+Two of a Kind: true
+Hand Value: 25
+
+name : A(n) Drew Hussie
+Chips: 100
+Cards: [18, 22, 28, 40, 51]
+Hand : [Ten of Diamonds, Nine of Diamonds, Eight of Spades, Five of Spades, Two of Clubs]
+Card multiples: [High Ten]
+Hand Value: 8
+
+name : A(n) Drew Hussie
+Chips: 60
+Cards: [18, 22, 44, 49, 51]
+Hand : [Ten of Diamonds, Nine of Diamonds, Four of Spades, Two of Hearts, Two of Clubs]
+Card multiples: [Pair Two, High Ten]
+Two of a Kind: true
+Hand Value: 13
+
+name : A(n) Drew Hussie
+Chips: 60
+Cards: [4, 24, 25, 38, 47]
+Hand : [Ace of Spades, Nine of Spades, Eight of Hearts, Five of Diamonds, Three of Clubs]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 300
+Cards: [4, 6, 25, 27, 47]
+Hand : [Ace of Spades, King of Diamonds, Eight of Hearts, Eight of Clubs, Three of Clubs]
+Card multiples: [Pair Eight, High Ace]
+Two of a Kind: true
+Hand Value: 19
+
+name : A(n) Drew Hussie
+Chips: 300
+Cards: [9, 17, 29, 33, 39]
+Hand : [Queen of Hearts, Ten of Hearts, Seven of Hearts, Six of Hearts, Five of Clubs]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [9, 12, 13, 14, 30]
+Hand : [Queen of Hearts, Queen of Spades, Jack of Hearts, Jack of Diamonds, Seven of Diamonds]
+Card multiples: [Pair Queen, Pair Jack, High Seven]
+Two Pairs: true
+Hand Value: 35
+
+name : A(n) Drew Hussie
+Chips: 800
+Cards: [9, 12, 13, 14, 22]
+Hand : [Queen of Hearts, Queen of Spades, Jack of Hearts, Jack of Diamonds, Nine of Diamonds]
+Card multiples: [Pair Queen, Pair Jack, High Nine]
+Two Pairs: true
+Hand Value: 35
+
+name : A(n) Drew Hussie
+Chips: 800
+Cards: [3, 17, 21, 33, 47]
+Hand : [Ace of Clubs, Ten of Hearts, Nine of Hearts, Six of Hearts, Three of Clubs]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 1300
+Cards: [1, 3, 17, 21, 47]
+Hand : [Ace of Hearts, Ace of Clubs, Ten of Hearts, Nine of Hearts, Three of Clubs]
+Card multiples: [Pair Ace, High Ten]
+Two of a Kind: true
+Hand Value: 25
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [2, 27, 33, 35, 39]
+Hand : [Ace of Diamonds, Eight of Clubs, Six of Hearts, Six of Clubs, Five of Clubs]
+Card multiples: [Pair Six, High Ace]
+Two of a Kind: true
+Hand Value: 17
+
+name : A(n) Drew Hussie
+Chips: 460
+Cards: [2, 28, 33, 35, 36]
+Hand : [Ace of Diamonds, Eight of Spades, Six of Hearts, Six of Clubs, Six of Spades]
+Card multiples: [Three of a kind Six, High Ace]
+Three of a Kind: true
+Hand Value: 44
+
+name : A(n) Drew Hussie
+Chips: 460
+Cards: [3, 22, 28, 38, 40]
+Hand : [Ace of Clubs, Nine of Diamonds, Eight of Spades, Five of Diamonds, Five of Spades]
+Card multiples: [Pair Five, High Ace]
+Two of a Kind: true
+Hand Value: 16
+
+name : A(n) Drew Hussie
+Chips: 460
+Cards: [3, 12, 22, 38, 50]
+Hand : [Ace of Clubs, Queen of Spades, Nine of Diamonds, Five of Diamonds, Two of Diamonds]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 460
+Cards: [8, 12, 26, 39, 48]
+Hand : [King of Spades, Queen of Spades, Eight of Diamonds, Five of Clubs, Three of Spades]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 900
+Cards: [5, 8, 12, 26, 48]
+Hand : [King of Hearts, King of Spades, Queen of Spades, Eight of Diamonds, Three of Spades]
+Card multiples: [Pair King, High Queen]
+Two of a Kind: true
+Hand Value: 24
+
+name : A(n) Drew Hussie
+Chips: 900
+Cards: [27, 28, 39, 46, 50]
+Hand : [Eight of Clubs, Eight of Spades, Five of Clubs, Three of Diamonds, Two of Diamonds]
+Card multiples: [Pair Eight, High Five]
+Two of a Kind: true
+Hand Value: 19
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [3, 6, 9, 11, 31]
+Hand : [Ace of Clubs, King of Diamonds, Queen of Hearts, Queen of Clubs, Seven of Clubs]
+Card multiples: [Pair Queen, High Ace]
+Two of a Kind: true
+Hand Value: 23
+
+name : A(n) Drew Hussie
+Chips: 800
+Cards: [3, 9, 11, 27, 37]
+Hand : [Ace of Clubs, Queen of Hearts, Queen of Clubs, Eight of Clubs, Five of Hearts]
+Card multiples: [Pair Queen, High Ace]
+Two of a Kind: true
+Hand Value: 23
+
+name : A(n) Drew Hussie
+Chips: 800
+Cards: [12, 20, 36, 44, 47]
+Hand : [Queen of Spades, Ten of Spades, Six of Spades, Four of Spades, Three of Clubs]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : A(n) Drew Hussie
+Chips: 100
+Cards: [3, 23, 25, 31, 50]
+Hand : [Ace of Clubs, Nine of Clubs, Eight of Hearts, Seven of Clubs, Two of Diamonds]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 60
+Cards: [3, 44, 47, 49, 51]
+Hand : [Ace of Clubs, Four of Spades, Three of Clubs, Two of Hearts, Two of Clubs]
+Card multiples: [Pair Two, High Ace]
+Two of a Kind: true
+Hand Value: 13
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [13, 15, 23, 32, 38]
+Hand : [Jack of Hearts, Jack of Clubs, Nine of Clubs, Seven of Spades, Five of Diamonds]
+Card multiples: [Pair Jack, High Nine]
+Two of a Kind: true
+Hand Value: 22
+
+name : A(n) Drew Hussie
+Chips: 699
+Cards: [13, 13, 15, 24, 39]
+Hand : [Jack of Hearts, Jack of Hearts, Jack of Clubs, Nine of Spades, Five of Clubs]
+Card multiples: [Three of a kind Jack, High Nine]
+Three of a Kind: true
+Hand Value: 49
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [1, 13, 34, 43, 48]
+Hand : [Ace of Hearts, Jack of Hearts, Six of Diamonds, Four of Clubs, Three of Spades]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [1, 13, 13, 33, 44]
+Hand : [Ace of Hearts, Jack of Hearts, Jack of Hearts, Six of Hearts, Four of Spades]
+Card multiples: [Pair Jack, High Ace]
+Two of a Kind: true
+Hand Value: 22
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [22, 34, 46, 48, 49]
+Hand : [Nine of Diamonds, Six of Diamonds, Three of Diamonds, Three of Spades, Two of Hearts]
+Card multiples: [Pair Three, High Nine]
+Two of a Kind: true
+Hand Value: 14
+
+name : A(n) Drew Hussie
+Chips: 900
+Cards: [22, 34, 46, 48, 49]
+Hand : [Nine of Diamonds, Six of Diamonds, Three of Diamonds, Three of Spades, Two of Hearts]
+Card multiples: [Pair Three, High Nine]
+Two of a Kind: true
+Hand Value: 14
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [23, 35, 40, 41, 47]
+Hand : [Nine of Clubs, Six of Clubs, Five of Spades, Four of Hearts, Three of Clubs]
+Card multiples: [High Nine]
+Hand Value: 7
+
+name : A(n) Drew Hussie
+Chips: 460
+Cards: [18, 23, 31, 35, 38]
+Hand : [Ten of Diamonds, Nine of Clubs, Seven of Clubs, Six of Clubs, Five of Diamonds]
+Card multiples: [High Ten]
+Hand Value: 8
+
+name : A(n) Drew Hussie
+Chips: 460
+Cards: [3, 14, 20, 27, 38]
+Hand : [Ace of Clubs, Jack of Diamonds, Ten of Spades, Eight of Clubs, Five of Diamonds]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 406
+Cards: [3, 4, 20, 27, 38]
+Hand : [Ace of Clubs, Ace of Spades, Ten of Spades, Eight of Clubs, Five of Diamonds]
+Card multiples: [Pair Ace, High Ten]
+Two of a Kind: true
+Hand Value: 25
+
+name : A(n) Drew Hussie
+Chips: 406
+Cards: [6, 14, 33, 36, 51]
+Hand : [King of Diamonds, Jack of Diamonds, Six of Hearts, Six of Spades, Two of Clubs]
+Card multiples: [Pair Six, High King]
+Two of a Kind: true
+Hand Value: 17
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [5, 6, 28, 47, 51]
+Hand : [King of Hearts, King of Diamonds, Eight of Spades, Three of Clubs, Two of Clubs]
+Card multiples: [Pair King, High Eight]
+Two of a Kind: true
+Hand Value: 24
+
+name : A(n) Drew Hussie
+Chips: 2800
+Cards: [1, 5, 6, 27, 36]
+Hand : [Ace of Hearts, King of Hearts, King of Diamonds, Eight of Clubs, Six of Spades]
+Card multiples: [Pair King, High Ace]
+Two of a Kind: true
+Hand Value: 24
+
+name : A(n) Drew Hussie
+Chips: 2800
+Cards: [11, 13, 20, 23, 32]
+Hand : [Queen of Clubs, Jack of Hearts, Ten of Spades, Nine of Clubs, Seven of Spades]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : A(n) Drew Hussie
+Chips: 3300
+Cards: [11, 13, 23, 24, 32]
+Hand : [Queen of Clubs, Jack of Hearts, Nine of Clubs, Nine of Spades, Seven of Spades]
+Card multiples: [Pair Nine, High Queen]
+Two of a Kind: true
+Hand Value: 20
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [22, 24, 27, 41, 48]
+Hand : [Nine of Diamonds, Nine of Spades, Eight of Clubs, Four of Hearts, Three of Spades]
+Card multiples: [Pair Nine, High Eight]
+Two of a Kind: true
+Hand Value: 20
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [7, 22, 29, 34, 45]
+Hand : [King of Clubs, Nine of Diamonds, Seven of Hearts, Six of Diamonds, Three of Hearts]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [32, 34, 36, 42, 45]
+Hand : [Seven of Spades, Six of Diamonds, Six of Spades, Four of Diamonds, Three of Hearts]
+Card multiples: [Pair Six, High Seven]
+Two of a Kind: true
+Hand Value: 17
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [1, 4, 14, 19, 45]
+Hand : [Ace of Hearts, Ace of Spades, Jack of Diamonds, Ten of Clubs, Three of Hearts]
+Card multiples: [Pair Ace, High Jack]
+Two of a Kind: true
+Hand Value: 25
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [12, 16, 22, 35, 46]
+Hand : [Queen of Spades, Jack of Spades, Nine of Diamonds, Six of Clubs, Three of Diamonds]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [13, 15, 16, 28, 42]
+Hand : [Jack of Hearts, Jack of Clubs, Jack of Spades, Eight of Spades, Four of Diamonds]
+Card multiples: [Three of a kind Jack, High Eight]
+Three of a Kind: true
+Hand Value: 49
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [14, 19, 30, 33, 50]
+Hand : [Jack of Diamonds, Ten of Clubs, Seven of Diamonds, Six of Hearts, Two of Diamonds]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [16, 30, 39, 44, 46]
+Hand : [Jack of Spades, Seven of Diamonds, Five of Clubs, Four of Spades, Three of Diamonds]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : A(n) Drew Hussie
+Chips: 300
+Cards: [8, 16, 27, 28, 38]
+Hand : [King of Spades, Jack of Spades, Eight of Clubs, Eight of Spades, Five of Diamonds]
+Card multiples: [Pair Eight, High King]
+Two of a Kind: true
+Hand Value: 19
+
+name : A(n) Drew Hussie
+Chips: 300
+Cards: [6, 14, 16, 22, 30]
+Hand : [King of Diamonds, Jack of Diamonds, Jack of Spades, Nine of Diamonds, Seven of Diamonds]
+Card multiples: [Pair Jack, High King]
+Two of a Kind: true
+Hand Value: 22
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [31, 32, 33, 36, 40]
+Hand : [Seven of Clubs, Seven of Spades, Six of Hearts, Six of Spades, Five of Spades]
+Card multiples: [Pair Seven, Pair Six, High Five]
+Two Pairs: true
+Hand Value: 30
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [24, 29, 33, 36, 47]
+Hand : [Nine of Spades, Seven of Hearts, Six of Hearts, Six of Spades, Three of Clubs]
+Card multiples: [Pair Six, High Nine]
+Two of a Kind: true
+Hand Value: 17
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [4, 13, 29, 36, 48]
+Hand : [Ace of Spades, Jack of Hearts, Seven of Hearts, Six of Spades, Three of Spades]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 2700
+Cards: [17, 18, 23, 26, 48]
+Hand : [Ten of Hearts, Ten of Diamonds, Nine of Clubs, Eight of Diamonds, Three of Spades]
+Card multiples: [Pair Ten, High Nine]
+Two of a Kind: true
+Hand Value: 21
+
+name : A(n) Drew Hussie
+Chips: 2700
+Cards: [3, 4, 28, 32, 47]
+Hand : [Ace of Clubs, Ace of Spades, Eight of Spades, Seven of Spades, Three of Clubs]
+Card multiples: [Pair Ace, High Eight]
+Two of a Kind: true
+Hand Value: 25
+
+name : A(n) Drew Hussie
+Chips: 2300
+Cards: [1, 9, 28, 32, 50]
+Hand : [Ace of Hearts, Queen of Hearts, Eight of Spades, Seven of Spades, Two of Diamonds]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 2300
+Cards: [1, 9, 10, 25, 35]
+Hand : [Ace of Hearts, Queen of Hearts, Queen of Diamonds, Eight of Hearts, Six of Clubs]
+Card multiples: [Pair Queen, High Ace]
+Two of a Kind: true
+Hand Value: 23
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [2, 5, 25, 42, 46]
+Hand : [Ace of Diamonds, King of Hearts, Eight of Hearts, Four of Diamonds, Three of Diamonds]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 640
+Cards: [2, 3, 5, 7, 26]
+Hand : [Ace of Diamonds, Ace of Clubs, King of Hearts, King of Clubs, Eight of Diamonds]
+Card multiples: [Pair Ace, Pair King, High Eight]
+Two Pairs: true
+Hand Value: 37
+
+name : A(n) Drew Hussie
+Chips: 640
+Cards: [28, 35, 40, 48, 49]
+Hand : [Eight of Spades, Six of Clubs, Five of Spades, Three of Spades, Two of Hearts]
+Card multiples: [High Eight]
+Hand Value: 6
+
+name : A(n) Drew Hussie
+Chips: 440
+Cards: [28, 35, 40, 48, 49]
+Hand : [Eight of Spades, Six of Clubs, Five of Spades, Three of Spades, Two of Hearts]
+Card multiples: [High Eight]
+Hand Value: 6
+
+name : A(n) Drew Hussie
+Chips: 440
+Cards: [10, 20, 27, 42, 44]
+Hand : [Queen of Diamonds, Ten of Spades, Eight of Clubs, Four of Diamonds, Four of Spades]
+Card multiples: [Pair Four, High Queen]
+Two of a Kind: true
+Hand Value: 15
+
+name : A(n) Drew Hussie
+Chips: 240
+Cards: [16, 29, 34, 42, 44]
+Hand : [Jack of Spades, Seven of Hearts, Six of Diamonds, Four of Diamonds, Four of Spades]
+Card multiples: [Pair Four, High Jack]
+Two of a Kind: true
+Hand Value: 15
+
+name : A(n) Drew Hussie
+Chips: 240
+Cards: [11, 21, 23, 28, 48]
+Hand : [Queen of Clubs, Nine of Hearts, Nine of Clubs, Eight of Spades, Three of Spades]
+Card multiples: [Pair Nine, High Queen]
+Two of a Kind: true
+Hand Value: 20
+
+name : A(n) Drew Hussie
+Chips: 200
+Cards: [2, 15, 21, 37, 42]
+Hand : [Ace of Diamonds, Jack of Clubs, Nine of Hearts, Five of Hearts, Four of Diamonds]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [1, 15, 25, 37, 47]
+Hand : [Ace of Hearts, Jack of Clubs, Eight of Hearts, Five of Hearts, Three of Clubs]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [1, 4, 15, 21, 45]
+Hand : [Ace of Hearts, Ace of Spades, Jack of Clubs, Nine of Hearts, Three of Hearts]
+Card multiples: [Pair Ace, High Jack]
+Two of a Kind: true
+Hand Value: 25
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [5, 29, 33, 46, 47]
+Hand : [King of Hearts, Seven of Hearts, Six of Hearts, Three of Diamonds, Three of Clubs]
+Card multiples: [Pair Three, High King]
+Two of a Kind: true
+Hand Value: 14
+
+name : A(n) Drew Hussie
+Chips: 2300
+Cards: [3, 5, 33, 46, 47]
+Hand : [Ace of Clubs, King of Hearts, Six of Hearts, Three of Diamonds, Three of Clubs]
+Card multiples: [Pair Three, High Ace]
+Two of a Kind: true
+Hand Value: 14
+
+name : A(n) Drew Hussie
+Chips: 2300
+Cards: [2, 3, 12, 14, 45]
+Hand : [Ace of Diamonds, Ace of Clubs, Queen of Spades, Jack of Diamonds, Three of Hearts]
+Card multiples: [Pair Ace, High Queen]
+Two of a Kind: true
+Hand Value: 25
+
+name : A(n) Drew Hussie
+Chips: 2100
+Cards: [2, 11, 12, 15, 31]
+Hand : [Ace of Diamonds, Queen of Clubs, Queen of Spades, Jack of Clubs, Seven of Clubs]
+Card multiples: [Pair Queen, High Ace]
+Two of a Kind: true
+Hand Value: 23
+
+name : A(n) Drew Hussie
+Chips: 2100
+Cards: [3, 9, 20, 26, 30]
+Hand : [Ace of Clubs, Queen of Hearts, Ten of Spades, Eight of Diamonds, Seven of Diamonds]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 3172
+Cards: [2, 3, 20, 26, 30]
+Hand : [Ace of Diamonds, Ace of Clubs, Ten of Spades, Eight of Diamonds, Seven of Diamonds]
+Card multiples: [Pair Ace, High Ten]
+Two of a Kind: true
+Hand Value: 25
+
+name : A(n) Drew Hussie
+Chips: 3172
+Cards: [19, 33, 45, 46, 48]
+Hand : [Ten of Clubs, Six of Hearts, Three of Hearts, Three of Diamonds, Three of Spades]
+Card multiples: [Three of a kind Three, High Ten]
+Three of a Kind: true
+Hand Value: 41
+
+name : A(n) Drew Hussie
+Chips: 4284
+Cards: [33, 39, 45, 46, 48]
+Hand : [Six of Hearts, Five of Clubs, Three of Hearts, Three of Diamonds, Three of Spades]
+Card multiples: [Three of a kind Three, High Six]
+Three of a Kind: true
+Hand Value: 41
+
+name : A(n) Drew Hussie
+Chips: 4284
+Cards: [8, 10, 13, 14, 31]
+Hand : [King of Spades, Queen of Diamonds, Jack of Hearts, Jack of Diamonds, Seven of Clubs]
+Card multiples: [Pair Jack, High King]
+Two of a Kind: true
+Hand Value: 22
+
+name : A(n) Drew Hussie
+Chips: 6296
+Cards: [10, 13, 14, 19, 46]
+Hand : [Queen of Diamonds, Jack of Hearts, Jack of Diamonds, Ten of Clubs, Three of Diamonds]
+Card multiples: [Pair Jack, High Queen]
+Two of a Kind: true
+Hand Value: 22
+
+name : A(n) Drew Hussie
+Chips: 6296
+Cards: [3, 25, 32, 33, 43]
+Hand : [Ace of Clubs, Eight of Hearts, Seven of Spades, Six of Hearts, Four of Clubs]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 5896
+Cards: [17, 25, 32, 43, 44]
+Hand : [Ten of Hearts, Eight of Hearts, Seven of Spades, Four of Clubs, Four of Spades]
+Card multiples: [Pair Four, High Ten]
+Two of a Kind: true
+Hand Value: 15
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [4, 6, 16, 23, 43]
+Hand : [Ace of Spades, King of Diamonds, Jack of Spades, Nine of Clubs, Four of Clubs]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 533
+Cards: [4, 5, 6, 34, 46]
+Hand : [Ace of Spades, King of Hearts, King of Diamonds, Six of Diamonds, Three of Diamonds]
+Card multiples: [Pair King, High Ace]
+Two of a Kind: true
+Hand Value: 24
+
+name : A(n) Drew Hussie
+Chips: 533
+Cards: [2, 6, 22, 27, 44]
+Hand : [Ace of Diamonds, King of Diamonds, Nine of Diamonds, Eight of Clubs, Four of Spades]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 533
+Cards: [2, 6, 22, 27, 44]
+Hand : [Ace of Diamonds, King of Diamonds, Nine of Diamonds, Eight of Clubs, Four of Spades]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 533
+Cards: [2, 19, 40, 41, 47]
+Hand : [Ace of Diamonds, Ten of Clubs, Five of Spades, Four of Hearts, Three of Clubs]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 493
+Cards: [14, 29, 40, 41, 47]
+Hand : [Jack of Diamonds, Seven of Hearts, Five of Spades, Four of Hearts, Three of Clubs]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : A(n) Drew Hussie
+Chips: 493
+Cards: [4, 13, 18, 43, 44]
+Hand : [Ace of Spades, Jack of Hearts, Ten of Diamonds, Four of Clubs, Four of Spades]
+Card multiples: [Pair Four, High Ace]
+Two of a Kind: true
+Hand Value: 15
+
+name : A(n) Drew Hussie
+Chips: 746
+Cards: [3, 13, 13, 43, 44]
+Hand : [Ace of Clubs, Jack of Hearts, Jack of Hearts, Four of Clubs, Four of Spades]
+Card multiples: [Pair Jack, Pair Four, High Ace]
+Two Pairs: true
+Hand Value: 34
+
+name : A(n) Drew Hussie
+Chips: 746
+Cards: [6, 19, 24, 31, 47]
+Hand : [King of Diamonds, Ten of Clubs, Nine of Spades, Seven of Clubs, Three of Clubs]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 346
+Cards: [1, 19, 24, 26, 40]
+Hand : [Ace of Hearts, Ten of Clubs, Nine of Spades, Eight of Diamonds, Five of Spades]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 346
+Cards: [3, 20, 27, 43, 47]
+Hand : [Ace of Clubs, Ten of Spades, Eight of Clubs, Four of Clubs, Three of Clubs]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 306
+Cards: [15, 20, 22, 43, 47]
+Hand : [Jack of Clubs, Ten of Spades, Nine of Diamonds, Four of Clubs, Three of Clubs]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [3, 15, 18, 19, 51]
+Hand : [Ace of Clubs, Jack of Clubs, Ten of Diamonds, Ten of Clubs, Two of Clubs]
+Card multiples: [Pair Ten, High Ace]
+Two of a Kind: true
+Hand Value: 21
+
+name : A(n) Drew Hussie
+Chips: 2800
+Cards: [3, 15, 18, 19, 51]
+Hand : [Ace of Clubs, Jack of Clubs, Ten of Diamonds, Ten of Clubs, Two of Clubs]
+Card multiples: [Pair Ten, High Ace]
+Two of a Kind: true
+Hand Value: 21
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [6, 14, 28, 29, 34]
+Hand : [King of Diamonds, Jack of Diamonds, Eight of Spades, Seven of Hearts, Six of Diamonds]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [20, 25, 34, 37, 45]
+Hand : [Ten of Spades, Eight of Hearts, Six of Diamonds, Five of Hearts, Three of Hearts]
+Card multiples: [High Ten]
+Hand Value: 8
+
+name : A(n) Drew Hussie
+Chips: 460
+Cards: [20, 25, 34, 37, 45]
+Hand : [Ten of Spades, Eight of Hearts, Six of Diamonds, Five of Hearts, Three of Hearts]
+Card multiples: [High Ten]
+Hand Value: 8
+
+name : A(n) Drew Hussie
+Chips: 100
+Cards: [3, 4, 21, 32, 38]
+Hand : [Ace of Clubs, Ace of Spades, Nine of Hearts, Seven of Spades, Five of Diamonds]
+Card multiples: [Pair Ace, High Nine]
+Two of a Kind: true
+Hand Value: 25
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [4, 11, 15, 17, 23]
+Hand : [Ace of Spades, Queen of Clubs, Jack of Clubs, Ten of Hearts, Nine of Clubs]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [4, 11, 15, 17, 23]
+Hand : [Ace of Spades, Queen of Clubs, Jack of Clubs, Ten of Hearts, Nine of Clubs]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [9, 29, 35, 44, 45]
+Hand : [Queen of Hearts, Seven of Hearts, Six of Clubs, Four of Spades, Three of Hearts]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : A(n) Drew Hussie
+Chips: 460
+Cards: [9, 29, 35, 44, 45]
+Hand : [Queen of Hearts, Seven of Hearts, Six of Clubs, Four of Spades, Three of Hearts]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : A(n) Drew Hussie
+Chips: 460
+Cards: [1, 4, 16, 42, 47]
+Hand : [Ace of Hearts, Ace of Spades, Jack of Spades, Four of Diamonds, Three of Clubs]
+Card multiples: [Pair Ace, High Jack]
+Two of a Kind: true
+Hand Value: 25
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [9, 10, 23, 43, 48]
+Hand : [Queen of Hearts, Queen of Diamonds, Nine of Clubs, Four of Clubs, Three of Spades]
+Card multiples: [Pair Queen, High Nine]
+Two of a Kind: true
+Hand Value: 23
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [9, 10, 12, 26, 39]
+Hand : [Queen of Hearts, Queen of Diamonds, Queen of Spades, Eight of Diamonds, Five of Clubs]
+Card multiples: [Three of a kind Queen, High Eight]
+Three of a Kind: true
+Hand Value: 50
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [8, 15, 23, 46, 49]
+Hand : [King of Spades, Jack of Clubs, Nine of Clubs, Three of Diamonds, Two of Hearts]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 460
+Cards: [8, 14, 17, 25, 36]
+Hand : [King of Spades, Jack of Diamonds, Ten of Hearts, Eight of Hearts, Six of Spades]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 460
+Cards: [3, 11, 17, 20, 36]
+Hand : [Ace of Clubs, Queen of Clubs, Ten of Hearts, Ten of Spades, Six of Spades]
+Card multiples: [Pair Ten, High Ace]
+Two of a Kind: true
+Hand Value: 21
+
+name : A(n) Drew Hussie
+Chips: 640
+Cards: [3, 16, 17, 20, 29]
+Hand : [Ace of Clubs, Jack of Spades, Ten of Hearts, Ten of Spades, Seven of Hearts]
+Card multiples: [Pair Ten, High Ace]
+Two of a Kind: true
+Hand Value: 21
+
+name : A(n) Drew Hussie
+Chips: 640
+Cards: [2, 20, 24, 30, 32]
+Hand : [Ace of Diamonds, Ten of Spades, Nine of Spades, Seven of Diamonds, Seven of Spades]
+Card multiples: [Pair Seven, High Ace]
+Two of a Kind: true
+Hand Value: 18
+
+name : A(n) Drew Hussie
+Chips: 440
+Cards: [2, 8, 30, 32, 48]
+Hand : [Ace of Diamonds, King of Spades, Seven of Diamonds, Seven of Spades, Three of Spades]
+Card multiples: [Pair Seven, High Ace]
+Two of a Kind: true
+Hand Value: 18
+
+name : A(n) Drew Hussie
+Chips: 100
+Cards: [3, 14, 37, 44, 46]
+Hand : [Ace of Clubs, Jack of Diamonds, Five of Hearts, Four of Spades, Three of Diamonds]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [1, 14, 20, 45, 49]
+Hand : [Ace of Hearts, Jack of Diamonds, Ten of Spades, Three of Hearts, Two of Hearts]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 300
+Cards: [1, 8, 20, 48, 49]
+Hand : [Ace of Hearts, King of Spades, Ten of Spades, Three of Spades, Two of Hearts]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [3, 24, 34, 37, 43]
+Hand : [Ace of Clubs, Nine of Spades, Six of Diamonds, Five of Hearts, Four of Clubs]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [7, 12, 18, 37, 39]
+Hand : [King of Clubs, Queen of Spades, Ten of Diamonds, Five of Hearts, Five of Clubs]
+Card multiples: [Pair Five, High King]
+Two of a Kind: true
+Hand Value: 16
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [4, 15, 30, 40, 45]
+Hand : [Ace of Spades, Jack of Clubs, Seven of Diamonds, Five of Spades, Three of Hearts]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [2, 20, 35, 38, 48]
+Hand : [Ace of Diamonds, Ten of Spades, Six of Clubs, Five of Diamonds, Three of Spades]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [1, 6, 24, 31, 46]
+Hand : [Ace of Hearts, King of Diamonds, Nine of Spades, Seven of Clubs, Three of Diamonds]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [29, 33, 39, 49, 51]
+Hand : [Seven of Hearts, Six of Hearts, Five of Clubs, Two of Hearts, Two of Clubs]
+Card multiples: [Pair Two, High Seven]
+Two of a Kind: true
+Hand Value: 13
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [4, 7, 11, 17, 38]
+Hand : [Ace of Spades, King of Clubs, Queen of Clubs, Ten of Hearts, Five of Diamonds]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [7, 22, 24, 34, 38]
+Hand : [King of Clubs, Nine of Diamonds, Nine of Spades, Six of Diamonds, Five of Diamonds]
+Card multiples: [Pair Nine, High King]
+Two of a Kind: true
+Hand Value: 20
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [13, 20, 21, 30, 45]
+Hand : [Jack of Hearts, Ten of Spades, Nine of Hearts, Seven of Diamonds, Three of Hearts]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : A(n) Drew Hussie
+Chips: 300
+Cards: [11, 13, 21, 30, 45]
+Hand : [Queen of Clubs, Jack of Hearts, Nine of Hearts, Seven of Diamonds, Three of Hearts]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [10, 17, 19, 20, 22]
+Hand : [Queen of Diamonds, Ten of Hearts, Ten of Clubs, Ten of Spades, Nine of Diamonds]
+Card multiples: [Three of a kind Ten, High Queen]
+Three of a Kind: true
+Hand Value: 48
+
+name : A(n) Drew Hussie
+Chips: 100
+Cards: [4, 16, 35, 40, 43]
+Hand : [Ace of Spades, Jack of Spades, Six of Clubs, Five of Spades, Four of Clubs]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 60
+Cards: [4, 16, 33, 49, 51]
+Hand : [Ace of Spades, Jack of Spades, Six of Hearts, Two of Hearts, Two of Clubs]
+Card multiples: [Pair Two, High Ace]
+Two of a Kind: true
+Hand Value: 13
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [30, 35, 41, 46, 49]
+Hand : [Seven of Diamonds, Six of Clubs, Four of Hearts, Three of Diamonds, Two of Hearts]
+Card multiples: [High Seven]
+Hand Value: 5
+
+name : A(n) Drew Hussie
+Chips: 460
+Cards: [22, 41, 46, 49, 51]
+Hand : [Nine of Diamonds, Four of Hearts, Three of Diamonds, Two of Hearts, Two of Clubs]
+Card multiples: [Pair Two, High Nine]
+Two of a Kind: true
+Hand Value: 13
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [21, 29, 36, 40, 42]
+Hand : [Nine of Hearts, Seven of Hearts, Six of Spades, Five of Spades, Four of Diamonds]
+Card multiples: [High Nine]
+Hand Value: 7
+
+name : A(n) Drew Hussie
+Chips: 2460
+Cards: [29, 36, 40, 42, 43]
+Hand : [Seven of Hearts, Six of Spades, Five of Spades, Four of Diamonds, Four of Clubs]
+Card multiples: [Pair Four, High Seven]
+Two of a Kind: true
+Hand Value: 15
+
+name : A(n) Drew Hussie
+Chips: 2460
+Cards: [9, 14, 28, 36, 37]
+Hand : [Queen of Hearts, Jack of Diamonds, Eight of Spades, Six of Spades, Five of Hearts]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : A(n) Drew Hussie
+Chips: 2420
+Cards: [9, 14, 36, 45, 49]
+Hand : [Queen of Hearts, Jack of Diamonds, Six of Spades, Three of Hearts, Two of Hearts]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : A(n) Drew Hussie
+Chips: 500
+Cards: [22, 26, 30, 32, 48]
+Hand : [Nine of Diamonds, Eight of Diamonds, Seven of Diamonds, Seven of Spades, Three of Spades]
+Card multiples: [Pair Seven, High Nine]
+Two of a Kind: true
+Hand Value: 18
+
+name : A(n) Drew Hussie
+Chips: 460
+Cards: [3, 14, 30, 32, 38]
+Hand : [Ace of Clubs, Jack of Diamonds, Seven of Diamonds, Seven of Spades, Five of Diamonds]
+Card multiples: [Pair Seven, High Ace]
+Two of a Kind: true
+Hand Value: 18
+
+name : A(n) Drew Hussie
+Chips: 460
+Cards: [2, 5, 7, 12, 32]
+Hand : [Ace of Diamonds, King of Hearts, King of Clubs, Queen of Spades, Seven of Spades]
+Card multiples: [Pair King, High Ace]
+Two of a Kind: true
+Hand Value: 24
+
+name : A(n) Drew Hussie
+Chips: 406
+Cards: [2, 5, 7, 35, 42]
+Hand : [Ace of Diamonds, King of Hearts, King of Clubs, Six of Clubs, Four of Diamonds]
+Card multiples: [Pair King, High Ace]
+Two of a Kind: true
+Hand Value: 24
+
+name : A(n) Drew Hussie
+Chips: 406
+Cards: [2, 18, 30, 42, 49]
+Hand : [Ace of Diamonds, Ten of Diamonds, Seven of Diamonds, Four of Diamonds, Two of Hearts]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [1, 30, 33, 39, 51]
+Hand : [Ace of Hearts, Seven of Diamonds, Six of Hearts, Five of Clubs, Two of Clubs]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 2300
+Cards: [1, 14, 18, 41, 49]
+Hand : [Ace of Hearts, Jack of Diamonds, Ten of Diamonds, Four of Hearts, Two of Hearts]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 2300
+Cards: [6, 7, 12, 26, 37]
+Hand : [King of Diamonds, King of Clubs, Queen of Spades, Eight of Diamonds, Five of Hearts]
+Card multiples: [Pair King, High Queen]
+Two of a Kind: true
+Hand Value: 24
+
+name : A(n) Drew Hussie
+Chips: 2533
+Cards: [6, 7, 19, 38, 39]
+Hand : [King of Diamonds, King of Clubs, Ten of Clubs, Five of Diamonds, Five of Clubs]
+Card multiples: [Pair King, Pair Five, High Ten]
+Two Pairs: true
+Hand Value: 36
+
+name : A(n) Drew Hussie
+Chips: 2533
+Cards: [11, 19, 30, 40, 51]
+Hand : [Queen of Clubs, Ten of Clubs, Seven of Diamonds, Five of Spades, Two of Clubs]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : A(n) Drew Hussie
+Chips: 2333
+Cards: [2, 7, 11, 21, 31]
+Hand : [Ace of Diamonds, King of Clubs, Queen of Clubs, Nine of Hearts, Seven of Clubs]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 2333
+Cards: [6, 12, 17, 30, 50]
+Hand : [King of Diamonds, Queen of Spades, Ten of Hearts, Seven of Diamonds, Two of Diamonds]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 1933
+Cards: [3, 6, 12, 40, 43]
+Hand : [Ace of Clubs, King of Diamonds, Queen of Spades, Five of Spades, Four of Clubs]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [6, 18, 25, 37, 49]
+Hand : [King of Diamonds, Ten of Diamonds, Eight of Hearts, Five of Hearts, Two of Hearts]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 2300
+Cards: [1, 6, 18, 23, 41]
+Hand : [Ace of Hearts, King of Diamonds, Ten of Diamonds, Nine of Clubs, Four of Hearts]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 2300
+Cards: [3, 5, 33, 48, 51]
+Hand : [Ace of Clubs, King of Hearts, Six of Hearts, Three of Spades, Two of Clubs]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 2533
+Cards: [3, 5, 14, 15, 32]
+Hand : [Ace of Clubs, King of Hearts, Jack of Diamonds, Jack of Clubs, Seven of Spades]
+Card multiples: [Pair Jack, High Ace]
+Two of a Kind: true
+Hand Value: 22
+
+name : A(n) Drew Hussie
+Chips: 2500
+Cards: [1, 5, 29, 36, 40]
+Hand : [Ace of Hearts, King of Hearts, Seven of Hearts, Six of Spades, Five of Spades]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : A(n) Drew Hussie
+Chips: 2300
+Cards: [1, 5, 29, 50, 51]
+Hand : [Ace of Hearts, King of Hearts, Seven of Hearts, Two of Diamonds, Two of Clubs]
+Card multiples: [Pair Two, High Ace]
+Two of a Kind: true
+Hand Value: 13
+
+name : A(n) Drew Hussie
+Chips: 2300
+Cards: [6, 10, 12, 16, 28]
+Hand : [King of Diamonds, Queen of Diamonds, Queen of Spades, Jack of Spades, Eight of Spades]
+Card multiples: [Pair Queen, High King]
+Two of a Kind: true
+Hand Value: 23
+
+name : A(n) Drew Hussie
+Chips: 2200
+Cards: [12, 16, 21, 28, 30]
+Hand : [Queen of Spades, Jack of Spades, Nine of Hearts, Eight of Spades, Seven of Diamonds]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : A(n) Drew Hussie
+Chips: 2200
+Cards: [8, 9, 17, 29, 44]
+Hand : [King of Spades, Queen of Hearts, Ten of Hearts, Seven of Hearts, Four of Spades]
+Card multiples: [High King]
+Hand Value: 11
+
+name : A(n) Drew Hussie
+Chips: 2180
+Cards: [8, 9, 17, 29, 44]
+Hand : [King of Spades, Queen of Hearts, Ten of Hearts, Seven of Hearts, Four of Spades]
+Card multiples: [High King]
+Hand Value: 11
+

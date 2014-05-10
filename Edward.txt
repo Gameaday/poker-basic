@@ -1,0 +1,70 @@
+name : Edward
+Chips: 500
+Cards: [21, 23, 27, 34, 48]
+Hand : [Nine of Hearts, Nine of Clubs, Eight of Clubs, Six of Diamonds, Three of Spades]
+Card multiples: [Pair Nine, High Eight]
+Two of a Kind: true
+Hand Value: 20
+
+name : Edward
+Chips: 500
+Cards: [21, 25, 35, 45, 48]
+Hand : [Nine of Hearts, Eight of Hearts, Six of Clubs, Three of Hearts, Three of Spades]
+Card multiples: [Pair Three, High Nine]
+Two of a Kind: true
+Hand Value: 14
+
+name : Edward
+Chips: 500
+Cards: [21, 25, 35, 45, 48]
+Hand : [Nine of Hearts, Eight of Hearts, Six of Clubs, Three of Hearts, Three of Spades]
+Card multiples: [Pair Three, High Nine]
+Two of a Kind: true
+Hand Value: 14
+
+name : Edward
+Chips: 500
+Cards: [7, 19, 31, 35, 38]
+Hand : [King of Clubs, Ten of Clubs, Seven of Clubs, Six of Clubs, Five of Diamonds]
+Card multiples: [High King]
+Hand Value: 11
+
+name : Edward
+Chips: 2500
+Cards: [1, 23, 41, 45, 49]
+Hand : [Ace of Hearts, Nine of Clubs, Four of Hearts, Three of Hearts, Two of Hearts]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : Edward
+Chips: 500
+Cards: [7, 14, 15, 40, 46]
+Hand : [King of Clubs, Jack of Diamonds, Jack of Clubs, Five of Spades, Three of Diamonds]
+Card multiples: [Pair Jack, High King]
+Two of a Kind: true
+Hand Value: 22
+
+name : Edward
+Chips: 90
+Cards: [7, 14, 15, 40, 46]
+Hand : [King of Clubs, Jack of Diamonds, Jack of Clubs, Five of Spades, Three of Diamonds]
+Card multiples: [Pair Jack, High King]
+Two of a Kind: true
+Hand Value: 22
+
+name : Edward
+Chips: 500
+Cards: [3, 34, 35, 41, 43]
+Hand : [Ace of Clubs, Six of Diamonds, Six of Clubs, Four of Hearts, Four of Clubs]
+Card multiples: [Pair Six, Pair Four, High Ace]
+Two Pairs: true
+Hand Value: 29
+
+name : Edward
+Chips: 250
+Cards: [3, 34, 35, 41, 43]
+Hand : [Ace of Clubs, Six of Diamonds, Six of Clubs, Four of Hearts, Four of Clubs]
+Card multiples: [Pair Six, Pair Four, High Ace]
+Two Pairs: true
+Hand Value: 29
+

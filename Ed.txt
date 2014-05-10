@@ -1,0 +1,98 @@
+name : Ed
+Chips: 500
+Cards: [15, 24, 27, 39, 48]
+Hand : [Jack of Clubs, Nine of Spades, Eight of Clubs, Five of Clubs, Three of Spades]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : Ed
+Chips: 2500
+Cards: [1, 17, 28, 38, 44]
+Hand : [Ace of Hearts, Ten of Hearts, Eight of Spades, Five of Diamonds, Four of Spades]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : Ed
+Chips: 100
+Cards: [5, 8, 25, 26, 36]
+Hand : [King of Hearts, King of Spades, Eight of Hearts, Eight of Diamonds, Six of Spades]
+Card multiples: [Pair King, Pair Eight, High Six]
+Two Pairs: true
+Hand Value: 36
+
+name : Ed
+Chips: 300
+Cards: [5, 8, 25, 26, 36]
+Hand : [King of Hearts, King of Spades, Eight of Hearts, Eight of Diamonds, Six of Spades]
+Card multiples: [Pair King, Pair Eight, High Six]
+Two Pairs: true
+Hand Value: 36
+
+name : Ed
+Chips: 500
+Cards: [6, 13, 16, 19, 20]
+Hand : [King of Diamonds, Jack of Hearts, Jack of Spades, Ten of Clubs, Ten of Spades]
+Card multiples: [Pair Jack, Pair Ten, High King]
+Two Pairs: true
+Hand Value: 34
+
+name : Ed
+Chips: 500
+Cards: [7, 14, 17, 39, 49]
+Hand : [King of Clubs, Jack of Diamonds, Ten of Hearts, Five of Clubs, Two of Hearts]
+Card multiples: [High King]
+Hand Value: 11
+
+name : Ed
+Chips: 520
+Cards: [7, 14, 17, 39, 49]
+Hand : [King of Clubs, Jack of Diamonds, Ten of Hearts, Five of Clubs, Two of Hearts]
+Card multiples: [High King]
+Hand Value: 11
+
+name : Ed
+Chips: 2500
+Cards: [6, 7, 23, 34, 46]
+Hand : [King of Diamonds, King of Clubs, Nine of Clubs, Six of Diamonds, Three of Diamonds]
+Card multiples: [Pair King, High Nine]
+Two of a Kind: true
+Hand Value: 24
+
+name : Ed
+Chips: 2590
+Cards: [6, 7, 23, 34, 46]
+Hand : [King of Diamonds, King of Clubs, Nine of Clubs, Six of Diamonds, Three of Diamonds]
+Card multiples: [Pair King, High Nine]
+Two of a Kind: true
+Hand Value: 24
+
+name : Ed
+Chips: 2500
+Cards: [21, 22, 38, 44, 48]
+Hand : [Nine of Hearts, Nine of Diamonds, Five of Diamonds, Four of Spades, Three of Spades]
+Card multiples: [Pair Nine, High Five]
+Two of a Kind: true
+Hand Value: 20
+
+name : Ed
+Chips: 2850
+Cards: [21, 22, 38, 44, 48]
+Hand : [Nine of Hearts, Nine of Diamonds, Five of Diamonds, Four of Spades, Three of Spades]
+Card multiples: [Pair Nine, High Five]
+Two of a Kind: true
+Hand Value: 20
+
+name : Ed
+Chips: 2850
+Cards: [3, 10, 25, 38, 44]
+Hand : [Ace of Clubs, Queen of Diamonds, Eight of Hearts, Five of Diamonds, Four of Spades]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : Ed
+Chips: 3390
+Cards: [3, 10, 25, 38, 44]
+Hand : [Ace of Clubs, Queen of Diamonds, Eight of Hearts, Five of Diamonds, Four of Spades]
+Card multiples: [High Ace]
+Hand Value: 12
+

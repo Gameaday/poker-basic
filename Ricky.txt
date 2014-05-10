@@ -1,0 +1,67 @@
+name : Ricky
+Chips: 2500
+Cards: [2, 13, 18, 37, 45]
+Hand : [Ace of Diamonds, Jack of Hearts, Ten of Diamonds, Five of Hearts, Three of Hearts]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : Ricky
+Chips: 500
+Cards: [21, 24, 25, 28, 38]
+Hand : [Nine of Hearts, Nine of Spades, Eight of Hearts, Eight of Spades, Five of Diamonds]
+Card multiples: [Pair Nine, Pair Eight, High Five]
+Two Pairs: true
+Hand Value: 32
+
+name : Ricky
+Chips: 2500
+Cards: [9, 15, 20, 49, 51]
+Hand : [Queen of Hearts, Jack of Clubs, Ten of Spades, Two of Hearts, Two of Clubs]
+Card multiples: [Pair Two, High Queen]
+Two of a Kind: true
+Hand Value: 13
+
+name : Ricky
+Chips: 2700
+Cards: [9, 15, 20, 49, 51]
+Hand : [Queen of Hearts, Jack of Clubs, Ten of Spades, Two of Hearts, Two of Clubs]
+Card multiples: [Pair Two, High Queen]
+Two of a Kind: true
+Hand Value: 13
+
+name : Ricky
+Chips: 2700
+Cards: [8, 9, 31, 46, 51]
+Hand : [King of Spades, Queen of Hearts, Seven of Clubs, Three of Diamonds, Two of Clubs]
+Card multiples: [High King]
+Hand Value: 11
+
+name : Ricky
+Chips: 2700
+Cards: [8, 9, 31, 46, 51]
+Hand : [King of Spades, Queen of Hearts, Seven of Clubs, Three of Diamonds, Two of Clubs]
+Card multiples: [High King]
+Hand Value: 11
+
+name : Ricky
+Chips: 2700
+Cards: [2, 6, 9, 39, 49]
+Hand : [Ace of Diamonds, King of Diamonds, Queen of Hearts, Five of Clubs, Two of Hearts]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : Ricky
+Chips: 2700
+Cards: [2, 6, 9, 39, 49]
+Hand : [Ace of Diamonds, King of Diamonds, Queen of Hearts, Five of Clubs, Two of Hearts]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : Ricky
+Chips: 2700
+Cards: [7, 12, 13, 41, 44]
+Hand : [King of Clubs, Queen of Spades, Jack of Hearts, Four of Hearts, Four of Spades]
+Card multiples: [Pair Four, High King]
+Two of a Kind: true
+Hand Value: 15
+

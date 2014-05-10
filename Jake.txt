@@ -1,0 +1,61 @@
+name : Jake
+Chips: 500
+Cards: [9, 24, 25, 36, 38]
+Hand : [Queen of Hearts, Nine of Spades, Eight of Hearts, Six of Spades, Five of Diamonds]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : Jake
+Chips: 2500
+Cards: [7, 14, 20, 35, 40]
+Hand : [King of Clubs, Jack of Diamonds, Ten of Spades, Six of Clubs, Five of Spades]
+Card multiples: [High King]
+Hand Value: 11
+
+name : Jake
+Chips: 2500
+Cards: [4, 5, 6, 18, 48]
+Hand : [Ace of Spades, King of Hearts, King of Diamonds, Ten of Diamonds, Three of Spades]
+Card multiples: [Pair King, High Ace]
+Two of a Kind: true
+Hand Value: 24
+
+name : Jake
+Chips: 2500
+Cards: [1, 9, 19, 29, 42]
+Hand : [Ace of Hearts, Queen of Hearts, Ten of Clubs, Seven of Hearts, Four of Diamonds]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : Jake
+Chips: 2500
+Cards: [1, 3, 29, 31, 39]
+Hand : [Ace of Hearts, Ace of Clubs, Seven of Hearts, Seven of Clubs, Five of Clubs]
+Card multiples: [Pair Ace, Pair Seven, High Five]
+Two Pairs: true
+Hand Value: 37
+
+name : Jake
+Chips: 2500
+Cards: [11, 20, 41, 46, 48]
+Hand : [Queen of Clubs, Ten of Spades, Four of Hearts, Three of Diamonds, Three of Spades]
+Card multiples: [Pair Three, High Queen]
+Two of a Kind: true
+Hand Value: 14
+
+name : Jake
+Chips: 500
+Cards: [5, 10, 33, 36, 42]
+Hand : [King of Hearts, Queen of Diamonds, Six of Hearts, Six of Spades, Four of Diamonds]
+Card multiples: [Pair Six, High King]
+Two of a Kind: true
+Hand Value: 17
+
+name : Jake
+Chips: 500
+Cards: [10, 11, 12, 27, 29]
+Hand : [Queen of Diamonds, Queen of Clubs, Queen of Spades, Eight of Clubs, Seven of Hearts]
+Card multiples: [Three of a kind Queen, High Eight]
+Three of a Kind: true
+Hand Value: 50
+

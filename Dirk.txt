@@ -1,0 +1,179 @@
+name : Dirk
+Chips: 2500
+Cards: [9, 20, 21, 25, 35]
+Hand : [Queen of Hearts, Ten of Spades, Nine of Hearts, Eight of Hearts, Six of Clubs]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : Dirk
+Chips: 500
+Cards: [7, 21, 24, 26, 41]
+Hand : [King of Clubs, Nine of Hearts, Nine of Spades, Eight of Diamonds, Four of Hearts]
+Card multiples: [Pair Nine, High King]
+Two of a Kind: true
+Hand Value: 20
+
+name : Dirk
+Chips: 2500
+Cards: [14, 17, 22, 34, 36]
+Hand : [Jack of Diamonds, Ten of Hearts, Nine of Diamonds, Six of Diamonds, Six of Spades]
+Card multiples: [Pair Six, High Jack]
+Two of a Kind: true
+Hand Value: 17
+
+name : Dirk
+Chips: 2700
+Cards: [14, 17, 22, 34, 36]
+Hand : [Jack of Diamonds, Ten of Hearts, Nine of Diamonds, Six of Diamonds, Six of Spades]
+Card multiples: [Pair Six, High Jack]
+Two of a Kind: true
+Hand Value: 17
+
+name : Dirk
+Chips: 0
+Cards: [4, 20, 37, 45, 48]
+Hand : [Ace of Spades, Ten of Spades, Five of Hearts, Three of Hearts, Three of Spades]
+Card multiples: [Pair Three, High Ace]
+Two of a Kind: true
+Hand Value: 14
+
+name : Dirk
+Chips: 0
+Cards: [4, 20, 37, 45, 48]
+Hand : [Ace of Spades, Ten of Spades, Five of Hearts, Three of Hearts, Three of Spades]
+Card multiples: [Pair Three, High Ace]
+Two of a Kind: true
+Hand Value: 14
+
+name : Dirk
+Chips: 0
+Cards: [10, 13, 26, 31, 32]
+Hand : [Queen of Diamonds, Jack of Hearts, Eight of Diamonds, Seven of Clubs, Seven of Spades]
+Card multiples: [Pair Seven, High Queen]
+Two of a Kind: true
+Hand Value: 18
+
+name : Dirk
+Chips: 420
+Cards: [10, 13, 26, 31, 32]
+Hand : [Queen of Diamonds, Jack of Hearts, Eight of Diamonds, Seven of Clubs, Seven of Spades]
+Card multiples: [Pair Seven, High Queen]
+Two of a Kind: true
+Hand Value: 18
+
+name : Dirk
+Chips: 500
+Cards: [23, 28, 33, 35, 49]
+Hand : [Nine of Clubs, Eight of Spades, Six of Hearts, Six of Clubs, Two of Hearts]
+Card multiples: [Pair Six, High Nine]
+Two of a Kind: true
+Hand Value: 17
+
+name : Dirk
+Chips: 500
+Cards: [23, 28, 33, 35, 49]
+Hand : [Nine of Clubs, Eight of Spades, Six of Hearts, Six of Clubs, Two of Hearts]
+Card multiples: [Pair Six, High Nine]
+Two of a Kind: true
+Hand Value: 17
+
+name : Dirk
+Chips: 0
+Cards: [2, 14, 20, 24, 50]
+Hand : [Ace of Diamonds, Jack of Diamonds, Ten of Spades, Nine of Spades, Two of Diamonds]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : Dirk
+Chips: 240
+Cards: [2, 14, 20, 24, 50]
+Hand : [Ace of Diamonds, Jack of Diamonds, Ten of Spades, Nine of Spades, Two of Diamonds]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : Dirk
+Chips: 2500
+Cards: [13, 26, 32, 35, 37]
+Hand : [Jack of Hearts, Eight of Diamonds, Seven of Spades, Six of Clubs, Five of Hearts]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : Dirk
+Chips: 2500
+Cards: [13, 26, 32, 35, 37]
+Hand : [Jack of Hearts, Eight of Diamonds, Seven of Spades, Six of Clubs, Five of Hearts]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : Dirk
+Chips: 2500
+Cards: [10, 18, 29, 41, 49]
+Hand : [Queen of Diamonds, Ten of Diamonds, Seven of Hearts, Four of Hearts, Two of Hearts]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : Dirk
+Chips: 2500
+Cards: [10, 18, 29, 41, 49]
+Hand : [Queen of Diamonds, Ten of Diamonds, Seven of Hearts, Four of Hearts, Two of Hearts]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : Dirk
+Chips: 2500
+Cards: [9, 13, 22, 27, 49]
+Hand : [Queen of Hearts, Jack of Hearts, Nine of Diamonds, Eight of Clubs, Two of Hearts]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : Dirk
+Chips: 2500
+Cards: [9, 13, 22, 27, 49]
+Hand : [Queen of Hearts, Jack of Hearts, Nine of Diamonds, Eight of Clubs, Two of Hearts]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : Dirk
+Chips: 2500
+Cards: [28, 32, 33, 36, 44]
+Hand : [Eight of Spades, Seven of Spades, Six of Hearts, Six of Spades, Four of Spades]
+Card multiples: [Pair Six, High Eight]
+Two of a Kind: true
+Hand Value: 17
+
+name : Dirk
+Chips: 3425
+Cards: [28, 32, 33, 36, 44]
+Hand : [Eight of Spades, Seven of Spades, Six of Hearts, Six of Spades, Four of Spades]
+Card multiples: [Pair Six, High Eight]
+Two of a Kind: true
+Hand Value: 17
+
+name : Dirk
+Chips: 2500
+Cards: [14, 26, 29, 33, 40]
+Hand : [Jack of Diamonds, Eight of Diamonds, Seven of Hearts, Six of Hearts, Five of Spades]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : Dirk
+Chips: 2500
+Cards: [14, 26, 29, 33, 40]
+Hand : [Jack of Diamonds, Eight of Diamonds, Seven of Hearts, Six of Hearts, Five of Spades]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : Dirk
+Chips: 2500
+Cards: [15, 20, 27, 30, 34]
+Hand : [Jack of Clubs, Ten of Spades, Eight of Clubs, Seven of Diamonds, Six of Diamonds]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : Dirk
+Chips: 2500
+Cards: [15, 20, 27, 30, 34]
+Hand : [Jack of Clubs, Ten of Spades, Eight of Clubs, Seven of Diamonds, Six of Diamonds]
+Card multiples: [High Jack]
+Hand Value: 9
+

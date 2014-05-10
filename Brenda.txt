@@ -1,0 +1,269 @@
+name : Brenda
+Chips: 500
+Cards: [15, 24, 29, 39, 48]
+Hand : [Jack of Clubs, Nine of Spades, Seven of Hearts, Five of Clubs, Three of Spades]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : Brenda
+Chips: 520
+Cards: [15, 24, 29, 39, 48]
+Hand : [Jack of Clubs, Nine of Spades, Seven of Hearts, Five of Clubs, Three of Spades]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : Brenda
+Chips: 0
+Cards: [6, 7, 10, 20, 48]
+Hand : [King of Diamonds, King of Clubs, Queen of Diamonds, Ten of Spades, Three of Spades]
+Card multiples: [Pair King, High Queen]
+Two of a Kind: true
+Hand Value: 24
+
+name : Brenda
+Chips: 90
+Cards: [6, 7, 10, 20, 48]
+Hand : [King of Diamonds, King of Clubs, Queen of Diamonds, Ten of Spades, Three of Spades]
+Card multiples: [Pair King, High Queen]
+Two of a Kind: true
+Hand Value: 24
+
+name : Brenda
+Chips: 0
+Cards: [12, 13, 16, 47, 50]
+Hand : [Queen of Spades, Jack of Hearts, Jack of Spades, Three of Clubs, Two of Diamonds]
+Card multiples: [Pair Jack, High Queen]
+Two of a Kind: true
+Hand Value: 22
+
+name : Brenda
+Chips: 90
+Cards: [12, 13, 16, 47, 50]
+Hand : [Queen of Spades, Jack of Hearts, Jack of Spades, Three of Clubs, Two of Diamonds]
+Card multiples: [Pair Jack, High Queen]
+Two of a Kind: true
+Hand Value: 22
+
+name : Brenda
+Chips: 0
+Cards: [5, 6, 9, 27, 31]
+Hand : [King of Hearts, King of Diamonds, Queen of Hearts, Eight of Clubs, Seven of Clubs]
+Card multiples: [Pair King, High Queen]
+Two of a Kind: true
+Hand Value: 24
+
+name : Brenda
+Chips: 90
+Cards: [5, 6, 9, 27, 31]
+Hand : [King of Hearts, King of Diamonds, Queen of Hearts, Eight of Clubs, Seven of Clubs]
+Card multiples: [Pair King, High Queen]
+Two of a Kind: true
+Hand Value: 24
+
+name : Brenda
+Chips: 0
+Cards: [5, 7, 11, 25, 27]
+Hand : [King of Hearts, King of Clubs, Queen of Clubs, Eight of Hearts, Eight of Clubs]
+Card multiples: [Pair King, Pair Eight, High Queen]
+Two Pairs: true
+Hand Value: 36
+
+name : Brenda
+Chips: 2500
+Cards: [6, 24, 25, 28, 33]
+Hand : [King of Diamonds, Nine of Spades, Eight of Hearts, Eight of Spades, Six of Hearts]
+Card multiples: [Pair Eight, High King]
+Two of a Kind: true
+Hand Value: 19
+
+name : Brenda
+Chips: 2950
+Cards: [6, 24, 25, 28, 33]
+Hand : [King of Diamonds, Nine of Spades, Eight of Hearts, Eight of Spades, Six of Hearts]
+Card multiples: [Pair Eight, High King]
+Two of a Kind: true
+Hand Value: 19
+
+name : Brenda
+Chips: 2500
+Cards: [1, 8, 15, 17, 45]
+Hand : [Ace of Hearts, King of Spades, Jack of Clubs, Ten of Hearts, Three of Hearts]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : Brenda
+Chips: -50
+Cards: [1, 8, 15, 17, 45]
+Hand : [Ace of Hearts, King of Spades, Jack of Clubs, Ten of Hearts, Three of Hearts]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : Brenda
+Chips: -50
+Cards: [2, 16, 36, 42, 46]
+Hand : [Ace of Diamonds, Jack of Spades, Six of Spades, Four of Diamonds, Three of Diamonds]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : Brenda
+Chips: -10
+Cards: [2, 16, 36, 42, 46]
+Hand : [Ace of Diamonds, Jack of Spades, Six of Spades, Four of Diamonds, Three of Diamonds]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : Brenda
+Chips: 500
+Cards: [1, 23, 38, 49, 51]
+Hand : [Ace of Hearts, Nine of Clubs, Five of Diamonds, Two of Hearts, Two of Clubs]
+Card multiples: [Pair Two, High Ace]
+Two of a Kind: true
+Hand Value: 13
+
+name : Brenda
+Chips: 500
+Cards: [1, 23, 38, 49, 51]
+Hand : [Ace of Hearts, Nine of Clubs, Five of Diamonds, Two of Hearts, Two of Clubs]
+Card multiples: [Pair Two, High Ace]
+Two of a Kind: true
+Hand Value: 13
+
+name : Brenda
+Chips: 500
+Cards: [23, 36, 39, 47, 51]
+Hand : [Nine of Clubs, Six of Spades, Five of Clubs, Three of Clubs, Two of Clubs]
+Card multiples: [High Nine]
+Hand Value: 7
+
+name : Brenda
+Chips: 2500
+Cards: [4, 23, 32, 36, 38]
+Hand : [Ace of Spades, Nine of Clubs, Seven of Spades, Six of Spades, Five of Diamonds]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : Brenda
+Chips: -100
+Cards: [4, 23, 32, 36, 38]
+Hand : [Ace of Spades, Nine of Clubs, Seven of Spades, Six of Spades, Five of Diamonds]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : Brenda
+Chips: -100
+Cards: [3, 6, 34, 36, 40]
+Hand : [Ace of Clubs, King of Diamonds, Six of Diamonds, Six of Spades, Five of Spades]
+Card multiples: [Pair Six, High Ace]
+Two of a Kind: true
+Hand Value: 17
+
+name : Brenda
+Chips: 550
+Cards: [3, 6, 34, 36, 40]
+Hand : [Ace of Clubs, King of Diamonds, Six of Diamonds, Six of Spades, Five of Spades]
+Card multiples: [Pair Six, High Ace]
+Two of a Kind: true
+Hand Value: 17
+
+name : Brenda
+Chips: 550
+Cards: [4, 10, 17, 48, 49]
+Hand : [Ace of Spades, Queen of Diamonds, Ten of Hearts, Three of Spades, Two of Hearts]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : Brenda
+Chips: -50
+Cards: [4, 10, 17, 48, 49]
+Hand : [Ace of Spades, Queen of Diamonds, Ten of Hearts, Three of Spades, Two of Hearts]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : Brenda
+Chips: -50
+Cards: [1, 2, 7, 15, 33]
+Hand : [Ace of Hearts, Ace of Diamonds, King of Clubs, Jack of Clubs, Six of Hearts]
+Card multiples: [Pair Ace, High King]
+Two of a Kind: true
+Hand Value: 25
+
+name : Brenda
+Chips: 1109
+Cards: [1, 2, 7, 15, 33]
+Hand : [Ace of Hearts, Ace of Diamonds, King of Clubs, Jack of Clubs, Six of Hearts]
+Card multiples: [Pair Ace, High King]
+Two of a Kind: true
+Hand Value: 25
+
+name : Brenda
+Chips: 1109
+Cards: [9, 14, 23, 32, 38]
+Hand : [Queen of Hearts, Jack of Diamonds, Nine of Clubs, Seven of Spades, Five of Diamonds]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : Brenda
+Chips: -100
+Cards: [9, 14, 23, 32, 38]
+Hand : [Queen of Hearts, Jack of Diamonds, Nine of Clubs, Seven of Spades, Five of Diamonds]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : Brenda
+Chips: -100
+Cards: [7, 15, 20, 28, 40]
+Hand : [King of Clubs, Jack of Clubs, Ten of Spades, Eight of Spades, Five of Spades]
+Card multiples: [High King]
+Hand Value: 11
+
+name : Brenda
+Chips: -100
+Cards: [7, 15, 20, 28, 40]
+Hand : [King of Clubs, Jack of Clubs, Ten of Spades, Eight of Spades, Five of Spades]
+Card multiples: [High King]
+Hand Value: 11
+
+name : Brenda
+Chips: -100
+Cards: [1, 13, 16, 20, 48]
+Hand : [Ace of Hearts, Jack of Hearts, Jack of Spades, Ten of Spades, Three of Spades]
+Card multiples: [Pair Jack, High Ace]
+Two of a Kind: true
+Hand Value: 22
+
+name : Brenda
+Chips: 2587
+Cards: [1, 13, 16, 20, 48]
+Hand : [Ace of Hearts, Jack of Hearts, Jack of Spades, Ten of Spades, Three of Spades]
+Card multiples: [Pair Jack, High Ace]
+Two of a Kind: true
+Hand Value: 22
+
+name : Brenda
+Chips: 2500
+Cards: [6, 13, 22, 27, 38]
+Hand : [King of Diamonds, Jack of Hearts, Nine of Diamonds, Eight of Clubs, Five of Diamonds]
+Card multiples: [High King]
+Hand Value: 11
+
+name : Brenda
+Chips: 2500
+Cards: [6, 13, 22, 27, 38]
+Hand : [King of Diamonds, Jack of Hearts, Nine of Diamonds, Eight of Clubs, Five of Diamonds]
+Card multiples: [High King]
+Hand Value: 11
+
+name : Brenda
+Chips: 2500
+Cards: [12, 22, 32, 33, 43]
+Hand : [Queen of Spades, Nine of Diamonds, Seven of Spades, Six of Hearts, Four of Clubs]
+Card multiples: [High Queen]
+Hand Value: 10
+
+name : Brenda
+Chips: 150
+Cards: [12, 22, 32, 33, 43]
+Hand : [Queen of Spades, Nine of Diamonds, Seven of Spades, Six of Hearts, Four of Clubs]
+Card multiples: [High Queen]
+Hand Value: 10
+

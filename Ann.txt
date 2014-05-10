@@ -1,0 +1,28 @@
+name : Ann
+Chips: 2500
+Cards: [13, 20, 26, 37, 41]
+Hand : [Jack of Hearts, Ten of Spades, Eight of Diamonds, Five of Hearts, Four of Hearts]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : Ann
+Chips: 2500
+Cards: [13, 20, 26, 37, 41]
+Hand : [Jack of Hearts, Ten of Spades, Eight of Diamonds, Five of Hearts, Four of Hearts]
+Card multiples: [High Jack]
+Hand Value: 9
+
+name : Ann
+Chips: 2500
+Cards: [4, 13, 17, 35, 37]
+Hand : [Ace of Spades, Jack of Hearts, Ten of Hearts, Six of Clubs, Five of Hearts]
+Card multiples: [High Ace]
+Hand Value: 12
+
+name : Ann
+Chips: 2540
+Cards: [4, 13, 17, 35, 37]
+Hand : [Ace of Spades, Jack of Hearts, Ten of Hearts, Six of Clubs, Five of Hearts]
+Card multiples: [High Ace]
+Hand Value: 12
+

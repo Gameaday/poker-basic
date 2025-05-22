@@ -10,41 +10,41 @@ import java.util.*;
 import javax.swing.JOptionPane;
 
 class Player {
-//Player has folded True/False
+    // Player has folded True/False
 
     public int lastBet;
 
     public boolean fold;
-//player object name
+    // player object name
     public String name;
-//the players hand
+    // the players hand
     public int[] hand;
-//the players current chips
+    // the players current chips
     public int chips;
-//current bet total
+    // current bet total
     public int bet;
-//convert the players hand into a reader friendly format
+    // convert the players hand into a reader friendly format
     public String[] convertedHand, convertedHand2;
-//hand Multiples
+    // hand Multiples
     private int[][] handMultiples;
-//Whether the hand is a straight, flush, pair, etc..
+    // Whether the hand is a straight, flush, pair, etc..
     private boolean Straight, aceStraight, Flush, straightFlush, royalFlush;
     private boolean twoKind, twoPair, threeKind, fourKind, fullHouse;
-//Hand value
+    // Hand value
     public int handValue;
 
-//class method thingies
-// The ID of the Player object
+    // class method thingies
+    // The ID of the Player object
     public Player() {
-      // TODO document why this constructor is empty
+        // TODO document why this constructor is empty
     }
 
-// The Player Name is set
+    // The Player Name is set
     public void setName(String playerName) {
         name = playerName;
     }
 
-//
+    //
     public void resetBet() {
         lastBet = 0;
         bet = 0;
@@ -55,7 +55,7 @@ class Player {
         bet = 0;
     }
 
-//set location to write to file
+    // set location to write to file
     public void save() {
         try {
             System.setOut(new PrintStream(new FileOutputStream(name + ".txt", true)));
@@ -64,7 +64,7 @@ class Player {
         }
     }
 
-// The Chips variable is assigned a value.
+    // The Chips variable is assigned a value.
     public void setChipsCurrent(int playerChips) {
         chips = playerChips;
     }
@@ -77,13 +77,13 @@ class Player {
         }
     }
 
-//bet something, return the bet so it can be used
+    // bet something, return the bet so it can be used
     public int bet(int bet) {
         this.bet = bet;
         chips -= bet;
         return bet;
     }
-// player folds
+    // player folds
 
     public boolean fold() {
         fold = true;
@@ -95,85 +95,85 @@ class Player {
         return fold;
     }
 
-//sets whole hand
+    // sets whole hand
     public void updateHand(int[] playerHand) {
         hand = playerHand;
         Arrays.sort(hand);
     }
 
-//converts hand to reader friendly format
+    // converts hand to reader friendly format
     public void convertHand() {
         convertedHand = Main.convertHand(hand);
     }
 
-//converts pairs to a reader friendly format
+    // converts pairs to a reader friendly format
     public void convertHand2() {
         convertedHand2 = Main.convertHand2(handMultiples);
     }
 
-//find card multiples in hand
+    // find card multiples in hand
     public void findMultiples() {
         handMultiples = Main.handMultiples(hand);
     }
 
-//checks if hand is a Straight
+    // checks if hand is a Straight
     public void isStraight() {
         Straight = Main.isStraight(hand);
     }
 
-//checks if hand is a Straight
+    // checks if hand is a Straight
     public void isAceStraight() {
         aceStraight = Main.isAceStraight(hand);
     }
 
-//checks if hand is Flush
+    // checks if hand is Flush
     public void isFlush() {
         Straight = Main.isFlush(hand);
     }
 
-//checks if hand is a Straight Flush
+    // checks if hand is a Straight Flush
     public void isStraightFlush() {
         straightFlush = Main.isStraightFlush(hand);
     }
 
-//checks if hand is a Royal Flush
+    // checks if hand is a Royal Flush
     public void isRoyalFlush() {
         royalFlush = Main.isRoyalFlush(hand);
     }
 
-//checks if Two of a kind
+    // checks if Two of a kind
     public void is2Kind() {
         twoKind = Main.is2Kind(handMultiples);
     }
 
-//checks if Two pairs
+    // checks if Two pairs
     public void is2Pair() {
         twoPair = Main.is2Pair(handMultiples);
     }
 
-//checks if Three of a kind
+    // checks if Three of a kind
     public void is3Kind() {
         threeKind = Main.is3Kind(handMultiples);
     }
 
-//checks if Full House
+    // checks if Full House
     public void isFullHouse() {
         fullHouse = Main.isFullHouse(handMultiples);
     }
 
-//checks if Four of a kind
+    // checks if Four of a kind
     public void is4Kind() {
         fourKind = Main.is4Kind(handMultiples);
     }
 
-//ALL *IS* HAND CHECKS & multiples
+    // ALL *IS* HAND CHECKS & multiples
     public void Checks() {
         updateHand(hand);
         findMultiples();
         convertHand();
         convertHand2();
         handValue();
-//is checks
+        // is checks
         is2Kind();
         is2Pair();
         is3Kind();
@@ -186,12 +186,12 @@ class Player {
         isRoyalFlush();
     }
 
-//gives derives a value from the player hand
+    // gives derives a value from the player hand
     public void handValue() {
         handValue = Main.handValue(hand);
     }
 
-//sets up a player with a hand, chips, a name, and prints it
+    // sets up a player with a hand, chips, a name, and prints it
     public void setupPlayer(String playerName, int chips, int[] Deck) {
 
         setName(playerName);
@@ -204,7 +204,7 @@ class Player {
         reportPlayer();
     }
 
-//sets up a player with a hand, chips, a name, and prints it
+    // sets up a player with a hand, chips, a name, and prints it
     public void setupPlayerAgain(String playerName, int[] Deck, int chips) {
 
         setName(playerName);
@@ -217,13 +217,13 @@ class Player {
         reportPlayer();
     }
 
-//This method prints the current values of the player
+    // This method prints the current values of the player
     public void printPlayer() {
         System.out.println("name : " + name);
         System.out.println("Chips: " + chips);
     }
 
-//only prints things that are true about the hand
+    // only prints things that are true about the hand
     public void HandContains() {
         if (twoKind == true & twoPair != true & fullHouse != true) {
             System.out.println("Two of a Kind: " + twoKind);
@@ -257,7 +257,7 @@ class Player {
         }
     }
 
-//prints all the current stats for the hand
+    // prints all the current stats for the hand
     public void printHandStats() {
         System.out.println("Cards: " + Arrays.toString(hand));
         System.out.println("Hand : " + Arrays.toString(convertedHand));
@@ -267,7 +267,7 @@ class Player {
         System.out.println("Hand Value: " + handValue);
     }
 
-//saves player info to file
+    // saves player info to file
     public void reportPlayer() {
         save();
         printPlayer();
@@ -279,74 +279,75 @@ class Player {
 public class Main {
 
     public static void main(String[] args) {
-//Variables
+        // Variables
         int workingPot = 0, topBet = 0, countup = 0;
         boolean Continue = true;
         boolean Quit = false;
         String[] players;
         Player USER = null, CPU1 = null, CPU2 = null, CPU3 = null;
         Player[] list;
-//print my names as author
+        // print my names as author
         author();
 
-//Prompt user for a name
+        // Prompt user for a name
         String playerName = promptName();
-//prompt for number of players to play against:
+        // prompt for number of players to play against:
         int playerCount = promptChallengers();
-//prompt for starting chip quantity:
+        // prompt for starting chip quantity:
         int chipsInitial = promptChips();
 
-//Set stuff up
+        // Set stuff up
         players = new String[playerCount + 1];
         list = new Player[players.length];
 
-//add your name to list
+        // add your name to list
         players[0] = playerName;
 
-//Decide names for the Computer players
+        // Decide names for the Computer players
         decideNames(players);
         setupList(list, USER, CPU1, CPU2, CPU3);
 
         while (Continue == true) {
-            //initialize the Deck
+            // initialize the Deck
             int[] Deck = setDeck();
             if (countup < 1) {
-                //Initialize players with hands, names, and chips
+                // Initialize players with hands, names, and chips
                 InitializePlayers(list, players, chipsInitial, Deck);
                 countup = 1;
             } else {
                 InitializePlayers(list, players, Deck);
             }
-//show player his hand
+            // show player his hand
             revealHand(list[0].convertedHand);
-//have player bet
+            // have player bet
             workingPot = bet(list, workingPot);
-//report current pot value
+            // report current pot value
             System.out.println("Current Pot Value: " + workingPot);
 
-//have player exchange cards
+            // have player exchange cards
             Exchange(list[0], Deck);
 
-//report new hand
+            // report new hand
             revealHand(list[0].convertedHand);
 
-//have player bet again
+            // have player bet again
             workingPot = bet(list, workingPot);
-//report current pot value
+            // report current pot value
             System.out.println("Current Pot Value: " + workingPot);
-//playersStats(list);
+            // playersStats(list);
 
-//Declare results
+            // Declare results
             declareResults(list);
-//divide the pot between the winner(s), note gives 100% to all winners currently
+            // divide the pot between the winner(s), note gives 100% to all winners
+            // currently
             dividePot(list, workingPot);
-//save updated stats to file
+            // save updated stats to file
             playersStats(list);
             Continue = promptEnd();
         }
     }
 
-//methods
+    // methods
     private static void InitializePlayers(Player[] list, String[] players, int chipsInitial, int[] Deck) {
         for (int i = 0; i < players.length; i++) {
             if (i == 0) {
@@ -369,8 +370,8 @@ public class Main {
                 CPU3.setupPlayer(players[i], chipsInitial, Deck);
                 list[i] = CPU3;
             }
-            System.out.println(); //places spaces between player info, for neatness
-//return null;
+            System.out.println(); // places spaces between player info, for neatness
+            // return null;
         }
     }
 
@@ -397,8 +398,8 @@ public class Main {
                 CPU3.setupPlayer(players[i], CPU3.chips, Deck);
                 list[i] = CPU3;
             }
-            System.out.println(); //places spaces between player info, for neatness
-//return null;
+            System.out.println(); // places spaces between player info, for neatness
+            // return null;
 
         }
 
@@ -445,7 +446,8 @@ public class Main {
     private static boolean declareResults(Player[] list) {
         int finish = decideWinner(list);
         if (finish == 0) {
-            JOptionPane.showMessageDialog(null, "You have lost the hand, better luck next time", "Sorry!", finish, null);
+            JOptionPane.showMessageDialog(null, "You have lost the hand, better luck next time", "Sorry!", finish,
+                    null);
             return true;
         }
         if (finish == 1) {
@@ -465,15 +467,17 @@ public class Main {
             winningScores[i] = list[i].handValue;
         }
         Arrays.sort(winningScores);
-        if (winningScores[list.length - 1] == list[0].handValue && winningScores[list.length - 2] == list[0].handValue) {
+        if (winningScores[list.length - 1] == list[0].handValue
+                && winningScores[list.length - 2] == list[0].handValue) {
             return 2;
-        } //tie
-        if (winningScores[list.length - 1] == list[0].handValue && winningScores[list.length - 2] != list[0].handValue) {
+        } // tie
+        if (winningScores[list.length - 1] == list[0].handValue
+                && winningScores[list.length - 2] != list[0].handValue) {
             return 1;
-        } //win
+        } // win
         if (winningScores[list.length - 1] != list[0].handValue) {
             return 0;
-        } //lose
+        } // lose
         return 2;
     }
 
@@ -487,8 +491,9 @@ public class Main {
             Arrays.sort(winningScores);
             if (winningScores[list.length - 1] == list[i].handValue) {
                 list[i].chips += pot;
-            } //this only accounts for one winner at the moment, but can be adapted,
-//for instance if int 2, tie, give half to each, still not perfect but covers more siturations.
+            } // this only accounts for one winner at the moment, but can be adapted,
+            // for instance if int 2, tie, give half to each, still not perfect but covers
+            // more siturations.
         }
     }
 
@@ -500,13 +505,13 @@ public class Main {
             }
         }
         if (count >= 1) {
-//System.out.print(count);
+            // System.out.print(count);
         }
         return count;
     }
 
     public static int[] cardMultiples(int[] hand) {
-        int[] result = {0, 0};
+        int[] result = { 0, 0 };
         boolean finished;
         int i = 0;
         int cardCheck = 0, escape;
@@ -558,7 +563,7 @@ public class Main {
             }
         } while (finished == false);
         int[][] resultArray = shrinkArray(results);
-//System.out.println(Arrays.toString(resultArray));
+        // System.out.println(Arrays.toString(resultArray));
         return resultArray;
     }
 
@@ -587,7 +592,7 @@ public class Main {
         int bet = 0;
         boolean valid = false;
         while (valid == false) {
-            Object[] chipSelection = {0, 10, 50, 100};
+            Object[] chipSelection = { 0, 10, 50, 100 };
             Object Chips = JOptionPane.showInputDialog(null, "How much will you bet?", null,
                     JOptionPane.INFORMATION_MESSAGE, null, chipSelection, chipSelection[0]);
             bet = (int) Chips;
@@ -741,7 +746,7 @@ public class Main {
     }
 
     static void recursiveBet(Player[] Player, int i, int pot, int bet) {
-        
+
     }
 
     static void playersStats(Player[] list) {
@@ -888,15 +893,17 @@ public class Main {
             }
             handRanks[i] = rank;
         }
-//System.out.println(Arrays.toString(handRanks));
+        // System.out.println(Arrays.toString(handRanks));
         return handRanks;
     }
 
     public static int[] setDeck() {
         int[] Deck;
-//change line below to reference another method or variable that tells deck size
+        // change line below to reference another method or variable that tells deck
+        // size
         Deck = new int[53];
-//i'm thinking global variable fed into a different method that fills an array that size.
+        // i'm thinking global variable fed into a different method that fills an array
+        // that size.
         for (int i = 0; i <= Deck.length - 1; i++) {
             Deck[i] = i;
         }
@@ -919,7 +926,7 @@ public class Main {
 
         for (int i = 0; i < hand.length; i++) {
             convertedHand[i] = cardName(hand[i]);
-//System.out.println("hand index: " + i);
+            // System.out.println("hand index: " + i);
         }
 
         return convertedHand;
@@ -957,7 +964,7 @@ public class Main {
                 list[3] = CPU3;
             }
         }
-//return players;
+        // return players;
     }
 
     public static boolean console() {
@@ -967,17 +974,18 @@ public class Main {
     }
 
     private static int randomCard(int[] workingDeck) {
-//chose random card from the deck
-//randomNum = minimum + (int)(Math.random()*maximum);
-//randomCard = 1+(int)(Math.random()*current size of deck);
+        // chose random card from the deck
+        // randomNum = minimum + (int)(Math.random()*maximum);
+        // randomCard = 1+(int)(Math.random()*current size of deck);
         int randomCard = 0 + (int) (Math.random() * (workingDeck.length - 1));
-//System.out.println(randomCard);
+        // System.out.println(randomCard);
         int Card = workingDeck[randomCard];
         return Card;
     }
 
     private static int remainingCards(int[] Cards) {
-//change line below to reference another method or variable that tells deck size
+        // change line below to reference another method or variable that tells deck
+        // size
         int index = 0;
         for (int i = 0; i <= Cards.length - 1; i++) {
             if (Cards[i] != 0) {
@@ -985,13 +993,13 @@ public class Main {
             }
         }
         int remainingCards = index;
-//System.out.println("Current size of Deck is: " + remainingCards + " Cards.");
+        // System.out.println("Current size of Deck is: " + remainingCards + " Cards.");
         return remainingCards;
     }
 
     private static int[] workingDeck(int[] Deck) {
         int[] workingDeck;
-//length of working deck = number of remaining cards
+        // length of working deck = number of remaining cards
         workingDeck = new int[remainingCards(Deck)];
         int index = 0;
         for (int i = 0; i <= Deck.length - 1; i++) {
@@ -1005,7 +1013,7 @@ public class Main {
 
     static int[] workingHand(int[] hand) {
         int[] workingHand;
-//length of working deck = number of remaining cards
+        // length of working deck = number of remaining cards
         workingHand = new int[remainingCards(hand)];
         int index = 0;
         for (int i = 0; i < hand.length; i++) {
@@ -1030,9 +1038,9 @@ public class Main {
 
         int card = randomCard(workingDeck(Deck));
 
-// "remove" card from deck
+        // "remove" card from deck
         Deck[card] = 0;
-//remake working Deck
+        // remake working Deck
         return card;
     }
 
@@ -1049,24 +1057,24 @@ public class Main {
     private static String cardRank(int card) {
         String cardRank;
         String[] Ranks = {
-            "error", "Ace", "King", "Queen",
-            "Jack", "Ten", "Nine", "Eight",
-            "Seven", "Six", "Five", "Four",
-            "Three", "Two"
+                "error", "Ace", "King", "Queen",
+                "Jack", "Ten", "Nine", "Eight",
+                "Seven", "Six", "Five", "Four",
+                "Three", "Two"
         };
         int rank = card / 4;
         if (card % 4 != 0) {
             rank++;
         }
         cardRank = Ranks[rank];
-//System.out.println("card rank test, Card: " + card + " rank: " + cardRank);
+        // System.out.println("card rank test, Card: " + card + " rank: " + cardRank);
         return cardRank;
     }
 
     private static String multicardName(int quantity) {
         String title;
         String[] Titles = {
-            "Error", "High", "Pair", "Three of a kind", "Four of a kind"
+                "Error", "High", "Pair", "Three of a kind", "Four of a kind"
         };
         title = Titles[quantity];
         return title;
@@ -1075,11 +1083,12 @@ public class Main {
     private static String cardSuit(int card) {
         String cardSuit;
         String[] Suits = {
-            "Spades", "Hearts", "Diamonds", "Clubs"
+                "Spades", "Hearts", "Diamonds", "Clubs"
         };
         int suit = card % 4;
         cardSuit = Suits[suit];
-//System.out.println("card suit test, Card: " + card + " suit: " + suit + cardSuit);
+        // System.out.println("card suit test, Card: " + card + " suit: " + suit +
+        // cardSuit);
         return cardSuit;
     }
 
@@ -1091,38 +1100,38 @@ public class Main {
     private static String cardRank2(int rank) {
         String cardRank;
         String[] Ranks = {
-            "error", "Ace", "King", "Queen",
-            "Jack", "Ten", "Nine", "Eight",
-            "Seven", "Six", "Five", "Four",
-            "Three", "Two", "One"
+                "error", "Ace", "King", "Queen",
+                "Jack", "Ten", "Nine", "Eight",
+                "Seven", "Six", "Five", "Four",
+                "Three", "Two", "One"
         };
         cardRank = Ranks[rank];
-//System.out.println("card rank test, Card: " + card + " rank: " + cardRank);
+        // System.out.println("card rank test, Card: " + card + " rank: " + cardRank);
         return cardRank;
     }
 
     public static void author() {
-        System.out.println("Made by: Carl Nelson and Anthony Elizondo"); //Creator names
-        System.out.println(); //space
+        System.out.println("Made by: Carl Nelson and Anthony Elizondo"); // Creator names
+        System.out.println(); // space
     }
 
     private static String[] possibleNames() {
 
         String[] names = {
-            "Carl", "Jeff", "James", "Chris", "Fred", "Daniel",
-            "Tony", "Jenny", "Susen", "Rory", "Melody",
-            "Liz", "Pamela", "Diane", "Carol", "Ed", "Edward",
-            "Alphonse", "Ricky", "Matt", "Waldo", "Wesley", "GLaDOS",
-            "Joe", "Bob", "Alex", "Josh", "David", "Brenda", "Ann",
-            "Billy", "Naomi", "Vincent", "John", "Jane", "Dave", "Dirk",
-            "Rose", "Roxy", "Jade", "Jake", "Karkat", "Lord English",
-            "Smallie", "Anthony", "Gwen"
+                "Carl", "Jeff", "James", "Chris", "Fred", "Daniel",
+                "Tony", "Jenny", "Susen", "Rory", "Melody",
+                "Liz", "Pamela", "Diane", "Carol", "Ed", "Edward",
+                "Alphonse", "Ricky", "Matt", "Waldo", "Wesley", "GLaDOS",
+                "Joe", "Bob", "Alex", "Josh", "David", "Brenda", "Ann",
+                "Billy", "Naomi", "Vincent", "John", "Jane", "Dave", "Dirk",
+                "Rose", "Roxy", "Jade", "Jake", "Karkat", "Lord English",
+                "Smallie", "Anthony", "Gwen"
         };
         return names;
     }
 
     private static String randomName() {
-//randomNum = minimum + (int)(Math.random()*maximum);
+        // randomNum = minimum + (int)(Math.random()*maximum);
         String[] names = possibleNames();
         int random = 0 + (int) (Math.random() * (names.length - 1));
         String name = names[random];
@@ -1130,15 +1139,17 @@ public class Main {
     }
 
     private static int promptChallengers() {
-        Object[] startingValue = {1, 2, 3};
-        Object gameSize = JOptionPane.showInputDialog(null, "How many computer players will you play against?", "Set up 2/3",
+        Object[] startingValue = { 1, 2, 3 };
+        Object gameSize = JOptionPane.showInputDialog(null, "How many computer players will you play against?",
+                "Set up 2/3",
                 JOptionPane.INFORMATION_MESSAGE, null, startingValue, startingValue[0]);
         int playerCount = (int) gameSize;
         return playerCount;
     }
 
     private static String promptName() {
-        String playerName = (String) JOptionPane.showInputDialog(null, "Enter a name for your player:", "Set up 1/3", 0, null, null, "A(n) Drew Hussie");
+        String playerName = (String) JOptionPane.showInputDialog(null, "Enter a name for your player:", "Set up 1/3", 0,
+                null, null, "A(n) Drew Hussie");
         return playerName;
     }
 
@@ -1164,7 +1175,8 @@ public class Main {
     private static int promptExchange(String[] hand) {
 
         String[] Cards = (hand);
-        Object ExchangeNumber = JOptionPane.showInputDialog(null, "Which Card will you exchange", "Pick one Card To Return",
+        Object ExchangeNumber = JOptionPane.showInputDialog(null, "Which Card will you exchange",
+                "Pick one Card To Return",
                 JOptionPane.QUESTION_MESSAGE, null, Cards, Cards[0]);
         return getChoiceIndex(ExchangeNumber, Cards);
     }
@@ -1190,15 +1202,16 @@ public class Main {
     }
 
     private static int promptExchangeNumber() {
-        Object[] Number = {0, 1, 2, 3, 4, 5};
-        Object ExchangeNumber = JOptionPane.showInputDialog(null, "how many cards will you be exchanging?", "number of cards to return",
+        Object[] Number = { 0, 1, 2, 3, 4, 5 };
+        Object ExchangeNumber = JOptionPane.showInputDialog(null, "how many cards will you be exchanging?",
+                "number of cards to return",
                 JOptionPane.INFORMATION_MESSAGE, null, Number, Number[0]);
         int exchangeNumber = (int) ExchangeNumber;
         return exchangeNumber;
     }
 
     private static int promptChips() {
-        Object[] chipSelection = {100, 500, 2500};
+        Object[] chipSelection = { 100, 500, 2500 };
         Object initialChips = JOptionPane.showInputDialog(null, "Select the starting chip quantity", "Set up 3/3",
                 JOptionPane.INFORMATION_MESSAGE, null, chipSelection, chipSelection[0]);
         int chipsInitial = (int) initialChips;
@@ -1206,7 +1219,7 @@ public class Main {
     }
 
     private static boolean promptEnd() {
-        Object[] Continue = {true, false};
+        Object[] Continue = { true, false };
         Object End = JOptionPane.showInputDialog(null, "Would you like to play again", "Continue?",
                 JOptionPane.INFORMATION_MESSAGE, null, Continue, Continue[0]);
         boolean end = (boolean) End;

@@ -1,8 +1,0 @@
-name : A(n) Drew] Hussie
-Chips: 500
-Cards: [10, 11, 16, 45, 46]
-Hand : [Queen of Diamonds, Queen of Clubs, Jack of Spades, Three of Hearts, Three of Diamonds]
-Card multiples: [Pair Queen, Pair Three, High Jack]
-Two Pairs: true
-Hand Value: 35
-

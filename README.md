@@ -75,38 +75,66 @@ mvn test
 
 ## Building
 
-This project supports **dual platform builds** - both desktop JAR and Android APK from the same codebase:
+This project supports **comprehensive cross-platform builds** for all major platforms:
 
-### Desktop Build (JAR)
+### 🖥️ Desktop Native Executables
+
+#### Windows (.exe)
+```bash
+cd Poker-Basic
+mvn clean package -Pwindows-exe -DskipTests
+# Output: target/jpackage/PokerGame-0.1b.exe
+```
+
+#### Linux (.deb)
+```bash
+cd Poker-Basic
+mvn clean package -Plinux-exe -DskipTests
+# Output: target/jpackage/pokergame_0.1b-1_amd64.deb
+```
+
+#### macOS (.dmg)
+```bash
+cd Poker-Basic
+mvn clean package -Pmacos-exe -DskipTests
+# Output: target/jpackage/PokerGame-0.1b.dmg
+```
+
+### ☕ Cross-Platform JAR
 ```bash
 cd Poker-Basic
 mvn clean compile    # Compile the project
 mvn test            # Run all tests
 mvn clean package   # Create distributable JAR
+# Output: target/pokermon-0.1b.jar (standard)
+#         target/pokermon-0.1b-fat.jar (with dependencies)
 ```
 
-### Android Build (APK)
+### 📱 Android Build (APK)
 ```bash
 # Requires internet connection for first-time setup
-./gradlew assembleDebug    # Create Android APK
+./gradlew :android:assembleDebug    # Create Android APK
+# Output: android/build/outputs/apk/debug/android-debug.apk
 ```
 
-### Verify Dual Platform Setup
+### 🔍 Verify All Build Configurations
 ```bash
-./gradlew verifyDualPlatformSetup    # Check both build configurations
+./validate-cross-platform-build.sh    # Comprehensive build system validation
 ```
-
-**Build Outputs:**
-- Desktop JAR: `Poker-Basic/target/pokermon-0.08.30.jar`
-- Android APK: `app/build/outputs/apk/debug/app-debug.apk`
 
 ### Platform-Specific Features
 
-#### Desktop (JAR)
-- Full Swing GUI with card graphics
+#### Native Desktop Applications (Windows/Linux/macOS)
+- Self-contained executables (no Java installation required)
+- Native OS integration (menus, shortcuts, file associations)
+- Optimized performance with bundled JRE
+- Platform-specific installers and packages
+
+#### Cross-Platform JAR
+- Full JavaFX GUI with card graphics
 - Console/text mode option
 - Mouse and keyboard controls
-- Works on Windows, Linux, macOS
+- Works on any Java 17+ compatible system
 
 #### Android (APK) 
 - Native Material Design interface

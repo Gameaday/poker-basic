@@ -5,11 +5,11 @@ package com.pokermon;
  * Provides a unified launcher that defaults to GUI mode with options for console mode.
  * 
  * @author Poker Game Team
- * @version 0.08.30
+ * @version 0.3
  */
 public class GameLauncher {
 
-    private static final String VERSION = "0.1b";
+    private static final String VERSION = "0.3";
     private static final String APP_NAME = "Poker Game";
     
     /**

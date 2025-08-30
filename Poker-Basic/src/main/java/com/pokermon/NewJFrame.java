@@ -1154,7 +1154,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 p.lastBet();
             } else {
                 // Fold if no chips
-                p.fold = true;
+                p.fold();
             }
         }
         // Optionally, check if another raise occurred and repeat if needed

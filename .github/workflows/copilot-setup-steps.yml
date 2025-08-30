@@ -1,0 +1,43 @@
+name: GitHub Copilot Setup Steps
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Run weekly to keep dependencies fresh
+    - cron: '0 0 * * 0'
+
+jobs:
+  copilot-setup-steps:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v5
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v5
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    
+    - name: Cache Maven packages
+      uses: actions/cache@v4
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+    
+    - name: Install dependencies and compile project
+      run: |
+        cd Poker-Basic
+        mvn clean compile -B
+        mvn dependency:resolve -B
+        mvn test-compile -B
+    
+    - name: Validate setup
+      run: |
+        cd Poker-Basic
+        mvn clean test -B
+        echo "✅ GitHub Copilot setup completed successfully"
+        echo "Dependencies pre-installed and project compiled"
+        echo "Ready for GitHub Copilot coding assistance"

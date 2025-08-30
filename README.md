@@ -111,26 +111,48 @@ EXAMPLES:
 
 ## Game Variants Supported
 
-The flexible architecture now supports multiple poker variants:
+The flexible architecture now supports multiple poker variants and exciting new monster-based game modes:
 
-### Traditional 5-Card Draw (Default)
+### Traditional Poker Variants
+
+#### Traditional 5-Card Draw (Default)
 ```java
 Game traditionalPoker = new Game(); // 5 cards, 4 players max, 1000 chips, 2 betting rounds
 ```
 
-### 3-Card Poker
+#### 3-Card Poker
 ```java
 Game threeCard = Game.createThreeCardPoker(); // 3 cards, 4 players max, 500 chips, 1 betting round
 ```
 
-### 7-Card Stud
+#### 7-Card Stud
 ```java
 Game sevenCard = Game.createSevenCardStud(); // 7 cards, 4 players max, 1500 chips, 3 betting rounds
 ```
 
+### Monster-Enhanced Game Modes ✨
+
+#### Adventure Mode - Monster Battles
+```java
+Game adventure = Game.createAdventureMode(); // Battle monsters whose health equals their chips
+```
+Fight through encounters where monster health determines their chip count. Defeat monsters to earn rewards and progress through increasingly challenging opponents.
+
+#### Safari Mode - Monster Capturing  
+```java
+Game safari = Game.createSafariMode(); // Capture monsters through strategic poker gameplay
+```
+Encounter wild monsters during poker games. Your poker performance affects capture probability, with better hands increasing your chances of adding monsters to your collection.
+
+#### Ironman Mode - Gacha Rewards
+```java
+Game ironman = Game.createIronmanMode(); // Convert winnings into monster gacha pulls
+```
+Play poker to accumulate chips, then cash out to perform gacha-style monster pulls. Higher chip counts increase chances of rare monster rewards.
+
 ### Custom Configuration
 ```java
-Game custom = new Game(handSize, maxPlayers, startingChips, bettingRounds);
+Game custom = new Game(handSize, maxPlayers, startingChips, bettingRounds, gameMode);
 ```
 
 ## Educational Value
@@ -182,14 +204,114 @@ This project serves as an excellent example of:
 
 ## Future Goals
 
-This project continues to evolve as an educational tool:
+This project continues to evolve as an educational tool with an exciting vision for monster-enhanced gameplay:
 
+### Version 1.0 - Monster Integration
+- **Monster System Foundation** ✅: Core monster classes, game modes, and collection management
+- **Adventure Mode**: Battle monsters whose health equals their chips - defeat them to earn rewards
+- **Safari Mode**: Capture monsters through strategic poker gameplay
+- **Ironman Mode**: Convert poker winnings into gacha-style monster pulls with rarity-based rewards
+- **Monster Effects**: Monsters provide gameplay advantages (chip bonuses, card advantages, betting boosts)
+
+### Platform Evolution
+- **Cross-Platform UI**: Replace Swing with JavaFX or web-based framework for Windows, Linux, and Android support
+- **Responsive Design**: Adaptive layouts for mouse and touchscreen controls
+- **Theme System**: Visual customization based on collected monsters
+
+### Advanced Features
+- **Monster Shop & Trading**: Buy, sell, and trade monsters with NPCs or other players
+- **Achievement System**: Unlock new monsters and game modes through gameplay milestones
+- **Save/Load System**: Persistent monster collections and player progress
+- **Monster Breeding**: Combine monsters to create new varieties with enhanced effects
+
+### Technical Goals
 - **Version 1.0 Target**: Complete professional-grade codebase
 - **CI/CD Integration**: Automated testing and deployment
 - **Dependency Management**: Automated updates and security scanning
 - **Additional Game Variants**: Texas Hold'em, Omaha, etc.
 - **Advanced AI**: Machine learning-based opponents
 - **Multiplayer Networking**: Online play capabilities
+
+## Monster System Preview
+
+The foundation for the monster system is now in place:
+
+### Game Modes
+```java
+Game adventure = Game.createAdventureMode();  // Battle monsters for rewards
+Game safari = Game.createSafariMode();        // Capture monsters
+Game ironman = Game.createIronmanMode();      // Gacha-style monster rewards
+```
+
+### Monster Types & Rarities
+- **Common**: Basic monsters with standard effects
+- **Uncommon**: Enhanced monsters with 1.5x power multiplier
+- **Rare**: Strong monsters with 2x power multiplier  
+- **Epic**: Powerful monsters with 3x power multiplier
+- **Legendary**: Ultimate monsters with 5x power multiplier
+
+### Monster Effects
+- **Chip Bonus**: Increases starting chips for poker games
+- **Card Advantage**: Provides extra card draws or exchanges
+- **Betting Boost**: Improves betting effectiveness and bluffing
+- **Luck Enhancement**: Increases chance of favorable hands
+- **Visual Theme**: Changes game appearance and card designs
+
+### Monster Collection System
+```java
+MonsterCollection collection = new MonsterCollection();
+Monster dragon = new Monster("Fire Dragon", Rarity.RARE, 100, EffectType.CHIP_BONUS, 50, "A fierce dragon");
+collection.addMonster(dragon);
+collection.setActiveMonster(dragon); // Apply dragon's effects to gameplay
+```
+
+## Development Roadmap
+
+### Phase 1: Monster System Foundation ✅ (Current)
+- [x] Core monster classes (Monster, MonsterCollection, GameMode)
+- [x] Game mode enumeration and configuration
+- [x] Foundation tests (27 new tests added)
+- [x] Documentation updates and future vision
+
+### Phase 2: Adventure Mode Implementation
+- [ ] Enemy monster generation and battle mechanics
+- [ ] Health-to-chips conversion system
+- [ ] Reward distribution after defeating monsters
+- [ ] Progressive difficulty scaling
+- [ ] Adventure mode UI integration
+
+### Phase 3: Safari Mode Implementation  
+- [ ] Monster encounter system during poker games
+- [ ] Capture probability mechanics based on performance
+- [ ] Safari-specific UI elements
+- [ ] Monster rarity distribution in wild encounters
+
+### Phase 4: Ironman Mode Implementation
+- [ ] Gacha system with chip-to-currency conversion
+- [ ] Rarity-weighted monster pull mechanics
+- [ ] Ironman leaderboards and high score tracking
+- [ ] Special Ironman-only monsters and rewards
+
+### Phase 5: Platform Migration
+- [ ] Replace Swing with JavaFX for better cross-platform support
+- [ ] Responsive UI design for different screen sizes
+- [ ] Touch-friendly controls for mobile platforms
+- [ ] Platform-specific deployment configurations
+
+### Phase 6: Enhanced Features
+- [ ] Monster shop and trading system
+- [ ] Save/load functionality for monster collections
+- [ ] Achievement and progression systems
+- [ ] Monster breeding and evolution mechanics
+- [ ] Multiplayer monster battles
+
+### Phase 7: Advanced Integration
+- [ ] AI opponent monster integration
+- [ ] Online multiplayer with monster sharing
+- [ ] Tournament modes with monster restrictions
+- [ ] Community features and monster showcases
+
+Each phase will maintain the project's educational value while adding engaging gameplay elements that demonstrate advanced software architecture patterns.
 
 ## Credits
 

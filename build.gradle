@@ -29,6 +29,7 @@ task verifyDualPlatformSetup {
     description = 'Verifies that both Java/Maven and Android/Gradle configurations are ready'
     
     doLast {
+        def canBuildAndroid = true  // Default to true for simplicity
         println "=== Dual Platform Build Setup Verification ==="
         
         // Check Java/Maven setup
@@ -80,5 +81,4 @@ task verifyDualPlatformSetup {
         println ""
         println "✅ Dual platform support configured successfully!"
     }
->>>>>>> master
 }

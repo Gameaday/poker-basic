@@ -231,6 +231,24 @@ hs_err_pid*
 mvnw
 mvnw.cmd
 
+#############
+## Gradle
+#############
+
+.gradle/
+build/
+gradle-app.setting
+!gradle-wrapper.jar
+
+# Gradle Wrapper (keep these for build)
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+
+# Android build outputs
+*.apk
+*.aab
+*.ap_
+
 # IDE files
 .idea/
 *.iml

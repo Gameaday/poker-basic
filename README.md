@@ -75,14 +75,44 @@ mvn test
 
 ## Building
 
-This project uses Maven for building and dependency management:
+This project supports **dual platform builds** - both desktop JAR and Android APK from the same codebase:
 
+### Desktop Build (JAR)
 ```bash
 cd Poker-Basic
 mvn clean compile    # Compile the project
 mvn test            # Run all tests
 mvn clean package   # Create distributable JAR
 ```
+
+### Android Build (APK)
+```bash
+# Requires internet connection for first-time setup
+./gradlew assembleDebug    # Create Android APK
+```
+
+### Verify Dual Platform Setup
+```bash
+./gradlew verifyDualPlatformSetup    # Check both build configurations
+```
+
+**Build Outputs:**
+- Desktop JAR: `Poker-Basic/target/pokermon-0.08.30.jar`
+- Android APK: `app/build/outputs/apk/debug/app-debug.apk`
+
+### Platform-Specific Features
+
+#### Desktop (JAR)
+- Full Swing GUI with card graphics
+- Console/text mode option
+- Mouse and keyboard controls
+- Works on Windows, Linux, macOS
+
+#### Android (APK) 
+- Native Material Design interface
+- Touch-friendly game selection
+- Optimized for phones and tablets
+- Requires Android 5.0+ (API 21+)
 
 ### Command Line Options
 
@@ -213,10 +243,15 @@ This project continues to evolve as an educational tool with an exciting vision 
 - **Ironman Mode**: Convert poker winnings into gacha-style monster pulls with rarity-based rewards
 - **Monster Effects**: Monsters provide gameplay advantages (chip bonuses, card advantages, betting boosts)
 
-### Platform Evolution
-- **Cross-Platform UI**: Replace Swing with JavaFX or web-based framework for Windows, Linux, and Android support
-- **Responsive Design**: Adaptive layouts for mouse and touchscreen controls
+### Platform Evolution ✅
+- **Dual Platform Support**: Now supports both desktop (JAR) and Android (APK) builds
+- **Cross-Platform UI**: Desktop uses Swing, Android uses native Material Design
+- **Shared Codebase**: Same game logic runs on both platforms
 - **Theme System**: Visual customization based on collected monsters
+
+#### Current Platform Support
+- **Desktop (JAR)**: Windows, Linux, macOS via Java 17
+- **Android (APK)**: Android 5.0+ (API 21+) phones and tablets
 
 ### Advanced Features
 - **Monster Shop & Trading**: Buy, sell, and trade monsters with NPCs or other players

@@ -17,8 +17,9 @@ This is a poker game repository that is currently in a minimal, transitional sta
 ### Repository Setup
 - Clone the repository: `git clone https://github.com/Gameaday/poker-basic.git`
 - Navigate to repository: `cd poker-basic`
-- Check current branch: `git branch` (should be on `master` or main development branch)
-- Repository contains only: `README.md` and `.git/` directory
+- Check current branch: `git branch` (defaults to `master` branch)
+- **Note**: These instructions and additional files like `.gitignore` may be on development branches during active work
+- Repository contains only: `README.md` and `.git/` directory (on `master` branch)
 
 ### Basic Operations
 - View repository contents: `ls -la` (expect only README.md)

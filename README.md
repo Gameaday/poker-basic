@@ -313,6 +313,25 @@ collection.setActiveMonster(dragon); // Apply dragon's effects to gameplay
 
 Each phase will maintain the project's educational value while adding engaging gameplay elements that demonstrate advanced software architecture patterns.
 
+## Development Setup
+
+### GitHub Copilot Integration
+This project includes optimized GitHub Copilot setup for enhanced development experience:
+
+```bash
+# Quick setup with Copilot optimization
+git clone https://github.com/Gameaday/poker-basic.git
+cd poker-basic
+code poker-basic.code-workspace  # Opens with optimized settings
+```
+
+See **[COPILOT_SETUP.md](COPILOT_SETUP.md)** for comprehensive setup instructions and tips for maximizing Copilot performance with this codebase.
+
+### Documentation Resources
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Development guidelines and best practices
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Detailed technical architecture documentation
+- **[COPILOT_SETUP.md](COPILOT_SETUP.md)** - GitHub Copilot optimization guide
+
 ## Credits
 
 - **Original Developers**: Carl Nelson and Anthony Elizondo (Original implementation ~2014)

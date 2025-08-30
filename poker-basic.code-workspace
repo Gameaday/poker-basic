@@ -1,0 +1,150 @@
+{
+    "folders": [
+        {
+            "name": "Poker-Basic Project",
+            "path": "."
+        }
+    ],
+    "settings": {
+        "maven.view": "hierarchical",
+        "java.configuration.updateBuildConfiguration": "automatic",
+        "java.compile.nullAnalysis.mode": "automatic",
+        "java.test.config": [
+            {
+                "name": "Poker Tests",
+                "workingDirectory": "${workspaceFolder}/Poker-Basic",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "projectName": "pokermon",
+                "classPaths": [
+                    "${workspaceFolder}/Poker-Basic/target/classes",
+                    "${workspaceFolder}/Poker-Basic/target/test-classes"
+                ]
+            }
+        ],
+        "github.copilot.enable": {
+            "*": true,
+            "yaml": true,
+            "plaintext": true,
+            "markdown": true,
+            "java": true
+        },
+        "github.copilot.advanced": {
+            "length": 500,
+            "temperature": 0.1,
+            "top_p": 1,
+            "inlineSuggestCount": 3
+        },
+        "files.associations": {
+            "copilot-instructions.md": "markdown",
+            "ARCHITECTURE.md": "markdown",
+            "CONTRIBUTING.md": "markdown"
+        },
+        "editor.inlineSuggest.enabled": true,
+        "editor.suggest.preview": true,
+        "editor.suggestSelection": "first",
+        "editor.tabCompletion": "on",
+        "java.saveActions.organizeImports": true,
+        "java.format.settings.url": null,
+        "java.format.settings.profile": null,
+        "files.exclude": {
+            "**/target": true,
+            "**/.git": true,
+            "**/.DS_Store": true,
+            "**/node_modules": true
+        }
+    },
+    "extensions": {
+        "recommendations": [
+            "github.copilot",
+            "github.copilot-chat",
+            "vscjava.vscode-java-pack",
+            "vscjava.vscode-maven",
+            "redhat.java",
+            "vscjava.vscode-java-debug",
+            "vscjava.vscode-java-test"
+        ]
+    },
+    "tasks": {
+        "version": "2.0.0",
+        "tasks": [
+            {
+                "label": "Maven: Clean and Test",
+                "type": "shell",
+                "command": "mvn",
+                "args": ["clean", "test"],
+                "group": "test",
+                "options": {
+                    "cwd": "${workspaceFolder}/Poker-Basic"
+                },
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "shared",
+                    "showReuseMessage": true,
+                    "clear": false
+                },
+                "problemMatcher": ["$maven"]
+            },
+            {
+                "label": "Maven: Package",
+                "type": "shell",
+                "command": "mvn",
+                "args": ["clean", "package"],
+                "group": "build",
+                "options": {
+                    "cwd": "${workspaceFolder}/Poker-Basic"
+                },
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "shared",
+                    "showReuseMessage": true,
+                    "clear": false
+                },
+                "problemMatcher": ["$maven"]
+            },
+            {
+                "label": "Run GUI Application",
+                "type": "shell",
+                "command": "mvn",
+                "args": ["compile", "exec:java", "-Dexec.mainClass=com.pokermon.NewJFrame"],
+                "group": "build",
+                "options": {
+                    "cwd": "${workspaceFolder}/Poker-Basic"
+                },
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "shared",
+                    "showReuseMessage": true,
+                    "clear": false
+                },
+                "problemMatcher": ["$maven"]
+            },
+            {
+                "label": "Run Console Application",
+                "type": "shell",
+                "command": "mvn",
+                "args": ["compile", "exec:java", "-Dexec.mainClass=com.pokermon.Main"],
+                "group": "build",
+                "options": {
+                    "cwd": "${workspaceFolder}/Poker-Basic"
+                },
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "shared",
+                    "showReuseMessage": true,
+                    "clear": false
+                },
+                "problemMatcher": ["$maven"]
+            }
+        ]
+    }
+}

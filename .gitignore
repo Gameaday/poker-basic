@@ -236,7 +236,10 @@ mvnw.cmd
 *.iml
 *.ipr
 *.iws
+
+# VS Code - exclude most but keep our optimized settings
 .vscode/
+!.vscode/settings.json
 
 # Compiled class files
 *.class

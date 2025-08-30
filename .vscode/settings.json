@@ -1,3 +1,23 @@
 {
-    "maven.view": "hierarchical"
+    "maven.view": "hierarchical",
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.compile.nullAnalysis.mode": "automatic",
+    "github.copilot.enable": {
+        "*": true,
+        "yaml": true,
+        "plaintext": true,
+        "markdown": true,
+        "java": true
+    },
+    "github.copilot.advanced": {
+        "length": 500,
+        "temperature": 0.1,
+        "top_p": 1,
+        "inlineSuggestCount": 3
+    },
+    "files.associations": {
+        "copilot-instructions.md": "markdown"
+    },
+    "editor.inlineSuggest.enabled": true,
+    "editor.suggest.preview": true
 }

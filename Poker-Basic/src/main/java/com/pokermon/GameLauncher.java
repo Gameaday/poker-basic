@@ -56,8 +56,18 @@ public class GameLauncher {
      * Launch the GUI version of the game.
      */
     private static void launchGUI() {
-        System.out.println("Starting " + APP_NAME + " (GUI Mode)...");
-        NewJFrame.main(new String[0]);
+        System.out.println("Starting " + APP_NAME + " (Modern JavaFX GUI Mode)...");
+        
+        // Check if JavaFX is available
+        try {
+            Class.forName("javafx.application.Application");
+            // Launch JavaFX application
+            com.pokermon.ui.PokerFXApplication.launchApp(new String[0]);
+        } catch (ClassNotFoundException e) {
+            System.err.println("JavaFX not available. Falling back to Swing GUI...");
+            // Fallback to legacy Swing interface
+            NewJFrame.main(new String[0]);
+        }
     }
     
     /**

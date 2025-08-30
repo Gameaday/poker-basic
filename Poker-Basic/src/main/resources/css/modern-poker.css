@@ -1,0 +1,223 @@
+/* Modern Poker Game Styles */
+
+.root {
+    -fx-background-color: linear-gradient(to bottom, #2e7d32, #1b5e20);
+    -fx-font-family: 'Arial', 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* Title and Text Styles */
+.title {
+    -fx-text-fill: gold;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 2, 2);
+}
+
+.subtitle {
+    -fx-text-fill: lightgray;
+}
+
+.info-text {
+    -fx-text-fill: #90a4ae;
+    -fx-font-size: 11px;
+    -fx-padding: 5 0 0 0;
+}
+
+/* Button Styles */
+.menu-button {
+    -fx-background-color: linear-gradient(to bottom, #4caf50, #388e3c);
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #2e7d32;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 3, 0, 1, 1);
+    -fx-cursor: hand;
+}
+
+.menu-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #66bb6a, #4caf50);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5, 0, 2, 2);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+.menu-button:pressed {
+    -fx-background-color: linear-gradient(to bottom, #388e3c, #2e7d32);
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+.action-button {
+    -fx-background-color: linear-gradient(to bottom, #795548, #5d4037);
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-border-color: #3e2723;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 2, 0, 1, 1);
+    -fx-cursor: hand;
+}
+
+.action-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #8d6e63, #795548);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 3, 0, 1, 1);
+}
+
+.action-button:disabled {
+    -fx-opacity: 0.5;
+    -fx-cursor: default;
+}
+
+/* Card Styles */
+.card {
+    -fx-background-color: white;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #333;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 3, 0, 1, 1);
+    -fx-cursor: hand;
+}
+
+.card:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5, 0, 2, 2);
+}
+
+.card-text {
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-text-alignment: center;
+}
+
+.card-back {
+    -fx-background-color: linear-gradient(to bottom, #3f51b5, #303f9f);
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #1a237e;
+    -fx-border-width: 1;
+}
+
+/* Game Table Styles */
+.poker-table {
+    -fx-background-color: radial-gradient(center 50% 50%, radius 70%, #2e7d32, #1b5e20);
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: #8d6e63;
+    -fx-border-width: 5;
+}
+
+.player-area {
+    -fx-background-color: rgba(76, 175, 80, 0.3);
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #4caf50;
+    -fx-border-width: 2;
+}
+
+.pot-area {
+    -fx-background-color: rgba(255, 193, 7, 0.8);
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-color: #ff8f00;
+    -fx-border-width: 3;
+}
+
+.pot-label {
+    -fx-text-fill: #3e2723;
+    -fx-font-weight: bold;
+}
+
+/* Settings Dialog Styles */
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #424242;
+}
+
+.tab-pane .tab {
+    -fx-background-color: #616161;
+    -fx-text-fill: white;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: #4caf50;
+    -fx-text-fill: white;
+}
+
+/* Slider Styles */
+.slider .track {
+    -fx-background-color: #bdbdbd;
+    -fx-background-radius: 2;
+}
+
+.slider .thumb {
+    -fx-background-color: #4caf50;
+    -fx-background-radius: 8;
+    -fx-border-color: #2e7d32;
+    -fx-border-width: 2;
+}
+
+.slider .thumb:hover {
+    -fx-background-color: #66bb6a;
+}
+
+/* Spinner Styles */
+.spinner .text-field {
+    -fx-background-color: white;
+    -fx-border-color: #4caf50;
+    -fx-border-radius: 4;
+}
+
+/* ComboBox Styles */
+.combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #4caf50;
+    -fx-border-radius: 4;
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: #4caf50;
+}
+
+.combo-box .arrow {
+    -fx-background-color: white;
+}
+
+/* CheckBox Styles */
+.check-box .box {
+    -fx-background-color: white;
+    -fx-border-color: #4caf50;
+    -fx-border-radius: 3;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: #4caf50;
+}
+
+/* Animation Effects */
+@keyframes fadeIn {
+    from { -fx-opacity: 0; }
+    to { -fx-opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { -fx-translate-y: 20; -fx-opacity: 0; }
+    to { -fx-translate-y: 0; -fx-opacity: 1; }
+}
+
+.fade-in {
+    -fx-animation: fadeIn 0.5s ease-in;
+}
+
+.slide-up {
+    -fx-animation: slideUp 0.3s ease-out;
+}
+
+/* Touch-friendly improvements */
+.touch-enabled .button {
+    -fx-min-height: 44;
+    -fx-min-width: 44;
+}
+
+.touch-enabled .card {
+    -fx-min-height: 60;
+    -fx-min-width: 42;
+}

@@ -98,8 +98,9 @@ jobs:
       id: retention
       run: |
         if [ "${{ github.event_name }}" = "pull_request" ]; then
+          PR_NUMBER="${{ github.event.number }}"
           echo "retention_days=14" >> $GITHUB_OUTPUT
-          echo "artifact_name=poker-game-jar-pr-${{ github.event.number }}" >> $GITHUB_OUTPUT
+          echo "artifact_name=poker-game-jar-pr-${PR_NUMBER}" >> $GITHUB_OUTPUT
         else
           echo "retention_days=90" >> $GITHUB_OUTPUT
           echo "artifact_name=poker-game-jar" >> $GITHUB_OUTPUT

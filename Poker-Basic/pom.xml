@@ -235,9 +235,18 @@
                             <input>${project.build.directory}</input>
                             <destination>${project.build.directory}/jpackage</destination>
                             
+                            <!-- JavaFX modules for native packaging -->
+                            <addModules>
+                                <addModule>java.base</addModule>
+                                <addModule>java.desktop</addModule>
+                                <addModule>javafx.controls</addModule>
+                                <addModule>javafx.fxml</addModule>
+                            </addModules>
+                            
                             <!-- JVM options -->
                             <javaOptions>
                                 <option>-Dfile.encoding=UTF-8</option>
+                                <option>--add-opens=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED</option>
                             </javaOptions>
                         </configuration>
                     </plugin>
@@ -283,9 +292,18 @@
                             <input>${project.build.directory}</input>
                             <destination>${project.build.directory}/jpackage</destination>
                             
+                            <!-- JavaFX modules for native packaging -->
+                            <addModules>
+                                <addModule>java.base</addModule>
+                                <addModule>java.desktop</addModule>
+                                <addModule>javafx.controls</addModule>
+                                <addModule>javafx.fxml</addModule>
+                            </addModules>
+                            
                             <!-- JVM options -->
                             <javaOptions>
                                 <option>-Dfile.encoding=UTF-8</option>
+                                <option>--add-opens=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED</option>
                             </javaOptions>
                         </configuration>
                     </plugin>
@@ -329,9 +347,18 @@
                             <input>${project.build.directory}</input>
                             <destination>${project.build.directory}/jpackage</destination>
                             
+                            <!-- JavaFX modules for native packaging -->
+                            <addModules>
+                                <addModule>java.base</addModule>
+                                <addModule>java.desktop</addModule>
+                                <addModule>javafx.controls</addModule>
+                                <addModule>javafx.fxml</addModule>
+                            </addModules>
+                            
                             <!-- JVM options -->
                             <javaOptions>
                                 <option>-Dfile.encoding=UTF-8</option>
+                                <option>--add-opens=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED</option>
                             </javaOptions>
                         </configuration>
                     </plugin>

@@ -67,18 +67,22 @@ task verifyDualPlatformSetup {
         
         println ""
         println "=== Network Status ==="
-        println "Internet connectivity: ${canBuildAndroid ? 'Available' : 'Limited/Offline'}"
+        try {
+            // Simple network check - will work in environments with network access
+            def networkAvailable = "ping -c 1 google.com".execute().waitFor() == 0
+            println "Internet connectivity: ${networkAvailable ? 'Available' : 'Limited/Offline'}"
+        } catch (Exception e) {
+            println "Internet connectivity: Limited/Offline"
+        }
         
         println ""
         println "=== Build Instructions ==="
         println "JAR (Desktop):  cd Poker-Basic && mvn clean package"
-        if (canBuildAndroid) {
-            println "APK (Android):  ./gradlew assembleDebug"
-        } else {
-            println "APK (Android):  ./gradlew assembleDebug (requires internet connection)"
-        }
+        println "EXE (Windows):  cd Poker-Basic && mvn package -Pwindows-exe -DskipTests"
+        println "DEB (Linux):    cd Poker-Basic && mvn package -Plinux-exe -DskipTests"
+        println "DMG (macOS):    cd Poker-Basic && mvn package -Pmacos-exe -DskipTests"
+        println "APK (Android):  ./gradlew :android:assembleDebug (requires internet)"
         println ""
-        println "✅ Dual platform support configured successfully!"
+        println "✅ Cross-platform build support configured successfully!"
     }
->>>>>>> master
 }

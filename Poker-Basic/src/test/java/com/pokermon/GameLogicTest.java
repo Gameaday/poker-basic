@@ -139,9 +139,10 @@ class GameLogicTest {
         // Test with maximum reasonable players
         Player[] maxPlayers = new Player[4];
         String[] maxNames = {"P1", "P2", "P3", "P4"};
+        int[] sharedDeck = Main.setDeck();
         for (int i = 0; i < 4; i++) {
             maxPlayers[i] = new Player();
-            maxPlayers[i].setupPlayer(maxNames[i], 1000, Main.setDeck()); // Fresh deck for each player
+            maxPlayers[i].setupPlayer(maxNames[i], 1000, sharedDeck); // Shared deck for all players
         }
         
         // All should be properly initialized

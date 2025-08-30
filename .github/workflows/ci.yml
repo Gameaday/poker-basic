@@ -178,11 +178,11 @@ jobs:
           ### Quick Start
           ```bash
           # Download the JAR file
-          # GUI Version (Recommended)
-          java -cp pokermon-${{ steps.version.outputs.version }}.jar com.pokermon.NewJFrame
+          # Modern UI (Default)
+          java -jar pokermon-${{ steps.version.outputs.version }}.jar
           
-          # Console Version  
-          java -cp pokermon-${{ steps.version.outputs.version }}.jar com.pokermon.Main
+          # Console Version for Testing
+          java -jar pokermon-${{ steps.version.outputs.version }}.jar --basic
           ```
           
           ### Requirements

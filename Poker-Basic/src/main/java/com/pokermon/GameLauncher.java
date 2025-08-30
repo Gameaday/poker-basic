@@ -9,7 +9,7 @@ package com.pokermon;
  */
 public class GameLauncher {
 
-    private static final String VERSION = "0.08.30";
+    private static final String VERSION = "0.1b";
     private static final String APP_NAME = "Poker Game";
     
     /**

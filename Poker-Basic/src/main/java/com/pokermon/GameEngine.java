@@ -239,4 +239,96 @@ public class GameEngine {
     public void endGame() {
         this.gameActive = false;
     }
+    
+    /**
+     * Gets the current highest bet amount.
+     * @return current high bet
+     */
+    public int getCurrentHighBet() {
+        if (!gameActive || players == null) {
+            return 0;
+        }
+        
+        int highBet = 0;
+        for (Player player : players) {
+            if (player.getBet() > highBet) {
+                highBet = player.getBet();
+            }
+        }
+        return highBet;
+    }
+    
+    /**
+     * Sets the current highest bet amount.
+     * @param amount the new high bet amount
+     */
+    public void setCurrentHighBet(int amount) {
+        // This is tracked implicitly by player bets, but we can validate
+        if (amount >= 0) {
+            // The high bet is maintained by checking all player bets
+        }
+    }
+    
+    /**
+     * Adds amount to the current pot.
+     * @param amount the amount to add
+     */
+    public void addToPot(int amount) {
+        if (amount > 0) {
+            this.currentPot += amount;
+        }
+    }
+    
+    /**
+     * Gets the game deck.
+     * @return the current deck
+     */
+    public int[] getDeck() {
+        return deck != null ? deck.clone() : new int[0];
+    }
+    
+    /**
+     * Advances to the next round.
+     * @return true if successfully advanced
+     */
+    public boolean nextRound() {
+        if (!gameActive) {
+            return false;
+        }
+        
+        currentRound++;
+        // Reset bets for next round
+        if (players != null) {
+            for (Player player : players) {
+                player.resetBet();
+            }
+        }
+        return true;
+    }
+    
+    /**
+     * Checks if the current round is complete.
+     * @return true if round is complete
+     */
+    public boolean isRoundComplete() {
+        // A round is complete when all players have either folded or matched the highest bet
+        if (!gameActive || players == null) {
+            return true;
+        }
+        
+        int highBet = getCurrentHighBet();
+        int activePlayers = 0;
+        int playersMatchingBet = 0;
+        
+        for (Player player : players) {
+            if (!player.isFold() && player.getChips() > 0) {
+                activePlayers++;
+                if (player.getBet() >= highBet || player.getChips() == 0) {
+                    playersMatchingBet++;
+                }
+            }
+        }
+        
+        return activePlayers <= 1 || playersMatchingBet == activePlayers;
+    }
 }

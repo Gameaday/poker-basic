@@ -6,7 +6,7 @@
 
     <groupId>com.pokermon</groupId>
     <artifactId>pokermon</artifactId>
-    <version>0.08.30</version>
+    <version>0.1b</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

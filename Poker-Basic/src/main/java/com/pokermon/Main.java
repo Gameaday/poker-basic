@@ -7,8 +7,6 @@ package com.pokermon;
 import java.io.*;
 import java.util.*;
 
-import javax.swing.JOptionPane;
-
 /**
  * Represents a poker player with their hand, chips, and game state.
  * Provides encapsulated access to player data and poker hand evaluation.
@@ -432,12 +430,12 @@ public class Main {
 //print my names as author
         author();
 
-//Prompt user for a name
-        String playerName = promptName();
+//Prompt user for a name - using defaults for non-interactive mode
+        String playerName = promptName("A(n) Drew Hussie");
 //prompt for number of players to play against:
-        int playerCount = promptChallengers();
+        int playerCount = promptChallengers(2);
 //prompt for starting chip quantity:
-        int chipsInitial = promptChips();
+        int chipsInitial = promptChips(500);
 
 //Set stuff up
         players = new String[playerCount + 1];
@@ -462,13 +460,13 @@ public class Main {
             }
 //show player his hand
             revealHand(list[0].getConvertedHand());
-//have player bet
+//have player bet (using default bet amounts for non-interactive mode)
             workingPot = bet(list, workingPot);
 //report current pot value
             System.out.println("Current Pot Value: " + workingPot);
 
-//have player exchange cards
-            Exchange(list[0], Deck);
+//have player exchange cards (no exchange in default mode)
+            Exchange(list[0], Deck, new int[0]);
 
 //report new hand
             revealHand(list[0].getConvertedHand());
@@ -485,7 +483,7 @@ public class Main {
             dividePot(list, workingPot);
 //save updated stats to file
             playersStats(list);
-            Continue = promptEnd();
+            Continue = promptEnd(false); // Default to ending after one game
         }
     }
 
@@ -561,16 +559,18 @@ public class Main {
 
     private static boolean declareResults(Player[] list) {
         int finish = decideWinner(list);
+        // Return winner information instead of showing dialogs
+        // This allows calling code to handle display appropriately
         if (finish == 0) {
-            JOptionPane.showMessageDialog(null, "You have lost the hand, better luck next time", "Sorry!", finish, null);
+            System.out.println("You have lost the hand, better luck next time");
             return true;
         }
         if (finish == 1) {
-            JOptionPane.showMessageDialog(null, "You have won the hand, congratulations! ", "Winner!", finish, null);
+            System.out.println("You have won the hand, congratulations!");
             return true;
         }
         if (finish == 2) {
-            JOptionPane.showMessageDialog(null, "No one won the hand, the game was a tie.", "TIE!", finish, null);
+            System.out.println("No one won the hand, the game was a tie.");
             return false;
         }
         return false;
@@ -707,18 +707,13 @@ public class Main {
         return revisedLength;
     }
 
-    public static int placeBet(int chips) {
-        int bet = 0;
-        boolean valid = false;
-        while (valid == false) {
-            Object[] chipSelection = {0, 10, 50, 100};
-            Object Chips = JOptionPane.showInputDialog(null, "How much will you bet?", null,
-                    JOptionPane.INFORMATION_MESSAGE, null, chipSelection, chipSelection[0]);
-            bet = (int) Chips;
-
-            if (bet <= chips) {
-                valid = true;
-            }
+    public static int placeBet(int chips, int requestedBet) {
+        int bet = requestedBet;
+        if (bet > chips) {
+            bet = chips; // All-in if requested bet is more than available chips
+        }
+        if (bet < 0) {
+            bet = 0; // No negative bets
         }
         return bet;
     }
@@ -1231,32 +1226,29 @@ public class Main {
         return name;
     }
 
-    private static int promptChallengers() {
-        Object[] startingValue = {1, 2, 3};
-        Object gameSize = JOptionPane.showInputDialog(null, "How many computer players will you play against?", "Set up 2/3",
-                JOptionPane.INFORMATION_MESSAGE, null, startingValue, startingValue[0]);
-        int playerCount = (int) gameSize;
-        return playerCount;
+    private static int promptChallengers(int defaultCount) {
+        // Return the provided count, with validation
+        if (defaultCount >= 1 && defaultCount <= 3) {
+            return defaultCount;
+        }
+        return 2; // Default fallback
     }
 
-    private static String promptName() {
-        String playerName = (String) JOptionPane.showInputDialog(null, "Enter a name for your player:", "Set up 1/3", 0, null, null, "A(n) Drew Hussie");
-        return playerName;
+    private static String promptName(String defaultName) {
+        // Return the provided name, or default if empty
+        return (defaultName != null && !defaultName.trim().isEmpty()) ? defaultName : "A(n) Drew Hussie";
     }
 
     private static void revealHand(String[] Hand) {
-        JOptionPane.showMessageDialog(null, "Your hand is: " + "\n" + Arrays.toString(Hand));
+        System.out.println("Your hand is: " + Arrays.toString(Hand));
     }
 
-    private static int[] Exchange(Player current, int[] deck) {
-        int e = promptExchangeNumber();
-        if (e != 0) {
-            for (int i = 0; i < e; i++) {
-                int[] workingHand = workingHand(current.getHand());
-                String[] RFV = convertHand(workingHand);
-                int index = promptExchange(RFV);
-                int cardIndex = findIndex(current.getHand(), workingHand[index]);
-                current.removeCardAtIndex(cardIndex);
+    private static int[] Exchange(Player current, int[] deck, int[] cardsToExchange) {
+        if (cardsToExchange != null && cardsToExchange.length > 0) {
+            for (int cardIndex : cardsToExchange) {
+                if (cardIndex >= 0 && cardIndex < current.getHand().length) {
+                    current.removeCardAtIndex(cardIndex);
+                }
             }
         }
         replaceCards(current.getHandForModification(), deck);
@@ -1264,12 +1256,12 @@ public class Main {
         return deck;
     }
 
-    private static int promptExchange(String[] hand) {
-
-        String[] Cards = (hand);
-        Object ExchangeNumber = JOptionPane.showInputDialog(null, "Which Card will you exchange", "Pick one Card To Return",
-                JOptionPane.QUESTION_MESSAGE, null, Cards, Cards[0]);
-        return getChoiceIndex(ExchangeNumber, Cards);
+    private static int promptExchange(String[] hand, int cardIndex) {
+        // Return the requested card index, with bounds checking
+        if (cardIndex >= 0 && cardIndex < hand.length) {
+            return cardIndex;
+        }
+        return 0; // Default to first card if invalid index
     }
 
     public static int findIndex(int[] array, int value) {
@@ -1292,27 +1284,27 @@ public class Main {
         return -1;
     }
 
-    private static int promptExchangeNumber() {
-        Object[] Number = {0, 1, 2, 3, 4, 5};
-        Object ExchangeNumber = JOptionPane.showInputDialog(null, "how many cards will you be exchanging?", "number of cards to return",
-                JOptionPane.INFORMATION_MESSAGE, null, Number, Number[0]);
-        int exchangeNumber = (int) ExchangeNumber;
-        return exchangeNumber;
+    private static int promptExchangeNumber(int defaultNumber) {
+        // Return the provided number, with validation
+        if (defaultNumber >= 0 && defaultNumber <= 5) {
+            return defaultNumber;
+        }
+        return 0; // Default to no exchange
     }
 
-    private static int promptChips() {
-        Object[] chipSelection = {100, 500, 2500};
-        Object initialChips = JOptionPane.showInputDialog(null, "Select the starting chip quantity", "Set up 3/3",
-                JOptionPane.INFORMATION_MESSAGE, null, chipSelection, chipSelection[0]);
-        int chipsInitial = (int) initialChips;
-        return chipsInitial;
+    private static int promptChips(int defaultChips) {
+        // Return the provided chip count, with validation
+        int[] validChips = {100, 500, 1000, 2500};
+        for (int valid : validChips) {
+            if (defaultChips == valid) {
+                return defaultChips;
+            }
+        }
+        return 500; // Default fallback
     }
 
-    private static boolean promptEnd() {
-        Object[] Continue = {true, false};
-        Object End = JOptionPane.showInputDialog(null, "Would you like to play again", "Continue?",
-                JOptionPane.INFORMATION_MESSAGE, null, Continue, Continue[0]);
-        boolean end = (boolean) End;
-        return end;
+    private static boolean promptEnd(boolean defaultContinue) {
+        // Return the provided continue flag
+        return defaultContinue;
     }
 }

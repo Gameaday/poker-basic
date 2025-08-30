@@ -9,13 +9,15 @@ import javafx.scene.layout.*
 import javafx.stage.Stage
 import javafx.scene.Node
 import com.pokermon.bridge.GameLogicBridge
+import com.pokermon.bridge.GameActionResult
+import com.pokermon.GameMode
 
 /**
  * Modern JavaFX-based UI for the poker game.
  * Provides a cross-platform interface with touch and mouse support.
  * 
  * @author Poker Game Team
- * @version 0.08.30
+ * @version 0.1b
  */
 class ModernPokerApp : Application() {
     
@@ -94,7 +96,7 @@ class ModernPokerApp : Application() {
         }
         
         // Version info
-        val versionLabel = Label("Version 0.08.30 - Modern UI Edition").apply {
+        val versionLabel = Label("Version 0.1b - Modern UI Edition").apply {
             style = "-fx-font-size: 12px; -fx-text-fill: #999999;"
         }
         
@@ -136,6 +138,37 @@ class ModernPokerApp : Application() {
         })
         playerNameField.style = "-fx-font-size: 14px;"
         form.children.add(playerNameField)
+        
+        // Game Mode Selection
+        form.children.add(Label("Game Mode:").apply {
+            style = "-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;"
+        })
+        
+        val gameModeCombo = ComboBox<GameMode>().apply {
+            items.addAll(GameMode.values())
+            value = GameMode.CLASSIC
+            style = "-fx-font-size: 14px;"
+            setOnAction { 
+                gameBridge.setGameMode(value)
+            }
+        }
+        form.children.add(gameModeCombo)
+        
+        // Game mode description
+        val modeDescription = Label(GameMode.CLASSIC.description).apply {
+            style = "-fx-text-fill: #cccccc; -fx-font-size: 12px; -fx-wrap-text: true;"
+            maxWidth = 350.0
+        }
+        gameModeCombo.setOnAction {
+            modeDescription.text = gameModeCombo.value.description
+            // Show additional setup for monster modes
+            if (gameModeCombo.value.hasMonsters()) {
+                statusLabel.text = "Monster mode selected! Enhanced gameplay with creature collection features."
+            } else {
+                statusLabel.text = "Classic poker mode selected."
+            }
+        }
+        form.children.add(modeDescription)
         
         // Player count
         form.children.add(Label("Number of Players: ${playerCountSlider.value.toInt()}").apply {
@@ -244,17 +277,26 @@ class ModernPokerApp : Application() {
         }
         
         // Display cards
-        gameBridge.getPlayerHand().forEach { card ->
+        val handCards = gameBridge.getPlayerHand()
+        val selectedCards = gameBridge.getSelectedCards()
+        
+        handCards.forEachIndexed { index, card ->
             val cardBtn = Button(card).apply {
                 prefWidth = 80.0
                 prefHeight = 120.0
-                style = "-fx-font-size: 14px; -fx-background-color: white; -fx-border-color: black;"
+                val isSelected = selectedCards.contains(index)
+                style = if (isSelected) {
+                    "-fx-font-size: 14px; -fx-background-color: #ffd700; -fx-border-color: #ff6600; -fx-border-width: 3px; -fx-text-fill: black;"
+                } else {
+                    "-fx-font-size: 14px; -fx-background-color: white; -fx-border-color: black; -fx-text-fill: black;"
+                }
                 setOnAction { 
                     // Toggle card selection
-                    if (style.contains("selected")) {
-                        style = "-fx-font-size: 14px; -fx-background-color: white; -fx-border-color: black;"
+                    val nowSelected = gameBridge.toggleCardSelection(index)
+                    style = if (nowSelected) {
+                        "-fx-font-size: 14px; -fx-background-color: #ffd700; -fx-border-color: #ff6600; -fx-border-width: 3px; -fx-text-fill: black;"
                     } else {
-                        style = "-fx-font-size: 14px; -fx-background-color: #ffd700; -fx-border-color: #ff6600; -fx-border-width: 3px;"
+                        "-fx-font-size: 14px; -fx-background-color: white; -fx-border-color: black; -fx-text-fill: black;"
                     }
                 }
             }
@@ -344,16 +386,61 @@ class ModernPokerApp : Application() {
     private fun performAction(action: String) {
         val result = when (action) {
             "call" -> gameBridge.performCall()
-            "raise" -> gameBridge.performRaise(100) // Fixed raise amount for demo
+            "raise" -> showRaiseDialog()
             "check" -> gameBridge.performCheck()
             "fold" -> gameBridge.performFold()
-            "exchange" -> gameBridge.exchangeCards(listOf(0, 1)) // Exchange first two cards for demo
+            "exchange" -> {
+                val selectedCards = gameBridge.getSelectedCards().toList()
+                if (selectedCards.isEmpty()) {
+                    return showAlert("No Selection", "Please select cards to exchange first.")
+                }
+                gameBridge.exchangeCards(selectedCards)
+            }
             else -> return
         }
         
         statusLabel.text = result.message
         
         // Update UI state
+        updateGameDisplay()
+        
+        // Refresh the game display to show updated cards
+        if (action == "exchange") {
+            showGamePlay()
+        }
+    }
+    
+    /**
+     * Shows a dialog for raise amount input.
+     */
+    private fun showRaiseDialog(): GameActionResult {
+        val dialog = TextInputDialog("100").apply {
+            title = "Raise Amount"
+            headerText = "Enter raise amount:"
+            contentText = "Amount:"
+        }
+        
+        val result = dialog.showAndWait()
+        return if (result.isPresent) {
+            try {
+                val amount = result.get().toInt()
+                if (amount > 0) {
+                    gameBridge.performRaise(amount)
+                } else {
+                    GameActionResult(false, "Invalid raise amount")
+                }
+            } catch (e: NumberFormatException) {
+                GameActionResult(false, "Invalid number format")
+            }
+        } else {
+            GameActionResult(false, "Raise cancelled")
+        }
+    }
+    
+    /**
+     * Updates the game display with current state.
+     */
+    private fun updateGameDisplay() {
         potLabel.text = "Pot: $${gameBridge.getCurrentPot()}"
         chipsLabel.text = "Chips: $${gameBridge.getPlayerChips()}"
     }
@@ -362,6 +449,14 @@ class ModernPokerApp : Application() {
      * Shows the settings screen.
      */
     private fun showSettings() {
+        val gameMode = gameBridge.getGameMode()
+        val modeInfo = when (gameMode) {
+            GameMode.CLASSIC -> "Standard poker gameplay"
+            GameMode.ADVENTURE -> "Battle monsters in poker duels"
+            GameMode.SAFARI -> "Capture monsters through poker"
+            GameMode.IRONMAN -> "Convert winnings to monster gacha"
+        }
+        
         val alert = Alert(Alert.AlertType.INFORMATION).apply {
             title = "Settings"
             headerText = "Game Settings"
@@ -372,12 +467,20 @@ class ModernPokerApp : Application() {
                 ✓ Cross-platform compatibility
                 
                 Game Settings:
+                ✓ Current Mode: ${gameMode.displayName}
+                ✓ Mode Description: $modeInfo
                 ✓ Auto-save enabled
                 ✓ Hints enabled
-                ✓ Standard poker rules
+                ✓ ${if (gameMode.hasMonsters()) "Monster system active" else "Standard poker rules"}
+                
+                Available Game Modes:
+                • Classic Poker: Traditional gameplay
+                • Adventure Mode: Battle monsters (chips = monster health)
+                • Safari Mode: Capture monsters through poker success
+                • Ironman Mode: Gacha system with rarity chances
                 
                 Platform: JavaFX/Kotlin
-                Version: 0.08.30
+                Version: 0.1b
             """.trimIndent()
         }
         alert.showAndWait()

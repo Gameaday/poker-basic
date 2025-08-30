@@ -80,7 +80,7 @@ class GameLogicTest {
     void testHandValueConsistency() {
         // Test that hand value calculation is consistent
         Player testPlayer = new Player();
-        testPlayer.setupPlayer("TestPlayer", 1000, testDeck);
+        testPlayer.setupPlayer("TestPlayer", 1000, Main.setDeck()); // Fresh deck
         
         int handValue1 = testPlayer.getHandValue();
         testPlayer.performAllChecks(); // Recalculate
@@ -114,7 +114,7 @@ class GameLogicTest {
     void testGameStateConsistency() {
         // Test that game state remains consistent across operations
         Player player = new Player();
-        player.setupPlayer("TestPlayer", 1000, testDeck);
+        player.setupPlayer("TestPlayer", 1000, Main.setDeck()); // Fresh deck
         
         int initialChips = player.getChips();
         int betAmount = 100;
@@ -133,7 +133,7 @@ class GameLogicTest {
         // Test with minimum players
         Player[] minPlayers = new Player[1];
         minPlayers[0] = new Player();
-        minPlayers[0].setupPlayer("Solo", 1000, testDeck);
+        minPlayers[0].setupPlayer("Solo", 1000, Main.setDeck()); // Fresh deck
         assertNotNull(minPlayers[0].getName());
         
         // Test with maximum reasonable players
@@ -141,7 +141,7 @@ class GameLogicTest {
         String[] maxNames = {"P1", "P2", "P3", "P4"};
         for (int i = 0; i < 4; i++) {
             maxPlayers[i] = new Player();
-            maxPlayers[i].setupPlayer(maxNames[i], 1000, testDeck);
+            maxPlayers[i].setupPlayer(maxNames[i], 1000, Main.setDeck()); // Fresh deck for each player
         }
         
         // All should be properly initialized

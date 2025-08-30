@@ -311,16 +311,27 @@ class Player {
     }
 
     /**
-     * Sets up a player with a hand, chips, and name.
+     * Sets up a player with a hand, chips, and name using default hand size.
      * @param playerName the player's name
      * @param chips the starting chip count
      * @param deck the deck to draw from
      */
     public void setupPlayer(String playerName, int chips, int[] deck) {
+        setupPlayer(playerName, chips, deck, 5); // Default to 5-card hand
+    }
+
+    /**
+     * Sets up a player with a hand, chips, and name using custom hand size.
+     * @param playerName the player's name
+     * @param chips the starting chip count
+     * @param deck the deck to draw from
+     * @param handSize the number of cards in the hand
+     */
+    public void setupPlayer(String playerName, int chips, int[] deck, int handSize) {
         setName(playerName);
         setChipsCurrent(chips);
         resetFold();
-        updateHand(Main.newHand(deck));
+        updateHand(Main.newHand(deck, handSize));
         convertHand();
         printPlayer();
         printHandStats();
@@ -957,12 +968,29 @@ public class Main {
         return Deck;
     }
 
-    public static int[] newHand(int[] Deck) {
-        int[] hand;
-        hand = new int[5];
-
-        for (int i = 0; i < 5; i++) {
-            hand[i] = drawCard(Deck);
+    /**
+     * Generates a hand with the default size (5 cards).
+     * @param deck the deck to draw from
+     * @return a hand of 5 cards
+     */
+    public static int[] newHand(int[] deck) {
+        return newHand(deck, 5);
+    }
+    
+    /**
+     * Generates a hand with the specified number of cards.
+     * @param deck the deck to draw from
+     * @param handSize the number of cards to draw
+     * @return a hand of the specified size
+     */
+    public static int[] newHand(int[] deck, int handSize) {
+        if (handSize < 1 || handSize > 52) {
+            throw new IllegalArgumentException("Hand size must be between 1 and 52");
+        }
+        
+        int[] hand = new int[handSize];
+        for (int i = 0; i < handSize; i++) {
+            hand[i] = drawCard(deck);
         }
         return hand;
     }
@@ -1080,13 +1108,17 @@ public class Main {
         return hand;
     }
 
-    private static int drawCard(int[] Deck) {
-
-        int card = randomCard(workingDeck(Deck));
-
-// "remove" card from deck
-        Deck[card] = 0;
-//remake working Deck
+    /**
+     * Draws a card from the deck.
+     * @param deck the deck to draw from
+     * @return the drawn card value
+     */
+    public static int drawCard(int[] deck) {
+        int card = randomCard(workingDeck(deck));
+        
+        // "remove" card from deck
+        deck[card] = 0;
+        //remake working deck
         return card;
     }
 

@@ -31,22 +31,15 @@ class GameLogicTest {
                 testNames[i] = "Player" + (i + 1);
             }
             
-            // Use reflection to access the private method
-            try {
-                java.lang.reflect.Method initMethod = Main.class.getDeclaredMethod(
-                    "InitializePlayers", Player[].class, String[].class, int.class, int[].class);
-                initMethod.setAccessible(true);
-                initMethod.invoke(null, testPlayers, testNames, 1000, Main.setDeck()); // Fresh deck
-                
-                // Verify all players were initialized
-                for (int i = 0; i < numPlayers; i++) {
-                    assertNotNull(testPlayers[i]);
-                    assertEquals(testNames[i], testPlayers[i].getName());
-                    assertEquals(1000, testPlayers[i].getChips());
-                    assertNotNull(testPlayers[i].getHand());
-                }
-            } catch (Exception e) {
-                fail("Failed to test dynamic player initialization: " + e.getMessage());
+            // Directly call the package-private InitializePlayers method
+            Main.InitializePlayers(testPlayers, testNames, 1000, Main.setDeck()); // Fresh deck
+            
+            // Verify all players were initialized
+            for (int i = 0; i < numPlayers; i++) {
+                assertNotNull(testPlayers[i]);
+                assertEquals(testNames[i], testPlayers[i].getName());
+                assertEquals(1000, testPlayers[i].getChips());
+                assertNotNull(testPlayers[i].getHand());
             }
         }
     }

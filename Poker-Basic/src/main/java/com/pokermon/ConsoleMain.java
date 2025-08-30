@@ -8,7 +8,7 @@ import java.util.*;
  * This class provides a pure text-based interface without any GUI dependencies.
  * 
  * @author Poker Game Team
- * @version 0.3
+ * @version 1.0.0
  */
 public class ConsoleMain {
     

@@ -407,7 +407,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }
         updatePlayerChips();
 //show player his hand
-        revealHand(list[0].convertedHand); //rewrite not using joptionpane
+        revealHand(list[0].getConvertedHand()); //rewrite not using joptionpane
 //have player bet
         jComboBox3.setVisible(true);
         jLabel14.setVisible(true);
@@ -471,7 +471,7 @@ public class NewJFrame extends javax.swing.JFrame {
         selectionCheck();
         Object selectedBet = jComboBox3.getSelectedItem();
         System.out.println(Integer.valueOf(selectedBet.toString()));
-        if (Integer.valueOf(selectedBet.toString()) > list[0].chips) {
+        if (Integer.valueOf(selectedBet.toString()) > list[0].getChips()) {
             System.out.println("invalid bet, try again.");
         } else {
             jComboBox3.setVisible(false);
@@ -502,7 +502,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
 //report new hand
         System.out.println();
-        revealHand2(list[0].convertedHand);//rewrite
+        revealHand2(list[0].getConvertedHand());//rewrite
         jComboBox4.setVisible(true);
         jLabel14.setVisible(true);
 //have player bet again
@@ -512,7 +512,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
 
         Object selectedBet = jComboBox4.getSelectedItem();
-        if (Integer.valueOf(selectedBet.toString()) > list[0].chips) {
+        if (Integer.valueOf(selectedBet.toString()) > list[0].getChips()) {
             System.out.println("invalid bet, try again.");
         } else {
             jComboBox4.setVisible(false);
@@ -647,16 +647,16 @@ public class NewJFrame extends javax.swing.JFrame {
     private void updatePlayerChips(int playerIndex) {
         switch (playerIndex) {
             case 0:
-                jLabel8.setText("Your Chips: " + USER.chips);
+                jLabel8.setText("Your Chips: " + USER.getChips());
                 break;
             case 1:
-                jLabel3.setText("Chips: " + CPU1.chips);
+                jLabel3.setText("Chips: " + CPU1.getChips());
                 break;
             case 2:
-                jLabel5.setText("Chips: " + CPU2.chips);
+                jLabel5.setText("Chips: " + CPU2.getChips());
                 break;
             case 3:
-                jLabel7.setText("Chips: " + CPU3.chips);
+                jLabel7.setText("Chips: " + CPU3.getChips());
         }
     }
 
@@ -665,13 +665,13 @@ public class NewJFrame extends javax.swing.JFrame {
 
         switch (playerCount) {
             case 3:
-                jLabel7.setText("Chips: " + list[3].chips);
+                jLabel7.setText("Chips: " + list[3].getChips());
             case 2:
-                jLabel5.setText("Chips: " + list[2].chips);
+                jLabel5.setText("Chips: " + list[2].getChips());
             case 1:
-                jLabel3.setText("Chips: " + list[1].chips);
+                jLabel3.setText("Chips: " + list[1].getChips());
             case 0:
-                jLabel8.setText("Your Chips: " + list[0].chips);
+                jLabel8.setText("Your Chips: " + list[0].getChips());
         }
     }
 
@@ -733,84 +733,74 @@ public class NewJFrame extends javax.swing.JFrame {
      return jTextField1.getText();
      }*/
 
-    private void InitializePlayers(Player[] list, String[] players, int chipsInitial, int[] Deck) {
+    /**
+     * Initializes all players with hands, names, and chips, and sets up the UI labels.
+     * @param list the array of players to initialize
+     * @param players the array of player names
+     * @param chipsInitial the initial number of chips for each player
+     * @param deck the deck to draw cards from
+     */
+    private void InitializePlayers(Player[] list, String[] players, int chipsInitial, int[] deck) {
+        // Arrays to store the UI labels for each player type
+        JLabel[] nameLabels = {null, jLabel2, jLabel4, jLabel6}; // CPU name labels
+        JLabel[] chipLabels = {jLabel8, jLabel3, jLabel5, jLabel7}; // Chip labels for all players
+        
         for (int i = 0; i < players.length; i++) {
-            switch (i) {
-                case 0:
-                    Player USER = new Player();
-                    USER.setupPlayer(players[i], chipsInitial, Deck);
-                    list[i] = USER;
-                    jLabel8.setVisible(true);
-                    break;
-                case 1:
-                    Player CPU1 = new Player();
-                    CPU1.setupPlayer(players[i], chipsInitial, Deck);
-                    list[i] = CPU1;
-                    jLabel2.setVisible(true);
-                    jLabel2.setText(CPU1.name);
-                    jLabel3.setVisible(true);
-                    break;
-                case 2:
-                    Player CPU2 = new Player();
-                    CPU2.setupPlayer(players[i], chipsInitial, Deck);
-                    list[i] = CPU2;
-                    jLabel4.setVisible(true);
-                    jLabel4.setText(CPU2.name);
-                    jLabel5.setVisible(true);
-
-                    break;
-                case 3:
-                    Player CPU3 = new Player();
-                    CPU3.setupPlayer(players[i], chipsInitial, Deck);
-                    list[i] = CPU3;
-                    jLabel6.setVisible(true);
-                    jLabel6.setText(CPU3.name);
-                    jLabel7.setVisible(true);
+            Player player = new Player();
+            player.setupPlayer(players[i], chipsInitial, deck);
+            list[i] = player;
+            
+            // Set up UI labels based on player index
+            if (i == 0) {
+                // Human player
+                jLabel8.setVisible(true);
+            } else {
+                // AI players (CPU1, CPU2, CPU3)
+                if (nameLabels[i] != null) {
+                    nameLabels[i].setVisible(true);
+                    nameLabels[i].setText(player.getName());
+                }
+                if (chipLabels[i] != null) {
+                    chipLabels[i].setVisible(true);
+                }
             }
-            System.out.println(); //places spaces between player info, for neatness
-//return null;
-
+            
+            System.out.println(); // places spaces between player info, for neatness
         }
     }
 
-    private void InitializePlayers(Player[] list, String[] players, int[] Deck) {
+    /**
+     * Re-initializes existing players with new hands while preserving their current chips and updating UI.
+     * @param list the array of existing players to re-initialize
+     * @param players the array of player names
+     * @param deck the deck to draw cards from
+     */
+    private void InitializePlayers(Player[] list, String[] players, int[] deck) {
+        // Arrays to store the UI labels for each player type
+        JLabel[] nameLabels = {null, jLabel2, jLabel4, jLabel6}; // CPU name labels
+        JLabel[] chipLabels = {jLabel8, jLabel3, jLabel5, jLabel7}; // Chip labels for all players
+        
         for (int i = 0; i < players.length; i++) {
-            switch (i) {
-                case 0:
-
-                    Player USER = list[i];
-                    USER.setupPlayer(players[i], list[0].chips, Deck);
-                    list[i] = USER;
-                    jLabel8.setVisible(true);
-                    break;
-                case 1:
-                    Player CPU1 = list[i];
-                    CPU1.setupPlayer(players[i], list[1].chips, Deck);
-                    list[i] = CPU1;
-                    jLabel2.setVisible(true);
-                    jLabel2.setText(CPU1.name);
-                    jLabel3.setVisible(true);
-                    break;
-                case 2:
-                    Player CPU2 = list[i];
-                    CPU2.setupPlayer(players[i], list[2].chips, Deck);
-                    list[i] = CPU2;
-                    jLabel4.setVisible(true);
-                    jLabel4.setText(CPU2.name);
-                    jLabel5.setVisible(true);
-                    break;
-                case 3:
-                    Player CPU3 = list[i];
-                    CPU3.setupPlayer(players[i], list[3].chips, Deck);
-                    list[i] = CPU3;
-                    jLabel6.setVisible(true);
-                    jLabel6.setText(CPU3.name);
-                    jLabel7.setVisible(true);
+            Player player = list[i];
+            player.setupPlayer(players[i], player.getChips(), deck);
+            
+            // Set up UI labels based on player index
+            if (i == 0) {
+                // Human player
+                jLabel8.setVisible(true);
+            } else {
+                // AI players (CPU1, CPU2, CPU3)
+                if (nameLabels[i] != null) {
+                    nameLabels[i].setVisible(true);
+                    nameLabels[i].setText(player.getName());
+                }
+                if (chipLabels[i] != null) {
+                    chipLabels[i].setVisible(true);
+                }
             }
-            System.out.println(); //places spaces between player info, for neatness
-//return null;
+            
+            System.out.println(); // places spaces between player info, for neatness
         }
-
     }
 
     private void revealHand(String[] Hand) {
@@ -982,152 +972,92 @@ public class NewJFrame extends javax.swing.JFrame {
         int[] indecies = exchangeIndex(e);
         if (e != 0) {
             for (int i = 0; i < e; i++) {
-                int[] workingHand = Main.workingHand(current.hand);
+                int[] workingHand = Main.workingHand(current.getHand());
                 String[] RFV = Main.convertHand(workingHand);
                 int index = indecies[i]; //rewrite for gui
-                current.hand[index] = 0;
+                current.removeCardAtIndex(index);
             }
         }
-        Main.replaceCards(current.hand, deck);
-        current.Checks();
+        Main.replaceCards(current.getHandForModification(), deck);
+        current.performAllChecks();
         return deck;
     }
 
+    /**
+     * Calculates the bet amount for an AI player based on their hand value and available chips.
+     * @param player the AI player
+     * @param currentBet the current bet amount
+     * @return the new bet amount
+     */
+    private int calculateAIBet(Player player, int currentBet) {
+        int chips = player.getChips();
+        int handValue = player.getHandValue();
+        int bet = currentBet;
+        
+        if (chips <= 0) {
+            return bet;
+        }
+        
+        int betIncrease = 0;
+        if (handValue <= 38 && handValue >= 18) {
+            betIncrease = 25;
+        } else if (handValue > 38 && handValue <= 70) {
+            betIncrease = 50;
+        } else if (handValue > 70) {
+            betIncrease = 100;
+        } else {
+            // Weak hand - just call or fold if bet is too high
+            return Math.min(bet, chips);
+        }
+        
+        bet += betIncrease;
+        
+        // Adjust bet if player doesn't have enough chips
+        if (chips < bet) {
+            if (handValue <= 38) {
+                bet = chips / 4;
+                if (chips % 4 != 0) {
+                    bet += 1;
+                }
+            } else if (handValue <= 70) {
+                bet = chips / 2;
+                if (chips % 4 != 0) {
+                    bet += 1;
+                }
+            } else {
+                bet = chips; // All-in for strong hands
+            }
+        }
+        
+        return bet;
+    }
+
     int bet(Player[] list, int pot, int bet) {
-        // bet = 0;
         for (int i = 0; i < list.length; i++) {
-            int threshold = 0;
             int lastBet = bet;
-            if (i == 0 && list[i].fold == false) {
-                Player USER = list[i];
-                pot += USER.bet(bet);
-                USER.lastBet();
+            
+            if (list[i].isFold()) {
+                continue; // Skip folded players
+            }
+            
+            if (i == 0) {
+                // Human player - bet already set through UI
+                Player user = list[i];
+                pot += user.placeBet(bet);
+                user.recordLastBet();
                 if (lastBet != bet) {
                     recursiveBet(list, i, pot, bet);
                     break;
                 }
-            }
-            if (i == 1 && list[i].fold == false) {
-                Player CPU1 = list[i];
-                int chips = CPU1.chips;
-                if (chips > 0) {
-                    if (CPU1.handValue <= 38 && CPU1.handValue >= 18) {
-                        bet += 25;
-                        threshold = bet;
-                        if (chips < threshold) {
-                            bet = chips / 4;
-                            if (chips % 4 != 0) {
-                                bet += 1;
-                            }
-                        } else if (CPU1.handValue > 38 && CPU1.handValue <= 70) {
-                            bet += 50;
-                            threshold = bet;
-                            if (chips < threshold) {
-                                bet = chips / 2;
-                                if (chips % 4 != 0) {
-                                    bet += 1;
-                                }
-                            }
-                        } else if (CPU1.handValue > 70) {
-                            bet += 100;
-                            threshold = bet;
-                            if (chips < threshold) {
-                                bet = chips;
-                            }
-                        } else {
-                            if (bet > chips) {
-                                bet = chips;
-                            }
-                        }
-                    }
-                    pot += CPU1.bet(bet);
-                    CPU1.lastBet();
-                    if (lastBet != bet) {
-                        recursiveBet(list, i, pot, bet);
-                        break;
-                    }
-                }
-            }
-            if (i == 2 && list[i].fold == false) {
-                Player CPU2 = list[i];
-                int chips = CPU2.chips;
-                if (chips > 0) {
-                    if (CPU2.handValue <= 38 && CPU2.handValue >= 18) {
-                        bet += 25;
-                        threshold = bet;
-                        if (chips < threshold) {
-                            bet = chips / 4;
-                            if (chips % 4 != 0) {
-                                bet += 1;
-                            }
-                        } else if (CPU2.handValue > 38 && CPU2.handValue <= 70) {
-                            bet += 50;
-                            threshold = bet;
-                            if (chips < threshold) {
-                                bet = chips / 2;
-                                if (chips % 4 != 0) {
-                                    bet += 1;
-                                }
-                            }
-                        } else if (CPU2.handValue > 70) {
-                            bet += 100;
-                            threshold = bet;
-                            if (chips < threshold) {
-                                bet = chips;
-                            }
-                        } else {
-                            if (bet > chips) {
-                                bet = chips;
-                            }
-                        }
-                    }
-                    pot += CPU2.bet(bet);
-                    CPU2.lastBet();
-                    if (lastBet != bet) {
-                        recursiveBet(list, i, pot, bet);
-                        break;
-                    }
-                }
-            }
-            if (i == 3 && list[i].fold == false) {
-                Player CPU3 = list[i];
-                int chips = CPU3.chips;
-                if (chips > 0) {
-                    if (CPU3.handValue <= 38 && CPU3.handValue >= 18) {
-                        bet += 25;
-                        threshold = bet;
-                        if (chips < threshold) {
-                            bet = chips / 4;
-                            if (chips % 4 != 0) {
-                                bet += 1;
-                            }
-                        } else if (CPU3.handValue > 38 && CPU3.handValue <= 70) {
-                            bet += 50;
-                            threshold = bet;
-                            if (chips < threshold) {
-                                bet = chips / 2;
-                                if (chips % 4 != 0) {
-                                    bet += 1;
-                                }
-                            }
-                        } else if (CPU3.handValue > 70) {
-                            bet += 100;
-                            threshold = bet;
-                            if (chips < threshold) {
-                                bet = chips;
-                            }
-                        } else {
-                            if (bet > chips) {
-                                bet = chips;
-                            }
-                        }
-                    }
-                    pot += CPU3.bet(bet);
-                    CPU3.lastBet();
-                    if (lastBet != bet) {
-                        recursiveBet(list, i, pot, bet);
-                        break;
-                    }
+            } else {
+                // AI player - calculate bet automatically
+                Player aiPlayer = list[i];
+                bet = calculateAIBet(aiPlayer, bet);
+                pot += aiPlayer.placeBet(bet);
+                aiPlayer.recordLastBet();
+                if (lastBet != bet) {
+                    recursiveBet(list, i, pot, bet);
+                    break;
                 }
             }
         }
@@ -1138,23 +1068,23 @@ public class NewJFrame extends javax.swing.JFrame {
         // Handle additional betting rounds after a raise
         int lastBet = bet;
         for (int i = 0; i < players.length; i++) {
-            if (i == playerIndex || players[i].fold) {
+            if (i == playerIndex || players[i].isFold()) {
                 continue;
             }
             Player p = players[i];
-            int chips = p.chips;
+            int chips = p.getChips();
             // Simple logic: if player has enough chips and hand is strong, call or raise; else fold
             if (chips > lastBet) {
                 // Example: call the raise
-                pot += p.bet(lastBet);
-                p.lastBet();
+                pot += p.placeBet(lastBet);
+                p.recordLastBet();
             } else if (chips > 0) {
                 // All-in if not enough chips to call
-                pot += p.bet(chips);
-                p.lastBet();
+                pot += p.placeBet(chips);
+                p.recordLastBet();
             } else {
                 // Fold if no chips
-                p.fold = true;
+                p.setFold(true);
             }
         }
         // Optionally, check if another raise occurred and repeat if needed

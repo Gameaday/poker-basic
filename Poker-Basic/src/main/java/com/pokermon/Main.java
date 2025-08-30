@@ -9,53 +9,95 @@ import java.util.*;
 
 import javax.swing.JOptionPane;
 
+/**
+ * Represents a poker player with their hand, chips, and game state.
+ * Provides encapsulated access to player data and poker hand evaluation.
+ */
 class Player {
-//Player has folded True/False
-
-    public int lastBet;
-
-    public boolean fold;
-//player object name
-    public String name;
-//the players hand
-    public int[] hand;
-//the players current chips
-    public int chips;
-//current bet total
-    public int bet;
-//convert the players hand into a reader friendly format
-    public String[] convertedHand, convertedHand2;
-//hand Multiples
+    // Private fields for better encapsulation
+    private int lastBet;
+    private boolean fold;
+    private String name;
+    private int[] hand;
+    private int chips;
+    private int bet;
+    private String[] convertedHand, convertedHand2;
     private int[][] handMultiples;
-//Whether the hand is a straight, flush, pair, etc..
-    private boolean Straight, aceStraight, Flush, straightFlush, royalFlush;
+    private boolean straight, aceStraight, flush, straightFlush, royalFlush;
     private boolean twoKind, twoPair, threeKind, fourKind, fullHouse;
-//Hand value
-    public int handValue;
+    private int handValue;
 
-//class method thingies
-// The ID of the Player object
+    
+    /**
+     * Default constructor for a Player.
+     */
     public Player() {
-      // TODO document why this constructor is empty
+        this.fold = false;
+        this.lastBet = 0;
+        this.bet = 0;
+        this.chips = 0;
+        this.handValue = 0;
     }
 
-// The Player Name is set
+    // Getters
+    public int getLastBet() { return lastBet; }
+    public boolean isFold() { return fold; }
+    public String getName() { return name; }
+    public int[] getHand() { return hand != null ? hand.clone() : null; }
+    public int getChips() { return chips; }
+    public int getBet() { return bet; }
+    public String[] getConvertedHand() { return convertedHand != null ? convertedHand.clone() : null; }
+    public String[] getConvertedHand2() { return convertedHand2 != null ? convertedHand2.clone() : null; }
+    public int getHandValue() { return handValue; }
+    public boolean isStraight() { return straight; }
+    public boolean isAceStraight() { return aceStraight; }
+    public boolean isFlush() { return flush; }
+    public boolean isStraightFlush() { return straightFlush; }
+    public boolean isRoyalFlush() { return royalFlush; }
+    public boolean isTwoKind() { return twoKind; }
+    public boolean isTwoPair() { return twoPair; }
+    public boolean isThreeKind() { return threeKind; }
+    public boolean isFourKind() { return fourKind; }
+    public boolean isFullHouse() { return fullHouse; }
+
+    public void setLastBet(int lastBet) { this.lastBet = lastBet; }
+    public void setFold(boolean fold) { this.fold = fold; }
+    
+    /**
+     * Sets the player's name.
+     * @param playerName the name to set
+     */
     public void setName(String playerName) {
-        name = playerName;
+        this.name = playerName;
     }
 
-//
+    /**
+     * Sets the player's current chip count.
+     * @param playerChips the number of chips to set
+     */
+    public void setChips(int playerChips) {
+        this.chips = playerChips;
+    }
+
+    /**
+     * Resets the player's betting state for a new round.
+     */
     public void resetBet() {
-        lastBet = 0;
-        bet = 0;
+        this.lastBet = 0;
+        this.bet = 0;
     }
 
-    public void lastBet() {
-        lastBet = bet;
-        bet = 0;
+    /**
+     * Records the last bet and resets current bet.
+     */
+    public void recordLastBet() {
+        this.lastBet = this.bet;
+        this.bet = 0;
     }
 
-//set location to write to file
+    /**
+     * Saves player information to a file for persistence.
+     */
     public void save() {
         try {
             System.setOut(new PrintStream(new FileOutputStream(name + ".txt", true)));
@@ -64,210 +106,311 @@ class Player {
         }
     }
 
-// The Chips variable is assigned a value.
+    /**
+     * Sets the player's chip count with validation.
+     * @param playerChips the number of chips to set
+     */
     public void setChipsCurrent(int playerChips) {
-        chips = playerChips;
+        this.chips = playerChips;
     }
 
+    /**
+     * Adjusts chip count for returning players.
+     * @param playerChips current chip count
+     */
     public void setChipsCurrentAgain(int playerChips) {
         if (playerChips < 1) {
-            playerChips = 200;
+            this.chips = 200;
         } else {
-            playerChips += 100;
+            this.chips = playerChips + 100;
         }
     }
 
-//bet something, return the bet so it can be used
-    public int bet(int bet) {
-        this.bet = bet;
-        chips -= bet;
-        return bet;
+    /**
+     * Places a bet, deducting from chips.
+     * @param betAmount the amount to bet
+     * @return the actual bet amount
+     */
+    public int placeBet(int betAmount) {
+        this.bet = betAmount;
+        this.chips -= betAmount;
+        return betAmount;
     }
-// player folds
 
-    public boolean fold() {
-        fold = true;
+    /**
+     * Makes the player fold their hand.
+     * @return true (always folds)
+     */
+    public boolean foldHand() {
+        this.fold = true;
         return fold;
     }
 
+    /**
+     * Adds chips to the player's total.
+     * @param amount the amount to add
+     */
+    public void addChips(int amount) {
+        this.chips += amount;
+    }
+
+    /**
+     * Sets a specific card in the hand to 0 (removed).
+     * @param index the index of the card to remove
+     */
+    public void removeCardAtIndex(int index) {
+        if (this.hand != null && index >= 0 && index < this.hand.length) {
+            this.hand[index] = 0;
+        }
+    }
+
+    /**
+     * Gets the hand array for direct modification (used internally by game logic).
+     * @return the hand array reference
+     */
+    public int[] getHandForModification() {
+        return this.hand;
+    }
+
+    /**
+     * Resets the fold status for a new round.
+     * @return false (unfolds the player)
+     */
     public boolean resetFold() {
-        fold = false;
+        this.fold = false;
         return fold;
     }
-
-//sets whole hand
     public void updateHand(int[] playerHand) {
-        hand = playerHand;
-        Arrays.sort(hand);
+        this.hand = playerHand != null ? playerHand.clone() : null;
+        if (this.hand != null) {
+            Arrays.sort(this.hand);
+        }
     }
 
-//converts hand to reader friendly format
+    /**
+     * Converts hand to reader-friendly format.
+     */
     public void convertHand() {
-        convertedHand = Main.convertHand(hand);
+        this.convertedHand = Main.convertHand(hand);
     }
 
-//converts pairs to a reader friendly format
+    /**
+     * Converts card multiples to reader-friendly format.
+     */
     public void convertHand2() {
-        convertedHand2 = Main.convertHand2(handMultiples);
+        this.convertedHand2 = Main.convertHand2(handMultiples);
     }
 
-//find card multiples in hand
+    /**
+     * Finds card multiples in the hand.
+     */
     public void findMultiples() {
-        handMultiples = Main.handMultiples(hand);
+        this.handMultiples = Main.handMultiples(hand);
     }
 
-//checks if hand is a Straight
-    public void isStraight() {
-        Straight = Main.isStraight(hand);
+    /**
+     * Checks if hand is a straight.
+     */
+    public void checkStraight() {
+        this.straight = Main.isStraight(hand);
     }
 
-//checks if hand is a Straight
-    public void isAceStraight() {
-        aceStraight = Main.isAceStraight(hand);
+    /**
+     * Checks if hand is an ace-high straight.
+     */
+    public void checkAceStraight() {
+        this.aceStraight = Main.isAceStraight(hand);
     }
 
-//checks if hand is Flush
-    public void isFlush() {
-        Flush = Main.isFlush(hand);
+    /**
+     * Checks if hand is a flush.
+     */
+    public void checkFlush() {
+        this.flush = Main.isFlush(hand);
     }
 
-//checks if hand is a Straight Flush
-    public void isStraightFlush() {
-        straightFlush = Main.isStraightFlush(hand);
+    /**
+     * Checks if hand is a straight flush.
+     */
+    public void checkStraightFlush() {
+        this.straightFlush = Main.isStraightFlush(hand);
     }
 
-//checks if hand is a Royal Flush
-    public void isRoyalFlush() {
-        royalFlush = Main.isRoyalFlush(hand);
+    /**
+     * Checks if hand is a royal flush.
+     */
+    public void checkRoyalFlush() {
+        this.royalFlush = Main.isRoyalFlush(hand);
     }
 
-//checks if Two of a kind
-    public void is2Kind() {
-        twoKind = Main.is2Kind(handMultiples);
+    /**
+     * Checks if hand has two of a kind.
+     */
+    public void check2Kind() {
+        this.twoKind = Main.is2Kind(handMultiples);
     }
 
-//checks if Two pairs
-    public void is2Pair() {
-        twoPair = Main.is2Pair(handMultiples);
+    /**
+     * Checks if hand has two pairs.
+     */
+    public void check2Pair() {
+        this.twoPair = Main.is2Pair(handMultiples);
     }
 
-//checks if Three of a kind
-    public void is3Kind() {
-        threeKind = Main.is3Kind(handMultiples);
+    /**
+     * Checks if hand has three of a kind.
+     */
+    public void check3Kind() {
+        this.threeKind = Main.is3Kind(handMultiples);
     }
 
-//checks if Full House
-    public void isFullHouse() {
-        fullHouse = Main.isFullHouse(handMultiples);
+    /**
+     * Checks if hand is a full house.
+     */
+    public void checkFullHouse() {
+        this.fullHouse = Main.isFullHouse(handMultiples);
     }
 
-//checks if Four of a kind
-    public void is4Kind() {
-        fourKind = Main.is4Kind(handMultiples);
+    /**
+     * Checks if hand has four of a kind.
+     */
+    public void check4Kind() {
+        this.fourKind = Main.is4Kind(handMultiples);
     }
 
-//ALL *IS* HAND CHECKS & multiples
-    public void Checks() {
+    /**
+     * Performs all hand checks and evaluations.
+     */
+    public void performAllChecks() {
         updateHand(hand);
         findMultiples();
         convertHand();
         convertHand2();
-        handValue();
-//is checks
-        is2Kind();
-        is2Pair();
-        is3Kind();
-        isFullHouse();
-        is4Kind();
-        isStraight();
-        isAceStraight();
-        isFlush();
-        isStraightFlush();
-        isRoyalFlush();
+        calculateHandValue();
+        // Perform all hand type checks
+        check2Kind();
+        check2Pair();
+        check3Kind();
+        checkFullHouse();
+        check4Kind();
+        checkStraight();
+        checkAceStraight();
+        checkFlush();
+        checkStraightFlush();
+        checkRoyalFlush();
     }
 
-//gives derives a value from the player hand
-    public void handValue() {
-        handValue = Main.handValue(hand);
+    /**
+     * Calculates and sets the hand value.
+     */
+    public void calculateHandValue() {
+        this.handValue = Main.handValue(hand);
     }
 
-//sets up a player with a hand, chips, a name, and prints it
-    public void setupPlayer(String playerName, int chips, int[] Deck) {
+    /**
+     * Sets up a player with a hand, chips, and name using default hand size.
+     * @param playerName the player's name
+     * @param chips the starting chip count
+     * @param deck the deck to draw from
+     */
+    public void setupPlayer(String playerName, int chips, int[] deck) {
+        setupPlayer(playerName, chips, deck, 5); // Default to 5-card hand
+    }
 
+    /**
+     * Sets up a player with a hand, chips, and name using custom hand size.
+     * @param playerName the player's name
+     * @param chips the starting chip count
+     * @param deck the deck to draw from
+     * @param handSize the number of cards in the hand
+     */
+    public void setupPlayer(String playerName, int chips, int[] deck, int handSize) {
         setName(playerName);
         setChipsCurrent(chips);
         resetFold();
-        updateHand(Main.newHand(Deck));
+        updateHand(Main.newHand(deck, handSize));
         convertHand();
         printPlayer();
         printHandStats();
         reportPlayer();
     }
 
-//sets up a player with a hand, chips, a name, and prints it
-    public void setupPlayerAgain(String playerName, int[] Deck, int chips) {
-
+    /**
+     * Sets up a player again with existing chips plus bonus.
+     * @param playerName the player's name
+     * @param deck the deck to draw from
+     * @param chips the current chip count
+     */
+    public void setupPlayerAgain(String playerName, int[] deck, int chips) {
         setName(playerName);
         setChipsCurrent(chips);
         resetFold();
-        updateHand(Main.newHand(Deck));
+        updateHand(Main.newHand(deck));
         convertHand();
         printPlayer();
         printHandStats();
         reportPlayer();
     }
 
-//This method prints the current values of the player
+    /**
+     * Prints basic player information.
+     */
     public void printPlayer() {
         System.out.println("name : " + name);
         System.out.println("Chips: " + chips);
     }
 
-//only prints things that are true about the hand
-    public void HandContains() {
-        if (twoKind == true & twoPair != true & fullHouse != true) {
+    /**
+     * Displays what the hand contains (only true conditions).
+     */
+    public void displayHandContents() {
+        if (twoKind && !twoPair && !fullHouse) {
             System.out.println("Two of a Kind: " + twoKind);
         }
-        if (twoPair == true) {
+        if (twoPair) {
             System.out.println("Two Pairs: " + twoPair);
         }
-        if (threeKind == true & fullHouse != true) {
+        if (threeKind && !fullHouse) {
             System.out.println("Three of a Kind: " + threeKind);
         }
-        if (fullHouse == true) {
+        if (fullHouse) {
             System.out.println("Full House: " + fullHouse);
         }
-        if (fourKind == true) {
+        if (fourKind) {
             System.out.println("Four of a Kind: " + fourKind);
         }
-        if (Straight == true & aceStraight != true & royalFlush != true) {
-            System.out.println("Straight: " + Straight);
+        if (straight && !aceStraight && !royalFlush) {
+            System.out.println("Straight: " + straight);
         }
-        if (aceStraight == true & royalFlush != true) {
+        if (aceStraight && !royalFlush) {
             System.out.println("Ace High Straight: " + aceStraight);
         }
-        if (Flush == true & straightFlush != true & royalFlush != true) {
-            System.out.println("Flush: " + Flush);
+        if (flush && !straightFlush && !royalFlush) {
+            System.out.println("Flush: " + flush);
         }
-        if (straightFlush == true & royalFlush != true) {
+        if (straightFlush && !royalFlush) {
             System.out.println("Straight Flush: " + straightFlush);
         }
-        if (royalFlush == true) {
+        if (royalFlush) {
             System.out.println("Royal Flush: " + royalFlush);
         }
     }
 
-//prints all the current stats for the hand
+    /**
+     * Prints all current hand statistics.
+     */
     public void printHandStats() {
         System.out.println("Cards: " + Arrays.toString(hand));
         System.out.println("Hand : " + Arrays.toString(convertedHand));
-        Checks();
+        performAllChecks();
         System.out.println("Card multiples: " + Arrays.toString(convertedHand2));
-        HandContains();
+        displayHandContents();
         System.out.println("Hand Value: " + handValue);
     }
 
-//saves player info to file
+    /**
+     * Saves player information to file.
+     */
     public void reportPlayer() {
         save();
         printPlayer();
@@ -318,7 +461,7 @@ public class Main {
                 InitializePlayers(list, players, Deck);
             }
 //show player his hand
-            revealHand(list[0].convertedHand);
+            revealHand(list[0].getConvertedHand());
 //have player bet
             workingPot = bet(list, workingPot);
 //report current pot value
@@ -328,7 +471,7 @@ public class Main {
             Exchange(list[0], Deck);
 
 //report new hand
-            revealHand(list[0].convertedHand);
+            revealHand(list[0].getConvertedHand());
 
 //have player bet again
             workingPot = bet(list, workingPot);
@@ -347,61 +490,34 @@ public class Main {
     }
 
 //methods
-    private static void InitializePlayers(Player[] list, String[] players, int chipsInitial, int[] Deck) {
+    /**
+     * Initializes all players with hands, names, and chips.
+     * @param list the array of players to initialize
+     * @param players the array of player names
+     * @param chipsInitial the initial number of chips for each player
+     * @param deck the deck to draw cards from
+     */
+    static void InitializePlayers(Player[] list, String[] players, int chipsInitial, int[] deck) {
         for (int i = 0; i < players.length; i++) {
-            if (i == 0) {
-                Player USER = new Player();
-                USER.setupPlayer(players[i], chipsInitial, Deck);
-                list[i] = USER;
-            }
-            if (i == 1) {
-                Player CPU1 = new Player();
-                CPU1.setupPlayer(players[i], chipsInitial, Deck);
-                list[i] = CPU1;
-            }
-            if (i == 2) {
-                Player CPU2 = new Player();
-                CPU2.setupPlayer(players[i], chipsInitial, Deck);
-                list[i] = CPU2;
-            }
-            if (i == 3) {
-                Player CPU3 = new Player();
-                CPU3.setupPlayer(players[i], chipsInitial, Deck);
-                list[i] = CPU3;
-            }
-            System.out.println(); //places spaces between player info, for neatness
-//return null;
+            Player player = new Player();
+            player.setupPlayer(players[i], chipsInitial, deck);
+            list[i] = player;
+            System.out.println(); // places spaces between player info, for neatness
         }
     }
 
-    private static void InitializePlayers(Player[] list, String[] players, int[] Deck) {
+    /**
+     * Re-initializes existing players with new hands while preserving their current chips.
+     * @param list the array of existing players to re-initialize
+     * @param players the array of player names
+     * @param deck the deck to draw cards from
+     */
+    static void InitializePlayers(Player[] list, String[] players, int[] deck) {
         for (int i = 0; i < players.length; i++) {
-
-            if (i == 0) {
-                Player USER = list[i];
-                USER.setupPlayer(players[i], USER.chips, Deck);
-                list[i] = USER;
-            }
-            if (i == 1) {
-                Player CPU1 = list[i];
-                CPU1.setupPlayer(players[i], CPU1.chips, Deck);
-                list[i] = CPU1;
-            }
-            if (i == 2) {
-                Player CPU2 = list[i];
-                CPU2.setupPlayer(players[i], CPU2.chips, Deck);
-                list[i] = CPU2;
-            }
-            if (i == 3) {
-                Player CPU3 = list[i];
-                CPU3.setupPlayer(players[i], CPU3.chips, Deck);
-                list[i] = CPU3;
-            }
-            System.out.println(); //places spaces between player info, for neatness
-//return null;
-
+            Player player = list[i];
+            player.setupPlayer(players[i], player.getChips(), deck);
+            System.out.println(); // places spaces between player info, for neatness
         }
-
     }
 
     public static int handValue(int[] hand) {
@@ -438,7 +554,8 @@ public class Main {
         if (is2Kind(Multiples) == true) {
             return Value += 13;
         }
-        return Value;
+        // Ensure hand value is always positive (minimum value of 1 for high card hands)
+        return Math.max(Value, 1);
 
     }
 
@@ -462,16 +579,16 @@ public class Main {
     static int decideWinner(Player[] list) {
         int[] winningScores = new int[list.length];
         for (int i = 0; i < list.length; i++) {
-            winningScores[i] = list[i].handValue;
+            winningScores[i] = list[i].getHandValue();
         }
         Arrays.sort(winningScores);
-        if (winningScores[list.length - 1] == list[0].handValue && winningScores[list.length - 2] == list[0].handValue) {
+        if (winningScores[list.length - 1] == list[0].getHandValue() && winningScores[list.length - 2] == list[0].getHandValue()) {
             return 2;
         } //tie
-        if (winningScores[list.length - 1] == list[0].handValue && winningScores[list.length - 2] != list[0].handValue) {
+        if (winningScores[list.length - 1] == list[0].getHandValue() && winningScores[list.length - 2] != list[0].getHandValue()) {
             return 1;
         } //win
-        if (winningScores[list.length - 1] != list[0].handValue) {
+        if (winningScores[list.length - 1] != list[0].getHandValue()) {
             return 0;
         } //lose
         return 2;
@@ -480,13 +597,13 @@ public class Main {
     static void dividePot(Player[] list, int pot) {
         int[] winningScores = new int[list.length];
         for (int i = 0; i < list.length; i++) {
-            winningScores[i] = list[i].handValue;
+            winningScores[i] = list[i].getHandValue();
         }
         for (int i = 0; i < list.length; i++) {
-            winningScores[i] = list[i].handValue;
+            winningScores[i] = list[i].getHandValue();
             Arrays.sort(winningScores);
-            if (winningScores[list.length - 1] == list[i].handValue) {
-                list[i].chips += pot;
+            if (winningScores[list.length - 1] == list[i].getHandValue()) {
+                list[i].addChips(pot);
             } //this only accounts for one winner at the moment, but can be adapted,
 //for instance if int 2, tie, give half to each, still not perfect but covers more siturations.
         }
@@ -506,6 +623,9 @@ public class Main {
     }
 
     public static int[] cardMultiples(int[] hand) {
+        if (hand == null || hand.length == 0) {
+            return new int[]{0, 0}; // Return safe default for empty hands
+        }
         int[] result = {0, 0};
         boolean finished;
         int i = 0;
@@ -541,15 +661,19 @@ public class Main {
 
     public static int[][] handMultiples(int[] hand) {
         int[] adjustedHand = handRanks(hand);
-        int[][] results = new int[3][2];
+        // Make results array size dynamic based on hand size
+        // Maximum possible multiples is hand.length (all different cards)
+        int[][] results = new int[hand.length][2];
         boolean finished;
         int i = 0;
         do {
             int[] newHand = workingHand(adjustedHand);
             int[] found = cardMultiples(newHand);
             removeCard(adjustedHand, found[0]);
-            results[i][0] = found[0];
-            results[i][1] = found[1];
+            if (i < results.length) { // Add bounds check
+                results[i][0] = found[0];
+                results[i][1] = found[1];
+            }
             i++;
             if (found[1] <= 1) {
                 finished = true;
@@ -599,141 +723,82 @@ public class Main {
         return bet;
     }
 
+    /**
+     * Calculates the bet amount for an AI player based on their hand value and available chips.
+     * @param player the AI player
+     * @param currentBet the current bet amount
+     * @return the new bet amount
+     */
+    private static int calculateAIBet(Player player, int currentBet) {
+        int chips = player.getChips();
+        int handValue = player.getHandValue();
+        int bet = currentBet;
+        
+        if (chips <= 0) {
+            return bet;
+        }
+        
+        int betIncrease = 0;
+        if (handValue <= 38 && handValue >= 18) {
+            betIncrease = 25;
+        } else if (handValue > 38 && handValue <= 70) {
+            betIncrease = 50;
+        } else if (handValue > 70) {
+            betIncrease = 100;
+        } else {
+            // Weak hand - just call or fold if bet is too high
+            return Math.min(bet, chips);
+        }
+        
+        bet += betIncrease;
+        
+        // Adjust bet if player doesn't have enough chips
+        if (chips < bet) {
+            if (handValue <= 38) {
+                bet = chips / 4;
+                if (chips % 4 != 0) {
+                    bet += 1;
+                }
+            } else if (handValue <= 70) {
+                bet = chips / 2;
+                if (chips % 4 != 0) {
+                    bet += 1;
+                }
+            } else {
+                bet = chips; // All-in for strong hands
+            }
+        }
+        
+        return bet;
+    }
+
     static int bet(Player[] list, int pot) {
         int bet = 0;
         for (int i = 0; i < list.length; i++) {
-            int threshold = 0;
             int lastBet = bet;
-            if (i == 0 && list[i].fold == false) {
-                Player USER = list[i];
-                pot += USER.bet(bet);
-                USER.lastBet();
+            
+            if (list[i].isFold()) {
+                continue; // Skip folded players
+            }
+            
+            if (i == 0) {
+                // Human player - get bet through UI
+                Player user = list[i];
+                pot += user.placeBet(bet);
+                user.recordLastBet();
                 if (lastBet != bet) {
                     recursiveBet(list, i, pot, bet);
                     break;
                 }
-            }
-            if (i == 1 && list[i].fold == false) {
-                Player CPU1 = list[i];
-                int chips = CPU1.chips;
-                if (chips > 0) {
-                    if (CPU1.handValue <= 38 && CPU1.handValue >= 18) {
-                        bet += 25;
-                        threshold = bet;
-                        if (chips < threshold) {
-                            bet = chips / 4;
-                            if (chips % 4 != 0) {
-                                bet += 1;
-                            }
-                        } else if (CPU1.handValue > 38 && CPU1.handValue <= 70) {
-                            bet += 50;
-                            threshold = bet;
-                            if (chips < threshold) {
-                                bet = chips / 2;
-                                if (chips % 4 != 0) {
-                                    bet += 1;
-                                }
-                            }
-                        } else if (CPU1.handValue > 70) {
-                            bet += 100;
-                            threshold = bet;
-                            if (chips < threshold) {
-                                bet = chips;
-                            }
-                        } else {
-                            if (bet > chips) {
-                                bet = chips;
-                            }
-                        }
-                    }
-                    pot += CPU1.bet(bet);
-                    CPU1.lastBet();
-                    if (lastBet != bet) {
-                        recursiveBet(list, i, pot, bet);
-                        break;
-                    }
-                }
-            }
-            if (i == 2 && list[i].fold == false) {
-                Player CPU2 = list[i];
-                int chips = CPU2.chips;
-                if (chips > 0) {
-                    if (CPU2.handValue <= 38 && CPU2.handValue >= 18) {
-                        bet += 25;
-                        threshold = bet;
-                        if (chips < threshold) {
-                            bet = chips / 4;
-                            if (chips % 4 != 0) {
-                                bet += 1;
-                            }
-                        } else if (CPU2.handValue > 38 && CPU2.handValue <= 70) {
-                            bet += 50;
-                            threshold = bet;
-                            if (chips < threshold) {
-                                bet = chips / 2;
-                                if (chips % 4 != 0) {
-                                    bet += 1;
-                                }
-                            }
-                        } else if (CPU2.handValue > 70) {
-                            bet += 100;
-                            threshold = bet;
-                            if (chips < threshold) {
-                                bet = chips;
-                            }
-                        } else {
-                            if (bet > chips) {
-                                bet = chips;
-                            }
-                        }
-                    }
-                    pot += CPU2.bet(bet);
-                    CPU2.lastBet();
-                    if (lastBet != bet) {
-                        recursiveBet(list, i, pot, bet);
-                        break;
-                    }
-                }
-            }
-            if (i == 3 && list[i].fold == false) {
-                Player CPU3 = list[i];
-                int chips = CPU3.chips;
-                if (chips > 0) {
-                    if (CPU3.handValue <= 38 && CPU3.handValue >= 18) {
-                        bet += 25;
-                        threshold = bet;
-                        if (chips < threshold) {
-                            bet = chips / 4;
-                            if (chips % 4 != 0) {
-                                bet += 1;
-                            }
-                        } else if (CPU3.handValue > 38 && CPU3.handValue <= 70) {
-                            bet += 50;
-                            threshold = bet;
-                            if (chips < threshold) {
-                                bet = chips / 2;
-                                if (chips % 4 != 0) {
-                                    bet += 1;
-                                }
-                            }
-                        } else if (CPU3.handValue > 70) {
-                            bet += 100;
-                            threshold = bet;
-                            if (chips < threshold) {
-                                bet = chips;
-                            }
-                        } else {
-                            if (bet > chips) {
-                                bet = chips;
-                            }
-                        }
-                    }
-                    pot += CPU3.bet(bet);
-                    CPU3.lastBet();
-                    if (lastBet != bet) {
-                        recursiveBet(list, i, pot, bet);
-                        break;
-                    }
+            } else {
+                // AI player - calculate bet automatically
+                Player aiPlayer = list[i];
+                bet = calculateAIBet(aiPlayer, bet);
+                pot += aiPlayer.placeBet(bet);
+                aiPlayer.recordLastBet();
+                if (lastBet != bet) {
+                    recursiveBet(list, i, pot, bet);
+                    break;
                 }
             }
         }
@@ -908,12 +973,29 @@ public class Main {
         return Deck;
     }
 
-    public static int[] newHand(int[] Deck) {
-        int[] hand;
-        hand = new int[5];
-
-        for (int i = 0; i < 5; i++) {
-            hand[i] = drawCard(Deck);
+    /**
+     * Generates a hand with the default size (5 cards).
+     * @param deck the deck to draw from
+     * @return a hand of 5 cards
+     */
+    public static int[] newHand(int[] deck) {
+        return newHand(deck, 5);
+    }
+    
+    /**
+     * Generates a hand with the specified number of cards.
+     * @param deck the deck to draw from
+     * @param handSize the number of cards to draw
+     * @return a hand of the specified size
+     */
+    public static int[] newHand(int[] deck, int handSize) {
+        if (handSize < 1 || handSize > 52) {
+            throw new IllegalArgumentException("Hand size must be between 1 and 52");
+        }
+        
+        int[] hand = new int[handSize];
+        for (int i = 0; i < handSize; i++) {
+            hand[i] = drawCard(deck);
         }
         return hand;
     }
@@ -975,7 +1057,10 @@ public class Main {
 //chose random card from the deck
 //randomNum = minimum + (int)(Math.random()*maximum);
 //randomCard = 1+(int)(Math.random()*current size of deck);
-        int randomCard = 0 + (int) (Math.random() * (workingDeck.length - 1));
+        if (workingDeck.length == 0) {
+            throw new IllegalStateException("Cannot draw from empty deck");
+        }
+        int randomCard = 0 + (int) (Math.random() * workingDeck.length);
 //System.out.println(randomCard);
         int Card = workingDeck[randomCard];
         return Card;
@@ -1031,14 +1116,26 @@ public class Main {
         return hand;
     }
 
-    private static int drawCard(int[] Deck) {
-
-        int card = randomCard(workingDeck(Deck));
-
-// "remove" card from deck
-        Deck[card] = 0;
-//remake working Deck
-        return card;
+    /**
+     * Draws a card from the deck.
+     * @param deck the deck to draw from
+     * @return the drawn card value
+     */
+    public static int drawCard(int[] deck) {
+        int[] workingDeck = workingDeck(deck);
+        if (workingDeck.length == 0) {
+            throw new IllegalStateException("Cannot draw from empty deck");
+        }
+        int cardIndex = randomCard(workingDeck);
+        
+        // Get the card value before removing it
+        int cardValue = deck[cardIndex];
+        
+        // "remove" card from deck
+        deck[cardIndex] = 0;
+        
+        // Return the card value
+        return cardValue;
     }
 
     static int[] replaceCards(int[] hand, int[] Deck) {
@@ -1155,14 +1252,15 @@ public class Main {
         int e = promptExchangeNumber();
         if (e != 0) {
             for (int i = 0; i < e; i++) {
-                int[] workingHand = workingHand(current.hand);
+                int[] workingHand = workingHand(current.getHand());
                 String[] RFV = convertHand(workingHand);
                 int index = promptExchange(RFV);
-                current.hand[findIndex(current.hand, workingHand[index])] = 0;
+                int cardIndex = findIndex(current.getHand(), workingHand[index]);
+                current.removeCardAtIndex(cardIndex);
             }
         }
-        replaceCards(current.hand, deck);
-        current.Checks();
+        replaceCards(current.getHandForModification(), deck);
+        current.performAllChecks();
         return deck;
     }
 

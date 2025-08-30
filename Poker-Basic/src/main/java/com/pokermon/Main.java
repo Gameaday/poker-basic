@@ -482,61 +482,34 @@ public class Main {
     }
 
 //methods
-    private static void InitializePlayers(Player[] list, String[] players, int chipsInitial, int[] Deck) {
+    /**
+     * Initializes all players with hands, names, and chips.
+     * @param list the array of players to initialize
+     * @param players the array of player names
+     * @param chipsInitial the initial number of chips for each player
+     * @param deck the deck to draw cards from
+     */
+    private static void InitializePlayers(Player[] list, String[] players, int chipsInitial, int[] deck) {
         for (int i = 0; i < players.length; i++) {
-            if (i == 0) {
-                Player USER = new Player();
-                USER.setupPlayer(players[i], chipsInitial, Deck);
-                list[i] = USER;
-            }
-            if (i == 1) {
-                Player CPU1 = new Player();
-                CPU1.setupPlayer(players[i], chipsInitial, Deck);
-                list[i] = CPU1;
-            }
-            if (i == 2) {
-                Player CPU2 = new Player();
-                CPU2.setupPlayer(players[i], chipsInitial, Deck);
-                list[i] = CPU2;
-            }
-            if (i == 3) {
-                Player CPU3 = new Player();
-                CPU3.setupPlayer(players[i], chipsInitial, Deck);
-                list[i] = CPU3;
-            }
-            System.out.println(); //places spaces between player info, for neatness
-//return null;
+            Player player = new Player();
+            player.setupPlayer(players[i], chipsInitial, deck);
+            list[i] = player;
+            System.out.println(); // places spaces between player info, for neatness
         }
     }
 
-    private static void InitializePlayers(Player[] list, String[] players, int[] Deck) {
+    /**
+     * Re-initializes existing players with new hands while preserving their current chips.
+     * @param list the array of existing players to re-initialize
+     * @param players the array of player names
+     * @param deck the deck to draw cards from
+     */
+    private static void InitializePlayers(Player[] list, String[] players, int[] deck) {
         for (int i = 0; i < players.length; i++) {
-
-            if (i == 0) {
-                Player USER = list[i];
-                USER.setupPlayer(players[i], USER.getChips(), Deck);
-                list[i] = USER;
-            }
-            if (i == 1) {
-                Player CPU1 = list[i];
-                CPU1.setupPlayer(players[i], CPU1.getChips(), Deck);
-                list[i] = CPU1;
-            }
-            if (i == 2) {
-                Player CPU2 = list[i];
-                CPU2.setupPlayer(players[i], CPU2.getChips(), Deck);
-                list[i] = CPU2;
-            }
-            if (i == 3) {
-                Player CPU3 = list[i];
-                CPU3.setupPlayer(players[i], CPU3.getChips(), Deck);
-                list[i] = CPU3;
-            }
-            System.out.println(); //places spaces between player info, for neatness
-//return null;
-
+            Player player = list[i];
+            player.setupPlayer(players[i], player.getChips(), deck);
+            System.out.println(); // places spaces between player info, for neatness
         }
-
     }
 
     public static int handValue(int[] hand) {
@@ -734,141 +707,82 @@ public class Main {
         return bet;
     }
 
+    /**
+     * Calculates the bet amount for an AI player based on their hand value and available chips.
+     * @param player the AI player
+     * @param currentBet the current bet amount
+     * @return the new bet amount
+     */
+    private static int calculateAIBet(Player player, int currentBet) {
+        int chips = player.getChips();
+        int handValue = player.getHandValue();
+        int bet = currentBet;
+        
+        if (chips <= 0) {
+            return bet;
+        }
+        
+        int betIncrease = 0;
+        if (handValue <= 38 && handValue >= 18) {
+            betIncrease = 25;
+        } else if (handValue > 38 && handValue <= 70) {
+            betIncrease = 50;
+        } else if (handValue > 70) {
+            betIncrease = 100;
+        } else {
+            // Weak hand - just call or fold if bet is too high
+            return Math.min(bet, chips);
+        }
+        
+        bet += betIncrease;
+        
+        // Adjust bet if player doesn't have enough chips
+        if (chips < bet) {
+            if (handValue <= 38) {
+                bet = chips / 4;
+                if (chips % 4 != 0) {
+                    bet += 1;
+                }
+            } else if (handValue <= 70) {
+                bet = chips / 2;
+                if (chips % 4 != 0) {
+                    bet += 1;
+                }
+            } else {
+                bet = chips; // All-in for strong hands
+            }
+        }
+        
+        return bet;
+    }
+
     static int bet(Player[] list, int pot) {
         int bet = 0;
         for (int i = 0; i < list.length; i++) {
-            int threshold = 0;
             int lastBet = bet;
-            if (i == 0 && !list[i].isFold()) {
-                Player USER = list[i];
-                pot += USER.placeBet(bet);
-                USER.recordLastBet();
+            
+            if (list[i].isFold()) {
+                continue; // Skip folded players
+            }
+            
+            if (i == 0) {
+                // Human player - get bet through UI
+                Player user = list[i];
+                pot += user.placeBet(bet);
+                user.recordLastBet();
                 if (lastBet != bet) {
                     recursiveBet(list, i, pot, bet);
                     break;
                 }
-            }
-            if (i == 1 && !list[i].isFold()) {
-                Player CPU1 = list[i];
-                int chips = CPU1.getChips();
-                if (chips > 0) {
-                    if (CPU1.getHandValue() <= 38 && CPU1.getHandValue() >= 18) {
-                        bet += 25;
-                        threshold = bet;
-                        if (chips < threshold) {
-                            bet = chips / 4;
-                            if (chips % 4 != 0) {
-                                bet += 1;
-                            }
-                        } else if (CPU1.getHandValue() > 38 && CPU1.getHandValue() <= 70) {
-                            bet += 50;
-                            threshold = bet;
-                            if (chips < threshold) {
-                                bet = chips / 2;
-                                if (chips % 4 != 0) {
-                                    bet += 1;
-                                }
-                            }
-                        } else if (CPU1.getHandValue() > 70) {
-                            bet += 100;
-                            threshold = bet;
-                            if (chips < threshold) {
-                                bet = chips;
-                            }
-                        } else {
-                            if (bet > chips) {
-                                bet = chips;
-                            }
-                        }
-                    }
-                    pot += CPU1.placeBet(bet);
-                    CPU1.recordLastBet();
-                    if (lastBet != bet) {
-                        recursiveBet(list, i, pot, bet);
-                        break;
-                    }
-                }
-            }
-            if (i == 2 && !list[i].isFold()) {
-                Player CPU2 = list[i];
-                int chips = CPU2.getChips();
-                if (chips > 0) {
-                    if (CPU2.getHandValue() <= 38 && CPU2.getHandValue() >= 18) {
-                        bet += 25;
-                        threshold = bet;
-                        if (chips < threshold) {
-                            bet = chips / 4;
-                            if (chips % 4 != 0) {
-                                bet += 1;
-                            }
-                        } else if (CPU2.getHandValue() > 38 && CPU2.getHandValue() <= 70) {
-                            bet += 50;
-                            threshold = bet;
-                            if (chips < threshold) {
-                                bet = chips / 2;
-                                if (chips % 4 != 0) {
-                                    bet += 1;
-                                }
-                            }
-                        } else if (CPU2.getHandValue() > 70) {
-                            bet += 100;
-                            threshold = bet;
-                            if (chips < threshold) {
-                                bet = chips;
-                            }
-                        } else {
-                            if (bet > chips) {
-                                bet = chips;
-                            }
-                        }
-                    }
-                    pot += CPU2.placeBet(bet);
-                    CPU2.recordLastBet();
-                    if (lastBet != bet) {
-                        recursiveBet(list, i, pot, bet);
-                        break;
-                    }
-                }
-            }
-            if (i == 3 && !list[i].isFold()) {
-                Player CPU3 = list[i];
-                int chips = CPU3.getChips();
-                if (chips > 0) {
-                    if (CPU3.getHandValue() <= 38 && CPU3.getHandValue() >= 18) {
-                        bet += 25;
-                        threshold = bet;
-                        if (chips < threshold) {
-                            bet = chips / 4;
-                            if (chips % 4 != 0) {
-                                bet += 1;
-                            }
-                        } else if (CPU3.getHandValue() > 38 && CPU3.getHandValue() <= 70) {
-                            bet += 50;
-                            threshold = bet;
-                            if (chips < threshold) {
-                                bet = chips / 2;
-                                if (chips % 4 != 0) {
-                                    bet += 1;
-                                }
-                            }
-                        } else if (CPU3.getHandValue() > 70) {
-                            bet += 100;
-                            threshold = bet;
-                            if (chips < threshold) {
-                                bet = chips;
-                            }
-                        } else {
-                            if (bet > chips) {
-                                bet = chips;
-                            }
-                        }
-                    }
-                    pot += CPU3.placeBet(bet);
-                    CPU3.recordLastBet();
-                    if (lastBet != bet) {
-                        recursiveBet(list, i, pot, bet);
-                        break;
-                    }
+            } else {
+                // AI player - calculate bet automatically
+                Player aiPlayer = list[i];
+                bet = calculateAIBet(aiPlayer, bet);
+                pot += aiPlayer.placeBet(bet);
+                aiPlayer.recordLastBet();
+                if (lastBet != bet) {
+                    recursiveBet(list, i, pot, bet);
+                    break;
                 }
             }
         }

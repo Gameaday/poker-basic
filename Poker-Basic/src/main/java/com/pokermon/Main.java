@@ -622,6 +622,9 @@ public class Main {
     }
 
     public static int[] cardMultiples(int[] hand) {
+        if (hand == null || hand.length == 0) {
+            return new int[]{0, 0}; // Return safe default for empty hands
+        }
         int[] result = {0, 0};
         boolean finished;
         int i = 0;
@@ -657,15 +660,19 @@ public class Main {
 
     public static int[][] handMultiples(int[] hand) {
         int[] adjustedHand = handRanks(hand);
-        int[][] results = new int[3][2];
+        // Make results array size dynamic based on hand size
+        // Maximum possible multiples is hand.length (all different cards)
+        int[][] results = new int[hand.length][2];
         boolean finished;
         int i = 0;
         do {
             int[] newHand = workingHand(adjustedHand);
             int[] found = cardMultiples(newHand);
             removeCard(adjustedHand, found[0]);
-            results[i][0] = found[0];
-            results[i][1] = found[1];
+            if (i < results.length) { // Add bounds check
+                results[i][0] = found[0];
+                results[i][1] = found[1];
+            }
             i++;
             if (found[1] <= 1) {
                 finished = true;
@@ -1049,7 +1056,10 @@ public class Main {
 //chose random card from the deck
 //randomNum = minimum + (int)(Math.random()*maximum);
 //randomCard = 1+(int)(Math.random()*current size of deck);
-        int randomCard = 0 + (int) (Math.random() * (workingDeck.length - 1));
+        if (workingDeck.length == 0) {
+            throw new IllegalStateException("Cannot draw from empty deck");
+        }
+        int randomCard = 0 + (int) (Math.random() * workingDeck.length);
 //System.out.println(randomCard);
         int Card = workingDeck[randomCard];
         return Card;
@@ -1111,12 +1121,20 @@ public class Main {
      * @return the drawn card value
      */
     public static int drawCard(int[] deck) {
-        int card = randomCard(workingDeck(deck));
+        int[] workingDeck = workingDeck(deck);
+        if (workingDeck.length == 0) {
+            throw new IllegalStateException("Cannot draw from empty deck");
+        }
+        int cardIndex = randomCard(workingDeck);
+        
+        // Get the card value before removing it
+        int cardValue = deck[cardIndex];
         
         // "remove" card from deck
-        deck[card] = 0;
-        //remake working deck
-        return card;
+        deck[cardIndex] = 0;
+        
+        // Return the card value
+        return cardValue;
     }
 
     static int[] replaceCards(int[] hand, int[] Deck) {

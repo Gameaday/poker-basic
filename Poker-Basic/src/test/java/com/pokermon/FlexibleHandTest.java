@@ -32,13 +32,13 @@ class FlexibleHandTest {
         int[] oneCardHand = Main.newHand(Main.setDeck(), 1);
         assertEquals(1, oneCardHand.length);
         
-        // All cards should be valid (card indices should be between 0 and 51)
+        // All cards should be valid (card values should be between 1 and 52)
         for (int card : threeCardHand) {
-            assertTrue(card >= 0 && card <= 51, "Card should be valid index: " + card);
+            assertTrue(card >= 1 && card <= 52, "Card should be valid value: " + card);
         }
         
         for (int card : sevenCardHand) {
-            assertTrue(card >= 0 && card <= 51, "Card should be valid index: " + card);
+            assertTrue(card >= 1 && card <= 52, "Card should be valid value: " + card);
         }
     }
     

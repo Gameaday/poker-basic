@@ -36,7 +36,7 @@ class GameLogicTest {
                 java.lang.reflect.Method initMethod = Main.class.getDeclaredMethod(
                     "InitializePlayers", Player[].class, String[].class, int.class, int[].class);
                 initMethod.setAccessible(true);
-                initMethod.invoke(null, testPlayers, testNames, 1000, testDeck);
+                initMethod.invoke(null, testPlayers, testNames, 1000, Main.setDeck()); // Fresh deck
                 
                 // Verify all players were initialized
                 for (int i = 0; i < numPlayers; i++) {
@@ -63,7 +63,7 @@ class GameLogicTest {
             for (int i = 0; i < count; i++) {
                 flexNames[i] = "Flex" + (i + 1);
                 flexPlayers[i] = new Player();
-                flexPlayers[i].setupPlayer(flexNames[i], 1000, testDeck);
+                flexPlayers[i].setupPlayer(flexNames[i], 1000, Main.setDeck()); // Fresh deck for each player
             }
             
             // Test that all players are properly set up
@@ -97,7 +97,7 @@ class GameLogicTest {
             
             for (int i = 0; i < numPlayers; i++) {
                 bettingPlayers[i] = new Player();
-                bettingPlayers[i].setupPlayer("Player" + (i + 1), 1000, testDeck);
+                bettingPlayers[i].setupPlayer("Player" + (i + 1), 1000, Main.setDeck()); // Fresh deck for each player
             }
             
             // Test betting with this number of players
@@ -156,7 +156,7 @@ class GameLogicTest {
     void testEncapsulationIntegrity() {
         // Test that encapsulation prevents unwanted modifications
         Player player = new Player();
-        player.setupPlayer("TestPlayer", 1000, testDeck);
+        player.setupPlayer("TestPlayer", 1000, Main.setDeck()); // Fresh deck
         
         // Getting hand should return a copy, not original
         int[] hand1 = player.getHand();

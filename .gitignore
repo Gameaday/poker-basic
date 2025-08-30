@@ -1,0 +1,22 @@
+# Ignore legacy Java build artifacts that might be left over from branch switching
+Poker-Basic/
+*.class
+target/
+build/
+dist/
+nbproject/private/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+tmp/
+temp/

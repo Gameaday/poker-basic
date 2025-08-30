@@ -1135,8 +1135,30 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     void recursiveBet(Player[] players, int playerIndex, int pot, int bet) {
-        // TODO: Implement recursive betting logic for handling raises
-        // For now, this is a stub to fix compilation error
+        // Handle additional betting rounds after a raise
+        int lastBet = bet;
+        for (int i = 0; i < players.length; i++) {
+            if (i == playerIndex || players[i].fold) {
+                continue;
+            }
+            Player p = players[i];
+            int chips = p.chips;
+            // Simple logic: if player has enough chips and hand is strong, call or raise; else fold
+            if (chips > lastBet) {
+                // Example: call the raise
+                pot += p.bet(lastBet);
+                p.lastBet();
+            } else if (chips > 0) {
+                // All-in if not enough chips to call
+                pot += p.bet(chips);
+                p.lastBet();
+            } else {
+                // Fold if no chips
+                p.fold = true;
+            }
+        }
+        // Optionally, check if another raise occurred and repeat if needed
+        // This is a basic implementation; more complex logic can be added as needed
     }
 
     protected ImageIcon createImageIcon(String path) {

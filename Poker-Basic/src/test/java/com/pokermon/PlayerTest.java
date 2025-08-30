@@ -99,11 +99,12 @@ class PlayerTest {
         player.setupPlayer("Test", 1000, testDeck);
         
         int[] hand = player.getHand();
-        int[] modifiedHand = hand.clone();
-        modifiedHand[0] = 999; // Try to modify the returned array
+        int originalCard = hand[0];
+        hand[0] = 999; // Try to modify the returned array directly
         
         // Original hand should not be affected
         assertNotEquals(999, player.getHand()[0]);
+        assertEquals(originalCard, player.getHand()[0]);
     }
     
     @Test

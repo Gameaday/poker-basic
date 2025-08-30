@@ -158,6 +158,24 @@ class Player {
     }
 
     /**
+     * Sets a specific card in the hand to 0 (removed).
+     * @param index the index of the card to remove
+     */
+    public void removeCardAtIndex(int index) {
+        if (this.hand != null && index >= 0 && index < this.hand.length) {
+            this.hand[index] = 0;
+        }
+    }
+
+    /**
+     * Gets the hand array for direct modification (used internally by game logic).
+     * @return the hand array reference
+     */
+    public int[] getHandForModification() {
+        return this.hand;
+    }
+
+    /**
      * Resets the fold status for a new round.
      * @return false (unfolds the player)
      */
@@ -597,7 +615,7 @@ public class Main {
     static void dividePot(Player[] list, int pot) {
         int[] winningScores = new int[list.length];
         for (int i = 0; i < list.length; i++) {
-            winningScores[i] = list[i].handValue;
+            winningScores[i] = list[i].getHandValue();
         }
         for (int i = 0; i < list.length; i++) {
             winningScores[i] = list[i].getHandValue();
@@ -1272,13 +1290,14 @@ public class Main {
         int e = promptExchangeNumber();
         if (e != 0) {
             for (int i = 0; i < e; i++) {
-                int[] workingHand = workingHand(current.hand);
+                int[] workingHand = workingHand(current.getHand());
                 String[] RFV = convertHand(workingHand);
                 int index = promptExchange(RFV);
-                current.hand[findIndex(current.hand, workingHand[index])] = 0;
+                int cardIndex = findIndex(current.getHand(), workingHand[index]);
+                current.removeCardAtIndex(cardIndex);
             }
         }
-        replaceCards(current.hand, deck);
+        replaceCards(current.getHandForModification(), deck);
         current.performAllChecks();
         return deck;
     }

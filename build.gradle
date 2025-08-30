@@ -80,5 +80,4 @@ task verifyDualPlatformSetup {
         println ""
         println "✅ Dual platform support configured successfully!"
     }
->>>>>>> master
 }

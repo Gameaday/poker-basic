@@ -1,6 +1,17 @@
-// Gradle project settings for dual platform support
-rootProject.name = 'poker-basic'
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
 
-// Include Android module only when Android plugin is available
-// Uncomment the line below when building Android APK with network access:
-// include ':app'
+rootProject.name = "PokerGame"
+include ':android'

@@ -1,24 +1,12 @@
-// Dual Platform Build Configuration for Poker Game
-// Supports both Maven (JAR) and Gradle (APK) builds
-
-// Use the presence of internet connectivity to determine if we can use Android plugins
-def canBuildAndroid = true
-try {
-    new URL("https://dl.google.com").openConnection().connect()
-} catch (Exception e) {
-    canBuildAndroid = false
-}
-
-if (canBuildAndroid) {
-    // Android build configuration (only when network is available)
-    buildscript {
-        repositories {
-            google()
-            mavenCentral()
-        }
-        dependencies {
-            classpath 'com.android.tools.build:gradle:8.1.0'
-        }
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.1.4'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.10'
     }
 }
 
@@ -92,4 +80,5 @@ task verifyDualPlatformSetup {
         println ""
         println "✅ Dual platform support configured successfully!"
     }
+>>>>>>> master
 }

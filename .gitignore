@@ -284,3 +284,12 @@ Thumbs.db
 *.tmp
 *.temp
 *~
+
+# Gradle cache and wrapper
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
+
+# Android build outputs  
+android/build/
+android/.gradle/

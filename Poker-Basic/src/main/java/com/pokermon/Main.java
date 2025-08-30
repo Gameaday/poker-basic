@@ -60,9 +60,6 @@ class Player {
     public boolean isFourKind() { return fourKind; }
     public boolean isFullHouse() { return fullHouse; }
 
-    // Setters
-
-    // Setters
     public void setLastBet(int lastBet) { this.lastBet = lastBet; }
     public void setFold(boolean fold) { this.fold = fold; }
     

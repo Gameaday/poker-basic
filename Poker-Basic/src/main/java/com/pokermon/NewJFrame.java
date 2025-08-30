@@ -511,7 +511,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
 
-        Object selectedBet = jComboBox3.getSelectedItem();
+        Object selectedBet = jComboBox4.getSelectedItem();
         if (Integer.valueOf(selectedBet.toString()) > list[0].chips) {
             System.out.println("invalid bet, try again.");
         } else {
@@ -540,6 +540,9 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox4ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // Start new round - reset pot and UI
+        workingPot = 0;
+        updatePot();
         jButton4.setVisible(false);
         jButton5.setVisible(false);
         jLabel16.setVisible(false);
@@ -729,45 +732,6 @@ public class NewJFrame extends javax.swing.JFrame {
      }
      return jTextField1.getText();
      }*/
-    /*private void InitializePlayers(Object[] list, String[] players, int chipsInitial, int[] Deck) {
-     for (int i = 0; i < players.length; i++) {
-    
-     if (i == 0) {
-     Player USER = new Player();
-     USER.setupPlayer(players[i], chipsInitial, Deck);
-     list[i] = USER;
-     jLabel8.setVisible(true);
-     }
-     if (i == 1) {
-     Player CPU1 = new Player();
-     CPU1.setupPlayer(players[i], chipsInitial, Deck);
-     list[i] = CPU1;
-     jLabel2.setVisible(true);
-     jLabel2.setText(CPU1.name);
-     jLabel3.setVisible(true);
-
-     if (i == 2) {
-     Player CPU2 = new Player();
-     CPU2.setupPlayer(players[i], chipsInitial, Deck);
-     list[i] = CPU2;
-     jLabel4.setVisible(true);
-     jLabel4.setText(CPU2.name);
-     jLabel5.setVisible(true);
-
-     }
-     if (i == 3) {
-     Player CPU3 = new Player();
-     CPU3.setupPlayer(players[i], chipsInitial, Deck);
-     list[i] = CPU3;
-     jLabel6.setVisible(true);
-     jLabel6.setText(CPU3.name);
-     jLabel7.setVisible(true);
-     }
-     System.out.println(); //places spaces between player info, for neatness
-     //return null;
-     }
-     }
-     }*/
 
     private void InitializePlayers(Player[] list, String[] players, int chipsInitial, int[] Deck) {
         for (int i = 0; i < players.length; i++) {
@@ -848,43 +812,6 @@ public class NewJFrame extends javax.swing.JFrame {
         }
 
     }
-    /*private void InitializePlayers(Object[] list, String[] players, int[] Deck) {
-     for (int i = 0; i < players.length; i++) {
-
-     if (i == 0) {
-     Player USER = new Player();
-     USER.setupPlayer(players[i], USER.chips, Deck);
-     list[i] = USER;
-     jLabel8.setVisible(true);
-     }
-     if (i == 1) {
-     Player CPU1 = new Player();
-     CPU1.setupPlayer(players[i], CPU1.chips, Deck);
-     list[i] = CPU1;
-     jLabel2.setVisible(true);
-     jLabel2.setText(CPU1.name);
-     jLabel3.setVisible(true);
-     }
-     if (i == 2) {
-     Player CPU2 = new Player();
-     CPU2.setupPlayer(players[i], CPU2.chips, Deck);
-     list[i] = CPU2;
-     jLabel4.setVisible(true);
-     jLabel4.setText(CPU2.name);
-     jLabel5.setVisible(true);
-     }
-     if (i == 3) {
-     Player CPU3 = new Player();
-     CPU3.setupPlayer(players[i], CPU3.chips, Deck);
-     list[i] = CPU3;
-     jLabel6.setVisible(true);
-     jLabel6.setText(CPU3.name);
-     jLabel7.setVisible(true);
-     }
-     System.out.println(); //places spaces between player info, for neatness
-     //return null;
-     * }
-     }*/
 
     private void revealHand(String[] Hand) {
         ImageIcon icon;
@@ -1065,28 +992,6 @@ public class NewJFrame extends javax.swing.JFrame {
         current.Checks();
         return deck;
     }
-    /*private static int promptExchange(String[] hand) {
-     String[] Cards = (hand);
-     Object ExchangeNumber = JOptionPane.showInputDialog(null, "Which Card will you exchange", "Pick one Card To Return",
-     JOptionPane.QUESTION_MESSAGE, null, Cards, Cards[0]);
-     return Main.getChoiceIndex(ExchangeNumber, Cards);
-     }
-
-     /*
-     private static int promptExchangeNumber() {
-     Object[] Number = {0, 1, 2, 3, 4, 5};
-     Object ExchangeNumber = JOptionPane.showInputDialog(null, "how many cards will you be exchanging?", "number of cards to return",
-     JOptionPane.INFORMATION_MESSAGE, null, Number, Number[0]);
-     int exchangeNumber = (int) ExchangeNumber;
-     return exchangeNumber;
-     }*/
-    /*public static int placeBet(int chips) {
-     int bet=0;
-     /*Object[] chipSelection = {0, 10, 50, 100};
-     Object Chips = JOptionPane.showInputDialog(null, "How much will you bet?", null,
-     JOptionPane.INFORMATION_MESSAGE, null, chipSelection, chipSelection[0]);
-     bet = (int) Chips;*
-     return bet;*/
 
     int bet(Player[] list, int pot, int bet) {
         // bet = 0;

@@ -128,7 +128,7 @@ class Player {
 
 //checks if hand is Flush
     public void isFlush() {
-        Straight = Main.isFlush(hand);
+        Flush = Main.isFlush(hand);
     }
 
 //checks if hand is a Straight Flush
@@ -229,7 +229,7 @@ class Player {
             System.out.println("Two of a Kind: " + twoKind);
         }
         if (twoPair == true) {
-            System.out.println("Two Pairs: " + twoKind);
+            System.out.println("Two Pairs: " + twoPair);
         }
         if (threeKind == true & fullHouse != true) {
             System.out.println("Three of a Kind: " + threeKind);
@@ -792,12 +792,18 @@ public class Main {
     }
 
     public static boolean isFullHouse(int[][] multiples) {
-        boolean isfullHouse = false;
-        int i = multiples.length - 1;
-        if (multiples[i][1] != 1) {
-            isfullHouse = true;
+        boolean hasThreeOfKind = false;
+        boolean hasPair = false;
+        
+        for (int i = 0; i < multiples.length; i++) {
+            if (multiples[i][1] == 3) {
+                hasThreeOfKind = true;
+            } else if (multiples[i][1] == 2) {
+                hasPair = true;
+            }
         }
-        return isfullHouse;
+        
+        return hasThreeOfKind && hasPair;
     }
 
     public static boolean is4Kind(int[][] multiples) {
@@ -894,11 +900,10 @@ public class Main {
 
     public static int[] setDeck() {
         int[] Deck;
-//change line below to reference another method or variable that tells deck size
-        Deck = new int[53];
-//i'm thinking global variable fed into a different method that fills an array that size.
-        for (int i = 0; i <= Deck.length - 1; i++) {
-            Deck[i] = i;
+        // Standard deck has 52 cards (13 ranks * 4 suits)
+        Deck = new int[52];
+        for (int i = 0; i < Deck.length; i++) {
+            Deck[i] = i + 1; // Cards numbered 1-52
         }
         return Deck;
     }

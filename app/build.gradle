@@ -1,0 +1,54 @@
+// Android app module build configuration
+// Note: This file requires the Android Gradle Plugin which needs internet access
+
+// To enable Android builds when network is available:
+// 1. Ensure internet connection
+// 2. Uncomment the line below
+// apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 34
+    buildToolsVersion "34.0.0"
+
+    defaultConfig {
+        applicationId "com.pokermon"
+        minSdkVersion 21
+        targetSdkVersion 34
+        versionCode 1
+        versionName "0.08.30"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    sourceSets {
+        main {
+            java {
+                // Include shared Java source from Maven project
+                // This allows the same core game logic to be used in both JAR and APK builds
+                srcDirs = ['src/main/java', '../Poker-Basic/src/main/java']
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.android.material:material:1.9.0'
+    
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}

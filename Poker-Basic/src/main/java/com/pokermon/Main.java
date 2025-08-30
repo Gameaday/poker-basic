@@ -1033,12 +1033,13 @@ public class Main {
 
     private static int drawCard(int[] Deck) {
 
-        int card = randomCard(workingDeck(Deck));
+        int cardIndex = randomCard(workingDeck(Deck));
+        int cardValue = Deck[cardIndex];
 
 // "remove" card from deck
-        Deck[card] = 0;
+        Deck[cardIndex] = 0;
 //remake working Deck
-        return card;
+        return cardValue;
     }
 
     static int[] replaceCards(int[] hand, int[] Deck) {

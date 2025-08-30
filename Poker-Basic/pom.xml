@@ -16,6 +16,8 @@
         <maven.surefire.version>3.2.5</maven.surefire.version>
         <maven.failsafe.version>3.2.5</maven.failsafe.version>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+        <kotlin.version>1.9.10</kotlin.version>
+        <compose.version>1.5.4</compose.version>
     </properties>
 
     <dependencies>
@@ -24,6 +26,26 @@
             <artifactId>junit-jupiter</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
+        </dependency>
+        
+        <!-- Kotlin Standard Library -->
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+        
+        <!-- JavaFX for cross-platform UI -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>21.0.1</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>21.0.1</version>
         </dependency>
     </dependencies>
 
@@ -54,6 +76,44 @@
                     <source>17</source>
                     <target>17</target>
                     <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            
+            <!-- Kotlin Maven Plugin -->
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlin.version}</version>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirs>
+                                <sourceDir>src/main/kotlin</sourceDir>
+                                <sourceDir>src/main/java</sourceDir>
+                            </sourceDirs>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirs>
+                                <sourceDir>src/test/kotlin</sourceDir>
+                                <sourceDir>src/test/java</sourceDir>
+                            </sourceDirs>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <jvmTarget>17</jvmTarget>
                 </configuration>
             </plugin>
             

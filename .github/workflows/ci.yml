@@ -63,7 +63,7 @@ jobs:
   package:
     runs-on: ubuntu-latest
     needs: test
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || github.event_name == 'pull_request'
     
     steps:
     - name: Checkout code
@@ -94,12 +94,23 @@ jobs:
         echo "Verifying JAR is executable..."
         java -jar *.jar --help || echo "JAR created successfully (help command may not be implemented)"
     
+    - name: Determine artifact retention
+      id: retention
+      run: |
+        if [ "${{ github.event_name }}" = "pull_request" ]; then
+          echo "retention_days=14" >> $GITHUB_OUTPUT
+          echo "artifact_name=poker-game-jar-pr-${{ github.event.number }}" >> $GITHUB_OUTPUT
+        else
+          echo "retention_days=90" >> $GITHUB_OUTPUT
+          echo "artifact_name=poker-game-jar" >> $GITHUB_OUTPUT
+        fi
+    
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: poker-game-jar
+        name: ${{ steps.retention.outputs.artifact_name }}
         path: Poker-Basic/target/*.jar
-        retention-days: 90
+        retention-days: ${{ steps.retention.outputs.retention_days }}
 
   release:
     runs-on: ubuntu-latest

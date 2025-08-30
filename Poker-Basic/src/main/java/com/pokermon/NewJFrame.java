@@ -19,6 +19,7 @@ public class NewJFrame extends javax.swing.JFrame {
     
     public NewJFrame() {
         initComponents();
+        initializeUIComponentArrays();
     }
 
     /**
@@ -638,6 +639,29 @@ public class NewJFrame extends javax.swing.JFrame {
     int chipsInitial;
     int bet = 0;
     int[] Deck = Main.setDeck();
+    
+    // UI component arrays for flexible mapping - eliminates hard-coded switch statements
+    private JToggleButton[] cardToggleButtons;
+    private JLabel[] playerChipLabels;
+    
+    /**
+     * Initializes the UI component arrays for flexible component mapping.
+     * This eliminates hard-coded assumptions about specific UI components.
+     */
+    private void initializeUIComponentArrays() {
+        // Initialize card toggle buttons array
+        cardToggleButtons = new JToggleButton[]{
+            jToggleButton1, jToggleButton2, jToggleButton3, jToggleButton4, jToggleButton5
+        };
+        
+        // Initialize player chip labels array (index matches player index)
+        playerChipLabels = new JLabel[]{
+            jLabel8,  // Player 0 (human player)
+            jLabel3,  // Player 1 (CPU1)
+            jLabel5,  // Player 2 (CPU2)  
+            jLabel7   // Player 3 (CPU3)
+        };
+    }
 
     private void updatePot() {
         jLabel1.setText("Pot: " + workingPot);
@@ -645,42 +669,32 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     private void updatePlayerChips(int playerIndex) {
-        switch (playerIndex) {
-            case 0:
-                jLabel8.setText("Your Chips: " + USER.getChips());
-                break;
-            case 1:
-                jLabel3.setText("Chips: " + CPU1.getChips());
-                break;
-            case 2:
-                jLabel5.setText("Chips: " + CPU2.getChips());
-                break;
-            case 3:
-                jLabel7.setText("Chips: " + CPU3.getChips());
+        if (playerIndex >= 0 && playerIndex < playerChipLabels.length) {
+            String chipText = (playerIndex == 0) ? 
+                "Your Chips: " + USER.getChips() : 
+                "Chips: " + list[playerIndex].getChips();
+            playerChipLabels[playerIndex].setText(chipText);
         }
     }
 
     private void updatePlayerChips() {
-        //jalbels 8(you) 3(cpu1) 5(cpu2) 7(cpu 3)
-
-        switch (playerCount) {
-            case 3:
-                jLabel7.setText("Chips: " + list[3].getChips());
-            case 2:
-                jLabel5.setText("Chips: " + list[2].getChips());
-            case 1:
-                jLabel3.setText("Chips: " + list[1].getChips());
-            case 0:
-                jLabel8.setText("Your Chips: " + list[0].getChips());
+        for (int i = 0; i <= playerCount; i++) {
+            if (i < playerChipLabels.length && i < list.length) {
+                String chipText = (i == 0) ? 
+                    "Your Chips: " + list[i].getChips() : 
+                    "Chips: " + list[i].getChips();
+                playerChipLabels[i].setText(chipText);
+            }
         }
     }
 
     private void InitialPlayerChips() {
-        //jalbels 8(you) 3(cpu1) 5(cpu2) 7(cpu 3)
-        jLabel8.setText("Your Chips: " + chipsInitial);
-        jLabel3.setText("Chips: " + chipsInitial);
-        jLabel5.setText("Chips: " + chipsInitial);
-        jLabel7.setText("Chips: " + chipsInitial);
+        for (int i = 0; i < playerChipLabels.length; i++) {
+            String chipText = (i == 0) ? 
+                "Your Chips: " + chipsInitial : 
+                "Chips: " + chipsInitial;
+            playerChipLabels[i].setText(chipText);
+        }
     }
 
     private void selectionRefresh() {
@@ -691,37 +705,10 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void selectionCheck() {
         for (int i = 0; i < 5; i++) {
-
-            switch (i) {
-                case 0:
-                    if (jToggleButton1.isSelected()) {
-                        keepCards[i] = false;
-                    }
-
-                    break;
-                case 1:
-                    if (jToggleButton2.isSelected()) {
-                        keepCards[i] = false;
-                    }
-                    break;
-                case 2:
-                    if (jToggleButton3.isSelected()) {
-                        keepCards[i] = false;
-                    }
-                    break;
-                case 3:
-                    if (jToggleButton4.isSelected()) {
-                        keepCards[i] = false;
-                    }
-                    break;
-                case 4:
-                    if (jToggleButton5.isSelected()) {
-                        keepCards[i] = false;
-                    }
-
+            if (cardToggleButtons[i].isSelected()) {
+                keepCards[i] = false;
             }
         }
-
     }
     /* private String promptName(){
      jLabel9.setVisible(true);
@@ -809,49 +796,13 @@ public class NewJFrame extends javax.swing.JFrame {
             icon = createImageIcon("/Cards/TET/" + Hand[i] + ".jpg");
             Image img = icon.getImage().getScaledInstance(90, 126, Image.SCALE_SMOOTH);
             icon.setImage(img);
-            switch (i) {
-                case 0:
-                    jToggleButton1.setVisible(true);
-                    jToggleButton1.setEnabled(false);
-                    //jToggleButton1.setText(Hand[i]);
-                    jToggleButton1.setText("");
-                    jToggleButton1.setIcon(icon);
-                    jToggleButton1.setDisabledIcon(icon);
-
-                    break;
-                case 1:
-                    jToggleButton2.setVisible(true);
-                    jToggleButton2.setEnabled(false);
-                    //jToggleButton2.setText(Hand[i]);
-                    jToggleButton2.setText("");
-                    jToggleButton2.setIcon(icon);
-                    jToggleButton2.setDisabledIcon(icon);
-                    break;
-                case 2:
-                    jToggleButton3.setVisible(true);
-                    jToggleButton3.setEnabled(false);
-                    //jToggleButton3.setText(Hand[i]);
-                    jToggleButton3.setText("");
-                    jToggleButton3.setIcon(icon);
-                    jToggleButton3.setDisabledIcon(icon);
-                    break;
-                case 3:
-                    jToggleButton4.setVisible(true);
-                    jToggleButton4.setEnabled(false);
-                    //jToggleButton4.setText(Hand[i]);
-                    jToggleButton4.setText("");
-                    jToggleButton4.setIcon(icon);
-                    jToggleButton4.setDisabledIcon(icon);
-                    break;
-                case 4:
-                    jToggleButton5.setVisible(true);
-                    jToggleButton5.setEnabled(false);
-                    //jToggleButton5.setText(Hand[i]);
-                    jToggleButton5.setText("");
-                    jToggleButton5.setIcon(icon);
-                    jToggleButton5.setDisabledIcon(icon);
-
-            }
+            
+            JToggleButton button = cardToggleButtons[i];
+            button.setVisible(true);
+            button.setEnabled(false);
+            button.setText("");
+            button.setIcon(icon);
+            button.setDisabledIcon(icon);
         }
     }
 
@@ -861,64 +812,15 @@ public class NewJFrame extends javax.swing.JFrame {
             icon = createImageIcon("/Cards/TET/" + Hand[i] + ".jpg");
             Image img = icon.getImage().getScaledInstance(90, 126, Image.SCALE_SMOOTH);
             icon.setImage(img);
-            switch (i) {
-                case 0:
-                    jToggleButton1.setVisible(true);
-                    //
-                    // jToggleButton1.setText(Hand[i]);
-
-                    jToggleButton1.setText("");
-                    jToggleButton1.setIcon(icon);
-                    jToggleButton1.setSelected(false);
-                    jToggleButton1.setEnabled(false);
-                    jToggleButton1.setDisabledIcon(icon);
-                    jToggleButton1.setBorderPainted(false);
-                    break;
-                case 1:
-                    jToggleButton2.setVisible(true);
-                    //
-                    //jToggleButton2.setText(Hand[i]);
-                    jToggleButton2.setText("");
-                    jToggleButton2.setIcon(icon);
-                    jToggleButton2.setSelected(false);
-                    jToggleButton2.setEnabled(false);
-                    jToggleButton2.setDisabledIcon(icon);
-                    jToggleButton2.setBorderPainted(false);
-                    break;
-                case 2:
-                    jToggleButton3.setVisible(true);
-                    //
-                    //jToggleButton3.setText(Hand[i]);
-                    jToggleButton3.setText("");
-                    jToggleButton3.setIcon(icon);
-                    jToggleButton3.setSelected(false);
-                    jToggleButton3.setEnabled(false);
-                    jToggleButton3.setDisabledIcon(icon);
-                    jToggleButton3.setBorderPainted(false);
-                    break;
-                case 3:
-                    jToggleButton4.setVisible(true);
-                    //
-                    //jToggleButton4.setText(Hand[i]);
-                    jToggleButton4.setText("");
-                    jToggleButton4.setIcon(icon);
-                    jToggleButton4.setSelected(false);
-                    jToggleButton4.setEnabled(false);
-                    jToggleButton4.setDisabledIcon(icon);
-                    jToggleButton4.setBorderPainted(false);
-                    break;
-                case 4:
-                    jToggleButton5.setVisible(true);
-                    //
-                    //jToggleButton5.setText(Hand[i]);
-                    jToggleButton5.setText("");
-                    jToggleButton5.setIcon(icon);
-                    jToggleButton5.setSelected(false);
-                    jToggleButton5.setEnabled(false);
-                    jToggleButton5.setDisabledIcon(icon);
-                    jToggleButton5.setBorderPainted(false);
-
-            }
+            
+            JToggleButton button = cardToggleButtons[i];
+            button.setVisible(true);
+            button.setText("");
+            button.setIcon(icon);
+            button.setSelected(false);
+            button.setEnabled(false);
+            button.setDisabledIcon(icon);
+            button.setBorderPainted(false);
         }
 //JOptionPane.showMessageDialog(null, "Your hand is: " + "\n" + Arrays.toString(Hand));
     }

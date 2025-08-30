@@ -70,8 +70,7 @@ public class Monster {
         if (rarity == null) {
             throw new IllegalArgumentException("Monster rarity cannot be null");
         }
-        if (baseHealth <= 0) {
-            throw new IllegalArgumentException("Monster health must be positive");
+            throw new IllegalArgumentException("Monster health must be greater than zero");
         }
         if (effectType == null) {
             throw new IllegalArgumentException("Monster effect type cannot be null");

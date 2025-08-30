@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package pokermon;
+package com.pokermon;
 
 /**
  *
@@ -171,7 +171,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jLayeredPane1.add(jToggleButton2);
         jToggleButton2.setBounds(130, 250, 90, 126);
 
-        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pokermon/Cards/TET/Ace of Diamonds.jpg"))); // NOI18N
+        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Cards/TET/Ace of Diamonds.jpg"))); // NOI18N
         jToggleButton1.setText("U+1F0A1\n");
         jToggleButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jToggleButton1.setBorderPainted(false);
@@ -326,12 +326,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
-      /*  if (keepCards[0]) {
-         keepCards[0] = false;
-         } else if (!keepCards[0]) {
-         keepCards[0] = true;
-         }*/
+        // Toggle border to show selection state
         if (jToggleButton1.isSelected()) {
             jToggleButton1.setBorderPainted(true);
         } else {
@@ -347,11 +342,9 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel10.setVisible(true);
         jComboBox1.setVisible(true);
         System.out.println(playerName);
-        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
         Object gameSize = jComboBox1.getSelectedItem();
         playerCount = (int) Integer.valueOf(gameSize.toString());
         System.out.println(playerCount);
@@ -362,7 +355,6 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
         jButton2.setVisible(false);
         jLabel9.setVisible(true);
         jTextField1.setVisible(true);
@@ -372,7 +364,6 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
         Object initialChips = jComboBox2.getSelectedItem();
         chipsInitial = (int) Integer.valueOf(initialChips.toString());
         System.out.println(chipsInitial);
@@ -425,7 +416,6 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-        // TODO add your handling code here:
         /*if (keepCards[1]) {
          keepCards[1] = false;
          } else if (!keepCards[1]) {
@@ -439,7 +429,6 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-        // TODO add your handling code here:
         /*if (keepCards[2]) {
          keepCards[2] = false;
          } else if (!keepCards[2]) {
@@ -453,7 +442,6 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
-        // TODO add your handling code here:
         /*if (keepCards[3]) {
          keepCards[3] = false;
          } else if (!keepCards[3]) {
@@ -467,7 +455,6 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton4ActionPerformed
 
     private void jToggleButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton5ActionPerformed
-        // TODO add your handling code here:
        /* if (keepCards[4]) {
          keepCards[4] = false;
          } else if (!keepCards[4]) {
@@ -481,7 +468,6 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton5ActionPerformed
 
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
-        // TODO add your handling code here:
         selectionCheck();
         Object selectedBet = jComboBox3.getSelectedItem();
         System.out.println(Integer.valueOf(selectedBet.toString()));
@@ -509,7 +495,6 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         //have player exchange cards
         jButton1.setVisible(false);
         selectionCheck();
@@ -525,7 +510,6 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
-        // TODO add your handling code here:
 
         Object selectedBet = jComboBox3.getSelectedItem();
         if (Integer.valueOf(selectedBet.toString()) > list[0].chips) {
@@ -556,7 +540,6 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox4ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
         jButton4.setVisible(false);
         jButton5.setVisible(false);
         jLabel16.setVisible(false);
@@ -565,7 +548,6 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
         jButton5.setVisible(false);
         System.exit(0);
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -907,7 +889,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private void revealHand(String[] Hand) {
         ImageIcon icon;
         for (int i = 0; i < 5; i++) {
-            icon = createImageIcon("/pokermon/Cards/TET/" + Hand[i] + ".jpg");
+            icon = createImageIcon("/Cards/TET/" + Hand[i] + ".jpg");
             Image img = icon.getImage().getScaledInstance(90, 126, Image.SCALE_SMOOTH);
             icon.setImage(img);
             switch (i) {
@@ -959,7 +941,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private void revealHand2(String[] Hand) {
         ImageIcon icon;
         for (int i = 0; i < 5; i++) {
-            icon = createImageIcon("/pokermon/Cards/TET/" + Hand[i] + ".jpg");
+            icon = createImageIcon("/Cards/TET/" + Hand[i] + ".jpg");
             Image img = icon.getImage().getScaledInstance(90, 126, Image.SCALE_SMOOTH);
             icon.setImage(img);
             switch (i) {
@@ -1245,6 +1227,11 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         }
         return pot;
+    }
+
+    void recursiveBet(Player[] players, int playerIndex, int pot, int bet) {
+        // TODO: Implement recursive betting logic for handling raises
+        // For now, this is a stub to fix compilation error
     }
 
     protected ImageIcon createImageIcon(String path) {

@@ -161,7 +161,6 @@
               <winDirChooser>true</winDirChooser>
               <winMenu>true</winMenu>
               <winShortcut>true</winShortcut>
-              <runtimeImage>${java.home}</runtimeImage>
               <mainClass>com.pokermon.GameLauncher</mainClass>
               <mainJar>pokermon-${project.version}-fat.jar</mainJar>
               <input>${project.build.directory}</input>
@@ -169,8 +168,6 @@
               <addModules>
                 <addModule>java.base</addModule>
                 <addModule>java.desktop</addModule>
-                <addModule>javafx.controls</addModule>
-                <addModule>javafx.fxml</addModule>
               </addModules>
               <javaOptions>
                 <option>-Dfile.encoding=UTF-8</option>
@@ -206,7 +203,6 @@
               <type>DEB</type>
               <linuxShortcut>true</linuxShortcut>
               <linuxMenuGroup>Games</linuxMenuGroup>
-              <runtimeImage>${java.home}</runtimeImage>
               <mainClass>com.pokermon.GameLauncher</mainClass>
               <mainJar>pokermon-${project.version}-fat.jar</mainJar>
               <input>${project.build.directory}</input>
@@ -214,8 +210,6 @@
               <addModules>
                 <addModule>java.base</addModule>
                 <addModule>java.desktop</addModule>
-                <addModule>javafx.controls</addModule>
-                <addModule>javafx.fxml</addModule>
               </addModules>
               <javaOptions>
                 <option>-Dfile.encoding=UTF-8</option>
@@ -249,7 +243,6 @@
               <description>Educational Poker Game with Monster Collection</description>
               <copyright>Educational Project</copyright>
               <type>DMG</type>
-              <runtimeImage>${java.home}</runtimeImage>
               <mainClass>com.pokermon.GameLauncher</mainClass>
               <mainJar>pokermon-${project.version}-fat.jar</mainJar>
               <input>${project.build.directory}</input>
@@ -257,8 +250,6 @@
               <addModules>
                 <addModule>java.base</addModule>
                 <addModule>java.desktop</addModule>
-                <addModule>javafx.controls</addModule>
-                <addModule>javafx.fxml</addModule>
               </addModules>
               <javaOptions>
                 <option>-Dfile.encoding=UTF-8</option>

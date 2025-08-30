@@ -227,7 +227,6 @@
                             <winShortcut>true</winShortcut>
                             
                             <!-- Runtime configuration - using main jar approach -->
-                            <runtimeImage>${java.home}</runtimeImage>
                             <mainClass>com.pokermon.GameLauncher</mainClass>
                             <mainJar>pokermon-${project.version}-fat.jar</mainJar>
                             
@@ -235,12 +234,10 @@
                             <input>${project.build.directory}</input>
                             <destination>${project.build.directory}/jpackage</destination>
                             
-                            <!-- JavaFX modules for native packaging -->
+                            <!-- JavaFX modules for native packaging - automatic detection from fat JAR -->
                             <addModules>
                                 <addModule>java.base</addModule>
                                 <addModule>java.desktop</addModule>
-                                <addModule>javafx.controls</addModule>
-                                <addModule>javafx.fxml</addModule>
                             </addModules>
                             
                             <!-- JVM options -->
@@ -284,7 +281,6 @@
                             <linuxMenuGroup>Games</linuxMenuGroup>
                             
                             <!-- Runtime configuration - using main jar approach -->
-                            <runtimeImage>${java.home}</runtimeImage>
                             <mainClass>com.pokermon.GameLauncher</mainClass>
                             <mainJar>pokermon-${project.version}-fat.jar</mainJar>
                             
@@ -292,12 +288,10 @@
                             <input>${project.build.directory}</input>
                             <destination>${project.build.directory}/jpackage</destination>
                             
-                            <!-- JavaFX modules for native packaging -->
+                            <!-- JavaFX modules for native packaging - automatic detection from fat JAR -->
                             <addModules>
                                 <addModule>java.base</addModule>
                                 <addModule>java.desktop</addModule>
-                                <addModule>javafx.controls</addModule>
-                                <addModule>javafx.fxml</addModule>
                             </addModules>
                             
                             <!-- JVM options -->
@@ -339,7 +333,6 @@
                             <type>DMG</type>
                             
                             <!-- Runtime configuration - using main jar approach -->
-                            <runtimeImage>${java.home}</runtimeImage>
                             <mainClass>com.pokermon.GameLauncher</mainClass>
                             <mainJar>pokermon-${project.version}-fat.jar</mainJar>
                             
@@ -347,12 +340,10 @@
                             <input>${project.build.directory}</input>
                             <destination>${project.build.directory}/jpackage</destination>
                             
-                            <!-- JavaFX modules for native packaging -->
+                            <!-- JavaFX modules for native packaging - automatic detection from fat JAR -->
                             <addModules>
                                 <addModule>java.base</addModule>
                                 <addModule>java.desktop</addModule>
-                                <addModule>javafx.controls</addModule>
-                                <addModule>javafx.fxml</addModule>
                             </addModules>
                             
                             <!-- JVM options -->

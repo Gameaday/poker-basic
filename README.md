@@ -45,19 +45,29 @@ This version represents a significant milestone in the project's evolution, show
 
 ## Quick Start
 
-### GUI Version (Recommended)
+### Using the JAR (Recommended)
+```bash
+# Download and run the latest JAR from GitHub releases
+java -jar pokermon-0.08.30.jar          # Start GUI mode (default)
+java -jar pokermon-0.08.30.jar --basic  # Start console mode
+java -jar pokermon-0.08.30.jar --help   # Show all options
+```
+
+### Development Mode
+
+#### GUI Version (NetBeans/IDE)
 ```bash
 cd Poker-Basic
 mvn compile exec:java -Dexec.mainClass="com.pokermon.NewJFrame"
 ```
 
-### Console Version
+#### Console Version (Terminal)
 ```bash
 cd Poker-Basic  
-mvn compile exec:java -Dexec.mainClass="com.pokermon.Main"
+mvn compile exec:java -Dexec.mainClass="com.pokermon.ConsoleMain"
 ```
 
-### Running Tests
+#### Running Tests
 ```bash
 cd Poker-Basic
 mvn test
@@ -72,6 +82,31 @@ cd Poker-Basic
 mvn clean compile    # Compile the project
 mvn test            # Run all tests
 mvn clean package   # Create distributable JAR
+```
+
+### Command Line Options
+
+The JAR supports the following command-line options:
+
+```bash
+java -jar pokermon-0.08.30.jar [OPTIONS]
+
+OPTIONS:
+  (no arguments)     Launch GUI mode (default, recommended)
+  -b, --basic        Launch console/text mode
+      --console      Same as --basic
+  -h, --help         Show help message and usage information
+  -v, --version      Show version information
+
+EXAMPLES:
+  java -jar pokermon-0.08.30.jar
+    Start the game in GUI mode (default)
+
+  java -jar pokermon-0.08.30.jar --basic
+    Start the game in console mode
+
+  java -jar pokermon-0.08.30.jar --help
+    Display help information
 ```
 
 ## Game Variants Supported

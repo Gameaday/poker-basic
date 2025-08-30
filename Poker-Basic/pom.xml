@@ -93,7 +93,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.pokermon.Main</mainClass>
+                            <mainClass>com.pokermon.GameLauncher</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

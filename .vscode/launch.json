@@ -6,6 +6,48 @@
     "configurations": [
         {
             "type": "java",
+            "name": "OLD_Main",
+            "request": "launch",
+            "mainClass": "com.pokermon.OLD_Main",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "FullUI",
+            "request": "launch",
+            "mainClass": "com.pokermon.FullUI",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "FullUI",
+            "request": "launch",
+            "mainClass": "com.pokermon.FullUI",
+            "projectName": "pokermon"
+        },
+        {
+            "type": "java",
+            "name": "Full_UI",
+            "request": "launch",
+            "mainClass": "com.pokermon.Full_UI",
+            "projectName": "pokermon"
+        },
+        {
+            "type": "java",
+            "name": "NewJFrame",
+            "request": "launch",
+            "mainClass": "com.pokermon.NewJFrame",
+            "projectName": "pokermon"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "com.pokermon.Main",
+            "projectName": "pokermon"
+        },
+        {
+            "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "pokermon.Main",

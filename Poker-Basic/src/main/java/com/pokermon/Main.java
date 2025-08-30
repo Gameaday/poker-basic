@@ -1024,22 +1024,34 @@ public class Main {
         return players;
     }
 
+    /**
+     * Initializes the player list array with user and AI players.
+     * This cross-platform method sets up the game state for all platforms.
+     * 
+     * @param list Array to hold all players in the game
+     * @param USER Human player object
+     * @param CPU1 First AI player (may be null if fewer than 2 total players)
+     * @param CPU2 Second AI player (may be null if fewer than 3 total players)  
+     * @param CPU3 Third AI player (may be null if fewer than 4 total players)
+     */
     static void setupList(Player[] list, Player USER, Player CPU1, Player CPU2, Player CPU3) {
+        // Assign players to list positions based on array length
+        // Position 0: Always the human player
+        // Positions 1-3: AI players as needed
         for (int i = 0; i < list.length; i++) {
             if (i == 0) {
-                list[0] = USER;
+                list[0] = USER;  // Human player always goes first
             }
             if (i == 1) {
-                list[1] = CPU1;
+                list[1] = CPU1;  // First AI opponent
             }
             if (i == 2) {
-                list[2] = CPU2;
+                list[2] = CPU2;  // Second AI opponent
             }
             if (i == 3) {
-                list[3] = CPU3;
+                list[3] = CPU3;  // Third AI opponent
             }
         }
-//return players;
     }
 
     public static boolean console() {
@@ -1048,43 +1060,68 @@ public class Main {
         return true;
     }
 
+    /**
+     * Selects a random card from the working deck.
+     * This method is cross-platform compatible and uses standard Java random number generation.
+     * 
+     * @param workingDeck Array containing available cards in the deck
+     * @return The randomly selected card value
+     * @throws IllegalStateException if the deck is empty
+     */
     private static int randomCard(int[] workingDeck) {
-//chose random card from the deck
-//randomNum = minimum + (int)(Math.random()*maximum);
-//randomCard = 1+(int)(Math.random()*current size of deck);
+        // Validate deck is not empty before drawing
         if (workingDeck.length == 0) {
             throw new IllegalStateException("Cannot draw from empty deck");
         }
-        int randomCard = 0 + (int) (Math.random() * workingDeck.length);
-//System.out.println(randomCard);
-        int Card = workingDeck[randomCard];
-        return Card;
+        
+        // Generate random index within deck bounds: 0 to (deck.length - 1)
+        int randomIndex = (int) (Math.random() * workingDeck.length);
+        
+        // Return the card at the randomly selected index
+        int selectedCard = workingDeck[randomIndex];
+        return selectedCard;
     }
 
+    /**
+     * Counts the number of remaining cards in a deck array.
+     * This method supports cross-platform card game logic by providing deck state information.
+     * 
+     * @param Cards Array representing the deck (0 = used card, non-zero = available card)
+     * @return Number of cards still available in the deck
+     */
     private static int remainingCards(int[] Cards) {
-//change line below to reference another method or variable that tells deck size
-        int index = 0;
-        for (int i = 0; i <= Cards.length - 1; i++) {
+        int count = 0;
+        
+        // Iterate through all deck positions and count non-zero (available) cards
+        for (int i = 0; i < Cards.length; i++) {
             if (Cards[i] != 0) {
-                index++;
+                count++;  // This card is still available
             }
         }
-        int remainingCards = index;
-//System.out.println("Current size of Deck is: " + remainingCards + " Cards.");
-        return remainingCards;
+        
+        return count;
     }
 
+    /**
+     * Creates a working deck containing only available cards.
+     * This cross-platform method compacts the deck array by removing used cards.
+     * 
+     * @param Deck Full deck array (may contain zeros for used cards)
+     * @return Compacted array containing only available cards
+     */
     private static int[] workingDeck(int[] Deck) {
-        int[] workingDeck;
-//length of working deck = number of remaining cards
-        workingDeck = new int[remainingCards(Deck)];
+        // Create array sized for exactly the number of remaining cards
+        int[] workingDeck = new int[remainingCards(Deck)];
         int index = 0;
-        for (int i = 0; i <= Deck.length - 1; i++) {
+        
+        // Copy all available (non-zero) cards to the working deck
+        for (int i = 0; i < Deck.length; i++) {
             if (Deck[i] != 0) {
-                workingDeck[index] = i;
+                workingDeck[index] = i;  // Store the card index (position in original deck)
                 index++;
             }
         }
+        
         return workingDeck;
     }
 

@@ -497,7 +497,7 @@ public class Main {
      * @param chipsInitial the initial number of chips for each player
      * @param deck the deck to draw cards from
      */
-    private static void InitializePlayers(Player[] list, String[] players, int chipsInitial, int[] deck) {
+    static void InitializePlayers(Player[] list, String[] players, int chipsInitial, int[] deck) {
         for (int i = 0; i < players.length; i++) {
             Player player = new Player();
             player.setupPlayer(players[i], chipsInitial, deck);
@@ -512,7 +512,7 @@ public class Main {
      * @param players the array of player names
      * @param deck the deck to draw cards from
      */
-    private static void InitializePlayers(Player[] list, String[] players, int[] deck) {
+    static void InitializePlayers(Player[] list, String[] players, int[] deck) {
         for (int i = 0; i < players.length; i++) {
             Player player = list[i];
             player.setupPlayer(players[i], player.getChips(), deck);
@@ -554,7 +554,8 @@ public class Main {
         if (is2Kind(Multiples) == true) {
             return Value += 13;
         }
-        return Value;
+        // Ensure hand value is always positive (minimum value of 1 for high card hands)
+        return Math.max(Value, 1);
 
     }
 

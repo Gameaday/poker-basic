@@ -35,7 +35,7 @@ public final class Version {
      * Version code for Android builds - increments with each release.
      * This ensures proper APK update handling on Android devices.
      */
-    public static final int VERSION_CODE = 1;
+    public static final int VERSION_CODE = 2;
     
     /**
      * Build timestamp placeholder for future use.

@@ -61,14 +61,14 @@ This document describes the new modern cross-platform UI system implemented for 
 
 ```bash
 # Launch modern UI
-java -jar pokermon-0.08.30.jar --modern
-java -jar pokermon-0.08.30.jar --compose  # Alias
+java -jar pokermon-1.0.0.jar --modern
+java -jar pokermon-1.0.0.jar --compose  # Alias
 
 # Traditional Swing UI (unchanged)
-java -jar pokermon-0.08.30.jar
+java -jar pokermon-1.0.0.jar
 
 # Console mode (unchanged)
-java -jar pokermon-0.08.30.jar --basic
+java -jar pokermon-1.0.0.jar --basic
 ```
 
 ### UI Flow

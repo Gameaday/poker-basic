@@ -75,7 +75,7 @@
 
 ### For Users
 1. Download JAR from GitHub Releases
-2. Run: `java -jar pokermon-0.08.30.jar` (GUI/Console versions available)
+2. Run: `java -jar pokermon-1.0.0.jar` (GUI/Console versions available)
 3. Requires Java 17+
 
 ## 🎯 Success Criteria Met

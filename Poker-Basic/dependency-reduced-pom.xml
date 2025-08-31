@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.pokermon</groupId>
   <artifactId>pokermon</artifactId>
-  <version>0.1b</version>
+  <version>1.0.0</version>
   <build>
     <resources>
       <resource>
@@ -161,13 +161,17 @@
               <winDirChooser>true</winDirChooser>
               <winMenu>true</winMenu>
               <winShortcut>true</winShortcut>
-              <runtimeImage>${java.home}</runtimeImage>
               <mainClass>com.pokermon.GameLauncher</mainClass>
               <mainJar>pokermon-${project.version}-fat.jar</mainJar>
               <input>${project.build.directory}</input>
               <destination>${project.build.directory}/jpackage</destination>
+              <addModules>
+                <addModule>java.base</addModule>
+                <addModule>java.desktop</addModule>
+              </addModules>
               <javaOptions>
                 <option>-Dfile.encoding=UTF-8</option>
+                <option>--add-opens=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED</option>
               </javaOptions>
             </configuration>
           </plugin>
@@ -199,13 +203,17 @@
               <type>DEB</type>
               <linuxShortcut>true</linuxShortcut>
               <linuxMenuGroup>Games</linuxMenuGroup>
-              <runtimeImage>${java.home}</runtimeImage>
               <mainClass>com.pokermon.GameLauncher</mainClass>
               <mainJar>pokermon-${project.version}-fat.jar</mainJar>
               <input>${project.build.directory}</input>
               <destination>${project.build.directory}/jpackage</destination>
+              <addModules>
+                <addModule>java.base</addModule>
+                <addModule>java.desktop</addModule>
+              </addModules>
               <javaOptions>
                 <option>-Dfile.encoding=UTF-8</option>
+                <option>--add-opens=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED</option>
               </javaOptions>
             </configuration>
           </plugin>
@@ -235,13 +243,17 @@
               <description>Educational Poker Game with Monster Collection</description>
               <copyright>Educational Project</copyright>
               <type>DMG</type>
-              <runtimeImage>${java.home}</runtimeImage>
               <mainClass>com.pokermon.GameLauncher</mainClass>
               <mainJar>pokermon-${project.version}-fat.jar</mainJar>
               <input>${project.build.directory}</input>
               <destination>${project.build.directory}/jpackage</destination>
+              <addModules>
+                <addModule>java.base</addModule>
+                <addModule>java.desktop</addModule>
+              </addModules>
               <javaOptions>
                 <option>-Dfile.encoding=UTF-8</option>
+                <option>--add-opens=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED</option>
               </javaOptions>
             </configuration>
           </plugin>

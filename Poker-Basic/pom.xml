@@ -6,7 +6,7 @@
 
     <groupId>com.pokermon</groupId>
     <artifactId>pokermon</artifactId>
-    <version>0.1b</version>
+    <version>1.0.0</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -227,7 +227,6 @@
                             <winShortcut>true</winShortcut>
                             
                             <!-- Runtime configuration - using main jar approach -->
-                            <runtimeImage>${java.home}</runtimeImage>
                             <mainClass>com.pokermon.GameLauncher</mainClass>
                             <mainJar>pokermon-${project.version}-fat.jar</mainJar>
                             
@@ -235,9 +234,16 @@
                             <input>${project.build.directory}</input>
                             <destination>${project.build.directory}/jpackage</destination>
                             
+                            <!-- JavaFX modules for native packaging - automatic detection from fat JAR -->
+                            <addModules>
+                                <addModule>java.base</addModule>
+                                <addModule>java.desktop</addModule>
+                            </addModules>
+                            
                             <!-- JVM options -->
                             <javaOptions>
                                 <option>-Dfile.encoding=UTF-8</option>
+                                <option>--add-opens=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED</option>
                             </javaOptions>
                         </configuration>
                     </plugin>
@@ -275,7 +281,6 @@
                             <linuxMenuGroup>Games</linuxMenuGroup>
                             
                             <!-- Runtime configuration - using main jar approach -->
-                            <runtimeImage>${java.home}</runtimeImage>
                             <mainClass>com.pokermon.GameLauncher</mainClass>
                             <mainJar>pokermon-${project.version}-fat.jar</mainJar>
                             
@@ -283,9 +288,16 @@
                             <input>${project.build.directory}</input>
                             <destination>${project.build.directory}/jpackage</destination>
                             
+                            <!-- JavaFX modules for native packaging - automatic detection from fat JAR -->
+                            <addModules>
+                                <addModule>java.base</addModule>
+                                <addModule>java.desktop</addModule>
+                            </addModules>
+                            
                             <!-- JVM options -->
                             <javaOptions>
                                 <option>-Dfile.encoding=UTF-8</option>
+                                <option>--add-opens=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED</option>
                             </javaOptions>
                         </configuration>
                     </plugin>
@@ -321,7 +333,6 @@
                             <type>DMG</type>
                             
                             <!-- Runtime configuration - using main jar approach -->
-                            <runtimeImage>${java.home}</runtimeImage>
                             <mainClass>com.pokermon.GameLauncher</mainClass>
                             <mainJar>pokermon-${project.version}-fat.jar</mainJar>
                             
@@ -329,9 +340,16 @@
                             <input>${project.build.directory}</input>
                             <destination>${project.build.directory}/jpackage</destination>
                             
+                            <!-- JavaFX modules for native packaging - automatic detection from fat JAR -->
+                            <addModules>
+                                <addModule>java.base</addModule>
+                                <addModule>java.desktop</addModule>
+                            </addModules>
+                            
                             <!-- JVM options -->
                             <javaOptions>
                                 <option>-Dfile.encoding=UTF-8</option>
+                                <option>--add-opens=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED</option>
                             </javaOptions>
                         </configuration>
                     </plugin>

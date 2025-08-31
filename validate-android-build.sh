@@ -58,7 +58,7 @@ echo "------------------------------"
 test_item "settings.gradle includes android module" "grep -q ':android' settings.gradle"
 test_item "Root build.gradle has Android plugin" "grep -q 'com.android.tools.build:gradle' build.gradle"
 test_item "Android build.gradle has correct namespace" "grep -q 'com.pokermon.android' android/build.gradle"
-test_item "Android build.gradle has version 0.1b" "grep -q '0.1b' android/build.gradle"
+test_item "Android build.gradle has version 1.0.0" "grep -q '1.0.0' android/build.gradle"
 test_item "MainActivity has correct package" "grep -q 'package com.pokermon.android' android/src/main/java/com/pokermon/android/MainActivity.kt"
 
 echo ""
@@ -89,7 +89,7 @@ if [ -f android/build.gradle ]; then
     VERSION_NAME=$(grep "versionName" android/build.gradle | sed -n 's/.*versionName "\([^"]*\)"/\1/p')
     
     echo "📱 Android Compile SDK: $COMPILE_SDK"
-    echo "📱 Android Min SDK: $MIN_SDK (Android 5.0+)"
+    echo "📱 Android Min SDK: $MIN_SDK (Android 8.0+)"
     echo "📱 Android Target SDK: $TARGET_SDK"
     echo "📱 App Version: $VERSION_NAME"
 fi
@@ -97,7 +97,7 @@ fi
 echo ""
 echo "🎯 Expected Build Outputs"
 echo "-------------------------"
-echo "📦 JAR Output: Poker-Basic/target/pokermon-0.1b.jar"
+echo "📦 JAR Output: Poker-Basic/target/pokermon-1.0.0-fat.jar"
 echo "📱 APK Output: android/build/outputs/apk/debug/android-debug.apk"
 
 echo ""

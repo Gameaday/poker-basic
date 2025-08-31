@@ -91,6 +91,7 @@ public class Main {
     static void InitializePlayers(Player[] list, String[] players, int chipsInitial, int[] deck) {
         for (int i = 0; i < players.length; i++) {
             Player player = new Player();
+            player.setHuman(i == 0); // First player (index 0) is human
             player.setupPlayer(players[i], chipsInitial, deck);
             list[i] = player;
             System.out.println(); // places spaces between player info, for neatness
@@ -106,6 +107,11 @@ public class Main {
     static void InitializePlayers(Player[] list, String[] players, int[] deck) {
         for (int i = 0; i < players.length; i++) {
             Player player = list[i];
+            if (player == null) {
+                player = new Player();
+                player.setHuman(i == 0); // First player (index 0) is human
+                list[i] = player;
+            }
             player.setupPlayer(players[i], player.getChips(), deck);
             System.out.println(); // places spaces between player info, for neatness
         }
@@ -369,7 +375,7 @@ public class Main {
                 continue; // Skip folded players
             }
             
-            if (i == 0) {
+            if (list[i].isHuman()) {
                 // Human player - get bet through UI
                 Player user = list[i];
                 pot += user.placeBet(bet);
@@ -399,21 +405,9 @@ public class Main {
 
     static void playersStats(Player[] list) {
         for (int i = 0; i < list.length; i++) {
-            if (i == 0) {
-                Player USER = list[i];
-                USER.reportPlayer();
-            }
-            if (i == 1) {
-                Player CPU1 = list[i];
-                CPU1.reportPlayer();
-            }
-            if (i == 2) {
-                Player CPU2 = list[i];
-                CPU2.reportPlayer();
-            }
-            if (i == 3) {
-                Player CPU3 = list[i];
-                CPU3.reportPlayer();
+            Player player = list[i];
+            if (player != null) {
+                player.reportPlayer();
             }
         }
     }
@@ -618,7 +612,7 @@ public class Main {
     }
 
     /**
-     * Initializes the player list array with user and AI players.
+     * Initializes the player list array dynamically.
      * This cross-platform method sets up the game state for all platforms.
      * 
      * @param list Array to hold all players in the game
@@ -628,22 +622,12 @@ public class Main {
      * @param CPU3 Third AI player (may be null if fewer than 4 total players)
      */
     static void setupList(Player[] list, Player USER, Player CPU1, Player CPU2, Player CPU3) {
-        // Assign players to list positions based on array length
-        // Position 0: Always the human player
-        // Positions 1-3: AI players as needed
-        for (int i = 0; i < list.length; i++) {
-            if (i == 0) {
-                list[0] = USER;  // Human player always goes first
-            }
-            if (i == 1) {
-                list[1] = CPU1;  // First AI opponent
-            }
-            if (i == 2) {
-                list[2] = CPU2;  // Second AI opponent
-            }
-            if (i == 3) {
-                list[3] = CPU3;  // Third AI opponent
-            }
+        // Array of players in order - human first, then AI players
+        Player[] players = {USER, CPU1, CPU2, CPU3};
+        
+        // Dynamically assign players to list positions based on array length
+        for (int i = 0; i < list.length && i < players.length; i++) {
+            list[i] = players[i];
         }
     }
 

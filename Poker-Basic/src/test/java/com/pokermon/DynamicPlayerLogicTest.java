@@ -184,4 +184,29 @@ class DynamicPlayerLogicTest {
                 "Human flag should match position (only first player is human)");
         }
     }
+    
+    @Test
+    void testGameEngineIntegration() {
+        // Test that GameEngine also properly sets human flags
+        Game gameConfig = new Game(); // Use default classic game
+        GameEngine engine = new GameEngine(gameConfig);
+        
+        String[] playerNames = {"Human", "AI1", "AI2"};
+        assertTrue(engine.initializeGame(playerNames), "Game should initialize successfully");
+        
+        Player[] players = engine.getPlayers();
+        assertEquals(3, players.length, "Should have 3 players");
+        
+        // Check human flags are set correctly
+        assertTrue(players[0].isHuman(), "First player should be human");
+        assertFalse(players[1].isHuman(), "Second player should be AI");
+        assertFalse(players[2].isHuman(), "Third player should be AI");
+        
+        // All players should have proper initialization
+        for (Player player : players) {
+            assertNotNull(player.getName(), "Player should have a name");
+            assertTrue(player.getChips() > 0, "Player should have chips");
+            assertNotNull(player.getHand(), "Player should have a hand");
+        }
+    }
 }

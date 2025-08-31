@@ -46,6 +46,7 @@ public class GameEngine {
         // Initialize all players
         for (int i = 0; i < playerNames.length; i++) {
             players[i] = new Player();
+            players[i].setHuman(i == 0); // First player is human, others are AI
             players[i].setupPlayer(playerNames[i], gameConfig.getStartingChips(), deck, gameConfig.getHandSize());
         }
         

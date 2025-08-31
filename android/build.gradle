@@ -59,6 +59,12 @@ android {
 }
 
 dependencies {
+    // Shared game logic - using regular JAR to avoid dependency conflicts
+    implementation files('../Poker-Basic/target/pokermon-1.0.0.jar')
+    
+    // Kotlin standard library for shared logic compatibility
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.10'
+    
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
@@ -67,6 +73,9 @@ dependencies {
     implementation 'androidx.compose.ui:ui'
     implementation 'androidx.compose.ui:ui-tooling-preview'
     implementation 'androidx.compose.material3:material3'
+    
+    // Navigation for Compose - using version aligned with activity-compose
+    implementation 'androidx.navigation:navigation-compose:2.7.2'
     
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

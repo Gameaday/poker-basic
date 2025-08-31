@@ -10,11 +10,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.pokermon.GameMode
 import com.pokermon.android.ui.theme.PokerGameTheme
 
 /**
  * Main Android activity for the Poker Game.
- * Uses Jetpack Compose for modern Android UI.
+ * Uses Jetpack Compose with Navigation for modern Android UI.
  */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +30,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    PokerGameScreen()
+                    PokerGameNavigation()
                 }
             }
         }
@@ -33,7 +38,60 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun PokerGameScreen() {
+fun PokerGameNavigation() {
+    val navController = rememberNavController()
+    
+    NavHost(
+        navController = navController,
+        startDestination = "main_menu"
+    ) {
+        composable("main_menu") {
+            MainMenuScreen(navController = navController)
+        }
+        composable("game_mode_selection") {
+            GameModeSelectionScreen(
+                onGameModeSelected = { gameMode ->
+                    navController.navigate("gameplay/${gameMode.name}")
+                },
+                onBackPressed = {
+                    navController.popBackStack()
+                }
+            )
+        }
+        composable("gameplay/{gameMode}") { backStackEntry ->
+            val gameModeString = backStackEntry.arguments?.getString("gameMode") ?: "CLASSIC"
+            val gameMode = try {
+                GameMode.valueOf(gameModeString)
+            } catch (e: IllegalArgumentException) {
+                GameMode.CLASSIC
+            }
+            
+            GameplayScreen(
+                gameMode = gameMode,
+                onBackPressed = {
+                    navController.popBackStack("main_menu", false)
+                }
+            )
+        }
+        composable("settings") {
+            SettingsScreen(
+                onBackPressed = {
+                    navController.popBackStack()
+                }
+            )
+        }
+        composable("about") {
+            AboutScreen(
+                onBackPressed = {
+                    navController.popBackStack()
+                }
+            )
+        }
+    }
+}
+
+@Composable
+fun MainMenuScreen(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -49,7 +107,7 @@ fun PokerGameScreen() {
         Spacer(modifier = Modifier.height(16.dp))
         
         Text(
-            text = "Mobile Edition v0.1b",
+            text = "Mobile Edition v1.0.0",
             style = MaterialTheme.typography.bodyLarge
         )
         
@@ -57,7 +115,7 @@ fun PokerGameScreen() {
         
         Button(
             onClick = { 
-                // TODO: Start new game
+                navController.navigate("game_mode_selection")
             },
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -68,7 +126,7 @@ fun PokerGameScreen() {
         
         Button(
             onClick = { 
-                // TODO: Show settings
+                navController.navigate("settings")
             },
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -79,7 +137,7 @@ fun PokerGameScreen() {
         
         OutlinedButton(
             onClick = { 
-                // TODO: Show about
+                navController.navigate("about")
             },
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -89,7 +147,7 @@ fun PokerGameScreen() {
         Spacer(modifier = Modifier.height(32.dp))
         
         Text(
-            text = "Android version of the cross-platform poker game.\nFull game logic integration coming soon!",
+            text = "Android version of the cross-platform poker game.\nNow with full game logic integration!",
             style = MaterialTheme.typography.bodyMedium
         )
     }
@@ -97,8 +155,8 @@ fun PokerGameScreen() {
 
 @Preview(showBackground = true)
 @Composable
-fun PokerGameScreenPreview() {
+fun MainMenuScreenPreview() {
     PokerGameTheme {
-        PokerGameScreen()
+        MainMenuScreen(rememberNavController())
     }
 }

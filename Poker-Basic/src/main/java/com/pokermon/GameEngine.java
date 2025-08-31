@@ -72,8 +72,8 @@ public class GameEngine {
         
         // Deal new hands to all active players
         for (Player player : players) {
-            if (!player.isFold() && player.getChips() > 0) {
-                player.resetFold();
+            if (player.getChips() > 0) {
+                player.resetFold(); // Reset fold status for all players with chips
                 player.updateHand(generateHand(deck, gameConfig.getHandSize()));
                 player.performAllChecks();
             }

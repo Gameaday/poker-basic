@@ -42,7 +42,7 @@ public final class Version {
      * incrementation with each commit without manual intervention.
      * This value is replaced during build process with actual git commit count.
      */
-    public static final int VERSION_CODE = 5;
+    public static final int VERSION_CODE = 2;
     
     /**
      * Build timestamp from Maven build process.

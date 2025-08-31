@@ -18,6 +18,8 @@ import androidx.compose.ui.unit.dp
 import com.pokermon.GameMode
 import com.pokermon.bridge.GameLogicBridge
 
+private const val BET_INCREMENT = 10
+
 /**
  * Main gameplay screen that integrates with the shared game logic.
  */
@@ -305,9 +307,9 @@ fun GameActionsCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 OutlinedButton(
-                    onClick = { if (betAmount > 10) onBetAmountChanged(betAmount - 10) }
+                    onClick = { if (betAmount > BET_INCREMENT) onBetAmountChanged(betAmount - BET_INCREMENT) }
                 ) {
-                    Text("-10")
+                    Text("-$BET_INCREMENT")
                 }
                 
                 Button(
@@ -321,9 +323,9 @@ fun GameActionsCard(
                 }
                 
                 OutlinedButton(
-                    onClick = { onBetAmountChanged(betAmount + 10) }
+                    onClick = { onBetAmountChanged(betAmount + BET_INCREMENT) }
                 ) {
-                    Text("+10")
+                    Text("+$BET_INCREMENT")
                 }
             }
         }

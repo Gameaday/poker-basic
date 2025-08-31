@@ -6,6 +6,23 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Integration tests for the refactored game logic to ensure improved reusability works correctly.
+ * 
+ * These tests focus on:
+ * - Dynamic player initialization with varying player counts
+ * - Player array flexibility and scalability
+ * - Hand value calculation consistency
+ * - Betting logic that scales with different numbers of players
+ * - Game state consistency across operations
+ * - Code reusability improvements and edge case handling
+ * - Encapsulation integrity to prevent unwanted modifications
+ * 
+ * Flow validation includes:
+ * - Player initialization → Hand dealing → Betting → State consistency
+ * - Multi-player scenarios with different configurations
+ * - Edge cases with minimum and maximum player counts
+ * - Data integrity and encapsulation verification
+ * 
+ * @author Enhanced for issue #68 - Improve process flow and test cases
  */
 class GameLogicTest {
     

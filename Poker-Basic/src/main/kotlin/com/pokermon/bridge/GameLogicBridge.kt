@@ -58,10 +58,40 @@ class GameLogicBridge {
      */
     private fun updatePlayerData() {
         gameEngine?.let { engine ->
-            currentPot = engine.getCurrentPot()
-            // Use simple demo data for now
-            playerHand = listOf("Ace of Spades", "King of Hearts", "Queen of Diamonds", "Jack of Clubs", "Ten of Spades")
+            currentPot = engine.currentPot
+            val players = engine.players
+            if (players.isNotEmpty()) {
+                val player = players[0] // Human player is always at index 0
+                playerChips = player.getChips()
+                
+                // Convert player's hand to displayable strings
+                player.getConvertedHand()?.let { hand ->
+                    playerHand = hand.toList()
+                } ?: run {
+                    // Fallback to basic card names if converted hand isn't available
+                    player.getHand()?.let { handInts ->
+                        playerHand = handInts.map { cardInt ->
+                            if (cardInt != 0) cardName(cardInt) else "Empty"
+                        }.filter { it != "Empty" }
+                    }
+                }
+            }
         }
+    }
+    
+    /**
+     * Helper method to get card name using Main.cardName.
+     */
+    private fun cardName(cardInt: Int): String {
+        // Use a simple conversion since Main.cardName is private
+        val suits = arrayOf("Spades", "Hearts", "Diamonds", "Clubs")
+        val ranks = arrayOf("Error", "Ace", "King", "Queen", "Jack", "Ten", 
+                           "Nine", "Eight", "Seven", "Six", "Five", "Four", "Three", "Two", "One")
+        
+        val rank = cardInt / 4 + 1
+        val suit = cardInt % 4
+        
+        return "${ranks.getOrElse(rank) { "Unknown" }} of ${suits.getOrElse(suit) { "Unknown" }}"
     }
     
     /**
@@ -91,12 +121,18 @@ class GameLogicBridge {
      */
     fun getAllPlayers(): List<PlayerInfo> {
         return if (isGameInitialized) {
-            listOf(
-                PlayerInfo(playerName, playerChips, false, true, 85),
-                PlayerInfo("CPU 1", 950, false, false, 78),
-                PlayerInfo("CPU 2", 1100, false, false, 62),
-                PlayerInfo("CPU 3", 800, true, false, 0)
-            )
+            gameEngine?.let { engine ->
+                val players = engine.players
+                players.mapIndexed { index, player ->
+                    PlayerInfo(
+                        name = player.getName() ?: "Player $index",
+                        chips = player.getChips(),
+                        isFolded = player.isFold(),
+                        isCurrentPlayer = index == 0, // Human player is always at index 0
+                        handValue = player.getHandValue()
+                    )
+                }
+            } ?: emptyList()
         } else {
             emptyList()
         }
@@ -152,11 +188,30 @@ class GameLogicBridge {
         }
         
         return try {
-            // Simplified call - bet a standard amount
-            val callAmount = 50.coerceAtMost(playerChips)
-            playerChips -= callAmount
-            currentPot += callAmount
-            GameActionResult(true, "Called for $callAmount chips")
+            gameEngine?.let { engine ->
+                val players = engine.players
+                if (players.isNotEmpty()) {
+                    val player = players[0] // Human player
+                    
+                    // For testing purposes, use a standard call amount if no high bet exists
+                    val highBet = engine.currentHighBet
+                    val callAmount = if (highBet <= 0) 50 else (highBet - player.getBet()).coerceAtMost(player.getChips())
+                    
+                    if (callAmount <= 0) {
+                        GameActionResult(true, "No bet to call")
+                    } else {
+                        player.placeBet(player.getBet() + callAmount)
+                        // Update the engine's pot as well
+                        val newPot = engine.currentPot + callAmount
+                        // Since GameEngine doesn't have a setPot method, update manually
+                        currentPot = newPot
+                        playerChips = player.getChips()
+                        GameActionResult(true, "Called for $callAmount chips")
+                    }
+                } else {
+                    GameActionResult(false, "No players found")
+                }
+            } ?: GameActionResult(false, "Game engine not available")
         } catch (e: Exception) {
             GameActionResult(false, "Error performing call: ${e.message}")
         }
@@ -171,15 +226,24 @@ class GameLogicBridge {
         }
         
         return try {
-            val totalAmount = amount // For simplicity, just use the raise amount directly
-            
-            if (totalAmount > playerChips) {
-                GameActionResult(false, "Not enough chips to raise by $amount")
-            } else {
-                playerChips -= totalAmount
-                currentPot += totalAmount
-                GameActionResult(true, "Raised by $amount chips")
-            }
+            gameEngine?.let { engine ->
+                val players = engine.players
+                if (players.isNotEmpty()) {
+                    val player = players[0] // Human player
+                    
+                    if (amount > player.getChips()) {
+                        GameActionResult(false, "Not enough chips to raise by $amount")
+                    } else {
+                        player.placeBet(amount)
+                        // Update the pot with the actual bet amount
+                        currentPot = engine.currentPot + amount
+                        playerChips = player.getChips()
+                        GameActionResult(true, "Raised by $amount chips")
+                    }
+                } else {
+                    GameActionResult(false, "No players found")
+                }
+            } ?: GameActionResult(false, "Game engine not available")
         } catch (e: Exception) {
             GameActionResult(false, "Error performing raise: ${e.message}")
         }
@@ -194,7 +258,17 @@ class GameLogicBridge {
         }
         
         return try {
-            GameActionResult(true, "Folded")
+            gameEngine?.let { engine ->
+                val players = engine.players
+                if (players.isNotEmpty()) {
+                    val player = players[0] // Human player
+                    player.setFold(true)
+                    updatePlayerData()
+                    GameActionResult(true, "Folded")
+                } else {
+                    GameActionResult(false, "No players found")
+                }
+            } ?: GameActionResult(false, "Game engine not available")
         } catch (e: Exception) {
             GameActionResult(false, "Error folding: ${e.message}")
         }
@@ -224,21 +298,13 @@ class GameLogicBridge {
         }
         
         return try {
-            // For now, simulate card exchange by updating the hand
-            val newHand = playerHand.toMutableList()
-            val cardNames = listOf("Ace of Spades", "King of Hearts", "Queen of Diamonds", 
-                                  "Jack of Clubs", "Ten of Spades", "Nine of Hearts", 
-                                  "Eight of Diamonds", "Seven of Clubs")
-            
-            cardIndices.forEach { index ->
-                if (index < newHand.size) {
-                    newHand[index] = cardNames.random()
-                }
-            }
-            
-            playerHand = newHand
-            clearCardSelection()
-            GameActionResult(true, "Exchanged ${cardIndices.size} cards")
+            gameEngine?.let { engine ->
+                val cardIndicesArray = cardIndices.toIntArray()
+                engine.exchangeCards(0, cardIndicesArray) // 0 = human player index
+                updatePlayerData()
+                clearCardSelection()
+                GameActionResult(true, "Exchanged ${cardIndices.size} cards")
+            } ?: GameActionResult(false, "Game engine not available")
         } catch (e: Exception) {
             GameActionResult(false, "Error exchanging cards: ${e.message}")
         }
@@ -248,14 +314,16 @@ class GameLogicBridge {
      * Advance to the next round of the game.
      */
     fun nextRound(): GameActionResult {
-        if (!isGameInitialized || gameEngine == null) {
+        if (!isGameInitialized) {
             return GameActionResult(false, "Game not initialized")
         }
         
         return try {
-            gameEngine!!.nextRound()
-            updatePlayerData()
-            GameActionResult(true, "Advanced to next round")
+            gameEngine?.let { engine ->
+                engine.startNewRound()
+                updatePlayerData()
+                GameActionResult(true, "Advanced to round ${engine.currentRound}")
+            } ?: GameActionResult(false, "Game engine not available")
         } catch (e: Exception) {
             GameActionResult(false, "Error advancing round: ${e.message}")
         }
@@ -284,21 +352,24 @@ class GameLogicBridge {
         }
         
         return try {
-            // Simulate winner determination for demo
-            val random = kotlin.random.Random.nextInt(3)
-            val message = when (random) {
-                0 -> "🎉 You won the hand!"
-                1 -> "You lost this hand"
-                else -> "It's a tie!"
-            }
-            
-            if (random == 0) {
-                playerChips += currentPot
-                currentPot = 0
-            }
-            
-            updatePlayerData()
-            GameActionResult(true, message)
+            gameEngine?.let { engine ->
+                val winners = engine.determineWinners()
+                if (winners.isNotEmpty()) {
+                    engine.distributePot(winners)
+                    val isHumanWinner = winners.contains(0) // Human player is at index 0
+                    
+                    val message = when {
+                        isHumanWinner && winners.size == 1 -> "🎉 You won the hand!"
+                        isHumanWinner && winners.size > 1 -> "🤝 You tied for the win!"
+                        else -> "You lost this hand"
+                    }
+                    
+                    updatePlayerData()
+                    GameActionResult(true, message)
+                } else {
+                    GameActionResult(false, "No winners determined")
+                }
+            } ?: GameActionResult(false, "Game engine not available")
         } catch (e: Exception) {
             GameActionResult(false, "Error determining winner: ${e.message}")
         }

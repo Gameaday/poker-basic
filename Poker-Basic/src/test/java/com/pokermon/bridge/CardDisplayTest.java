@@ -26,6 +26,12 @@ class CardDisplayTest {
         List<String> playerHand = bridge.getPlayerHand();
         assertFalse(playerHand.isEmpty(), "Player should have cards");
         
+        // Print sample cards for verification
+        System.out.println("Sample card formats: " + playerHand);
+        for (String card : playerHand) {
+            System.out.println("  " + card + " (length: " + card.length() + ")");
+        }
+        
         // Verify card format (should be like "A♠", "K♥", "Q♦", "J♣", "10♠", etc.)
         for (String card : playerHand) {
             assertNotNull(card, "Card should not be null");
@@ -42,6 +48,13 @@ class CardDisplayTest {
             assertFalse(card.contains("King"), "Card should not contain full word 'King': " + card);
         }
         
-        System.out.println("Sample card formats: " + playerHand);
+        // Test round completion logic
+        System.out.println("Round completion before bets: " + bridge.isRoundComplete());
+        assertFalse(bridge.isRoundComplete(), "Round should not be complete before any bets");
+        
+        // Make a call and test again
+        var result = bridge.performCall();
+        System.out.println("Call result: " + result.getMessage());
+        System.out.println("Round completion after call: " + bridge.isRoundComplete());
     }
 }

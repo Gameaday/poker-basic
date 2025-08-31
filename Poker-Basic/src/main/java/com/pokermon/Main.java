@@ -1,6 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Legacy main class for the Pokermon game.
+ * Contains core game logic and card management functionality.
+ * 
+ * @author Carl Nelson (@Gameaday)
+ * @version 1.0.0
  */
 package com.pokermon;
 

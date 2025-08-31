@@ -34,7 +34,7 @@ fun AboutScreen(
     ) {
         // App header
         Text(
-            text = "🃏 Poker Game",
+            text = "🃏 Pokermon",
             style = MaterialTheme.typography.headlineLarge,
             modifier = Modifier.padding(bottom = 8.dp)
         )
@@ -56,7 +56,7 @@ fun AboutScreen(
             )
         ) {
             Text(
-                text = "A cross-platform educational poker game demonstrating modern software development practices with shared business logic across desktop and mobile platforms.",
+                text = "A cross-platform educational poker game demonstrating modern software development practices with shared business logic across desktop and mobile platforms. Short for \"Poker Monster\" after the game features.",
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(16.dp)
@@ -105,9 +105,19 @@ fun ContributorsSection() {
                 modifier = Modifier.padding(bottom = 16.dp)
             )
             
-            // Art Contributors
+            // Creator and Lead Developer
             ContributorCard(
                 icon = Icons.Default.AccountCircle,
+                name = "Carl Nelson (@Gameaday)",
+                role = "Creator & Lead Developer",
+                description = "All game coding and concepts - Complete architecture, game logic, and cross-platform implementation"
+            )
+            
+            Spacer(modifier = Modifier.height(12.dp))
+            
+            // Art Contributors
+            ContributorCard(
+                icon = Icons.Default.Star,
                 name = "Peter & Chris Vey",
                 role = "Card Art Assets",
                 description = "Beautiful playing card designs used throughout the game"
@@ -115,19 +125,9 @@ fun ContributorsSection() {
             
             Spacer(modifier = Modifier.height(12.dp))
             
-            // Development Team
-            ContributorCard(
-                icon = Icons.Default.Build,
-                name = "Development Team",
-                role = "Game Logic & UI",
-                description = "Cross-platform game engine and user interface implementation"
-            )
-            
-            Spacer(modifier = Modifier.height(12.dp))
-            
             // Educational Framework
             ContributorCard(
-                icon = Icons.Default.Star,
+                icon = Icons.Default.Build,
                 name = "Educational Framework",
                 role = "Learning Platform",
                 description = "Demonstrating object-oriented design and code improvement techniques"
@@ -279,8 +279,8 @@ fun LicenseSection() {
             )
             
             Text(
-                text = "• Card art assets by Peter & Chris Vey\n" +
-                      "• Game logic and implementation by development team\n" +
+                text = "• All game coding and concepts by Carl Nelson (@Gameaday)\n" +
+                      "• Card art assets by Peter & Chris Vey\n" +
                       "• Built with modern Android development tools\n" +
                       "• Designed for educational purposes",
                 style = MaterialTheme.typography.bodySmall,

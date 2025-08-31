@@ -6,6 +6,9 @@ import com.pokermon.*
  * Bridge class that connects the Modern UI with the actual game engine.
  * Provides a clean interface for UI operations while maintaining separation of concerns.
  * Uses public interfaces to avoid package-private access issues.
+ * 
+ * @author Carl Nelson (@Gameaday)
+ * @version 1.0.0
  */
 class GameLogicBridge {
     private var gameEngine: GameEngine? = null

@@ -152,11 +152,11 @@
               </execution>
             </executions>
             <configuration>
-              <name>PokerGame</name>
+              <name>Pokermon</name>
               <appVersion>${project.version}</appVersion>
-              <vendor>Pokermon Games</vendor>
-              <description>Educational Poker Game with Monster Collection</description>
-              <copyright>Educational Project</copyright>
+              <vendor>Carl Nelson (@Gameaday)</vendor>
+              <description>Educational Poker Game - Pokermon (Poker Monster)</description>
+              <copyright>© 2024 Carl Nelson (@Gameaday)</copyright>
               <type>EXE</type>
               <winDirChooser>true</winDirChooser>
               <winMenu>true</winMenu>

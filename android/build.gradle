@@ -10,7 +10,7 @@ android {
         applicationId "com.pokermon.android"
         minSdk 26
         targetSdk 34
-        versionCode 1
+        versionCode 1 // Increment this for each APK release to enable updates
         versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

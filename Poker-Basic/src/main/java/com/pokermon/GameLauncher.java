@@ -1,16 +1,13 @@
 package com.pokermon;
 
 /**
- * Main entry point for the Poker Game application.
+ * Main entry point for the Pokermon application.
  * Provides a unified launcher that defaults to GUI mode with options for console mode.
  * 
- * @author Poker Game Team
+ * @author Carl Nelson (@Gameaday)
  * @version 1.0.0
  */
 public class GameLauncher {
-
-    private static final String VERSION = "1.0.0";
-    private static final String APP_NAME = "Poker Game";
     
     /**
      * Main entry point for the application.
@@ -56,7 +53,7 @@ public class GameLauncher {
      * Launch the modern JavaFX UI version of the game.
      */
     private static void launchModern() {
-        System.out.println("Starting " + APP_NAME + " (Modern JavaFX UI)...");
+        System.out.println("Starting " + Version.APP_NAME + " (Modern JavaFX UI)...");
         try {
             // Use reflection to call the Kotlin JavaFX launcher
             Class<?> modernClass = Class.forName("com.pokermon.modern.ModernMainKt");
@@ -74,7 +71,7 @@ public class GameLauncher {
      * Launch the console version of the game.
      */
     private static void launchConsole() {
-        System.out.println("Starting " + APP_NAME + " (Console Mode)...");
+        System.out.println("Starting " + Version.APP_NAME + " (Console Mode)...");
         ConsoleMain.main(new String[0]);
     }
     
@@ -82,7 +79,7 @@ public class GameLauncher {
      * Launch the modern JavaFX UI version of the game.
      */
     private static void launchCompose() {
-        System.out.println("Starting " + APP_NAME + " (Modern JavaFX UI)...");
+        System.out.println("Starting " + Version.APP_NAME + " (Modern JavaFX UI)...");
         try {
             // Use reflection to call the Kotlin JavaFX launcher
             Class<?> modernClass = Class.forName("com.pokermon.modern.ModernMainKt");
@@ -100,22 +97,24 @@ public class GameLauncher {
      * Display version information.
      */
     private static void showVersion() {
-        System.out.println(APP_NAME + " version " + VERSION);
+        System.out.println(Version.getVersionInfo());
         System.out.println("A Java-based poker game with GUI and console modes.");
+        System.out.println(Version.COPYRIGHT);
     }
     
     /**
      * Display comprehensive help information.
      */
     private static void showHelp() {
-        System.out.println(APP_NAME + " - Educational Poker Game");
-        System.out.println("Version: " + VERSION);
+        System.out.println(Version.APP_DISPLAY_NAME);
+        System.out.println("Version: " + Version.VERSION);
+        System.out.println(Version.COPYRIGHT);
         System.out.println();
         System.out.println("USAGE:");
-        System.out.println("  java -jar pokermon-" + VERSION + ".jar [OPTIONS]");
+        System.out.println("  java -jar pokermon-" + Version.VERSION + ".jar [OPTIONS]");
         System.out.println();
         System.out.println("DESCRIPTION:");
-        System.out.println("  An educational poker game supporting multiple game variants.");
+        System.out.println("  " + Version.APP_DESCRIPTION + ".");
         System.out.println("  Defaults to modern JavaFX UI for the best cross-platform experience.");
         System.out.println();
         System.out.println("OPTIONS:");
@@ -126,13 +125,13 @@ public class GameLauncher {
         System.out.println("  -v, --version      Show version information");
         System.out.println();
         System.out.println("EXAMPLES:");
-        System.out.println("  java -jar pokermon-" + VERSION + ".jar");
+        System.out.println("  java -jar pokermon-" + Version.VERSION + ".jar");
         System.out.println("    Start the game with modern JavaFX UI (default)");
         System.out.println();
-        System.out.println("  java -jar pokermon-" + VERSION + ".jar --basic");
+        System.out.println("  java -jar pokermon-" + Version.VERSION + ".jar --basic");
         System.out.println("    Start the game in console mode");
         System.out.println();
-        System.out.println("  java -jar pokermon-" + VERSION + ".jar --help");
+        System.out.println("  java -jar pokermon-" + Version.VERSION + ".jar --help");
         System.out.println("    Display this help information");
         System.out.println();
         System.out.println("GAME FEATURES:");
@@ -144,6 +143,9 @@ public class GameLauncher {
         System.out.println("  - Cross-platform UI with Kotlin/JavaFX");
         System.out.println("  - Touch, mouse, and gamepad support");
         System.out.println("  - Customizable themes and settings");
+        System.out.println();
+        System.out.println("CREATOR:");
+        System.out.println("  All game coding and concepts by " + Version.CREATOR);
         System.out.println();
         System.out.println("For more information, visit: https://github.com/Gameaday/poker-basic");
     }

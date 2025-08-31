@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Poker Game</string>
-    <string name="app_description">Cross-platform educational poker game with multiple game modes</string>
+    <string name="app_name">Pokermon</string>
+    <string name="app_description">Educational poker game demonstrating cross-platform development with multiple game modes</string>
     
     <!-- App shortcuts -->
     <string name="quick_classic_short">Classic Game</string>

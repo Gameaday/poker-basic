@@ -1,13 +1,12 @@
 package com.pokermon;
 
-import java.io.*;
 import java.util.*;
 
 /**
- * Console-only version of the poker game.
+ * Console-only version of the Pokermon game.
  * This class provides a pure text-based interface without any GUI dependencies.
  * 
- * @author Poker Game Team
+ * @author Carl Nelson (@Gameaday)
  * @version 1.0.0
  */
 public class ConsoleMain {
@@ -16,7 +15,7 @@ public class ConsoleMain {
     
     public static void main(String[] args) {
         System.out.println("=================================================");
-        System.out.println("         POKER GAME - CONSOLE MODE");
+        System.out.println("         " + Version.APP_NAME.toUpperCase() + " - CONSOLE MODE");
         System.out.println("=================================================");
         System.out.println();
         

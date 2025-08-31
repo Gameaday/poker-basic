@@ -3,6 +3,9 @@ package com.pokermon;
 /**
  * Represents the overall game state and configuration for a poker game.
  * This class manages game settings that can be customized for different variations.
+ * 
+ * @author Carl Nelson (@Gameaday)
+ * @version 1.0.0
  */
 public class Game {
     private static final int DEFAULT_HAND_SIZE = 5;

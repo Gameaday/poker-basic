@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.pokermon;
 
 import java.io.*;
@@ -10,6 +6,9 @@ import java.util.*;
 /**
  * Represents a poker player with their hand, chips, and game state.
  * Provides encapsulated access to player data and poker hand evaluation.
+ * 
+ * @author Carl Nelson (@Gameaday)
+ * @version 1.0.0
  */
 public class Player {
     // Private fields for better encapsulation

@@ -11,13 +11,14 @@ import javafx.scene.Node
 import com.pokermon.bridge.GameLogicBridge
 import com.pokermon.bridge.GameActionResult
 import com.pokermon.GameMode
+import com.pokermon.Version
 
 /**
- * Modern JavaFX-based UI for the poker game.
+ * Modern JavaFX-based UI for the Pokermon game.
  * Provides a cross-platform interface with touch and mouse support.
  * 
- * @author Poker Game Team
- * @version 0.1b
+ * @author Carl Nelson (@Gameaday)
+ * @version 1.0.0
  */
 class ModernPokerApp : Application() {
     
@@ -27,7 +28,7 @@ class ModernPokerApp : Application() {
     // UI state
     private val potLabel = Label("Pot: $0")
     private val chipsLabel = Label("Chips: $1000")
-    private val statusLabel = Label("Welcome to Modern Poker!")
+    private val statusLabel = Label("Welcome to ${Version.APP_NAME}!")
     
     // Game setup controls
     private val playerNameField = TextField("Player")
@@ -96,7 +97,7 @@ class ModernPokerApp : Application() {
         }
         
         // Version info
-        val versionLabel = Label("Version 0.1b - Modern UI Edition").apply {
+        val versionLabel = Label("${Version.getVersionInfo()} - Modern UI Edition").apply {
             style = "-fx-font-size: 12px; -fx-text-fill: #999999;"
         }
         

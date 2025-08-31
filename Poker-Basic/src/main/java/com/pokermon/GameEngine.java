@@ -330,10 +330,17 @@ public class GameEngine {
         }
         
         int startIndex = currentPlayerIndex;
+        int checkedPlayers = 0;
         do {
             currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
-        } while (currentPlayerIndex != startIndex && 
+            checkedPlayers++;
+        } while (checkedPlayers < players.length &&
                  (players[currentPlayerIndex].isFold() || players[currentPlayerIndex].getChips() <= 0));
+        // If no valid player found after checking all, set to -1
+        if (checkedPlayers == players.length &&
+            (players[currentPlayerIndex].isFold() || players[currentPlayerIndex].getChips() <= 0)) {
+            currentPlayerIndex = -1;
+        }
     }
     
     /**

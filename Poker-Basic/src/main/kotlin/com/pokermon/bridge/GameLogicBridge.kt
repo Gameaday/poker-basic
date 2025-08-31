@@ -235,8 +235,8 @@ class GameLogicBridge {
                         GameActionResult(false, "Not enough chips to raise by $amount")
                     } else {
                         player.placeBet(amount)
-                        // Update the pot with the actual bet amount
-                        currentPot = engine.currentPot + amount
+                        // Synchronize the pot from the engine after the bet
+                        currentPot = engine.currentPot
                         playerChips = player.getChips()
                         GameActionResult(true, "Raised by $amount chips")
                     }

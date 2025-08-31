@@ -67,34 +67,31 @@ class GameLogicBridge {
                 val player = players[0] // Human player is always at index 0
                 playerChips = player.getChips()
                 
-                // Convert player's hand to displayable strings
-                player.getConvertedHand()?.let { hand ->
-                    playerHand = hand.toList()
+                // Convert player's hand to poker notation format
+                player.getHand()?.let { handInts ->
+                    playerHand = handInts.map { cardInt ->
+                        if (cardInt != 0) cardName(cardInt) else "Empty"
+                    }.filter { it != "Empty" }
                 } ?: run {
-                    // Fallback to basic card names if converted hand isn't available
-                    player.getHand()?.let { handInts ->
-                        playerHand = handInts.map { cardInt ->
-                            if (cardInt != 0) cardName(cardInt) else "Empty"
-                        }.filter { it != "Empty" }
-                    }
+                    playerHand = emptyList()
                 }
             }
         }
     }
     
     /**
-     * Helper method to get card name using Main.cardName.
+     * Helper method to get card name in poker notation (e.g., "A♠", "K♥", "Q♦", "J♣").
      */
     private fun cardName(cardInt: Int): String {
-        // Use a simple conversion since Main.cardName is private
-        val suits = arrayOf("Spades", "Hearts", "Diamonds", "Clubs")
-        val ranks = arrayOf("Error", "Ace", "King", "Queen", "Jack", "Ten", 
-                           "Nine", "Eight", "Seven", "Six", "Five", "Four", "Three", "Two", "One")
+        // Convert to poker notation with rank and suit symbols
+        val suitSymbols = arrayOf("♠", "♥", "♦", "♣")
+        val rankSymbols = arrayOf("?", "A", "K", "Q", "J", "10", 
+                                 "9", "8", "7", "6", "5", "4", "3", "2", "1")
         
         val rank = cardInt / 4 + 1
         val suit = cardInt % 4
         
-        return "${ranks.getOrElse(rank) { "Unknown" }} of ${suits.getOrElse(suit) { "Unknown" }}"
+        return "${rankSymbols.getOrElse(rank) { "?" }}${suitSymbols.getOrElse(suit) { "?" }}"
     }
     
     /**
@@ -206,6 +203,8 @@ class GameLogicBridge {
                         player.placeBet(player.getBet() + callAmount)
                         // Add the call amount to the pot
                         engine.addToPot(callAmount)
+                        // Advance to next player after action
+                        engine.nextPlayer()
                         updatePlayerData()
                         GameActionResult(true, "Called for $callAmount chips")
                     }
@@ -238,6 +237,8 @@ class GameLogicBridge {
                         player.placeBet(amount)
                         // Add the raise amount to the pot
                         engine.addToPot(amount)
+                        // Advance to next player after action
+                        engine.nextPlayer()
                         updatePlayerData()
                         GameActionResult(true, "Raised by $amount chips")
                     }
@@ -264,6 +265,8 @@ class GameLogicBridge {
                 if (players.isNotEmpty()) {
                     val player = players[0] // Human player
                     player.setFold(true)
+                    // Advance to next player after action
+                    engine.nextPlayer()
                     updatePlayerData()
                     GameActionResult(true, "Folded")
                 } else {
@@ -284,7 +287,12 @@ class GameLogicBridge {
         }
         
         return try {
-            GameActionResult(true, "Checked")
+            gameEngine?.let { engine ->
+                // Advance to next player after action
+                engine.nextPlayer()
+                updatePlayerData()
+                GameActionResult(true, "Checked")
+            } ?: GameActionResult(false, "Game engine not available")
         } catch (e: Exception) {
             GameActionResult(false, "Error checking: ${e.message}")
         }
@@ -342,6 +350,13 @@ class GameLogicBridge {
      */
     fun getCurrentRound(): Int {
         return gameEngine?.getCurrentRound() ?: 0
+    }
+    
+    /**
+     * Get the current player's turn index.
+     */
+    fun getCurrentPlayerIndex(): Int {
+        return gameEngine?.getCurrentPlayerIndex() ?: 0
     }
     
     /**

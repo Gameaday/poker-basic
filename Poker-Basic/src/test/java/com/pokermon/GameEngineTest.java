@@ -205,4 +205,36 @@ class GameEngineTest {
             assertEquals(7, player.getHand().length); // 7-card stud
         }
     }
+    
+    @Test
+    void testRoundCompletionLogic() {
+        // Test the fixed round completion logic
+        engine.initializeGame(playerNames);
+        
+        // Initially, before any bets, round should not be complete
+        assertFalse(engine.isRoundComplete(), "Round should not be complete at start with no bets");
+        
+        Player[] players = engine.getPlayers();
+        
+        // Have one player bet
+        players[0].placeBet(50);
+        engine.addToPot(50);
+        assertFalse(engine.isRoundComplete(), "Round should not be complete with only one player betting");
+        
+        // Have all players match the bet
+        players[1].placeBet(50);
+        engine.addToPot(50);
+        players[2].placeBet(50);
+        engine.addToPot(50);
+        assertTrue(engine.isRoundComplete(), "Round should be complete when all players match bet");
+        
+        // Test with a fold
+        engine.nextRound();
+        players[0].placeBet(100);
+        engine.addToPot(100);
+        players[1].setFold(true);
+        players[2].placeBet(100);
+        engine.addToPot(100);
+        assertTrue(engine.isRoundComplete(), "Round should be complete when active players match bet (with fold)");
+    }
 }

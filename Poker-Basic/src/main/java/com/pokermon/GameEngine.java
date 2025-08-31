@@ -16,6 +16,7 @@ public class GameEngine {
     private int currentPot;
     private int currentRound;
     private boolean gameActive;
+    private int currentPlayerIndex;
     
     /**
      * Creates a new game engine with the specified configuration.
@@ -26,6 +27,7 @@ public class GameEngine {
         this.currentPot = 0;
         this.currentRound = 0;
         this.gameActive = false;
+        this.currentPlayerIndex = 0;
     }
     
     /**
@@ -51,6 +53,7 @@ public class GameEngine {
         }
         
         this.gameActive = true;
+        this.currentPlayerIndex = 0; // Start with first player
         return true;
     }
     
@@ -301,6 +304,7 @@ public class GameEngine {
         }
         
         currentRound++;
+        currentPlayerIndex = 0; // Reset to first player for new round
         // Reset bets for next round
         if (players != null) {
             for (Player player : players) {
@@ -308,6 +312,47 @@ public class GameEngine {
             }
         }
         return true;
+    }
+    
+    /**
+     * Gets the current player's index.
+     * @return the index of the current player
+     */
+    public int getCurrentPlayerIndex() {
+        return currentPlayerIndex;
+    }
+    
+    /**
+     * Advances to the next active player.
+     */
+    public void nextPlayer() {
+        if (!gameActive || players == null) {
+            return;
+        }
+        
+        int startIndex = currentPlayerIndex;
+        int checkedPlayers = 0;
+        do {
+            currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+            checkedPlayers++;
+        } while (checkedPlayers < players.length &&
+                 (players[currentPlayerIndex].isFold() || players[currentPlayerIndex].getChips() <= 0));
+        // If no valid player found after checking all, set to -1
+        if (checkedPlayers == players.length &&
+            (players[currentPlayerIndex].isFold() || players[currentPlayerIndex].getChips() <= 0)) {
+            currentPlayerIndex = -1;
+        }
+    }
+    
+    /**
+     * Gets the current player.
+     * @return the current player or null if game not active
+     */
+    public Player getCurrentPlayer() {
+        if (!gameActive || players == null || currentPlayerIndex < 0 || currentPlayerIndex >= players.length) {
+            return null;
+        }
+        return players[currentPlayerIndex];
     }
     
     /**
@@ -323,14 +368,23 @@ public class GameEngine {
         int highBet = getCurrentHighBet();
         int activePlayers = 0;
         int playersMatchingBet = 0;
+        boolean anyPlayerHasBet = false;
         
         for (Player player : players) {
             if (!player.isFold() && player.getChips() > 0) {
                 activePlayers++;
+                if (player.getBet() > 0) {
+                    anyPlayerHasBet = true;
+                }
                 if (player.getBet() >= highBet || player.getChips() == 0) {
                     playersMatchingBet++;
                 }
             }
+        }
+        
+        // If no one has bet yet, the round is not complete
+        if (!anyPlayerHasBet) {
+            return false;
         }
         
         return activePlayers <= 1 || playersMatchingBet == activePlayers;

@@ -51,7 +51,7 @@ fun SettingsScreen(
             title = "🎮 Game Preferences"
         ) {
             SettingsToggleItem(
-                icon = if (soundEnabled) Icons.Default.VolumeUp else Icons.Default.VolumeOff,
+                icon = if (soundEnabled) Icons.Default.Check else Icons.Default.Close,
                 title = "Sound Effects",
                 description = "Enable game sounds and audio feedback",
                 checked = soundEnabled,
@@ -59,7 +59,7 @@ fun SettingsScreen(
             )
             
             SettingsToggleItem(
-                icon = Icons.Default.Animation,
+                icon = Icons.Default.Settings,
                 title = "Animations",
                 description = "Enable card dealing and UI animations",
                 checked = animationsEnabled,
@@ -67,7 +67,7 @@ fun SettingsScreen(
             )
             
             SettingsToggleItem(
-                icon = Icons.Default.Save,
+                icon = Icons.Default.CheckCircle,
                 title = "Auto-Save",
                 description = "Automatically save game progress",
                 checked = autoSaveEnabled,
@@ -82,14 +82,14 @@ fun SettingsScreen(
             title = "💾 Save Management"
         ) {
             SettingsActionItem(
-                icon = Icons.Default.Backup,
+                icon = Icons.Default.Add,
                 title = "Backup Save Data",
                 description = "Create a backup of your game progress",
                 onClick = { showBackupDialog = true }
             )
             
             SettingsActionItem(
-                icon = Icons.Default.Restore,
+                icon = Icons.Default.Refresh,
                 title = "Restore Save Data",
                 description = "Restore from a previous backup",
                 onClick = { showRestoreDialog = true }
@@ -296,7 +296,7 @@ fun SettingsActionItem(
             }
             
             Icon(
-                imageVector = Icons.Default.ChevronRight,
+                imageVector = Icons.Default.ArrowForward,
                 contentDescription = "Go",
                 tint = if (isDestructive) 
                     MaterialTheme.colorScheme.error 

@@ -72,7 +72,7 @@ fun GameModeCard(
     val isImplemented = gameMode == GameMode.CLASSIC
     
     Card(
-        onClick = if (isImplemented) onSelected else { },
+        onClick = { if (isImplemented) onSelected() },
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
             containerColor = if (isImplemented) 

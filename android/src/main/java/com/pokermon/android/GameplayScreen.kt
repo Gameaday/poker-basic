@@ -28,8 +28,8 @@ fun GameplayScreen(
 ) {
     val gameBridge = remember { GameLogicBridge() }
     var gameState by remember { mutableStateOf("Initializing game...") }
-    var playerChips by remember { mutableIntState(1000) }
-    var currentPot by remember { mutableIntState(0) }
+    var playerChips by remember { mutableIntStateOf(1000) }
+    var currentPot by remember { mutableIntStateOf(0) }
     var playerCards by remember { mutableStateOf(listOf<String>()) }
     var isGameInitialized by remember { mutableStateOf(false) }
     var betAmount by remember { mutableIntStateOf(50) }
@@ -39,10 +39,9 @@ fun GameplayScreen(
         val success = gameBridge.initializeGame("Player", 3, 1000)
         if (success) {
             isGameInitialized = true
-            val gameInfo = gameBridge.getGameInfo()
-            playerChips = gameInfo.playerChips
-            currentPot = gameInfo.currentPot
-            playerCards = gameInfo.playerHand
+            playerChips = gameBridge.getPlayerChips()
+            currentPot = gameBridge.getCurrentPot()
+            playerCards = gameBridge.getPlayerHand()
             gameState = "Game ready! Make your move."
         } else {
             gameState = "Failed to initialize game"
@@ -85,18 +84,16 @@ fun GameplayScreen(
                     val result = gameBridge.performCall()
                     gameState = result.message
                     if (result.success) {
-                        val gameInfo = gameBridge.getGameInfo()
-                        playerChips = gameInfo.playerChips
-                        currentPot = gameInfo.currentPot
+                        playerChips = gameBridge.getPlayerChips()
+                        currentPot = gameBridge.getCurrentPot()
                     }
                 },
                 onRaise = { amount ->
                     val result = gameBridge.performRaise(amount)
                     gameState = result.message
                     if (result.success) {
-                        val gameInfo = gameBridge.getGameInfo()
-                        playerChips = gameInfo.playerChips
-                        currentPot = gameInfo.currentPot
+                        playerChips = gameBridge.getPlayerChips()
+                        currentPot = gameBridge.getCurrentPot()
                     }
                 },
                 onFold = {

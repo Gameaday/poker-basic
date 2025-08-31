@@ -107,7 +107,7 @@ fun ContributorsSection() {
             
             // Art Contributors
             ContributorCard(
-                icon = Icons.Default.Palette,
+                icon = Icons.Default.AccountCircle,
                 name = "Peter & Chris Vey",
                 role = "Card Art Assets",
                 description = "Beautiful playing card designs used throughout the game"
@@ -117,7 +117,7 @@ fun ContributorsSection() {
             
             // Development Team
             ContributorCard(
-                icon = Icons.Default.Code,
+                icon = Icons.Default.Build,
                 name = "Development Team",
                 role = "Game Logic & UI",
                 description = "Cross-platform game engine and user interface implementation"
@@ -127,7 +127,7 @@ fun ContributorsSection() {
             
             // Educational Framework
             ContributorCard(
-                icon = Icons.Default.School,
+                icon = Icons.Default.Star,
                 name = "Educational Framework",
                 role = "Learning Platform",
                 description = "Demonstrating object-oriented design and code improvement techniques"

@@ -25,7 +25,6 @@ public class ConsoleMain {
         boolean Continue = true;
         boolean Quit = false;
         String[] players;
-        Player USER = null, CPU1 = null, CPU2 = null, CPU3 = null;
         Player[] list;
         
         // Print author information
@@ -49,7 +48,7 @@ public class ConsoleMain {
         
         // Decide names for the Computer players
         Main.decideNames(players);
-        Main.setupList(list, USER, CPU1, CPU2, CPU3);
+        Main.setupPlayersList(list);
         
         while (Continue) {
             // Initialize the Deck

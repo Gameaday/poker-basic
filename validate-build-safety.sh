@@ -75,7 +75,7 @@ echo ""
 echo -e "${BLUE}📁 Repository Structure Safety${NC}"
 echo "-----------------------------"
 
-test_item "Maven POM structure valid" "[ -f Poker-Basic/pom.xml ] && xmllint --noout Poker-Basic/pom.xml 2>/dev/null || grep -q '<project' Poker-Basic/pom.xml"
+test_item "Maven POM structure valid" "[ -f Poker-Basic/pom.xml ] && { command -v xmllint >/dev/null 2>&1 && xmllint --noout Poker-Basic/pom.xml; } || { ! command -v xmllint >/dev/null 2>&1 && grep -q '<project' Poker-Basic/pom.xml; }"
 test_item "Gradle wrapper executable" "[ -x gradlew ]"
 test_item "Android module exists" "[ -d android ] && [ -f android/build.gradle ]"
 test_item "Source code present" "[ -d Poker-Basic/src/main/java/com/pokermon ]"

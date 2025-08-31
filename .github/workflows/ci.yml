@@ -129,36 +129,73 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-    
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
+
+    - name: Cache Android SDK
+      uses: actions/cache@v4
       with:
-        cmdline-tools-version: 11479570
-        accept-android-sdk-licenses: true
-        packages: |
-          platforms;android-34
-          build-tools;34.0.0
-          ndk;25.2.9519653
-
-    - name: Debug Android SDK Setup
+        path: |
+          ~/android-sdk
+        key: android-sdk-34-${{ runner.os }}-${{ hashFiles('android/build.gradle') }}
+        restore-keys: |
+          android-sdk-34-${{ runner.os }}-
+    
+    - name: Setup Android SDK (Manual)
       run: |
-        echo "ANDROID_HOME: $ANDROID_HOME"
-        echo "ANDROID_SDK_ROOT: $ANDROID_SDK_ROOT"
-        which sdkmanager || echo "sdkmanager not found in PATH"
-        ls -la "$ANDROID_HOME/cmdline-tools/" || echo "cmdline-tools directory not found"
-
-    - name: Accept all Android SDK licenses
-      run: |
-        # Primary license acceptance
-        yes | sdkmanager --licenses || echo "Primary license acceptance may have failed"
+        echo "=== Setting up Android SDK manually for maximum reliability ==="
         
-        # Fallback license acceptance for older SDK setups
-        mkdir -p "$ANDROID_HOME/licenses" || true
-        echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" > "$ANDROID_HOME/licenses/android-sdk-license" || true
-        echo "84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license" || true
+        # Set up Android SDK directory
+        export ANDROID_HOME=$HOME/android-sdk
+        export ANDROID_SDK_ROOT=$ANDROID_HOME
+        export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools
+        echo "ANDROID_HOME=$ANDROID_HOME" >> $GITHUB_ENV
+        echo "ANDROID_SDK_ROOT=$ANDROID_HOME" >> $GITHUB_ENV
+        echo "PATH=$PATH" >> $GITHUB_ENV
         
-        # Verify installation
-        sdkmanager --list_installed || echo "Failed to list installed packages"
+        # Check if SDK is already cached
+        if [ -d "$ANDROID_HOME/cmdline-tools/latest" ] && [ -d "$ANDROID_HOME/platforms/android-34" ]; then
+          echo "Android SDK found in cache, verifying setup..."
+          sdkmanager --version
+          sdkmanager --list_installed
+          echo "=== Android SDK restored from cache successfully ==="
+          exit 0
+        fi
+        
+        # Create SDK directory structure
+        mkdir -p $ANDROID_HOME/cmdline-tools
+        mkdir -p $ANDROID_HOME/licenses
+        
+        # Download and install command line tools (latest version)
+        echo "Downloading Android cmdline-tools..."
+        cd $ANDROID_HOME/cmdline-tools
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-11479570_latest.zip
+        unzip -q commandlinetools-linux-11479570_latest.zip
+        mv cmdline-tools latest
+        rm commandlinetools-linux-11479570_latest.zip
+        
+        # Pre-accept all Android SDK licenses to avoid interactive prompts
+        echo "Pre-accepting Android SDK licenses..."
+        echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" > $ANDROID_HOME/licenses/android-sdk-license
+        echo "84831b9409646a918e30573bab4c9c91346d8abd" > $ANDROID_HOME/licenses/android-sdk-preview-license
+        echo "d56f5187479451eabf01fb78af6dfcb131a6481e" > $ANDROID_HOME/licenses/intel-android-extra-license
+        echo "33b6a2b64607f11b759f320ef9dff4ae5c47d97a" > $ANDROID_HOME/licenses/google-gdk-license
+        echo "d975f751698a77b662f1254ddbeed3901e976f5a" > $ANDROID_HOME/licenses/mips-android-sysimage-license
+        
+        # Verify sdkmanager is working
+        echo "Testing sdkmanager installation..."
+        sdkmanager --version
+        
+        # Install required Android SDK components
+        echo "Installing Android SDK components..."
+        sdkmanager --install "platforms;android-34"
+        sdkmanager --install "build-tools;34.0.0"
+        sdkmanager --install "ndk;25.2.9519653"
+        sdkmanager --install "platform-tools"
+        
+        # List installed packages for verification
+        echo "Installed Android SDK components:"
+        sdkmanager --list_installed
+        
+        echo "=== Android SDK setup completed successfully ==="
     
     - name: Cache Gradle packages
       uses: actions/cache@v4
@@ -189,17 +226,25 @@ jobs:
         echo "Gradle version:"
         ./gradlew --version
         
-        echo "Android SDK packages available:"
-        sdkmanager --list || echo "Failed to list SDK packages"
+        echo "Android SDK verification:"
+        echo "ANDROID_HOME: $ANDROID_HOME"
+        echo "Available platforms:"
+        ls -la "$ANDROID_HOME/platforms/" || echo "No platforms found"
+        echo "Available build-tools:"
+        ls -la "$ANDROID_HOME/build-tools/" || echo "No build tools found"
+        
+        echo "SDK Manager packages:"
+        sdkmanager --list_installed | head -20
         
         echo "Building APK with detailed logging..."
         ./gradlew :android:assembleDebug --no-daemon --stacktrace --info || {
-          echo "Android build failed. Checking common issues..."
+          echo "=== BUILD FAILED - Diagnostic Information ==="
           echo "Android SDK location: $ANDROID_HOME"
-          echo "Available build tools:"
-          ls -la "$ANDROID_HOME/build-tools/" || echo "No build tools found"
-          echo "Available platforms:"
-          ls -la "$ANDROID_HOME/platforms/" || echo "No platforms found"
+          echo "Environment variables:"
+          env | grep ANDROID
+          echo "Gradle daemon status:"
+          ./gradlew --status || true
+          echo "=== END DIAGNOSTIC INFO ==="
           exit 1
         }
     

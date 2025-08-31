@@ -12,19 +12,19 @@ def getGitCommitCount = providers.exec {
 
 android {
     namespace 'com.pokermon.android'
-    compileSdk 34
-    buildToolsVersion "34.0.0"
+    compileSdk 35
+    buildToolsVersion "35.0.0"
 
     defaultConfig {
         applicationId "com.pokermon.android"
-        minSdk 26
-        targetSdk 34
+        minSdk 28
+        targetSdk 35
         versionCode getGitCommitCount.get() // Dynamic version code based on git commit count
         versionName "1.0.${getGitCommitCount.get()}" // Dynamic version name with commit count as patch version
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         
-        // Optimize for API 26+ features
+        // Optimize for API 28+ features
         vectorDrawables.useSupportLibrary = true
     }
 

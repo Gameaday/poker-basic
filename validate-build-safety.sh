@@ -119,7 +119,7 @@ echo "----------------------------"
 # Verify build configurations are copilot-friendly
 test_item "Maven timeout configurations present" "grep -q 'maven.surefire.version' Poker-Basic/pom.xml"
 test_item "Shade plugin configured for fat JAR" "grep -q 'maven-shade-plugin' Poker-Basic/pom.xml"
-test_item "Android API levels compatible" "grep -q 'minSdk 21' android/build.gradle"
+test_item "Android API levels compatible" "grep -q 'minSdk 28' android/build.gradle"
 
 # Check for potential copilot crash conditions
 test_item "No dangerous system calls" "! grep -r 'System.exit' Poker-Basic/src/main/java/ | grep -v 'GameLauncher.java'"

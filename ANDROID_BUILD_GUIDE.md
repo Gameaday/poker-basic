@@ -18,7 +18,7 @@ This directory contains the Android build infrastructure for creating APK files 
 
 2. **Build outputs**:
    - APK file: `app/build/outputs/apk/debug/app-debug.apk`
-   - Installable on Android devices running API 21+ (Android 5.0+)
+   - Installable on Android devices running API 28+ (Android 9.0+)
 
 ### Architecture
 

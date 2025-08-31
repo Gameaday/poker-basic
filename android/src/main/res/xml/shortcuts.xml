@@ -14,7 +14,6 @@
             <extra android:name="gameMode" android:value="CLASSIC" />
             <extra android:name="quickStart" android:value="true" />
         </intent>
-        <categories android:name="android.shortcut.conversation" />
     </shortcut>
     
     <shortcut

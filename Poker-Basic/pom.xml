@@ -18,8 +18,7 @@
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
         <kotlin.version>1.9.10</kotlin.version>
         <compose.version>1.5.4</compose.version>
-        <!-- Git commit count for dynamic versioning -->
-        <git.commit.count>0</git.commit.count>
+
     </properties>
 
     <dependencies>
@@ -70,59 +69,6 @@
         </resources>
         
         <plugins>
-            <!-- Execute git command to get commit count for dynamic versioning -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.3.0</version>
-                <executions>
-                    <execution>
-                        <id>git-commit-count</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>bash</executable>
-                            <arguments>
-                                <argument>-c</argument>
-                                <argument>git rev-list --count HEAD | tr -d '\n'</argument>
-                            </arguments>
-                            <outputFile>${project.build.directory}/git-commit-count.txt</outputFile>
-                            <successCodes>
-                                <successCode>0</successCode>
-                            </successCodes>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            
-            <!-- Replace placeholders in Version.java with actual git commit count -->
-            <plugin>
-                <groupId>com.google.code.maven-replacer-plugin</groupId>
-                <artifactId>replacer</artifactId>
-                <version>1.5.3</version>
-                <executions>
-                    <execution>
-                        <phase>process-sources</phase>
-                        <goals>
-                            <goal>replace</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <includes>
-                        <include>${project.build.sourceDirectory}/com/pokermon/Version.java</include>
-                    </includes>
-                    <replacements>
-                        <replacement>
-                            <token>@git.commit.count@</token>
-                            <valueFile>${project.build.directory}/git-commit-count.txt</valueFile>
-                        </replacement>
-                    </replacements>
-                </configuration>
-            </plugin>
-            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

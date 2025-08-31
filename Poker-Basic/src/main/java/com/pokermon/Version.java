@@ -5,21 +5,20 @@ package com.pokermon;
  * This class serves as the single point of truth for all version information
  * across desktop JAR, Android APK, and other build targets.
  * 
- * Version code is dynamically generated based on git commit count to ensure
- * automatic incrementation with each commit, eliminating manual version management
- * while maintaining semantic versioning for major and minor releases.
+ * Version is managed with simple incremental versioning to ensure
+ * automatic incrementation without complex build plugins.
  * 
  * @author Carl Nelson (@Gameaday)
- * @version 1.0.0
+ * @version 1.0.6
  */
 public final class Version {
     
     /**
-     * The current version of the application with dynamic patch version based on commit count.
-     * Format: major.minor.commitCount (e.g., "1.0.4" where 4 is the commit count)
-     * This value is replaced during build process with actual git commit count.
+     * The current version of the application with incremental patch version.
+     * Format: major.minor.patch (e.g., "1.0.6")
+     * Increment the patch number for each new build.
      */
-    public static final String VERSION = "1.0.5";
+    public static final String VERSION = "1.0.6";
     
     /**
      * The application name - short for "Poker Monster" after the game features.
@@ -37,12 +36,11 @@ public final class Version {
     public static final String APP_DESCRIPTION = "Educational poker game demonstrating cross-platform development with multiple game modes";
     
     /**
-     * Version code for Android builds - dynamically generated from git commit count.
-     * This ensures proper APK update handling on Android devices and automatic
-     * incrementation with each commit without manual intervention.
-     * This value is replaced during build process with actual git commit count.
+     * Version code for Android builds - incremental integer for APK updates.
+     * This ensures proper APK update handling on Android devices.
+     * Increment this number for each new build.
      */
-    public static final int VERSION_CODE = 5;
+    public static final int VERSION_CODE = 6;
     
     /**
      * Build timestamp from Maven build process.
@@ -76,7 +74,7 @@ public final class Version {
     }
     
     /**
-     * Get detailed version information including commit count.
+     * Get detailed version information.
      * @return Detailed version info with build details
      */
     public static String getDetailedVersionInfo() {

@@ -26,11 +26,7 @@ class CardDisplayTest {
         List<String> playerHand = bridge.getPlayerHand();
         assertFalse(playerHand.isEmpty(), "Player should have cards");
         
-        // Print sample cards for verification
-        System.out.println("Sample card formats: " + playerHand);
-        for (String card : playerHand) {
-            System.out.println("  " + card + " (length: " + card.length() + ")");
-        }
+        // Verify card format (no debug output needed in production tests)
         
         // Verify card format (should be like "A♠", "K♥", "Q♦", "J♣", "10♠", etc.)
         for (String card : playerHand) {
@@ -49,12 +45,10 @@ class CardDisplayTest {
         }
         
         // Test round completion logic
-        System.out.println("Round completion before bets: " + bridge.isRoundComplete());
         assertFalse(bridge.isRoundComplete(), "Round should not be complete before any bets");
         
         // Make a call and test again
         var result = bridge.performCall();
-        System.out.println("Call result: " + result.getMessage());
-        System.out.println("Round completion after call: " + bridge.isRoundComplete());
+        // Test verifies the call completes successfully without debug output
     }
 }

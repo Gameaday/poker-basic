@@ -59,8 +59,8 @@ android {
 }
 
 dependencies {
-    // Shared game logic - using regular JAR to avoid dependency conflicts
-    implementation files('../Poker-Basic/target/pokermon-1.0.0.jar')
+    // Shared game logic - using fat JAR with all dependencies included
+    implementation files('../Poker-Basic/target/pokermon-1.0.0-fat.jar')
     
     // Kotlin standard library for shared logic compatibility
     implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.10'

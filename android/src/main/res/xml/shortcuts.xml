@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <shortcut
+        android:shortcutId="quick_classic"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/quick_classic_short"
+        android:shortcutLongLabel="@string/quick_classic_long">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.pokermon.android"
+            android:targetClass="com.pokermon.android.MainActivity">
+            <extra android:name="gameMode" android:value="CLASSIC" />
+            <extra android:name="quickStart" android:value="true" />
+        </intent>
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+    
+    <shortcut
+        android:shortcutId="settings"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/settings_short"
+        android:shortcutLongLabel="@string/settings_long">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.pokermon.android"
+            android:targetClass="com.pokermon.android.MainActivity">
+            <extra android:name="destination" android:value="settings" />
+        </intent>
+    </shortcut>
+    
+</shortcuts>

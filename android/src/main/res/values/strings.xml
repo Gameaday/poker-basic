@@ -2,4 +2,10 @@
 <resources>
     <string name="app_name">Poker Game</string>
     <string name="app_description">Cross-platform educational poker game with multiple game modes</string>
+    
+    <!-- App shortcuts -->
+    <string name="quick_classic_short">Classic Game</string>
+    <string name="quick_classic_long">Start Classic Poker Game</string>
+    <string name="settings_short">Settings</string>
+    <string name="settings_long">Game Settings</string>
 </resources>

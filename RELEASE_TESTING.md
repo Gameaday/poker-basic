@@ -11,7 +11,7 @@ The workflow creates different types of releases based on the branch:
 - **Alpha Release**: Triggered by branches starting with `alpha-`
   - Creates pre-release with "Alpha Test" label
   - Tag format: `alpha-{version}-{timestamp}`
-  - Example: `alpha-0.08.30-20240830-120000`
+  - Example: `alpha-1.0.0-20240830-120000`
 
 - **Development Release**: Triggered by pushes to `main` or `master`
   - Creates pre-release with "Development Build" label
@@ -49,10 +49,10 @@ The workflow will automatically:
 3. Test the application:
    ```bash
    # GUI Version
-   java -cp pokermon-0.08.30.jar com.pokermon.NewJFrame
+   java -cp pokermon-1.0.0.jar com.pokermon.NewJFrame
    
    # Console Version
-   java -cp pokermon-0.08.30.jar com.pokermon.Main
+   java -cp pokermon-1.0.0.jar com.pokermon.Main
    ```
 
 ## Release Notes Template

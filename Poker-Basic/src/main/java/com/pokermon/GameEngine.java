@@ -5,6 +5,9 @@ import java.util.Arrays;
 /**
  * Manages the core game logic and flow for poker games.
  * This class provides a centralized way to handle game operations with improved reusability.
+ * 
+ * @author Carl Nelson (@Gameaday)
+ * @version 1.0.0
  */
 public class GameEngine {
     private final Game gameConfig;

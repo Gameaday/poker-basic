@@ -100,7 +100,7 @@ fun MainMenuScreen(navController: NavHostController) {
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "🃏 Poker Game",
+            text = "🃏 Pokermon",
             style = MaterialTheme.typography.headlineLarge
         )
         
@@ -147,7 +147,7 @@ fun MainMenuScreen(navController: NavHostController) {
         Spacer(modifier = Modifier.height(32.dp))
         
         Text(
-            text = "Android version of the cross-platform poker game.\nNow with full game logic integration!",
+            text = "Android version of Pokermon - the cross-platform poker game.\nNow with full game logic integration!",
             style = MaterialTheme.typography.bodyMedium
         )
     }

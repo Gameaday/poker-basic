@@ -10,7 +10,7 @@ android {
         applicationId "com.pokermon.android"
         minSdk 26
         targetSdk 34
-        versionCode 1
+        versionCode 1 // Increment this for each APK release to enable updates
         versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -59,12 +59,13 @@ android {
 }
 
 dependencies {
-    // Shared game logic - using regular JAR to avoid dependency conflicts
-    implementation files('../Poker-Basic/target/pokermon-1.0.0.jar')
+    // Shared game logic - using thin JAR (no dependencies) to avoid conflicts
+    implementation files('../Poker-Basic/target/pokermon-1.0.0-android.jar')
     
-    // Kotlin standard library for shared logic compatibility
+    // Explicit dependencies for proper Android management
     implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.10'
     
+    // Android and UI dependencies
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'

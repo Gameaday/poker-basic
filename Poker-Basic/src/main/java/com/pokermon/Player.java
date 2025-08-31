@@ -23,6 +23,7 @@ public class Player {
     private boolean straight, aceStraight, flush, straightFlush, royalFlush;
     private boolean twoKind, twoPair, threeKind, fourKind, fullHouse;
     private int handValue;
+    private boolean isHuman;
 
     
     /**
@@ -34,6 +35,7 @@ public class Player {
         this.bet = 0;
         this.chips = 0;
         this.handValue = 0;
+        this.isHuman = false; // Default to AI player
     }
 
     // Getters
@@ -56,9 +58,11 @@ public class Player {
     public boolean isThreeKind() { return threeKind; }
     public boolean isFourKind() { return fourKind; }
     public boolean isFullHouse() { return fullHouse; }
+    public boolean isHuman() { return isHuman; }
 
     public void setLastBet(int lastBet) { this.lastBet = lastBet; }
     public void setFold(boolean fold) { this.fold = fold; }
+    public void setHuman(boolean isHuman) { this.isHuman = isHuman; }
     
     /**
      * Sets the player's name.

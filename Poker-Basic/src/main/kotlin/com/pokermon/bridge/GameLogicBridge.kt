@@ -201,11 +201,9 @@ class GameLogicBridge {
                         GameActionResult(true, "No bet to call")
                     } else {
                         player.placeBet(player.getBet() + callAmount)
-                        // Update the engine's pot as well
-                        val newPot = engine.currentPot + callAmount
-                        // Since GameEngine doesn't have a setPot method, update manually
-                        currentPot = newPot
-                        playerChips = player.getChips()
+                        // Add the call amount to the pot
+                        engine.addToPot(callAmount)
+                        updatePlayerData()
                         GameActionResult(true, "Called for $callAmount chips")
                     }
                 } else {
@@ -235,9 +233,9 @@ class GameLogicBridge {
                         GameActionResult(false, "Not enough chips to raise by $amount")
                     } else {
                         player.placeBet(amount)
-                        // Synchronize the pot from the engine after the bet
-                        currentPot = engine.currentPot
-                        playerChips = player.getChips()
+                        // Add the raise amount to the pot
+                        engine.addToPot(amount)
+                        updatePlayerData()
                         GameActionResult(true, "Raised by $amount chips")
                     }
                 } else {

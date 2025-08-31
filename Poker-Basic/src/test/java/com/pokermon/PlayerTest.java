@@ -6,6 +6,22 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for the Player class to verify proper encapsulation and functionality.
+ * 
+ * These tests ensure that:
+ * - Player state management works correctly (chips, betting, folding)
+ * - Hand management and encapsulation is properly implemented
+ * - Player setup and initialization functions as expected
+ * - Betting mechanics work correctly with various scenarios
+ * - Player data integrity is maintained throughout operations
+ * 
+ * Coverage includes:
+ * - Basic getter/setter functionality
+ * - Betting operations and chip management  
+ * - Hand setup and card management
+ * - Folding state transitions
+ * - Data encapsulation and defensive copying
+ * 
+ * @author Enhanced for issue #68 - Improve process flow and test cases
  */
 class PlayerTest {
     

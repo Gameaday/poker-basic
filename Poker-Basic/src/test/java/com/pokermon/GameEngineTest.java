@@ -6,6 +6,28 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the GameEngine class to verify centralized game management.
+ * 
+ * These comprehensive tests validate:
+ * - Complete game initialization and setup flow
+ * - Invalid game initialization handling and error recovery
+ * - New round management and state transitions
+ * - Betting round coordination and pot management
+ * - Card exchange functionality
+ * - Winner determination algorithms
+ * - Pot distribution mechanics
+ * - Game continuation and lifecycle management
+ * - Game state reporting and consistency
+ * - Custom game configuration support
+ * - Flexible hand size handling
+ * - Round completion logic with complex betting scenarios
+ * 
+ * Flow validation covers:
+ * - Game Start → Player Setup → Round Management → Betting → Card Exchange → Winner → Pot Distribution → Next Round
+ * - Error scenarios and recovery mechanisms
+ * - Edge cases in game state transitions
+ * - Multi-configuration game support
+ * 
+ * @author Enhanced for issue #68 - Improve process flow and test cases
  */
 class GameEngineTest {
     

@@ -89,7 +89,7 @@ if [ -f android/build.gradle ]; then
     VERSION_NAME=$(grep "versionName" android/build.gradle | sed -n 's/.*versionName "\([^"]*\)"/\1/p')
     
     echo "📱 Android Compile SDK: $COMPILE_SDK"
-    echo "📱 Android Min SDK: $MIN_SDK (Android 5.0+)"
+    echo "📱 Android Min SDK: $MIN_SDK (Android 8.0+)"
     echo "📱 Android Target SDK: $TARGET_SDK"
     echo "📱 App Version: $VERSION_NAME"
 fi

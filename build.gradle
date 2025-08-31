@@ -22,37 +22,48 @@ task verifyDualPlatformSetup {
     description = 'Verifies that both Java/Maven and Android/Gradle configurations are ready'
     
     doLast {
-        def canBuildAndroid = true  // Default to true for simplicity
         println "=== Dual Platform Build Setup Verification ==="
         
         // Check Java/Maven setup
-        def pomFile = file('Poker-Basic/pom.xml')
+        def pomPath = 'Poker-Basic/pom.xml'
+        def pomFile = new File(pomPath)
         if (pomFile.exists()) {
-            println "✅ Java/Maven build: ${pomFile.path}"
+            println "✅ Java/Maven build: ${pomPath}"
             println "   Build command: cd Poker-Basic && mvn clean package"
         } else {
             println "❌ Java/Maven pom.xml not found"
         }
         
         // Check Android/Gradle setup
-        def androidManifest = file('app/src/main/AndroidManifest.xml')
-        def appBuildGradle = file('app/build.gradle')
-        def gradleWrapper = file('gradlew')
-        def androidActivity = file('app/src/main/java/com/pokermon/MainActivity.java')
+        def androidManifestPath = 'android/src/main/AndroidManifest.xml'
+        def androidBuildGradlePath = 'android/build.gradle'
+        def gradleWrapperPath = 'gradlew'
+        def androidActivityPath = 'android/src/main/java/com/pokermon/android/MainActivity.kt'
         
-        if (androidManifest.exists() && appBuildGradle.exists() && gradleWrapper.exists() && androidActivity.exists()) {
+        def androidManifest = new File(androidManifestPath)
+        def androidBuildGradle = new File(androidBuildGradlePath)
+        def gradleWrapper = new File(gradleWrapperPath)
+        def androidActivity = new File(androidActivityPath)
+        
+        if (androidManifest.exists() && androidBuildGradle.exists() && gradleWrapper.exists() && androidActivity.exists()) {
             println "✅ Android/Gradle build configuration complete:"
             println "   - AndroidManifest.xml: ${androidManifest.exists()}"
-            println "   - app/build.gradle: ${appBuildGradle.exists()}"
+            println "   - android/build.gradle: ${androidBuildGradle.exists()}"
             println "   - Gradle wrapper: ${gradleWrapper.exists()}"
-            println "   - MainActivity.java: ${androidActivity.exists()}"
-            println "   Build command: ./gradlew assembleDebug"
+            println "   - MainActivity.kt: ${androidActivity.exists()}"
+            println "   Build command: ./gradlew :android:assembleDebug"
         } else {
             println "❌ Android build configuration incomplete"
+            println "   Missing files:"
+            if (!androidManifest.exists()) println "   - AndroidManifest.xml"
+            if (!androidBuildGradle.exists()) println "   - android/build.gradle"
+            if (!gradleWrapper.exists()) println "   - gradlew"
+            if (!androidActivity.exists()) println "   - MainActivity.kt"
         }
         
         // Check shared source integration
-        def sharedJavaSource = file('Poker-Basic/src/main/java/com/pokermon')
+        def sharedJavaSourcePath = 'Poker-Basic/src/main/java/com/pokermon'
+        def sharedJavaSource = new File(sharedJavaSourcePath)
         if (sharedJavaSource.exists()) {
             def javaFiles = sharedJavaSource.listFiles().findAll { it.name.endsWith('.java') }
             println "✅ Shared Java source: ${javaFiles.size()} files in com.pokermon package"

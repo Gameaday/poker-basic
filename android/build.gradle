@@ -8,18 +8,27 @@ android {
 
     defaultConfig {
         applicationId "com.pokermon.android"
-        minSdk 21
+        minSdk 26
         targetSdk 34
         versionCode 1
         versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        
+        // Optimize for API 26+ features
+        vectorDrawables.useSupportLibrary = true
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            // Faster debug builds
+            minifyEnabled false
+            debuggable true
         }
     }
     
@@ -34,10 +43,18 @@ android {
     
     buildFeatures {
         compose true
+        buildConfig = true
     }
     
     composeOptions {
         kotlinCompilerExtensionVersion '1.5.8'
+    }
+    
+    // Optimization settings for faster builds
+    packagingOptions {
+        resources {
+            excludes += ['/META-INF/{AL2.0,LGPL2.1}']
+        }
     }
 }
 

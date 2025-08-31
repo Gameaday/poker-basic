@@ -345,8 +345,8 @@ fun CardDisplay(
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = card.take(3), // Show first 3 characters
-            style = MaterialTheme.typography.labelSmall,
+            text = card, // Show full card notation (e.g., "A♠", "K♥")
+            style = MaterialTheme.typography.labelMedium,
             color = if (isSelected) Color.White else Color.Black,
             textAlign = TextAlign.Center
         )

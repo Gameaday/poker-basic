@@ -1,4 +1,5 @@
-import com.pokermon.bridge.GameLogicBridge;
+package com.pokermon.bridge;
+
 import java.util.List;
 
 public class QuickCardTest {

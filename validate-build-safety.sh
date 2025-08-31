@@ -122,8 +122,7 @@ test_item "Shade plugin configured for fat JAR" "grep -q 'maven-shade-plugin' Po
 test_item "Android API levels compatible" "grep -q 'minSdk 21' android/build.gradle"
 
 # Check for potential copilot crash conditions
-test_item "No infinite loops in build config" "! grep -r 'while.*true' Poker-Basic/pom.xml || true"
-test_item "No dangerous system calls" "! grep -r 'System.exit' Poker-Basic/src/main/java/ | grep -v 'GameLauncher.java' || true"
+test_item "No dangerous system calls" "! grep -r 'System.exit' Poker-Basic/src/main/java/ | grep -v 'GameLauncher.java'"
 
 echo ""
 

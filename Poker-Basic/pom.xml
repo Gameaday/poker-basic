@@ -165,7 +165,9 @@
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.5.1</version>
                 <executions>
+                    <!-- Fat JAR for desktop distribution -->
                     <execution>
+                        <id>fat-jar</id>
                         <phase>package</phase>
                         <goals>
                             <goal>shade</goal>
@@ -187,6 +189,32 @@
                                 </filter>
                             </filters>
                             <finalName>pokermon-${project.version}-fat</finalName>
+                        </configuration>
+                    </execution>
+                    <!-- Thin JAR for Android (no dependencies) -->
+                    <execution>
+                        <id>thin-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <artifactSet>
+                                <includes>
+                                    <include>${project.groupId}:${project.artifactId}</include>
+                                </includes>
+                            </artifactSet>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                            <finalName>pokermon-${project.version}-android</finalName>
                         </configuration>
                     </execution>
                 </executions>

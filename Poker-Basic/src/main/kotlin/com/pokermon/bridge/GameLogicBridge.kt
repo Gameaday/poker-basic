@@ -21,6 +21,10 @@ class GameLogicBridge {
     private var playerChips = 1000
     private var playerHand = listOf<String>()
     
+    // Game state for save/load functionality
+    private var gameStateSaved = false
+    private var savedGameState: SavedGameState? = null
+    
     /**
      * Initialize a new game with the specified parameters.
      */
@@ -55,6 +59,33 @@ class GameLogicBridge {
             success
         } catch (e: Exception) {
             false
+        }
+    }
+    
+    /**
+     * Check if the game should advance to the next phase after a player action.
+     * This handles automatic game flow progression.
+     */
+    private fun checkAndAdvanceGamePhase() {
+        gameEngine?.let { engine ->
+            // Check if current betting round is complete
+            if (engine.isRoundComplete()) {
+                val currentPhase = engine.currentPhase
+                when (currentPhase) {
+                    GamePhase.BETTING_ROUND, GamePhase.PLAYER_ACTIONS -> {
+                        // Move to card exchange phase after initial betting
+                        engine.beginCardExchange()
+                    }
+                    GamePhase.FINAL_BETTING -> {
+                        // Move to winner determination after final betting
+                        engine.setPhase(GamePhase.WINNER_DETERMINATION)
+                    }
+                    else -> {
+                        // For other phases, use the standard advance method
+                        engine.advancePhase()
+                    }
+                }
+            }
         }
     }
     
@@ -244,6 +275,9 @@ class GameLogicBridge {
                     val callAmount = if (highBet <= 0) 50 else (highBet - player.getBet()).coerceAtMost(player.getChips())
                     
                     if (callAmount <= 0) {
+                        // Check if we should advance phase after this action
+                        checkAndAdvanceGamePhase()
+                        updatePlayerData()
                         GameActionResult(true, "No bet to call")
                     } else {
                         player.placeBet(player.getBet() + callAmount)
@@ -251,6 +285,8 @@ class GameLogicBridge {
                         engine.addToPot(callAmount)
                         // Advance to next player after action
                         engine.nextPlayer()
+                        // Check if we should advance phase after this action
+                        checkAndAdvanceGamePhase()
                         updatePlayerData()
                         GameActionResult(true, "Called for $callAmount chips")
                     }
@@ -285,6 +321,8 @@ class GameLogicBridge {
                         engine.addToPot(amount)
                         // Advance to next player after action
                         engine.nextPlayer()
+                        // Check if we should advance phase after this action
+                        checkAndAdvanceGamePhase()
                         updatePlayerData()
                         GameActionResult(true, "Raised by $amount chips")
                     }
@@ -313,6 +351,8 @@ class GameLogicBridge {
                     player.setFold(true)
                     // Advance to next player after action
                     engine.nextPlayer()
+                    // Check if we should advance phase after this action
+                    checkAndAdvanceGamePhase()
                     updatePlayerData()
                     GameActionResult(true, "Folded")
                 } else {
@@ -336,6 +376,8 @@ class GameLogicBridge {
             gameEngine?.let { engine ->
                 // Advance to next player after action
                 engine.nextPlayer()
+                // Check if we should advance phase after this action
+                checkAndAdvanceGamePhase()
                 updatePlayerData()
                 GameActionResult(true, "Checked")
             } ?: GameActionResult(false, "Game engine not available")
@@ -542,6 +584,86 @@ class GameLogicBridge {
     internal fun getGameEngine(): GameEngine? {
         return gameEngine
     }
+    
+    /**
+     * Save the current game state.
+     */
+    fun saveGameState(): GameActionResult {
+        return try {
+            if (!isGameInitialized) {
+                return GameActionResult(false, "No game to save")
+            }
+            
+            gameEngine?.let { engine ->
+                savedGameState = SavedGameState(
+                    playerName = playerName,
+                    gameMode = gameMode,
+                    currentRound = engine.currentRound,
+                    currentPhase = engine.currentPhase,
+                    currentPot = currentPot,
+                    playerChips = playerChips,
+                    playerCards = playerHand,
+                    allPlayersData = getAllPlayers(),
+                    selectedCards = selectedCards.toSet(),
+                    isGameActive = true
+                )
+                gameStateSaved = true
+                GameActionResult(true, "Game saved successfully")
+            } ?: GameActionResult(false, "Game engine not available")
+        } catch (e: Exception) {
+            GameActionResult(false, "Error saving game: ${e.message}")
+        }
+    }
+    
+    /**
+     * Load a previously saved game state.
+     */
+    fun loadGameState(): GameActionResult {
+        return try {
+            savedGameState?.let { saved ->
+                // Restore basic game parameters
+                playerName = saved.playerName
+                gameMode = saved.gameMode
+                currentPot = saved.currentPot
+                playerChips = saved.playerChips
+                playerHand = saved.playerCards
+                selectedCards = saved.selectedCards.toMutableSet()
+                
+                // Reinitialize game with saved parameters
+                val success = initializeGame(saved.playerName, saved.allPlayersData.size, saved.playerChips)
+                if (success) {
+                    // Try to restore phase (may not be perfect but gives basic restoration)
+                    gameEngine?.setPhase(saved.currentPhase)
+                    updatePlayerData()
+                    GameActionResult(true, "Game loaded successfully")
+                } else {
+                    GameActionResult(false, "Failed to restore game state")
+                }
+            } ?: GameActionResult(false, "No saved game found")
+        } catch (e: Exception) {
+            GameActionResult(false, "Error loading game: ${e.message}")
+        }
+    }
+    
+    /**
+     * Check if there is a saved game available.
+     */
+    fun hasSavedGame(): Boolean {
+        return savedGameState != null
+    }
+    
+    /**
+     * Clear the saved game state.
+     */
+    fun clearSavedGame(): GameActionResult {
+        return try {
+            savedGameState = null
+            gameStateSaved = false
+            GameActionResult(true, "Saved game cleared")
+        } catch (e: Exception) {
+            GameActionResult(false, "Error clearing saved game: ${e.message}")
+        }
+    }
 }
 
 /**
@@ -561,4 +683,20 @@ data class PlayerInfo(
 data class GameActionResult(
     val success: Boolean,
     val message: String
+)
+
+/**
+ * Saved game state for persistence functionality.
+ */
+data class SavedGameState(
+    val playerName: String,
+    val gameMode: GameMode,
+    val currentRound: Int,
+    val currentPhase: GamePhase,
+    val currentPot: Int,
+    val playerChips: Int,
+    val playerCards: List<String>,
+    val allPlayersData: List<PlayerInfo>,
+    val selectedCards: Set<Int>,
+    val isGameActive: Boolean
 )

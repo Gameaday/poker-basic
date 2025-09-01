@@ -17,9 +17,10 @@ public final class Version {
     /**
      * The current version of the application with dynamic patch version based on commit count.
      * Format: major.minor.commitCount (e.g., "1.0.4" where 4 is the commit count)
-     * This value is replaced during build process with actual git commit count.
+     * This value is replaced during build process with actual git commit count from main branch.
+     * Fallback to "1.0.0" if replacement fails to ensure valid version string.
      */
-    public static final String VERSION = "1.0.5";
+    public static final String VERSION = "1.0.8";
     
     /**
      * The application name - short for "Poker Monster" after the game features.
@@ -37,12 +38,13 @@ public final class Version {
     public static final String APP_DESCRIPTION = "Educational poker game demonstrating cross-platform development with multiple game modes";
     
     /**
-     * Version code for Android builds - dynamically generated from git commit count.
+     * Version code for Android builds - dynamically generated from git commit count from main branch.
      * This ensures proper APK update handling on Android devices and automatic
      * incrementation with each commit without manual intervention.
-     * This value is replaced during build process with actual git commit count.
+     * This value is replaced during build process with actual git commit count from main branch.
+     * Fallback to 1 if replacement fails to ensure valid version code.
      */
-    public static final int VERSION_CODE = 2;
+    public static final int VERSION_CODE = 8;
     
     /**
      * Build timestamp from Maven build process.
@@ -60,11 +62,40 @@ public final class Version {
     public static final String CREATOR = "Carl Nelson (@Gameaday)";
     
     /**
-     * Get formatted version information.
-     * @return Formatted version string
+     * Get formatted version information with validation.
+     * @return Formatted version string with fallback if replacement failed
      */
     public static String getVersionInfo() {
-        return APP_NAME + " version " + VERSION;
+        return APP_NAME + " version " + getValidatedVersion();
+    }
+    
+    /**
+     * Get validated version string with fallback for failed placeholder replacement.
+     * @return Valid version string (falls back to "1.0.0" if placeholder replacement failed)
+     */
+    public static String getValidatedVersion() {
+        // Use string concatenation to avoid Maven replacement affecting this check
+        String placeholder = "@" + "git.commit.count" + "@";
+        if (VERSION.contains(placeholder)) {
+            // Placeholder replacement failed - use fallback version
+            return "1.0.0";
+        }
+        return VERSION;
+    }
+    
+    /**
+     * Get validated version code with fallback for failed placeholder replacement.
+     * @return Valid version code (falls back to 1 if placeholder replacement failed)
+     */
+    public static int getValidatedVersionCode() {
+        // Use string concatenation to avoid Maven replacement affecting this check
+        String placeholder = "@" + "git.commit.count" + "@";
+        String versionStr = String.valueOf(VERSION_CODE);
+        if (versionStr.contains(placeholder) || VERSION_CODE <= 0) {
+            // Placeholder replacement failed or invalid - use fallback version code
+            return 1;
+        }
+        return VERSION_CODE;
     }
     
     /**
@@ -72,7 +103,7 @@ public final class Version {
      * @return Complete app info string
      */
     public static String getFullInfo() {
-        return APP_DISPLAY_NAME + " v" + VERSION + " - " + APP_DESCRIPTION;
+        return APP_DISPLAY_NAME + " v" + getValidatedVersion() + " - " + APP_DESCRIPTION;
     }
     
     /**
@@ -81,7 +112,7 @@ public final class Version {
      */
     public static String getDetailedVersionInfo() {
         return String.format("%s v%s (build %d) - %s", 
-            APP_NAME, VERSION, VERSION_CODE, BUILD_TIMESTAMP);
+            APP_NAME, getValidatedVersion(), getValidatedVersionCode(), BUILD_TIMESTAMP);
     }
     
     /**

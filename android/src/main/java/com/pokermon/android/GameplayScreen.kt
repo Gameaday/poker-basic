@@ -1,5 +1,6 @@
 package com.pokermon.android
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -43,6 +44,9 @@ fun GameplayScreen(
     var selectedCards by remember { mutableStateOf(setOf<Int>()) }
     var currentRound by remember { mutableIntStateOf(0) }
     var isRoundComplete by remember { mutableStateOf(false) }
+    
+    // Back button protection
+    var showExitConfirmDialog by remember { mutableStateOf(false) }
     
     // Game phase state
     var currentPhase by remember { mutableStateOf<GamePhase>(GamePhase.INITIALIZATION) }
@@ -88,6 +92,11 @@ fun GameplayScreen(
         } else {
             gameState = "Failed to initialize game"
         }
+    }
+    
+    // Handle back button during gameplay - show confirmation dialog
+    BackHandler(enabled = isGameInitialized) {
+        showExitConfirmDialog = true
     }
     
     Column(
@@ -349,6 +358,35 @@ fun GameplayScreen(
             Text("Back to Menu")
         }
     }
+    
+    // Exit confirmation dialog
+    if (showExitConfirmDialog) {
+        AlertDialog(
+            onDismissRequest = { showExitConfirmDialog = false },
+            title = { Text("⚠️ Exit Game") },
+            text = { 
+                Text("Are you sure you want to exit the current game?\n\nYour progress will be lost if you haven't saved.") 
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showExitConfirmDialog = false
+                        onBackPressed()
+                    },
+                    colors = ButtonDefaults.textButtonColors(
+                        contentColor = MaterialTheme.colorScheme.error
+                    )
+                ) {
+                    Text("Exit Game")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showExitConfirmDialog = false }) {
+                    Text("Continue Playing")
+                }
+            }
+        )
+    }
 }
 
 @Composable
@@ -460,26 +498,85 @@ fun CardDisplay(
     onClick: () -> Unit = {},
     canClick: Boolean = true
 ) {
+    // Parse card string to get rank and suit for better display
+    val (rank, suitSymbol, suitColor) = parseCardDisplay(card)
+    
     Box(
         modifier = Modifier
             .size(width = 60.dp, height = 80.dp)
             .clickable(enabled = canClick) { onClick() }
             .background(
                 color = if (isSelected) MaterialTheme.colorScheme.primary 
-                       else if (canClick) Color.White 
-                       else Color.Gray.copy(alpha = 0.7f),
+                       else Color.White,
                 shape = RoundedCornerShape(8.dp)
             ),
         contentAlignment = Alignment.Center
     ) {
-        Text(
-            text = card, // Show full card notation (e.g., "A♠", "K♥")
-            style = MaterialTheme.typography.labelMedium,
-            color = if (isSelected) Color.White 
-                   else if (canClick) Color.Black 
-                   else Color.Gray,
-            textAlign = TextAlign.Center
-        )
+        // Add border for selected cards
+        if (isSelected) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        color = Color.Transparent,
+                        shape = RoundedCornerShape(8.dp)
+                    )
+                    .then(
+                        Modifier.background(
+                            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
+                            shape = RoundedCornerShape(8.dp)
+                        )
+                    )
+            )
+        }
+        
+        // Card content
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            // Rank
+            Text(
+                text = rank,
+                style = MaterialTheme.typography.titleMedium,
+                color = if (isSelected) Color.White else suitColor,
+                fontWeight = FontWeight.Bold
+            )
+            // Suit symbol
+            Text(
+                text = suitSymbol,
+                style = MaterialTheme.typography.titleLarge,
+                color = if (isSelected) Color.White else suitColor
+            )
+        }
+    }
+}
+
+/**
+ * Parse card string to extract rank, suit symbol, and color for display.
+ */
+private fun parseCardDisplay(card: String): Triple<String, String, Color> {
+    when {
+        card.contains("♠") -> {
+            val rank = card.replace("♠", "").trim()
+            return Triple(rank, "♠", Color.Black)
+        }
+        card.contains("♥") -> {
+            val rank = card.replace("♥", "").trim()
+            return Triple(rank, "♥", Color.Red)
+        }
+        card.contains("♦") -> {
+            val rank = card.replace("♦", "").trim()
+            return Triple(rank, "♦", Color.Red)
+        }
+        card.contains("♣") -> {
+            val rank = card.replace("♣", "").trim()
+            return Triple(rank, "♣", Color.Black)
+        }
+        else -> {
+            // Fallback for unparseable cards
+            return Triple(card, "", Color.Gray)
+        }
     }
 }
 

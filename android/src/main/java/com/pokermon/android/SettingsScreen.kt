@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.pokermon.android.ui.theme.PokerTableTheme
 
 /**
  * Settings screen for customization and save management.
@@ -25,6 +26,8 @@ fun SettingsScreen(
     var soundEnabled by remember { mutableStateOf(true) }
     var animationsEnabled by remember { mutableStateOf(true) }
     var autoSaveEnabled by remember { mutableStateOf(true) }
+    var selectedTheme by remember { mutableStateOf<PokerTableTheme?>(null) }
+    var showThemeDialog by remember { mutableStateOf(false) }
     
     Column(
         modifier = Modifier
@@ -72,6 +75,20 @@ fun SettingsScreen(
                 description = "Automatically save game progress",
                 checked = autoSaveEnabled,
                 onCheckedChange = { autoSaveEnabled = it }
+            )
+        }
+        
+        Spacer(modifier = Modifier.height(24.dp))
+        
+        // Table Theme Section
+        SettingsSection(
+            title = "🎨 Table Theme"
+        ) {
+            SettingsActionItem(
+                icon = Icons.Default.Settings,
+                title = "Poker Table Style",
+                description = selectedTheme?.displayName ?: "Default (System Colors)",
+                onClick = { showThemeDialog = true }
             )
         }
         
@@ -164,6 +181,84 @@ fun SettingsScreen(
             },
             dismissButton = {
                 TextButton(onClick = { showDeleteDialog = false }) {
+                    Text("Cancel")
+                }
+            }
+        )
+    }
+    
+    // Theme selection dialog
+    if (showThemeDialog) {
+        AlertDialog(
+            onDismissRequest = { showThemeDialog = false },
+            title = { Text("🎨 Choose Table Theme") },
+            text = {
+                Column {
+                    Text(
+                        text = "Select your preferred poker table color scheme:",
+                        modifier = Modifier.padding(bottom = 16.dp)
+                    )
+                    
+                    // Default/System option
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = selectedTheme == null,
+                            onClick = { selectedTheme = null }
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Column {
+                            Text(
+                                text = "Default",
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                            Text(
+                                text = "System colors",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
+                    
+                    // Poker table themes
+                    PokerTableTheme.values().forEach { theme ->
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 4.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            RadioButton(
+                                selected = selectedTheme == theme,
+                                onClick = { selectedTheme = theme }
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Column {
+                                Text(
+                                    text = theme.displayName,
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
+                                Text(
+                                    text = theme.description,
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+                    }
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { showThemeDialog = false }) {
+                    Text("Apply")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showThemeDialog = false }) {
                     Text("Cancel")
                 }
             }

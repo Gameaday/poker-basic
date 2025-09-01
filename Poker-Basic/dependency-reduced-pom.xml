@@ -36,7 +36,7 @@
               <executable>bash</executable>
               <arguments>
                 <argument>-c</argument>
-                <argument>git rev-list --count origin/master 2&gt;/dev/null | tr -d '\n' || git rev-list --count HEAD 2&gt;/dev/null | tr -d '\n' || echo -n 0</argument>
+                <argument>TOTAL_COMMITS=$(git rev-list --count --all 2&gt;/dev/null | tr -d '\n' || echo 0); BRANCH_COMMITS=$(git rev-list --count HEAD 2&gt;/dev/null | tr -d '\n' || echo 0); if [ "$TOTAL_COMMITS" -gt "$BRANCH_COMMITS" ]; then echo -n "$TOTAL_COMMITS"; else echo -n "$BRANCH_COMMITS"; fi</argument>
               </arguments>
               <outputFile>${project.build.directory}/git-commit-count.txt</outputFile>
               <successCodes>

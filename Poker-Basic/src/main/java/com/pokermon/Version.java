@@ -19,7 +19,7 @@ public final class Version {
      * Format: major.minor.commitCount (e.g., "1.0.4" where 4 is the commit count)
      * This value is replaced during build process with actual git commit count from main branch.
      */
-    public static final String VERSION = "1.0.1";
+    public static final String VERSION = "1.0.140";
     
     /**
      * The application name - short for "Poker Monster" after the game features.
@@ -42,7 +42,7 @@ public final class Version {
      * incrementation with each commit without manual intervention.
      * This value is replaced during build process with actual git commit count from main branch.
      */
-    public static final int VERSION_CODE = 1;
+    public static final int VERSION_CODE = 140;
     
     /**
      * Build timestamp from Maven build process.

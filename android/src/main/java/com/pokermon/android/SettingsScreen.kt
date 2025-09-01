@@ -85,7 +85,7 @@ fun SettingsScreen(
             title = "🎨 Table Theme"
         ) {
             SettingsActionItem(
-                icon = Icons.Default.Palette,
+                icon = Icons.Default.Settings,
                 title = "Poker Table Style",
                 description = selectedTheme?.displayName ?: "Default (System Colors)",
                 onClick = { showThemeDialog = true }

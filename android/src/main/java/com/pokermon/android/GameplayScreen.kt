@@ -358,6 +358,35 @@ fun GameplayScreen(
             Text("Back to Menu")
         }
     }
+    
+    // Exit confirmation dialog
+    if (showExitConfirmDialog) {
+        AlertDialog(
+            onDismissRequest = { showExitConfirmDialog = false },
+            title = { Text("⚠️ Exit Game") },
+            text = { 
+                Text("Are you sure you want to exit the current game?\n\nYour progress will be lost if you haven't saved.") 
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showExitConfirmDialog = false
+                        onBackPressed()
+                    },
+                    colors = ButtonDefaults.textButtonColors(
+                        contentColor = MaterialTheme.colorScheme.error
+                    )
+                ) {
+                    Text("Exit Game")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showExitConfirmDialog = false }) {
+                    Text("Continue Playing")
+                }
+            }
+        )
+    }
 }
 
 @Composable
@@ -810,34 +839,5 @@ fun RoundManagementCard(
                 }
             }
         }
-    }
-    
-    // Exit confirmation dialog
-    if (showExitConfirmDialog) {
-        AlertDialog(
-            onDismissRequest = { showExitConfirmDialog = false },
-            title = { Text("⚠️ Exit Game") },
-            text = { 
-                Text("Are you sure you want to exit the current game?\n\nYour progress will be lost if you haven't saved.") 
-            },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        showExitConfirmDialog = false
-                        onBackPressed()
-                    },
-                    colors = ButtonDefaults.textButtonColors(
-                        contentColor = MaterialTheme.colorScheme.error
-                    )
-                ) {
-                    Text("Exit Game")
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = { showExitConfirmDialog = false }) {
-                    Text("Continue Playing")
-                }
-            }
-        )
     }
 }

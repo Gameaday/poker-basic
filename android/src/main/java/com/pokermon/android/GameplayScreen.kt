@@ -15,24 +15,31 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.pokermon.GameMode
 import com.pokermon.GamePhase
+import com.pokermon.android.data.UserProfileManager
 import com.pokermon.bridge.GameLogicBridge
 import com.pokermon.bridge.PlayerInfo
 
 private const val BET_INCREMENT = 10
 
 /**
- * Main gameplay screen that integrates with the shared game logic.
+ * Enhanced gameplay screen with user profile integration for tracking game progress.
  */
 @Composable
 fun GameplayScreen(
     gameMode: GameMode,
     onBackPressed: () -> Unit
 ) {
+    val context = LocalContext.current
+    val userProfileManager = remember { UserProfileManager.getInstance(context) }
+    val userProfile by userProfileManager.userProfile.collectAsState()
+    val gameSettings by userProfileManager.gameSettings.collectAsState()
+    
     val gameBridge = remember { GameLogicBridge() }
     var gameState by remember { mutableStateOf("Initializing game...") }
     var playerChips by remember { mutableIntStateOf(1000) }
@@ -44,6 +51,7 @@ fun GameplayScreen(
     var selectedCards by remember { mutableStateOf(setOf<Int>()) }
     var currentRound by remember { mutableIntStateOf(0) }
     var isRoundComplete by remember { mutableStateOf(false) }
+    var initialChips by remember { mutableIntStateOf(1000) }
     
     // Back button protection
     var showExitConfirmDialog by remember { mutableStateOf(false) }
@@ -81,12 +89,13 @@ fun GameplayScreen(
         }
     }
     
-    // Initialize game when screen loads
+    // Initialize game when screen loads  
     LaunchedEffect(gameMode) {
         gameBridge.setGameMode(gameMode)
-        val success = gameBridge.initializeGame("Player", 3, 1000)
+        val success = gameBridge.initializeGame(userProfile.username, 3, 1000)
         if (success) {
             isGameInitialized = true
+            initialChips = 1000
             refreshGameData()
             gameState = phaseDescription
         } else {
@@ -116,7 +125,7 @@ fun GameplayScreen(
         ) {
             Column {
                 Text(
-                    text = "🃏 ${gameMode.displayName}",
+                    text = "🐲 ${gameMode.displayName}",
                     style = MaterialTheme.typography.headlineMedium
                 )
                 if (isGameInitialized) {
@@ -308,6 +317,34 @@ fun GameplayScreen(
                     gameState = result.message
                     if (result.success) {
                         refreshGameData()
+                        
+                        // Track game completion in user profile if auto-save is enabled
+                        if (gameSettings.autoSaveEnabled) {
+                            val finalChips = gameBridge.getPlayerChips()
+                            val chipsWon = finalChips - initialChips
+                            val playerWon = chipsWon > 0
+                            val playerInfo = allPlayers.firstOrNull { it.name == userProfile.username }
+                            val handAchieved = playerInfo?.let { 
+                                // Try to get the best hand achieved during the game
+                                // For now, use a simplified approach
+                                when {
+                                    finalChips > initialChips * 2 -> "High Win"
+                                    finalChips > initialChips -> "Good Hand"
+                                    else -> "High Card"
+                                }
+                            } ?: "High Card"
+                            
+                            // Record the game completion
+                            userProfileManager.recordGameCompletion(
+                                won = playerWon,
+                                chipsWon = chipsWon.toLong(),
+                                handAchieved = handAchieved,
+                                gameMode = gameMode.name
+                            )
+                            
+                            // Auto-save current game state if available
+                            gameBridge.saveGameState()
+                        }
                     }
                 },
                 modifier = Modifier.padding(bottom = 16.dp)

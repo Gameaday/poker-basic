@@ -8,8 +8,25 @@ apply plugin: 'kotlin-android'
  * Using provider API for configuration cache compatibility.
  */
 def getGitCommitCount = providers.exec {
-    commandLine 'bash', '-c', 'git rev-list --count origin/master 2>/dev/null || git rev-list --count HEAD'
-}.standardOutput.asText.map { it.trim().toInteger() }
+    commandLine 'bash', '-c', '''
+        # Use main branch commit count specifically to avoid pull request resets
+        MAIN_COMMITS=$(git rev-list --count origin/main 2>/dev/null || git rev-list --count origin/master 2>/dev/null || echo 0)
+        # Fallback to HEAD if main/master not available 
+        HEAD_COMMITS=$(git rev-list --count HEAD 2>/dev/null || echo 0)
+        # Use the higher count to ensure proper versioning
+        if [ "$MAIN_COMMITS" -gt "$HEAD_COMMITS" ]; then 
+            echo "$MAIN_COMMITS"
+        elif [ "$HEAD_COMMITS" -gt 0 ]; then 
+            echo "$HEAD_COMMITS"
+        else 
+            echo "1"
+        fi
+    '''
+}.standardOutput.asText.map { 
+    def count = it.trim().toInteger()
+    // Ensure minimum version code of 1
+    return count > 0 ? count : 1
+}
 
 android {
     namespace 'com.pokermon.android'

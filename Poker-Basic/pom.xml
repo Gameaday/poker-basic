@@ -86,7 +86,20 @@
                             <executable>bash</executable>
                             <arguments>
                                 <argument>-c</argument>
-                                <argument>TOTAL_COMMITS=$(git rev-list --count --all 2>/dev/null | tr -d '\n' || echo 0); BRANCH_COMMITS=$(git rev-list --count HEAD 2>/dev/null | tr -d '\n' || echo 0); if [ "$TOTAL_COMMITS" -gt "$BRANCH_COMMITS" ]; then echo -n "$TOTAL_COMMITS"; else echo -n "$BRANCH_COMMITS"; fi</argument>
+                                <argument>
+                                # Use main branch commit count specifically to avoid pull request resets
+                                MAIN_COMMITS=$(git rev-list --count origin/main 2>/dev/null || git rev-list --count origin/master 2>/dev/null || echo 0);
+                                # Fallback to HEAD if main/master not available 
+                                HEAD_COMMITS=$(git rev-list --count HEAD 2>/dev/null || echo 0);
+                                # Use the higher count to ensure proper versioning
+                                if [ "$MAIN_COMMITS" -gt "$HEAD_COMMITS" ]; then 
+                                    echo -n "$MAIN_COMMITS"; 
+                                elif [ "$HEAD_COMMITS" -gt 0 ]; then 
+                                    echo -n "$HEAD_COMMITS"; 
+                                else 
+                                    echo -n "1"; 
+                                fi
+                                </argument>
                             </arguments>
                             <outputFile>${project.build.directory}/git-commit-count.txt</outputFile>
                             <successCodes>

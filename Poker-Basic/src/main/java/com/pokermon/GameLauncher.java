@@ -107,11 +107,11 @@ public class GameLauncher {
      */
     private static void showHelp() {
         System.out.println(Version.APP_DISPLAY_NAME);
-        System.out.println("Version: " + Version.VERSION);
+        System.out.println("Version: " + Version.getValidatedVersion());
         System.out.println(Version.COPYRIGHT);
         System.out.println();
         System.out.println("USAGE:");
-        System.out.println("  java -jar pokermon-" + Version.VERSION + ".jar [OPTIONS]");
+        System.out.println("  java -jar pokermon-" + Version.getValidatedVersion() + ".jar [OPTIONS]");
         System.out.println();
         System.out.println("DESCRIPTION:");
         System.out.println("  " + Version.APP_DESCRIPTION + ".");
@@ -125,13 +125,13 @@ public class GameLauncher {
         System.out.println("  -v, --version      Show version information");
         System.out.println();
         System.out.println("EXAMPLES:");
-        System.out.println("  java -jar pokermon-" + Version.VERSION + ".jar");
+        System.out.println("  java -jar pokermon-" + Version.getValidatedVersion() + ".jar");
         System.out.println("    Start the game with modern JavaFX UI (default)");
         System.out.println();
-        System.out.println("  java -jar pokermon-" + Version.VERSION + ".jar --basic");
+        System.out.println("  java -jar pokermon-" + Version.getValidatedVersion() + ".jar --basic");
         System.out.println("    Start the game in console mode");
         System.out.println();
-        System.out.println("  java -jar pokermon-" + Version.VERSION + ".jar --help");
+        System.out.println("  java -jar pokermon-" + Version.getValidatedVersion() + ".jar --help");
         System.out.println("    Display this help information");
         System.out.println();
         System.out.println("GAME FEATURES:");

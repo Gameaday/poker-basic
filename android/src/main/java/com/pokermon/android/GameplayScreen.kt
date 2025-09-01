@@ -496,8 +496,8 @@ fun PlayerHandCard(
     cards: List<String>,
     selectedCards: Set<Int>,
     onCardSelected: (Int) -> Unit,
-    canSelectCards: Boolean = true,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    canSelectCards: Boolean = true
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
@@ -713,8 +713,8 @@ fun GameActionsCard(
     betAmount: Int,
     onBetAmountChanged: (Int) -> Unit,
     hasSelectedCards: Boolean,
-    canExchangeCards: Boolean = true,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    canExchangeCards: Boolean = true
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),

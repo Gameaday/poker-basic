@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.*
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -15,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.pokermon.CardPackManager
 import com.pokermon.android.data.UserProfileManager
 import com.pokermon.android.ui.theme.PokerTableTheme
+import java.util.Locale
 
 /**
  * Enhanced settings screen with persistent user profile integration.
@@ -87,7 +89,7 @@ fun SettingsScreen(
             SettingsActionItem(
                 icon = Icons.Default.Person,
                 title = "Profile Information",
-                description = "Games: ${userProfile.totalGamesPlayed}, Win Rate: ${String.format("%.1f", userProfile.winRate * 100)}%",
+                description = "Games: ${userProfile.totalGamesPlayed}, Win Rate: ${String.format(Locale.getDefault(), "%.1f", userProfile.winRate * 100)}%",
                 onClick = { showProfileDialog = true }
             )
             
@@ -163,7 +165,7 @@ fun SettingsScreen(
             title = "🃏 Card Art Selection"
         ) {
             SettingsActionItem(
-                icon = Icons.Default.Image,
+                icon = Icons.Default.Star,
                 title = "Card Pack",
                 description = selectedCardPackDisplay,
                 onClick = { showCardPackDialog = true }
@@ -461,7 +463,7 @@ fun SettingsScreen(
                 Column {
                     Text("🎮 Games Played: ${userProfile.totalGamesPlayed}")
                     Text("🏆 Games Won: ${userProfile.gamesWon}")
-                    Text("📊 Win Rate: ${String.format("%.1f", userProfile.winRate * 100)}%")
+                    Text("📊 Win Rate: ${String.format(Locale.getDefault(), "%.1f", userProfile.winRate * 100)}%")
                     Text("💰 Total Chips Won: ${userProfile.totalChipsWon}")
                     Text("🃏 Best Hand: ${userProfile.highestHand}")
                     Text("🎯 Favorite Mode: ${userProfile.favoriteGameMode}")
@@ -636,7 +638,7 @@ fun SettingsActionItem(
             }
             
             Icon(
-                imageVector = Icons.Default.KeyboardArrowRight,
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                 contentDescription = "Go",
                 tint = if (isDestructive) 
                     MaterialTheme.colorScheme.error 

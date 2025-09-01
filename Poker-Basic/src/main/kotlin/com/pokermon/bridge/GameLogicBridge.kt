@@ -59,6 +59,33 @@ class GameLogicBridge {
     }
     
     /**
+     * Check if the game should advance to the next phase after a player action.
+     * This handles automatic game flow progression.
+     */
+    private fun checkAndAdvanceGamePhase() {
+        gameEngine?.let { engine ->
+            // Check if current betting round is complete
+            if (engine.isRoundComplete()) {
+                val currentPhase = engine.currentPhase
+                when (currentPhase) {
+                    GamePhase.BETTING_ROUND, GamePhase.PLAYER_ACTIONS -> {
+                        // Move to card exchange phase after initial betting
+                        engine.beginCardExchange()
+                    }
+                    GamePhase.FINAL_BETTING -> {
+                        // Move to winner determination after final betting
+                        engine.setPhase(GamePhase.WINNER_DETERMINATION)
+                    }
+                    else -> {
+                        // For other phases, use the standard advance method
+                        engine.advancePhase()
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
      * Updates local player data from the game engine.
      */
     private fun updatePlayerData() {
@@ -244,6 +271,9 @@ class GameLogicBridge {
                     val callAmount = if (highBet <= 0) 50 else (highBet - player.getBet()).coerceAtMost(player.getChips())
                     
                     if (callAmount <= 0) {
+                        // Check if we should advance phase after this action
+                        checkAndAdvanceGamePhase()
+                        updatePlayerData()
                         GameActionResult(true, "No bet to call")
                     } else {
                         player.placeBet(player.getBet() + callAmount)
@@ -251,6 +281,8 @@ class GameLogicBridge {
                         engine.addToPot(callAmount)
                         // Advance to next player after action
                         engine.nextPlayer()
+                        // Check if we should advance phase after this action
+                        checkAndAdvanceGamePhase()
                         updatePlayerData()
                         GameActionResult(true, "Called for $callAmount chips")
                     }
@@ -285,6 +317,8 @@ class GameLogicBridge {
                         engine.addToPot(amount)
                         // Advance to next player after action
                         engine.nextPlayer()
+                        // Check if we should advance phase after this action
+                        checkAndAdvanceGamePhase()
                         updatePlayerData()
                         GameActionResult(true, "Raised by $amount chips")
                     }
@@ -313,6 +347,8 @@ class GameLogicBridge {
                     player.setFold(true)
                     // Advance to next player after action
                     engine.nextPlayer()
+                    // Check if we should advance phase after this action
+                    checkAndAdvanceGamePhase()
                     updatePlayerData()
                     GameActionResult(true, "Folded")
                 } else {
@@ -336,6 +372,8 @@ class GameLogicBridge {
             gameEngine?.let { engine ->
                 // Advance to next player after action
                 engine.nextPlayer()
+                // Check if we should advance phase after this action
+                checkAndAdvanceGamePhase()
                 updatePlayerData()
                 GameActionResult(true, "Checked")
             } ?: GameActionResult(false, "Game engine not available")

@@ -1,5 +1,6 @@
 package com.pokermon.android
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -43,6 +44,9 @@ fun GameplayScreen(
     var selectedCards by remember { mutableStateOf(setOf<Int>()) }
     var currentRound by remember { mutableIntStateOf(0) }
     var isRoundComplete by remember { mutableStateOf(false) }
+    
+    // Back button protection
+    var showExitConfirmDialog by remember { mutableStateOf(false) }
     
     // Game phase state
     var currentPhase by remember { mutableStateOf<GamePhase>(GamePhase.INITIALIZATION) }
@@ -88,6 +92,11 @@ fun GameplayScreen(
         } else {
             gameState = "Failed to initialize game"
         }
+    }
+    
+    // Handle back button during gameplay - show confirmation dialog
+    BackHandler(enabled = isGameInitialized) {
+        showExitConfirmDialog = true
     }
     
     Column(
@@ -742,5 +751,34 @@ fun RoundManagementCard(
                 }
             }
         }
+    }
+    
+    // Exit confirmation dialog
+    if (showExitConfirmDialog) {
+        AlertDialog(
+            onDismissRequest = { showExitConfirmDialog = false },
+            title = { Text("⚠️ Exit Game") },
+            text = { 
+                Text("Are you sure you want to exit the current game?\n\nYour progress will be lost if you haven't saved.") 
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showExitConfirmDialog = false
+                        onBackPressed()
+                    },
+                    colors = ButtonDefaults.textButtonColors(
+                        contentColor = MaterialTheme.colorScheme.error
+                    )
+                ) {
+                    Text("Exit Game")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showExitConfirmDialog = false }) {
+                    Text("Continue Playing")
+                }
+            }
+        )
     }
 }

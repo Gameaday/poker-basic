@@ -98,7 +98,7 @@ fun SettingsScreen(
             title = "🎮 Game Preferences"
         ) {
             SettingsToggleItem(
-                icon = if (gameSettings.soundEnabled) Icons.Default.VolumeUp else Icons.Default.VolumeOff,
+                icon = Icons.Default.Notifications,
                 title = "Sound Effects",
                 description = "Enable game sounds and audio feedback",
                 checked = gameSettings.soundEnabled,
@@ -110,7 +110,7 @@ fun SettingsScreen(
             )
             
             SettingsToggleItem(
-                icon = Icons.Default.Animation,
+                icon = Icons.Default.PlayArrow,
                 title = "Animations",
                 description = "Enable card dealing and UI animations",
                 checked = gameSettings.animationsEnabled,
@@ -122,7 +122,7 @@ fun SettingsScreen(
             )
             
             SettingsToggleItem(
-                icon = Icons.Default.Save,
+                icon = Icons.Default.Star,
                 title = "Auto-Save",
                 description = "Automatically save game progress",
                 checked = gameSettings.autoSaveEnabled,
@@ -141,7 +141,7 @@ fun SettingsScreen(
             title = "🎨 Pokermon Table Theme"
         ) {
             SettingsActionItem(
-                icon = Icons.Default.Palette,
+                icon = Icons.Default.Settings,
                 title = "Table Style",
                 description = selectedTheme.displayName,
                 onClick = { showThemeDialog = true }
@@ -155,21 +155,21 @@ fun SettingsScreen(
             title = "💾 Data Management"
         ) {
             SettingsActionItem(
-                icon = Icons.Default.CloudUpload,
+                icon = Icons.Default.Share,
                 title = "Export Profile",
                 description = "Create backup of all user data and settings",
                 onClick = { showBackupDialog = true }
             )
             
             SettingsActionItem(
-                icon = Icons.Default.CloudDownload,
+                icon = Icons.Default.AccountCircle,
                 title = "Import Profile",
                 description = "Restore from a previous backup",
                 onClick = { showRestoreDialog = true }
             )
             
             SettingsActionItem(
-                icon = Icons.Default.DeleteForever,
+                icon = Icons.Default.Delete,
                 title = "Reset All Data",
                 description = "Remove all progress and settings (cannot be undone)",
                 onClick = { showDeleteDialog = true },
@@ -208,7 +208,8 @@ fun SettingsScreen(
                 TextButton(onClick = { 
                     // In real app, this would save to file or share
                     val exportData = userProfileManager.exportUserData()
-                    // For demo, just close dialog
+                    // TODO: Implement actual file export
+                    println("Export data: $exportData") // For debugging/demo
                     showBackupDialog = false 
                 }) {
                     Text("Export")
@@ -395,6 +396,7 @@ fun SettingsScreen(
                 }
             }
         )
+    }
 }
 
 @Composable
@@ -522,7 +524,7 @@ fun SettingsActionItem(
             }
             
             Icon(
-                imageVector = Icons.Default.ArrowForward,
+                imageVector = Icons.Default.KeyboardArrowRight,
                 contentDescription = "Go",
                 tint = if (isDestructive) 
                     MaterialTheme.colorScheme.error 

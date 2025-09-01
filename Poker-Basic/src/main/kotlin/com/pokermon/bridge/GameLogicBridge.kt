@@ -68,24 +68,64 @@ class GameLogicBridge {
      */
     private fun checkAndAdvanceGamePhase() {
         gameEngine?.let { engine ->
-            // Check if current betting round is complete
-            if (engine.isRoundComplete()) {
-                val currentPhase = engine.currentPhase
-                when (currentPhase) {
-                    GamePhase.BETTING_ROUND, GamePhase.PLAYER_ACTIONS -> {
-                        // Move to card exchange phase after initial betting
-                        engine.beginCardExchange()
-                    }
-                    GamePhase.FINAL_BETTING -> {
-                        // Move to winner determination after final betting
-                        engine.setPhase(GamePhase.WINNER_DETERMINATION)
-                    }
-                    else -> {
-                        // For other phases, use the standard advance method
-                        engine.advancePhase()
+            try {
+                // Check if current betting round is complete or should advance
+                val shouldAdvance = engine.isRoundComplete() || shouldForceAdvancePhase(engine)
+                
+                if (shouldAdvance) {
+                    val currentPhase = engine.currentPhase
+                    when (currentPhase) {
+                        GamePhase.BETTING_ROUND, GamePhase.PLAYER_ACTIONS -> {
+                            // Move to card exchange phase after initial betting
+                            engine.beginCardExchange()
+                        }
+                        GamePhase.FINAL_BETTING -> {
+                            // Move to winner determination after final betting
+                            engine.setPhase(GamePhase.WINNER_DETERMINATION)
+                        }
+                        else -> {
+                            // For other phases, use the standard advance method
+                            engine.advancePhase()
+                        }
                     }
                 }
+            } catch (e: Exception) {
+                // Log error but don't crash the game
+                println("Warning: Error in phase advancement: ${e.message}")
             }
+        }
+    }
+    
+    /**
+     * Helper method to determine if we should force phase advancement
+     * even if isRoundComplete() returns false.
+     */
+    private fun shouldForceAdvancePhase(engine: com.pokermon.GameEngine): Boolean {
+        return try {
+            val players = engine.players
+            val activePlayers = players.filter { !it.isFold() && it.chips > 0 }
+            
+            // If only one active player remains, advance phase
+            if (activePlayers.size <= 1) {
+                return true
+            }
+            
+            // Check if all active players have acted and bets are equal
+            val currentPlayerIndex = engine.currentPlayerIndex
+            val currentPlayer = if (currentPlayerIndex >= 0 && currentPlayerIndex < players.size) {
+                players[currentPlayerIndex]
+            } else null
+            
+            // If current player has folded or has no chips, we should advance
+            currentPlayer?.let { player ->
+                if (player.isFold() || player.chips <= 0) {
+                    return true
+                }
+            }
+            
+            false
+        } catch (e: Exception) {
+            false
         }
     }
     
@@ -511,21 +551,21 @@ class GameLogicBridge {
      * Check if betting actions are allowed in the current phase.
      */
     fun canBet(): Boolean {
-        return getCurrentPhase().allowsBetting()
+        return getCurrentPhase().allowsBetting
     }
     
     /**
      * Check if card exchange is allowed in the current phase.
      */
     fun canExchangeCards(): Boolean {
-        return getCurrentPhase().allowsCardExchange()
+        return getCurrentPhase().allowsCardExchange
     }
     
     /**
      * Check if round progression is allowed in the current phase.
      */
     fun canProgressRound(): Boolean {
-        return getCurrentPhase().allowsRoundProgression()
+        return getCurrentPhase().allowsRoundProgression
     }
     
     /**

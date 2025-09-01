@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.*
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -163,7 +164,7 @@ fun SettingsScreen(
             title = "🃏 Card Art Selection"
         ) {
             SettingsActionItem(
-                icon = Icons.Default.Image,
+                icon = Icons.Default.Star,
                 title = "Card Pack",
                 description = selectedCardPackDisplay,
                 onClick = { showCardPackDialog = true }
@@ -636,7 +637,7 @@ fun SettingsActionItem(
             }
             
             Icon(
-                imageVector = Icons.Default.KeyboardArrowRight,
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                 contentDescription = "Go",
                 tint = if (isDestructive) 
                     MaterialTheme.colorScheme.error 

@@ -95,6 +95,43 @@ class GameLogicBridge {
     }
     
     /**
+     * Get the resource path for a card image based on card integer value.
+     * Maps to the actual card art files in the repository resources.
+     */
+    fun getCardImagePath(cardInt: Int): String {
+        if (cardInt == 0) return "Cards/TET/card_back.jpg" // Default back for empty cards
+        
+        val suits = arrayOf("Clubs", "Hearts", "Diamonds", "Spades")
+        val ranks = arrayOf("", "Ace", "King", "Queen", "Jack", "Ten", 
+                           "Nine", "Eight", "Seven", "Six", "Five", "Four", "Three", "Two", "One")
+        
+        val rank = cardInt / 4 + 1
+        val suit = cardInt % 4
+        
+        val rankName = ranks.getOrElse(rank) { "Unknown" }
+        val suitName = suits.getOrElse(suit) { "Unknown" }
+        
+        return "Cards/TET/$rankName of $suitName.jpg"
+    }
+    
+    /**
+     * Get card image paths for the current player's hand.
+     */
+    fun getPlayerHandImagePaths(): List<String> {
+        return gameEngine?.let { engine ->
+            val players = engine.players
+            if (players.isNotEmpty()) {
+                val player = players[0] // Human player is always at index 0
+                player.getHand()?.map { cardInt ->
+                    getCardImagePath(cardInt)
+                } ?: emptyList()
+            } else {
+                emptyList()
+            }
+        } ?: emptyList()
+    }
+    
+    /**
      * Get the current player's hand as displayable card strings.
      */
     fun getPlayerHand(): List<String> {
@@ -388,6 +425,104 @@ class GameLogicBridge {
             } ?: GameActionResult(false, "Game engine not available")
         } catch (e: Exception) {
             GameActionResult(false, "Error determining winner: ${e.message}")
+        }
+    }
+    
+    /**
+     * Get the current game phase.
+     */
+    fun getCurrentPhase(): GamePhase {
+        return gameEngine?.getCurrentPhase() ?: GamePhase.INITIALIZATION
+    }
+    
+    /**
+     * Get the current game phase display name.
+     */
+    fun getPhaseDisplayName(): String {
+        return getCurrentPhase().displayName
+    }
+    
+    /**
+     * Get the current game phase description.
+     */
+    fun getPhaseDescription(): String {
+        return getCurrentPhase().description
+    }
+    
+    /**
+     * Check if cards should be visible in the current phase.
+     */
+    fun shouldShowCards(): Boolean {
+        return getCurrentPhase().shouldShowCards()
+    }
+    
+    /**
+     * Check if betting actions are allowed in the current phase.
+     */
+    fun canBet(): Boolean {
+        return getCurrentPhase().allowsBetting()
+    }
+    
+    /**
+     * Check if card exchange is allowed in the current phase.
+     */
+    fun canExchangeCards(): Boolean {
+        return getCurrentPhase().allowsCardExchange()
+    }
+    
+    /**
+     * Check if round progression is allowed in the current phase.
+     */
+    fun canProgressRound(): Boolean {
+        return getCurrentPhase().allowsRoundProgression()
+    }
+    
+    /**
+     * Check if the current phase requires player input.
+     */
+    fun needsPlayerInput(): Boolean {
+        return getCurrentPhase().requiresPlayerInput()
+    }
+    
+    /**
+     * Check if the game is in an active phase.
+     */
+    fun isActivePhase(): Boolean {
+        return getCurrentPhase().isActivePhase()
+    }
+    
+    /**
+     * Advance to the next game phase manually.
+     */
+    fun advancePhase(): GameActionResult {
+        return try {
+            gameEngine?.let { engine ->
+                val success = engine.advancePhase()
+                if (success) {
+                    updatePlayerData()
+                    GameActionResult(true, "Advanced to ${engine.getCurrentPhase().displayName}")
+                } else {
+                    GameActionResult(false, "Cannot advance from current phase")
+                }
+            } ?: GameActionResult(false, "Game engine not available")
+        } catch (e: Exception) {
+            GameActionResult(false, "Error advancing phase: ${e.message}")
+        }
+    }
+    
+    /**
+     * Complete card exchange phase and move to final betting.
+     */
+    fun completeCardExchange(): GameActionResult {
+        return try {
+            gameEngine?.let { engine ->
+                engine.completeCardExchange()
+                updatePlayerData()
+                clearCardSelection()
+                GameActionResult(true, "Card exchange completed, moving to final betting")
+            } ?: GameActionResult(false, "Game engine not available")
+        } catch (e: Exception) {
+            GameActionResult(false, "Error completing card exchange: ${e.message}")
         }
     }
 }

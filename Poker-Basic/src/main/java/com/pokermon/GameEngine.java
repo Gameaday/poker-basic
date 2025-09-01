@@ -17,6 +17,7 @@ public class GameEngine {
     private int currentRound;
     private boolean gameActive;
     private int currentPlayerIndex;
+    private GamePhase currentPhase;
     
     /**
      * Creates a new game engine with the specified configuration.
@@ -28,6 +29,7 @@ public class GameEngine {
         this.currentRound = 0;
         this.gameActive = false;
         this.currentPlayerIndex = 0;
+        this.currentPhase = GamePhase.INITIALIZATION;
     }
     
     /**
@@ -40,10 +42,15 @@ public class GameEngine {
             return false;
         }
         
+        // Phase: PLAYER_SETUP
+        this.currentPhase = GamePhase.PLAYER_SETUP;
         this.players = new Player[playerNames.length];
-        this.deck = Main.setDeck();
         this.currentPot = 0;
         this.currentRound = 0;
+        
+        // Phase: DECK_CREATION
+        this.currentPhase = GamePhase.DECK_CREATION;
+        this.deck = Main.setDeck();
         
         // Initialize all players
         for (int i = 0; i < playerNames.length; i++) {
@@ -54,6 +61,7 @@ public class GameEngine {
         
         this.gameActive = true;
         this.currentPlayerIndex = 0; // Start with first player
+        this.currentPhase = GamePhase.ROUND_START;
         return true;
     }
     
@@ -65,10 +73,16 @@ public class GameEngine {
             return;
         }
         
+        // Phase: ROUND_START
+        this.currentPhase = GamePhase.ROUND_START;
+        
         // Reset deck for new round
         this.deck = Main.setDeck();
         this.currentPot = 0;
         this.currentRound++;
+        
+        // Phase: HAND_DEALING
+        this.currentPhase = GamePhase.HAND_DEALING;
         
         // Deal new hands to all active players
         for (Player player : players) {
@@ -78,6 +92,13 @@ public class GameEngine {
                 player.performAllChecks();
             }
         }
+        
+        // Phase: HAND_EVALUATION
+        this.currentPhase = GamePhase.HAND_EVALUATION;
+        // Hand evaluation happens automatically in performAllChecks()
+        
+        // Move to betting phase
+        this.currentPhase = GamePhase.BETTING_ROUND;
     }
     
     /**
@@ -103,7 +124,16 @@ public class GameEngine {
             return currentPot;
         }
         
+        // Ensure we're in the right phase for betting
+        if (currentPhase == GamePhase.BETTING_ROUND) {
+            this.currentPhase = GamePhase.PLAYER_ACTIONS;
+        }
+        
         currentPot = Main.bet(players, currentPot);
+        
+        // Move to pot management phase after betting
+        this.currentPhase = GamePhase.POT_MANAGEMENT;
+        
         return currentPot;
     }
     
@@ -117,6 +147,11 @@ public class GameEngine {
             return;
         }
         
+        // Ensure we're in card exchange phase
+        if (currentPhase != GamePhase.CARD_EXCHANGE) {
+            this.currentPhase = GamePhase.CARD_EXCHANGE;
+        }
+        
         Player player = players[playerIndex];
         if (cardIndices != null) {
             for (int index : cardIndices) {
@@ -126,6 +161,8 @@ public class GameEngine {
         
         Main.replaceCards(player.getHandForModification(), deck);
         player.performAllChecks();
+        
+        // Note: Don't auto-advance phase here since multiple players might exchange cards
     }
     
     /**
@@ -136,6 +173,9 @@ public class GameEngine {
         if (!gameActive || players == null) {
             return new int[0];
         }
+        
+        // Set to winner determination phase
+        this.currentPhase = GamePhase.WINNER_DETERMINATION;
         
         return new int[]{Main.decideWinner(players)};
     }
@@ -149,6 +189,9 @@ public class GameEngine {
             return;
         }
         
+        // Set to pot distribution phase
+        this.currentPhase = GamePhase.POT_DISTRIBUTION;
+        
         int potShare = currentPot / winners.length;
         for (int winnerIndex : winners) {
             if (winnerIndex >= 0 && winnerIndex < players.length) {
@@ -157,6 +200,9 @@ public class GameEngine {
         }
         
         currentPot = 0;
+        
+        // Move to round end phase
+        this.currentPhase = GamePhase.ROUND_END;
     }
     
     /**
@@ -241,10 +287,63 @@ public class GameEngine {
     }
     
     /**
+     * Gets the current game phase.
+     * @return the current game phase
+     */
+    public GamePhase getCurrentPhase() {
+        return currentPhase;
+    }
+    
+    /**
+     * Transitions to the next game phase.
+     * @return true if transition was successful
+     */
+    public boolean advancePhase() {
+        GamePhase nextPhase = currentPhase.getNextPhase();
+        if (nextPhase != null) {
+            this.currentPhase = nextPhase;
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * Manually sets the game phase (for testing or special cases).
+     * @param phase the phase to set
+     */
+    public void setPhase(GamePhase phase) {
+        this.currentPhase = phase;
+    }
+    
+    /**
+     * Transitions to card exchange phase.
+     */
+    public void beginCardExchange() {
+        this.currentPhase = GamePhase.CARD_EXCHANGE;
+    }
+    
+    /**
+     * Completes card exchange and moves to hand re-evaluation.
+     */
+    public void completeCardExchange() {
+        this.currentPhase = GamePhase.HAND_REEVALUATION;
+        // Re-evaluate all hands after card exchange
+        if (players != null) {
+            for (Player player : players) {
+                if (!player.isFold()) {
+                    player.performAllChecks();
+                }
+            }
+        }
+        this.currentPhase = GamePhase.FINAL_BETTING;
+    }
+    
+    /**
      * Ends the current game.
      */
     public void endGame() {
         this.gameActive = false;
+        this.currentPhase = GamePhase.GAME_END;
     }
     
     /**

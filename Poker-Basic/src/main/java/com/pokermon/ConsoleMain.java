@@ -30,6 +30,9 @@ public class ConsoleMain {
         // Print author information
         Main.author();
         
+        // Prompt for game mode selection
+        GameMode selectedMode = promptGameMode();
+        
         // Prompt user for a name
         String playerName = promptName();
         
@@ -48,6 +51,13 @@ public class ConsoleMain {
         
         // Decide names for the Computer players
         Main.decideNames(players);
+        
+        // Check if monster mode is selected and handle accordingly
+        if (selectedMode.hasMonsters()) {
+            handleMonsterMode(selectedMode, playerName, playerCount, chipsInitial);
+            return;
+        }
+        
         Main.setupList(list, USER, CPU1, CPU2, CPU3);
         
         while (Continue) {
@@ -310,5 +320,156 @@ public class ConsoleMain {
             System.out.println("🤝 The game was a tie! Multiple players had the same hand value.");
             return false;
         }
+    }
+    
+    /**
+     * Console prompt for game mode selection.
+     */
+    private static GameMode promptGameMode() {
+        System.out.println("\n" + "=".repeat(50));
+        System.out.println("                GAME MODE SELECTION");
+        System.out.println("=".repeat(50));
+        System.out.println("Choose your game mode:");
+        System.out.println("1. Classic Poker - Traditional 5-card draw with betting");
+        System.out.println("2. Adventure Mode - Battle monsters with poker combat");
+        System.out.println("3. Safari Mode - Capture monsters through poker gameplay");
+        System.out.println("4. Ironman Mode - Convert winnings to monster gacha pulls");
+        System.out.println();
+        System.out.print("Enter your choice (1-4) [1]: ");
+        
+        try {
+            String input = scanner.nextLine().trim();
+            if (input.isEmpty()) return GameMode.CLASSIC;
+            
+            int choice = Integer.parseInt(input);
+            switch (choice) {
+                case 1: return GameMode.CLASSIC;
+                case 2: return GameMode.ADVENTURE;
+                case 3: return GameMode.SAFARI;
+                case 4: return GameMode.IRONMAN;
+                default:
+                    System.out.println("Invalid choice. Using default: Classic Poker");
+                    return GameMode.CLASSIC;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Using default: Classic Poker");
+            return GameMode.CLASSIC;
+        }
+    }
+    
+    /**
+     * Handles monster-based game modes.
+     */
+    private static void handleMonsterMode(GameMode mode, String playerName, int playerCount, int chipsInitial) {
+        System.out.println("\n" + "=".repeat(50));
+        System.out.println("          " + mode.getDisplayName().toUpperCase());
+        System.out.println("=".repeat(50));
+        System.out.println(mode.getDescription());
+        System.out.println();
+        
+        switch (mode) {
+            case ADVENTURE:
+                System.out.println("🏔️ Welcome to Adventure Mode, " + playerName + "!");
+                System.out.println("You'll battle monsters whose health equals their poker chip count.");
+                System.out.println("Use your poker skills to defeat enemies and earn rewards!");
+                System.out.println();
+                launchAdventureMode(playerName, playerCount, chipsInitial);
+                break;
+                
+            case SAFARI:
+                System.out.println("🌿 Welcome to Safari Mode, " + playerName + "!");
+                System.out.println("Encounter wild monsters during poker games.");
+                System.out.println("Better hands increase your capture probability!");
+                System.out.println();
+                launchSafariMode(playerName, playerCount, chipsInitial);
+                break;
+                
+            case IRONMAN:
+                System.out.println("🎰 Welcome to Ironman Mode, " + playerName + "!");
+                System.out.println("Convert your poker winnings into monster gacha pulls.");
+                System.out.println("Higher winnings increase your chances of rare monsters!");
+                System.out.println();
+                launchIronmanMode(playerName, playerCount, chipsInitial);
+                break;
+                
+            default:
+                System.out.println("Unknown game mode. Returning to classic poker.");
+                return;
+        }
+    }
+    
+    /**
+     * Adventure Mode implementation - Monster battles using poker combat.
+     */
+    private static void launchAdventureMode(String playerName, int playerCount, int chipsInitial) {
+        System.out.println("🚧 BETA FEATURE - Adventure Mode");
+        System.out.println();
+        System.out.println("Adventure Mode is currently under development for the beta milestone.");
+        System.out.println("This mode will feature:");
+        System.out.println("  • Monster battles where health equals chip count");
+        System.out.println("  • Poker hand strength determines battle outcomes");
+        System.out.println("  • Progressive difficulty and boss encounters");
+        System.out.println("  • Rewards and item drops from defeated monsters");
+        System.out.println();
+        System.out.println("Implementation Status: Foundation complete, battle engine in progress");
+        System.out.println("Expected in: Beta Milestone 1.1");
+        System.out.println();
+        System.out.print("Press Enter to continue with Classic Poker for now...");
+        scanner.nextLine();
+        
+        // For now, fall back to classic poker with a note
+        System.out.println("\nFalling back to Classic Poker...");
+        // Re-launch classic mode
+        main(new String[0]);
+    }
+    
+    /**
+     * Safari Mode implementation - Monster capture during poker games.
+     */
+    private static void launchSafariMode(String playerName, int playerCount, int chipsInitial) {
+        System.out.println("🚧 BETA FEATURE - Safari Mode");
+        System.out.println();
+        System.out.println("Safari Mode is currently under development for the beta milestone.");
+        System.out.println("This mode will feature:");
+        System.out.println("  • Random monster encounters during poker games");
+        System.out.println("  • Capture probability based on poker performance");
+        System.out.println("  • Monster collection and rarity distribution");
+        System.out.println("  • Habitat variety and special encounter events");
+        System.out.println();
+        System.out.println("Implementation Status: Encounter system design complete");
+        System.out.println("Expected in: Beta Milestone 1.2");
+        System.out.println();
+        System.out.print("Press Enter to continue with Classic Poker for now...");
+        scanner.nextLine();
+        
+        // For now, fall back to classic poker with a note
+        System.out.println("\nFalling back to Classic Poker...");
+        // Re-launch classic mode
+        main(new String[0]);
+    }
+    
+    /**
+     * Ironman Mode implementation - Gacha system using poker winnings.
+     */
+    private static void launchIronmanMode(String playerName, int playerCount, int chipsInitial) {
+        System.out.println("🚧 BETA FEATURE - Ironman Mode");
+        System.out.println();
+        System.out.println("Ironman Mode is currently under development for the beta milestone.");
+        System.out.println("This mode will feature:");
+        System.out.println("  • Gacha system converting chips to premium currency");
+        System.out.println("  • Weighted random monster acquisition");
+        System.out.println("  • Leaderboards and high score tracking");
+        System.out.println("  • Limited-time events and special monsters");
+        System.out.println();
+        System.out.println("Implementation Status: Gacha mechanics designed");
+        System.out.println("Expected in: Beta Milestone 1.3");
+        System.out.println();
+        System.out.print("Press Enter to continue with Classic Poker for now...");
+        scanner.nextLine();
+        
+        // For now, fall back to classic poker with a note
+        System.out.println("\nFalling back to Classic Poker...");
+        // Re-launch classic mode
+        main(new String[0]);
     }
 }

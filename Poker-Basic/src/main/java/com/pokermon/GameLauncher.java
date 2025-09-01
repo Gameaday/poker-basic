@@ -41,6 +41,11 @@ public class GameLauncher {
                     launchConsole();
                     return;
                     
+                case "-m":
+                case "--mode":
+                    launchModeSelection();
+                    return;
+                    
                 default:
                     System.err.println("Unknown argument: " + arg);
                     System.err.println("Use -h or --help for usage information.");
@@ -72,6 +77,14 @@ public class GameLauncher {
      */
     private static void launchConsole() {
         System.out.println("Starting " + Version.APP_NAME + " (Console Mode)...");
+        ConsoleMain.main(new String[0]);
+    }
+    
+    /**
+     * Launch the console version with interactive mode selection.
+     */
+    private static void launchModeSelection() {
+        System.out.println("Starting " + Version.APP_NAME + " (Console Mode - Interactive Selection)...");
         ConsoleMain.main(new String[0]);
     }
     
@@ -121,6 +134,7 @@ public class GameLauncher {
         System.out.println("  (no arguments)     Launch modern JavaFX UI (default, recommended)");
         System.out.println("  -b, --basic        Launch console/text mode");
         System.out.println("      --console      Same as --basic");
+        System.out.println("  -m, --mode         Launch console mode with interactive game mode selection");
         System.out.println("  -h, --help         Show this help message");
         System.out.println("  -v, --version      Show version information");
         System.out.println();
@@ -131,11 +145,15 @@ public class GameLauncher {
         System.out.println("  java -jar pokermon-" + Version.getValidatedVersion() + ".jar --basic");
         System.out.println("    Start the game in console mode");
         System.out.println();
+        System.out.println("  java -jar pokermon-" + Version.getValidatedVersion() + ".jar --mode");
+        System.out.println("    Start with interactive game mode selection (Classic, Adventure, Safari, Ironman)");
+        System.out.println();
         System.out.println("  java -jar pokermon-" + Version.getValidatedVersion() + ".jar --help");
         System.out.println("    Display this help information");
         System.out.println();
         System.out.println("GAME FEATURES:");
         System.out.println("  - Multiple poker variants supported");
+        System.out.println("  - Monster gameplay modes (Adventure, Safari, Ironman)");
         System.out.println("  - AI opponents with different skill levels");
         System.out.println("  - Statistics tracking and analysis");
         System.out.println("  - Flexible hand evaluation system");

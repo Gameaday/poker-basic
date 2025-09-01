@@ -48,13 +48,17 @@ class CardPackManagerTest {
         CardPackManager manager = CardPackManager.getInstance();
         var packs = manager.getAvailableCardPacks();
         
-        // Should have at least TEXT_SYMBOLS and TET
-        assertTrue(packs.size() >= 2);
+        // Should have at least TEXT_SYMBOLS, TET, and CLASSIC
+        assertTrue(packs.size() >= 3);
         assertTrue(packs.containsKey(CardPackManager.TEXT_SYMBOLS));
         assertTrue(packs.containsKey("TET"));
+        assertTrue(packs.containsKey("CLASSIC"));
         
         // TEXT_SYMBOLS should be first (LinkedHashMap preserves order)
         assertEquals(CardPackManager.TEXT_SYMBOLS, 
             packs.keySet().iterator().next());
+            
+        // Verify display names
+        assertEquals("Classic", manager.getDisplayName("CLASSIC"));
     }
 }

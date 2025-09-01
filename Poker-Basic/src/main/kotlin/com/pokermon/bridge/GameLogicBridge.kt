@@ -21,6 +21,10 @@ class GameLogicBridge {
     private var playerChips = 1000
     private var playerHand = listOf<String>()
     
+    // Game state for save/load functionality
+    private var gameStateSaved = false
+    private var savedGameState: SavedGameState? = null
+    
     /**
      * Initialize a new game with the specified parameters.
      */
@@ -580,6 +584,86 @@ class GameLogicBridge {
     internal fun getGameEngine(): GameEngine? {
         return gameEngine
     }
+    
+    /**
+     * Save the current game state.
+     */
+    fun saveGameState(): GameActionResult {
+        return try {
+            if (!isGameInitialized) {
+                return GameActionResult(false, "No game to save")
+            }
+            
+            gameEngine?.let { engine ->
+                savedGameState = SavedGameState(
+                    playerName = playerName,
+                    gameMode = gameMode,
+                    currentRound = engine.currentRound,
+                    currentPhase = engine.currentPhase,
+                    currentPot = currentPot,
+                    playerChips = playerChips,
+                    playerCards = playerHand,
+                    allPlayersData = getAllPlayers(),
+                    selectedCards = selectedCards.toSet(),
+                    isGameActive = true
+                )
+                gameStateSaved = true
+                GameActionResult(true, "Game saved successfully")
+            } ?: GameActionResult(false, "Game engine not available")
+        } catch (e: Exception) {
+            GameActionResult(false, "Error saving game: ${e.message}")
+        }
+    }
+    
+    /**
+     * Load a previously saved game state.
+     */
+    fun loadGameState(): GameActionResult {
+        return try {
+            savedGameState?.let { saved ->
+                // Restore basic game parameters
+                playerName = saved.playerName
+                gameMode = saved.gameMode
+                currentPot = saved.currentPot
+                playerChips = saved.playerChips
+                playerHand = saved.playerCards
+                selectedCards = saved.selectedCards.toMutableSet()
+                
+                // Reinitialize game with saved parameters
+                val success = initializeGame(saved.playerName, saved.allPlayersData.size, saved.playerChips)
+                if (success) {
+                    // Try to restore phase (may not be perfect but gives basic restoration)
+                    gameEngine?.setPhase(saved.currentPhase)
+                    updatePlayerData()
+                    GameActionResult(true, "Game loaded successfully")
+                } else {
+                    GameActionResult(false, "Failed to restore game state")
+                }
+            } ?: GameActionResult(false, "No saved game found")
+        } catch (e: Exception) {
+            GameActionResult(false, "Error loading game: ${e.message}")
+        }
+    }
+    
+    /**
+     * Check if there is a saved game available.
+     */
+    fun hasSavedGame(): Boolean {
+        return savedGameState != null
+    }
+    
+    /**
+     * Clear the saved game state.
+     */
+    fun clearSavedGame(): GameActionResult {
+        return try {
+            savedGameState = null
+            gameStateSaved = false
+            GameActionResult(true, "Saved game cleared")
+        } catch (e: Exception) {
+            GameActionResult(false, "Error clearing saved game: ${e.message}")
+        }
+    }
 }
 
 /**
@@ -599,4 +683,20 @@ data class PlayerInfo(
 data class GameActionResult(
     val success: Boolean,
     val message: String
+)
+
+/**
+ * Saved game state for persistence functionality.
+ */
+data class SavedGameState(
+    val playerName: String,
+    val gameMode: GameMode,
+    val currentRound: Int,
+    val currentPhase: GamePhase,
+    val currentPot: Int,
+    val playerChips: Int,
+    val playerCards: List<String>,
+    val allPlayersData: List<PlayerInfo>,
+    val selectedCards: Set<Int>,
+    val isGameActive: Boolean
 )

@@ -62,6 +62,11 @@ public class CardPackManager {
                 availableCardPacks.put("TET", "Eternal Tortoise Cards");
             }
         }
+        
+        // Always ensure CLASSIC is available as a fallback option
+        if (!availableCardPacks.containsKey("CLASSIC")) {
+            availableCardPacks.put("CLASSIC", "Classic");
+        }
     }
     
     /**
@@ -163,6 +168,8 @@ public class CardPackManager {
         switch (packName.toUpperCase()) {
             case "TET":
                 return "Eternal Tortoise Cards";
+            case "CLASSIC":
+                return "Classic";
             default:
                 // Convert camelCase or snake_case to Title Case
                 String result = packName.replaceAll("([a-z])([A-Z])", "$1 $2")

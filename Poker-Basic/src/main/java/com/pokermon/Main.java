@@ -12,6 +12,47 @@ import java.util.*;
 
 public class Main {
 
+    // Card mapping constants to avoid recreating arrays on every method call
+    private static final String[] CARD_RANKS = {
+        "error", "Ace", "King", "Queen",
+        "Jack", "Ten", "Nine", "Eight",
+        "Seven", "Six", "Five", "Four",
+        "Three", "Two"
+    };
+    
+    private static final String[] CARD_RANKS_EXTENDED = {
+        "error", "Ace", "King", "Queen",
+        "Jack", "Ten", "Nine", "Eight",
+        "Seven", "Six", "Five", "Four",
+        "Three", "Two", "One"
+    };
+    
+    private static final String[] CARD_SUITS = {
+        "Spades", "Hearts", "Diamonds", "Clubs"
+    };
+    
+    private static final String[] MULTICARD_NAMES = {
+        "Error", "High", "Pair", "Three of a kind", "Four of a kind"
+    };
+    
+    private static final String[] POSSIBLE_NAMES = {
+        "Carl", "Jeff", "James", "Chris", "Fred", "Daniel",
+        "Tony", "Jenny", "Susen", "Rory", "Melody",
+        "Liz", "Pamela", "Diane", "Carol", "Ed", "Edward",
+        "Alphonse", "Ricky", "Matt", "Waldo", "Wesley", "GLaDOS",
+        "Joe", "Bob", "Alex", "Josh", "David", "Brenda", "Ann",
+        "Billy", "Naomi", "Vincent", "John", "Jane", "Dave", "Dirk",
+        "Rose", "Roxy", "Jade", "Jake", "Karkat", "Lord English",
+        "Smallie", "Anthony", "Gwen"
+    };
+    
+    private static final int[] VALID_CHIPS = {100, 500, 1000, 2500};
+    
+    // Game constants
+    private static final int DECK_SIZE = 52;
+    private static final int DEFAULT_HAND_SIZE = 5;
+    private static final int MAX_MULTIPLES_ARRAY_SIZE = 3;
+
     public static void main(String[] args) {
 //Variables
         int workingPot = 0, topBet = 0, countup = 0;
@@ -297,7 +338,7 @@ public class Main {
 
     private static int usedSpace(int[][] Array) {
         int index = 0;
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < MAX_MULTIPLES_ARRAY_SIZE; i++) {
             if (Array[i][0] != 0) {
                 index++;
             }
@@ -548,7 +589,7 @@ public class Main {
     public static int[] setDeck() {
         int[] Deck;
         // Standard deck has 52 cards (13 ranks * 4 suits)
-        Deck = new int[52];
+        Deck = new int[DECK_SIZE];
         for (int i = 0; i < Deck.length; i++) {
             Deck[i] = i + 1; // Cards numbered 1-52
         }
@@ -561,7 +602,7 @@ public class Main {
      * @return a hand of 5 cards
      */
     public static int[] newHand(int[] deck) {
-        return newHand(deck, 5);
+        return newHand(deck, DEFAULT_HAND_SIZE);
     }
     
     /**
@@ -571,8 +612,8 @@ public class Main {
      * @return a hand of the specified size
      */
     public static int[] newHand(int[] deck, int handSize) {
-        if (handSize < 1 || handSize > 52) {
-            throw new IllegalArgumentException("Hand size must be between 1 and 52");
+        if (handSize < 1 || handSize > DECK_SIZE) {
+            throw new IllegalArgumentException("Hand size must be between 1 and " + DECK_SIZE);
         }
         
         int[] hand = new int[handSize];
@@ -759,37 +800,25 @@ public class Main {
 
     private static String cardRank(int card) {
         String cardRank;
-        String[] Ranks = {
-            "error", "Ace", "King", "Queen",
-            "Jack", "Ten", "Nine", "Eight",
-            "Seven", "Six", "Five", "Four",
-            "Three", "Two"
-        };
         int rank = card / 4;
         if (card % 4 != 0) {
             rank++;
         }
-        cardRank = Ranks[rank];
+        cardRank = CARD_RANKS[rank];
 //System.out.println("card rank test, Card: " + card + " rank: " + cardRank);
         return cardRank;
     }
 
     private static String multicardName(int quantity) {
         String title;
-        String[] Titles = {
-            "Error", "High", "Pair", "Three of a kind", "Four of a kind"
-        };
-        title = Titles[quantity];
+        title = MULTICARD_NAMES[quantity];
         return title;
     }
 
     private static String cardSuit(int card) {
         String cardSuit;
-        String[] Suits = {
-            "Spades", "Hearts", "Diamonds", "Clubs"
-        };
         int suit = card % 4;
-        cardSuit = Suits[suit];
+        cardSuit = CARD_SUITS[suit];
 //System.out.println("card suit test, Card: " + card + " suit: " + suit + cardSuit);
         return cardSuit;
     }
@@ -801,13 +830,7 @@ public class Main {
 
     private static String cardRank2(int rank) {
         String cardRank;
-        String[] Ranks = {
-            "error", "Ace", "King", "Queen",
-            "Jack", "Ten", "Nine", "Eight",
-            "Seven", "Six", "Five", "Four",
-            "Three", "Two", "One"
-        };
-        cardRank = Ranks[rank];
+        cardRank = CARD_RANKS_EXTENDED[rank];
 //System.out.println("card rank test, Card: " + card + " rank: " + cardRank);
         return cardRank;
     }
@@ -818,18 +841,7 @@ public class Main {
     }
 
     private static String[] possibleNames() {
-
-        String[] names = {
-            "Carl", "Jeff", "James", "Chris", "Fred", "Daniel",
-            "Tony", "Jenny", "Susen", "Rory", "Melody",
-            "Liz", "Pamela", "Diane", "Carol", "Ed", "Edward",
-            "Alphonse", "Ricky", "Matt", "Waldo", "Wesley", "GLaDOS",
-            "Joe", "Bob", "Alex", "Josh", "David", "Brenda", "Ann",
-            "Billy", "Naomi", "Vincent", "John", "Jane", "Dave", "Dirk",
-            "Rose", "Roxy", "Jade", "Jake", "Karkat", "Lord English",
-            "Smallie", "Anthony", "Gwen"
-        };
-        return names;
+        return POSSIBLE_NAMES;
     }
 
     private static String randomName() {
@@ -908,8 +920,7 @@ public class Main {
 
     private static int promptChips(int defaultChips) {
         // Return the provided chip count, with validation
-        int[] validChips = {100, 500, 1000, 2500};
-        for (int valid : validChips) {
+        for (int valid : VALID_CHIPS) {
             if (defaultChips == valid) {
                 return defaultChips;
             }

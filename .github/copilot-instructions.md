@@ -4,12 +4,12 @@
 
 ## Repository Overview
 
-Poker Basic is a Java 17 educational poker game project demonstrating cross-platform development with multiple build targets:
+Poker Basic is a Java 17 cross-platform poker game project featuring monster collection mechanics with multiple build targets:
 - Desktop JAR (via Maven) - **ALWAYS WORKS**
 - Android APK (via Gradle) - **REQUIRES INTERNET** 
-- Educational codebase with 77 comprehensive tests
+- Professional codebase with 190 comprehensive tests
 
-The project showcases code improvement techniques, object-oriented design, and professional development practices.
+The project demonstrates modern software development practices using professional architecture patterns and comprehensive testing for a fun gaming experience.
 
 ## Quick Start - Essential Commands
 
@@ -30,9 +30,9 @@ mvn clean package -B   # Package: ~15 seconds. NEVER CANCEL. Set timeout to 60+ 
 ### Run the Application
 ```bash
 cd Poker-Basic
-java -jar target/pokermon-0.1b.jar --help    # Show comprehensive help
-java -jar target/pokermon-0.1b.jar --basic   # Console mode (interactive)
-java -jar target/pokermon-0.1b.jar          # GUI mode (requires display)
+java -jar target/pokermon-1.0.0-fat.jar --help    # Show comprehensive help
+java -jar target/pokermon-1.0.0-fat.jar --basic   # Console mode (interactive)
+java -jar target/pokermon-1.0.0-fat.jar          # GUI mode (requires display)
 ```
 
 ### Android Build (Network Required)
@@ -57,10 +57,10 @@ java -jar target/pokermon-0.1b.jar          # GUI mode (requires display)
 5. **Android build**: Only attempt if internet access is available
 
 ### Required Validation After Changes
-- **Always run**: `mvn test -B` (77 tests must pass)
+- **Always run**: `mvn test -B` (190 tests must pass)
 - **Always test**: Run console game scenario (see Validation section)
 - **Java compatibility**: Ensure Java 17+ compatibility
-- **JAR functionality**: Test `java -jar pokermon-0.1b.jar --help`
+- **JAR functionality**: Test `java -jar pokermon-1.0.0-fat.jar --help`
 
 ## Network and Environment Limitations
 
@@ -87,7 +87,7 @@ java -jar target/pokermon-0.1b.jar          # GUI mode (requires display)
 #### Console Mode Validation
 ```bash
 cd Poker-Basic
-java -jar target/pokermon-0.1b.jar --basic
+java -jar target/pokermon-1.0.0-fat.jar --basic
 # 1. Enter player name (e.g., "TestPlayer")
 # 2. Choose number of AI opponents (1-3) 
 # 3. Choose starting chips (500 recommended)
@@ -99,21 +99,21 @@ java -jar target/pokermon-0.1b.jar --basic
 #### JAR Functionality Validation
 ```bash
 cd Poker-Basic
-java -jar target/pokermon-0.1b.jar --help     # Must show comprehensive help
-java -jar target/pokermon-0.1b.jar --version  # Must show version 0.1b
+java -jar target/pokermon-1.0.0-fat.jar --help     # Must show comprehensive help
+java -jar target/pokermon-1.0.0-fat.jar --version  # Must show version 1.0.0
 ```
 
 #### Build System Validation
 ```bash
 cd /home/runner/work/poker-basic/poker-basic
 ./validate-android-build.sh  # Must pass all 21 checks
-cd Poker-Basic && mvn test -B # Must pass all 77 tests
+cd Poker-Basic && mvn test -B # Must pass all 190 tests
 ```
 
 ## Build Outputs and Artifacts
 
 ### Successful Build Outputs
-- **JAR**: `Poker-Basic/target/pokermon-0.1b.jar` (works standalone)
+- **JAR**: `Poker-Basic/target/pokermon-1.0.0-fat.jar` (works standalone)
 - **APK**: `android/build/outputs/apk/debug/android-debug.apk` (requires internet to build)
 - **Test Reports**: `Poker-Basic/target/surefire-reports/` (XML format)
 
@@ -121,14 +121,14 @@ cd Poker-Basic && mvn test -B # Must pass all 77 tests
 ```bash
 cd Poker-Basic
 ls -la target/*.jar                        # Verify JAR exists (~700KB)
-java -jar target/pokermon-0.1b.jar --help  # Verify JAR is executable
+java -jar target/pokermon-1.0.0-fat.jar --help  # Verify JAR is executable
 ```
 
 ## Time Expectations
 
 ### Typical Command Times (Add 50% buffer for timeouts)
 - `mvn clean compile`: ~10 seconds
-- `mvn test`: ~12 seconds (77 tests)
+- `mvn test`: ~12 seconds (190 tests)
 - `mvn clean package`: ~15 seconds
 - `./validate-android-build.sh`: <1 second
 - Android build: 30+ minutes (with internet)

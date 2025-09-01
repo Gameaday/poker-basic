@@ -402,25 +402,12 @@ public class ConsoleMain {
      * Adventure Mode implementation - Monster battles using poker combat.
      */
     private static void launchAdventureMode(String playerName, int playerCount, int chipsInitial) {
-        System.out.println("🚧 BETA FEATURE - Adventure Mode");
+        System.out.println("🏔️ Welcome to Adventure Mode, " + playerName + "!");
+        System.out.println("Battle monsters using poker hand strength as your weapon!");
         System.out.println();
-        System.out.println("Adventure Mode is currently under development for the beta milestone.");
-        System.out.println("This mode will feature:");
-        System.out.println("  • Monster battles where health equals chip count");
-        System.out.println("  • Poker hand strength determines battle outcomes");
-        System.out.println("  • Progressive difficulty and boss encounters");
-        System.out.println("  • Rewards and item drops from defeated monsters");
-        System.out.println();
-        System.out.println("Implementation Status: Foundation complete, battle engine in progress");
-        System.out.println("Expected in: Beta Milestone 1.1");
-        System.out.println();
-        System.out.print("Press Enter to continue with Classic Poker for now...");
-        scanner.nextLine();
         
-        // For now, fall back to classic poker with a note
-        System.out.println("\nFalling back to Classic Poker...");
-        // Re-launch classic mode
-        main(new String[0]);
+        AdventureMode adventure = new AdventureMode(playerName, chipsInitial);
+        adventure.startAdventure();
     }
     
     /**

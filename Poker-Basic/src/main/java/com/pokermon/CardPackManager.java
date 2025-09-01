@@ -227,11 +227,6 @@ public class CardPackManager {
             return null; // Indicates to use text symbols instead
         }
         
-        // For TET, use the existing card back pattern if it exists, or fallback
-        if ("TET".equals(packName)) {
-            return CARDS_RESOURCE_PATH + "/" + packName + "/card red A.jpg"; // Existing TET back
-        }
-        
         return CARDS_RESOURCE_PATH + "/" + packName + "/card_back.jpg";
     }
     

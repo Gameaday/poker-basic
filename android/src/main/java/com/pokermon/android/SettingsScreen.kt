@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.pokermon.CardPackManager
 import com.pokermon.android.data.UserProfileManager
 import com.pokermon.android.ui.theme.PokerTableTheme
 
@@ -34,6 +35,7 @@ fun SettingsScreen(
     var showRestoreDialog by remember { mutableStateOf(false) }
     var showDeleteDialog by remember { mutableStateOf(false) }
     var showThemeDialog by remember { mutableStateOf(false) }
+    var showCardPackDialog by remember { mutableStateOf(false) }
     var showProfileDialog by remember { mutableStateOf(false) }
     var showAchievementsDialog by remember { mutableStateOf(false) }
     
@@ -45,6 +47,12 @@ fun SettingsScreen(
             PokerTableTheme.CLASSIC_GREEN
         }
     }
+    
+    // Get available card packs
+    val cardPackManager = remember { CardPackManager.getInstance() }
+    val availableCardPacks = remember { cardPackManager.availableCardPacks }
+    val selectedCardPack = gameSettings.selectedCardPack
+    val selectedCardPackDisplay = cardPackManager.getDisplayName(selectedCardPack)
     
     Column(
         modifier = Modifier
@@ -145,6 +153,20 @@ fun SettingsScreen(
                 title = "Table Style",
                 description = selectedTheme.displayName,
                 onClick = { showThemeDialog = true }
+            )
+        }
+        
+        Spacer(modifier = Modifier.height(24.dp))
+        
+        // Card Art Selection Section
+        SettingsSection(
+            title = "🃏 Card Art Selection"
+        ) {
+            SettingsActionItem(
+                icon = Icons.Default.Image,
+                title = "Card Pack",
+                description = selectedCardPackDisplay,
+                onClick = { showCardPackDialog = true }
             )
         }
         
@@ -366,6 +388,64 @@ fun SettingsScreen(
             },
             confirmButton = {
                 TextButton(onClick = { showThemeDialog = false }) {
+                    Text("Done")
+                }
+            }
+        )
+    }
+    
+    // Card Pack Selection Dialog
+    if (showCardPackDialog) {
+        AlertDialog(
+            onDismissRequest = { showCardPackDialog = false },
+            title = { Text("🃏 Select Card Art Pack") },
+            text = { 
+                Column {
+                    Text(
+                        text = "Choose your preferred card art style:",
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    
+                    availableCardPacks.forEach { (packName, displayName) ->
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 4.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            RadioButton(
+                                selected = selectedCardPack == packName,
+                                onClick = {
+                                    userProfileManager.updateGameSettings(
+                                        gameSettings.copy(selectedCardPack = packName)
+                                    )
+                                }
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Column {
+                                Text(
+                                    text = displayName,
+                                    style = MaterialTheme.typography.bodyLarge
+                                )
+                                if (packName == CardPackManager.TEXT_SYMBOLS) {
+                                    Text(
+                                        text = "Classic text and symbols display",
+                                        style = MaterialTheme.typography.bodySmall
+                                    )
+                                } else {
+                                    Text(
+                                        text = "Image-based card art pack",
+                                        style = MaterialTheme.typography.bodySmall
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { showCardPackDialog = false }) {
                     Text("Done")
                 }
             }

@@ -2,12 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 /**
- * Get git commit count for dynamic version code generation.
- * This ensures automatic version code incrementation with each commit.
+ * Get git commit count from main branch for dynamic version code generation.
+ * This ensures automatic version code incrementation with each commit on main branch,
+ * preventing version resets in pull request branches.
  * Using provider API for configuration cache compatibility.
  */
 def getGitCommitCount = providers.exec {
-    commandLine 'git', 'rev-list', '--count', 'HEAD'
+    commandLine 'bash', '-c', 'git rev-list --count origin/master 2>/dev/null || git rev-list --count HEAD'
 }.standardOutput.asText.map { it.trim().toInteger() }
 
 android {

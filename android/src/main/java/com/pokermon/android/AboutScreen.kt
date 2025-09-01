@@ -197,7 +197,7 @@ fun TechnicalInfoSection() {
             
             TechInfoItem(
                 label = "Platform",
-                value = "Android (API 26+)"
+                value = "Android (API 28+)"
             )
             
             TechInfoItem(
@@ -222,7 +222,7 @@ fun TechnicalInfoSection() {
             
             TechInfoItem(
                 label = "Target SDK",
-                value = "API 34 (Android 14)"
+                value = "API 35 (Android 15)"
             )
         }
     }

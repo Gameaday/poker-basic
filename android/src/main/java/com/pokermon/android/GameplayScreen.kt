@@ -3,6 +3,7 @@ package com.pokermon.android
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -400,21 +401,32 @@ fun GameplayScreen(
     if (showExitConfirmDialog) {
         AlertDialog(
             onDismissRequest = { showExitConfirmDialog = false },
-            title = { Text("⚠️ Exit Game") },
+            title = { 
+                Text(
+                    text = "🚪 Leave Round",
+                    color = MaterialTheme.colorScheme.onSurface
+                ) 
+            },
             text = { 
-                Text("Are you sure you want to exit the current game?\n\nYour progress will be lost if you haven't saved.") 
+                Text(
+                    text = "Do you want to pause this round and return to the menu?\n\n" +
+                          "Your game session will be preserved and you can continue later.",
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                ) 
             },
             confirmButton = {
                 TextButton(
                     onClick = {
+                        // Save game state before exiting
+                        if (gameSettings.autoSaveEnabled) {
+                            // Game state is automatically preserved in the bridge
+                            // The user can return to continue the same session
+                        }
                         showExitConfirmDialog = false
                         onBackPressed()
-                    },
-                    colors = ButtonDefaults.textButtonColors(
-                        contentColor = MaterialTheme.colorScheme.error
-                    )
+                    }
                 ) {
-                    Text("Exit Game")
+                    Text("Pause & Exit")
                 }
             },
             dismissButton = {
@@ -512,10 +524,12 @@ fun PlayerHandCard(
                 )
             }
             
-            LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            // Show all cards in a scrollable row that fits the screen
+            Row(
+                modifier = Modifier.horizontalScroll(rememberScrollState()),
+                horizontalArrangement = Arrangement.spacedBy(4.dp) // Reduced spacing to fit more cards
             ) {
-                itemsIndexed(cards) { index, card ->
+                cards.forEachIndexed { index, card ->
                     CardDisplay(
                         card = card,
                         isSelected = canSelectCards && selectedCards.contains(index),
@@ -540,12 +554,12 @@ fun CardDisplay(
     
     Box(
         modifier = Modifier
-            .size(width = 60.dp, height = 80.dp)
+            .size(width = 50.dp, height = 70.dp) // Reduced size to fit more cards
             .clickable(enabled = canClick) { onClick() }
             .background(
                 color = if (isSelected) MaterialTheme.colorScheme.primary 
                        else Color.White,
-                shape = RoundedCornerShape(8.dp)
+                shape = RoundedCornerShape(6.dp) // Slightly smaller radius
             ),
         contentAlignment = Alignment.Center
     ) {
@@ -556,12 +570,12 @@ fun CardDisplay(
                     .fillMaxSize()
                     .background(
                         color = Color.Transparent,
-                        shape = RoundedCornerShape(8.dp)
+                        shape = RoundedCornerShape(6.dp)
                     )
                     .then(
                         Modifier.background(
                             color = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
-                            shape = RoundedCornerShape(8.dp)
+                            shape = RoundedCornerShape(6.dp)
                         )
                     )
             )

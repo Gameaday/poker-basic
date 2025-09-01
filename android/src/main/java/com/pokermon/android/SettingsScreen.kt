@@ -192,17 +192,25 @@ fun SettingsScreen(
     if (showBackupDialog) {
         AlertDialog(
             onDismissRequest = { showBackupDialog = false },
-            title = { Text("💾 Export Profile Data") },
+            title = { 
+                Text(
+                    text = "💾 Export Profile Data",
+                    color = MaterialTheme.colorScheme.onSurface
+                ) 
+            },
             text = { 
-                Text("""
-                Export your complete Pokermon profile including:
-                • User statistics and achievements
-                • Game settings and preferences
-                • Monster collection progress
-                • All unlocked content
-                
-                This creates a complete backup of your data.
-                """.trimIndent()) 
+                Text(
+                    text = """
+                    Export your complete Pokermon profile including:
+                    • User statistics and achievements
+                    • Game settings and preferences
+                    • Monster collection progress
+                    • All unlocked content
+                    
+                    This creates a complete backup of your data.
+                    """.trimIndent(),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                ) 
             },
             confirmButton = {
                 TextButton(onClick = { 
@@ -226,18 +234,26 @@ fun SettingsScreen(
     if (showRestoreDialog) {
         AlertDialog(
             onDismissRequest = { showRestoreDialog = false },
-            title = { Text("🔄 Import Profile Data") },
+            title = { 
+                Text(
+                    text = "🔄 Import Profile Data",
+                    color = MaterialTheme.colorScheme.onSurface
+                ) 
+            },
             text = { 
-                Text("""
-                Import a previously exported Pokermon profile.
-                
-                ⚠️ This will replace all current data including:
-                • User statistics and achievements
-                • Game settings and preferences
-                • Monster collection progress
-                
-                Current progress will be lost!
-                """.trimIndent()) 
+                Text(
+                    text = """
+                    Import a previously exported Pokermon profile.
+                    
+                    ⚠️ This will replace all current data including:
+                    • User statistics and achievements
+                    • Game settings and preferences
+                    • Monster collection progress
+                    
+                    Current progress will be lost!
+                    """.trimIndent(),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                ) 
             },
             confirmButton = {
                 TextButton(onClick = { 
@@ -258,18 +274,26 @@ fun SettingsScreen(
     if (showDeleteDialog) {
         AlertDialog(
             onDismissRequest = { showDeleteDialog = false },
-            title = { Text("⚠️ Reset All Data") },
+            title = { 
+                Text(
+                    text = "⚠️ Reset All Data",
+                    color = MaterialTheme.colorScheme.error
+                ) 
+            },
             text = { 
-                Text("""
-                This will permanently delete ALL your Pokermon data:
-                
-                • User profile and statistics
-                • All achievements and progress
-                • Monster collection
-                • Game settings and preferences
-                
-                This action cannot be undone!
-                """.trimIndent()) 
+                Text(
+                    text = """
+                    This will permanently delete ALL your Pokermon data:
+                    
+                    • User profile and statistics
+                    • All achievements and progress
+                    • Monster collection
+                    • Game settings and preferences
+                    
+                    This action cannot be undone!
+                    """.trimIndent(),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                ) 
             },
             confirmButton = {
                 TextButton(
@@ -296,10 +320,18 @@ fun SettingsScreen(
     if (showThemeDialog) {
         AlertDialog(
             onDismissRequest = { showThemeDialog = false },
-            title = { Text("🎨 Choose Pokermon Table Theme") },
+            title = { 
+                Text(
+                    text = "🎨 Choose Pokermon Table Theme",
+                    color = MaterialTheme.colorScheme.onSurface
+                ) 
+            },
             text = { 
                 Column {
-                    Text("Select your preferred poker table style:")
+                    Text(
+                        text = "Select your preferred poker table style:",
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
                     Spacer(modifier = Modifier.height(16.dp))
                     
                     PokerTableTheme.values().forEach { theme ->

@@ -349,6 +349,43 @@ jobs:
           echo "tag_name=dev-${{ steps.version.outputs.version }}-$(date +%Y%m%d-%H%M%S)" >> $GITHUB_OUTPUT
           echo "release_name=Development Build ${{ steps.version.outputs.version }}" >> $GITHUB_OUTPUT
         fi
+
+    - name: Generate changelog
+      id: changelog
+      run: |
+        echo "Generating changelog from git history..."
+        
+        # Find the last tag (if any)
+        LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+        
+        if [ -z "$LAST_TAG" ]; then
+          echo "No previous tag found, generating changelog from entire history"
+          CHANGELOG=$(git log --oneline --pretty=format:"- %s (%h)" --reverse)
+          echo "changelog_title=All Changes" >> $GITHUB_OUTPUT
+        else
+          echo "Found last tag: $LAST_TAG"
+          echo "Generating changelog since $LAST_TAG"
+          CHANGELOG=$(git log "${LAST_TAG}..HEAD" --oneline --pretty=format:"- %s (%h)" --reverse)
+          echo "changelog_title=Changes since $LAST_TAG" >> $GITHUB_OUTPUT
+          
+          # If no changes since last tag, use the single latest commit
+          if [ -z "$CHANGELOG" ]; then
+            CHANGELOG=$(git log -1 --oneline --pretty=format:"- %s (%h)")
+            echo "changelog_title=Latest Changes" >> $GITHUB_OUTPUT
+          fi
+        fi
+        
+        # Handle empty changelog
+        if [ -z "$CHANGELOG" ]; then
+          CHANGELOG="- No changes found"
+        fi
+        
+        # Store changelog in file to handle multiline content
+        echo "$CHANGELOG" > /tmp/changelog.txt
+        echo "changelog_file=/tmp/changelog.txt" >> $GITHUB_OUTPUT
+        
+        echo "Generated changelog:"
+        echo "$CHANGELOG"
     
     - name: Create Release
       uses: softprops/action-gh-release@v2
@@ -363,6 +400,10 @@ jobs:
           - **Build Date**: ${{ github.event.head_commit.timestamp }}
           - **Commit**: ${{ github.sha }}
           - **Branch**: ${{ github.ref_name }}
+          
+          ### ${{ steps.changelog.outputs.changelog_title }}
+          
+          $(cat ${{ steps.changelog.outputs.changelog_file }})
           
           ### What's Included
           This release provides native executables and packages for all major platforms:

@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.pokermon.CardPackManager
 import com.pokermon.android.data.UserProfileManager
 import com.pokermon.android.ui.theme.PokerTableTheme
+import java.util.Locale
 
 /**
  * Enhanced settings screen with persistent user profile integration.
@@ -88,7 +89,7 @@ fun SettingsScreen(
             SettingsActionItem(
                 icon = Icons.Default.Person,
                 title = "Profile Information",
-                description = "Games: ${userProfile.totalGamesPlayed}, Win Rate: ${String.format("%.1f", userProfile.winRate * 100)}%",
+                description = "Games: ${userProfile.totalGamesPlayed}, Win Rate: ${String.format(Locale.getDefault(), "%.1f", userProfile.winRate * 100)}%",
                 onClick = { showProfileDialog = true }
             )
             
@@ -462,7 +463,7 @@ fun SettingsScreen(
                 Column {
                     Text("🎮 Games Played: ${userProfile.totalGamesPlayed}")
                     Text("🏆 Games Won: ${userProfile.gamesWon}")
-                    Text("📊 Win Rate: ${String.format("%.1f", userProfile.winRate * 100)}%")
+                    Text("📊 Win Rate: ${String.format(Locale.getDefault(), "%.1f", userProfile.winRate * 100)}%")
                     Text("💰 Total Chips Won: ${userProfile.totalChipsWon}")
                     Text("🃏 Best Hand: ${userProfile.highestHand}")
                     Text("🎯 Favorite Mode: ${userProfile.favoriteGameMode}")

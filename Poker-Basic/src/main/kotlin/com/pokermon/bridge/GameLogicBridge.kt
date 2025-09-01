@@ -47,6 +47,8 @@ class GameLogicBridge {
             // Initialize the game and deal first hand
             val success = gameEngine!!.initializeGame(playerNames)
             if (success) {
+                // Start the first round to get cards dealt
+                gameEngine!!.startNewRound()
                 updatePlayerData()
                 this.isGameInitialized = true
             }
@@ -97,15 +99,22 @@ class GameLogicBridge {
     /**
      * Get the resource path for a card image based on card integer value.
      * Maps to the actual card art files in the repository resources.
+     * Uses the same mapping as Main.cardRank and Main.cardSuit methods.
      */
     fun getCardImagePath(cardInt: Int): String {
         if (cardInt == 0) return "Cards/TET/card_back.jpg" // Default back for empty cards
         
-        val suits = arrayOf("Clubs", "Hearts", "Diamonds", "Spades")
-        val ranks = arrayOf("", "Ace", "King", "Queen", "Jack", "Ten", 
-                           "Nine", "Eight", "Seven", "Six", "Five", "Four", "Three", "Two", "One")
+        val suits = arrayOf("Spades", "Hearts", "Diamonds", "Clubs")
+        val ranks = arrayOf("error", "Ace", "King", "Queen", "Jack", "Ten", "Nine", "Eight", 
+                           "Seven", "Six", "Five", "Four", "Three", "Two")
         
-        val rank = cardInt / 4 + 1
+        // Use the same logic as Main.cardRank
+        var rank = cardInt / 4
+        if (cardInt % 4 != 0) {
+            rank++
+        }
+        
+        // Use the same logic as Main.cardSuit  
         val suit = cardInt % 4
         
         val rankName = ranks.getOrElse(rank) { "Unknown" }
@@ -524,6 +533,14 @@ class GameLogicBridge {
         } catch (e: Exception) {
             GameActionResult(false, "Error completing card exchange: ${e.message}")
         }
+    }
+    
+    /**
+     * Get the underlying game engine for testing purposes.
+     * This method should only be used in tests.
+     */
+    internal fun getGameEngine(): GameEngine? {
+        return gameEngine
     }
 }
 

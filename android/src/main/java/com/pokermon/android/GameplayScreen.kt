@@ -18,6 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.pokermon.GameMode
+import com.pokermon.GamePhase
 import com.pokermon.bridge.GameLogicBridge
 import com.pokermon.bridge.PlayerInfo
 
@@ -43,7 +44,16 @@ fun GameplayScreen(
     var currentRound by remember { mutableIntStateOf(0) }
     var isRoundComplete by remember { mutableStateOf(false) }
     
-    // Function to refresh all game data
+    // Game phase state
+    var currentPhase by remember { mutableStateOf<GamePhase>(GamePhase.INITIALIZATION) }
+    var phaseDisplayName by remember { mutableStateOf("Initializing...") }
+    var phaseDescription by remember { mutableStateOf("Setting up game") }
+    var shouldShowCards by remember { mutableStateOf(false) }
+    var canBet by remember { mutableStateOf(false) }
+    var canExchangeCards by remember { mutableStateOf(false) }
+    var canProgressRound by remember { mutableStateOf(false) }
+    
+    // Function to refresh all game data including phase information
     fun refreshGameData() {
         if (isGameInitialized) {
             playerChips = gameBridge.getPlayerChips()
@@ -52,6 +62,18 @@ fun GameplayScreen(
             allPlayers = gameBridge.getAllPlayers()
             currentRound = gameBridge.getCurrentRound()
             isRoundComplete = gameBridge.isRoundComplete()
+            
+            // Update phase-specific state
+            currentPhase = gameBridge.getCurrentPhase()
+            phaseDisplayName = gameBridge.getPhaseDisplayName()
+            phaseDescription = gameBridge.getPhaseDescription()
+            shouldShowCards = gameBridge.shouldShowCards()
+            canBet = gameBridge.canBet()
+            canExchangeCards = gameBridge.canExchangeCards()
+            canProgressRound = gameBridge.canProgressRound()
+            
+            // Update selected cards from bridge
+            selectedCards = gameBridge.getSelectedCards()
         }
     }
     
@@ -62,7 +84,7 @@ fun GameplayScreen(
         if (success) {
             isGameInitialized = true
             refreshGameData()
-            gameState = "Game ready! Make your move."
+            gameState = phaseDescription
         } else {
             gameState = "Failed to initialize game"
         }
@@ -75,7 +97,7 @@ fun GameplayScreen(
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Header with round info
+        // Header with round and phase info
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -83,10 +105,19 @@ fun GameplayScreen(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                text = "🃏 ${gameMode.displayName}",
-                style = MaterialTheme.typography.headlineMedium
-            )
+            Column {
+                Text(
+                    text = "🃏 ${gameMode.displayName}",
+                    style = MaterialTheme.typography.headlineMedium
+                )
+                if (isGameInitialized) {
+                    Text(
+                        text = phaseDisplayName,
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.secondary
+                    )
+                }
+            }
             
             if (isGameInitialized) {
                 Text(
@@ -112,25 +143,28 @@ fun GameplayScreen(
             )
         }
         
-        // Player hand with card selection for exchange
-        if (playerCards.isNotEmpty()) {
+        // Player hand with card selection for exchange - only show if phase allows
+        if (shouldShowCards && playerCards.isNotEmpty()) {
             PlayerHandCard(
                 cards = playerCards,
                 selectedCards = selectedCards,
-                onCardSelected = { cardIndex ->
+                onCardSelected = if (canExchangeCards) { cardIndex ->
                     selectedCards = if (selectedCards.contains(cardIndex)) {
                         selectedCards - cardIndex
                     } else {
                         selectedCards + cardIndex
                     }
                     gameBridge.toggleCardSelection(cardIndex)
+                } else { _ -> 
+                    // Card selection disabled when not in exchange phase
                 },
+                canSelectCards = canExchangeCards,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
         }
         
-        // Game actions
-        if (isGameInitialized) {
+        // Game actions - only show if phase allows betting
+        if (isGameInitialized && canBet) {
             GameActionsCard(
                 onCall = {
                     val result = gameBridge.performCall()
@@ -160,7 +194,7 @@ fun GameplayScreen(
                         refreshGameData()
                     }
                 },
-                onExchangeCards = {
+                onExchangeCards = if (canExchangeCards) { {
                     if (selectedCards.isNotEmpty()) {
                         val result = gameBridge.exchangeCards(selectedCards.toList())
                         gameState = result.message
@@ -171,16 +205,86 @@ fun GameplayScreen(
                     } else {
                         gameState = "Select cards to exchange first"
                     }
-                },
+                } } else { {
+                    gameState = "Card exchange not available in current phase"
+                } },
                 betAmount = betAmount,
                 onBetAmountChanged = { betAmount = it },
                 hasSelectedCards = selectedCards.isNotEmpty(),
+                canExchangeCards = canExchangeCards,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
         }
         
-        // Round management
-        if (isGameInitialized) {
+        // Card exchange actions - separate section when in exchange phase
+        if (isGameInitialized && canExchangeCards && !canBet) {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.tertiaryContainer
+                )
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "🔄 Card Exchange",
+                        style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier.padding(bottom = 8.dp)
+                    )
+                    
+                    Text(
+                        text = if (selectedCards.isNotEmpty()) 
+                            "${selectedCards.size} card(s) selected for exchange"
+                        else "Select cards to exchange (tap cards above)",
+                        style = MaterialTheme.typography.bodyMedium,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(bottom = 16.dp)
+                    )
+                    
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Button(
+                            onClick = {
+                                if (selectedCards.isNotEmpty()) {
+                                    val result = gameBridge.exchangeCards(selectedCards.toList())
+                                    gameState = result.message
+                                    if (result.success) {
+                                        selectedCards = emptySet()
+                                        refreshGameData()
+                                    }
+                                } else {
+                                    gameState = "Select cards to exchange first"
+                                }
+                            },
+                            enabled = selectedCards.isNotEmpty()
+                        ) {
+                            Text("Exchange Selected")
+                        }
+                        
+                        OutlinedButton(
+                            onClick = {
+                                val result = gameBridge.completeCardExchange()
+                                gameState = result.message
+                                if (result.success) {
+                                    selectedCards = emptySet()
+                                    refreshGameData()
+                                }
+                            }
+                        ) {
+                            Text("Skip Exchange")
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Round management - only show if phase allows round progression  
+        if (isGameInitialized && canProgressRound) {
             RoundManagementCard(
                 isRoundComplete = isRoundComplete,
                 onNextRound = {
@@ -201,19 +305,38 @@ fun GameplayScreen(
             )
         }
         
-        // Game status
+        // Game status with phase information
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.secondaryContainer
             )
         ) {
-            Text(
-                text = gameState,
-                style = MaterialTheme.typography.bodyMedium,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(16.dp)
-            )
+            Column(
+                modifier = Modifier.padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                if (isGameInitialized) {
+                    Text(
+                        text = phaseDisplayName,
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(bottom = 4.dp)
+                    )
+                    Text(
+                        text = phaseDescription,
+                        style = MaterialTheme.typography.bodyMedium,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(bottom = 8.dp)
+                    )
+                }
+                
+                Text(
+                    text = gameState,
+                    style = MaterialTheme.typography.bodyMedium,
+                    textAlign = TextAlign.Center
+                )
+            }
         }
         
         Spacer(modifier = Modifier.height(24.dp))
@@ -286,6 +409,7 @@ fun PlayerHandCard(
     cards: List<String>,
     selectedCards: Set<Int>,
     onCardSelected: (Int) -> Unit,
+    canSelectCards: Boolean = true,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -304,7 +428,7 @@ fun PlayerHandCard(
                 modifier = Modifier.padding(bottom = 8.dp)
             )
             
-            if (selectedCards.isNotEmpty()) {
+            if (canSelectCards && selectedCards.isNotEmpty()) {
                 Text(
                     text = "${selectedCards.size} card(s) selected for exchange",
                     style = MaterialTheme.typography.bodySmall,
@@ -319,8 +443,9 @@ fun PlayerHandCard(
                 itemsIndexed(cards) { index, card ->
                     CardDisplay(
                         card = card,
-                        isSelected = selectedCards.contains(index),
-                        onClick = { onCardSelected(index) }
+                        isSelected = canSelectCards && selectedCards.contains(index),
+                        onClick = if (canSelectCards) { { onCardSelected(index) } } else { {} },
+                        canClick = canSelectCards
                     )
                 }
             }
@@ -332,14 +457,17 @@ fun PlayerHandCard(
 fun CardDisplay(
     card: String,
     isSelected: Boolean = false,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
+    canClick: Boolean = true
 ) {
     Box(
         modifier = Modifier
             .size(width = 60.dp, height = 80.dp)
-            .clickable { onClick() }
+            .clickable(enabled = canClick) { onClick() }
             .background(
-                color = if (isSelected) MaterialTheme.colorScheme.primary else Color.White,
+                color = if (isSelected) MaterialTheme.colorScheme.primary 
+                       else if (canClick) Color.White 
+                       else Color.Gray.copy(alpha = 0.7f),
                 shape = RoundedCornerShape(8.dp)
             ),
         contentAlignment = Alignment.Center
@@ -347,7 +475,9 @@ fun CardDisplay(
         Text(
             text = card, // Show full card notation (e.g., "A♠", "K♥")
             style = MaterialTheme.typography.labelMedium,
-            color = if (isSelected) Color.White else Color.Black,
+            color = if (isSelected) Color.White 
+                   else if (canClick) Color.Black 
+                   else Color.Gray,
             textAlign = TextAlign.Center
         )
     }
@@ -435,6 +565,7 @@ fun GameActionsCard(
     betAmount: Int,
     onBetAmountChanged: (Int) -> Unit,
     hasSelectedCards: Boolean,
+    canExchangeCards: Boolean = true,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -530,8 +661,8 @@ fun GameActionsCard(
                 }
             }
             
-            // Card exchange section
-            if (hasSelectedCards) {
+            // Card exchange section - only show if card exchange is allowed
+            if (canExchangeCards && hasSelectedCards) {
                 Spacer(modifier = Modifier.height(12.dp))
                 
                 Button(

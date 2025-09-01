@@ -220,6 +220,32 @@ class HandEvaluationTest {
     }
     
     /**
+     * Test card constants functionality to ensure array extraction didn't break card naming.
+     */
+    @Test
+    void testCardConstantsFunctionality() {
+        // Test known card values to verify the constants work correctly
+        
+        // Test card 4 (Ace of Spades) 
+        String[] testHand1 = Main.convertHand(new int[]{4});
+        assertNotNull(testHand1[0], "Card name should not be null");
+        assertTrue(testHand1[0].contains("Ace"), "Should contain Ace");
+        assertTrue(testHand1[0].contains("Spades"), "Should contain Spades");
+        
+        // Test card 8 (King of Spades)
+        String[] testHand2 = Main.convertHand(new int[]{8});
+        assertNotNull(testHand2[0], "Card name should not be null");
+        assertTrue(testHand2[0].contains("King"), "Should contain King");
+        assertTrue(testHand2[0].contains("Spades"), "Should contain Spades");
+        
+        // Test card 52 (Two of Spades)
+        String[] testHand3 = Main.convertHand(new int[]{52});
+        assertNotNull(testHand3[0], "Card name should not be null");
+        assertTrue(testHand3[0].contains("Two"), "Should contain Two");
+        assertTrue(testHand3[0].contains("Spades"), "Should contain Spades");
+    }
+
+    /**
      * Test performAllChecks method completeness.
      */
     @Test

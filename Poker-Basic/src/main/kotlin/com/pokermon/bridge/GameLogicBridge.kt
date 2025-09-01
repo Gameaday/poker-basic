@@ -20,6 +20,7 @@ class GameLogicBridge {
     private var selectedCards = mutableSetOf<Int>()
     private var playerChips = 1000
     private var playerHand = listOf<String>()
+    private var selectedCardPack = "TET" // Default to TET for backward compatibility
     
     // Game state for save/load functionality
     private var gameStateSaved = false
@@ -168,12 +169,31 @@ class GameLogicBridge {
     }
     
     /**
+     * Set the selected card pack for image display.
+     */
+    fun setSelectedCardPack(cardPack: String) {
+        selectedCardPack = cardPack
+    }
+    
+    /**
+     * Get the currently selected card pack.
+     */
+    fun getSelectedCardPack(): String {
+        return selectedCardPack
+    }
+    
+    /**
      * Get the resource path for a card image based on card integer value.
      * Maps to the actual card art files in the repository resources.
      * Uses the same mapping as Main.cardRank and Main.cardSuit methods.
      */
     fun getCardImagePath(cardInt: Int): String {
-        if (cardInt == 0) return "Cards/TET/card_back.jpg" // Default back for empty cards
+        val cardPackManager = CardPackManager.getInstance()
+        
+        if (cardInt == 0) {
+            // Return card back path or null for text symbols
+            return cardPackManager.getCardBackImagePath(selectedCardPack) ?: "TEXT_BACK"
+        }
         
         val suits = arrayOf("Spades", "Hearts", "Diamonds", "Clubs")
         val ranks = arrayOf("error", "Ace", "King", "Queen", "Jack", "Ten", "Nine", "Eight", 
@@ -191,7 +211,9 @@ class GameLogicBridge {
         val rankName = ranks.getOrElse(rank) { "Unknown" }
         val suitName = suits.getOrElse(suit) { "Unknown" }
         
-        return "Cards/TET/$rankName of $suitName.jpg"
+        // Use CardPackManager to get the correct path
+        return cardPackManager.getCardImagePath(selectedCardPack, rankName, suitName) 
+            ?: "TEXT_${rankName}_${suitName}"
     }
     
     /**

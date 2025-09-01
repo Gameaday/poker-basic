@@ -37,6 +37,7 @@ class UserProfileManager private constructor(private val context: Context) {
         private const val KEY_ANIMATIONS_ENABLED = "animations_enabled"
         private const val KEY_AUTO_SAVE_ENABLED = "auto_save_enabled"
         private const val KEY_SELECTED_THEME = "selected_theme"
+        private const val KEY_SELECTED_CARD_PACK = "selected_card_pack"
         private const val KEY_FIRST_LAUNCH = "first_launch"
         private const val KEY_LAST_PLAYED = "last_played"
         private const val KEY_MONSTERS_COLLECTED = "monsters_collected"
@@ -90,7 +91,8 @@ class UserProfileManager private constructor(private val context: Context) {
             soundEnabled = prefs.getBoolean(KEY_SOUND_ENABLED, true),
             animationsEnabled = prefs.getBoolean(KEY_ANIMATIONS_ENABLED, true),
             autoSaveEnabled = prefs.getBoolean(KEY_AUTO_SAVE_ENABLED, true),
-            selectedTheme = prefs.getString(KEY_SELECTED_THEME, "CLASSIC_GREEN") ?: "CLASSIC_GREEN"
+            selectedTheme = prefs.getString(KEY_SELECTED_THEME, "CLASSIC_GREEN") ?: "CLASSIC_GREEN",
+            selectedCardPack = prefs.getString(KEY_SELECTED_CARD_PACK, "TEXT_SYMBOLS") ?: "TEXT_SYMBOLS"
         )
     }
     
@@ -132,6 +134,7 @@ class UserProfileManager private constructor(private val context: Context) {
             putBoolean(KEY_ANIMATIONS_ENABLED, true)
             putBoolean(KEY_AUTO_SAVE_ENABLED, true)
             putString(KEY_SELECTED_THEME, "CLASSIC_GREEN")
+            putString(KEY_SELECTED_CARD_PACK, "TEXT_SYMBOLS")
             putBoolean(KEY_FIRST_LAUNCH, false)
             putLong(KEY_LAST_PLAYED, System.currentTimeMillis())
             putInt(KEY_MONSTERS_COLLECTED, 0)
@@ -176,6 +179,7 @@ class UserProfileManager private constructor(private val context: Context) {
             putBoolean(KEY_ANIMATIONS_ENABLED, settings.animationsEnabled)
             putBoolean(KEY_AUTO_SAVE_ENABLED, settings.autoSaveEnabled)
             putString(KEY_SELECTED_THEME, settings.selectedTheme)
+            putString(KEY_SELECTED_CARD_PACK, settings.selectedCardPack)
         }.apply()
         
         _gameSettings.value = settings
@@ -242,7 +246,8 @@ class UserProfileManager private constructor(private val context: Context) {
                 "soundEnabled": ${settings.soundEnabled},
                 "animationsEnabled": ${settings.animationsEnabled},
                 "autoSaveEnabled": ${settings.autoSaveEnabled},
-                "selectedTheme": "${settings.selectedTheme}"
+                "selectedTheme": "${settings.selectedTheme}",
+                "selectedCardPack": "${settings.selectedCardPack}"
             }
         }
         """.trimIndent()
@@ -332,5 +337,6 @@ data class GameSettings(
     val soundEnabled: Boolean,
     val animationsEnabled: Boolean,
     val autoSaveEnabled: Boolean,
-    val selectedTheme: String
+    val selectedTheme: String,
+    val selectedCardPack: String
 )

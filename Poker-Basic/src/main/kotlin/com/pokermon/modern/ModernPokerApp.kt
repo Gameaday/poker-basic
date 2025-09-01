@@ -12,6 +12,7 @@ import com.pokermon.bridge.GameLogicBridge
 import com.pokermon.bridge.GameActionResult
 import com.pokermon.GameMode
 import com.pokermon.Version
+import com.pokermon.CardPackManager
 
 /**
  * Modern JavaFX-based UI for the Pokermon game.
@@ -458,6 +459,12 @@ class ModernPokerApp : Application() {
             GameMode.IRONMAN -> "Convert winnings to monster gacha"
         }
         
+        // Get card pack information
+        val cardPackManager = CardPackManager.getInstance()
+        val selectedCardPack = gameBridge.getSelectedCardPack()
+        val selectedCardPackDisplay = cardPackManager.getDisplayName(selectedCardPack)
+        val availablePacks = cardPackManager.availableCardPacks.values.joinToString(", ")
+        
         val alert = Alert(Alert.AlertType.INFORMATION).apply {
             title = "Settings"
             headerText = "Game Settings"
@@ -466,6 +473,10 @@ class ModernPokerApp : Application() {
                 ✓ Modern UI enabled
                 ✓ Touch/mouse support active
                 ✓ Cross-platform compatibility
+                
+                Card Display Settings:
+                ✓ Selected Card Pack: $selectedCardPackDisplay
+                ✓ Available Packs: $availablePacks
                 
                 Game Settings:
                 ✓ Current Mode: ${gameMode.displayName}

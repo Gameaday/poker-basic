@@ -97,6 +97,13 @@ fun PokerGameNavigation() {
                 }
             )
         }
+        composable("encyclopedia") {
+            MonsterEncyclopediaScreen(
+                onBackPressed = {
+                    navController.popBackStack()
+                }
+            )
+        }
         composable("about") {
             AboutScreen(
                 onBackPressed = {
@@ -191,6 +198,17 @@ fun MainMenuScreen(navController: NavHostController) {
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("⚙️ Settings")
+        }
+        
+        Spacer(modifier = Modifier.height(16.dp))
+        
+        Button(
+            onClick = { 
+                navController.navigate("encyclopedia")
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("🐲 Monster Encyclopedia")
         }
         
         Spacer(modifier = Modifier.height(16.dp))

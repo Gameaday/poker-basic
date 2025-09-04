@@ -23,13 +23,19 @@ import androidx.compose.ui.unit.dp
 import com.pokermon.GameMode
 import com.pokermon.GamePhase
 import com.pokermon.android.data.UserProfileManager
+import com.pokermon.android.data.MonsterOpponentManager
+import com.pokermon.android.data.MonsterOpponent
+import com.pokermon.android.ui.EnhancedCardDisplay
 import com.pokermon.bridge.GameLogicBridge
 import com.pokermon.bridge.PlayerInfo
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 private const val BET_INCREMENT = 10
 
 /**
- * Enhanced gameplay screen with user profile integration for tracking game progress.
+ * Enhanced gameplay screen with monster opponents, card graphics, and improved flow management.
+ * Addresses gameplay flow issues and integrates monster system for engaging opponents.
  */
 @Composable
 fun GameplayScreen(
@@ -42,12 +48,18 @@ fun GameplayScreen(
     val gameSettings by userProfileManager.gameSettings.collectAsState()
     
     val gameBridge = remember { GameLogicBridge() }
+    val monsterOpponentManager = remember { MonsterOpponentManager() }
+    val coroutineScope = rememberCoroutineScope()
+    
     var gameState by remember { mutableStateOf("Initializing game...") }
     var playerChips by remember { mutableIntStateOf(1000) }
     var currentPot by remember { mutableIntStateOf(0) }
     var playerCards by remember { mutableStateOf(listOf<String>()) }
     var allPlayers by remember { mutableStateOf(listOf<PlayerInfo>()) }
+    var monsterOpponents by remember { mutableStateOf(listOf<MonsterOpponent>()) }
     var isGameInitialized by remember { mutableStateOf(false) }
+    var awaitingPlayerAction by remember { mutableStateOf(false) }
+    var lastActionResult by remember { mutableStateOf("") }
     var betAmount by remember { mutableIntStateOf(50) }
     var selectedCards by remember { mutableStateOf(setOf<Int>()) }
     var currentRound by remember { mutableIntStateOf(0) }
@@ -87,18 +99,44 @@ fun GameplayScreen(
             
             // Update selected cards from bridge
             selectedCards = gameBridge.getSelectedCards()
+            
+            // Update game flow state
+            awaitingPlayerAction = canBet || canExchangeCards
+            gameState = phaseDescription
+            
+            // Auto-progress if needed and possible
+            if (!awaitingPlayerAction && canProgressRound) {
+                // Automatically advance to next phase after a short delay
+                coroutineScope.launch {
+                    delay(1500) // Brief pause to show results
+                    if (!awaitingPlayerAction) {
+                        val result = gameBridge.advancePhase()
+                        if (result.success) {
+                            refreshGameData()
+                        } else {
+                            lastActionResult = result.message
+                        }
+                    }
+                }
+            }
         }
     }
     
     // Initialize game when screen loads  
     LaunchedEffect(gameMode) {
         gameBridge.setGameMode(gameMode)
+        
+        // Generate monster opponents based on player's experience level
+        val skillLevel = (userProfile.gamesWon / 10).coerceAtMost(4) // 0-4 skill level
+        monsterOpponents = monsterOpponentManager.generateOpponents(3, skillLevel)
+        
         val success = gameBridge.initializeGame(userProfile.username, 3, 1000)
         if (success) {
             isGameInitialized = true
             initialChips = 1000
             refreshGameData()
             gameState = phaseDescription
+            awaitingPlayerAction = canBet || canExchangeCards
         } else {
             gameState = "Failed to initialize game"
         }
@@ -154,10 +192,11 @@ fun GameplayScreen(
             modifier = Modifier.padding(bottom = 16.dp)
         )
         
-        // All players information
+        // All players information with monster opponents
         if (allPlayers.isNotEmpty()) {
             AllPlayersCard(
                 players = allPlayers,
+                monsterOpponents = monsterOpponents,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
         }
@@ -524,13 +563,13 @@ fun PlayerHandCard(
                 )
             }
             
-            // Show all cards in a scrollable row that fits the screen
+            // Show all cards in a scrollable row using enhanced graphics
             Row(
                 modifier = Modifier.horizontalScroll(rememberScrollState()),
-                horizontalArrangement = Arrangement.spacedBy(4.dp) // Reduced spacing to fit more cards
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 cards.forEachIndexed { index, card ->
-                    CardDisplay(
+                    EnhancedCardDisplay(
                         card = card,
                         isSelected = canSelectCards && selectedCards.contains(index),
                         onClick = if (canSelectCards) { { onCardSelected(index) } } else { {} },
@@ -634,6 +673,7 @@ private fun parseCardDisplay(card: String): Triple<String, String, Color> {
 @Composable
 fun AllPlayersCard(
     players: List<PlayerInfo>,
+    monsterOpponents: List<MonsterOpponent>,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -646,7 +686,7 @@ fun AllPlayersCard(
             modifier = Modifier.padding(16.dp)
         ) {
             Text(
-                text = "👥 All Players",
+                text = "🐲 Battle Participants",
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(bottom = 12.dp)
             )
@@ -654,8 +694,15 @@ fun AllPlayersCard(
             LazyRow(
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                items(players) { player ->
-                    PlayerInfoDisplay(player = player)
+                itemsIndexed(players) { index, player ->
+                    val monster = if (index > 0 && index <= monsterOpponents.size) {
+                        monsterOpponents[index - 1]
+                    } else null
+                    
+                    PlayerInfoDisplay(
+                        player = player,
+                        monster = monster
+                    )
                 }
             }
         }
@@ -663,7 +710,10 @@ fun AllPlayersCard(
 }
 
 @Composable
-fun PlayerInfoDisplay(player: PlayerInfo) {
+fun PlayerInfoDisplay(
+    player: PlayerInfo,
+    monster: MonsterOpponent? = null
+) {
     Card(
         colors = CardDefaults.cardColors(
             containerColor = if (player.isCurrentPlayer) 
@@ -676,11 +726,23 @@ fun PlayerInfoDisplay(player: PlayerInfo) {
             modifier = Modifier.padding(12.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
-                text = if (player.isCurrentPlayer) "You" else player.name,
-                style = MaterialTheme.typography.labelLarge,
-                fontWeight = FontWeight.Bold
-            )
+            // Player/Monster name with emoji
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                if (monster != null) {
+                    Text(
+                        text = getMonsterEmoji(monster.monster.name),
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                }
+                Text(
+                    text = if (player.isCurrentPlayer) "You" else (monster?.displayName ?: player.name),
+                    style = MaterialTheme.typography.labelLarge,
+                    fontWeight = FontWeight.Bold
+                )
+            }
             
             Text(
                 text = "💰 ${player.chips}",
@@ -890,5 +952,27 @@ fun RoundManagementCard(
                 }
             }
         }
+    }
+}
+
+/**
+ * Get monster emoji for display based on monster name.
+ */
+private fun getMonsterEmoji(monsterName: String): String {
+    return when {
+        monsterName.contains("Pup") || monsterName.contains("Dog") -> "🐕"
+        monsterName.contains("Bird") -> "🐦"
+        monsterName.contains("Cat") -> "🐱"
+        monsterName.contains("Fox") -> "🦊"
+        monsterName.contains("Turtle") -> "🐢"
+        monsterName.contains("Shark") -> "🦈"
+        monsterName.contains("Raven") -> "🐦‍⬛"
+        monsterName.contains("Dragon") -> "🐉"
+        monsterName.contains("Phoenix") -> "🔥"
+        monsterName.contains("Ninja") -> "🥷"
+        monsterName.contains("Quokka") -> "🐹"
+        monsterName.contains("AI") || monsterName.contains("Algorithm") -> "🤖"
+        monsterName.contains("Daemon") || monsterName.contains("Compiler") -> "👾"
+        else -> "🎮"
     }
 }

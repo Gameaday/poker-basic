@@ -46,17 +46,32 @@ The system includes 24 carefully balanced personalities, each with unique behavi
 **Intellectual:**
 - **Brainy**: High intelligence, strategic thinking
 
-#### Personality Traits (0.0-10.0 Scale)
+#### Generalized Personality Traits (0.0-10.0 Scale)
 
-Each personality is defined by 7 core behavioral weights:
+Each personality is defined by 10 core generalized traits that can be reused across all game modes:
 
-- **Aggressiveness**: Likelihood to bet/raise aggressively
-- **Gullibility**: Tendency to call bluffs and trust opponents  
-- **Bluff Tendency**: Frequency of bluffing with weak hands
-- **Confidence**: Self-assurance in hand assessment
-- **Caution**: Conservative play and risk avoidance
-- **Deception**: Skill at misleading opponents
-- **Fold Tendency**: Likelihood to fold under pressure
+**Core Personality Traits:**
+- **Courage**: Willingness to take risks and face challenges
+- **Gullibility**: How easily influenced or deceived by others
+- **Guile**: Cunning, deceptiveness, and tactical cleverness
+- **Confidence**: Self-assurance and belief in one's abilities
+- **Caution**: Careful consideration and prudent decision-making
+- **Empathy**: Ability to understand and read others
+- **Timidness**: Tendency to avoid confrontation or risk
+- **Patience**: Tolerance for waiting and deliberation
+- **Ambition**: Drive to succeed and take initiative
+- **Intelligence**: Analytical thinking and strategic planning
+
+#### Poker-Specific Behavior Calculations
+
+These generalized traits are combined with different weights to determine poker-specific behaviors:
+
+- **Aggressiveness** = Courage × 0.4 + Ambition × 0.3 + Confidence × 0.3
+- **Bluff Tendency** = Guile × 0.5 + Confidence × 0.3 + Courage × 0.2
+- **Fold Tendency** = Timidness × 0.4 + Caution × 0.3 + (10 - Confidence) × 0.3
+- **Deception Ability** = Guile × 0.6 + Intelligence × 0.2 + (10 - Empathy) × 0.2
+
+This approach allows the same personality traits to influence behavior in different game modes with mode-specific weight combinations.
 
 ### 🧠 Advanced Decision Making
 
@@ -222,9 +237,32 @@ com.pokermon.ai/
 ### Extensibility Points
 
 - **Custom Personalities**: Easy addition of new personality types
-- **Trait Expansion**: Additional behavioral dimensions
+- **Trait Expansion**: Additional behavioral dimensions (system supports up to 10 core traits)
 - **Context Awareness**: More sophisticated game state analysis
-- **Cross-Mode Compatibility**: Use in Adventure, Safari, and Ironman modes
+- **Cross-Mode Compatibility**: Generalized traits can be reused across Adventure, Safari, and Ironman modes
+- **Flexible Behavior Mapping**: Different trait weight combinations for different game contexts
+
+### Generalized Trait System Benefits
+
+The new generalized trait system provides several advantages:
+
+1. **Reusability**: Core personality traits can be used across all game modes
+2. **Flexibility**: Different weight combinations create diverse behaviors from the same traits
+3. **Extensibility**: Easy to add new calculated behaviors without changing core personalities
+4. **Maintainability**: Centralized trait definitions reduce code duplication
+5. **Clarity**: More intuitive trait names that match real-world personality concepts
+
+**Example Cross-Mode Usage:**
+```java
+// Poker mode: Aggressiveness calculation
+float pokerAggression = courage * 0.4f + ambition * 0.3f + confidence * 0.3f;
+
+// Adventure mode: Risk-taking calculation  
+float adventureRisk = courage * 0.5f + ambition * 0.4f + (10.0f - caution) * 0.1f;
+
+// Safari mode: Exploration tendency
+float explorationTendency = ambition * 0.3f + intelligence * 0.3f + courage * 0.2f + (10.0f - timidness) * 0.2f;
+```
 
 ## Developer Guidelines
 

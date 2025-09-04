@@ -48,21 +48,21 @@ public class PersonalityTraits {
 
     /**
      * Creates personality traits from a Personality enum.
-     * This converts the specific poker behaviors back to general traits.
+     * This maps the personality's generalized traits to the trait system.
      * 
      * @param personality the personality to convert
      * @return personality traits derived from the personality
      */
     public static PersonalityTraits fromPersonality(Personality personality) {
-        // Convert poker-specific traits to general personality traits
-        float bravery = (personality.getAggressiveness() + (10.0f - personality.getFoldTendency())) / 2.0f;
-        float tenacity = (personality.getConfidence() + (10.0f - personality.getCaution())) / 2.0f;
-        float intelligence = (personality.getCaution() + (10.0f - personality.getGullibility())) / 2.0f;
+        // Map personality's generalized traits to trait system
+        float bravery = personality.getCourage();
+        float tenacity = (personality.getConfidence() + (10.0f - personality.getTimidness())) / 2.0f;
+        float intelligence = personality.getIntelligence();
         float confidence = personality.getConfidence();
-        float tactfulness = (personality.getDeception() + personality.getCaution()) / 2.0f;
-        float empathy = (10.0f - personality.getGullibility() + personality.getDeception()) / 2.0f;
-        float patience = (personality.getCaution() + (10.0f - personality.getAggressiveness())) / 2.0f;
-        float adaptability = (personality.getBluffTendency() + personality.getDeception()) / 2.0f;
+        float tactfulness = (personality.getGuile() + personality.getCaution()) / 2.0f;
+        float empathy = personality.getEmpathy();
+        float patience = personality.getPatience();
+        float adaptability = (personality.getGuile() + personality.getIntelligence()) / 2.0f;
         
         return new PersonalityTraits(bravery, tenacity, intelligence, confidence, 
                                    tactfulness, empathy, patience, adaptability);

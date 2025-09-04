@@ -209,7 +209,7 @@ private fun MonsterCard(
                         
                         if (isDiscovered) {
                             Icon(
-                                Icons.Default.Visibility,
+                                Icons.Default.CheckCircle,
                                 contentDescription = "Seen",
                                 tint = MaterialTheme.colorScheme.primary,
                                 modifier = Modifier.size(16.dp)
@@ -218,7 +218,7 @@ private fun MonsterCard(
                         
                         if (isDefeated) {
                             Icon(
-                                Icons.Default.EmojiEvents,
+                                Icons.Default.Star,
                                 contentDescription = "Defeated",
                                 tint = Color(0xFFFFD700), // Gold
                                 modifier = Modifier.size(16.dp)

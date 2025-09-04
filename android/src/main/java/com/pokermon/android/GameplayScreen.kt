@@ -110,7 +110,7 @@ fun GameplayScreen(
                 coroutineScope.launch {
                     delay(1500) // Brief pause to show results
                     if (!awaitingPlayerAction) {
-                        val result = gameBridge.progressToNextPhase()
+                        val result = gameBridge.advancePhase()
                         if (result.success) {
                             refreshGameData()
                         } else {

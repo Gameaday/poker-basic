@@ -1,6 +1,7 @@
 package com.pokermon;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Centralized database of all available monsters in the Pokermon universe.
@@ -135,7 +136,7 @@ public class MonsterDatabase {
     public static List<Monster> getMonstersByRarity(Monster.Rarity rarity) {
         return MONSTERS_BY_RARITY.stream()
             .filter(monster -> monster.getRarity() == rarity)
-            .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+            .collect(Collectors.toList());
     }
     
     /**
@@ -183,7 +184,7 @@ public class MonsterDatabase {
         return MONSTER_DATABASE.keySet().stream()
             .filter(name -> name.toLowerCase().startsWith(prefix.toLowerCase()))
             .sorted()
-            .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+            .collect(Collectors.toList());
     }
     
     /**

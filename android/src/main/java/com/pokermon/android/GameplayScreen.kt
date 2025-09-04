@@ -28,6 +28,8 @@ import com.pokermon.android.data.MonsterOpponent
 import com.pokermon.android.ui.EnhancedCardDisplay
 import com.pokermon.bridge.GameLogicBridge
 import com.pokermon.bridge.PlayerInfo
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 private const val BET_INCREMENT = 10
 
@@ -47,6 +49,7 @@ fun GameplayScreen(
     
     val gameBridge = remember { GameLogicBridge() }
     val monsterOpponentManager = remember { MonsterOpponentManager() }
+    val coroutineScope = rememberCoroutineScope()
     
     var gameState by remember { mutableStateOf("Initializing game...") }
     var playerChips by remember { mutableIntStateOf(1000) }
@@ -104,9 +107,8 @@ fun GameplayScreen(
             // Auto-progress if needed and possible
             if (!awaitingPlayerAction && canProgressRound) {
                 // Automatically advance to next phase after a short delay
-                kotlin.coroutines.DelicateCoroutinesApi
-                kotlinx.coroutines.GlobalScope.launch {
-                    kotlinx.coroutines.delay(1500) // Brief pause to show results
+                coroutineScope.launch {
+                    delay(1500) // Brief pause to show results
                     if (!awaitingPlayerAction) {
                         val result = gameBridge.progressToNextPhase()
                         if (result.success) {

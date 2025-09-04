@@ -71,6 +71,8 @@ class MonsterOpponentManager {
     
     /**
      * Select an appropriate opponent monster based on skill level.
+     * @param skillLevel estimated skill level (0-4, 0=beginner, 4=legendary)
+     * @return a monster suitable for the player's skill level
      */
     private fun selectOpponentMonster(skillLevel: Int): Monster {
         val monsterPool = when (skillLevel) {
@@ -84,7 +86,11 @@ class MonsterOpponentManager {
         
         val selectedName = monsterPool.random(random)
         return MonsterDatabase.getMonster(selectedName) 
-            ?: MonsterDatabase.getMonster("PixelPup")!!
+            ?: run {
+                // Fallback to PixelPup if selected monster doesn't exist
+                MonsterDatabase.getMonster("PixelPup") 
+                    ?: throw IllegalStateException("Critical error: Base monster PixelPup not found in database")
+            }
     }
     
     /**

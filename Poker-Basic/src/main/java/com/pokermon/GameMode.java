@@ -1,62 +1,43 @@
 package com.pokermon;
 
+import com.pokermon.api.GameMode;
+
 /**
- * Defines the different game modes available in the poker game.
- * This enum supports the future expansion into monster-based gameplay.
+ * Backward compatibility wrapper for GameMode enum.
+ * This class maintains compatibility with existing code while redirecting to the new api package.
+ * 
+ * @deprecated Use com.pokermon.api.GameMode instead
  */
+@Deprecated
 public enum GameMode {
-    /**
-     * Traditional poker game mode - classic 5-card draw with betting.
-     */
-    CLASSIC("Classic Poker", "Traditional poker gameplay with betting and card exchange"),
+    CLASSIC(com.pokermon.api.GameMode.CLASSIC),
+    ADVENTURE(com.pokermon.api.GameMode.ADVENTURE),
+    SAFARI(com.pokermon.api.GameMode.SAFARI),
+    IRONMAN(com.pokermon.api.GameMode.IRONMAN);
     
-    /**
-     * Adventure mode - battle monsters whose health equals their chips.
-     * Players must defeat enemies to progress and earn rewards.
-     */
-    ADVENTURE("Adventure Mode", "Battle monsters in poker duels where their health equals their chips"),
+    private final com.pokermon.api.GameMode delegate;
     
-    /**
-     * Safari mode - attempt to capture monsters through poker gameplay.
-     * Success in capturing depends on poker performance and luck.
-     */
-    SAFARI("Safari Mode", "Capture monsters through strategic poker gameplay"),
-    
-    /**
-     * Ironman mode - chips are converted to gacha currency for monster prizes.
-     * Higher chip counts increase chances of rare monster rewards.
-     */
-    IRONMAN("Ironman Mode", "Convert poker winnings into monster gacha pulls with rarity chances");
-    
-    private final String displayName;
-    private final String description;
-    
-    GameMode(String displayName, String description) {
-        this.displayName = displayName;
-        this.description = description;
+    GameMode(com.pokermon.api.GameMode delegate) {
+        this.delegate = delegate;
     }
     
-    /**
-     * Gets the human-readable display name for this game mode.
-     * @return the display name
-     */
     public String getDisplayName() {
-        return displayName;
+        return delegate.getDisplayName();
     }
     
-    /**
-     * Gets the description of this game mode.
-     * @return the description
-     */
     public String getDescription() {
-        return description;
+        return delegate.getDescription();
+    }
+    
+    public boolean hasMonsters() {
+        return delegate.hasMonsters();
     }
     
     /**
-     * Checks if this game mode involves monster mechanics.
-     * @return true if the mode uses monsters, false for classic poker
+     * Gets the actual API GameMode instance.
+     * @return the API GameMode
      */
-    public boolean hasMonsters() {
-        return this != CLASSIC;
+    public com.pokermon.api.GameMode getApiGameMode() {
+        return delegate;
     }
 }

@@ -1,12 +1,14 @@
 /**
  * Legacy main class for the Pokermon game.
  * Contains core game logic and card management functionality.
+ * Now integrates with the advanced AI personality system.
  * 
  * @author Carl Nelson (@Gameaday)
  * @version 1.0.0
  */
 package com.pokermon;
 
+import com.pokermon.ai.PersonalityManager;
 import java.io.*;
 import java.util.*;
 
@@ -359,12 +361,56 @@ public class Main {
     }
 
     /**
+     * Calculates the bet amount for an AI player using the advanced personality system.
+     * Falls back to the legacy system if the advanced system is not available.
+     * 
+     * @param player the AI player
+     * @param currentBet the current bet amount
+     * @param potSize the current pot size (defaults to currentBet * 2 if not available)
+     * @return the new bet amount
+     */
+    public static int calculateAdvancedAIBet(Player player, int currentBet, int potSize) {
+        try {
+            PersonalityManager manager = PersonalityManager.getInstance();
+            
+            // Ensure the player has a monster/personality assignment
+            if (!manager.hasPlayerAssignments(player.getName())) {
+                manager.assignRandomMonsterToPlayer(player.getName());
+            }
+            
+            // Use the advanced AI system
+            return manager.calculateAdvancedAIBet(player, currentBet, potSize);
+            
+        } catch (Exception e) {
+            // Fallback to legacy system if anything goes wrong
+            System.err.println("Warning: Advanced AI system failed, falling back to legacy AI: " + e.getMessage());
+            return calculateLegacyAIBet(player, currentBet);
+        }
+    }
+
+    /**
      * Calculates the bet amount for an AI player based on their hand value and available chips.
+     * This method now uses the advanced AI system by default.
+     * 
      * @param player the AI player
      * @param currentBet the current bet amount
      * @return the new bet amount
      */
     private static int calculateAIBet(Player player, int currentBet) {
+        // Estimate pot size if not available (simple heuristic)
+        int estimatedPot = Math.max(currentBet * 2, 100);
+        return calculateAdvancedAIBet(player, currentBet, estimatedPot);
+    }
+
+    /**
+     * Legacy AI calculation method - simple hand-value based betting.
+     * Kept for backward compatibility and as a fallback.
+     * 
+     * @param player the AI player
+     * @param currentBet the current bet amount
+     * @return the new bet amount
+     */
+    private static int calculateLegacyAIBet(Player player, int currentBet) {
         int chips = player.getChips();
         int handValue = player.getHandValue();
         int bet = currentBet;
@@ -669,6 +715,15 @@ public class Main {
         // Dynamically assign players to list positions based on array length
         for (int i = 0; i < list.length && i < players.length; i++) {
             list[i] = players[i];
+        }
+        
+        // Initialize AI players with monsters and personalities
+        try {
+            PersonalityManager manager = PersonalityManager.getInstance();
+            manager.autoAssignMonstersToAI(list);
+        } catch (Exception e) {
+            // Silently fail if advanced AI system is not available
+            // The game will continue with legacy AI behavior
         }
     }
 

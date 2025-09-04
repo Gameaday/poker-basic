@@ -126,6 +126,9 @@ fun GameplayScreen(
     LaunchedEffect(gameMode) {
         gameBridge.setGameMode(gameMode)
         
+        // Enable automatic AI processing for Android UI
+        gameBridge.setAutoAIEnabled(true)
+        
         // Generate monster opponents based on player's experience level
         val skillLevel = (userProfile.gamesWon / 10).coerceAtMost(4) // 0-4 skill level
         monsterOpponents = monsterOpponentManager.generateOpponents(3, skillLevel)

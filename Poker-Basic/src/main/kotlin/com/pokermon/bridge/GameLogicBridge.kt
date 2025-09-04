@@ -26,6 +26,9 @@ class GameLogicBridge {
     private var gameStateSaved = false
     private var savedGameState: SavedGameState? = null
     
+    // Flag to enable automatic AI processing (disabled by default for compatibility)
+    private var enableAutoAI = false
+    
     /**
      * Initialize a new game with the specified parameters.
      */
@@ -70,6 +73,11 @@ class GameLogicBridge {
     private fun checkAndAdvanceGamePhase() {
         gameEngine?.let { engine ->
             try {
+                // Only process AI opponents if we have more than 1 player and this isn't a test scenario
+                if (shouldProcessAIOpponents(engine)) {
+                    processAIOpponents()
+                }
+                
                 // Check if current betting round is complete or should advance
                 val shouldAdvance = engine.isRoundComplete() || shouldForceAdvancePhase(engine)
                 
@@ -93,6 +101,142 @@ class GameLogicBridge {
             } catch (e: Exception) {
                 // Log error but don't crash the game
                 println("Warning: Error in phase advancement: ${e.message}")
+            }
+        }
+    }
+    
+    /**
+     * Determine if we should automatically process AI opponents.
+     * Skip AI processing during tests or when only one player exists.
+     */
+    private fun shouldProcessAIOpponents(engine: com.pokermon.GameEngine): Boolean {
+        val players = engine.players
+        if (players == null || players.size <= 1) {
+            return false
+        }
+        
+        // Only enable AI processing when explicitly requested (e.g., from Android UI)
+        // To maintain compatibility with existing tests and console mode, we need
+        // an explicit flag to enable automatic AI processing
+        return enableAutoAI && hasMultipleActivePlayers(engine)
+    }
+    
+    /**
+     * Check if there are multiple active players in the game.
+     */
+    private fun hasMultipleActivePlayers(engine: com.pokermon.GameEngine): Boolean {
+        val players = engine.players ?: return false
+        val activePlayers = players.count { !it.isFold() && it.chips > 0 }
+        return activePlayers > 1
+    }
+    
+    /**
+     * Enable or disable automatic AI processing.
+     * This should be enabled for Android UI but disabled for tests and console mode.
+     */
+    fun setAutoAIEnabled(enabled: Boolean) {
+        this.enableAutoAI = enabled
+    }
+    
+    /**
+     * Process AI opponent turns automatically after a human player action.
+     * This ensures the game flows properly through all AI players before 
+     * returning control to the human player.
+     */
+    private fun processAIOpponents() {
+        gameEngine?.let { engine ->
+            try {
+                val players = engine.players
+                if (players == null || players.isEmpty()) return
+                
+                var safetyCounter = 0
+                val maxIterations = players.size * 2 // Prevent infinite loops
+                
+                // Keep processing until we either reach the human player (index 0) 
+                // or determine the round is complete
+                while (safetyCounter < maxIterations) {
+                    val currentPlayerIndex = engine.currentPlayerIndex
+                    
+                    // If we're back to human player (index 0) or invalid index, stop
+                    if (currentPlayerIndex <= 0 || currentPlayerIndex >= players.size) {
+                        break
+                    }
+                    
+                    val currentPlayer = players[currentPlayerIndex]
+                    
+                    // If current player has folded or is out of chips, advance to next
+                    if (currentPlayer.isFold() || currentPlayer.chips <= 0) {
+                        engine.nextPlayer()
+                        safetyCounter++
+                        continue
+                    }
+                    
+                    // Process AI player action based on simple logic
+                    processAIPlayerAction(engine, currentPlayer, currentPlayerIndex)
+                    
+                    // Move to next player
+                    engine.nextPlayer()
+                    safetyCounter++
+                    
+                    // Check if round is complete after this AI action
+                    if (engine.isRoundComplete()) {
+                        break
+                    }
+                }
+            } catch (e: Exception) {
+                println("Warning: Error processing AI opponents: ${e.message}")
+            }
+        }
+    }
+    
+    /**
+     * Process a single AI player's action using simple poker AI logic.
+     */
+    private fun processAIPlayerAction(engine: com.pokermon.GameEngine, player: com.pokermon.Player, playerIndex: Int) {
+        try {
+            val highBet = engine.currentHighBet
+            val playerBet = player.bet
+            val playerChips = player.chips
+            val callAmount = (highBet - playerBet).coerceAtMost(playerChips)
+            
+            // Simple AI decision making based on hand strength and chips
+            val handValue = player.handValue
+            val chipRatio = if (playerChips > 0) callAmount.toDouble() / playerChips else 1.0
+            
+            when {
+                // Fold if hand is very weak and call amount is significant
+                handValue < 3 && chipRatio > 0.3 -> {
+                    player.setFold(true)
+                }
+                // Call if call amount is reasonable
+                callAmount <= playerChips && chipRatio <= 0.5 -> {
+                    if (callAmount > 0) {
+                        player.placeBet(playerBet + callAmount)
+                        engine.addToPot(callAmount)
+                    }
+                }
+                // Raise if hand is strong and has chips
+                handValue > 5 && playerChips >= callAmount + 20 && chipRatio < 0.3 -> {
+                    val raiseAmount = callAmount + 20.coerceAtMost(playerChips / 4)
+                    player.placeBet(playerBet + raiseAmount)
+                    engine.addToPot(raiseAmount)
+                }
+                // Default: call if possible, otherwise fold
+                callAmount <= playerChips -> {
+                    if (callAmount > 0) {
+                        player.placeBet(playerBet + callAmount)
+                        engine.addToPot(callAmount)
+                    }
+                }
+                else -> {
+                    player.setFold(true)
+                }
+            }
+        } catch (e: Exception) {
+            // If AI processing fails, just have the player check/fold
+            println("Warning: AI player $playerIndex decision error: ${e.message}")
+            if (player.chips <= 0) {
+                player.setFold(true)
             }
         }
     }

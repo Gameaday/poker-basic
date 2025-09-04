@@ -138,6 +138,13 @@ public class GameLauncher {
         System.out.println("  -h, --help         Show this help message");
         System.out.println("  -v, --version      Show version information");
         System.out.println();
+        System.out.println("ARCHITECTURE:");
+        System.out.println("  The codebase has been reorganized for better separation of concerns:");
+        System.out.println("  📦 com.pokermon.api/           - Core game configuration & enums");
+        System.out.println("  📦 com.pokermon.core/          - Business logic & game engine");
+        System.out.println("  📦 com.pokermon.interfaces/    - UI interface implementations");
+        System.out.println("  📦 com.pokermon/               - Legacy compatibility layer");
+        System.out.println();
         System.out.println("EXAMPLES:");
         System.out.println("  java -jar pokermon-" + Version.getValidatedVersion() + ".jar");
         System.out.println("    Start the game with modern JavaFX UI (default)");

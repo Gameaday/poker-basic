@@ -97,14 +97,25 @@ android {
             excludes += ['/META-INF/{AL2.0,LGPL2.1}']
         }
     }
+    
+    // Include shared Kotlin source files directly for pure Kotlin-native architecture
+    sourceSets {
+        main {
+            java {
+                srcDirs += '../Poker-Basic/src/main/kotlin'
+                srcDirs += '../Poker-Basic/src/main/java'
+            }
+        }
+    }
 }
 
 dependencies {
-    // Shared game logic - using thin JAR (no dependencies) to avoid conflicts
-    implementation files('../Poker-Basic/target/pokermon-1.0.0-android.jar')
+    // Direct Kotlin source integration - no external module dependencies needed
+    // All Kotlin source files are included directly via sourceSets configuration
     
-    // Explicit dependencies for proper Android management - Conservative stable versions
+    // Kotlin-native dependencies - aligned with main project
     implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.22'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
     
     // Android and UI dependencies - Conservative stable updates
     implementation 'androidx.core:core-ktx:1.13.1'

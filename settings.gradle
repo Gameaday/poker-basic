@@ -5,6 +5,7 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
@@ -13,5 +14,15 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PokerGame"
+// Pokermon - Pure Kotlin-Native Cross-Platform Project
+rootProject.name = "Pokermon"
+
+// Include shared Kotlin-native module
+include ':shared'
+project(':shared').projectDir = new File('shared')
+
+// Include Android module
 include ':android'
+
+// Include desktop module for native executable generation  
+include ':desktop'

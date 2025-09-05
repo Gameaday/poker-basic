@@ -12,6 +12,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -20,25 +21,44 @@ import com.pokermon.GameMode
 import com.pokermon.android.data.UserProfileManager
 import com.pokermon.android.ui.theme.PokerGameTheme
 import com.pokermon.android.ui.theme.PokerTableTheme
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.first
 
 /**
  * Main Android activity for the Pokermon Game.
- * Enhanced with comprehensive user profile integration and persistent theming.
+ * Enhanced with Kotlin-native features: coroutines, flow, and modern state management.
+ * 
+ * Features Kotlin-native enhancements:
+ * - Coroutines for async operations
+ * - StateFlow for reactive UI updates
+ * - Lifecycle-aware state management
+ * - Type-safe navigation with sealed classes
  */
 class MainActivity : ComponentActivity() {
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Use Kotlin coroutines for async initialization
+        lifecycleScope.launch {
+            initializeUserData()
+        }
+        
         setContent {
             val context = LocalContext.current
             val userProfileManager = remember { UserProfileManager.getInstance(context) }
+            
+            // Kotlin Flow integration for reactive UI
             val gameSettings by userProfileManager.gameSettings.collectAsState()
             
-            // Apply user's selected theme
+            // Type-safe theme selection with Kotlin when expression
             val selectedTheme = remember(gameSettings.selectedTheme) {
-                try {
-                    PokerTableTheme.valueOf(gameSettings.selectedTheme)
-                } catch (e: IllegalArgumentException) {
-                    null
+                when (gameSettings.selectedTheme) {
+                    PokerTableTheme.CLASSIC.name -> PokerTableTheme.CLASSIC
+                    PokerTableTheme.NEON.name -> PokerTableTheme.NEON
+                    PokerTableTheme.DARK.name -> PokerTableTheme.DARK
+                    PokerTableTheme.FOREST.name -> PokerTableTheme.FOREST
+                    else -> PokerTableTheme.CLASSIC // Safe default
                 }
             }
             
@@ -47,28 +67,75 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    PokerGameNavigation()
+                    PokerGameNavigation(userProfileManager)
                 }
             }
         }
     }
+    
+    /**
+     * Kotlin coroutine function for async user data initialization.
+     * Demonstrates Kotlin-native async patterns.
+     */
+    private suspend fun initializeUserData() {
+        try {
+            val userProfileManager = UserProfileManager.getInstance(this)
+            
+            // Use Kotlin Flow operators for data processing
+            val settings = userProfileManager.gameSettings.first()
+            
+            // Kotlin-native null safety and smart casts
+            settings.let { gameSettings ->
+                if (gameSettings.playerName.isBlank()) {
+                    // Initialize default settings if needed
+                    userProfileManager.updatePlayerName("New Player")
+                }
+            }
+        } catch (e: Exception) {
+            // Kotlin-style exception handling
+            // Log error but don't crash the app
+            android.util.Log.w("MainActivity", "Failed to initialize user data", e)
+        }
+    }
+}
+
+/**
+ * Enhanced navigation with Kotlin-native sealed classes for type safety.
+ * Demonstrates modern Kotlin patterns for Android navigation.
+ */
+sealed class NavigationRoute(val route: String) {
+    object MainMenu : NavigationRoute("main_menu")
+    object GameModeSelection : NavigationRoute("game_mode_selection") 
+    object Settings : NavigationRoute("settings")
+    object About : NavigationRoute("about")
+    object MonsterEncyclopedia : NavigationRoute("monster_encyclopedia")
+    data class Gameplay(val gameMode: GameMode) : NavigationRoute("gameplay/${gameMode.name}")
+    
+    companion object {
+        fun fromGameMode(gameMode: GameMode): Gameplay = Gameplay(gameMode)
+    }
 }
 
 @Composable
-fun PokerGameNavigation() {
+fun PokerGameNavigation(userProfileManager: UserProfileManager) {
     val navController = rememberNavController()
     
     NavHost(
         navController = navController,
-        startDestination = "main_menu"
+        startDestination = NavigationRoute.MainMenu.route
     ) {
-        composable("main_menu") {
+        composable(NavigationRoute.MainMenu.route) {
             MainMenuScreen(navController = navController)
         }
-        composable("game_mode_selection") {
+        composable(NavigationRoute.GameModeSelection.route) {
             GameModeSelectionScreen(
                 onGameModeSelected = { gameMode ->
-                    navController.navigate("gameplay/${gameMode.name}")
+                    // Type-safe navigation using sealed classes
+                    navController.navigate(NavigationRoute.fromGameMode(gameMode).route)
+                },
+                onBack = { navController.popBackStack() }
+            )
+        }
                 },
                 onBackPressed = {
                     navController.popBackStack()

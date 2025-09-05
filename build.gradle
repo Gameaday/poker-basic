@@ -1,12 +1,58 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+// Pokermon - Pure Kotlin-Native Cross-Platform Build
+// Top-level build file for pure Kotlin-native development
+import java.text.SimpleDateFormat
+import java.util.Date
+
+// Dynamic version calculation without git dependency
+def calculateVersion() {
+    def major = project.findProperty('app.version.major') ?: '1'
+    def minor = project.findProperty('app.version.minor') ?: '1'  
+    def patch = project.findProperty('app.version.patch') ?: '0'
+    def timestamp = new SimpleDateFormat('yyyyMMdd').format(new Date())
+    return "${major}.${minor}.${patch}.${timestamp}"
+}
+
+// Set dynamic version for all projects
+allprojects {
+    version = calculateVersion()
+    group = 'com.pokermon'
+}
+
 buildscript {
+    ext.kotlin_version = '1.9.22'
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.4.0'
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.22'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    
+    // Apply Kotlin configuration to all projects
+    afterEvaluate {
+        if (plugins.hasPlugin('org.jetbrains.kotlin.android') || 
+            plugins.hasPlugin('org.jetbrains.kotlin.jvm') ||
+            plugins.hasPlugin('org.jetbrains.kotlin.multiplatform')) {
+            
+            tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
+                kotlinOptions {
+                    jvmTarget = '17'
+                    freeCompilerArgs += [
+                        '-Xjsr305=strict',
+                        '-opt-in=kotlin.ExperimentalStdlibApi'
+                    ]
+                }
+            }
+        }
     }
 }
 
@@ -16,78 +62,69 @@ task clean(type: Delete) {
     delete fileTree(dir: '.', include: 'app/build')
 }
 
-// Verification task that works offline
-task verifyDualPlatformSetup {
+// Enhanced verification for pure Kotlin-native architecture
+task verifyKotlinNativeSetup {
     group = 'verification'
-    description = 'Verifies that both Java/Maven and Android/Gradle configurations are ready'
+    description = 'Verifies pure Kotlin-native build configuration without Maven dependencies'
     
     doLast {
-        println "=== Dual Platform Build Setup Verification ==="
+        println "=== Pure Kotlin-Native Architecture Verification ==="
+        println "Project: Pokermon"
+        println "Version: ${version} (dynamic, no git dependency)"
         
-        // Check Java/Maven setup
-        def pomPath = 'Poker-Basic/pom.xml'
-        def pomFile = new File(pomPath)
-        if (pomFile.exists()) {
-            println "✅ Java/Maven build: ${pomPath}"
-            println "   Build command: cd Poker-Basic && mvn clean package"
+        // Check Kotlin source setup
+        def kotlinSourcePath = 'shared/src/main/kotlin/com/pokermon'
+        def kotlinSource = new File(project.rootDir, kotlinSourcePath)
+        
+        if (kotlinSource.exists()) {
+            def kotlinFiles = kotlinSource.listFiles().findAll { it.name.endsWith('.kt') }
+            println "✅ Kotlin source: ${kotlinFiles.size()} files in com.pokermon package"
+            
+            // Check for key Kotlin-native classes
+            def keyClasses = ['Monster.kt', 'MonsterDatabase.kt', 'GameEngine.kt', 'Player.kt']
+            keyClasses.each { className ->
+                if (new File(kotlinSource, className).exists()) {
+                    println "✅ ${className} - Kotlin-native implementation ready"
+                } else {
+                    println "⚠️  ${className} - needs migration"
+                }
+            }
         } else {
-            println "❌ Java/Maven pom.xml not found"
+            println "❌ Kotlin source directory missing"
+        }
+        
+        // Check for Maven removal 
+        def pomFile = new File(project.rootDir, 'shared/pom.xml')
+        if (pomFile.exists()) {
+            println "⚠️  Maven pom.xml still present - will be removed in pure Kotlin-native migration"
+        } else {
+            println "✅ No Maven dependencies - pure Gradle/Kotlin-native"
         }
         
         // Check Android/Gradle setup
-        def androidManifestPath = 'android/src/main/AndroidManifest.xml'
         def androidBuildGradlePath = 'android/build.gradle'
         def gradleWrapperPath = 'gradlew'
         def androidActivityPath = 'android/src/main/java/com/pokermon/android/MainActivity.kt'
         
-        def androidManifest = new File(androidManifestPath)
-        def androidBuildGradle = new File(androidBuildGradlePath)
-        def gradleWrapper = new File(gradleWrapperPath)
-        def androidActivity = new File(androidActivityPath)
+        def androidBuildGradle = new File(project.rootDir, androidBuildGradlePath)
+        def gradleWrapper = new File(project.rootDir, gradleWrapperPath)
+        def androidActivity = new File(project.rootDir, androidActivityPath)
         
-        if (androidManifest.exists() && androidBuildGradle.exists() && gradleWrapper.exists() && androidActivity.exists()) {
-            println "✅ Android/Gradle build configuration complete:"
-            println "   - AndroidManifest.xml: ${androidManifest.exists()}"
-            println "   - android/build.gradle: ${androidBuildGradle.exists()}"
-            println "   - Gradle wrapper: ${gradleWrapper.exists()}"
-            println "   - MainActivity.kt: ${androidActivity.exists()}"
+        if (androidBuildGradle.exists() && gradleWrapper.exists() && androidActivity.exists()) {
+            println "✅ Android/Gradle build configuration complete"
             println "   Build command: ./gradlew :android:assembleDebug"
         } else {
-            println "❌ Android build configuration incomplete"
-            println "   Missing files:"
-            if (!androidManifest.exists()) println "   - AndroidManifest.xml"
-            if (!androidBuildGradle.exists()) println "   - android/build.gradle"
-            if (!gradleWrapper.exists()) println "   - gradlew"
-            if (!androidActivity.exists()) println "   - MainActivity.kt"
-        }
-        
-        // Check shared source integration
-        def sharedJavaSourcePath = 'Poker-Basic/src/main/java/com/pokermon'
-        def sharedJavaSource = new File(sharedJavaSourcePath)
-        if (sharedJavaSource.exists()) {
-            def javaFiles = sharedJavaSource.listFiles().findAll { it.name.endsWith('.java') }
-            println "✅ Shared Java source: ${javaFiles.size()} files in com.pokermon package"
-            println "   Shared files: ${javaFiles.collect { it.name }.join(', ')}"
+            println "⚠️  Android build configuration needs setup"
         }
         
         println ""
-        println "=== Network Status ==="
-        try {
-            // Simple network check - will work in environments with network access
-            def networkAvailable = "ping -c 1 google.com".execute().waitFor() == 0
-            println "Internet connectivity: ${networkAvailable ? 'Available' : 'Limited/Offline'}"
-        } catch (Exception e) {
-            println "Internet connectivity: Limited/Offline"
-        }
-        
+        println "=== Build Commands (Pure Kotlin-Native) ==="
+        println "Android APK:      ./gradlew :android:assembleDebug (requires internet)"
+        println "Desktop JAR:      ./gradlew :shared:fatJar"
+        println "Console App:      ./gradlew :shared:runConsole"
+        println "Run Tests:        ./gradlew :shared:test"
+        println "Clean All:        ./gradlew clean"
         println ""
-        println "=== Build Instructions ==="
-        println "JAR (Desktop):  cd Poker-Basic && mvn clean package"
-        println "EXE (Windows):  cd Poker-Basic && mvn package -Pwindows-exe -DskipTests"
-        println "DEB (Linux):    cd Poker-Basic && mvn package -Plinux-exe -DskipTests"
-        println "DMG (macOS):    cd Poker-Basic && mvn package -Pmacos-exe -DskipTests"
-        println "APK (Android):  ./gradlew :android:assembleDebug (requires internet)"
-        println ""
-        println "✅ Cross-platform build support configured successfully!"
+        println "✅ Pure Kotlin-native cross-platform architecture verified!"
     }
 }

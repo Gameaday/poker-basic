@@ -1,0 +1,41 @@
+theme: jekyll-theme-cayman
+title: Pokermon
+description: Where Poker meets Monster Collecting with a Twist!
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://historylabs.dev" # the base hostname & protocol for your site
+
+# GitHub Pages Configuration for Pokermon
+show_downloads: true
+google_analytics: # Add Google Analytics ID when available
+
+# Navigation
+header_page_refs: ['home', 'gameplay', 'download', 'contribute']
+
+# Social links
+github_username: Gameaday
+repository_url: https://github.com/Gameaday/poker-basic
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+plugins:
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Content settings
+excerpt_separator: <!--more-->
+
+# Exclude from processing
+exclude:
+  - .gradle/
+  - .vscode/
+  - build/
+  - Poker-Basic/build/
+  - android/build/
+  - desktop/build/
+  - gradle/
+  - "*.gradle"
+  - "gradlew*"
+  - README.md
+  - LICENSE

@@ -1,0 +1,57 @@
+plugins {
+    id 'java-library'
+    id 'org.jetbrains.kotlin.jvm' version '1.9.22'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+kotlin {
+    jvmToolchain(17)
+}
+
+sourceSets {
+    main {
+        kotlin {
+            srcDirs 'src/main/kotlin'
+        }
+        java {
+            srcDirs 'src/main/java'
+        }
+    }
+    test {
+        kotlin {
+            srcDirs 'src/test/kotlin'
+        }
+        java {
+            srcDirs 'src/test/java'
+        }
+    }
+}
+
+dependencies {
+    // Kotlin standard library
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.22'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
+    
+    // Testing
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.13.4'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+// Configure JAR for Android compatibility (if needed)
+jar {
+    manifest {
+        attributes(
+            'Implementation-Title': 'Pokermon Kotlin-Native Core',
+            'Implementation-Version': '1.0.0',
+            'Main-Class': 'com.pokermon.GameLauncher'
+        )
+    }
+}

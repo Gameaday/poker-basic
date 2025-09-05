@@ -100,11 +100,12 @@ android {
 }
 
 dependencies {
-    // Shared game logic - using thin JAR (no dependencies) to avoid conflicts
-    implementation files('../Poker-Basic/target/pokermon-1.0.0-android.jar')
+    // Direct Kotlin source integration - no JAR dependencies needed
+    implementation project(':Poker-Basic')
     
-    // Explicit dependencies for proper Android management - Conservative stable versions
+    // Kotlin-native dependencies - aligned with main project
     implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.22'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
     
     // Android and UI dependencies - Conservative stable updates
     implementation 'androidx.core:core-ktx:1.13.1'

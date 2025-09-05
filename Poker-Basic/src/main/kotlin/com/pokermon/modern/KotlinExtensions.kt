@@ -25,16 +25,16 @@ fun Player.canAfford(amount: Int): Boolean = this.chips >= amount
  * Checks if the player is active (not folded and has chips).
  * @return true if the player can continue playing
  */
-fun Player.isActive(): Boolean = !this.isFold && this.chips > 0
+fun Player.isActive(): Boolean = !this.isFold() && this.chips > 0
 
 /**
  * Gets the player's status as a descriptive string.
  * @return formatted status string
  */
 fun Player.getStatus(): String = when {
-    this.isFold -> "Folded"
+    this.isFold() -> "Folded"
     this.chips <= 0 -> "Out of chips"
-    this.isHuman -> "Human Player"
+    this.isHuman() -> "Human Player"
     else -> "AI Player"
 }
 
@@ -75,7 +75,7 @@ fun Array<Player>.getActivePlayers(): List<Player> =
  * @return player with best hand, or null if none found
  */
 fun Array<Player>.getBestHand(): Player? = 
-    this.filter { !it.isFold }.maxByOrNull { it.handValue }
+    this.filter { !it.isFold() }.maxByOrNull { it.handValue }
 
 /**
  * Gets the total pot from all player bets.

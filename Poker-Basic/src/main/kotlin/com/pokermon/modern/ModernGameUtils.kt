@@ -193,7 +193,7 @@ class ModernGameManager {
     private suspend fun dealCards() {
         val state = _gameState.value
         state.players.forEach { player ->
-            _gameEvents.emit(GameEvent.CardDealt(player.name, 5))
+            _gameEvents.emit(GameEvent.CardDealt(player.name ?: "Unknown", 5))
         }
     }
     
@@ -201,7 +201,7 @@ class ModernGameManager {
         val state = _gameState.value
         val winner = state.activePlayers.maxByOrNull { it.handValue }
         winner?.let { 
-            _gameEvents.emit(GameEvent.RoundEnded(it.name, state.pot))
+            _gameEvents.emit(GameEvent.RoundEnded(it.name ?: "Unknown", state.pot))
         }
     }
     
@@ -322,8 +322,8 @@ object GameFunctions {
      */
     val playerNameValidator: (Player) -> String? = { player ->
         when {
-            player.name.isBlank() -> "Player name cannot be empty"
-            player.name.length > 20 -> "Player name too long"
+            player.name?.isBlank() != false -> "Player name cannot be empty"
+            player.name?.length ?: 0 > 20 -> "Player name too long"
             else -> null
         }
     }

@@ -376,11 +376,12 @@ class GameLogicBridge {
     /**
      * Helper method to get card name in full notation (e.g., "Ace of Spades", "King of Hearts", etc.).
      * This format matches the CardGraphicsManager expectations for proper image loading.
+     * Uses the same logic as Main.cardRank and Main.cardSuit for consistency.
      */
     private fun cardName(cardInt: Int): String {
         // Convert to full card names that match the drawable resources
         val suits = arrayOf("Spades", "Hearts", "Diamonds", "Clubs")
-        val ranks = arrayOf("?", "Ace", "King", "Queen", "Jack", "Ten", 
+        val ranks = arrayOf("error", "Ace", "King", "Queen", "Jack", "Ten", 
                            "Nine", "Eight", "Seven", "Six", "Five", "Four", "Three", "Two")
         
         // Validate input range to prevent out-of-bounds access
@@ -388,7 +389,13 @@ class GameLogicBridge {
             return "Invalid Card"
         }
         
-        val rank = cardInt / 4 + 1
+        // Use the same logic as Main.cardRank - this matches the original card encoding
+        var rank = cardInt / 4
+        if (cardInt % 4 != 0) {
+            rank++
+        }
+        
+        // Use the same logic as Main.cardSuit  
         val suit = cardInt % 4
         
         // Ensure indices are within bounds  

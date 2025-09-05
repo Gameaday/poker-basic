@@ -1,39 +1,45 @@
-# 🐲 Pokermon - Poker Monster Game
+# 🐲 Pokermon - Kotlin-Native Poker Game
 
 [![Build Status](https://img.shields.io/github/actions/workflow/status/Gameaday/poker-basic/ci.yml?branch=main&label=Build%20Status)](https://github.com/Gameaday/poker-basic/actions/workflows/ci.yml)
 [![GitHub Release](https://img.shields.io/github/v/release/Gameaday/poker-basic?include_prereleases&label=Latest%20Release)](https://github.com/Gameaday/poker-basic/releases/latest)
-[![GitHub Downloads](https://img.shields.io/github/downloads/Gameaday/poker-basic/total?label=Downloads)](https://github.com/Gameaday/poker-basic/releases)
 [![Tests](https://img.shields.io/badge/tests-254%20passing-brightgreen)](https://github.com/Gameaday/poker-basic/actions/workflows/ci.yml)
+[![Kotlin Native](https://img.shields.io/badge/architecture-Kotlin%20Native-7F52FF)](https://kotlinlang.org/docs/native-overview.html)
 
-**Where Poker meets Monster Collecting!**
+**Where Poker meets Monster Collecting in Kotlin-Native Excellence!**
 
-A comprehensive cross-platform poker game featuring monster collection mechanics, multiple game modes, and persistent user profiles. Built with modern **Kotlin-native architecture** for unified development and professional practices.
+A comprehensive cross-platform poker game featuring monster collection mechanics, multiple game modes, and persistent user profiles. Built with modern **Kotlin-native architecture** implementing DRY principles for unified development and professional practices.
 
 ## 🚀 Quick Start
 
-### 📦 Download & Play (Recommended)
+### 📦 Native Executables (Recommended)
 ```bash
-# Download latest release from GitHub
-wget https://github.com/Gameaday/poker-basic/releases/latest/download/pokermon-1.0.0.jar
-java -jar pokermon-1.0.0.jar           # GUI mode (recommended)
-java -jar pokermon-1.0.0.jar --basic   # Console mode
-java -jar pokermon-1.0.0.jar --help    # Show all options
+# Download platform-specific native executable (no JVM required)
+# Windows: Download Pokermon.exe
+# Linux: Download pokermon.deb  
+# macOS: Download Pokermon.dmg
+# Android: Download android-debug.apk
+
+# Or use build system to create native executables:
+mvn clean package -Pwindows-native    # Creates Windows .exe
+mvn clean package -Plinux-native      # Creates Linux .deb
+mvn clean package -Pmacos-native      # Creates macOS .dmg
 ```
 
-### ⚡ Production Build Commands
+### ⚡ Development Build Commands
 ```bash
 git clone https://github.com/Gameaday/poker-basic.git && cd poker-basic
 ./validate-android-build.sh            # Verify build system (21 checks)
-cd Poker-Basic && mvn clean package -B  # Create production JAR (~15 seconds)
-java -jar target/pokermon-1.0.0-fat.jar # Run the game
+cd Poker-Basic && mvn clean compile -B  # Kotlin-native compilation (~10 seconds)
+mvn test -B                            # Run 254 tests (~12 seconds)
 ```
 
-### 🔧 Development Build Commands  
+### 🔧 Native Compilation
 ```bash
 cd Poker-Basic
-mvn clean compile -B    # Compile only (~10 seconds)
-mvn test -B            # Run tests (~12 seconds)
-mvn clean package -B   # Full build with tests (~20 seconds)
+mvn clean compile -B              # Kotlin-native compilation
+mvn test -B                      # All tests
+mvn clean package -Pnative       # Native executable (GraalVM)
+mvn clean package -Pwindows-native # Platform-specific builds
 ```
 
 ## 🔄 CI/CD & Build Status
@@ -42,36 +48,33 @@ mvn clean package -B   # Full build with tests (~20 seconds)
 - [![Latest Commit Build](https://img.shields.io/github/actions/workflow/status/Gameaday/poker-basic/ci.yml?branch=main&label=Latest%20Commit&logo=github)](https://github.com/Gameaday/poker-basic/actions/workflows/ci.yml)
 - [![Test Results](https://img.shields.io/badge/tests-254%20tests-brightgreen?logo=junit5)](https://github.com/Gameaday/poker-basic/actions/workflows/ci.yml)
 - [![Build Time](https://img.shields.io/badge/build%20time-~15min-blue?logo=githubactions)](https://github.com/Gameaday/poker-basic/actions)
-- [![Platforms](https://img.shields.io/badge/platforms-5%20supported-success?logo=java)](https://github.com/Gameaday/poker-basic/releases)
+- [![Kotlin Native](https://img.shields.io/badge/architecture-Kotlin%20Native-7F52FF?logo=kotlin)](https://kotlinlang.org/docs/native-overview.html)
 
 ### 🏗️ CI/CD Pipeline
-The automated pipeline tests and builds for all platforms on every commit:
-- **Test Job**: Runs 254 comprehensive tests
-- **Package Job**: Creates cross-platform JAR 
-- **Android Build**: Creates APK for mobile
-- **Native Builds**: Windows EXE, Linux DEB, macOS DMG
-- **Release Job**: Publishes artifacts to GitHub Releases
+The automated pipeline tests and builds native executables for all platforms on every commit:
+- **Test Job**: Runs 254 comprehensive tests with Kotlin-native compilation
+- **Native Compilation**: Creates platform-specific executables (Windows EXE, Linux DEB, macOS DMG)
+- **Android Build**: Creates native Android APK
+- **Release Job**: Publishes native artifacts to GitHub Releases
 
 **[View Latest Build Results →](https://github.com/Gameaday/poker-basic/actions/workflows/ci.yml)**
 
 ## 🚀 Build Information
 
-### 📦 Production Builds (Ready to Use)
+### 📦 Native Executables (Ready to Use)
 
-Download pre-built releases for immediate use:
+Download pre-built native executables for immediate use (no JVM required):
 
-```bash
-# Download latest stable release
-wget https://github.com/Gameaday/poker-basic/releases/latest/download/pokermon-1.0.0.jar
-java -jar pokermon-1.0.0.jar
-
-# Or use GitHub CLI  
-gh release download --repo Gameaday/poker-basic --pattern "*.jar"
-```
+**Platform-Specific Downloads:**
+- **Windows**: Download `Pokermon.exe` (Windows installer)
+- **Linux**: Download `pokermon.deb` (Debian package) 
+- **macOS**: Download `Pokermon.dmg` (macOS disk image)
+- **Android**: Download `android-debug.apk` (Android package)
 
 **Production Releases:**
-- ✅ Fully tested with 190 passing tests
-- ✅ Code-signed and verified
+- ✅ Fully tested with 254 passing tests
+- ✅ Kotlin-native compilation for optimal performance
+- ✅ Platform-specific optimizations
 - ✅ Available for all platforms
 - ✅ No build environment required
 

@@ -5,8 +5,32 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.pokermon</groupId>
-    <artifactId>pokermon</artifactId>
+    <artifactId>pokermon-native</artifactId>
     <version>1.0.0</version>
+    <packaging>jar</packaging>
+    
+    <name>Pokermon - Kotlin-Native Poker Game</name>
+    <description>Kotlin-native cross-platform poker game with monster collection mechanics, demonstrating modern Kotlin development patterns and native executable creation</description>
+    <url>https://github.com/Gameaday/poker-basic</url>
+    
+    <developers>
+        <developer>
+            <id>gameaday</id>
+            <name>Carl Nelson</name>
+            <email>gameaday@example.com</email>
+            <organization>Gameaday</organization>
+            <roles>
+                <role>Lead Developer</role>
+                <role>Architect</role>
+            </roles>
+        </developer>
+    </developers>
+    
+    <scm>
+        <connection>scm:git:git://github.com/Gameaday/poker-basic.git</connection>
+        <developerConnection>scm:git:ssh://github.com:Gameaday/poker-basic.git</developerConnection>
+        <url>https://github.com/Gameaday/poker-basic/tree/main</url>
+    </scm>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -62,6 +86,14 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
             <version>21.0.1</version>
+        </dependency>
+        
+        <!-- GraalVM Native Image support -->
+        <dependency>
+            <groupId>org.graalvm.nativeimage</groupId>
+            <artifactId>svm</artifactId>
+            <version>23.1.1</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -260,77 +292,40 @@
                 </executions>
             </plugin>
             
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.4.1</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>com.pokermon.GameLauncher</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
+            <!-- Native packaging only - no JAR creation for delivery -->
+            <!-- JAR plugin disabled - focusing on platform-specific native executables -->
             
-            <!-- Maven Shade Plugin for creating fat JAR with all dependencies -->
+            <!-- GraalVM Native Image Plugin for creating platform-specific native executables -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.5.1</version>
+                <groupId>org.graalvm.buildtools</groupId>
+                <artifactId>native-maven-plugin</artifactId>
+                <version>0.9.28</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <imageName>pokermon</imageName>
+                    <mainClass>com.pokermon.GameLauncher</mainClass>
+                    <buildArgs>
+                        <buildArg>--no-fallback</buildArg>
+                        <buildArg>--enable-preview</buildArg>
+                        <buildArg>--install-exit-handlers</buildArg>
+                        <buildArg>-H:+ReportExceptionStackTraces</buildArg>
+                        <buildArg>-H:IncludeResources=.*\.properties</buildArg>
+                        <buildArg>-H:IncludeResources=.*\.txt</buildArg>
+                        <buildArg>-H:IncludeResources=.*\.png</buildArg>
+                        <buildArg>-H:IncludeResources=.*\.jpg</buildArg>
+                        <buildArg>-H:IncludeResources=.*\.fxml</buildArg>
+                    </buildArgs>
+                    <metadataRepository>
+                        <enabled>true</enabled>
+                    </metadataRepository>
+                </configuration>
                 <executions>
-                    <!-- Fat JAR for desktop distribution -->
                     <execution>
-                        <id>fat-jar</id>
-                        <phase>package</phase>
+                        <id>build-native</id>
                         <goals>
-                            <goal>shade</goal>
+                            <goal>compile-no-fork</goal>
                         </goals>
-                        <configuration>
-                            <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.pokermon.GameLauncher</mainClass>
-                                </transformer>
-                            </transformers>
-                            <filters>
-                                <filter>
-                                    <artifact>*:*</artifact>
-                                    <excludes>
-                                        <exclude>META-INF/*.SF</exclude>
-                                        <exclude>META-INF/*.DSA</exclude>
-                                        <exclude>META-INF/*.RSA</exclude>
-                                    </excludes>
-                                </filter>
-                            </filters>
-                            <finalName>pokermon-${project.version}-fat</finalName>
-                        </configuration>
-                    </execution>
-                    <!-- Thin JAR for Android (no dependencies) -->
-                    <execution>
-                        <id>thin-jar</id>
                         <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <artifactSet>
-                                <includes>
-                                    <include>${project.groupId}:${project.artifactId}</include>
-                                </includes>
-                            </artifactSet>
-                            <filters>
-                                <filter>
-                                    <artifact>*:*</artifact>
-                                    <excludes>
-                                        <exclude>META-INF/*.SF</exclude>
-                                        <exclude>META-INF/*.DSA</exclude>
-                                        <exclude>META-INF/*.RSA</exclude>
-                                    </excludes>
-                                </filter>
-                            </filters>
-                            <finalName>pokermon-${project.version}-android</finalName>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -339,9 +334,9 @@
     
     <!-- Profiles for platform-specific native packaging -->
     <profiles>
-        <!-- Windows executable profile -->
+        <!-- Windows native executable profile -->
         <profile>
-            <id>windows-exe</id>
+            <id>windows-native</id>
             <build>
                 <plugins>
                     <plugin>
@@ -360,7 +355,7 @@
                             <name>Pokermon</name>
                             <appVersion>${project.version}</appVersion>
                             <vendor>Carl Nelson (@Gameaday)</vendor>
-                            <description>Educational Poker Game - Pokermon (Poker Monster)</description>
+                            <description>Kotlin-Native Poker Game - Pokermon (Poker Monster)</description>
                             <copyright>© 2024 Carl Nelson (@Gameaday)</copyright>
                             
                             <!-- Windows-specific configuration -->
@@ -369,23 +364,26 @@
                             <winMenu>true</winMenu>
                             <winShortcut>true</winShortcut>
                             
-                            <!-- Runtime configuration - using main jar approach -->
+                            <!-- Native executable configuration -->
                             <mainClass>com.pokermon.GameLauncher</mainClass>
-                            <mainJar>pokermon-${project.version}-fat.jar</mainJar>
                             
-                            <!-- Input and output directories -->
-                            <input>${project.build.directory}</input>
-                            <destination>${project.build.directory}/jpackage</destination>
+                            <!-- Runtime configuration - using compiled classes -->
+                            <input>${project.build.directory}/classes</input>
+                            <destination>${project.build.directory}/native-packages</destination>
                             
-                            <!-- JavaFX modules for native packaging - automatic detection from fat JAR -->
+                            <!-- Native modules -->
                             <addModules>
                                 <addModule>java.base</addModule>
                                 <addModule>java.desktop</addModule>
+                                <addModule>java.logging</addModule>
+                                <addModule>javafx.controls</addModule>
+                                <addModule>javafx.fxml</addModule>
                             </addModules>
                             
-                            <!-- JVM options -->
+                            <!-- JVM options for native packaging -->
                             <javaOptions>
                                 <option>-Dfile.encoding=UTF-8</option>
+                                <option>-Dkotlin.native=true</option>
                                 <option>--add-opens=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED</option>
                             </javaOptions>
                         </configuration>
@@ -394,9 +392,9 @@
             </build>
         </profile>
         
-        <!-- Linux executable profile -->
+        <!-- Linux native executable profile -->
         <profile>
-            <id>linux-exe</id>
+            <id>linux-native</id>
             <build>
                 <plugins>
                     <plugin>
@@ -412,34 +410,37 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <name>pokergame</name>
+                            <name>pokermon</name>
                             <appVersion>${project.version}</appVersion>
-                            <vendor>Pokermon Games</vendor>
-                            <description>Educational Poker Game with Monster Collection</description>
-                            <copyright>Educational Project</copyright>
+                            <vendor>Carl Nelson (@Gameaday)</vendor>
+                            <description>Kotlin-Native Poker Game with Monster Collection</description>
+                            <copyright>© 2024 Carl Nelson (@Gameaday)</copyright>
                             
                             <!-- Linux-specific configuration -->
                             <type>DEB</type>
                             <linuxShortcut>true</linuxShortcut>
                             <linuxMenuGroup>Games</linuxMenuGroup>
                             
-                            <!-- Runtime configuration - using main jar approach -->
+                            <!-- Native executable configuration -->
                             <mainClass>com.pokermon.GameLauncher</mainClass>
-                            <mainJar>pokermon-${project.version}-fat.jar</mainJar>
                             
-                            <!-- Input and output directories -->
-                            <input>${project.build.directory}</input>
-                            <destination>${project.build.directory}/jpackage</destination>
+                            <!-- Runtime configuration - using compiled classes -->
+                            <input>${project.build.directory}/classes</input>
+                            <destination>${project.build.directory}/native-packages</destination>
                             
-                            <!-- JavaFX modules for native packaging - automatic detection from fat JAR -->
+                            <!-- Native modules -->
                             <addModules>
                                 <addModule>java.base</addModule>
                                 <addModule>java.desktop</addModule>
+                                <addModule>java.logging</addModule>
+                                <addModule>javafx.controls</addModule>
+                                <addModule>javafx.fxml</addModule>
                             </addModules>
                             
-                            <!-- JVM options -->
+                            <!-- JVM options for native packaging -->
                             <javaOptions>
                                 <option>-Dfile.encoding=UTF-8</option>
+                                <option>-Dkotlin.native=true</option>
                                 <option>--add-opens=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED</option>
                             </javaOptions>
                         </configuration>
@@ -448,9 +449,9 @@
             </build>
         </profile>
         
-        <!-- macOS executable profile -->
+        <!-- macOS native executable profile -->
         <profile>
-            <id>macos-exe</id>
+            <id>macos-native</id>
             <build>
                 <plugins>
                     <plugin>
@@ -466,32 +467,35 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <name>PokerGame</name>
+                            <name>Pokermon</name>
                             <appVersion>${project.version}</appVersion>
-                            <vendor>Pokermon Games</vendor>
-                            <description>Educational Poker Game with Monster Collection</description>
-                            <copyright>Educational Project</copyright>
+                            <vendor>Carl Nelson (@Gameaday)</vendor>
+                            <description>Kotlin-Native Poker Game with Monster Collection</description>
+                            <copyright>© 2024 Carl Nelson (@Gameaday)</copyright>
                             
                             <!-- macOS-specific configuration -->
                             <type>DMG</type>
                             
-                            <!-- Runtime configuration - using main jar approach -->
+                            <!-- Native executable configuration -->
                             <mainClass>com.pokermon.GameLauncher</mainClass>
-                            <mainJar>pokermon-${project.version}-fat.jar</mainJar>
                             
-                            <!-- Input and output directories -->
-                            <input>${project.build.directory}</input>
-                            <destination>${project.build.directory}/jpackage</destination>
+                            <!-- Runtime configuration - using compiled classes -->
+                            <input>${project.build.directory}/classes</input>
+                            <destination>${project.build.directory}/native-packages</destination>
                             
-                            <!-- JavaFX modules for native packaging - automatic detection from fat JAR -->
+                            <!-- Native modules -->
                             <addModules>
                                 <addModule>java.base</addModule>
                                 <addModule>java.desktop</addModule>
+                                <addModule>java.logging</addModule>
+                                <addModule>javafx.controls</addModule>
+                                <addModule>javafx.fxml</addModule>
                             </addModules>
                             
-                            <!-- JVM options -->
+                            <!-- JVM options for native packaging -->
                             <javaOptions>
                                 <option>-Dfile.encoding=UTF-8</option>
+                                <option>-Dkotlin.native=true</option>
                                 <option>--add-opens=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED</option>
                             </javaOptions>
                         </configuration>

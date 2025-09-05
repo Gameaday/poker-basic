@@ -235,4 +235,20 @@ object CardUtils {
      */
     @JvmStatic
     fun getCardName(card: Int): String = cardName(card)
+    
+    /**
+     * Convert array of cards to readable card names.
+     */
+    fun convertCards(cards: IntArray): List<String> {
+        return cards.map { cardName(it) }
+    }
+    
+    /**
+     * Convert hand multiples to string array format.
+     */
+    fun convertHand(multiples: Array<IntArray>): Array<String> {
+        return multiples.map { (rank, count) ->
+            "${CARD_RANKS.getOrElse(rank) { "Unknown" }} ($count)"
+        }.toTypedArray()
+    }
 }

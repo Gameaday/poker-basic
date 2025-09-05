@@ -59,6 +59,10 @@ data class Player(
     val isFourKind: Boolean get() = _fourKind
     val isFullHouse: Boolean get() = _fullHouse
     
+    // Property accessors for compatibility
+    val convertedHand: Array<String> get() = _convertedHand ?: arrayOf()
+    val convertedHand2: Array<String> get() = _convertedHand2 ?: arrayOf()
+    
     // Safe getters that return copies to prevent external modification
     fun getHand(): IntArray? = _hand?.copyOf()
     fun getConvertedHand(): Array<String>? = _convertedHand?.copyOf()

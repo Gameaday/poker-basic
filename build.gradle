@@ -70,7 +70,7 @@ task verifyKotlinNativeSetup {
     doLast {
         println "=== Pure Kotlin-Native Architecture Verification ==="
         println "Project: Pokermon"
-        println "Version: ${rootProject.version} (dynamic, no git dependency)"
+        println "Version: ${version} (dynamic, no git dependency)"
         
         // Check Kotlin source setup
         def kotlinSourcePath = 'Poker-Basic/src/main/kotlin/com/pokermon'

@@ -1,33 +1,34 @@
-# Cross Platform Build System Guide
+# Kotlin-Native Cross Platform Build System Guide
 
 ## Overview
 
-This project supports native builds for all major platforms using a comprehensive cross-platform build system:
+This project leverages **Kotlin-native architecture** for unified cross-platform builds supporting all major platforms:
 
 - **Windows**: Native `.exe` executables
 - **Linux**: Native `.deb` packages  
 - **macOS**: Native `.dmg` disk images
-- **Android**: Native `.apk` packages
-- **Cross-Platform**: Universal `.jar` files
+- **Android**: Native `.apk` packages with Kotlin coroutines
+- **Cross-Platform**: Universal `.jar` files with Kotlin runtime
 
-## Build System Architecture
+## Kotlin-Native Build Architecture
 
 ### Technology Stack
-- **Java 17**: Core runtime and compilation target
-- **Maven**: Primary build system for desktop platforms
-- **Gradle**: Android build system
+- **Kotlin 1.9.22**: Primary language with modern features
+- **Java 17**: Target runtime and legacy compatibility
+- **Maven**: Kotlin-first build system for desktop platforms
+- **Gradle**: Android build system with Kotlin integration
 - **jpackage**: Native packaging tool (Java 17+)
 - **GitHub Actions**: Automated CI/CD pipeline
 
 ### Platform-Specific Build Tools
 
-| Platform | Build Tool | Output Format | Runtime Bundled |
-|----------|------------|---------------|-----------------|
-| Windows  | jpackage   | .exe installer| Yes            |
-| Linux    | jpackage   | .deb package  | Yes            |
-| macOS    | jpackage   | .dmg image    | Yes            |
-| Android  | Gradle     | .apk package  | N/A (Android Runtime) |
-| Cross-Platform | Maven | .jar file | No (requires Java 17+) |
+| Platform | Build Tool | Language Priority | Output Format | Runtime Bundled |
+|----------|------------|------------------|---------------|-----------------|
+| Windows  | jpackage   | Kotlin → Java    | .exe installer| Yes            |
+| Linux    | jpackage   | Kotlin → Java    | .deb package  | Yes            |
+| macOS    | jpackage   | Kotlin → Java    | .dmg image    | Yes            |
+| Android  | Gradle     | Pure Kotlin      | .apk package  | Android Runtime |
+| Cross-Platform | Maven | Kotlin + Java   | .jar file     | No (requires Java 17+) |
 
 ## Building for Specific Platforms
 

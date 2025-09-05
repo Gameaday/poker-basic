@@ -1,6 +1,6 @@
-# Android Build Setup for Poker Game
+# Android Kotlin-Native Build Setup for Poker Game
 
-This directory contains the Android build infrastructure for creating APK files alongside the existing JAR builds.
+This directory contains the Android build infrastructure leveraging **Kotlin-native architecture** for creating APK files with modern Android features.
 
 ## Quick Start
 
@@ -8,25 +8,27 @@ This directory contains the Android build infrastructure for creating APK files 
 - Internet connection (required for Android SDK download)
 - Java 17 (already configured in the main project)
 
-### Building Android APK
+### Building Android APK with Kotlin-Native
 
 1. **First-time setup** (requires internet):
    ```bash
    # From project root
-   ./gradlew assembleDebug
+   ./gradlew assembleDebug --no-daemon
    ```
 
 2. **Build outputs**:
-   - APK file: `app/build/outputs/apk/debug/app-debug.apk`
-   - Installable on Android devices running API 28+ (Android 9.0+)
+   - APK file: `android/build/outputs/apk/debug/android-debug.apk`
+   - Installable on Android devices running API 21+ (Android 5.0+)
 
-### Architecture
+### Kotlin-Native Android Architecture
 
-The Android build reuses the existing Java source code from `Poker-Basic/src/main/java/com/pokermon/` through Gradle's `sourceSets` configuration. This means:
+The Android build leverages Kotlin-native architecture for optimal Android integration:
 
-- ✅ Same game logic for both JAR and APK
-- ✅ No code duplication
-- ✅ Consistent behavior across platforms
+- ✅ **Native Kotlin implementation** with coroutines for async operations
+- ✅ **Material Design components** with Compose UI
+- ✅ **Shared Kotlin business logic** from core modules
+- ✅ **Type-safe navigation** with sealed classes
+- ✅ **Flow-based reactive patterns** for state management
 
 ### Files Structure
 

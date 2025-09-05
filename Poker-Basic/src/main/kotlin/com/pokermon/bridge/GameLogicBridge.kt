@@ -192,7 +192,7 @@ class GameLogicBridge {
                         break
                     }
                     
-                    val currentPlayer = players?.get(currentPlayerIndex) ?: continue
+                    val currentPlayer = players[currentPlayerIndex]
                     
                     // If current player has folded or is out of chips, advance to next
                     if (currentPlayer.isFold() || currentPlayer.chips <= 0) {

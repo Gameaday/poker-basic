@@ -368,23 +368,22 @@ class GameEngine(private val gameConfig: Game) {
     
     /**
      * Advances to the next active player.
+     * Kotlin-enhanced with null safety and smart casts.
      */
     fun nextPlayer() {
-        if (!gameActive || players == null) {
-            return
-        }
+        val playerArray = players ?: return
+        if (!gameActive) return
         
-        val startIndex = currentPlayerIndex
         var checkedPlayers = 0
         do {
-            currentPlayerIndex = (currentPlayerIndex + 1) % players!!.size
+            currentPlayerIndex = (currentPlayerIndex + 1) % playerArray.size
             checkedPlayers++
-        } while (checkedPlayers < players!!.size &&
-                 (players!![currentPlayerIndex].isFold() || players!![currentPlayerIndex].chips <= 0))
+        } while (checkedPlayers < playerArray.size &&
+                 (playerArray[currentPlayerIndex].isFold() || playerArray[currentPlayerIndex].chips <= 0))
         
         // If no valid player found after checking all, set to -1
-        if (checkedPlayers == players!!.size &&
-            (players!![currentPlayerIndex].isFold() || players!![currentPlayerIndex].chips <= 0)) {
+        if (checkedPlayers == playerArray.size &&
+            (playerArray[currentPlayerIndex].isFold() || playerArray[currentPlayerIndex].chips <= 0)) {
             currentPlayerIndex = -1
         }
     }

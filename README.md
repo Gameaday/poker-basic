@@ -3,11 +3,11 @@
 [![Build Status](https://img.shields.io/github/actions/workflow/status/Gameaday/poker-basic/ci.yml?branch=main&label=Build%20Status)](https://github.com/Gameaday/poker-basic/actions/workflows/ci.yml)
 [![GitHub Release](https://img.shields.io/github/v/release/Gameaday/poker-basic?include_prereleases&label=Latest%20Release)](https://github.com/Gameaday/poker-basic/releases/latest)
 [![GitHub Downloads](https://img.shields.io/github/downloads/Gameaday/poker-basic/total?label=Downloads)](https://github.com/Gameaday/poker-basic/releases)
-[![Tests](https://img.shields.io/badge/tests-190%20passing-brightgreen)](https://github.com/Gameaday/poker-basic/actions/workflows/ci.yml)
+[![Tests](https://img.shields.io/badge/tests-254%20passing-brightgreen)](https://github.com/Gameaday/poker-basic/actions/workflows/ci.yml)
 
 **Where Poker meets Monster Collecting!**
 
-A comprehensive cross-platform poker game featuring monster collection mechanics, multiple game modes, and persistent user profiles. Built with professional development practices and modern architecture patterns.
+A comprehensive cross-platform poker game featuring monster collection mechanics, multiple game modes, and persistent user profiles. Built with modern **Kotlin-native architecture** for unified development and professional practices.
 
 ## 🚀 Quick Start
 
@@ -40,13 +40,13 @@ mvn clean package -B   # Full build with tests (~20 seconds)
 
 ### 📊 Current Build Status
 - [![Latest Commit Build](https://img.shields.io/github/actions/workflow/status/Gameaday/poker-basic/ci.yml?branch=main&label=Latest%20Commit&logo=github)](https://github.com/Gameaday/poker-basic/actions/workflows/ci.yml)
-- [![Test Results](https://img.shields.io/badge/tests-190%20tests-brightgreen?logo=junit5)](https://github.com/Gameaday/poker-basic/actions/workflows/ci.yml)
+- [![Test Results](https://img.shields.io/badge/tests-254%20tests-brightgreen?logo=junit5)](https://github.com/Gameaday/poker-basic/actions/workflows/ci.yml)
 - [![Build Time](https://img.shields.io/badge/build%20time-~15min-blue?logo=githubactions)](https://github.com/Gameaday/poker-basic/actions)
 - [![Platforms](https://img.shields.io/badge/platforms-5%20supported-success?logo=java)](https://github.com/Gameaday/poker-basic/releases)
 
 ### 🏗️ CI/CD Pipeline
 The automated pipeline tests and builds for all platforms on every commit:
-- **Test Job**: Runs 190 comprehensive tests
+- **Test Job**: Runs 254 comprehensive tests
 - **Package Job**: Creates cross-platform JAR 
 - **Android Build**: Creates APK for mobile
 - **Native Builds**: Windows EXE, Linux DEB, macOS DMG
@@ -181,37 +181,52 @@ OPTIONS:
   -v, --version      Show version information
 ```
 
-## 🏗️ Architecture & Design Principles
+## 🏗️ Kotlin-Native Architecture & Design Principles
 
-### DRY (Don't Repeat Yourself) Architecture
-Pokermon follows DRY principles to maintain single authoritative sources of truth for all platform-agnostic components:
+### Unified Kotlin-First Development
+Pokermon leverages Kotlin-native architecture for unified cross-platform development with modern language features:
 
-#### 🎯 Core Architecture Components
-- **`GameLogicBridge.kt`** - Unified API bridging all UI platforms (Android, Desktop, Console)
-- **`GameEngine.java`** - Platform-agnostic poker game logic and state management  
-- **`MonsterDatabase.java`** - Centralized monster data and collection system
-- **`GamePhase.java`** - Universal game state definitions across all platforms
-- **`CardPackManager.java`** - Unified card asset management for all UI implementations
+#### 🎯 Core Kotlin-Native Components
+- **`GameLogicBridge.kt`** - Unified API bridging all UI platforms with coroutines support
+- **`GameEngine.kt`** - Modern Kotlin implementation with null safety and collection operators  
+- **`Game.kt`** - Data class configuration with default parameters and immutable design
+- **`GameMode.kt`** - Rich enum class with extension functions and type safety
+- **`GamePhase.kt`** - Sealed class hierarchy for type-safe game state management
+- **`Player.java`** - Legacy compatibility (migration in progress)
+- **`Main.java`** - Core utilities (migration planned)
 
-#### 🔄 Cross-Platform Consistency
+#### ⚡ Kotlin-Native Benefits
+- **Native Android compatibility** - No Java-Kotlin interop complexity
+- **Coroutines support** - Async programming ready for responsive UIs  
+- **Null safety** - Eliminates common runtime crashes
+- **Data classes** - Immutable state management with copy semantics
+- **Extension functions** - Enhanced functionality without inheritance
+- **Smart casts** - Type-safe operations with automatic casting
+
+#### 🔄 Kotlin-Native Cross-Platform Architecture
 ```
 ┌─────────────────┬─────────────────┬─────────────────┐
 │   Android UI    │   Desktop UI    │   Console UI    │
+│   (Kotlin)      │   (JavaFX)      │   (Text Mode)   │
 ├─────────────────┼─────────────────┼─────────────────┤
-│                 │  GameLogicBridge (Kotlin)        │
+│              GameLogicBridge.kt (Unified API)      │
 ├─────────────────┼─────────────────┼─────────────────┤
-│              Core Game Logic (Java)                │
-│  • GameEngine  • MonsterDatabase  • CardPacks      │
+│        Core Kotlin-Native Game Logic               │
+│  • GameEngine.kt  • Game.kt  • GameMode.kt        │
+│  • GamePhase.kt  • Bridge Components              │
+├─────────────────┼─────────────────┼─────────────────┤
+│         Legacy Java Components                     │
+│  • Player.java  • Main.java  • MonsterDatabase    │
 └─────────────────────────────────────────────────────┘
 ```
 
-#### 🎮 Platform-Specific Features
-- **Android**: Native Material Design UI with touch interactions
-- **Desktop**: JavaFX interface with traditional mouse/keyboard controls  
-- **Console**: Text-based interface for headless environments
-- **All Platforms**: Shared game logic, save states, and progression
+#### 🎮 Platform-Specific Optimizations
+- **Android**: Native Kotlin with coroutines for responsive async operations
+- **Desktop**: JavaFX interface bridged through Kotlin-native components  
+- **Console**: Text-based interface leveraging Kotlin's enhanced string handling
+- **All Platforms**: Unified Kotlin business logic with null safety and modern patterns
 
-This architecture ensures that game features, bug fixes, and improvements automatically benefit all platforms while maintaining platform-specific optimizations.
+This Kotlin-native architecture provides superior maintainability, type safety, and development velocity while ensuring feature parity across all platforms.
 
 ## 🔗 Links
 
@@ -221,4 +236,4 @@ This architecture ensures that game features, bug fixes, and improvements automa
 
 ---
 
-**Pokermon** combines professional software development practices with an engaging gaming experience. Built with modern architecture patterns and comprehensive testing for reliability across all platforms.
+**Pokermon** combines professional software development practices with an engaging gaming experience. Built with modern **Kotlin-native architecture** and comprehensive testing (254 tests) for reliability across all platforms.

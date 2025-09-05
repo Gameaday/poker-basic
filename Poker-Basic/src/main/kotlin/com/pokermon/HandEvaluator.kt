@@ -1,5 +1,7 @@
 package com.pokermon
 
+import com.pokermon.modern.CardUtils
+
 /**
  * Advanced hand evaluation system following DRY principles and designed for extensibility.
  * 

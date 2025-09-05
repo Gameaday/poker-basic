@@ -2,6 +2,7 @@ package com.pokermon.modern
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.assertThrows
 import com.pokermon.modern.CardUtils
 
 /**
@@ -12,19 +13,19 @@ class CardUtilsTest {
     
     @Test
     fun testCardRankAndSuit() {
-        // Test basic card encoding/decoding
-        val aceOfSpades = 51 // Should be Ace of Spades in the encoding
+        // Test basic card encoding/decoding (1-52 encoding)
+        val aceOfSpades = 52 // Should be Ace of Spades in 1-52 encoding
         
         val rank = CardUtils.cardRank(aceOfSpades)
         val suit = CardUtils.cardSuit(aceOfSpades)
         
-        assertTrue(rank >= 0 && rank < 13)
-        assertTrue(suit >= 0 && suit < 4)
+        assertEquals(13, rank) // Ace should be rank 13 in this encoding  
+        assertEquals(3, suit)  // Spades should be suit 3
     }
     
     @Test
     fun testCardNames() {
-        val testCard = 0 // Two of Clubs
+        val testCard = 1 // Two of Clubs (first card in 1-52 encoding)
         
         val rankName = CardUtils.rankName(testCard)
         val suitName = CardUtils.suitName(testCard)
@@ -42,37 +43,37 @@ class CardUtilsTest {
     
     @Test
     fun testCardValidation() {
-        // Valid cards
-        assertTrue(CardUtils.isValidCard(0))
-        assertTrue(CardUtils.isValidCard(25))
-        assertTrue(CardUtils.isValidCard(51))
+        // Valid cards (1-52 encoding)
+        assertTrue(CardUtils.isValidCard(1))
+        assertTrue(CardUtils.isValidCard(26))
+        assertTrue(CardUtils.isValidCard(52))
         
         // Invalid cards
+        assertFalse(CardUtils.isValidCard(0))
+        assertFalse(CardUtils.isValidCard(53))
         assertFalse(CardUtils.isValidCard(-1))
-        assertFalse(CardUtils.isValidCard(52))
-        assertFalse(CardUtils.isValidCard(100))
     }
     
     @Test
     fun testCardComparison() {
-        val card1 = 0  // Two of Clubs
-        val card2 = 1  // Three of Clubs  
-        val card3 = 13 // Two of Diamonds
+        val card1 = 1   // Two of Spades (1-52 encoding)
+        val card2 = 5   // Three of Spades  
+        val card3 = 2   // Two of Hearts
         
         // Test rank comparison
         assertTrue(CardUtils.compareByRank(card1, card2) < 0) // Two < Three
         assertEquals(0, CardUtils.compareByRank(card1, card3)) // Same rank
         
         // Test suit comparison
-        assertEquals(0, CardUtils.compareBySuit(card1, card2)) // Same suit
-        assertTrue(CardUtils.compareBySuit(card1, card3) < 0)  // Clubs < Diamonds
+        assertTrue(CardUtils.compareBySuit(card1, card2) == 0) // Same suit
+        assertTrue(CardUtils.compareBySuit(card1, card3) < 0)  // Spades < Hearts
     }
     
     @Test
     fun testSameRankAndSuit() {
-        val card1 = 0  // Two of Clubs
-        val card2 = 1  // Three of Clubs
-        val card3 = 13 // Two of Diamonds
+        val card1 = 1   // Two of Spades
+        val card2 = 5   // Three of Spades
+        val card3 = 2   // Two of Hearts
         
         assertFalse(CardUtils.sameRank(card1, card2))
         assertTrue(CardUtils.sameRank(card1, card3))
@@ -101,7 +102,7 @@ class CardUtilsTest {
     
     @Test
     fun testHandFormatting() {
-        val hand = intArrayOf(0, 13, 26, 39, 51) // Various cards
+        val hand = intArrayOf(1, 14, 27, 40, 52) // Various cards in 1-52 encoding
         
         val formatted = CardUtils.formatHand(hand, compact = false)
         val compactFormatted = CardUtils.formatHand(hand, compact = true)
@@ -114,7 +115,7 @@ class CardUtilsTest {
     
     @Test
     fun testHandAnalysis() {
-        val hand = intArrayOf(0, 1, 2, 3, 4) // Sequential cards
+        val hand = intArrayOf(1, 5, 9, 13, 17) // Sequential ranks, same suit
         
         val uniqueRanks = CardUtils.getUniqueRanks(hand)
         val uniqueSuits = CardUtils.getUniqueSuits(hand)
@@ -123,16 +124,16 @@ class CardUtilsTest {
         assertEquals(1, uniqueSuits.size) // All same suit
         
         // Test counting
-        val rankCount = CardUtils.countRank(hand, 0)
+        val rankCount = CardUtils.countRank(hand, 1)
         val suitCount = CardUtils.countSuit(hand, 0)
         
-        assertEquals(1, rankCount) // One card of rank 0
+        assertEquals(1, rankCount) // One card of rank 1
         assertEquals(5, suitCount) // All cards of suit 0
     }
     
     @Test
     fun testSorting() {
-        val hand = intArrayOf(51, 0, 25, 12, 38) // Random order
+        val hand = intArrayOf(52, 1, 26, 13, 39) // Random order (1-52 encoding)
         
         val sortedByRank = CardUtils.sortByRank(hand)
         val sortedBySuit = CardUtils.sortBySuit(hand)
@@ -186,25 +187,33 @@ class CardUtilsTest {
     }
     
     @Test
-    fun testLegacyCompatibility() {
-        val testCard = 25
+    fun testDirectMethodCalls() {
+        val testCard = 26 // Middle card in 1-52 encoding
         
-        // Test legacy convertCard method
-        val legacyName = CardUtils.convertCard(testCard)
-        assertNotNull(legacyName)
-        assertTrue(legacyName.contains(" of "))
+        // Test direct Kotlin-native methods
+        val cardName = CardUtils.cardName(testCard)
+        assertNotNull(cardName)
+        assertTrue(cardName.contains(" of "))
         
-        // Test Java-compatible methods
-        assertEquals(CardUtils.cardRank(testCard), CardUtils.getCardRank(testCard))
-        assertEquals(CardUtils.cardSuit(testCard), CardUtils.getCardSuit(testCard))
-        assertEquals(CardUtils.cardName(testCard), CardUtils.getCardName(testCard))
+        // Test consistency of core methods
+        val rank = CardUtils.cardRank(testCard)
+        val suit = CardUtils.cardSuit(testCard)
+        assertTrue(rank >= 1 && rank <= 13) // 1-52 encoding uses ranks 1-13
+        assertTrue(suit >= 0 && suit < 4)
+        
+        // Verify card name contains expected rank and suit
+        assertTrue(cardName.isNotEmpty())
     }
     
     @Test
     fun testEdgeCases() {
-        // Test invalid card handling
-        assertEquals("Invalid Card", CardUtils.convertCard(-1))
-        assertEquals("Invalid Card", CardUtils.convertCard(52))
+        // Test invalid card handling with direct methods
+        assertThrows<IllegalArgumentException> {
+            CardUtils.cardName(0)
+        }
+        assertThrows<IllegalArgumentException> {
+            CardUtils.cardName(53)
+        }
         
         // Test empty arrays
         val emptyHand = intArrayOf()

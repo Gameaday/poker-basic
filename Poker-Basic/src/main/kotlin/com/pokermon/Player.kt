@@ -1,5 +1,7 @@
 package com.pokermon
 
+import com.pokermon.modern.CardUtils
+
 /**
  * Kotlin-native data class representing a poker player with their hand, chips, and game state.
  * Provides immutable state management with null safety and modern Kotlin patterns.
@@ -154,7 +156,7 @@ data class Player(
      * Kotlin-native extension to get hand as card names.
      */
     fun getHandAsCardNames(): List<String> {
-        return _hand?.let { CardUtils.convertCards(it) } ?: emptyList()
+        return _hand?.map { CardUtils.cardName(it) } ?: emptyList()
     }
     
     /**
@@ -279,7 +281,7 @@ data class Player(
      */
     fun convertHand() {
         _hand?.let { hand ->
-            _convertedHand = CardUtils.convertCards(hand).toTypedArray()
+            _convertedHand = hand.map { CardUtils.cardName(it) }.toTypedArray()
         }
     }
     

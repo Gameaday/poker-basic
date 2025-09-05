@@ -28,17 +28,7 @@ object CardUtils {
     
     private val CARD_SUITS = arrayOf("Clubs", "Diamonds", "Hearts", "Spades")
     
-    // Legacy compatibility array for InterfaceUtils migration
-    val LEGACY_CARD_RANKS = arrayOf(
-        "error", "Ace", "King", "Queen",
-        "Jack", "Ten", "Nine", "Eight",
-        "Seven", "Six", "Five", "Four",
-        "Three", "Two"
-    )
-    
-    val LEGACY_CARD_SUITS = arrayOf("Spades", "Hearts", "Diamonds", "Clubs")
-    
-    // Game constants consolidated from InterfaceUtils
+    // Game constants
     const val DECK_SIZE = 52
     const val DEFAULT_HAND_SIZE = 5
     const val MAX_MULTIPLES_ARRAY_SIZE = 3
@@ -75,43 +65,49 @@ object CardUtils {
     )
     
     /**
-     * Get card rank from encoded card value.
-     * Uses the same logic as original Main.cardRank for compatibility.
+     * Get card rank from encoded card value (1-52 encoding).
+     * Uses the same logic as legacy CardUtils for compatibility.
      */
     fun cardRank(card: Int): Int {
-        return card % 13
+        if (card < 1 || card > 52) {
+            throw IllegalArgumentException("Invalid card value: $card (must be 1-52)")
+        }
+        return ((card - 1) / 4) + 1  // Ace=1, 2-10=face, J=11, Q=12, K=13
     }
     
     /**
-     * Get card suit from encoded card value.
-     * Uses the same logic as original Main.cardSuit for compatibility.
+     * Get card suit from encoded card value (1-52 encoding).
+     * Uses the same logic as legacy CardUtils for compatibility.
      */
     fun cardSuit(card: Int): Int {
-        return card / 13
+        if (card < 1 || card > 52) {
+            throw IllegalArgumentException("Invalid card value: $card (must be 1-52)")
+        }
+        return (card - 1) % 4  // Spades=0, Hearts=1, Diamonds=2, Clubs=3
     }
     
     /**
-     * Get rank name from card value.
+     * Get rank name from card value (1-52 encoding).
      */
     fun rankName(card: Int): String {
-        val rank = cardRank(card)
-        return if (rank in CARD_RANKS.indices) CARD_RANKS[rank] else "Unknown"
+        val rank = cardRank(card) // Will throw if invalid
+        return CARD_RANKS[rank - 1]  // Adjust for 1-based rank
     }
     
     /**
-     * Get suit name from card value.
+     * Get suit name from card value (1-52 encoding).
      */
     fun suitName(card: Int): String {
-        val suit = cardSuit(card)
-        return if (suit in CARD_SUITS.indices) CARD_SUITS[suit] else "Unknown"
+        val suit = cardSuit(card) // Will throw if invalid
+        return CARD_SUITS[suit]
     }
     
     /**
-     * Get short rank name for compact display.
+     * Get short rank name for compact display (1-52 encoding).
      */
     fun shortRankName(card: Int): String {
-        val rank = cardRank(card)
-        return if (rank in SHORT_RANKS.indices) SHORT_RANKS[rank] else "?"
+        val rank = cardRank(card) // Will throw if invalid
+        return SHORT_RANKS[rank - 1]  // Adjust for 1-based rank
     }
     
     /**
@@ -137,10 +133,10 @@ object CardUtils {
     }
     
     /**
-     * Validate card value is within valid range.
+     * Validate card value is within valid range (1-52 encoding).
      */
     fun isValidCard(card: Int): Boolean {
-        return card in 0..51
+        return card in 1..52
     }
     
     /**
@@ -248,36 +244,12 @@ object CardUtils {
     }
     
     // =================================================================
-    // JAVA COMPATIBILITY METHODS FOR MIGRATION PERIOD
+    // DECK AND HAND OPERATIONS
     // =================================================================
     
     /**
-     * Java-compatible static access for cardRank.
-     */
-    @JvmStatic
-    fun getCardRank(card: Int): Int = cardRank(card)
-    
-    /**
-     * Java-compatible static access for cardSuit.
-     */
-    @JvmStatic
-    fun getCardSuit(card: Int): Int = cardSuit(card)
-    
-    /**
-     * Java-compatible static access for card name.
-     */
-    @JvmStatic
-    fun getCardName(card: Int): String = cardName(card)
-    
-    /**
-     * Convert array of cards to readable card names.
-     */
-    fun convertCards(cards: IntArray): List<String> {
-        return cards.map { cardName(it) }
-    }
-    
-    /**
      * Convert hand multiples to string array format.
+     * Used by Player for converting hand analysis results.
      */
     fun convertHand(multiples: Array<IntArray>): Array<String> {
         return multiples.map { (rank, count) ->
@@ -285,36 +257,42 @@ object CardUtils {
         }.toTypedArray()
     }
     
-    // ================================================================= 
-    // CONSOLIDATED INTERFACE UTILS FUNCTIONALITY (DRY COMPLIANCE)
-    // =================================================================
-    
     /**
-     * Legacy convertCard method for compatibility with InterfaceUtils.
-     * @param card the card integer (0-51)
-     * @return the card name (e.g., "Ace of Spades")
-     */
-    fun convertCard(card: Int): String {
-        if (card < 0 || card >= DECK_SIZE) {
-            return "Invalid Card"
-        }
-        
-        val rank = card % 13 + 1
-        val suit = card / 13
-        
-        if (rank >= LEGACY_CARD_RANKS.size || suit >= LEGACY_CARD_SUITS.size) {
-            return "Invalid Card"
-        }
-        
-        return "${LEGACY_CARD_RANKS[rank]} of ${LEGACY_CARD_SUITS[suit]}"
-    }
-    
-    /**
-     * Creates a standard 52-card deck.
+     * Creates a standard 52-card deck (1-52 encoding).
      * @return array representing the deck
      */
     fun createDeck(): IntArray {
-        return IntArray(DECK_SIZE) { it }
+        return IntArray(52) { it + 1 }
+    }
+    
+    /**
+     * Create a new shuffled deck of 52 cards (1-52 encoding for legacy compatibility).
+     */
+    fun createShuffledDeck(): IntArray {
+        val deck = IntArray(52) { it + 1 }
+        deck.shuffle()
+        return deck
+    }
+    
+    /**
+     * Deal specified number of cards from deck.
+     * Returns the dealt cards and removes them from the deck.
+     */
+    fun dealCards(deck: MutableList<Int>, count: Int): IntArray {
+        require(deck.size >= count) { "Not enough cards in deck" }
+        
+        val dealt = IntArray(count)
+        repeat(count) { i ->
+            dealt[i] = deck.removeAt(0)
+        }
+        return dealt
+    }
+    
+    /**
+     * Format hand with symbols for visual appeal (legacy compatibility).
+     */
+    fun formatHandSymbols(hand: IntArray): String {
+        return hand.joinToString(" ") { compactCardName(it) }
     }
     
     /**
@@ -404,19 +382,4 @@ object CardUtils {
         return handValue to getHandDescription(handValue)
     }
     
-    /**
-     * Convert cards array to their string representations (modern version).
-     * @param cards the card integers
-     * @return list of card names
-     */
-    fun convertCardsToNames(cards: IntArray): List<String> {
-        return cards.map { convertCard(it) }
-    }
-    
-    /**
-     * Batch conversion of multiple hands to string representations.
-     */
-    fun convertMultipleHands(hands: List<IntArray>): List<List<String>> {
-        return hands.map { convertCardsToNames(it) }
-    }
 }

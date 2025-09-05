@@ -1,6 +1,7 @@
 package com.pokermon.bridge
 
 import com.pokermon.*
+import com.pokermon.modern.CardUtils
 
 /**
  * Data class to track AI player actions for UI feedback.
@@ -386,8 +387,8 @@ class GameLogicBridge {
         }
         
         // Use unified CardUtils for DRY compliance
-        val rankName = CardUtils.cardRank(cardInt)
-        val suitName = CardUtils.cardSuit(cardInt)
+        val rankName = CardUtils.rankName(cardInt)
+        val suitName = CardUtils.suitName(cardInt)
         
         // Use CardPackManager to get the correct path
         return CardPackManager.getCardImagePath(selectedCardPack, rankName, suitName) 

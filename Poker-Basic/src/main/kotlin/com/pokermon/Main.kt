@@ -700,8 +700,8 @@ object Main {
      */
     private fun displayHand(hand: IntArray) {
         hand.forEachIndexed { index, card ->
-            val rank = CardUtils.cardRank(card)
-            val suit = CardUtils.cardSuit(card)
+            val rank = CardUtils.rankName(card)
+            val suit = CardUtils.suitName(card)
             println("  ${index + 1}: $rank of $suit")
         }
     }

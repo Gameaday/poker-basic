@@ -1,0 +1,369 @@
+
+óV
+kotlinx
+cinterop
+CPointer
+	CFunction
+kotlin
+	Function1
+UShortVarOf
+UShort
+platform
+windows
+WCHARVar
+LPCWSTR
+Int
+WINBOOL
+internal
+CCall
+id
+0knifunptr_platform_windows9542_IsLFNDrive_getter
+
+IsLFNDrive
+	Function4
+HKEY__
+HKEY
+UInt
+DWORD
+LPWSTR
+HRESULT
+Cknifunptr_platform_windows9543_SHEnumerateUnreadMailAccounts_getter
+SHEnumerateUnreadMailAccounts
+	Function6
+	UIntVarOf
+DWORDVar
+	_FILETIME
+FILETIME
+:knifunptr_platform_windows9544_SHGetUnreadMailCount_getter
+SHGetUnreadMailCount
+	Function3
+:knifunptr_platform_windows9545_SHSetUnreadMailCount_getter
+SHSetUnreadMailCount
+	Function5
+
+ULongVarOf
+ULong
+HCRYPTPROVVar
+9knifunptr_platform_windows9546_CryptAcquireContext_getter
+CryptAcquireContext
+
+HCRYPTHASH
+
+UByteVarOf
+UByte
+BYTEVar
+3knifunptr_platform_windows9547_CryptSignHash_getter
+CryptSignHash
+	HCRYPTKEY
+:knifunptr_platform_windows9548_CryptVerifySignature_getter
+CryptVerifySignature
+	Function2
+6knifunptr_platform_windows9549_CryptSetProvider_getter
+CryptSetProvider
+8knifunptr_platform_windows9550_CryptSetProviderEx_getter
+CryptSetProviderEx
+=knifunptr_platform_windows9551_CryptGetDefaultProvider_getter
+CryptGetDefaultProvider
+<knifunptr_platform_windows9552_CryptEnumProviderTypes_getter
+CryptEnumProviderTypes
+8knifunptr_platform_windows9553_CryptEnumProviders_getter
+CryptEnumProviders
+	ByteVarOf
+Byte
+CHARVar
+LPCSTR
+/knifunptr_platform_windows9554_X509_CERT_getter
+	X509_CERT
+<knifunptr_platform_windows9555_X509_CERT_TO_BE_SIGNED_getter
+X509_CERT_TO_BE_SIGNED
+@knifunptr_platform_windows9556_X509_CERT_CRL_TO_BE_SIGNED_getter
+X509_CERT_CRL_TO_BE_SIGNED
+Dknifunptr_platform_windows9557_X509_CERT_REQUEST_TO_BE_SIGNED_getter
+X509_CERT_REQUEST_TO_BE_SIGNED
+5knifunptr_platform_windows9558_X509_EXTENSIONS_getter
+X509_EXTENSIONS
+5knifunptr_platform_windows9559_X509_NAME_VALUE_getter
+X509_NAME_VALUE
+/knifunptr_platform_windows9560_X509_NAME_getter
+	X509_NAME
+:knifunptr_platform_windows9561_X509_PUBLIC_KEY_INFO_getter
+X509_PUBLIC_KEY_INFO
+;knifunptr_platform_windows9562_X509_AUTHORITY_KEY_ID_getter
+X509_AUTHORITY_KEY_ID
+9knifunptr_platform_windows9563_X509_KEY_ATTRIBUTES_getter
+X509_KEY_ATTRIBUTES
+@knifunptr_platform_windows9564_X509_KEY_USAGE_RESTRICTION_getter
+X509_KEY_USAGE_RESTRICTION
+9knifunptr_platform_windows9565_X509_ALTERNATE_NAME_getter
+X509_ALTERNATE_NAME
+<knifunptr_platform_windows9566_X509_BASIC_CONSTRAINTS_getter
+X509_BASIC_CONSTRAINTS
+4knifunptr_platform_windows9567_X509_KEY_USAGE_getter
+X509_KEY_USAGE
+=knifunptr_platform_windows9568_X509_BASIC_CONSTRAINTS2_getter
+X509_BASIC_CONSTRAINTS2
+8knifunptr_platform_windows9569_X509_CERT_POLICIES_getter
+X509_CERT_POLICIES
+3knifunptr_platform_windows9570_PKCS_UTC_TIME_getter
+PKCS_UTC_TIME
+7knifunptr_platform_windows9571_PKCS_TIME_REQUEST_getter
+PKCS_TIME_REQUEST
+;knifunptr_platform_windows9572_RSA_CSP_PUBLICKEYBLOB_getter
+RSA_CSP_PUBLICKEYBLOB
+7knifunptr_platform_windows9573_X509_UNICODE_NAME_getter
+X509_UNICODE_NAME
+Fknifunptr_platform_windows9574_X509_KEYGEN_REQUEST_TO_BE_SIGNED_getter
+ X509_KEYGEN_REQUEST_TO_BE_SIGNED
+4knifunptr_platform_windows9575_PKCS_ATTRIBUTE_getter
+PKCS_ATTRIBUTE
+Gknifunptr_platform_windows9576_PKCS_CONTENT_INFO_SEQUENCE_OF_ANY_getter
+!PKCS_CONTENT_INFO_SEQUENCE_OF_ANY
+=knifunptr_platform_windows9577_X509_UNICODE_NAME_VALUE_getter
+X509_UNICODE_NAME_VALUE
+5knifunptr_platform_windows9578_X509_ANY_STRING_getter
+X509_ANY_STRING
+=knifunptr_platform_windows9579_X509_UNICODE_ANY_STRING_getter
+X509_UNICODE_ANY_STRING
+7knifunptr_platform_windows9580_X509_OCTET_STRING_getter
+X509_OCTET_STRING
+/knifunptr_platform_windows9581_X509_BITS_getter
+	X509_BITS
+2knifunptr_platform_windows9582_X509_INTEGER_getter
+X509_INTEGER
+=knifunptr_platform_windows9583_X509_MULTI_BYTE_INTEGER_getter
+X509_MULTI_BYTE_INTEGER
+5knifunptr_platform_windows9584_X509_ENUMERATED_getter
+X509_ENUMERATED
+9knifunptr_platform_windows9585_X509_CHOICE_OF_TIME_getter
+X509_CHOICE_OF_TIME
+<knifunptr_platform_windows9586_X509_AUTHORITY_KEY_ID2_getter
+X509_AUTHORITY_KEY_ID2
+@knifunptr_platform_windows9587_X509_AUTHORITY_INFO_ACCESS_getter
+X509_AUTHORITY_INFO_ACCESS
+>knifunptr_platform_windows9588_X509_SUBJECT_INFO_ACCESS_getter
+X509_SUBJECT_INFO_ACCESS
+:knifunptr_platform_windows9589_X509_CRL_REASON_CODE_getter
+X509_CRL_REASON_CODE
+7knifunptr_platform_windows9590_PKCS_CONTENT_INFO_getter
+PKCS_CONTENT_INFO
+:knifunptr_platform_windows9591_X509_SEQUENCE_OF_ANY_getter
+X509_SEQUENCE_OF_ANY
+:knifunptr_platform_windows9592_X509_CRL_DIST_POINTS_getter
+X509_CRL_DIST_POINTS
+=knifunptr_platform_windows9593_X509_ENHANCED_KEY_USAGE_getter
+X509_ENHANCED_KEY_USAGE
+.knifunptr_platform_windows9594_PKCS_CTL_getter
+PKCS_CTL
+:knifunptr_platform_windows9595_X509_MULTI_BYTE_UINT_getter
+X509_MULTI_BYTE_UINT
+8knifunptr_platform_windows9596_X509_DSS_PUBLICKEY_getter
+X509_DSS_PUBLICKEY
+9knifunptr_platform_windows9597_X509_DSS_PARAMETERS_getter
+X509_DSS_PARAMETERS
+8knifunptr_platform_windows9598_X509_DSS_SIGNATURE_getter
+X509_DSS_SIGNATURE
+=knifunptr_platform_windows9599_PKCS_RC2_CBC_PARAMETERS_getter
+PKCS_RC2_CBC_PARAMETERS
+=knifunptr_platform_windows9600_PKCS_SMIME_CAPABILITIES_getter
+PKCS_SMIME_CAPABILITIES
+<knifunptr_platform_windows9601_X509_QC_STATEMENTS_EXT_getter
+X509_QC_STATEMENTS_EXT
+:knifunptr_platform_windows9602_PKCS_RSA_PRIVATE_KEY_getter
+PKCS_RSA_PRIVATE_KEY
+;knifunptr_platform_windows9603_PKCS_PRIVATE_KEY_INFO_getter
+PKCS_PRIVATE_KEY_INFO
+Eknifunptr_platform_windows9604_PKCS_ENCRYPTED_PRIVATE_KEY_INFO_getter
+PKCS_ENCRYPTED_PRIVATE_KEY_INFO
+Kknifunptr_platform_windows9605_X509_PKIX_POLICY_QUALIFIER_USERNOTICE_getter
+%X509_PKIX_POLICY_QUALIFIER_USERNOTICE
+7knifunptr_platform_windows9606_X509_DH_PUBLICKEY_getter
+X509_DH_PUBLICKEY
+8knifunptr_platform_windows9607_X509_DH_PARAMETERS_getter
+X509_DH_PARAMETERS
+8knifunptr_platform_windows9608_X509_ECC_SIGNATURE_getter
+X509_ECC_SIGNATURE
+5knifunptr_platform_windows9609_PKCS_ATTRIBUTES_getter
+PKCS_ATTRIBUTES
+5knifunptr_platform_windows9610_PKCS_SORTED_CTL_getter
+PKCS_SORTED_CTL
+8knifunptr_platform_windows9611_X942_DH_PARAMETERS_getter
+X942_DH_PARAMETERS
+Gknifunptr_platform_windows9612_X509_BITS_WITHOUT_TRAILING_ZEROES_getter
+!X509_BITS_WITHOUT_TRAILING_ZEROES
+5knifunptr_platform_windows9613_X942_OTHER_INFO_getter
+X942_OTHER_INFO
+4knifunptr_platform_windows9614_X509_CERT_PAIR_getter
+X509_CERT_PAIR
+=knifunptr_platform_windows9615_X509_ISSUING_DIST_POINT_getter
+X509_ISSUING_DIST_POINT
+;knifunptr_platform_windows9616_X509_NAME_CONSTRAINTS_getter
+X509_NAME_CONSTRAINTS
+:knifunptr_platform_windows9617_X509_POLICY_MAPPINGS_getter
+X509_POLICY_MAPPINGS
+=knifunptr_platform_windows9618_X509_POLICY_CONSTRAINTS_getter
+X509_POLICY_CONSTRAINTS
+Aknifunptr_platform_windows9619_X509_CROSS_CERT_DIST_POINTS_getter
+X509_CROSS_CERT_DIST_POINTS
+.knifunptr_platform_windows9620_CMC_DATA_getter
+CMC_DATA
+2knifunptr_platform_windows9621_CMC_RESPONSE_getter
+CMC_RESPONSE
+0knifunptr_platform_windows9622_CMC_STATUS_getter
+
+CMC_STATUS
+8knifunptr_platform_windows9623_CMC_ADD_EXTENSIONS_getter
+CMC_ADD_EXTENSIONS
+8knifunptr_platform_windows9624_CMC_ADD_ATTRIBUTES_getter
+CMC_ADD_ATTRIBUTES
+?knifunptr_platform_windows9625_X509_CERTIFICATE_TEMPLATE_getter
+X509_CERTIFICATE_TEMPLATE
+9knifunptr_platform_windows9626_OCSP_SIGNED_REQUEST_getter
+OCSP_SIGNED_REQUEST
+2knifunptr_platform_windows9627_OCSP_REQUEST_getter
+OCSP_REQUEST
+3knifunptr_platform_windows9628_OCSP_RESPONSE_getter
+OCSP_RESPONSE
+@knifunptr_platform_windows9629_OCSP_BASIC_SIGNED_RESPONSE_getter
+OCSP_BASIC_SIGNED_RESPONSE
+9knifunptr_platform_windows9630_OCSP_BASIC_RESPONSE_getter
+OCSP_BASIC_RESPONSE
+7knifunptr_platform_windows9631_X509_LOGOTYPE_EXT_getter
+X509_LOGOTYPE_EXT
+8knifunptr_platform_windows9632_X509_BIOMETRIC_EXT_getter
+X509_BIOMETRIC_EXT
+=knifunptr_platform_windows9633_CNG_RSA_PUBLIC_KEY_BLOB_getter
+CNG_RSA_PUBLIC_KEY_BLOB
+<knifunptr_platform_windows9634_X509_OBJECT_IDENTIFIER_getter
+X509_OBJECT_IDENTIFIER
+?knifunptr_platform_windows9635_X509_ALGORITHM_IDENTIFIER_getter
+X509_ALGORITHM_IDENTIFIER
+Aknifunptr_platform_windows9636_PKCS_RSA_SSA_PSS_PARAMETERS_getter
+PKCS_RSA_SSA_PSS_PARAMETERS
+@knifunptr_platform_windows9637_PKCS_RSAES_OAEP_PARAMETERS_getter
+PKCS_RSAES_OAEP_PARAMETERS
+9knifunptr_platform_windows9638_ECC_CMS_SHARED_INFO_getter
+ECC_CMS_SHARED_INFO
+7knifunptr_platform_windows9639_TIMESTAMP_REQUEST_getter
+TIMESTAMP_REQUEST
+8knifunptr_platform_windows9640_TIMESTAMP_RESPONSE_getter
+TIMESTAMP_RESPONSE
+4knifunptr_platform_windows9641_TIMESTAMP_INFO_getter
+TIMESTAMP_INFO
+6knifunptr_platform_windows9642_X509_CERT_BUNDLE_getter
+X509_CERT_BUNDLE
+:knifunptr_platform_windows9643_X509_ECC_PRIVATE_KEY_getter
+X509_ECC_PRIVATE_KEY
+>knifunptr_platform_windows9644_CNG_RSA_PRIVATE_KEY_BLOB_getter
+CNG_RSA_PRIVATE_KEY_BLOB
+7knifunptr_platform_windows9645_PKCS7_SIGNER_INFO_getter
+PKCS7_SIGNER_INFO
+5knifunptr_platform_windows9646_CMS_SIGNER_INFO_getter
+CMS_SIGNER_INFO
+Gknifunptr_platform_windows9647_CMSG_DEFAULT_INSTALLABLE_FUNC_OID_getter
+!CMSG_DEFAULT_INSTALLABLE_FUNC_OID
+9knifunptr_platform_windows9648_CERT_STORE_PROV_MSG_getter
+CERT_STORE_PROV_MSG
+<knifunptr_platform_windows9649_CERT_STORE_PROV_MEMORY_getter
+CERT_STORE_PROV_MEMORY
+:knifunptr_platform_windows9650_CERT_STORE_PROV_FILE_getter
+CERT_STORE_PROV_FILE
+9knifunptr_platform_windows9651_CERT_STORE_PROV_REG_getter
+CERT_STORE_PROV_REG
+;knifunptr_platform_windows9652_CERT_STORE_PROV_PKCS7_getter
+CERT_STORE_PROV_PKCS7
+@knifunptr_platform_windows9653_CERT_STORE_PROV_SERIALIZED_getter
+CERT_STORE_PROV_SERIALIZED
+@knifunptr_platform_windows9654_CERT_STORE_PROV_FILENAME_A_getter
+CERT_STORE_PROV_FILENAME_A
+@knifunptr_platform_windows9655_CERT_STORE_PROV_FILENAME_W_getter
+CERT_STORE_PROV_FILENAME_W
+>knifunptr_platform_windows9656_CERT_STORE_PROV_FILENAME_getter
+CERT_STORE_PROV_FILENAME
+>knifunptr_platform_windows9657_CERT_STORE_PROV_SYSTEM_A_getter
+CERT_STORE_PROV_SYSTEM_A
+>knifunptr_platform_windows9658_CERT_STORE_PROV_SYSTEM_W_getter
+CERT_STORE_PROV_SYSTEM_W
+<knifunptr_platform_windows9659_CERT_STORE_PROV_SYSTEM_getter
+CERT_STORE_PROV_SYSTEM
+@knifunptr_platform_windows9660_CERT_STORE_PROV_COLLECTION_getter
+CERT_STORE_PROV_COLLECTION
+Gknifunptr_platform_windows9661_CERT_STORE_PROV_SYSTEM_REGISTRY_A_getter
+!CERT_STORE_PROV_SYSTEM_REGISTRY_A
+Gknifunptr_platform_windows9662_CERT_STORE_PROV_SYSTEM_REGISTRY_W_getter
+!CERT_STORE_PROV_SYSTEM_REGISTRY_W
+Eknifunptr_platform_windows9663_CERT_STORE_PROV_SYSTEM_REGISTRY_getter
+CERT_STORE_PROV_SYSTEM_REGISTRY
+@knifunptr_platform_windows9664_CERT_STORE_PROV_PHYSICAL_W_getter
+CERT_STORE_PROV_PHYSICAL_W
+>knifunptr_platform_windows9665_CERT_STORE_PROV_PHYSICAL_getter
+CERT_STORE_PROV_PHYSICAL
+Bknifunptr_platform_windows9666_CERT_STORE_PROV_SMART_CARD_W_getter
+CERT_STORE_PROV_SMART_CARD_W
+@knifunptr_platform_windows9667_CERT_STORE_PROV_SMART_CARD_getter
+CERT_STORE_PROV_SMART_CARD
+<knifunptr_platform_windows9668_CERT_STORE_PROV_LDAP_W_getter
+CERT_STORE_PROV_LDAP_W
+:knifunptr_platform_windows9669_CERT_STORE_PROV_LDAP_getter
+CERT_STORE_PROV_LDAP∆
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+	
+	
+ 
+	 
+ 
+	 
+
+ 
+ 
+	 
+	 
+ 
+	 
+	 
+	 
+ 
+ 
+	 
+	 
+	  
+# 
+& 
+' 
+( 
+	) 
+	, 
+- 
+. 
+	/ 
+	2 
+5 
+@ 
+A 
+	B 
+	C Ë;"N820,*00j`
+0j`0j`0008«ä("r\VTPN00j`0j`00j`
+0j`00j`0008«ä("µ"ûóîèå00j`00j`
+0j`00j`00j`000j`
+0j`00j`0008«ä(!"v%`ZXTR00j`
+0j`0j`00j`
+0j`0j`0008«ä($"ô+Ç|zvt00j` 000j`
+0j`00j`
+0j`0j`0j`0j`0008«ä(*"û1áÄ~zx0j`!0j`00j`
+0j`0j`0#0"j`$000j`00j`0008«ä(0"é4xrplj0j`!0#0"j`$00j`0j`%00j`
+0j`0j`0j`0008«ä(3"X7B<:6400j`
+0j`0j`0j`0&008«ä(6"z9d^\XV00j`
+0j`0j`00j`00j`0j`0008«ä(8"í;|vtpn0j`00j`00j`00j`
+0j`00j`00j`0008«ä(:"Ø=òëéâÜ0j`00j`00j`00j`000j`
+0j`00j`00j`0008«ä(<"Ø?òëéâÜ0j`00j`00j`00j`000j`
+0j`00j`00j`0008«ä(>"0E0(0'j`)0j`*8«ä(D"0G0(0'j`)0j`*8«ä(F"0I0(0'j`)0j`*8«ä(H"0K0(0'j`)0j`*8«ä(J"0M0(0'j`)0j`*8«ä(L"0O0(0'j`)0j`*8«ä(N"0Q0(0'j`)0j`*8«ä(P"0S0(0'j`)0j`*8«ä(R"0U0(0'j`)0j`*8«ä(T"0W0(0'j`)0j`*8«ä(V"0Y0(0'j`)0j`*8«ä(X"0[0(0'j`)0j`*8«ä(Z"0]0(0'j`)0j`*8«ä(\"0_0(0'j`)0j`*8«ä(^"0a0(0'j`)0j`*8«ä(`"0c0(0'j`)0j`*8«ä(b"0e0(0'j`)0j`*8«ä(d"0g0(0'j`)0j`*8«ä(f"0i0(0'j`)0j`*8«ä(h"0k0(0'j`)0j`*8«ä(j"0m0(0'j`)0j`*8«ä(l"0o0(0'j`)0j`*8«ä(n"0q0(0'j`)0j`*8«ä(p"0s0(0'j`)0j`*8«ä(r"0u0(0'j`)0j`*8«ä(t"0w0(0'j`)0j`*8«ä(v"0y0(0'j`)0j`*8«ä(x"0{0(0'j`)0j`*8«ä(z"0}0(0'j`)0j`*8«ä(|"00(0'j`)0j`*8«ä(~"2Å0(0'j`)0j`*8«ä	(Ä"2É0(0'j`)0j`*8«ä	(Ç"2Ö0(0'j`)0j`*8«ä	(Ñ"2á0(0'j`)0j`*8«ä	(Ü"2â0(0'j`)0j`*8«ä	(à"2ã0(0'j`)0j`*8«ä	(ä"2ç0(0'j`)0j`*8«ä	(å"2è0(0'j`)0j`*8«ä	(é"2ë0(0'j`)0j`*8«ä	(ê"2ì0(0'j`)0j`*8«ä	(í"2ï0(0'j`)0j`*8«ä	(î"2ó0(0'j`)0j`*8«ä	(ñ"2ô0(0'j`)0j`*8«ä	(ò"2õ0(0'j`)0j`*8«ä	(ö"2ù0(0'j`)0j`*8«ä	(ú"2ü0(0'j`)0j`*8«ä	(û"2°0(0'j`)0j`*8«ä	(†"2£0(0'j`)0j`*8«ä	(¢"2•0(0'j`)0j`*8«ä	(§"2ß0(0'j`)0j`*8«ä	(¶"2©0(0'j`)0j`*8«ä	(®"2´0(0'j`)0j`*8«ä	(™"2≠0(0'j`)0j`*8«ä	(¨"2Ø0(0'j`)0j`*8«ä	(Æ"2±0(0'j`)0j`*8«ä	(∞"2≥0(0'j`)0j`*8«ä	(≤"2µ0(0'j`)0j`*8«ä	(¥"2∑0(0'j`)0j`*8«ä	(∂"2π0(0'j`)0j`*8«ä	(∏"2ª0(0'j`)0j`*8«ä	(∫"2Ω0(0'j`)0j`*8«ä	(º"2ø0(0'j`)0j`*8«ä	(æ"2¡0(0'j`)0j`*8«ä	(¿"2√0(0'j`)0j`*8«ä	(¬"2≈0(0'j`)0j`*8«ä	(ƒ"2«0(0'j`)0j`*8«ä	(∆"2…0(0'j`)0j`*8«ä	(»"2À0(0'j`)0j`*8«ä	( "2Õ0(0'j`)0j`*8«ä	(Ã"2œ0(0'j`)0j`*8«ä	(Œ"2—0(0'j`)0j`*8«ä	(–"2”0(0'j`)0j`*8«ä	(“"2’0(0'j`)0j`*8«ä	(‘"2◊0(0'j`)0j`*8«ä	(÷"2Ÿ0(0'j`)0j`*8«ä	(ÿ"2€0(0'j`)0j`*8«ä	(⁄"2›0(0'j`)0j`*8«ä	(‹"2ﬂ0(0'j`)0j`*8«ä	(ﬁ"2·0(0'j`)0j`*8«ä	(‡"2„0(0'j`)0j`*8«ä	(‚"2Â0(0'j`)0j`*8«ä	(‰"2Á0(0'j`)0j`*8«ä	(Ê"2È0(0'j`)0j`*8«ä	(Ë"2Î0(0'j`)0j`*8«ä	(Í"2Ì0(0'j`)0j`*8«ä	(Ï"2Ô0(0'j`)0j`*8«ä	(Ó"2Ò0(0'j`)0j`*8«ä	("2Û0(0'j`)0j`*8«ä	(Ú"2ı0(0'j`)0j`*8«ä	(Ù"2˜0(0'j`)0j`*8«ä	(ˆ"2˘0(0'j`)0j`*8«ä	(¯"2˚0(0'j`)0j`*8«ä	(˙"2˝0(0'j`)0j`*8«ä	(¸"2ˇ0(0'j`)0j`*8«ä	(˛"2Å0(0'j`)0j`*8«ä	(Ä"2É0(0'j`)0j`*8«ä	(Ç"2Ö0(0'j`)0j`*8«ä	(Ñ"2á0(0'j`)0j`*8«ä	(Ü"2â0(0'j`)0j`*8«ä	(à"2ã0(0'j`)0j`*8«ä	(ä"2ç0(0'j`)0j`*8«ä	(å"2è0(0'j`)0j`*8«ä	(é"2ë0(0'j`)0j`*8«ä	(ê"2ì0(0'j`)0j`*8«ä	(í"2ï0(0'j`)0j`*8«ä	(î"2ó0(0'j`)0j`*8«ä	(ñ"2ô0(0'j`)0j`*8«ä	(ò"2õ0(0'j`)0j`*8«ä	(ö"2ù0(0'j`)0j`*8«ä	(ú"2ü0(0'j`)0j`*8«ä	(û"2°0(0'j`)0j`*8«ä	(†"2£0(0'j`)0j`*8«ä	(¢"2•0(0'j`)0j`*8«ä	(§"2ß0(0'j`)0j`*8«ä	(¶"2©0(0'j`)0j`*8«ä	(®"2´0(0'j`)0j`*8«ä	(™ÿ
+	‡
+ Í
+platform.windows

@@ -1,0 +1,534 @@
+
+˘S
+kotlinx
+cinterop
+CPointer
+	CFunction
+kotlin
+	Function3
+platform
+windows
+	IDispatch
+UInt
+LCID
+	UIntVarOf
+ULONGVar
+Int
+HRESULT
+internal
+CCall
+id
+5knifunptr_platform_windows9683_VarUintFromDisp_getter
+VarUintFromDisp
+	Function2
+Short
+VARIANT_BOOL
+5knifunptr_platform_windows9684_VarUintFromBool_getter
+VarUintFromBool
+Byte
+CHAR
+3knifunptr_platform_windows9685_VarUintFromI1_getter
+VarUintFromI1
+UShort
+USHORT
+4knifunptr_platform_windows9686_VarUintFromUI2_getter
+VarUintFromUI2
+ULong
+ULONG64
+4knifunptr_platform_windows9687_VarUintFromUI8_getter
+VarUintFromUI8
+tagDEC
+DECIMAL
+4knifunptr_platform_windows9688_VarUintFromDec_getter
+VarUintFromDec
+LONG
+4knifunptr_platform_windows9689_VarUintFromInt_getter
+VarUintFromInt
+_SCARD_IO_REQUEST
+SCARD_IO_REQUEST
+2knifunptr_platform_windows9690_SCARD_PCI_T0_getter
+SCARD_PCI_T0
+2knifunptr_platform_windows9691_SCARD_PCI_T1_getter
+SCARD_PCI_T1
+3knifunptr_platform_windows9692_SCARD_PCI_RAW_getter
+SCARD_PCI_RAW
+SCARDCONTEXT
+UShortVarOf
+WCHARVar
+LPWSTR
+DWORDVar
+LPDWORD
+;knifunptr_platform_windows9693_SCardListReaderGroups_getter
+SCardListReaderGroups
+	Function4
+LPCWSTR
+6knifunptr_platform_windows9694_SCardListReaders_getter
+SCardListReaders
+	Function6
+
+UByteVarOf
+UByte
+BYTEVar
+LPCBYTE
+posix
+_GUID
+GUID
+LPCGUID
+DWORD
+4knifunptr_platform_windows9695_SCardListCards_getter
+SCardListCards
+LPGUID
+9knifunptr_platform_windows9696_SCardListInterfaces_getter
+SCardListInterfaces
+8knifunptr_platform_windows9697_SCardGetProviderId_getter
+SCardGetProviderId
+	Function5
+Bknifunptr_platform_windows9698_SCardGetCardTypeProviderName_getter
+SCardGetCardTypeProviderName
+?knifunptr_platform_windows9699_SCardIntroduceReaderGroup_getter
+SCardIntroduceReaderGroup
+<knifunptr_platform_windows9700_SCardForgetReaderGroup_getter
+SCardForgetReaderGroup
+:knifunptr_platform_windows9701_SCardIntroduceReader_getter
+SCardIntroduceReader
+7knifunptr_platform_windows9702_SCardForgetReader_getter
+SCardForgetReader
+;knifunptr_platform_windows9703_SCardAddReaderToGroup_getter
+SCardAddReaderToGroup
+@knifunptr_platform_windows9704_SCardRemoveReaderFromGroup_getter
+SCardRemoveReaderFromGroup
+	Function8
+<knifunptr_platform_windows9705_SCardIntroduceCardType_getter
+SCardIntroduceCardType
+Bknifunptr_platform_windows9706_SCardSetCardTypeProviderName_getter
+SCardSetCardTypeProviderName
+9knifunptr_platform_windows9707_SCardForgetCardType_getter
+SCardForgetCardType
+8knifunptr_platform_windows9708_SCardListCardTypes_getter
+SCardListCardTypes
+SCARD_READERSTATEW
+LPSCARD_READERSTATEW
+6knifunptr_platform_windows9709_SCardLocateCards_getter
+SCardLocateCards
+_SCARD_ATRMASK
+LPSCARD_ATRMASK
+;knifunptr_platform_windows9710_SCardLocateCardsByATR_getter
+SCardLocateCardsByATR
+:knifunptr_platform_windows9711_SCardGetStatusChange_getter
+SCardGetStatusChange
+SCARDHANDLEVar
+LPSCARDHANDLE
+2knifunptr_platform_windows9712_SCardConnect_getter
+SCardConnect
+	Function7
+SCARDHANDLE
+LPBYTE
+1knifunptr_platform_windows9713_SCardStatus_getter
+SCardStatus
+@knifunptr_platform_windows9714_SCardGetReaderCapabilities_getter
+SCardGetReaderCapabilities
+@knifunptr_platform_windows9715_SCardSetReaderCapabilities_getter
+SCardSetReaderCapabilities
+	Function1
+OPENCARDNAME_EXW
+LPOPENCARDNAME_EXW
+:knifunptr_platform_windows9716_SCardUIDlgSelectCard_getter
+SCardUIDlgSelectCard
+OPENCARDNAMEW
+LPOPENCARDNAMEW
+5knifunptr_platform_windows9717_GetOpenCardName_getter
+GetOpenCardName
+UUID
+PBYTE
+4knifunptr_platform_windows9718_SCardReadCache_getter
+SCardReadCache
+5knifunptr_platform_windows9719_SCardWriteCache_getter
+SCardWriteCache
+HWND__
+HWND
+UINT
+WPARAM
+LPARAM
+LRESULT
+,knifunptr_platform_windows9720_SNDMSG_getter
+SNDMSG
+_PROPSHEETPAGEW
+PROPSHEETPAGEW_V3
+LPCPROPSHEETPAGEW
+cnames
+structs
+_PSP
+HPROPSHEETPAGE
+=knifunptr_platform_windows9721_CreatePropertySheetPage_getter
+CreatePropertySheetPage
+_PROPSHEETHEADERW
+PROPSHEETHEADERW
+LPCPROPSHEETHEADERW
+INT_PTR
+3knifunptr_platform_windows9722_PropertySheet_getter
+PropertySheet
+WINBOOL
+2knifunptr_platform_windows9723_EnumPrinters_getter
+EnumPrinters
+CPointerVarOf
+CPointed
+HANDLE
+	HANDLEVar
+LPHANDLE
+_PRINTER_DEFAULTSW
+LPPRINTER_DEFAULTSW
+1knifunptr_platform_windows9724_OpenPrinter_getter
+OpenPrinter
+2knifunptr_platform_windows9725_ResetPrinter_getter
+ResetPrinter
+,knifunptr_platform_windows9726_SetJob_getter
+SetJob
+,knifunptr_platform_windows9727_GetJob_getter
+GetJob
+.knifunptr_platform_windows9728_EnumJobs_getter
+EnumJobs
+0knifunptr_platform_windows9729_AddPrinter_getter
+
+AddPrinter
+0knifunptr_platform_windows9730_SetPrinter_getter
+
+SetPrinter
+0knifunptr_platform_windows9731_GetPrinter_getter
+
+GetPrinter
+6knifunptr_platform_windows9732_AddPrinterDriver_getter
+AddPrinterDriver
+8knifunptr_platform_windows9733_AddPrinterDriverEx_getter
+AddPrinterDriverEx
+8knifunptr_platform_windows9734_EnumPrinterDrivers_getter
+EnumPrinterDrivers
+6knifunptr_platform_windows9735_GetPrinterDriver_getter
+GetPrinterDriver
+?knifunptr_platform_windows9736_GetPrinterDriverDirectory_getter
+GetPrinterDriverDirectory
+9knifunptr_platform_windows9737_DeletePrinterDriver_getter
+DeletePrinterDriver
+;knifunptr_platform_windows9738_DeletePrinterDriverEx_getter
+DeletePrinterDriverEx
+7knifunptr_platform_windows9739_AddPrintProcessor_getter
+AddPrintProcessor
+9knifunptr_platform_windows9740_EnumPrintProcessors_getter
+EnumPrintProcessors
+@knifunptr_platform_windows9741_GetPrintProcessorDirectory_getter
+GetPrintProcessorDirectory
+Aknifunptr_platform_windows9742_EnumPrintProcessorDatatypes_getter
+EnumPrintProcessorDatatypes
+:knifunptr_platform_windows9743_DeletePrintProcessor_getter
+DeletePrintProcessor
+5knifunptr_platform_windows9744_StartDocPrinter_getter
+StartDocPrinter
+,knifunptr_platform_windows9745_AddJob_getter
+AddJob
+_devicemodeW
+	PDEVMODEW
+8knifunptr_platform_windows9746_DocumentProperties_getter
+DocumentProperties
+@knifunptr_platform_windows9747_AdvancedDocumentProperties_getter
+AdvancedDocumentProperties
+4knifunptr_platform_windows9748_GetPrinterData_getter
+GetPrinterData
+6knifunptr_platform_windows9749_GetPrinterDataEx_getter
+GetPrinterDataEx
+	Function9
+5knifunptr_platform_windows9750_EnumPrinterData_getter
+EnumPrinterData
+7knifunptr_platform_windows9751_EnumPrinterDataEx_getter
+EnumPrinterDataEx
+4knifunptr_platform_windows9752_EnumPrinterKey_getter
+EnumPrinterKey
+4knifunptr_platform_windows9753_SetPrinterData_getter
+SetPrinterData
+6knifunptr_platform_windows9754_SetPrinterDataEx_getter
+SetPrinterDataEx
+7knifunptr_platform_windows9755_DeletePrinterData_getter
+DeletePrinterData
+9knifunptr_platform_windows9756_DeletePrinterDataEx_getter
+DeletePrinterDataEx
+6knifunptr_platform_windows9757_DeletePrinterKey_getter
+DeletePrinterKey
+7knifunptr_platform_windows9758_PrinterMessageBox_getter
+PrinterMessageBox
+-knifunptr_platform_windows9759_AddForm_getter
+AddForm
+0knifunptr_platform_windows9760_DeleteForm_getter
+
+DeleteForm
+-knifunptr_platform_windows9761_GetForm_getter
+GetForm
+-knifunptr_platform_windows9762_SetForm_getter
+SetForm
+/knifunptr_platform_windows9763_EnumForms_getter
+	EnumForms
+2knifunptr_platform_windows9764_EnumMonitors_getter
+EnumMonitors
+0knifunptr_platform_windows9765_AddMonitor_getter
+
+AddMonitor
+3knifunptr_platform_windows9766_DeleteMonitor_getter
+DeleteMonitor
+/knifunptr_platform_windows9767_EnumPorts_getter
+	EnumPorts
+-knifunptr_platform_windows9768_AddPort_getter
+AddPort
+3knifunptr_platform_windows9769_ConfigurePort_getter
+ConfigurePort
+0knifunptr_platform_windows9770_DeletePort_getter
+
+DeletePort
+7knifunptr_platform_windows9771_GetDefaultPrinter_getter
+GetDefaultPrinter
+7knifunptr_platform_windows9772_SetDefaultPrinter_getter
+SetDefaultPrinter
+-knifunptr_platform_windows9773_SetPort_getter
+SetPort
+:knifunptr_platform_windows9774_AddPrinterConnection_getter
+AddPrinterConnection
+=knifunptr_platform_windows9775_DeletePrinterConnection_getter
+DeletePrinterConnection
+PCWSTR
+PDWORD
+-knifunptr_platform_windows9776_XcvData_getter
+XcvData
+6knifunptr_platform_windows9777_AddPrintProvidor_getter
+AddPrintProvidor
+9knifunptr_platform_windows9778_DeletePrintProvidor_getter
+DeletePrintProvidor
+size_t
+4knifunptr_platform_windows9779_IsValidDevmode_getter
+IsValidDevmode
+PVOID
+;knifunptr_platform_windows9780_AddPrinterConnection2_getter
+AddPrinterConnection2
+@knifunptr_platform_windows9781_DeletePrinterDriverPackage_getter
+DeletePrinterDriverPackage
+HDC__
+HDC
+INT
+ULONG
+3knifunptr_platform_windows9782_DocumentEvent_getter
+DocumentEvent
+_CORE_PRINTER_DRIVERW
+PCORE_PRINTER_DRIVERW
+;knifunptr_platform_windows9783_GetCorePrinterDrivers_getter
+GetCorePrinterDrivers
+7knifunptr_platform_windows9784_GetPrinterDriver2_getter
+GetPrinterDriver2
+Aknifunptr_platform_windows9785_GetPrinterDriverPackagePath_getter
+GetPrinterDriverPackagePath
+8knifunptr_platform_windows9786_GetSpoolFileHandle_getter
+GetSpoolFileHandle
+LPPRINTER_DEFAULTS
+_PRINTER_OPTIONS
+PPRINTER_OPTIONS
+2knifunptr_platform_windows9787_OpenPrinter2_getter
+OpenPrinter2
+PULONG
+@knifunptr_platform_windows9788_UploadPrinterDriverPackage_getter
+UploadPrinterDriverPackage
+tagOFNW
+LPOPENFILENAMEW
+5knifunptr_platform_windows9789_GetOpenFileName_getter
+GetOpenFileName
+5knifunptr_platform_windows9790_GetSaveFileName_getter
+GetSaveFileName
+WORD
+2knifunptr_platform_windows9791_GetFileTitle_getter
+GetFileTitle
+tagCHOOSECOLORW
+LPCHOOSECOLORW
+1knifunptr_platform_windows9792_ChooseColor_getter
+ChooseColor
+tagFINDREPLACEW
+LPFINDREPLACEW
+.knifunptr_platform_windows9793_FindText_getter
+FindText
+1knifunptr_platform_windows9794_ReplaceText_getter
+ReplaceText
+tagCHOOSEFONTW
+LPCHOOSEFONTW
+0knifunptr_platform_windows9795_ChooseFont_getter
+
+ChooseFont
+tagPDW
+LPPRINTDLGW
+.knifunptr_platform_windows9796_PrintDlg_getter
+PrintDlg
+tagPDEXW
+LPPRINTDLGEXW
+0knifunptr_platform_windows9797_PrintDlgEx_getter
+
+PrintDlgEx
+tagPSDW
+LPPAGESETUPDLGW
+2knifunptr_platform_windows9798_PageSetupDlg_getter
+PageSetupDlg
+3knifunptr_platform_windows9799_ua_CharUpperW_getter
+ua_CharUpperW
+2knifunptr_platform_windows9800_ua_lstrcmpiW_getter
+ua_lstrcmpiW
+1knifunptr_platform_windows9801_ua_lstrcmpW_getter
+ua_lstrcmpW
+1knifunptr_platform_windows9802_ua_lstrlenW_getter
+ua_lstrlenW
+	UShortVar
+/knifunptr_platform_windows9803_ua_wcschr_getter
+	ua_wcschr
+
+wchar_tVar
+0knifunptr_platform_windows9804_ua_wcsicmp_getter
+
+ua_wcsicmp
+/knifunptr_platform_windows9805_ua_wcslen_getter
+	ua_wcslen
+wchar_t
+0knifunptr_platform_windows9806_ua_wcsrchr_getter
+
+ua_wcsrchr
+1knifunptr_platform_windows9807___UA_WCSLEN_getter
+__UA_WCSLEN
+2knifunptr_platform_windows9808_ua_CharUpper_getter
+ua_CharUpper
+0knifunptr_platform_windows9809_ua_lstrcmp_getter
+
+ua_lstrcmp
+1knifunptr_platform_windows9810_ua_lstrcmpi_getter
+ua_lstrcmpi©
+ 
+ 
+ 
+ 
+
+ 
+
+
+ 
+	 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+! 
+" 
+% 
+& 
+) 
+, 
+- 
+4 
+5 
+6 
+7 
+8 
+9 
+< 
+= 
+@ 
+A 
+B 
+C 
+D 
+E
+,F 
+,G 
+,H 
+I 
+,L 
+Q 
+` 
+i 
+j 
+m 
+n 
+s 
+t 
+w 
+x 
+y 
+Ä 
+Å 
+Ç 
+Ö 
+Ü 
+â 
+ä 
+è 
+ê 
+ë 
+í 
+ì 
+î 
+ó 
+ò 
+ô 
+ö
+Mõ
+Nú 
+ù 
+† 
+° 
+¢ 
+£ 
+¶ 
+© 
+™ 
+´ 
+¨ 
+≠ 
+Æ 
+Ø 
+‹ 
+› 
+Ê 
+õ 
+ú 
+,£ 
+¶ 
+´ 
+¨ 
+≠ 
+Æ 
+± 
+≤ 
+ª 
+º 
+Ω 
+¿ 
+√ 
+ƒ 
+… 
+Ã 
+Õ 
+– 
+— 
+÷ 
+◊ 
+⁄ 
+€ 
+ﬁ 
+ﬂ 
+‚ 
+„ 
+Ó 
+,Ò 
+,ˆ ñÜ"`JDB><
+000	j`
+0	0j`00j`0008«ä("R<640.0j`0	0j`00j`0008«ä("R<640.0j`0	0j`00j`0008«ä("R <640.0j`0	0j`00j`0008«ä("R$<640.0j`0	0j`00j`0008«ä(#"Z(D><860j`00	0j`00j`0008«ä('"R+<640.0j`0	0j`00j`0008«ä(*"$/0j`08«ä(."$10j`08«ä(0"$30j`08«ä(2"v;`ZXTR0	j`00 j`!0j`"0	0j`#0j`$0j`0008«ä(:"î?~xvrp0	j`00 j`!0j`&00 j`!0j`"0	0j`#0j`$0j`0%008«ä(>"ªK§ùöïí0	j`0)0(j`*0j`+0-j`.0j`/0	j`000 j`!0j`"0	0j`#0j`$0j`0'008«ä(J"éNxrplj0	j`00 j`!0j`&0-j`.0j`10	0j`#0j`$0j`0%008«ä(M"pPZTRNL0	j`00 j`!0j`&0-j`.0j`10j`0008«ä(O"°SäÉÄ|z0	j`00 j`!0j`&0	j`000 j`!0j`"0	0j`#0j`$0j`02008«ä(R"XUB<:640	j`00 j`!0j`&0j`0008«ä(T"XWB<:640	j`00 j`!0j`&0j`0008«ä(V"vY`ZXTR0	j`00 j`!0j`&00 j`!0j`&0j`0008«ä(X"X[B<:640	j`00 j`!0j`&0j`0008«ä(Z"v]`ZXTR0	j`00 j`!0j`&00 j`!0j`&0j`0008«ä(\"v_`ZXTR0	j`00 j`!0j`&00 j`!0j`&0j`0008«ä(^"›b∆øº∑¥0	j`00 j`!0j`&0-j`.0j`/0-j`.0j`/0	j`00)0(j`*0j`+0)0(j`*0j`+0	j`00j`03008«ä(a"Ädjdb^\0	j`00 j`!0j`&0	j`000 j`!0j`&0j`0%008«ä(c"XfB<:640	j`00 j`!0j`&0j`0008«ä(e"ªh§ùöïí0	j`0)0(j`*0j`+0-j`.0j`/0	j`000 j`!0j`"0	0j`#0j`$0j`0'008«ä(g"vl`ZXTR0	j`00 j`!0j`&040j`50	j`00j`0%008«ä(k"vp`ZXTR0	j`060j`70	j`0040j`50	j`00j`02008«ä(o"brLFD@>0	j`0	j`0040j`50	j`00j`0%008«ä(q"≠vñèåáÑ0	j`00 j`!0j`&0	j`00	j`00	0j`80j`90	0j`#0j`$0j`0'008«ä(u"Û{‹’“Õ 0	j`;00 j`!0j`"0	0j`#0j`$0	0j`#0j`$0	0j`#0j`$0)0(j`*0j`<0	0j`#0j`$0j`0:008«ä(z"Ä}jdb^\0	j`;0	j`00)0(j`*0j`<0	0j`#0j`$0j`0%008«ä(|"lVPNJH0	j`;0	j`00)0(j`*0j`+0	j`00j`0%008«ä(~"FÑ.(&" 0>0j`?0j`0=008«ä	(É"Fà.(&" 0@0j`A0j`0=008«ä	(á"±åòëéâÜ0	j`0-j`B00	j`000 j`!0j`"0)0(j`*0j`C0	0j`#00j`0'008«ä	(ã"†éáÄ~zx0	j`0-j`B00	j`000 j`!0j`"0)0(j`*0j`C0	j`00j`0'008«ä	(ç"dñLFD@>0D0j`E0	j`F0	j`G0j`H0j`I0%008«ä	(ï"Tü<640.0Jj`K0j`L0O0j`P0=008«ä	(û"J•2,*&$0Qj`R0j`S0j`T0=008«ä	(§"Õ®¥≠™•¢0	j`000 j`!0j`"0	j`00)0(j`*0j`<0	j`00	0j`#0j`$0	0j`#0j`$0j`U0:008«ä	(ß"é±vpnjh00 j`!0j`"(&0W0j`X0Vj`Y0j`Z0[0j`\0j`U0008«ä	(∞"\≥D><860W0j`X0[0j`\0j`U0008«ä	(≤"Ñµlfd`^0W0j`X0	j`00	j`00)0(j`*0j`<0	j`00j`U02008«ä	(¥"•∑åÖÇ~|0W0j`X0	j`00	j`00)0(j`*0j`<0	j`00	0j`#0j`$0j`U0'008«ä	(∂"œπ∂Ø¨ß§0W0j`X0	j`00	j`00	j`00)0(j`*0j`<0	j`00	0j`#0j`$0	0j`#0j`$0j`U03008«ä	(∏"Ñªlfd`^00 j`!0j`"0	j`00)0(j`*0j`<0W0j`X0008«ä	(∫"zΩb\ZVT0W0j`X0	j`00)0(j`*0j`<0	j`00j`U0%008«ä	(º"ôøÄzxtr0W0j`X0	j`00)0(j`*0j`<0	j`00	0j`#0j`$0j`U02008«ä	(æ"x¡`ZXTR00 j`!0j`"0	j`00)0(j`*0j`<0j`U0008«ä	(¿"Ç√jdb^\00 j`!0j`"0	j`00)0(j`*0j`<0	j`00j`U0%008«ä	(¬"·≈»¡æπ∂00 j`!0j`"00 j`!0j`"0	j`00)0(j`*0j`<0	j`00	0j`#0j`$0	0j`#0j`$0j`U0:008«ä	(ƒ"ª«¢õòìê0W0j`X00 j`!0j`"0	j`00)0(j`*0j`<0	j`00	0j`#0j`$0j`U0'008«ä	(∆"√…™£†õò00 j`!0j`"00 j`!0j`"0	j`00)0(j`*0j`<0	j`00	0j`#0j`$0j`U0'008«ä	(»"åÀtnlhf00 j`!0j`"00 j`!0j`"00 j`!0j`"0j`U0008«ä	( "£ÕäÉÄ|z00 j`!0j`"00 j`!0j`"00 j`!0j`"0	j`00	j`00j`U02008«ä	(Ã"ØœñèåáÑ00 j`!0j`"00 j`!0j`"00 j`!0j`"00 j`!0j`"0j`U0%008«ä	(Œ"·—»¡æπ∂00 j`!0j`"00 j`!0j`"0	j`00)0(j`*0j`<0	j`00	0j`#0j`$0	0j`#0j`$0j`U0:008«ä	(–"√”™£†õò00 j`!0j`"00 j`!0j`"0	j`00)0(j`*0j`<0	j`00	0j`#0j`$0j`U0'008«ä	(“"·’»¡æπ∂00 j`!0j`"00 j`!0j`"0	j`00)0(j`*0j`<0	j`00	0j`#0j`$0	0j`#0j`$0j`U0:008«ä	(‘"å◊tnlhf00 j`!0j`"00 j`!0j`"00 j`!0j`"0j`U0008«ä	(÷"pŸXRPLJ0W0j`X0	j`00)0(j`*0j`<0	j`00008«ä	(ÿ"ô€Äzxtr0W0j`X0	j`00)0(j`*0j`<0	j`00	0j`#0j`$0j`U02008«ä	(⁄"±ﬂòëéâÜ0D0j`E0W0j`X00 j`!0j`"0]0j`^0]0j`^0	j`00j`0'008«ä	(ﬁ"•·åÖÇ~|0D0j`E0W0j`X00 j`!0j`"0]0j`^0]0j`^0j`02008«ä	(‡"œ„∂Ø¨ß§0W0j`X00 j`!0j`"0	0j`#0j`$0)0(j`*0j`<0	j`00	0j`#0j`$0	j`00'008«ä	(‚"ÌÂ‘Õ ≈¬0W0j`X00 j`!0j`&00 j`!0j`&0	0j`#0j`$0)0(j`*0j`<0	j`00	0j`#0j`$0	j`00:008«ä	(‰"ÅËË·ﬁŸ÷0W0j`X0	j`000 j`!0j`"0	j`00	0j`#0j`$0	0j`#0j`$0)0(j`*0j`<0	j`00	0j`#0j`$0	j`00_008«ä	(Á"œÍ∂Ø¨ß§0W0j`X00 j`!0j`&0)0(j`*0j`<0	j`00	0j`#0j`$0	0j`#0j`$0	j`00'008«ä	(È"±ÏòëéâÜ0W0j`X00 j`!0j`&00 j`!0j`"0	j`00	0j`#0j`$0	j`002008«ä	(Î"ôÓÄzxtr0W0j`X00 j`!0j`"0	j`00)0(j`*0j`<0	j`00	j`002008«ä	(Ì"ª¢õòìê0W0j`X00 j`!0j`&00 j`!0j`&0	j`00)0(j`*0j`<0	j`00	j`00'008«ä	(Ô"fÚNHFB@0W0j`X00 j`!0j`"0	j`00008«ä	(Ò"ÑÙlfd`^0W0j`X00 j`!0j`&00 j`!0j`&0	j`00008«ä	(Û"fˆNHFB@0W0j`X00 j`!0j`&0	j`00008«ä	(ı"±¯òëéâÜ0W0j`X0	j`00D0j`E00 j`!0j`"00 j`!0j`"0	j`00	j`00'008«ä	(˜"p˙XRPLJ0W0j`X0	j`00)0(j`*0j`<0j`U0008«ä	(˘"f¸NHFB@0W0j`X00 j`!0j`"0j`U0008«ä	(˚"ª˛¢õòìê0W0j`X00 j`!0j`"0	j`00)0(j`*0j`<0	j`00	0j`#0j`$0j`U0'008«ä	(˝"éÄvpnjh0W0j`X00 j`!0j`"0	j`00)0(j`*0j`<0j`U0%008«ä	(ˇ"ªÇ¢õòìê0W0j`X0	j`00)0(j`*0j`<0	j`00	0j`#0j`$0	0j`#0j`$0j`U0'008«ä	(Å"√Ñ™£†õò00 j`!0j`"0	j`00)0(j`*0j`<0	j`00	0j`#0j`$0	0j`#0j`$0j`U0'008«ä	(É"xÜ`ZXTR00 j`!0j`"0	j`00)0(j`*0j`<0j`U0008«ä	(Ö"åàtnlhf00 j`!0j`"00 j`!0j`"00 j`!0j`"0j`U0008«ä	(á"√ä™£†õò00 j`!0j`"0	j`00)0(j`*0j`<0	j`00	0j`#0j`$0	0j`#0j`$0j`U0'008«ä	(â"Çåjdb^\00 j`!0j`"0D0j`E00 j`!0j`"0j`U0008«ä	(ã"Çéjdb^\00 j`!0j`"0D0j`E00 j`!0j`"0j`U0008«ä	(ç"Çêjdb^\00 j`!0j`"0D0j`E00 j`!0j`"0j`U0008«ä	(è"níVPNJH00 j`!0j`"0	0j`#0j`$0j`U0008«ä	(ë"Pî820,*00 j`!0j`&0j`U0=008«ä	(ì"ññ~xvrp00 j`!0j`"00 j`!0j`"0	j`00)0(j`*0j`<0j`U0%008«ä	(ï"Pò820,*00 j`!0j`"0j`U0=008«ä	(ó"Pö820,*00 j`!0j`"0j`U0=008«ä	(ô"˜ûﬁ◊‘œÃ0W0j`X00 j`!0j``0)0(j`*0j`C0	j`00)0(j`*0j`C0	j`00	0j`#0j`a0	0j`#0j`a0j`U03008«ä	(ù"x†`ZXTR00 j`!0j`"0	j`00)0(j`*0j`<0j`U0008«ä	(ü"å¢tnlhf00 j`!0j`"00 j`!0j`"00 j`!0j`"0j`U0008«ä	(°"P•820,*0]0j`^0	j`b0j`U0008«ä	(§"Ñ®lfd`^0D0j`E00 j`!0j`&0	j`00W0j`c0j`U0%008«ä	(ß"å™tnlhf00 j`!0j`&00 j`!0j`&00 j`!0j`&0j`0008«ä	(©"´∞íãàÉÄ0W0j`X0d0j`e0j`f0	j`g0W0j`c0	j`g0W0j`c0j`0:008«ä	(Ø"Ø¥ñèåáÑ00 j`!0j`&00 j`!0j`&00 j`!0j`&0	j`00h0j`i0j`02008«ä	(≥"œ∂∂Ø¨ß§0D0j`E0W0j`X00 j`!0j`"0	j`00)0(j`*0j`<0	j`00	0j`#0j`$0j`U0:008«ä	(µ"ı∏‹’“Õ 00 j`!0j`&00 j`!0j`&00 j`!0j`&00 j`!0j`&00 j`!0j`"0	j`00	0j`#0j`$0j`0:008«ä	(∑"T∫<640.0W0j`X0W0j`X0=008«ä	(π"•øåÖÇ~|00 j`!0j`&(&0W0j`X0Vj`Y0j`Z0[0j`j0k0j`l0j`U0%008«ä	(æ"Î¬“À»√¿00 j`!0j`&00 j`!0j`&00 j`!0j`&0	j`00D0j`E00 j`!0j`"0	0j`0j`m0j`0:008«ä	(¡"F∆.(&" 0n0j`o0j`U0=008«ä	(≈"F».(&" 0n0j`o0j`U0=008«ä	(«"tÀ\VTPN00 j`!0j`&00 j`!0j`"0j`p00008«ä	( "Fœ.(&" 0q0j`r0j`U0=008«ä	(Œ"P”820,*0s0j`t0D0j`E0=008«ä	(“"P’820,*0s0j`t0D0j`E0=008«ä	(‘"FŸ.(&" 0u0j`v0j`U0=008«ä	(ÿ"F›.(&" 0w0j`x0j`U0=008«ä	(‹"F·.(&" 0y0j`z0j`0=008«ä	(‡"FÂ.(&" 0{0j`|0j`U0=008«ä	(‰"dÁLFD@>00 j`!0j`"00 j`!0j`"0=008«ä	(Ê"jÈRLJFD00 j`!0j`&00 j`!0j`&00008«ä	(Ë"jÎRLJFD00 j`!0j`&00 j`!0j`&00008«ä	(Í"LÌ4.,(&00 j`!0j`&00=008«ä	(Ï"^F@>:800 j`}0000 j`}00008«ä	(Ô"^ÛF@>:800 j`~000 j`~000008«ä	(Ú"Fı.(&" 00 j`}00	0=008«ä	(Ù"b¯JDB><00 j`~00j`00 j`~00008«ä	(˜"F˙.(&" 00 j`}00	0=008«ä	(˘"d¸LFD@>00 j`!0j`"00 j`!0j`"0=008«ä	(˚"j˛RLJFD00 j`!0j`&00 j`!0j`&00008«ä	(˝"jÄRLJFD00 j`!0j`&00 j`!0j`&00008«ä	(ˇÿ
+‡
+ Í
+platform.windows

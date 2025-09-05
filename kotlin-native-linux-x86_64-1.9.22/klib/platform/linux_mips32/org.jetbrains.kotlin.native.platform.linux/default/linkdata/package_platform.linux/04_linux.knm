@@ -1,0 +1,830 @@
+
+®A
+kotlinx
+cinterop
+
+CValuesRef
+platform
+linux
+aiocb
+__aiocbp
+kotlin
+Int
+internal
+CCall
+id
+"knifunptr_platform_linux0_aio_read
+aio_read
+#knifunptr_platform_linux1_aio_write
+	aio_write
+__mode
+CPointerVarOf
+CPointer
+CPointerVar
+__list
+__nent
+posix
+sigevent
+__sig
+$knifunptr_platform_linux2_lio_listio
+
+lio_listio
+#knifunptr_platform_linux3_aio_error
+	aio_error
+	__ssize_t
+$knifunptr_platform_linux4_aio_return
+
+aio_return
+__fildes
+$knifunptr_platform_linux5_aio_cancel
+
+aio_cancel
+timespec
+	__timeout
+%knifunptr_platform_linux6_aio_suspend
+aio_suspend
+__operation
+#knifunptr_platform_linux7_aio_fsync
+	aio_fsync
+Unit
+%knifunptr_platform_linux8_setaliasent
+setaliasent
+%knifunptr_platform_linux9_endaliasent
+endaliasent
+aliasent
+&knifunptr_platform_linux10_getaliasent
+getaliasent
+__result_buf
+	ByteVarOf
+Byte
+ByteVar
+__buffer
+UInt
+size_t
+__buflen
+__result
+(knifunptr_platform_linux11_getaliasent_r
+getaliasent_r
+String
+CString
+__name
+)knifunptr_platform_linux12_getaliasbyname
+getaliasbyname
++knifunptr_platform_linux13_getaliasbyname_r
+getaliasbyname_r
+argp
+__argp
+__argc
+__argv
+__flags
+IntVarOf
+IntVar
+__arg_index
+__input
+error_t
+%knifunptr_platform_linux14_argp_parse
+
+argp_parse
+'knifunptr_platform_linux15___argp_parse
+__argp_parse
+_IO_FILE
+FILE
+__stream
+$knifunptr_platform_linux16_argp_help
+	argp_help
+&knifunptr_platform_linux17___argp_help
+__argp_help
+
+argp_state
+__state
+*knifunptr_platform_linux18_argp_state_help
+argp_state_help
+,knifunptr_platform_linux19___argp_state_help
+__argp_state_help
+%knifunptr_platform_linux20_argp_usage
+
+argp_usage
+'knifunptr_platform_linux21___argp_usage
+__argp_usage
+__fmt
+Array
+Any
+variadicArguments
+%knifunptr_platform_linux22_argp_error
+
+argp_error
+'knifunptr_platform_linux23___argp_error
+__argp_error
+__status
+__errnum
+'knifunptr_platform_linux24_argp_failure
+argp_failure
+)knifunptr_platform_linux25___argp_failure
+__argp_failure
+argp_option
+__opt
++knifunptr_platform_linux26__option_is_short
+_option_is_short
+,knifunptr_platform_linux27___option_is_short
+__option_is_short
+)knifunptr_platform_linux28__option_is_end
+_option_is_end
+*knifunptr_platform_linux29___option_is_end
+__option_is_end
+CPointed
+COpaquePointer
+&knifunptr_platform_linux30__argp_input
+_argp_input
+'knifunptr_platform_linux31___argp_input
+__argp_input
+__argz
+	UIntVarOf
+	size_tVar
+__len
+(knifunptr_platform_linux32___argz_create
+__argz_create
+&knifunptr_platform_linux33_argz_create
+argz_create
+__string
+__sep
+,knifunptr_platform_linux34___argz_create_sep
+__argz_create_sep
+*knifunptr_platform_linux35_argz_create_sep
+argz_create_sep
+'knifunptr_platform_linux36___argz_count
+__argz_count
+%knifunptr_platform_linux37_argz_count
+
+argz_count
+)knifunptr_platform_linux38___argz_extract
+__argz_extract
+'knifunptr_platform_linux39_argz_extract
+argz_extract
++knifunptr_platform_linux40___argz_stringify
+__argz_stringify
+)knifunptr_platform_linux41_argz_stringify
+argz_stringify
+
+__argz_len
+__buf
+	__buf_len
+(knifunptr_platform_linux42___argz_append
+__argz_append
+&knifunptr_platform_linux43_argz_append
+argz_append
+__str
+%knifunptr_platform_linux44___argz_add
+
+__argz_add
+#knifunptr_platform_linux45_argz_add
+argz_add
+__delim
+)knifunptr_platform_linux46___argz_add_sep
+__argz_add_sep
+'knifunptr_platform_linux47_argz_add_sep
+argz_add_sep
+__entry
+(knifunptr_platform_linux48___argz_delete
+__argz_delete
+&knifunptr_platform_linux49_argz_delete
+argz_delete
+__before
+(knifunptr_platform_linux50___argz_insert
+__argz_insert
+&knifunptr_platform_linux51_argz_insert
+argz_insert
+__with
+UIntVar
+__replace_count
+)knifunptr_platform_linux52___argz_replace
+__argz_replace
+'knifunptr_platform_linux53_argz_replace
+argz_replace
+&knifunptr_platform_linux54___argz_next
+__argz_next
+$knifunptr_platform_linux55_argz_next
+	argz_next
+__key
+__salt
+ knifunptr_platform_linux56_crypt
+crypt
+!knifunptr_platform_linux57_setkey
+setkey
+__glibc_block
+__edflag
+"knifunptr_platform_linux58_encrypt
+encrypt
+__envz
+
+__envz_len
+%knifunptr_platform_linux59_envz_entry
+
+envz_entry
+#knifunptr_platform_linux60_envz_get
+envz_get
+__value
+#knifunptr_platform_linux61_envz_add
+envz_add
+__envz2
+__envz2_len
+
+__override
+%knifunptr_platform_linux62_envz_merge
+
+envz_merge
+&knifunptr_platform_linux63_envz_remove
+envz_remove
+%knifunptr_platform_linux64_envz_strip
+
+envz_strip
+__format
+ knifunptr_platform_linux65_error
+error
+__fname
+__lineno
+(knifunptr_platform_linux66_error_at_line
+error_at_line
+COpaquePointerVar
+__array
+__size
+$knifunptr_platform_linux67_backtrace
+	backtrace
+,knifunptr_platform_linux68_backtrace_symbols
+backtrace_symbols
+__fd
+/knifunptr_platform_linux69_backtrace_symbols_fd
+backtrace_symbols_fd
+__classification
+__label
+
+__severity
+__text
+__action
+__tag
+!knifunptr_platform_linux70_fmtmsg
+fmtmsg
+fpu_control_t
++knifunptr_platform_linux71___mips_fpu_getcw
+__mips_fpu_getcw
+arg0
++knifunptr_platform_linux72___mips_fpu_setcw
+__mips_fpu_setcw
+fstab
+#knifunptr_platform_linux73_getfsent
+getfsent
+$knifunptr_platform_linux74_getfsspec
+	getfsspec
+$knifunptr_platform_linux75_getfsfile
+	getfsfile
+#knifunptr_platform_linux76_setfsent
+setfsent
+#knifunptr_platform_linux77_endfsent
+endfsent
+	__pattern
+	CFunction
+	Function2
+	__errfunc
+glob_t
+__pglob
+knifunptr_platform_linux78_glob
+glob
+#knifunptr_platform_linux79_globfree
+globfree
+#knifunptr_platform_linux80_setsgent
+setsgent
+#knifunptr_platform_linux81_endsgent
+endsgent
+sgrp
+#knifunptr_platform_linux82_getsgent
+getsgent
+#knifunptr_platform_linux83_getsgnam
+getsgnam
+$knifunptr_platform_linux84_sgetsgent
+	sgetsgent
+$knifunptr_platform_linux85_fgetsgent
+	fgetsgent
+__g
+#knifunptr_platform_linux86_putsgent
+putsgent
+%knifunptr_platform_linux87_getsgent_r
+
+getsgent_r
+%knifunptr_platform_linux88_getsgnam_r
+
+getsgnam_r
+&knifunptr_platform_linux89_sgetsgent_r
+sgetsgent_r
+&knifunptr_platform_linux90_fgetsgent_r
+fgetsgent_r
+ifaddrs
+__ifap
+%knifunptr_platform_linux91_getifaddrs
+
+getifaddrs
+__ifa
+&knifunptr_platform_linux92_freeifaddrs
+freeifaddrs
+
+__cat_name
+__flag
+nl_catd
+"knifunptr_platform_linux93_catopen
+catopen
+	__catalog
+__set
+__number
+"knifunptr_platform_linux94_catgets
+catgets
+#knifunptr_platform_linux95_catclose
+catclose
+nl_item
+__item
+&knifunptr_platform_linux96_nl_langinfo
+nl_langinfo
+__locale_struct
+
+__locale_t
+__l
+(knifunptr_platform_linux97_nl_langinfo_l
+nl_langinfo_l
+__msgid
+"knifunptr_platform_linux98_gettext
+gettext
+__domainname
+#knifunptr_platform_linux99_dgettext
+dgettext
+&knifunptr_platform_linux100___dgettext
+
+__dgettext
+
+__category
+%knifunptr_platform_linux101_dcgettext
+	dcgettext
+'knifunptr_platform_linux102___dcgettext
+__dcgettext
+__msgid1
+__msgid2
+__n
+$knifunptr_platform_linux103_ngettext
+ngettext
+%knifunptr_platform_linux104_dngettext
+	dngettext
+&knifunptr_platform_linux105_dcngettext
+
+dcngettext
+&knifunptr_platform_linux106_textdomain
+
+textdomain
+	__dirname
+*knifunptr_platform_linux107_bindtextdomain
+bindtextdomain
+	__codeset
+3knifunptr_platform_linux108_bind_textdomain_codeset
+bind_textdomain_codeset
+	Elf32_Sym
+__sym
+__ndx
+uintptr_tVar
+	__refcook
+	__defcook
+La_mips_32_regs
+__regs
+	__symname
+__framesizep
+
+Elf32_Addr
+4knifunptr_platform_linux109_la_mips_o32_gnu_pltenter
+la_mips_o32_gnu_pltenter
+__inregs
+La_mips_32_retval
+	__outregs
+3knifunptr_platform_linux110_la_mips_o32_gnu_pltexit
+la_mips_o32_gnu_pltexit
+"knifunptr_platform_linux111_malloc
+malloc
+__nmemb
+"knifunptr_platform_linux112_calloc
+calloc
+__ptr
+#knifunptr_platform_linux113_realloc
+realloc
+ knifunptr_platform_linux114_free
+free
+!knifunptr_platform_linux115_cfree
+cfree
+__alignment
+$knifunptr_platform_linux116_memalign
+memalign
+"knifunptr_platform_linux117_valloc
+valloc
+#knifunptr_platform_linux118_pvalloc
+pvalloc
+	ptrdiff_t
+.knifunptr_platform_linux119___default_morecore
+__default_morecore
+CValue
+mallinfo
+$knifunptr_platform_linux120_mallinfo
+__param
+__val
+#knifunptr_platform_linux121_mallopt
+mallopt
+__pad
+'knifunptr_platform_linux122_malloc_trim
+malloc_trim
+.knifunptr_platform_linux123_malloc_usable_size
+malloc_usable_size
+(knifunptr_platform_linux124_malloc_stats
+malloc_stats
+	__options
+__fp
+'knifunptr_platform_linux125_malloc_info
+malloc_info
+,knifunptr_platform_linux126_malloc_get_state
+malloc_get_state
+,knifunptr_platform_linux127_malloc_set_state
+malloc_set_stateÎ
+ 
+ 
+ 
+
+
+ 
+
+ 
+	
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+# 
+* 
+/ 
+3 
+4 
+5 
+7 
+8 
+= 
+	> 
+D 
+I 
+J 
+M 
+R 
+S 
+Y 
+d 
+e 
+q 
+{ 
+| 
+Ç 
+É 
+∑ 
+‰ 
+ˆ 
+¸ 
+à 
+â 
+ã 
+ï 
+© 
+≤ 
+º 
+¿ 
+¡ 
+„ 
+Ê 
+È 
+Ì 
+Ò 
+à 
+ã 
+å ◊U(02
+00Há “
+	((02
+00Há “
+	(^0202$ 
+000
+j0`0202
+00Há “
+	((02
+00Há “
+	(,0j`2
+00Há “
+	(0"02 02
+00Há “
+	(!V&02$ 
+000
+j0`0202$
+00Há “
+	(%0)02'02
+00Há “
+	((,0Há “
+	(+.0Há “
+	(- 1
+00Há “
+	(0t<022
+002600j`02
+90j`2$: 
+000
+j0`0Há “
+	(;1A
+002?0“
+Há “
+	(@ÖC02?0“
+22
+002600j`02
+90j`2$: 
+000
+j0`0Há “
+	(BûO0j`2E
+002F028G4.,00j`00
+j00j``02H02K00j`02L0Há “
+	(NûQ0j`2E
+002F028G4.,00j`00
+j00j``02H02K00j`02L0Há “
+	(P^V02E
+002T0j`02H02?00j`0Há “
+	(U^X02E
+002T0j`02H02?00j`0Há “
+	(WD\02Z
+0 02T0j`02H0Há “
+	([D^02Z
+0 02T0j`02H0Há “
+	(](`02Z
+0 0Há “
+	(_(b02Z
+0 0Há “
+	(aOh02Z
+0 02c0“
+2f
+0"0!"0"Há “
+	(gOj02Z
+0 02c0“
+2f
+0"0!"0"Há “
+	(i_n02Z
+0 02k02l02c0“
+2f
+0"0!"0"Há “
+	(m_p02Z
+0 02k02l02c0“
+2f
+0"0!"0"Há “
+	(o(t02r
+0#0Há “
+	(s(v02r
+0#0Há “
+	(u(x02r
+0#0Há “
+	(w(z02r
+0#0Há “
+	(yH~0$0j`%2E
+002Z
+0 0Há “
+	(}IÄ0$0j`%2E
+002Z
+0 0Há “
+	(ÆÜ0j`28G4.,00j`00
+j00j``029Å4.,00j`00
+j00j``02Ñ00&j`'0Há “
+		(ÖÆà0j`28G4.,00j`00
+j00j``029Å4.,00j`00
+j00j``02Ñ00&j`'0Há “
+		(áèå0j`2â0“
+2ä029Å4.,00j`00
+j00j``02Ñ00&j`'0Há “
+		(ãèé0j`2â0“
+2ä029Å4.,00j`00
+j00j``02Ñ00&j`'0Há “
+		(ç=ê0j`2Å0“
+2Ñ0j`Há “
+		(è=í0j`2Å0“
+2Ñ0j`Há “
+		(ësî02Å0“
+2Ñ0j`28G4.,00j`00
+j00j``0Há “
+		(ìsñ02Å0“
+2Ñ0j`28G4.,00j`00
+j00j``0Há “
+		(ïKò02Å00j`02Ñ0j`2ä0Há “
+		(óKö02Å00j`02Ñ0j`2ä0Há “
+		(ôìü0j`29Å4.,00j`00
+j00j``02õ00&j`'02ú0“
+2ù0j`Há “
+		(ûì°0j`29Å4.,00j`00
+j00j``02õ00&j`'02ú0“
+2ù0j`Há “
+		(†Ü§0j`29Å4.,00j`00
+j00j``02õ00&j`'02¢0“
+Há “
+		(£Ü¶0j`29Å4.,00j`00
+j00j``02õ00&j`'02¢0“
+Há “
+		(•è©0j`29Å4.,00j`00
+j00j``02õ00&j`'02â0“
+2ß0Há “
+		(®è´0j`29Å4.,00j`00
+j00j``02õ00&j`'02â0“
+2ß0Há “
+		(™ãÆ029Å4.,00j`00
+j00j``02õ00&j`'02¨00j`0Há “
+		(≠ã∞029Å4.,00j`00
+j00j``02õ00&j`'02¨00j`0Há “
+		(Ø°≥0j`29Å4.,00j`00
+j00j``02õ00&j`'02±00j`02¨0“
+Há “
+		(≤°µ0j`29Å4.,00j`00
+j00j``02õ00&j`'02±00j`02¨0“
+Há “
+		(¥≥∫0j`29Å4.,00j`00
+j00j``02õ00&j`'02¢0“
+2∂0“
+2∏00&j`(0Há “
+		(π≥º0j`29Å4.,00j`00
+j00j``02õ00&j`'02¢0“
+2∂0“
+2∏00&j`(0Há “
+		(ª]æ00j`02Å0“
+2õ0j`2¨0“
+Há “
+		(Ω]¿00j`02Å0“
+2õ0j`2¨0“
+Há “
+		(øPƒ00j`02¡0“
+2¬0“
+Há “
+		(√,∆02¡0“
+Há “
+		(≈> 02«00j`02»0Há “
+		(…\Œ00j`02À0“
+2Ã0j`2?0“
+Há “
+		(Õ\–00j`02À0“
+2Ã0j`2?0“
+Há “
+		(œó”0j`29À4.,00j`00
+j00j``02Ã00&j`'02?0“
+2—0“
+Há “
+		(“úÿ0j`29À4.,00j`00
+j00j``02Ã00&j`'02‘0“
+2’0j`2÷0Há “
+		(◊Å⁄029À4.,00j`00
+j00j``02Ã00&j`'02?0“
+Há “
+		(Ÿp‹029À4.,00j`00
+j00j``02Ã00&j`'0Há “
+		(€Rﬂ02k02l02›0“
+2f
+0"0!"0"Há “
+		(ﬁm„02k02l02‡0“
+2·02›0“
+2f
+0"0!"0"Há “
+		(‚JË02%Â 0$0j`%0
+j`)02Ê0Há “
+		(Á|Í4.,00j`00
+j00j``02%Â 0$0j`%0
+j`)02Ê0Há “
+		(ÈSÌ02%Â 0$0j`%0
+j`)02Ê02Î0Há “
+		(Ïtı02Ó02Ô0“
+202Ò0“
+2Ú0“
+2Û0“
+Há “
+		(Ù¯0j`*Há “
+		(˜(˚02˘0j`*Há†“
+		(˙"˛
+0+0Há “
+		(˝3Ä
+0+02?0“
+Há “
+		(ˇ3Ç
+0+02?0“
+Há “
+		(ÅÑ0Há “
+		(ÉÜ0Há “
+		(ÖÄé02á0“
+2H029ä4.,(&00j`0000-0,02å
+0.0Há “
+		(ç+ê02å
+0.0Há “
+		(èí0Há “
+		(ëî0Há “
+		(ì"ó
+0/0Há “
+		(ñ3ô
+0/02?0“
+Há “
+		(ò4õ
+0/02â0“
+Há “
+		(ö6ù
+0/02T0j`0Há “
+		(ú?†02û
+0/02T0j`0Há “
+		(üv¢022
+0/02600j`02
+90j`2$: 
+0/00
+j0/`0Há “
+		(°á§02?0“
+22
+0/02600j`02
+90j`2$: 
+0/00
+j0/`0Há “
+		(£à¶02â0“
+22
+0/02600j`02
+90j`2$: 
+0/00
+j0/`0Há “
+		(•ä®02T0j`022
+0/02600j`02
+90j`2$: 
+0/00
+j0/`0Há “
+		(ßA¨02%™ 
+0000
+j00`0Há “
+		(´+Ø02≠
+000Há “
+		(ÆE¥0$0j`12∞0“
+2±0Há “
+		(≥iπ00j`02µ0$0j`12∂02∑02â0“
+Há “
+		(∏3ª02µ0$0j`1Há “
+		(∫9ø00j`02Ω0j`2Há “
+		(æPƒ00j`02Ω0j`22¬030j`4Há “
+		(√>«00j`02≈0“
+Há “
+		(∆P 00j`02»0“
+2≈0“
+Há “
+		(…PÃ00j`02»0“
+2≈0“
+Há “
+		(ÀYœ00j`02»0“
+2≈0“
+2Õ0Há “
+		(ŒY—00j`02»0“
+2≈0“
+2Õ0Há “
+		(–Y÷00j`02“0“
+2”0“
+2‘0Há “
+		(’kÿ00j`02»0“
+2“0“
+2”0“
+2‘0Há “
+		(◊t⁄00j`02»0“
+2“0“
+2”0“
+2‘02Õ0Há “
+		(Ÿ>‹00j`02»0“
+Há “
+		(€Pﬂ00j`02»0“
+2›0“
+Há “
+		(ﬁP‚00j`02»0“
+2‡0“
+Há “
+		(·∆Ô0j`82‰
+0502Â02Á00&j`602Ë00&j`602Í
+0702H00&j`(02Î0“
+2Ï00j`0Há “
+		(ÓûÙ02‰
+0502Â02Á00&j`602Ë00&j`602
+0702Ú
+0902Î0“
+Há “
+		(Û7ˆ0$0j`%2Ê0j`Há “
+		(ıD˘0$0j`%2˜0j`2Ê0j`Há “
+		(¯F¸0$0j`%2˙02Ê0j`Há “
+		(˚)˛02˙0Há “
+		(˝)Ä02˙0Há “
+		(ˇDÉ0$0j`%2Å0j`2Ê0j`Há “
+		(Ç7Ö0$0j`%2Ê0j`Há “
+		(Ñ7á0$0j`%2Ê0j`Há “
+		(Ü7ä0$0j`%2Ê0j`:Há “
+		(â å0<0;Há “
+		(ç,ë02é02è0Há “
+		(ê'î02í0j`Há “
+		(ì-ñ0j`2˙0Há “
+		(ïò0Há “
+		(ó8ú02ô02ö0j`0Há “
+		(õ*û0$0j`%Há “
+		(ù)†02˙0Há “
+		(üÿ
+‡
+ Í
+platform.linux

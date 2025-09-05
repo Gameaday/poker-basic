@@ -1,0 +1,782 @@
+
+ÐT
+kotlinx
+cinterop
+
+CValuesRef
+arg0
+kotlin
+UInt
+platform
+gdiplus
+GpStatus
+internal
+CCall
+id
+1knifunptr_platform_gdiplus256_GdipClosePathFigure
+GdipClosePathFigure
+2knifunptr_platform_gdiplus257_GdipClosePathFigures
+GdipClosePathFigures
+/knifunptr_platform_gdiplus258_GdipSetPathMarker
+GdipSetPathMarker
+2knifunptr_platform_gdiplus259_GdipClearPathMarkers
+GdipClearPathMarkers
+-knifunptr_platform_gdiplus260_GdipReversePath
+GdipReversePath
+PointF
+GpPointF
+arg1
+2knifunptr_platform_gdiplus261_GdipGetPathLastPoint
+GdipGetPathLastPoint
+Float
+REAL
+arg2
+arg3
+arg4
+-knifunptr_platform_gdiplus262_GdipAddPathLine
+GdipAddPathLine
+Int
+windows
+INT
+.knifunptr_platform_gdiplus263_GdipAddPathLine2
+GdipAddPathLine2
+arg5
+arg6
+,knifunptr_platform_gdiplus264_GdipAddPathArc
+GdipAddPathArc
+arg7
+arg8
+/knifunptr_platform_gdiplus265_GdipAddPathBezier
+GdipAddPathBezier
+0knifunptr_platform_gdiplus266_GdipAddPathBeziers
+GdipAddPathBeziers
+.knifunptr_platform_gdiplus267_GdipAddPathCurve
+GdipAddPathCurve
+/knifunptr_platform_gdiplus268_GdipAddPathCurve2
+GdipAddPathCurve2
+/knifunptr_platform_gdiplus269_GdipAddPathCurve3
+GdipAddPathCurve3
+4knifunptr_platform_gdiplus270_GdipAddPathClosedCurve
+GdipAddPathClosedCurve
+5knifunptr_platform_gdiplus271_GdipAddPathClosedCurve2
+GdipAddPathClosedCurve2
+2knifunptr_platform_gdiplus272_GdipAddPathRectangle
+GdipAddPathRectangle
+RectF
+GpRectF
+3knifunptr_platform_gdiplus273_GdipAddPathRectangles
+GdipAddPathRectangles
+0knifunptr_platform_gdiplus274_GdipAddPathEllipse
+GdipAddPathEllipse
+,knifunptr_platform_gdiplus275_GdipAddPathPie
+GdipAddPathPie
+0knifunptr_platform_gdiplus276_GdipAddPathPolygon
+GdipAddPathPolygon
+BOOL
+-knifunptr_platform_gdiplus277_GdipAddPathPath
+GdipAddPathPath
+UShortVarOf
+UShort
+WCHARVar
+/knifunptr_platform_gdiplus278_GdipAddPathString
+GdipAddPathString
+Rect
+0knifunptr_platform_gdiplus279_GdipAddPathStringI
+GdipAddPathStringI
+.knifunptr_platform_gdiplus280_GdipAddPathLineI
+GdipAddPathLineI
+Point
+GpPoint
+/knifunptr_platform_gdiplus281_GdipAddPathLine2I
+GdipAddPathLine2I
+-knifunptr_platform_gdiplus282_GdipAddPathArcI
+GdipAddPathArcI
+0knifunptr_platform_gdiplus283_GdipAddPathBezierI
+GdipAddPathBezierI
+1knifunptr_platform_gdiplus284_GdipAddPathBeziersI
+GdipAddPathBeziersI
+/knifunptr_platform_gdiplus285_GdipAddPathCurveI
+GdipAddPathCurveI
+0knifunptr_platform_gdiplus286_GdipAddPathCurve2I
+GdipAddPathCurve2I
+0knifunptr_platform_gdiplus287_GdipAddPathCurve3I
+GdipAddPathCurve3I
+5knifunptr_platform_gdiplus288_GdipAddPathClosedCurveI
+GdipAddPathClosedCurveI
+6knifunptr_platform_gdiplus289_GdipAddPathClosedCurve2I
+GdipAddPathClosedCurve2I
+3knifunptr_platform_gdiplus290_GdipAddPathRectangleI
+GdipAddPathRectangleI
+GpRect
+4knifunptr_platform_gdiplus291_GdipAddPathRectanglesI
+GdipAddPathRectanglesI
+1knifunptr_platform_gdiplus292_GdipAddPathEllipseI
+GdipAddPathEllipseI
+-knifunptr_platform_gdiplus293_GdipAddPathPieI
+GdipAddPathPieI
+1knifunptr_platform_gdiplus294_GdipAddPathPolygonI
+GdipAddPathPolygonI
+-knifunptr_platform_gdiplus295_GdipFlattenPath
+GdipFlattenPath
+4knifunptr_platform_gdiplus296_GdipWindingModeOutline
+GdipWindingModeOutline
++knifunptr_platform_gdiplus297_GdipWidenPath
+GdipWidenPath
+WarpMode
+arg9
+*knifunptr_platform_gdiplus298_GdipWarpPath
+GdipWarpPath
+/knifunptr_platform_gdiplus299_GdipTransformPath
+GdipTransformPath
+4knifunptr_platform_gdiplus300_GdipGetPathWorldBounds
+GdipGetPathWorldBounds
+5knifunptr_platform_gdiplus301_GdipGetPathWorldBoundsI
+GdipGetPathWorldBoundsI
+IntVarOf
+BOOLVar
+4knifunptr_platform_gdiplus302_GdipIsVisiblePathPoint
+GdipIsVisiblePathPoint
+5knifunptr_platform_gdiplus303_GdipIsVisiblePathPointI
+GdipIsVisiblePathPointI
+;knifunptr_platform_gdiplus304_GdipIsOutlineVisiblePathPoint
+GdipIsOutlineVisiblePathPoint
+<knifunptr_platform_gdiplus305_GdipIsOutlineVisiblePathPointI
+GdipIsOutlineVisiblePathPointI
+GpHatchStyle
+ARGB
+CPointerVarOf
+CPointer
+CPointed
+COpaquePointer
+COpaquePointerVar
+2knifunptr_platform_gdiplus306_GdipCreateHatchBrush
+GdipCreateHatchBrush
+	UIntVarOf
+GpHatchStyleVar
+/knifunptr_platform_gdiplus307_GdipGetHatchStyle
+GdipGetHatchStyle
+ARGBVar
+9knifunptr_platform_gdiplus308_GdipGetHatchForegroundColor
+GdipGetHatchForegroundColor
+9knifunptr_platform_gdiplus309_GdipGetHatchBackgroundColor
+GdipGetHatchBackgroundColor
+IStream
+5knifunptr_platform_gdiplus310_GdipLoadImageFromStream
+GdipLoadImageFromStream
+3knifunptr_platform_gdiplus311_GdipLoadImageFromFile
+GdipLoadImageFromFile
+8knifunptr_platform_gdiplus312_GdipLoadImageFromStreamICM
+GdipLoadImageFromStreamICM
+6knifunptr_platform_gdiplus313_GdipLoadImageFromFileICM
+GdipLoadImageFromFileICM
+,knifunptr_platform_gdiplus314_GdipCloneImage
+GdipCloneImage
+.knifunptr_platform_gdiplus315_GdipDisposeImage
+GdipDisposeImage
+posix
+_GUID
+CLSID
+EncoderParameters
+1knifunptr_platform_gdiplus316_GdipSaveImageToFile
+GdipSaveImageToFile
+3knifunptr_platform_gdiplus317_GdipSaveImageToStream
+GdipSaveImageToStream
+)knifunptr_platform_gdiplus318_GdipSaveAdd
+GdipSaveAdd
+.knifunptr_platform_gdiplus319_GdipSaveAddImage
+GdipSaveAddImage
+9knifunptr_platform_gdiplus320_GdipGetImageGraphicsContext
+GdipGetImageGraphicsContext
+	GpUnitVar
+0knifunptr_platform_gdiplus321_GdipGetImageBounds
+GdipGetImageBounds
+
+FloatVarOf
+REALVar
+3knifunptr_platform_gdiplus322_GdipGetImageDimension
+GdipGetImageDimension
+ImageTypeVar
+.knifunptr_platform_gdiplus323_GdipGetImageType
+GdipGetImageType
+UINTVar
+/knifunptr_platform_gdiplus324_GdipGetImageWidth
+GdipGetImageWidth
+0knifunptr_platform_gdiplus325_GdipGetImageHeight
+GdipGetImageHeight
+>knifunptr_platform_gdiplus326_GdipGetImageHorizontalResolution
+ GdipGetImageHorizontalResolution
+<knifunptr_platform_gdiplus327_GdipGetImageVerticalResolution
+GdipGetImageVerticalResolution
+/knifunptr_platform_gdiplus328_GdipGetImageFlags
+GdipGetImageFlags
+GUID
+3knifunptr_platform_gdiplus329_GdipGetImageRawFormat
+GdipGetImageRawFormat
+PixelFormatVar
+5knifunptr_platform_gdiplus330_GdipGetImagePixelFormat
+GdipGetImagePixelFormat
+UINT
+GetThumbnailImageAbort
+3knifunptr_platform_gdiplus331_GdipGetImageThumbnail
+GdipGetImageThumbnail
+=knifunptr_platform_gdiplus332_GdipGetEncoderParameterListSize
+GdipGetEncoderParameterListSize
+9knifunptr_platform_gdiplus333_GdipGetEncoderParameterList
+GdipGetEncoderParameterList
+>knifunptr_platform_gdiplus334_GdipImageGetFrameDimensionsCount
+ GdipImageGetFrameDimensionsCount
+=knifunptr_platform_gdiplus335_GdipImageGetFrameDimensionsList
+GdipImageGetFrameDimensionsList
+4knifunptr_platform_gdiplus336_GdipImageGetFrameCount
+GdipImageGetFrameCount
+8knifunptr_platform_gdiplus337_GdipImageSelectActiveFrame
+GdipImageSelectActiveFrame
+RotateFlipType
+1knifunptr_platform_gdiplus338_GdipImageRotateFlip
+GdipImageRotateFlip
+ColorPalette
+1knifunptr_platform_gdiplus339_GdipGetImagePalette
+GdipGetImagePalette
+1knifunptr_platform_gdiplus340_GdipSetImagePalette
+GdipSetImagePalette
+INTVar
+5knifunptr_platform_gdiplus341_GdipGetImagePaletteSize
+GdipGetImagePaletteSize
+2knifunptr_platform_gdiplus342_GdipGetPropertyCount
+GdipGetPropertyCount
+	PROPIDVar
+3knifunptr_platform_gdiplus343_GdipGetPropertyIdList
+GdipGetPropertyIdList
+PROPID
+5knifunptr_platform_gdiplus344_GdipGetPropertyItemSize
+GdipGetPropertyItemSize
+PropertyItem
+1knifunptr_platform_gdiplus345_GdipGetPropertyItem
+GdipGetPropertyItem
+1knifunptr_platform_gdiplus346_GdipGetPropertySize
+GdipGetPropertySize
+5knifunptr_platform_gdiplus347_GdipGetAllPropertyItems
+GdipGetAllPropertyItems
+4knifunptr_platform_gdiplus348_GdipRemovePropertyItem
+GdipRemovePropertyItem
+1knifunptr_platform_gdiplus349_GdipSetPropertyItem
+GdipSetPropertyItem
+ImageItemData
+4knifunptr_platform_gdiplus350_GdipFindFirstImageItem
+GdipFindFirstImageItem
+3knifunptr_platform_gdiplus351_GdipFindNextImageItem
+GdipFindNextImageItem
+2knifunptr_platform_gdiplus352_GdipGetImageItemData
+GdipGetImageItemData
+cnames
+structs
+GdiplusAbort
+/knifunptr_platform_gdiplus353_GdipImageSetAbort
+GdipImageSetAbort
+6knifunptr_platform_gdiplus354_GdipImageForceValidation
+GdipImageForceValidation
+6knifunptr_platform_gdiplus355_GdipGetImageDecodersSize
+GdipGetImageDecodersSize
+ImageCodecInfo
+2knifunptr_platform_gdiplus356_GdipGetImageDecoders
+GdipGetImageDecoders
+6knifunptr_platform_gdiplus357_GdipGetImageEncodersSize
+GdipGetImageEncodersSize
+2knifunptr_platform_gdiplus358_GdipGetImageEncoders
+GdipGetImageEncoders
+7knifunptr_platform_gdiplus359_GdipCreateImageAttributes
+GdipCreateImageAttributes
+6knifunptr_platform_gdiplus360_GdipCloneImageAttributes
+GdipCloneImageAttributes
+8knifunptr_platform_gdiplus361_GdipDisposeImageAttributes
+GdipDisposeImageAttributes
+ColorAdjustType
+>knifunptr_platform_gdiplus362_GdipSetImageAttributesToIdentity
+ GdipSetImageAttributesToIdentity
+6knifunptr_platform_gdiplus363_GdipResetImageAttributes
+GdipResetImageAttributes
+ColorMatrix
+ColorMatrixFlags
+?knifunptr_platform_gdiplus364_GdipSetImageAttributesColorMatrix
+!GdipSetImageAttributesColorMatrix
+=knifunptr_platform_gdiplus365_GdipSetImageAttributesThreshold
+GdipSetImageAttributesThreshold
+9knifunptr_platform_gdiplus366_GdipSetImageAttributesGamma
+GdipSetImageAttributesGamma
+8knifunptr_platform_gdiplus367_GdipSetImageAttributesNoOp
+GdipSetImageAttributesNoOp
+=knifunptr_platform_gdiplus368_GdipSetImageAttributesColorKeys
+GdipSetImageAttributesColorKeys
+ColorChannelFlags
+Aknifunptr_platform_gdiplus369_GdipSetImageAttributesOutputChannel
+#GdipSetImageAttributesOutputChannel
+Mknifunptr_platform_gdiplus370_GdipSetImageAttributesOutputChannelColorProfile
+/GdipSetImageAttributesOutputChannelColorProfile
+ColorMap
+>knifunptr_platform_gdiplus371_GdipSetImageAttributesRemapTable
+ GdipSetImageAttributesRemapTable
+WrapMode
+<knifunptr_platform_gdiplus372_GdipSetImageAttributesWrapMode
+GdipSetImageAttributesWrapMode
+;knifunptr_platform_gdiplus373_GdipSetImageAttributesICMMode
+GdipSetImageAttributesICMMode
+Cknifunptr_platform_gdiplus374_GdipGetImageAttributesAdjustedPalette
+%GdipGetImageAttributesAdjustedPalette
+Dknifunptr_platform_gdiplus375_GdipSetImageAttributesCachedBackground
+&GdipSetImageAttributesCachedBackground
+
+GpWrapMode
+1knifunptr_platform_gdiplus376_GdipCreateLineBrush
+GdipCreateLineBrush
+2knifunptr_platform_gdiplus377_GdipCreateLineBrushI
+GdipCreateLineBrushI
+LinearGradientMode
+9knifunptr_platform_gdiplus378_GdipCreateLineBrushFromRect
+GdipCreateLineBrushFromRect
+:knifunptr_platform_gdiplus379_GdipCreateLineBrushFromRectI
+GdipCreateLineBrushFromRectI
+Bknifunptr_platform_gdiplus380_GdipCreateLineBrushFromRectWithAngle
+$GdipCreateLineBrushFromRectWithAngle
+Cknifunptr_platform_gdiplus381_GdipCreateLineBrushFromRectWithAngleI
+%GdipCreateLineBrushFromRectWithAngleI
+/knifunptr_platform_gdiplus382_GdipSetLineColors
+GdipSetLineColors
+/knifunptr_platform_gdiplus383_GdipGetLineColors
+GdipGetLineColorsÙ
+ 
+ 
+ 
+
+ 
+
+
+ 
+	
+
+ 
+ 
+ 
+ 
+ 
+" 
+#
+$ 
+= 
+> 
+G 
+J 
+K 
+L 
+O 
+T 
+U 
+j 
+y 
+ƒ 
+„ 
+ 
+Ž 
+ 
+ 
+‘ 
+’ 
+“ 
+– 
+— 
+š 
+Ÿ 
+¬
+)­ 
+)® 
+¯ 
+º 
+½ 
+¾ 
+Á 
+Ä 
+)Ï 
+Ò 
+Õ 
+Ö 
+å 
+è 
+í 
+ò 
+õ 
+ø 
+ƒ 
+Š
+=‹
+>Œ 
+“ 
+  
+¥ 
+¦ 
+± 
+¶ 
+¹ 
+Â 
+Ç ’W+0j`20H‡ Ò
+	(+0j`20H‡ Ò
+	(+0j`20H‡ Ò
+	(+0j`20H‡ Ò
+	(+0j`20H‡ Ò
+	(?0j`2020
+j`0H‡ Ò
+	([!0j`202
+0j`2
+0j`2
+0j`2
+0j`H‡ Ò
+	( K&0j`2020
+j`02
+0j`H‡ Ò
+	(%s*0j`202
+0j`2
+0j`2
+0j`2
+0j`2
+'0j`2
+(0j`H‡ Ò
+	()‹.0j`202
+0j`2
+0j`2
+0j`2
+0j`2
+'0j`2
+(0j`2
++0j`2
+,0j`H‡ Ò
+	(-K00j`2020
+j`02
+0j`H‡ Ò
+	(/K20j`2020
+j`02
+0j`H‡ Ò
+	(1W40j`2020
+j`02
+0j`2
+0j`H‡ Ò
+	(3o60j`2020
+j`02
+0j`2
+0j`2
+0j`2
+'0j`H‡ Ò
+	(5K80j`2020
+j`02
+0j`H‡ Ò
+	(7W:0j`2020
+j`02
+0j`2
+0j`H‡ Ò
+	(9[<0j`202
+0j`2
+0j`2
+0j`2
+0j`H‡ Ò
+	(;K@0j`2020j`02
+0j`H‡ Ò
+	(?[B0j`202
+0j`2
+0j`2
+0j`2
+0j`H‡ Ò
+	(AsD0j`202
+0j`2
+0j`2
+0j`2
+0j`2
+'0j`2
+(0j`H‡ Ò
+	(CKF0j`2020
+j`02
+0j`H‡ Ò
+	(EEI0j`20202
+0j`H‡ Ò
+	(H•N0j`20200j`02
+0j`202
+0j`2
+'0j`2(
+002+0H‡ Ò
+	(M•Q0j`20200j`02
+0j`202
+0j`2
+'0j`2(
+002+0H‡ Ò
+	(P[S0j`202
+0j`2
+0j`2
+0j`2
+0j`H‡ Ò
+	(RKW0j`2020j`02
+0j`H‡ Ò
+	(VsY0j`202
+0j`2
+0j`2
+0j`2
+0j`2
+'0j`2
+(0j`H‡ Ò
+	(X‹[0j`202
+0j`2
+0j`2
+0j`2
+0j`2
+'0j`2
+(0j`2
++0j`2
+,0j`H‡ Ò
+	(ZK]0j`2020j`02
+0j`H‡ Ò
+	(\K_0j`2020j`02
+0j`H‡ Ò
+	(^Wa0j`2020j`02
+0j`2
+0j`H‡ Ò
+	(`oc0j`2020j`02
+0j`2
+0j`2
+0j`2
+'0j`H‡ Ò
+	(bKe0j`2020j`02
+0j`H‡ Ò
+	(dWg0j`2020j`02
+0j`2
+0j`H‡ Ò
+	(f[i0j`202
+0j`2
+0j`2
+0j`2
+0j`H‡ Ò
+	(hKl0j`2020j`02
+0j`H‡ Ò
+	(k[n0j`202
+0j`2
+0j`2
+0j`2
+0j`H‡ Ò
+	(msp0j`202
+0j`2
+0j`2
+0j`2
+0j`2
+'0j`2
+(0j`H‡ Ò
+	(oKr0j`2020j`02
+0j`H‡ Ò
+	(qEt0j`20202
+0j`H‡ Ò
+	(sEv0j`20202
+0j`H‡ Ò
+	(uSx0j`2020202
+0j`H‡ Ò
+	(w¡|0j`202020
+j`02
+0j`2
+0j`2
+'0j`2
+(0j`2
++0j`2
+,0j`2
+z0j`H‡ Ò
+	({9~0j`2020H‡ Ò
+	(}\€0j`2020j`02020H‡ Ò
+	(]‚0j`2020j`02020H‡ Ò
+		(m†0j`202
+0j`2
+0j`20200j`0H‡ Ò
+		(…mˆ0j`202
+0j`2
+0j`20200j`0H‡ Ò
+		(‡{Š0j`202
+0j`2
+0j`20202'00j`0H‡ Ò
+		(‰{Œ0j`202
+0j`2
+0j`20202'00j`0H‡ Ò
+		(‹i•0j`2
+0j`2
+0j`2
+0j`2$ 0"0!j`#0 j`$0H‡ Ò
+		(”G™0j`20200%j`&0H‡ Ò
+		(˜Gœ0j`20200%j`'0H‡ Ò
+		(›Gž0j`20200%j`'0H‡ Ò
+		(U¡0j`2
+0(02$ 0"0!j`#0 j`$0H‡ Ò
+		( _£0j`200j`02$ 0"0!j`#0 j`$0H‡ Ò
+		(¢U¥0j`2
+0(02$ 0"0!j`#0 j`$0H‡ Ò
+		(¤_§0j`200j`02$ 0"0!j`#0 j`$0H‡ Ò
+		(¦S©0j`202$ 0"0!j`#0 j`$0H‡ Ò
+		(¨-«0j`20H‡ Ò
+		(ªk±0j`20200j`020*j`+02
+0,0H‡ Ò
+		(°a³0j`202
+0(020*j`+02
+0,0H‡ Ò
+		(²=µ0j`202
+0,0H‡ Ò
+		(´K·0j`20202
+0,0H‡ Ò
+		(¶S¹0j`202$ 0"0!j`#0 j`$0H‡ Ò
+		(¸[¼0j`2020j`0200%j`-0H‡ Ò
+		(»aÀ0j`20200.j`/0200.j`/0H‡ Ò
+		(¿GÃ0j`20200%j`00H‡ Ò
+		(ÂGÆ0j`20200%j`10H‡ Ò
+		(ÅGÈ0j`20200%j`10H‡ Ò
+		(ÇGÊ0j`20200.j`/0H‡ Ò
+		(ÉGÌ0j`20200.j`/0H‡ Ò
+		(ËGÎ0j`20200%j`10H‡ Ò
+		(ÍAÑ0j`2020*j`20H‡ Ò
+		(ÐGÔ0j`20200j`30H‡ Ò
+		(Ó‘Ø0j`202
+0j`42
+0j`42$ 0"0!j`#0 j`$020"0!j`52'0H‡ Ò
+		(×[Ú0j`2020*j`+0200%j`10H‡ Ò
+		(Ù]Ü0j`2020*j`+02
+0j`42
+0,0H‡ Ò
+		(ÛGÞ0j`20200%j`10H‡ Ò
+		(ÝMà0j`2020*j`202
+0j`4H‡ Ò
+		(ß[â0j`2020*j`20200%j`10H‡ Ò
+		(áMä0j`2020*j`202
+0j`4H‡ Ò
+		(ã9ç0j`202
+0j`6H‡ Ò
+		(æIê0j`202
+0702
+0j`H‡ Ò
+		(é=ì0j`202
+070H‡ Ò
+		(ëGï0j`20200j`80H‡ Ò
+		(îGñ0j`20200%j`10H‡ Ò
+		(ðSô0j`202
+0j`4200%j`90H‡ Ò
+		(óS÷0j`202
+0j`:200%j`10H‡ Ò
+		(öUú0j`202
+0j`:2
+0j`42
+0;0H‡ Ò
+		(ùaü0j`20200%j`10200%j`10H‡ Ò
+		(ûUþ0j`202
+0j`42
+0j`42
+0;0H‡ Ò
+		(ý9€0j`202
+0j`:H‡ Ò
+		(ÿ=‚0j`202
+0;0H‡ Ò
+		(=…0j`202
+0<0H‡ Ò
+		(„=‡0j`202
+0<0H‡ Ò
+		(†=‰0j`202
+0<0H‡ Ò
+		(ˆ=Ž0j`202
+0?0H‡ Ò
+		(-0j`20H‡ Ò
+		(S’0j`200%j`10200%j`10H‡ Ò
+		(‘G•0j`2
+0j`42
+0j`42
+0@0H‡ Ò
+		(”S—0j`200%j`10200%j`10H‡ Ò
+		(–G™0j`2
+0j`42
+0j`42
+0@0H‡ Ò
+		(˜E›0j`2$ 0"0!j`#0 j`$0H‡ Ò
+		(šS0j`202$ 0"0!j`#0 j`$0H‡ Ò
+		(œ-Ÿ0j`20H‡ Ò
+		(ž9¢0j`202
+0j`AH‡ Ò
+		(¡9¤0j`202
+0j`AH‡ Ò
+		(£q¨0j`202
+0j`A2
+0j`2
+0B02
+0B02
+'0j`CH‡ Ò
+		(§Qª0j`202
+0j`A2
+0j`2
+0j`H‡ Ò
+		(©Q¬0j`202
+0j`A2
+0j`2
+0j`H‡ Ò
+		(«E®0j`202
+0j`A2
+0j`H‡ Ò
+		(­]°0j`202
+0j`A2
+0j`2
+0j`2
+0j`H‡ Ò
+		(¯Q³0j`202
+0j`A2
+0j`2
+0j`DH‡ Ò
+		(²_µ0j`202
+0j`A2
+0j`200j`0H‡ Ò
+		(´a¸0j`202
+0j`A2
+0j`2
+0j`42
+0E0H‡ Ò
+		(·Q»0j`202
+0j`F2
+0j`2
+0j`H‡ Ò
+		(º9½0j`202
+0j`H‡ Ò
+		(¼I¿0j`202
+0702
+0j`AH‡ Ò
+		(¾9Á0j`202
+0j`H‡ Ò
+		(À‘Ä0j`20
+j`020
+j`02
+0j`2
+0j`2
+0j`G2$' 0"0!j`#0 j`$0H‡ Ò
+		(Ã‘Æ0j`20j`020j`02
+0j`2
+0j`2
+0j`G2$' 0"0!j`#0 j`$0H‡ Ò
+		(Å‰É0j`20j`02
+0j`2
+0j`2
+0j`H2
+0j`G2$' 0"0!j`#0 j`$0H‡ Ò
+		(È‰Ë0j`20j`02
+0j`2
+0j`2
+0j`H2
+0j`G2$' 0"0!j`#0 j`$0H‡ Ò
+		(Ê•Í0j`20j`02
+0j`2
+0j`2
+0j`2
+0j`2
+'0j`G2$( 0"0!j`#0 j`$0H‡ Ò
+		(Ì•Ï0j`20j`02
+0j`2
+0j`2
+0j`2
+0j`2
+'0j`G2$( 0"0!j`#0 j`$0H‡ Ò
+		(ÎEÑ0j`202
+0j`2
+0j`H‡ Ò
+		(ÐGÓ0j`20200%j`'0H‡ Ò
+		(ÒØ
+à
+ ê
+platform.gdiplus

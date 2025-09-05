@@ -1,0 +1,286 @@
+
+—T
+platform
+posix
+_GUID
+GUID
+kotlinx
+cinterop
+internal
+CCall
+id
+:knifunptr_platform_windows7461_CLSID_DragDropHelper_getter
+CLSID_DragDropHelper
+@knifunptr_platform_windows7462_CLSID_DriveSizeCategorizer_getter
+CLSID_DriveSizeCategorizer
+@knifunptr_platform_windows7463_CLSID_DriveTypeCategorizer_getter
+CLSID_DriveTypeCategorizer
+Fknifunptr_platform_windows7464_CLSID_EnumerableObjectCollection_getter
+ CLSID_EnumerableObjectCollection
+9knifunptr_platform_windows7465_CLSID_ExecuteFolder_getter
+CLSID_ExecuteFolder
+:knifunptr_platform_windows7466_CLSID_ExecuteUnknown_getter
+CLSID_ExecuteUnknown
+;knifunptr_platform_windows7467_CLSID_ExplorerBrowser_getter
+CLSID_ExplorerBrowser
+9knifunptr_platform_windows7468_CLSID_FSCopyHandler_getter
+CLSID_FSCopyHandler
+:knifunptr_platform_windows7469_CLSID_FileOpenDialog_getter
+CLSID_FileOpenDialog
+9knifunptr_platform_windows7470_CLSID_FileOperation_getter
+CLSID_FileOperation
+IID
+8knifunptr_platform_windows7471_CLSID_FileProtocol_getter
+CLSID_FileProtocol
+:knifunptr_platform_windows7472_CLSID_FileSaveDialog_getter
+CLSID_FileSaveDialog
+:knifunptr_platform_windows7473_CLSID_FileSearchBand_getter
+CLSID_FileSearchBand
+5knifunptr_platform_windows7474_CLSID_FileTypes_getter
+CLSID_FileTypes
+6knifunptr_platform_windows7475_CLSID_FolderItem_getter
+CLSID_FolderItem
+Aknifunptr_platform_windows7476_CLSID_FolderItemsMultiLevel_getter
+CLSID_FolderItemsMultiLevel
+:knifunptr_platform_windows7477_CLSID_FolderShortcut_getter
+CLSID_FolderShortcut
+:knifunptr_platform_windows7478_CLSID_FolderViewHost_getter
+CLSID_FolderViewHost
+>knifunptr_platform_windows7479_CLSID_FrameworkInputPane_getter
+CLSID_FrameworkInputPane
+@knifunptr_platform_windows7480_CLSID_FreeSpaceCategorizer_getter
+CLSID_FreeSpaceCategorizer
+7knifunptr_platform_windows7481_CLSID_FtpProtocol_getter
+CLSID_FtpProtocol
+CLSID
+9knifunptr_platform_windows7482_CLSID_GlobalOptions_getter
+CLSID_GlobalOptions
+:knifunptr_platform_windows7483_CLSID_GopherProtocol_getter
+CLSID_GopherProtocol
+:knifunptr_platform_windows7484_CLSID_HWShellExecute_getter
+CLSID_HWShellExecute
+5knifunptr_platform_windows7485_CLSID_HomeGroup_getter
+CLSID_HomeGroup
+8knifunptr_platform_windows7486_CLSID_HttpProtocol_getter
+CLSID_HttpProtocol
+9knifunptr_platform_windows7487_CLSID_HttpSProtocol_getter
+CLSID_HttpSProtocol
+Bknifunptr_platform_windows7488_CLSID_IENamespaceTreeControl_getter
+CLSID_IENamespaceTreeControl
+3knifunptr_platform_windows7489_CLSID_ISFBand_getter
+CLSID_ISFBand
+=knifunptr_platform_windows7490_CLSID_IdentityUnmarshal_getter
+CLSID_IdentityUnmarshal
+;knifunptr_platform_windows7491_CLSID_ImageProperties_getter
+CLSID_ImageProperties
+;knifunptr_platform_windows7492_CLSID_ImageRecompress_getter
+CLSID_ImageRecompress
+Aknifunptr_platform_windows7493_CLSID_InMemoryPropertyStore_getter
+CLSID_InMemoryPropertyStore
+?knifunptr_platform_windows7494_CLSID_InProcFreeMarshaler_getter
+CLSID_InProcFreeMarshaler
+4knifunptr_platform_windows7495_CLSID_Internet_getter
+CLSID_Internet
+;knifunptr_platform_windows7496_CLSID_InternetButtons_getter
+CLSID_InternetButtons
+<knifunptr_platform_windows7497_CLSID_InternetExplorer_getter
+CLSID_InternetExplorer
+Aknifunptr_platform_windows7498_CLSID_InternetPrintOrdering_getter
+CLSID_InternetPrintOrdering
+Cknifunptr_platform_windows7499_CLSID_InternetSecurityManager_getter
+CLSID_InternetSecurityManager
+<knifunptr_platform_windows7500_CLSID_InternetShortcut_getter
+CLSID_InternetShortcut
+?knifunptr_platform_windows7501_CLSID_InternetZoneManager_getter
+CLSID_InternetZoneManager
+>knifunptr_platform_windows7502_CLSID_KnownFolderManager_getter
+CLSID_KnownFolderManager
+>knifunptr_platform_windows7503_CLSID_LinkColumnProvider_getter
+CLSID_LinkColumnProvider
+6knifunptr_platform_windows7504_CLSID_MSOButtons_getter
+CLSID_MSOButtons
+9knifunptr_platform_windows7505_CLSID_MailRecipient_getter
+CLSID_MailRecipient
+<knifunptr_platform_windows7506_CLSID_ManualResetEvent_getter
+CLSID_ManualResetEvent
+4knifunptr_platform_windows7507_CLSID_MenuBand_getter
+CLSID_MenuBand
+8knifunptr_platform_windows7508_CLSID_MenuBandSite_getter
+CLSID_MenuBandSite
+;knifunptr_platform_windows7509_CLSID_MenuToolbarBase_getter
+CLSID_MenuToolbarBase
+=knifunptr_platform_windows7510_CLSID_MergedCategorizer_getter
+CLSID_MergedCategorizer
+6knifunptr_platform_windows7511_CLSID_MkProtocol_getter
+CLSID_MkProtocol
+6knifunptr_platform_windows7512_CLSID_MyComputer_getter
+CLSID_MyComputer
+7knifunptr_platform_windows7513_CLSID_MyDocuments_getter
+CLSID_MyDocuments
+@knifunptr_platform_windows7514_CLSID_NamespaceTreeControl_getter
+CLSID_NamespaceTreeControl
+;knifunptr_platform_windows7515_CLSID_NamespaceWalker_getter
+CLSID_NamespaceWalker
+>knifunptr_platform_windows7516_CLSID_NetworkConnections_getter
+CLSID_NetworkConnections
+9knifunptr_platform_windows7517_CLSID_NetworkDomain_getter
+CLSID_NetworkDomain
+Aknifunptr_platform_windows7518_CLSID_NetworkExplorerFolder_getter
+CLSID_NetworkExplorerFolder
+9knifunptr_platform_windows7519_CLSID_NetworkPlaces_getter
+CLSID_NetworkPlaces
+9knifunptr_platform_windows7520_CLSID_NetworkServer_getter
+CLSID_NetworkServer
+8knifunptr_platform_windows7521_CLSID_NetworkShare_getter
+CLSID_NetworkShare
+3knifunptr_platform_windows7522_CLSID_NewMenu_getter
+CLSID_NewMenu
+<knifunptr_platform_windows7523_CLSID_OpenControlPanel_getter
+CLSID_OpenControlPanel
+5knifunptr_platform_windows7524_CLSID_PSBindCtx_getter
+CLSID_PSBindCtx
+9knifunptr_platform_windows7525_CLSID_PSClassObject_getter
+CLSID_PSClassObject
+8knifunptr_platform_windows7526_CLSID_PSClientSite_getter
+CLSID_PSClientSite
+6knifunptr_platform_windows7527_CLSID_PSDragDrop_getter
+CLSID_PSDragDrop
+9knifunptr_platform_windows7528_CLSID_PSEnumerators_getter
+CLSID_PSEnumerators
+7knifunptr_platform_windows7529_CLSID_PSGenObject_getter
+CLSID_PSGenObject
+;knifunptr_platform_windows7530_CLSID_PSInPlaceActive_getter
+CLSID_PSInPlaceActive
+:knifunptr_platform_windows7531_CLSID_PSInPlaceFrame_getter
+CLSID_PSInPlaceFrame
+@knifunptr_platform_windows7532_CLSID_PackageDebugSettings_getter
+CLSID_PackageDebugSettings
+Dknifunptr_platform_windows7533_CLSID_PersistentZoneIdentifier_getter
+CLSID_PersistentZoneIdentifier
+7knifunptr_platform_windows7534_CLSID_Picture_Dib_getter
+CLSID_Picture_Dib
+?knifunptr_platform_windows7535_CLSID_Picture_EnhMetafile_getter
+CLSID_Picture_EnhMetafile
+<knifunptr_platform_windows7536_CLSID_Picture_Metafile_getter
+CLSID_Picture_Metafile
+;knifunptr_platform_windows7537_CLSID_PlaybackManager_getter
+CLSID_PlaybackManager
+<knifunptr_platform_windows7538_CLSID_PreviousVersions_getter
+CLSID_PreviousVersions
+4knifunptr_platform_windows7539_CLSID_Printers_getter
+CLSID_Printers
+:knifunptr_platform_windows7540_CLSID_ProgressDialog_getter
+CLSID_ProgressDialog
+8knifunptr_platform_windows7541_CLSID_PropertiesUI_getter
+CLSID_PropertiesUI
+:knifunptr_platform_windows7542_CLSID_PropertySystem_getter
+CLSID_PropertySystem
+=knifunptr_platform_windows7543_CLSID_PublishDropTarget_getter
+CLSID_PublishDropTarget
+<knifunptr_platform_windows7544_CLSID_PublishingWizard_getter
+CLSID_PublishingWizard
+=knifunptr_platform_windows7545_CLSID_QueryAssociations_getter
+CLSID_QueryAssociations
+?knifunptr_platform_windows7546_CLSID_QueryCancelAutoPlay_getter
+CLSID_QueryCancelAutoPlay
+6knifunptr_platform_windows7547_CLSID_QuickLinks_getter
+CLSID_QuickLinks
+6knifunptr_platform_windows7548_CLSID_RecycleBin_getter
+CLSID_RecycleBin
+;knifunptr_platform_windows7549_CLSID_SBS_CdlProtocol_getter
+CLSID_SBS_CdlProtocol
+Bknifunptr_platform_windows7550_CLSID_SBS_ClassInstallFilter_getter
+CLSID_SBS_ClassInstallFilter
+<knifunptr_platform_windows7551_CLSID_SBS_FileProtocol_getter
+CLSID_SBS_FileProtocol
+;knifunptr_platform_windows7552_CLSID_SBS_FtpProtocol_getter
+CLSID_SBS_FtpProtocol
+>knifunptr_platform_windows7553_CLSID_SBS_GopherProtocol_getter
+CLSID_SBS_GopherProtocol
+<knifunptr_platform_windows7554_CLSID_SBS_HttpProtocol_getter
+CLSID_SBS_HttpProtocol
+=knifunptr_platform_windows7555_CLSID_SBS_HttpSProtocol_getter
+CLSID_SBS_HttpSProtocol
+Gknifunptr_platform_windows7556_CLSID_SBS_InternetSecurityManager_getter
+!CLSID_SBS_InternetSecurityManager
+Cknifunptr_platform_windows7557_CLSID_SBS_InternetZoneManager_getter
+CLSID_SBS_InternetZoneManager
+:knifunptr_platform_windows7558_CLSID_SBS_MkProtocol_getter
+CLSID_SBS_MkProtocol
+;knifunptr_platform_windows7559_CLSID_SBS_SoftDistExt_getter
+CLSID_SBS_SoftDistExt
+=knifunptr_platform_windows7560_CLSID_SBS_StdURLMoniker_getter
+CLSID_SBS_StdURLMoniker
+<knifunptr_platform_windows7561_CLSID_SBS_UrlMkBindCtx_getter
+CLSID_SBS_UrlMkBindCtx
+:knifunptr_platform_windows7562_CLSID_ScheduledTasks_getter
+CLSID_ScheduledTasks
+=knifunptr_platform_windows7563_CLSID_SearchAssistantOC_getter
+CLSID_SearchAssistantOC
+Cknifunptr_platform_windows7564_CLSID_SearchFolderItemFactory_getter
+CLSID_SearchFolderItemFactory
+Gknifunptr_platform_windows7565_CLSID_SharingConfigurationManager_getter
+!CLSID_SharingConfigurationManager
+1knifunptr_platform_windows7566_CLSID_Shell_getter
+CLSID_Shell
+>knifunptr_platform_windows7567_CLSID_ShellBrowserWindow_getter
+CLSID_ShellBrowserWindow
+8knifunptr_platform_windows7568_CLSID_ShellDesktop_getter
+CLSID_ShellDesktop
+?knifunptr_platform_windows7569_CLSID_ShellDispatchInproc_getter
+CLSID_ShellDispatchInproc
+9knifunptr_platform_windows7570_CLSID_ShellFSFolder_getter
+CLSID_ShellFSFolder
+:knifunptr_platform_windows7571_CLSID_ShellFldSetExt_getter
+CLSID_ShellFldSetExt
+;knifunptr_platform_windows7572_CLSID_ShellFolderItem_getter
+CLSID_ShellFolderItem
+;knifunptr_platform_windows7573_CLSID_ShellFolderView_getter
+CLSID_ShellFolderView
+=knifunptr_platform_windows7574_CLSID_ShellFolderViewOC_getter
+CLSID_ShellFolderViewOC
+5knifunptr_platform_windows7575_CLSID_ShellItem_getter
+CLSID_ShellItem
+8knifunptr_platform_windows7576_CLSID_ShellLibrary_getter
+CLSID_ShellLibrary
+5knifunptr_platform_windows7577_CLSID_ShellLink_getter
+CLSID_ShellLink
+;knifunptr_platform_windows7578_CLSID_ShellLinkObject_getter
+CLSID_ShellLinkObject
+:knifunptr_platform_windows7579_CLSID_ShellNameSpace_getter
+CLSID_ShellNameSpace
+Bknifunptr_platform_windows7580_CLSID_ShellSearchAssistantOC_getter
+CLSID_ShellSearchAssistantOC
+?knifunptr_platform_windows7581_CLSID_ShellShellNameSpace_getter
+CLSID_ShellShellNameSpace
+9knifunptr_platform_windows7582_CLSID_ShellUIHelper_getter
+CLSID_ShellUIHelper
+8knifunptr_platform_windows7583_CLSID_ShellWindows_getter
+CLSID_ShellWindows
+;knifunptr_platform_windows7584_CLSID_SizeCategorizer_getter
+CLSID_SizeCategorizer
+7knifunptr_platform_windows7585_CLSID_SoftDistExt_getter
+CLSID_SoftDistExt
+8knifunptr_platform_windows7586_CLSID_StartMenuPin_getter
+CLSID_StartMenuPin
+5knifunptr_platform_windows7587_CLSID_StaticDib_getter
+CLSID_StaticDib
+:knifunptr_platform_windows7588_CLSID_StaticMetafile_getter
+CLSID_StaticMetafile
+windowsI
+ 
+ 
+ 
+ 
+
+
+
+ 
+ 
+4 
+ ãé"
+0j`8«ä(	"0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("!0j`8«ä( "#0j`8«ä(""%0j`8«ä($"'0j`8«ä(&")0j`8«ä(("+0j`8«ä(*"-0j`8«ä(,"/0j`8«ä(."10j`8«ä(0"30j`8«ä(2"60j`	8«ä(5"80j`8«ä(7":0j`8«ä(9"<0j`8«ä(;">0j`8«ä(="@0j`8«ä(?"B0j`8«ä(A"D0j`8«ä(C"F0j`	8«ä(E"H0j`8«ä(G"J0j`8«ä(I"L0j`8«ä(K"N0j`	8«ä(M"P0j`8«ä(O"R0j`8«ä(Q"T0j`8«ä(S"V0j`8«ä(U"X0j`8«ä(W"Z0j`8«ä(Y"\0j`8«ä(["^0j`8«ä(]"`0j`8«ä(_"b0j`8«ä(a"d0j`8«ä(c"f0j`	8«ä(e"h0j`8«ä(g"j0j`8«ä(i"l0j`8«ä(k"n0j`8«ä(m"p0j`8«ä(o"r0j`8«ä(q"t0j`8«ä(s"v0j`8«ä(u"x0j`8«ä(w"z0j`8«ä(y"|0j`8«ä({"~0j`8«ä(}"Ä0j`8«ä("Ç0j`8«ä	(Å"Ñ0j`8«ä	(É"Ü0j`8«ä	(Ö"à0j`8«ä	(á"ä0j`	8«ä	(â"å0j`	8«ä	(ã"é0j`	8«ä	(ç"ê0j`	8«ä	(è"í0j`	8«ä	(ë"î0j`	8«ä	(ì"ñ0j`	8«ä	(ï"ò0j`	8«ä	(ó"ö0j`8«ä	(ô"ú0j`8«ä	(õ"û0j`	8«ä	(ù"†0j`	8«ä	(ü"¢0j`	8«ä	(°"§0j`8«ä	(£"¶0j`8«ä	(•"®0j`8«ä	(ß"™0j`8«ä	(©"¨0j`8«ä	(´"Æ0j`8«ä	(≠"∞0j`8«ä	(Ø"≤0j`8«ä	(±"¥0j`8«ä	(≥"∂0j`8«ä	(µ"∏0j`8«ä	(∑"∫0j`8«ä	(π"º0j`8«ä	(ª"æ0j`8«ä	(Ω"¿0j`8«ä	(ø"¬0j`8«ä	(¡"ƒ0j`8«ä	(√"∆0j`8«ä	(≈"»0j`8«ä	(«" 0j`8«ä	(…"Ã0j`8«ä	(À"Œ0j`8«ä	(Õ"–0j`8«ä	(œ"“0j`8«ä	(—"‘0j`8«ä	(”"÷0j`8«ä	(’"ÿ0j`8«ä	(◊"⁄0j`8«ä	(Ÿ"‹0j`8«ä	(€"ﬁ0j`8«ä	(›"‡0j`8«ä	(ﬂ"‚0j`8«ä	(·"‰0j`8«ä	(„"Ê0j`8«ä	(Â"Ë0j`8«ä	(Á"Í0j`8«ä	(È"Ï0j`8«ä	(Î"Ó0j`8«ä	(Ì"0j`8«ä	(Ô"Ú0j`8«ä	(Ò"Ù0j`8«ä	(Û"ˆ0j`8«ä	(ı"¯0j`8«ä	(˜"˙0j`8«ä	(˘"¸0j`8«ä	(˚"˛0j`8«ä	(˝"Ä0j`8«ä	(ˇ"Ç0j`8«ä	(Å"Ñ0j`8«ä	(É"Ü0j`8«ä	(Ö"à0j`	8«ä	(á"ä0j`	8«ä	(âÿ
+
+‡
+ Í
+platform.windows

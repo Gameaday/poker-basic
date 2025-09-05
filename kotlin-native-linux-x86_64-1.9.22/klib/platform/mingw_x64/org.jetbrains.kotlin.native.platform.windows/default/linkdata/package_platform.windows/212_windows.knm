@@ -1,0 +1,281 @@
+
+ë\
+platform
+posix
+_GUID
+GUID
+kotlinx
+cinterop
+internal
+CCall
+id
+<knifunptr_platform_windows7717_FOLDERID_PublicDesktop_getter
+FOLDERID_PublicDesktop
+>knifunptr_platform_windows7718_FOLDERID_PublicDocuments_getter
+FOLDERID_PublicDocuments
+>knifunptr_platform_windows7719_FOLDERID_PublicDownloads_getter
+FOLDERID_PublicDownloads
+>knifunptr_platform_windows7720_FOLDERID_PublicGameTasks_getter
+FOLDERID_PublicGameTasks
+>knifunptr_platform_windows7721_FOLDERID_PublicLibraries_getter
+FOLDERID_PublicLibraries
+:knifunptr_platform_windows7722_FOLDERID_PublicMusic_getter
+FOLDERID_PublicMusic
+=knifunptr_platform_windows7723_FOLDERID_PublicPictures_getter
+FOLDERID_PublicPictures
+>knifunptr_platform_windows7724_FOLDERID_PublicRingtones_getter
+FOLDERID_PublicRingtones
+>knifunptr_platform_windows7725_FOLDERID_PublicUserTiles_getter
+FOLDERID_PublicUserTiles
+;knifunptr_platform_windows7726_FOLDERID_PublicVideos_getter
+FOLDERID_PublicVideos
+:knifunptr_platform_windows7727_FOLDERID_QuickLaunch_getter
+FOLDERID_QuickLaunch
+5knifunptr_platform_windows7728_FOLDERID_Recent_getter
+FOLDERID_Recent
+@knifunptr_platform_windows7729_FOLDERID_RecordedTVLibrary_getter
+FOLDERID_RecordedTVLibrary
+?knifunptr_platform_windows7730_FOLDERID_RecycleBinFolder_getter
+FOLDERID_RecycleBinFolder
+:knifunptr_platform_windows7731_FOLDERID_ResourceDir_getter
+FOLDERID_ResourceDir
+8knifunptr_platform_windows7732_FOLDERID_Ringtones_getter
+FOLDERID_Ringtones
+?knifunptr_platform_windows7733_FOLDERID_RoamedTileImages_getter
+FOLDERID_RoamedTileImages
+=knifunptr_platform_windows7734_FOLDERID_RoamingAppData_getter
+FOLDERID_RoamingAppData
+;knifunptr_platform_windows7735_FOLDERID_RoamingTiles_getter
+FOLDERID_RoamingTiles
+9knifunptr_platform_windows7736_FOLDERID_SEARCH_CSC_getter
+FOLDERID_SEARCH_CSC
+:knifunptr_platform_windows7737_FOLDERID_SEARCH_MAPI_getter
+FOLDERID_SEARCH_MAPI
+:knifunptr_platform_windows7738_FOLDERID_SampleMusic_getter
+FOLDERID_SampleMusic
+=knifunptr_platform_windows7739_FOLDERID_SamplePictures_getter
+FOLDERID_SamplePictures
+>knifunptr_platform_windows7740_FOLDERID_SamplePlaylists_getter
+FOLDERID_SamplePlaylists
+;knifunptr_platform_windows7741_FOLDERID_SampleVideos_getter
+FOLDERID_SampleVideos
+9knifunptr_platform_windows7742_FOLDERID_SavedGames_getter
+FOLDERID_SavedGames
+<knifunptr_platform_windows7743_FOLDERID_SavedSearches_getter
+FOLDERID_SavedSearches
+:knifunptr_platform_windows7744_FOLDERID_Screenshots_getter
+FOLDERID_Screenshots
+9knifunptr_platform_windows7745_FOLDERID_SearchHome_getter
+FOLDERID_SearchHome
+5knifunptr_platform_windows7746_FOLDERID_SendTo_getter
+FOLDERID_SendTo
+Bknifunptr_platform_windows7747_FOLDERID_SidebarDefaultParts_getter
+FOLDERID_SidebarDefaultParts
+;knifunptr_platform_windows7748_FOLDERID_SidebarParts_getter
+FOLDERID_SidebarParts
+8knifunptr_platform_windows7749_FOLDERID_StartMenu_getter
+FOLDERID_StartMenu
+6knifunptr_platform_windows7750_FOLDERID_Startup_getter
+FOLDERID_Startup
+@knifunptr_platform_windows7751_FOLDERID_SyncManagerFolder_getter
+FOLDERID_SyncManagerFolder
+@knifunptr_platform_windows7752_FOLDERID_SyncResultsFolder_getter
+FOLDERID_SyncResultsFolder
+>knifunptr_platform_windows7753_FOLDERID_SyncSetupFolder_getter
+FOLDERID_SyncSetupFolder
+5knifunptr_platform_windows7754_FOLDERID_System_getter
+FOLDERID_System
+8knifunptr_platform_windows7755_FOLDERID_SystemX86_getter
+FOLDERID_SystemX86
+8knifunptr_platform_windows7756_FOLDERID_Templates_getter
+FOLDERID_Templates
+9knifunptr_platform_windows7757_FOLDERID_UserPinned_getter
+FOLDERID_UserPinned
+;knifunptr_platform_windows7758_FOLDERID_UserProfiles_getter
+FOLDERID_UserProfiles
+?knifunptr_platform_windows7759_FOLDERID_UserProgramFiles_getter
+FOLDERID_UserProgramFiles
+Eknifunptr_platform_windows7760_FOLDERID_UserProgramFilesCommon_getter
+FOLDERID_UserProgramFilesCommon
+9knifunptr_platform_windows7761_FOLDERID_UsersFiles_getter
+FOLDERID_UsersFiles
+=knifunptr_platform_windows7762_FOLDERID_UsersLibraries_getter
+FOLDERID_UsersLibraries
+5knifunptr_platform_windows7763_FOLDERID_Videos_getter
+FOLDERID_Videos
+<knifunptr_platform_windows7764_FOLDERID_VideosLibrary_getter
+FOLDERID_VideosLibrary
+6knifunptr_platform_windows7765_FOLDERID_Windows_getter
+FOLDERID_Windows
+Bknifunptr_platform_windows7766_FOLDERTYPEID_AccountPictures_getter
+FOLDERTYPEID_AccountPictures
+Aknifunptr_platform_windows7767_FOLDERTYPEID_Communications_getter
+FOLDERTYPEID_Communications
+Cknifunptr_platform_windows7768_FOLDERTYPEID_CompressedFolder_getter
+FOLDERTYPEID_CompressedFolder
+;knifunptr_platform_windows7769_FOLDERTYPEID_Contacts_getter
+FOLDERTYPEID_Contacts
+Gknifunptr_platform_windows7770_FOLDERTYPEID_ControlPanelCategory_getter
+!FOLDERTYPEID_ControlPanelCategory
+Fknifunptr_platform_windows7771_FOLDERTYPEID_ControlPanelClassic_getter
+ FOLDERTYPEID_ControlPanelClassic
+<knifunptr_platform_windows7772_FOLDERTYPEID_Documents_getter
+FOLDERTYPEID_Documents
+8knifunptr_platform_windows7773_FOLDERTYPEID_Games_getter
+FOLDERTYPEID_Games
+:knifunptr_platform_windows7774_FOLDERTYPEID_Generic_getter
+FOLDERTYPEID_Generic
+Aknifunptr_platform_windows7775_FOLDERTYPEID_GenericLibrary_getter
+FOLDERTYPEID_GenericLibrary
+Gknifunptr_platform_windows7776_FOLDERTYPEID_GenericSearchResults_getter
+!FOLDERTYPEID_GenericSearchResults
+:knifunptr_platform_windows7777_FOLDERTYPEID_Invalid_getter
+FOLDERTYPEID_Invalid
+8knifunptr_platform_windows7778_FOLDERTYPEID_Music_getter
+FOLDERTYPEID_Music
+Bknifunptr_platform_windows7779_FOLDERTYPEID_NetworkExplorer_getter
+FOLDERTYPEID_NetworkExplorer
+=knifunptr_platform_windows7780_FOLDERTYPEID_OpenSearch_getter
+FOLDERTYPEID_OpenSearch
+=knifunptr_platform_windows7781_FOLDERTYPEID_OtherUsers_getter
+FOLDERTYPEID_OtherUsers
+;knifunptr_platform_windows7782_FOLDERTYPEID_Pictures_getter
+FOLDERTYPEID_Pictures
+;knifunptr_platform_windows7783_FOLDERTYPEID_Printers_getter
+FOLDERTYPEID_Printers
+Aknifunptr_platform_windows7784_FOLDERTYPEID_PublishedItems_getter
+FOLDERTYPEID_PublishedItems
+=knifunptr_platform_windows7785_FOLDERTYPEID_RecordedTV_getter
+FOLDERTYPEID_RecordedTV
+=knifunptr_platform_windows7786_FOLDERTYPEID_RecycleBin_getter
+FOLDERTYPEID_RecycleBin
+=knifunptr_platform_windows7787_FOLDERTYPEID_SavedGames_getter
+FOLDERTYPEID_SavedGames
+Bknifunptr_platform_windows7788_FOLDERTYPEID_SearchConnector_getter
+FOLDERTYPEID_SearchConnector
+=knifunptr_platform_windows7789_FOLDERTYPEID_SearchHome_getter
+FOLDERTYPEID_SearchHome
+;knifunptr_platform_windows7790_FOLDERTYPEID_Searches_getter
+FOLDERTYPEID_Searches
+Cknifunptr_platform_windows7791_FOLDERTYPEID_SoftwareExplorer_getter
+FOLDERTYPEID_SoftwareExplorer
+<knifunptr_platform_windows7792_FOLDERTYPEID_StartMenu_getter
+FOLDERTYPEID_StartMenu
+<knifunptr_platform_windows7793_FOLDERTYPEID_UserFiles_getter
+FOLDERTYPEID_UserFiles
+Aknifunptr_platform_windows7794_FOLDERTYPEID_UsersLibraries_getter
+FOLDERTYPEID_UsersLibraries
+9knifunptr_platform_windows7795_FOLDERTYPEID_Videos_getter
+FOLDERTYPEID_Videos
+<knifunptr_platform_windows7796_GUID_ACDC_POWER_SOURCE_getter
+GUID_ACDC_POWER_SOURCE
+=knifunptr_platform_windows7797_GUID_ACTIVE_POWERSCHEME_getter
+GUID_ACTIVE_POWERSCHEME
+Kknifunptr_platform_windows7798_GUID_ADAPTIVE_POWER_BEHAVIOR_SUBGROUP_getter
+%GUID_ADAPTIVE_POWER_BEHAVIOR_SUBGROUP
+9knifunptr_platform_windows7799_GUID_ALLOW_AWAYMODE_getter
+GUID_ALLOW_AWAYMODE
+Aknifunptr_platform_windows7800_GUID_ALLOW_DISPLAY_REQUIRED_getter
+GUID_ALLOW_DISPLAY_REQUIRED
+9knifunptr_platform_windows7801_GUID_ALLOW_RTC_WAKE_getter
+GUID_ALLOW_RTC_WAKE
+?knifunptr_platform_windows7802_GUID_ALLOW_STANDBY_STATES_getter
+GUID_ALLOW_STANDBY_STATES
+@knifunptr_platform_windows7803_GUID_ALLOW_SYSTEM_REQUIRED_getter
+GUID_ALLOW_SYSTEM_REQUIRED
+;knifunptr_platform_windows7804_GUID_APPLAUNCH_BUTTON_getter
+GUID_APPLAUNCH_BUTTON
+Gknifunptr_platform_windows7805_GUID_BACKGROUND_TASK_NOTIFICATION_getter
+!GUID_BACKGROUND_TASK_NOTIFICATION
+Eknifunptr_platform_windows7806_GUID_BATTERY_DISCHARGE_ACTION_0_getter
+GUID_BATTERY_DISCHARGE_ACTION_0
+Eknifunptr_platform_windows7807_GUID_BATTERY_DISCHARGE_ACTION_1_getter
+GUID_BATTERY_DISCHARGE_ACTION_1
+Eknifunptr_platform_windows7808_GUID_BATTERY_DISCHARGE_ACTION_2_getter
+GUID_BATTERY_DISCHARGE_ACTION_2
+Eknifunptr_platform_windows7809_GUID_BATTERY_DISCHARGE_ACTION_3_getter
+GUID_BATTERY_DISCHARGE_ACTION_3
+Dknifunptr_platform_windows7810_GUID_BATTERY_DISCHARGE_FLAGS_0_getter
+GUID_BATTERY_DISCHARGE_FLAGS_0
+Dknifunptr_platform_windows7811_GUID_BATTERY_DISCHARGE_FLAGS_1_getter
+GUID_BATTERY_DISCHARGE_FLAGS_1
+Dknifunptr_platform_windows7812_GUID_BATTERY_DISCHARGE_FLAGS_2_getter
+GUID_BATTERY_DISCHARGE_FLAGS_2
+Dknifunptr_platform_windows7813_GUID_BATTERY_DISCHARGE_FLAGS_3_getter
+GUID_BATTERY_DISCHARGE_FLAGS_3
+Dknifunptr_platform_windows7814_GUID_BATTERY_DISCHARGE_LEVEL_0_getter
+GUID_BATTERY_DISCHARGE_LEVEL_0
+Dknifunptr_platform_windows7815_GUID_BATTERY_DISCHARGE_LEVEL_1_getter
+GUID_BATTERY_DISCHARGE_LEVEL_1
+Dknifunptr_platform_windows7816_GUID_BATTERY_DISCHARGE_LEVEL_2_getter
+GUID_BATTERY_DISCHARGE_LEVEL_2
+Dknifunptr_platform_windows7817_GUID_BATTERY_DISCHARGE_LEVEL_3_getter
+GUID_BATTERY_DISCHARGE_LEVEL_3
+Gknifunptr_platform_windows7818_GUID_BATTERY_PERCENTAGE_REMAINING_getter
+!GUID_BATTERY_PERCENTAGE_REMAINING
+;knifunptr_platform_windows7819_GUID_BATTERY_SUBGROUP_getter
+GUID_BATTERY_SUBGROUP
+@knifunptr_platform_windows7820_GUID_CONSOLE_DISPLAY_STATE_getter
+GUID_CONSOLE_DISPLAY_STATE
+Dknifunptr_platform_windows7821_GUID_CRITICAL_POWER_TRANSITION_getter
+GUID_CRITICAL_POWER_TRANSITION
+Eknifunptr_platform_windows7822_GUID_CUSTOM_CONFIRMOBJECTSAFETY_getter
+GUID_CUSTOM_CONFIRMOBJECTSAFETY
+Jknifunptr_platform_windows7823_GUID_CUSTOM_LOCALMACHINEZONEUNLOCKED_getter
+$GUID_CUSTOM_LOCALMACHINEZONEUNLOCKED
+=knifunptr_platform_windows7824_GUID_DEVICE_IDLE_POLICY_getter
+GUID_DEVICE_IDLE_POLICY
+Oknifunptr_platform_windows7825_GUID_DEVICE_POWER_POLICY_VIDEO_BRIGHTNESS_getter
+)GUID_DEVICE_POWER_POLICY_VIDEO_BRIGHTNESS
+Sknifunptr_platform_windows7826_GUID_DEVICE_POWER_POLICY_VIDEO_DIM_BRIGHTNESS_getter
+-GUID_DEVICE_POWER_POLICY_VIDEO_DIM_BRIGHTNESS
+Aknifunptr_platform_windows7827_GUID_DEVINTERFACE_CDCHANGER_getter
+GUID_DEVINTERFACE_CDCHANGER
+=knifunptr_platform_windows7828_GUID_DEVINTERFACE_CDROM_getter
+GUID_DEVINTERFACE_CDROM
+?knifunptr_platform_windows7829_GUID_DEVINTERFACE_COMPORT_getter
+GUID_DEVINTERFACE_COMPORT
+<knifunptr_platform_windows7830_GUID_DEVINTERFACE_DISK_getter
+GUID_DEVINTERFACE_DISK
+>knifunptr_platform_windows7831_GUID_DEVINTERFACE_FLOPPY_getter
+GUID_DEVINTERFACE_FLOPPY
+Eknifunptr_platform_windows7832_GUID_DEVINTERFACE_MEDIUMCHANGER_getter
+GUID_DEVINTERFACE_MEDIUMCHANGER
+Aknifunptr_platform_windows7833_GUID_DEVINTERFACE_PARTITION_getter
+GUID_DEVINTERFACE_PARTITION
+Nknifunptr_platform_windows7834_GUID_DEVINTERFACE_SERENUM_BUS_ENUMERATOR_getter
+(GUID_DEVINTERFACE_SERENUM_BUS_ENUMERATOR
+Cknifunptr_platform_windows7835_GUID_DEVINTERFACE_STORAGEPORT_getter
+GUID_DEVINTERFACE_STORAGEPORT
+<knifunptr_platform_windows7836_GUID_DEVINTERFACE_TAPE_getter
+GUID_DEVINTERFACE_TAPE
+>knifunptr_platform_windows7837_GUID_DEVINTERFACE_VOLUME_getter
+GUID_DEVINTERFACE_VOLUME
+Eknifunptr_platform_windows7838_GUID_DEVINTERFACE_WRITEONCEDISK_getter
+GUID_DEVINTERFACE_WRITEONCEDISK
+Bknifunptr_platform_windows7839_GUID_DISK_ADAPTIVE_POWERDOWN_getter
+GUID_DISK_ADAPTIVE_POWERDOWN
+Fknifunptr_platform_windows7840_GUID_DISK_BURST_IGNORE_THRESHOLD_getter
+ GUID_DISK_BURST_IGNORE_THRESHOLD
+Lknifunptr_platform_windows7841_GUID_DISK_COALESCING_POWERDOWN_TIMEOUT_getter
+&GUID_DISK_COALESCING_POWERDOWN_TIMEOUT
+<knifunptr_platform_windows7842_GUID_DISK_IDLE_TIMEOUT_getter
+GUID_DISK_IDLE_TIMEOUT
+Aknifunptr_platform_windows7843_GUID_DISK_POWERDOWN_TIMEOUT_getter
+GUID_DISK_POWERDOWN_TIMEOUT
+8knifunptr_platform_windows7844_GUID_DISK_SUBGROUP_getter
+GUID_DISK_SUBGROUP
+windows9
+ 
+ 
+ 
+ 
+
+
+
+ 
+ âå"
+0j`8«ä(	"0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä(" 0j`8«ä(""0j`8«ä(!"$0j`8«ä(#"&0j`8«ä(%"(0j`8«ä('"*0j`8«ä()",0j`8«ä(+".0j`8«ä(-"00j`8«ä(/"20j`8«ä(1"40j`8«ä(3"60j`8«ä(5"80j`8«ä(7":0j`8«ä(9"<0j`8«ä(;">0j`8«ä(="@0j`8«ä(?"B0j`8«ä(A"D0j`8«ä(C"F0j`8«ä(E"H0j`8«ä(G"J0j`8«ä(I"L0j`8«ä(K"N0j`8«ä(M"P0j`8«ä(O"R0j`8«ä(Q"T0j`8«ä(S"V0j`8«ä(U"X0j`8«ä(W"Z0j`8«ä(Y"\0j`8«ä(["^0j`8«ä(]"`0j`8«ä(_"b0j`8«ä(a"d0j`8«ä(c"f0j`8«ä(e"h0j`8«ä(g"j0j`8«ä(i"l0j`8«ä(k"n0j`8«ä(m"p0j`8«ä(o"r0j`8«ä(q"t0j`8«ä(s"v0j`8«ä(u"x0j`8«ä(w"z0j`8«ä(y"|0j`8«ä({"~0j`8«ä(}"Ä0j`8«ä("Ç0j`8«ä	(Å"Ñ0j`8«ä	(É"Ü0j`8«ä	(Ö"à0j`8«ä	(á"ä0j`8«ä	(â"å0j`8«ä	(ã"é0j`8«ä	(ç"ê0j`8«ä	(è"í0j`8«ä	(ë"î0j`8«ä	(ì"ñ0j`8«ä	(ï"ò0j`8«ä	(ó"ö0j`8«ä	(ô"ú0j`8«ä	(õ"û0j`8«ä	(ù"†0j`8«ä	(ü"¢0j`8«ä	(°"§0j`8«ä	(£"¶0j`8«ä	(•"®0j`8«ä	(ß"™0j`8«ä	(©"¨0j`8«ä	(´"Æ0j`8«ä	(≠"∞0j`8«ä	(Ø"≤0j`8«ä	(±"¥0j`8«ä	(≥"∂0j`8«ä	(µ"∏0j`8«ä	(∑"∫0j`8«ä	(π"º0j`8«ä	(ª"æ0j`8«ä	(Ω"¿0j`8«ä	(ø"¬0j`8«ä	(¡"ƒ0j`8«ä	(√"∆0j`8«ä	(≈"»0j`8«ä	(«" 0j`8«ä	(…"Ã0j`8«ä	(À"Œ0j`8«ä	(Õ"–0j`8«ä	(œ"“0j`8«ä	(—"‘0j`8«ä	(”"÷0j`8«ä	(’"ÿ0j`8«ä	(◊"⁄0j`8«ä	(Ÿ"‹0j`8«ä	(€"ﬁ0j`8«ä	(›"‡0j`8«ä	(ﬂ"‚0j`8«ä	(·"‰0j`8«ä	(„"Ê0j`8«ä	(Â"Ë0j`8«ä	(Á"Í0j`8«ä	(È"Ï0j`8«ä	(Î"Ó0j`8«ä	(Ì"0j`8«ä	(Ô"Ú0j`8«ä	(Ò"Ù0j`8«ä	(Û"ˆ0j`8«ä	(ı"¯0j`8«ä	(˜"˙0j`8«ä	(˘"¸0j`8«ä	(˚"˛0j`8«ä	(˝"Ä0j`8«ä	(ˇ"Ç0j`8«ä	(Å"Ñ0j`8«ä	(É"Ü0j`8«ä	(Ö"à0j`8«ä	(áÿ
+‡
+ Í
+platform.windows

@@ -1,0 +1,284 @@
+
+¥Q
+platform
+posix
+_GUID
+GUID
+kotlinx
+cinterop
+internal
+CCall
+id
+;knifunptr_platform_windows8357_IID_IProvideClassInfo_getter
+IID_IProvideClassInfo
+<knifunptr_platform_windows8358_IID_IProvideClassInfo2_getter
+IID_IProvideClassInfo2
+Cknifunptr_platform_windows8359_IID_IProvideMultipleClassInfo_getter
+IID_IProvideMultipleClassInfo
+IID
+0knifunptr_platform_windows8360_IID_IProxy_getter
+
+IID_IProxy
+7knifunptr_platform_windows8361_IID_IProxyManager_getter
+IID_IProxyManager
+;knifunptr_platform_windows8362_IID_IPublishingWizard_getter
+IID_IPublishingWizard
+<knifunptr_platform_windows8363_IID_IQueryAssociations_getter
+IID_IQueryAssociations
+>knifunptr_platform_windows8364_IID_IQueryCancelAutoPlay_getter
+IID_IQueryCancelAutoPlay
+8knifunptr_platform_windows8365_IID_IQueryCodePage_getter
+IID_IQueryCodePage
+8knifunptr_platform_windows8366_IID_IQueryContinue_getter
+IID_IQueryContinue
+4knifunptr_platform_windows8367_IID_IQueryInfo_getter
+IID_IQueryInfo
+8knifunptr_platform_windows8368_IID_IQuickActivate_getter
+IID_IQuickActivate
+2knifunptr_platform_windows8369_IID_IROTData_getter
+IID_IROTData
+5knifunptr_platform_windows8370_IID_IRecordInfo_getter
+IID_IRecordInfo
+6knifunptr_platform_windows8371_IID_IRegTreeItem_getter
+IID_IRegTreeItem
+6knifunptr_platform_windows8372_IID_IRelatedItem_getter
+IID_IRelatedItem
+@knifunptr_platform_windows8373_IID_IReleaseMarshalBuffers_getter
+IID_IReleaseMarshalBuffers
+9knifunptr_platform_windows8374_IID_IRemoteComputer_getter
+IID_IRemoteComputer
+;knifunptr_platform_windows8375_IID_IResolveShellLink_getter
+IID_IResolveShellLink
+8knifunptr_platform_windows8376_IID_IResultsFolder_getter
+IID_IResultsFolder
+4knifunptr_platform_windows8377_IID_IRichChunk_getter
+IID_IRichChunk
+6knifunptr_platform_windows8378_IID_IRootStorage_getter
+IID_IRootStorage
+5knifunptr_platform_windows8379_IID_IRpcChannel_getter
+IID_IRpcChannel
+;knifunptr_platform_windows8380_IID_IRpcChannelBuffer_getter
+IID_IRpcChannelBuffer
+<knifunptr_platform_windows8381_IID_IRpcChannelBuffer2_getter
+IID_IRpcChannelBuffer2
+<knifunptr_platform_windows8382_IID_IRpcChannelBuffer3_getter
+IID_IRpcChannelBuffer3
+4knifunptr_platform_windows8383_IID_IRpcHelper_getter
+IID_IRpcHelper
+5knifunptr_platform_windows8384_IID_IRpcOptions_getter
+IID_IRpcOptions
+3knifunptr_platform_windows8385_IID_IRpcProxy_getter
+IID_IRpcProxy
+9knifunptr_platform_windows8386_IID_IRpcProxyBuffer_getter
+IID_IRpcProxyBuffer
+2knifunptr_platform_windows8387_IID_IRpcStub_getter
+IID_IRpcStub
+8knifunptr_platform_windows8388_IID_IRpcStubBuffer_getter
+IID_IRpcStubBuffer
+=knifunptr_platform_windows8389_IID_IRpcSyntaxNegotiate_getter
+IID_IRpcSyntaxNegotiate
+9knifunptr_platform_windows8390_IID_IRunnableObject_getter
+IID_IRunnableObject
+7knifunptr_platform_windows8391_IID_IRunnableTask_getter
+IID_IRunnableTask
+=knifunptr_platform_windows8392_IID_IRunningObjectTable_getter
+IID_IRunningObjectTable
+:knifunptr_platform_windows8393_IID_IScriptErrorList_getter
+IID_IScriptErrorList
+1knifunptr_platform_windows8394_IID_ISearch_getter
+IID_ISearch
+<knifunptr_platform_windows8395_IID_ISearchAssistantOC_getter
+IID_ISearchAssistantOC
+=knifunptr_platform_windows8396_IID_ISearchAssistantOC2_getter
+IID_ISearchAssistantOC2
+=knifunptr_platform_windows8397_IID_ISearchAssistantOC3_getter
+IID_ISearchAssistantOC3
+8knifunptr_platform_windows8398_IID_ISearchBoxInfo_getter
+IID_ISearchBoxInfo
+8knifunptr_platform_windows8399_IID_ISearchContext_getter
+IID_ISearchContext
+Bknifunptr_platform_windows8400_IID_ISearchFolderItemFactory_getter
+IID_ISearchFolderItemFactory
+3knifunptr_platform_windows8401_IID_ISearches_getter
+IID_ISearches
+;knifunptr_platform_windows8402_IID_ISequentialStream_getter
+IID_ISequentialStream
+9knifunptr_platform_windows8403_IID_IServerSecurity_getter
+IID_IServerSecurity
+:knifunptr_platform_windows8404_IID_IServiceProvider_getter
+IID_IServiceProvider
+Fknifunptr_platform_windows8405_IID_ISharingConfigurationManager_getter
+ IID_ISharingConfigurationManager
+7knifunptr_platform_windows8406_IID_IShellBrowser_getter
+IID_IShellBrowser
+<knifunptr_platform_windows8407_IID_IShellChangeNotify_getter
+IID_IShellChangeNotify
+7knifunptr_platform_windows8408_IID_IShellDetails_getter
+IID_IShellDetails
+8knifunptr_platform_windows8409_IID_IShellDispatch_getter
+IID_IShellDispatch
+9knifunptr_platform_windows8410_IID_IShellDispatch2_getter
+IID_IShellDispatch2
+9knifunptr_platform_windows8411_IID_IShellDispatch3_getter
+IID_IShellDispatch3
+9knifunptr_platform_windows8412_IID_IShellDispatch4_getter
+IID_IShellDispatch4
+9knifunptr_platform_windows8413_IID_IShellDispatch5_getter
+IID_IShellDispatch5
+<knifunptr_platform_windows8414_IID_IShellExecuteHookA_getter
+IID_IShellExecuteHookA
+<knifunptr_platform_windows8415_IID_IShellExecuteHookW_getter
+IID_IShellExecuteHookW
+7knifunptr_platform_windows8416_IID_IShellExtInit_getter
+IID_IShellExtInit
+Bknifunptr_platform_windows8417_IID_IShellFavoritesNameSpace_getter
+IID_IShellFavoritesNameSpace
+6knifunptr_platform_windows8418_IID_IShellFolder_getter
+IID_IShellFolder
+7knifunptr_platform_windows8419_IID_IShellFolder2_getter
+IID_IShellFolder2
+:knifunptr_platform_windows8420_IID_IShellFolderBand_getter
+IID_IShellFolderBand
+<knifunptr_platform_windows8421_IID_IShellFolderViewCB_getter
+IID_IShellFolderViewCB
+>knifunptr_platform_windows8422_IID_IShellFolderViewDual_getter
+IID_IShellFolderViewDual
+?knifunptr_platform_windows8423_IID_IShellFolderViewDual2_getter
+IID_IShellFolderViewDual2
+?knifunptr_platform_windows8424_IID_IShellFolderViewDual3_getter
+IID_IShellFolderViewDual3
+4knifunptr_platform_windows8425_IID_IShellIcon_getter
+IID_IShellIcon
+;knifunptr_platform_windows8426_IID_IShellIconOverlay_getter
+IID_IShellIconOverlay
+Eknifunptr_platform_windows8427_IID_IShellIconOverlayIdentifier_getter
+IID_IShellIconOverlayIdentifier
+Bknifunptr_platform_windows8428_IID_IShellIconOverlayManager_getter
+IID_IShellIconOverlayManager
+:knifunptr_platform_windows8429_IID_IShellImageStore_getter
+IID_IShellImageStore
+4knifunptr_platform_windows8430_IID_IShellItem_getter
+IID_IShellItem
+5knifunptr_platform_windows8431_IID_IShellItem2_getter
+IID_IShellItem2
+9knifunptr_platform_windows8432_IID_IShellItemArray_getter
+IID_IShellItemArray
+:knifunptr_platform_windows8433_IID_IShellItemFilter_getter
+IID_IShellItemFilter
+@knifunptr_platform_windows8434_IID_IShellItemImageFactory_getter
+IID_IShellItemImageFactory
+=knifunptr_platform_windows8435_IID_IShellItemResources_getter
+IID_IShellItemResources
+7knifunptr_platform_windows8436_IID_IShellLibrary_getter
+IID_IShellLibrary
+5knifunptr_platform_windows8437_IID_IShellLinkA_getter
+IID_IShellLinkA
+<knifunptr_platform_windows8438_IID_IShellLinkDataList_getter
+IID_IShellLinkDataList
+8knifunptr_platform_windows8439_IID_IShellLinkDual_getter
+IID_IShellLinkDual
+9knifunptr_platform_windows8440_IID_IShellLinkDual2_getter
+IID_IShellLinkDual2
+5knifunptr_platform_windows8441_IID_IShellLinkW_getter
+IID_IShellLinkW
+4knifunptr_platform_windows8442_IID_IShellMenu_getter
+IID_IShellMenu
+<knifunptr_platform_windows8443_IID_IShellMenuCallback_getter
+IID_IShellMenuCallback
+9knifunptr_platform_windows8444_IID_IShellNameSpace_getter
+IID_IShellNameSpace
+<knifunptr_platform_windows8445_IID_IShellPropSheetExt_getter
+IID_IShellPropSheetExt
+6knifunptr_platform_windows8446_IID_IShellRunDll_getter
+IID_IShellRunDll
+=knifunptr_platform_windows8447_IID_IShellTaskScheduler_getter
+IID_IShellTaskScheduler
+8knifunptr_platform_windows8448_IID_IShellUIHelper_getter
+IID_IShellUIHelper
+9knifunptr_platform_windows8449_IID_IShellUIHelper2_getter
+IID_IShellUIHelper2
+4knifunptr_platform_windows8450_IID_IShellView_getter
+IID_IShellView
+5knifunptr_platform_windows8451_IID_IShellView2_getter
+IID_IShellView2
+5knifunptr_platform_windows8452_IID_IShellView3_getter
+IID_IShellView3
+7knifunptr_platform_windows8453_IID_IShellWindows_getter
+IID_IShellWindows
+:knifunptr_platform_windows8454_IID_ISimpleFrameSite_getter
+IID_ISimpleFrameSite
+6knifunptr_platform_windows8455_IID_ISoftDistExt_getter
+IID_ISoftDistExt
+?knifunptr_platform_windows8456_IID_ISpecifyPropertyPages_getter
+IID_ISpecifyPropertyPages
+>knifunptr_platform_windows8457_IID_IStartMenuPinnedList_getter
+IID_IStartMenuPinnedList
+9knifunptr_platform_windows8458_IID_IStdMarshalInfo_getter
+IID_IStdMarshalInfo
+2knifunptr_platform_windows8459_IID_IStorage_getter
+IID_IStorage
+1knifunptr_platform_windows8460_IID_IStream_getter
+IID_IStream
+6knifunptr_platform_windows8461_IID_IStreamAsync_getter
+IID_IStreamAsync
+?knifunptr_platform_windows8462_IID_IStreamUnbufferedInfo_getter
+IID_IStreamUnbufferedInfo
+/knifunptr_platform_windows8463_IID_IStub_getter
+	IID_IStub
+6knifunptr_platform_windows8464_IID_IStubManager_getter
+IID_IStubManager
+;knifunptr_platform_windows8465_IID_ISupportErrorInfo_getter
+IID_ISupportErrorInfo
+4knifunptr_platform_windows8466_IID_ISurrogate_getter
+IID_ISurrogate
+;knifunptr_platform_windows8467_IID_ISurrogateService_getter
+IID_ISurrogateService
+6knifunptr_platform_windows8468_IID_ISynchronize_getter
+IID_ISynchronize
+?knifunptr_platform_windows8469_IID_ISynchronizeContainer_getter
+IID_ISynchronizeContainer
+;knifunptr_platform_windows8470_IID_ISynchronizeEvent_getter
+IID_ISynchronizeEvent
+<knifunptr_platform_windows8471_IID_ISynchronizeHandle_getter
+IID_ISynchronizeHandle
+;knifunptr_platform_windows8472_IID_ISynchronizeMutex_getter
+IID_ISynchronizeMutex
+?knifunptr_platform_windows8473_IID_ISynchronizedCallBack_getter
+IID_ISynchronizedCallBack
+6knifunptr_platform_windows8474_IID_ITaskbarList_getter
+IID_ITaskbarList
+7knifunptr_platform_windows8475_IID_ITaskbarList2_getter
+IID_ITaskbarList2
+7knifunptr_platform_windows8476_IID_ITaskbarList3_getter
+IID_ITaskbarList3
+7knifunptr_platform_windows8477_IID_ITaskbarList4_getter
+IID_ITaskbarList4
+;knifunptr_platform_windows8478_IID_IThumbnailCapture_getter
+IID_IThumbnailCapture
+=knifunptr_platform_windows8479_IID_IThumbnailExtractor_getter
+IID_IThumbnailExtractor
+Bknifunptr_platform_windows8480_IID_IThumbnailHandlerFactory_getter
+IID_IThumbnailHandlerFactory
+?knifunptr_platform_windows8481_IID_ITimeAndNoticeControl_getter
+IID_ITimeAndNoticeControl
+=knifunptr_platform_windows8482_IID_ITransferAdviseSink_getter
+IID_ITransferAdviseSink
+>knifunptr_platform_windows8483_IID_ITransferDestination_getter
+IID_ITransferDestination
+=knifunptr_platform_windows8484_IID_ITransferMediumItem_getter
+IID_ITransferMediumItem
+windowsA
+ 
+ 
+ 
+ 
+
+
+
+ 
+ 
+ äç"
+0j`8«ä(	"0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("!0j`8«ä( "#0j`8«ä(""%0j`8«ä($"'0j`8«ä(&")0j`8«ä(("+0j`8«ä(*"-0j`8«ä(,"/0j`8«ä(."10j`8«ä(0"30j`8«ä(2"50j`8«ä(4"70j`8«ä(6"90j`8«ä(8";0j`8«ä(:"=0j`8«ä(<"?0j`8«ä(>"A0j`8«ä(@"C0j`8«ä(B"E0j`8«ä(D"G0j`8«ä(F"I0j`8«ä(H"K0j`8«ä(J"M0j`8«ä(L"O0j`8«ä(N"Q0j`8«ä(P"S0j`8«ä(R"U0j`8«ä(T"W0j`8«ä(V"Y0j`8«ä(X"[0j`8«ä(Z"]0j`8«ä(\"_0j`8«ä(^"a0j`8«ä(`"c0j`8«ä(b"e0j`8«ä(d"g0j`8«ä(f"i0j`8«ä(h"k0j`8«ä(j"m0j`8«ä(l"o0j`8«ä(n"q0j`8«ä(p"s0j`8«ä(r"u0j`8«ä(t"w0j`8«ä(v"y0j`8«ä(x"{0j`8«ä(z"}0j`8«ä(|"0j`8«ä(~"Å0j`8«ä	(Ä"É0j`8«ä	(Ç"Ö0j`8«ä	(Ñ"á0j`8«ä	(Ü"â0j`8«ä	(à"ã0j`8«ä	(ä"ç0j`8«ä	(å"è0j`8«ä	(é"ë0j`8«ä	(ê"ì0j`8«ä	(í"ï0j`8«ä	(î"ó0j`8«ä	(ñ"ô0j`8«ä	(ò"õ0j`8«ä	(ö"ù0j`8«ä	(ú"ü0j`8«ä	(û"°0j`8«ä	(†"£0j`8«ä	(¢"•0j`8«ä	(§"ß0j`8«ä	(¶"©0j`8«ä	(®"´0j`8«ä	(™"≠0j`8«ä	(¨"Ø0j`8«ä	(Æ"±0j`8«ä	(∞"≥0j`8«ä	(≤"µ0j`8«ä	(¥"∑0j`8«ä	(∂"π0j`8«ä	(∏"ª0j`8«ä	(∫"Ω0j`8«ä	(º"ø0j`8«ä	(æ"¡0j`8«ä	(¿"√0j`8«ä	(¬"≈0j`8«ä	(ƒ"«0j`8«ä	(∆"…0j`8«ä	(»"À0j`8«ä	( "Õ0j`8«ä	(Ã"œ0j`8«ä	(Œ"—0j`8«ä	(–"”0j`8«ä	(“"’0j`8«ä	(‘"◊0j`8«ä	(÷"Ÿ0j`8«ä	(ÿ"€0j`8«ä	(⁄"›0j`8«ä	(‹"ﬂ0j`8«ä	(ﬁ"·0j`8«ä	(‡"„0j`8«ä	(‚"Â0j`8«ä	(‰"Á0j`8«ä	(Ê"È0j`8«ä	(Ë"Î0j`8«ä	(Í"Ì0j`8«ä	(Ï"Ô0j`8«ä	(Ó"Ò0j`8«ä	("Û0j`8«ä	(Ú"ı0j`8«ä	(Ù"˜0j`8«ä	(ˆ"˘0j`8«ä	(¯"˚0j`8«ä	(˙"˝0j`8«ä	(¸"ˇ0j`8«ä	(˛"Å0j`8«ä	(Ä"É0j`8«ä	(Ç"Ö0j`8«ä	(Ñ"á0j`8«ä	(Ü"â0j`8«ä	(àÿ
+	‡
+ Í
+platform.windows

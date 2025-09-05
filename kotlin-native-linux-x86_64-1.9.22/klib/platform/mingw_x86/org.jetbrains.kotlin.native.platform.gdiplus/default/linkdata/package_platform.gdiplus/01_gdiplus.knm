@@ -1,0 +1,718 @@
+
+úX
+kotlin
+UInt
+platform
+gdiplus
+
+ObjectType
+type
+Int
+windows
+BOOL
+kotlinx
+cinterop
+internal
+CCall
+id
+-knifunptr_platform_gdiplus0_ObjectTypeIsValid
+ObjectTypeIsValid
+
+CValuesRef
+	UIntVarOf
+ULONG_PTRVar
+arg0
+GdiplusStartupInput
+arg1
+GdiplusStartupOutput
+arg2
+GpStatus
+*knifunptr_platform_gdiplus1_GdiplusStartup
+GdiplusStartup
+	ULONG_PTR
+Unit
++knifunptr_platform_gdiplus2_GdiplusShutdown
+GdiplusShutdown
+3knifunptr_platform_gdiplus3_GdiplusNotificationHook
+GdiplusNotificationHook
+5knifunptr_platform_gdiplus4_GdiplusNotificationUnhook
+GdiplusNotificationUnhook
+posix
+size_t
+CPointer
+CPointed
+COpaquePointer
+%knifunptr_platform_gdiplus5_GdipAlloc
+	GdipAlloc
+$knifunptr_platform_gdiplus6_GdipFree
+GdipFree
+PixelFormat
+pixfmt
+UINT
+.knifunptr_platform_gdiplus7_GetPixelFormatSize
+GetPixelFormatSize
+.knifunptr_platform_gdiplus8_IsAlphaPixelFormat
+IsAlphaPixelFormat
+2knifunptr_platform_gdiplus9_IsCanonicalPixelFormat
+IsCanonicalPixelFormat
+2knifunptr_platform_gdiplus10_IsExtendedPixelFormat
+IsExtendedPixelFormat
+1knifunptr_platform_gdiplus11_IsIndexedPixelFormat
+IsIndexedPixelFormat
+Float
+REAL
+CPointerVarOf
+COpaquePointerVar
+arg3
+9knifunptr_platform_gdiplus12_GdipCreateAdjustableArrowCap
+GdipCreateAdjustableArrowCap
+<knifunptr_platform_gdiplus13_GdipSetAdjustableArrowCapHeight
+GdipSetAdjustableArrowCapHeight
+
+FloatVarOf
+REALVar
+<knifunptr_platform_gdiplus14_GdipGetAdjustableArrowCapHeight
+GdipGetAdjustableArrowCapHeight
+;knifunptr_platform_gdiplus15_GdipSetAdjustableArrowCapWidth
+GdipSetAdjustableArrowCapWidth
+;knifunptr_platform_gdiplus16_GdipGetAdjustableArrowCapWidth
+GdipGetAdjustableArrowCapWidth
+Aknifunptr_platform_gdiplus17_GdipSetAdjustableArrowCapMiddleInset
+$GdipSetAdjustableArrowCapMiddleInset
+Aknifunptr_platform_gdiplus18_GdipGetAdjustableArrowCapMiddleInset
+$GdipGetAdjustableArrowCapMiddleInset
+?knifunptr_platform_gdiplus19_GdipSetAdjustableArrowCapFillState
+"GdipSetAdjustableArrowCapFillState
+IntVarOf
+BOOLVar
+?knifunptr_platform_gdiplus20_GdipGetAdjustableArrowCapFillState
+"GdipGetAdjustableArrowCapFillState
+IStream
+7knifunptr_platform_gdiplus21_GdipCreateBitmapFromStream
+GdipCreateBitmapFromStream
+UShortVarOf
+UShort
+WCHARVar
+5knifunptr_platform_gdiplus22_GdipCreateBitmapFromFile
+GdipCreateBitmapFromFile
+:knifunptr_platform_gdiplus23_GdipCreateBitmapFromStreamICM
+GdipCreateBitmapFromStreamICM
+8knifunptr_platform_gdiplus24_GdipCreateBitmapFromFileICM
+GdipCreateBitmapFromFileICM
+INT
+
+UByteVarOf
+UByte
+BYTEVar
+arg4
+arg5
+6knifunptr_platform_gdiplus25_GdipCreateBitmapFromScan0
+GdipCreateBitmapFromScan0
+9knifunptr_platform_gdiplus26_GdipCreateBitmapFromGraphics
+GdipCreateBitmapFromGraphics
+cnames
+structs
+IDirectDrawSurface7
+Bknifunptr_platform_gdiplus27_GdipCreateBitmapFromDirectDrawSurface
+%GdipCreateBitmapFromDirectDrawSurface
+tagBITMAPINFO
+
+BITMAPINFO
+7knifunptr_platform_gdiplus28_GdipCreateBitmapFromGdiDib
+GdipCreateBitmapFromGdiDib
+	HBITMAP__
+HBITMAP
+
+HPALETTE__
+HPALETTE
+8knifunptr_platform_gdiplus29_GdipCreateBitmapFromHBITMAP
+GdipCreateBitmapFromHBITMAP
+
+HBITMAPVar
+ARGB
+8knifunptr_platform_gdiplus30_GdipCreateHBITMAPFromBitmap
+GdipCreateHBITMAPFromBitmap
+HICON__
+HICON
+6knifunptr_platform_gdiplus31_GdipCreateBitmapFromHICON
+GdipCreateBitmapFromHICON
+HICONVar
+6knifunptr_platform_gdiplus32_GdipCreateHICONFromBitmap
+GdipCreateHICONFromBitmap
+HINSTANCE__
+	HINSTANCE
+9knifunptr_platform_gdiplus33_GdipCreateBitmapFromResource
+GdipCreateBitmapFromResource
+arg6
+0knifunptr_platform_gdiplus34_GdipCloneBitmapArea
+GdipCloneBitmapArea
+1knifunptr_platform_gdiplus35_GdipCloneBitmapAreaI
+GdipCloneBitmapAreaI
+Rect
+GpRect
+
+BitmapData
+/knifunptr_platform_gdiplus36_GdipBitmapLockBits
+GdipBitmapLockBits
+1knifunptr_platform_gdiplus37_GdipBitmapUnlockBits
+GdipBitmapUnlockBits
+ARGBVar
+/knifunptr_platform_gdiplus38_GdipBitmapGetPixel
+GdipBitmapGetPixel
+/knifunptr_platform_gdiplus39_GdipBitmapSetPixel
+GdipBitmapSetPixel
+4knifunptr_platform_gdiplus40_GdipBitmapSetResolution
+GdipBitmapSetResolution
+
+DitherType
+PaletteType
+ColorPalette
+4knifunptr_platform_gdiplus41_GdipBitmapConvertFormat
+GdipBitmapConvertFormat
+2knifunptr_platform_gdiplus42_GdipInitializePalette
+GdipInitializePalette
+tagRECT
+RECT
+INTVar
+2knifunptr_platform_gdiplus43_GdipBitmapApplyEffect
+GdipBitmapApplyEffect
+arg7
+arg8
+8knifunptr_platform_gdiplus44_GdipBitmapCreateApplyEffect
+GdipBitmapCreateApplyEffect
+HistogramFormat
+UINTVar
+3knifunptr_platform_gdiplus45_GdipBitmapGetHistogram
+GdipBitmapGetHistogram
+7knifunptr_platform_gdiplus46_GdipBitmapGetHistogramSize
+GdipBitmapGetHistogramSize
++knifunptr_platform_gdiplus47_GdipCloneBrush
+GdipCloneBrush
+,knifunptr_platform_gdiplus48_GdipDeleteBrush
+GdipDeleteBrush
+GpBrushTypeVar
+-knifunptr_platform_gdiplus49_GdipGetBrushType
+GdipGetBrushType
+3knifunptr_platform_gdiplus50_GdipCreateCachedBitmap
+GdipCreateCachedBitmap
+3knifunptr_platform_gdiplus51_GdipDeleteCachedBitmap
+GdipDeleteCachedBitmap
+1knifunptr_platform_gdiplus52_GdipDrawCachedBitmap
+GdipDrawCachedBitmap
+	GpLineCap
+4knifunptr_platform_gdiplus53_GdipCreateCustomLineCap
+GdipCreateCustomLineCap
+4knifunptr_platform_gdiplus54_GdipDeleteCustomLineCap
+GdipDeleteCustomLineCap
+3knifunptr_platform_gdiplus55_GdipCloneCustomLineCap
+GdipCloneCustomLineCap
+CustomLineCapTypeVar
+5knifunptr_platform_gdiplus56_GdipGetCustomLineCapType
+GdipGetCustomLineCapType
+;knifunptr_platform_gdiplus57_GdipSetCustomLineCapStrokeCaps
+GdipSetCustomLineCapStrokeCaps
+GpLineCapVar
+;knifunptr_platform_gdiplus58_GdipGetCustomLineCapStrokeCaps
+GdipGetCustomLineCapStrokeCaps
+
+GpLineJoin
+;knifunptr_platform_gdiplus59_GdipSetCustomLineCapStrokeJoin
+GdipSetCustomLineCapStrokeJoin
+GpLineJoinVar
+;knifunptr_platform_gdiplus60_GdipGetCustomLineCapStrokeJoin
+GdipGetCustomLineCapStrokeJoin
+8knifunptr_platform_gdiplus61_GdipSetCustomLineCapBaseCap
+GdipSetCustomLineCapBaseCap
+8knifunptr_platform_gdiplus62_GdipGetCustomLineCapBaseCap
+GdipGetCustomLineCapBaseCap
+:knifunptr_platform_gdiplus63_GdipSetCustomLineCapBaseInset
+GdipSetCustomLineCapBaseInset
+:knifunptr_platform_gdiplus64_GdipGetCustomLineCapBaseInset
+GdipGetCustomLineCapBaseInset
+;knifunptr_platform_gdiplus65_GdipSetCustomLineCapWidthScale
+GdipSetCustomLineCapWidthScale
+;knifunptr_platform_gdiplus66_GdipGetCustomLineCapWidthScale
+GdipGetCustomLineCapWidthScale
+CValue
+_GUID
+GUID
+-knifunptr_platform_gdiplus67_GdipCreateEffect
+GdipCreateEffect
+-knifunptr_platform_gdiplus68_GdipDeleteEffect
+GdipDeleteEffect
+7knifunptr_platform_gdiplus69_GdipGetEffectParameterSize
+GdipGetEffectParameterSize
+4knifunptr_platform_gdiplus70_GdipSetEffectParameters
+GdipSetEffectParameters
+4knifunptr_platform_gdiplus71_GdipGetEffectParameters
+GdipGetEffectParameters
+HDC__
+HDC
+1knifunptr_platform_gdiplus72_GdipCreateFontFromDC
+GdipCreateFontFromDC
+tagLOGFONTA
+LOGFONTA
+7knifunptr_platform_gdiplus73_GdipCreateFontFromLogfontA
+GdipCreateFontFromLogfontA
+tagLOGFONTW
+LOGFONTW
+7knifunptr_platform_gdiplus74_GdipCreateFontFromLogfontW
+GdipCreateFontFromLogfontW
++knifunptr_platform_gdiplus75_GdipCreateFont
+GdipCreateFont
+*knifunptr_platform_gdiplus76_GdipCloneFont
+GdipCloneFont
++knifunptr_platform_gdiplus77_GdipDeleteFont
+GdipDeleteFont
+*knifunptr_platform_gdiplus78_GdipGetFamily
+GdipGetFamily
+-knifunptr_platform_gdiplus79_GdipGetFontStyle
+GdipGetFontStyle
+,knifunptr_platform_gdiplus80_GdipGetFontSize
+GdipGetFontSize
+UnitVar
+,knifunptr_platform_gdiplus81_GdipGetFontUnit
+GdipGetFontUnit
+.knifunptr_platform_gdiplus82_GdipGetFontHeight
+GdipGetFontHeight
+6knifunptr_platform_gdiplus83_GdipGetFontHeightGivenDPI
+GdipGetFontHeightGivenDPI
+,knifunptr_platform_gdiplus84_GdipGetLogFontA
+GdipGetLogFontA
+,knifunptr_platform_gdiplus85_GdipGetLogFontW
+GdipGetLogFontW
+;knifunptr_platform_gdiplus86_GdipNewInstalledFontCollection
+GdipNewInstalledFontCollection
+9knifunptr_platform_gdiplus87_GdipNewPrivateFontCollection
+GdipNewPrivateFontCollection
+<knifunptr_platform_gdiplus88_GdipDeletePrivateFontCollection
+GdipDeletePrivateFontCollection
+=knifunptr_platform_gdiplus89_GdipGetFontCollectionFamilyCount
+ GdipGetFontCollectionFamilyCount
+<knifunptr_platform_gdiplus90_GdipGetFontCollectionFamilyList
+GdipGetFontCollectionFamilyList
+3knifunptr_platform_gdiplus91_GdipPrivateAddFontFile
+GdipPrivateAddFontFile
+5knifunptr_platform_gdiplus92_GdipPrivateAddMemoryFont
+GdipPrivateAddMemoryFont
+9knifunptr_platform_gdiplus93_GdipCreateFontFamilyFromName
+GdipCreateFontFamilyFromName
+1knifunptr_platform_gdiplus94_GdipDeleteFontFamily
+GdipDeleteFontFamily
+0knifunptr_platform_gdiplus95_GdipCloneFontFamily
+GdipCloneFontFamily
+>knifunptr_platform_gdiplus96_GdipGetGenericFontFamilySansSerif
+!GdipGetGenericFontFamilySansSerif
+:knifunptr_platform_gdiplus97_GdipGetGenericFontFamilySerif
+GdipGetGenericFontFamilySerif
+>knifunptr_platform_gdiplus98_GdipGetGenericFontFamilyMonospace
+!GdipGetGenericFontFamilyMonospace
+LANGID
+.knifunptr_platform_gdiplus99_GdipGetFamilyName
+GdipGetFamilyName
+2knifunptr_platform_gdiplus100_GdipIsStyleAvailable
+GdipIsStyleAvailable
+:knifunptr_platform_gdiplus101_GdipFontCollectionEnumerable
+GdipFontCollectionEnumerable
+9knifunptr_platform_gdiplus102_GdipFontCollectionEnumerate
+GdipFontCollectionEnumerate
+	UINT16Var
+-knifunptr_platform_gdiplus103_GdipGetEmHeight
+GdipGetEmHeight
+/knifunptr_platform_gdiplus104_GdipGetCellAscent
+GdipGetCellAscent
+0knifunptr_platform_gdiplus105_GdipGetCellDescent
+GdipGetCellDescent
+0knifunptr_platform_gdiplus106_GdipGetLineSpacing
+GdipGetLineSpacing
+GpFlushIntention
+'knifunptr_platform_gdiplus107_GdipFlush
+	GdipFlush
+/knifunptr_platform_gdiplus108_GdipCreateFromHDC
+GdipCreateFromHDC
+HANDLE
+0knifunptr_platform_gdiplus109_GdipCreateFromHDC2
+GdipCreateFromHDC2
+HWND__
+HWND
+0knifunptr_platform_gdiplus110_GdipCreateFromHWND
+GdipCreateFromHWND
+3knifunptr_platform_gdiplus111_GdipCreateFromHWNDICM
+GdipCreateFromHWNDICM
+0knifunptr_platform_gdiplus112_GdipDeleteGraphics
+GdipDeleteGraphics
+HDCVar
+'knifunptr_platform_gdiplus113_GdipGetDC
+	GdipGetDC
++knifunptr_platform_gdiplus114_GdipReleaseDC
+GdipReleaseDC
+CompositingMode
+4knifunptr_platform_gdiplus115_GdipSetCompositingMode
+GdipSetCompositingMode
+CompositingModeVar
+4knifunptr_platform_gdiplus116_GdipGetCompositingMode
+GdipGetCompositingMode
+4knifunptr_platform_gdiplus117_GdipSetRenderingOrigin
+GdipSetRenderingOrigin
+4knifunptr_platform_gdiplus118_GdipGetRenderingOrigin
+GdipGetRenderingOrigin
+CompositingQuality
+7knifunptr_platform_gdiplus119_GdipSetCompositingQuality
+GdipSetCompositingQuality
+CompositingQualityVar
+7knifunptr_platform_gdiplus120_GdipGetCompositingQuality
+GdipGetCompositingQuality
+SmoothingMode
+2knifunptr_platform_gdiplus121_GdipSetSmoothingMode
+GdipSetSmoothingMode
+SmoothingModeVar
+2knifunptr_platform_gdiplus122_GdipGetSmoothingMode
+GdipGetSmoothingMode
+PixelOffsetMode
+4knifunptr_platform_gdiplus123_GdipSetPixelOffsetMode
+GdipSetPixelOffsetMode
+PixelOffsetModeVar
+4knifunptr_platform_gdiplus124_GdipGetPixelOffsetMode
+GdipGetPixelOffsetMode
+TextRenderingHint
+6knifunptr_platform_gdiplus125_GdipSetTextRenderingHint
+GdipSetTextRenderingHint
+TextRenderingHintVar
+6knifunptr_platform_gdiplus126_GdipGetTextRenderingHint
+GdipGetTextRenderingHint
+1knifunptr_platform_gdiplus127_GdipSetTextContrast
+GdipSetTextContrast‹
+ 
+  
+
+
+ 
+  
+
+ 
+	
+
+
+	
+
+ 
+	 
+	 
+ 
+ 
+ 
+ 
+ 
+  
+#
+$ 
+	% 
+	& 
+	' 
+, 
+. 
+ 9 
+: 
+	; 
+	< 
+	B 
+C 
+	P 
+Q 
+T 
+	W 
+ X 
+Y 
+` 
+	a 
+ b 
+c 
+j
++k
+,l 
+o 
+p 
+s 
+t 
+u 
+v 
+y 
+z 
+} 
+~ 
+Å 
+Ñ 
+Ö 
+ç 
+é 
+è 
+î 
+õ 
+ú 
+ù 
+¢ 
+£ 
+§ 
+´ 
+¨ 
+µ 
+æ 
+≈ 
+  
+Õ 
+– 
+	ﬂ 
+‡ 
+· 
+Ï 
+Ì 
+ 
+Ò 
+Ù 
+ı 
+ 
+Ñ 
+© 
+≤ 
+ª 
+¿ 
+√ 
+ƒ 
+À 
+– 
+” 
+⁄ 
+› 
+‡ 
+„ 
+Ê 
+È 
+Ï 
+Ô ßQ(0j`2
+0j`Há “
+(W0j`200j`02
+002
+00Há†“
+(%02
+0j`Há†“
+(7 0j`200j`0Há†“
+(%"02
+0j`Há†“
+(!5)00j`2
+0j`Há†“
+(('+020Há†“
+(*(00j`2
+-0j`Há “
+(/(20j`2
+-0j`Há “
+(1(40j`2
+-0j`Há “
+(3(60j`2
+-0j`Há “
+(5(80j`2
+-0j`Há “
+(7g?0j`2
+0j`2
+0j`2
+0j`2$= 00j`0j`0Há†“
+(>7A0j`202
+0j`Há†“
+(@EE0j`20200j` 0Há†“
+(D7G0j`202
+0j`Há†“
+(FEI0j`20200j` 0Há†“
+(H7K0j`202
+0j`Há†“
+(JEM0j`20200j` 0Há†“
+(L7O0j`202
+0j`Há†“
+(NES0j`20200!j`"0Há†“
+(RSV0j`2
+0#02$ 00j`0j`0Há†“
+(U][0j`20%0$j`&02$ 00j`0j`0Há†“
+(ZS]0j`2
+0#02$ 00j`0j`0Há†“
+(\]_0j`20%0$j`&02$ 00j`0j`0Há†“
+(^çg0j`2
+0j`'2
+0j`'2
+0j`'2
+=0j`2d0)0(j`*02$e 00j`0j`0Há†“
+(fii0j`2
+0j`'2
+0j`'202$= 00j`0j`0Há†“
+(hSn0j`2
+0-02$ 00j`0j`0Há†“
+(mer0j`20.j`/0202$ 00j`0j`0Há†“
+(qox0j`2000j`12020j`32$ 00j`0j`0Há†“
+(w[|0j`202"000j`10j`402
+0j`5Há†“
+({ZÄ0j`2060j`72$ 00j`0j`0Há†“
+(QÉ0j`202"060j`70j`80Há†“
+	(Çuá0j`2090j`:20%0$j`&02$ 00j`0j`0Há†“
+	(Üêä0j`2
+0j`2
+0j`2
+0j`2
+=0j`2
+d0j`2e02%à 00j`0j`0Há†“
+	(âêå0j`2
+0j`'2
+0j`'2
+0j`'2
+=0j`'2
+d0j`2e02%à 00j`0j`0Há†“
+	(ãië0j`2020;j`<02
+0j`2
+=0j`2d
+0=0Há†“
+	(ê=ì0j`202
+0=0Há†“
+	(í_ñ0j`202
+0j`'2
+0j`'2=00j`>0Há†“
+	(ïQò0j`202
+0j`'2
+0j`'2
+=0j`5Há†“
+	(óEö0j`202
+0j`2
+0j`Há†“
+	(ômü0j`202
+0j`2
+0j`?2
+=0j`@2d
+0A02
+e0j`Há†“
+	(ûa°0j`2
+0A02
+0j`@2
+0j`'2
+=0j`2d0Há†“
+	(†õ¶0j`202020Bj`C02
+=0j`2$d 00j`0j`02e00!j`D0Há†“
+	(•¸™0j`2$ 00j`0j`02
+0j`'202=0Bj`C02d0Bj`C02$e 00j`0j`02à0j`2%ß 00j`0j`02®00!j`D0Há†“
+	(©ÆÆ0j`202
+0j`E2
+0j`2=00j`F02d00j`F02e00j`F02à00j`F0Há†“
+	(≠E∞0j`2
+0j`E200j`F0Há†“
+	(ØS≤0j`202$ 00j`0j`0Há†“
+	(±-¥0j`20Há†“
+	(≥G∑0j`20200j`G0Há†“
+	(∂aπ0j`20202$ 00j`0j`0Há†“
+	(∏-ª0j`20Há†“
+	(∫SΩ0j`20202
+0j`'2
+=0j`'Há†“
+	(ºy¿0j`20202
+0j`H2
+=0j`2$d 00j`0j`0Há†“
+	(ø-¬0j`20Há†“
+	(¡Sƒ0j`202$ 00j`0j`0Há†“
+	(√G«0j`20200j`I0Há†“
+	(∆E…0j`202
+0j`H2
+0j`HHá†“
+	(»aÃ0j`20200j`J0200j`J0Há†“
+	(À9œ0j`202
+0j`KHá†“
+	(ŒG“0j`20200j`L0Há†“
+	(—9‘0j`202
+0j`HHá†“
+	(”G÷0j`20200j`J0Há†“
+	(’9ÿ0j`202
+0j`Há†“
+	(◊G⁄0j`20200j` 0Há†“
+	(Ÿ9‹0j`202
+0j`Há†“
+	(€Gﬁ0j`20200j` 0Há†“
+	(›W„0j`20Nj`O0M2$ 00j`0j`0Há†“
+	(‚-Â0j`20Há†“
+	(‰GÁ0j`20200j`F0Há†“
+	(ÊGÈ0j`20202
+0j`Há†“
+	(ËUÎ0j`20200j`F020Há†“
+	(Í[Ô0j`20P0j`Q2$ 00j`0j`0Há†“
+	(ÓoÛ0j`20P0j`Q20Rj`S02$ 00j`0j`0Há†“
+	(Úo˜0j`20P0j`Q20Tj`U02$ 00j`0j`0Há†“
+	(ˆw˘0j`202
+0j`2
+0j`'2
+=0j`V2$d 00j`0j`0Há†“
+	(¯S˚0j`202$ 00j`0j`0Há†“
+	(˙-˝0j`20Há†“
+	(¸Sˇ0j`202$ 00j`0j`0Há†“
+	(˛GÅ0j`20200!j`D0Há†“
+	(ÄGÉ0j`20200j` 0Há†“
+	(ÇGÜ0j`20200j`W0Há†“
+	(ÖUà0j`2020200j` 0Há†“
+	(áSä0j`202
+0j`200j` 0Há†“
+	(âOå0j`202020Rj`S0Há†“
+	(ãOé0j`202020Tj`U0Há†“
+	(çEê0j`2$ 00j`0j`0Há†“
+	(èEí0j`2$ 00j`0j`0Há†“
+	(ëEî0j`2$ 00j`0j`0Há†“
+	(ìGñ0j`20200!j`D0Há†“
+	(ïyò0j`202
+0j`'2$ 00j`0j`02=00!j`D0Há†“
+	(óGö0j`2020%0$j`&0Há†“
+	(ôGú0j`20202
+0j`'Há†“
+	(õmû0j`20%0$j`&0202$ 00j`0j`0Há†“
+	(ù-†0j`20Há†“
+	(üS¢0j`202$ 00j`0j`0Há†“
+	(°E§0j`2$ 00j`0j`0Há†“
+	(£E¶0j`2$ 00j`0j`0Há†“
+	(•E®0j`2$ 00j`0j`0Há†“
+	(ßS´0j`2020%0$j`&02
+0%j`XHá†“
+	(™S≠0j`202
+0j`'200!j`"0Há†“
+	(¨UØ0j`2020200!j`D0Há†“
+	(Æá±0j`202
+0j`'2$ 00j`0j`02=00!j`D02d0Há†“
+	(∞S¥0j`202
+0j`'20%0$j`Y0Há†“
+	(≥S∂0j`202
+0j`'20%0$j`Y0Há†“
+	(µS∏0j`202
+0j`'20%0$j`Y0Há†“
+	(∑S∫0j`202
+0j`'20%0$j`Y0Há†“
+	(π9Ω0j`202
+0j`ZHá†“
+	(º[ø0j`20P0j`Q2$ 00j`0j`0Há†“
+	(æs¬0j`20P0j`Q200j`[2$ 00j`0j`0Há†“
+	(¡[∆0j`20\0j`]2$ 00j`0j`0Há†“
+	(≈[»0j`20\0j`]2$ 00j`0j`0Há†“
+	(«- 0j`20Há†“
+	(…QÕ0j`202"0P0j`Q0j`^0Há†“
+	(ÃCœ0j`2020P0j`QHá†“
+	(Œ9“0j`202
+0j`_Há†“
+	(—G’0j`20200j``0Há†“
+	(‘E◊0j`202
+0j`'2
+0j`'Há†“
+	(÷aŸ0j`20200!j`D0200!j`D0Há†“
+	(ÿ9‹0j`202
+0j`aHá†“
+	(€Gﬂ0j`20200j`b0Há†“
+	(ﬁ9‚0j`202
+0j`cHá†“
+	(·GÂ0j`20200!j`d0Há†“
+	(‰9Ë0j`202
+0j`eHá†“
+	(ÁGÎ0j`20200!j`f0Há†“
+	(Í9Ó0j`202
+0j`gHá†“
+	(ÌGÒ0j`20200j`h0Há†“
+	(9Û0j`202
+0j`Há†“
+	(Úÿ
+‡
+ Í
+platform.gdiplus

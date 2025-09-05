@@ -73,7 +73,7 @@ task verifyKotlinNativeSetup {
         println "Version: ${version} (dynamic, no git dependency)"
         
         // Check Kotlin source setup
-        def kotlinSourcePath = 'Poker-Basic/src/main/kotlin/com/pokermon'
+        def kotlinSourcePath = 'shared/src/main/kotlin/com/pokermon'
         def kotlinSource = new File(project.rootDir, kotlinSourcePath)
         
         if (kotlinSource.exists()) {
@@ -94,7 +94,7 @@ task verifyKotlinNativeSetup {
         }
         
         // Check for Maven removal 
-        def pomFile = new File(project.rootDir, 'Poker-Basic/pom.xml')
+        def pomFile = new File(project.rootDir, 'shared/pom.xml')
         if (pomFile.exists()) {
             println "⚠️  Maven pom.xml still present - will be removed in pure Kotlin-native migration"
         } else {

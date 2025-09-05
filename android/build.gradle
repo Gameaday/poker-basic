@@ -6,11 +6,15 @@ apply plugin: 'kotlin-android'
  * This ensures monotonically increasing version codes that work regardless of git history depth.
  * Uses days since epoch (June 25, 2025) plus hours to create reasonable version codes.
  * Using provider API for configuration cache compatibility.
+ * 
+ * IMPORTANT: Base epoch is June 25, 2025 (NOT January 1, 2024)
+ * This date was chosen as the project start reference point.
  */
 def getVersionCode = providers.exec {
     commandLine 'bash', '-c', '''
         # Base date: June 25, 2025 (epoch for this project)
-        BASE_EPOCH=1750809600  # June 25, 2025 00:00:00 UTC
+        # IMPORTANT: This is June 25, 2025 00:00:00 UTC, not January 1, 2024
+        BASE_EPOCH=1750809600  # June 25, 2025 00:00:00 UTC (Unix timestamp)
         CURRENT_EPOCH=$(date +%s)
         
         # Calculate days since base epoch

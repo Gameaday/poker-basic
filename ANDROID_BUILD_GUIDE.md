@@ -86,4 +86,11 @@ If you encounter "App not installed as package conflicts with an existing packag
 
 📖 **[ANDROID_DEBUG_BUILDS.md](ANDROID_DEBUG_BUILDS.md)** - Resolving package conflicts between debug and release builds
 
+### Version Code System
+
+The Android build uses a timestamp-based version code system for automatic incrementing:
+- **Base Epoch**: June 25, 2025 (Unix timestamp: 1750809600)
+- **Formula**: `(days_since_epoch * 100) + current_hour`
+- **Details**: See [ANDROID_DEBUG_BUILDS.md](ANDROID_DEBUG_BUILDS.md) for complete documentation
+
 The Android infrastructure is fully configured and ready for development environments with network access.

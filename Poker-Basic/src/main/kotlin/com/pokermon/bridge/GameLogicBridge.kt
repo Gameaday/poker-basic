@@ -1,6 +1,8 @@
 package com.pokermon.bridge
 
 import com.pokermon.*
+import com.pokermon.api.GameMode
+import com.pokermon.api.GamePhase
 
 /**
  * Data class to track AI player actions for UI feedback.

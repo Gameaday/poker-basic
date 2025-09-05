@@ -4,7 +4,7 @@ package com.pokermon;
  * Defines the different game modes available in the poker game.
  * This enum supports the future expansion into monster-based gameplay.
  */
-public enum GameMode {
+public enum GameModeJava {
     /**
      * Traditional poker game mode - classic 5-card draw with betting.
      */
@@ -31,7 +31,7 @@ public enum GameMode {
     private final String displayName;
     private final String description;
     
-    GameMode(String displayName, String description) {
+    GameModeJava(String displayName, String description) {
         this.displayName = displayName;
         this.description = description;
     }

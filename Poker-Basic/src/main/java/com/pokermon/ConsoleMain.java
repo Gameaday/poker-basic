@@ -1,5 +1,7 @@
 package com.pokermon;
 
+import com.pokermon.api.GameMode;
+
 import java.util.*;
 
 /**

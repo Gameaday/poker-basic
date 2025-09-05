@@ -1,5 +1,7 @@
 package com.pokermon;
 
+import com.pokermon.api.GameMode;
+
 /**
  * Represents the overall game state and configuration for a poker game.
  * This class manages game settings that can be customized for different variations.

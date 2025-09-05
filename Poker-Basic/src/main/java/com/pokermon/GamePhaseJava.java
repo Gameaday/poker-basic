@@ -13,7 +13,7 @@ package com.pokermon;
  * @author Carl Nelson (@Gameaday)
  * @version 1.0.0
  */
-public enum GamePhase {
+public enum GamePhaseJava {
     /**
      * Game is being initialized, no players yet set up.
      */
@@ -101,7 +101,7 @@ public enum GamePhase {
     private final boolean allowCardExchange;
     private final boolean allowRoundProgression;
     
-    GamePhase(String displayName, String description, boolean showCards, 
+    GamePhaseJava(String displayName, String description, boolean showCards, 
               boolean allowBetting, boolean allowCardExchange, boolean allowRoundProgression) {
         this.displayName = displayName;
         this.description = description;
@@ -163,7 +163,7 @@ public enum GamePhase {
      * Gets the next logical phase in the game flow.
      * @return the next phase, or null if this is the final phase
      */
-    public GamePhase getNextPhase() {
+    public GamePhaseJava getNextPhase() {
         switch (this) {
             case INITIALIZATION: return PLAYER_SETUP;
             case PLAYER_SETUP: return DECK_CREATION;

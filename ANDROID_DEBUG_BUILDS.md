@@ -76,8 +76,8 @@ The debug version can be identified by checking the package name in app settings
 ### Version Management
 
 Both build types use the same dynamic versioning:
-- `versionCode`: Git commit count (ensures proper update ordering)
-- `versionName`: "1.0.${commitCount}" (semantic versioning with auto-increment)
+- `versionCode`: Timestamp-based (ensures proper update ordering)
+- `versionName`: "1.0.${timestamp}" (semantic versioning with auto-increment based on build time)
 
 ### Build Artifacts
 

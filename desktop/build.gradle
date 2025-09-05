@@ -1,0 +1,116 @@
+// Pokermon Desktop - Native Executable Module
+// Pure Kotlin-native desktop application
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+    id 'application'
+}
+
+// Application configuration
+application {
+    mainClass = 'com.pokermon.DesktopLauncherKt'
+}
+
+// Java compatibility for native builds
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+// Kotlin configuration
+kotlin {
+    jvmToolchain(17)
+}
+
+// Dynamic version from root project
+version = rootProject.version
+group = rootProject.group
+
+// Source configuration
+sourceSets {
+    main {
+        kotlin {
+            srcDirs 'src/main/kotlin'
+        }
+    }
+}
+
+// Dependencies
+dependencies {
+    // Use shared Kotlin-native core
+    implementation project(':shared')
+    
+    // Kotlin standard library
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:${findProperty('kotlin.version') ?: '1.9.22'}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${findProperty('kotlinx.coroutines.version') ?: '1.7.3'}"
+    
+    // Desktop-specific dependencies (if needed)
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.7.3'
+}
+
+// Task to create native executable
+task createNativeExecutable(type: JavaExec) {
+    group = 'native'
+    description = 'Creates native executable for current platform'
+    dependsOn 'classes'
+    
+    mainClass = application.mainClass
+    classpath = sourceSets.main.runtimeClasspath
+    
+    doFirst {
+        println "Creating native executable for Pokermon..."
+        println "Main class: ${mainClass.get()}"
+        println "Version: ${project.version}"
+    }
+}
+
+// Task to run desktop application
+task runDesktop(type: JavaExec) {
+    group = 'application'
+    description = 'Run Pokermon desktop application'
+    
+    mainClass = application.mainClass
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+// Distribution task for packaging
+distributions {
+    main {
+        distributionBaseName = 'pokermon-desktop'
+        contents {
+            from 'src/main/resources'
+            into('lib') {
+                from configurations.runtimeClasspath
+                from jar.outputs.files
+            }
+        }
+    }
+}
+
+// Kotlin compilation options
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
+    kotlinOptions {
+        jvmTarget = '17'
+        freeCompilerArgs += [
+            '-Xjsr305=strict',
+            '-opt-in=kotlin.ExperimentalStdlibApi'
+        ]
+    }
+}
+
+// Information task
+task info {
+    group = 'help'
+    description = 'Display desktop module information'
+    
+    doLast {
+        println "=== Pokermon Desktop Module ==="
+        println "Version: ${project.version}"
+        println "Main class: ${application.mainClass.get()}"
+        println ""
+        println "Available tasks:"
+        println "  ./gradlew :desktop:runDesktop              - Run desktop app"
+        println "  ./gradlew :desktop:createNativeExecutable  - Create native executable"
+        println "  ./gradlew :desktop:installDist             - Create distribution"
+    }
+}

@@ -829,22 +829,27 @@ public class Main {
 
     private static String cardRank(int card) {
         // Use unified CardUtils for DRY compliance - single source of truth
-        return CardUtils.INSTANCE.cardRank(card);
+        return com.pokermon.modern.CardUtils.rankName(card);
     }
 
     private static String multicardName(int quantity) {
-        // Use unified CardUtils for DRY compliance - single source of truth
-        return CardUtils.INSTANCE.multicardName(quantity);
+        // Use unified CardUtils for DRY compliance - single source of truth  
+        return switch (quantity) {
+            case 2 -> "Pair";
+            case 3 -> "Three of a Kind";
+            case 4 -> "Four of a Kind"; 
+            default -> "Unknown";
+        };
     }
 
     private static String cardSuit(int card) {
         // Use unified CardUtils for DRY compliance - single source of truth
-        return CardUtils.INSTANCE.cardSuit(card);
+        return com.pokermon.modern.CardUtils.suitName(card);
     }
 
     private static String cardName(int card) {
         // Use unified CardUtils for DRY compliance - single source of truth
-        return CardUtils.INSTANCE.cardName(card);
+        return com.pokermon.modern.CardUtils.cardName(card);
     }
 
     private static String cardRank2(int rank) {

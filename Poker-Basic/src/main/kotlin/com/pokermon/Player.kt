@@ -20,7 +20,10 @@ data class Player(
     private var _hand: IntArray? = null,
     private var _handValue: Int = 0,
     
-    // Hand evaluation properties
+    // Public hand access for compatibility
+    var hand: IntArray
+        get() = _hand ?: IntArray(0)
+        set(value) { _hand = value }
     private var _straight: Boolean = false,
     private var _aceStraight: Boolean = false,
     private var _flush: Boolean = false,

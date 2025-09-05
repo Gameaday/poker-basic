@@ -237,8 +237,8 @@ class GameConfigBuilder {
     @GameDsl
     fun player(name: String, isHuman: Boolean = false, chips: Int = startingChips) {
         players.add(Player().apply {
-            setName(name)
-            setHuman(isHuman)
+            setPlayerName(name)
+            this.isHuman = isHuman
             setChipsCurrent(chips)
         })
     }

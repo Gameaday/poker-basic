@@ -142,7 +142,7 @@ class GameLogicBridge {
      */
     private fun hasMultipleActivePlayers(engine: com.pokermon.GameEngine): Boolean {
         val players = engine.players ?: return false
-        val activePlayers = players.count { !it.isFold() && it.chips > 0 }
+        val activePlayers = players.count { !it.fold && it.chips > 0 }
         return activePlayers > 1
     }
     
@@ -195,7 +195,7 @@ class GameLogicBridge {
                     val currentPlayer = players[currentPlayerIndex]
                     
                     // If current player has folded or is out of chips, advance to next
-                    if (currentPlayer.isFold() || currentPlayer.chips <= 0) {
+                    if (currentPlayer.fold || currentPlayer.chips <= 0) {
                         engine.nextPlayer()
                         safetyCounter++
                         continue
@@ -324,7 +324,7 @@ class GameLogicBridge {
     private fun shouldForceAdvancePhase(engine: com.pokermon.GameEngine): Boolean {
         return try {
             val players = engine.players
-            val activePlayers = players?.filter { !it.isFold() && it.chips > 0 } ?: emptyList()
+            val activePlayers = players?.filter { !it.fold && it.chips > 0 } ?: emptyList()
             
             // If only one active player remains, advance phase
             if (activePlayers.size <= 1) {
@@ -339,7 +339,7 @@ class GameLogicBridge {
             
             // If current player has folded or has no chips, we should advance
             currentPlayer?.let { player ->
-                if (player.isFold() || player.chips <= 0) {
+                if (player.fold || player.chips <= 0) {
                     return true
                 }
             }
@@ -359,12 +359,12 @@ class GameLogicBridge {
             val players = engine.players
             if (players != null && players.isNotEmpty()) {
                 val player = players[0] // Human player is always at index 0
-                playerChips = player.getChips()
+                playerChips = player.chips
                 
                 // Convert player's hand to poker notation format
                 player.getHand()?.let { handInts ->
                     playerHand = handInts.map { cardInt ->
-                        if (cardInt != 0) cardName(cardInt) else "Empty"
+                        if (cardInt != 0) CardUtils.cardName(cardInt) else "Empty"
                     }.filter { it != "Empty" }
                 } ?: run {
                     playerHand = emptyList()
@@ -374,35 +374,25 @@ class GameLogicBridge {
     }
     
     /**
-     * Helper method to get card name in full notation (e.g., "Ace of Spades", "King of Hearts", etc.).
-     * This format matches the CardGraphicsManager expectations for proper image loading.
-     * Uses the same logic as Main.cardRank and Main.cardSuit for consistency.
+     * Get the resource path for a card image based on card integer value.
+     * Maps to the actual card art files in the repository resources.
+     * Uses unified CardUtils for consistent card logic across all platforms.
      */
-    private fun cardName(cardInt: Int): String {
-        // Convert to full card names that match the drawable resources
-        val suits = arrayOf("Spades", "Hearts", "Diamonds", "Clubs")
-        val ranks = arrayOf("error", "Ace", "King", "Queen", "Jack", "Ten", 
-                           "Nine", "Eight", "Seven", "Six", "Five", "Four", "Three", "Two")
+    fun getCardImagePath(cardInt: Int): String {
+        val cardPackManager = CardPackManager.getInstance()
         
-        // Validate input range to prevent out-of-bounds access
-        if (cardInt < 0 || cardInt >= 52) {
-            return "Invalid Card"
+        if (cardInt == 0) {
+            // Return card back path or null for text symbols
+            return cardPackManager.getCardBackImagePath(selectedCardPack) ?: "TEXT_BACK"
         }
         
-        // Use the same logic as Main.cardRank - this matches the original card encoding
-        var rank = cardInt / 4
-        if (cardInt % 4 != 0) {
-            rank++
-        }
+        // Use unified CardUtils for DRY compliance
+        val rankName = CardUtils.cardRank(cardInt)
+        val suitName = CardUtils.cardSuit(cardInt)
         
-        // Use the same logic as Main.cardSuit  
-        val suit = cardInt % 4
-        
-        // Ensure indices are within bounds  
-        val rankName = if (rank >= 0 && rank < ranks.size) ranks[rank] else "Unknown"
-        val suitName = if (suit >= 0 && suit < suits.size) suits[suit] else "Unknown"
-        
-        return "$rankName of $suitName"
+        // Use CardPackManager to get the correct path
+        return cardPackManager.getCardImagePath(selectedCardPack, rankName, suitName) 
+            ?: "TEXT_${rankName}_${suitName}"
     }
     
     /**
@@ -417,40 +407,6 @@ class GameLogicBridge {
      */
     fun getSelectedCardPack(): String {
         return selectedCardPack
-    }
-    
-    /**
-     * Get the resource path for a card image based on card integer value.
-     * Maps to the actual card art files in the repository resources.
-     * Uses the same mapping as Main.cardRank and Main.cardSuit methods.
-     */
-    fun getCardImagePath(cardInt: Int): String {
-        val cardPackManager = CardPackManager.getInstance()
-        
-        if (cardInt == 0) {
-            // Return card back path or null for text symbols
-            return cardPackManager.getCardBackImagePath(selectedCardPack) ?: "TEXT_BACK"
-        }
-        
-        val suits = arrayOf("Spades", "Hearts", "Diamonds", "Clubs")
-        val ranks = arrayOf("error", "Ace", "King", "Queen", "Jack", "Ten", "Nine", "Eight", 
-                           "Seven", "Six", "Five", "Four", "Three", "Two")
-        
-        // Use the same logic as Main.cardRank
-        var rank = cardInt / 4
-        if (cardInt % 4 != 0) {
-            rank++
-        }
-        
-        // Use the same logic as Main.cardSuit  
-        val suit = cardInt % 4
-        
-        val rankName = ranks.getOrElse(rank) { "Unknown" }
-        val suitName = suits.getOrElse(suit) { "Unknown" }
-        
-        // Use CardPackManager to get the correct path
-        return cardPackManager.getCardImagePath(selectedCardPack, rankName, suitName) 
-            ?: "TEXT_${rankName}_${suitName}"
     }
     
     /**
@@ -501,11 +457,11 @@ class GameLogicBridge {
                 val players = engine.players
                 players?.mapIndexed { index, player ->
                     PlayerInfo(
-                        name = player.getName() ?: "Player $index",
-                        chips = player.getChips(),
-                        isFolded = player.isFold(),
+                        name = player.name,
+                        chips = player.chips,
+                        isFolded = player.fold,
                         isCurrentPlayer = index == 0, // Human player is always at index 0
-                        handValue = player.getHandValue()
+                        handValue = player.handValue
                     )
                 } ?: emptyList()
             } ?: emptyList()
@@ -571,7 +527,7 @@ class GameLogicBridge {
                     
                     // For testing purposes, use a standard call amount if no high bet exists
                     val highBet = engine.getCurrentHighBet()
-                    val callAmount = if (highBet <= 0) 50 else (highBet - player.getBet()).coerceAtMost(player.getChips())
+                    val callAmount = if (highBet <= 0) 50 else (highBet - player.bet).coerceAtMost(player.chips)
                     
                     if (callAmount <= 0) {
                         // Check if we should advance phase after this action
@@ -579,7 +535,7 @@ class GameLogicBridge {
                         updatePlayerData()
                         GameActionResult(true, "No bet to call")
                     } else {
-                        player.placeBet(player.getBet() + callAmount)
+                        player.placeBet(player.bet + callAmount)
                         // Add the call amount to the pot
                         engine.addToPot(callAmount)
                         // Advance to next player after action
@@ -612,7 +568,7 @@ class GameLogicBridge {
                 if (players != null && players.isNotEmpty()) {
                     val player = players[0] // Human player
                     
-                    if (amount > player.getChips()) {
+                    if (amount > player.chips) {
                         GameActionResult(false, "Not enough chips to raise by $amount")
                     } else {
                         player.placeBet(amount)

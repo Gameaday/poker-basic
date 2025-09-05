@@ -39,7 +39,7 @@ class GameEngine(private val gameConfig: Game) {
         // Initialize all players
         playerNames.forEachIndexed { i, name ->
             players!![i].apply {
-                setHuman(i == 0) // First player is human, others are AI
+                isHuman = (i == 0) // First player is human, others are AI
                 setupPlayer(name, gameConfig.startingChips, deck, gameConfig.handSize)
             }
         }
@@ -211,7 +211,7 @@ class GameEngine(private val gameConfig: Game) {
             append("Players:\n")
             
             players!!.forEachIndexed { i, player ->
-                append("  ${i + 1}. ${player.name} - Chips: ${player.chips}, Hand Value: ${player.handValue}, Folded: ${player.isFold()}\n")
+                append("  ${i + 1}. ${player.name} - Chips: ${player.chips}, Hand Value: ${player.handValue}, Folded: ${player.fold}\n")
             }
         }
     }
@@ -290,7 +290,7 @@ class GameEngine(private val gameConfig: Game) {
         currentPhase = GamePhase.HAND_REEVALUATION
         // Re-evaluate all hands after card exchange
         players?.forEach { player ->
-            if (!player.isFold()) {
+            if (!player.fold) {
                 player.performAllChecks()
             }
         }
@@ -379,11 +379,11 @@ class GameEngine(private val gameConfig: Game) {
             currentPlayerIndex = (currentPlayerIndex + 1) % playerArray.size
             checkedPlayers++
         } while (checkedPlayers < playerArray.size &&
-                 (playerArray[currentPlayerIndex].isFold() || playerArray[currentPlayerIndex].chips <= 0))
+                 (playerArray[currentPlayerIndex].fold || playerArray[currentPlayerIndex].chips <= 0))
         
         // If no valid player found after checking all, set to -1
         if (checkedPlayers == playerArray.size &&
-            (playerArray[currentPlayerIndex].isFold() || playerArray[currentPlayerIndex].chips <= 0)) {
+            (playerArray[currentPlayerIndex].fold || playerArray[currentPlayerIndex].chips <= 0)) {
             currentPlayerIndex = -1
         }
     }
@@ -415,7 +415,7 @@ class GameEngine(private val gameConfig: Game) {
         var anyPlayerHasBet = false
         
         players!!.forEach { player ->
-            if (!player.isFold() && player.chips > 0) {
+            if (!player.fold && player.chips > 0) {
                 activePlayers++
                 if (player.bet > 0) {
                     anyPlayerHasBet = true

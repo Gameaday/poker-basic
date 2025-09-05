@@ -138,7 +138,7 @@ class GameEngine(private val gameConfig: Game) {
             player.removeCardAtIndex(index)
         }
         
-        Main.replaceCards(player.handForModification, deck)
+        Main.replaceCards(player.getHandForModification(), deck)
         player.performAllChecks()
         
         // Note: Don't auto-advance phase here since multiple players might exchange cards

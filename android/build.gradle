@@ -56,6 +56,8 @@ android {
             // Faster debug builds
             minifyEnabled false
             debuggable true
+            // Use debug suffix to avoid package conflicts with release builds
+            applicationIdSuffix ".debug"
         }
     }
     

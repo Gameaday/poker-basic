@@ -709,7 +709,7 @@ object Main {
             HandEvaluator.HandType.FULL_HOUSE -> 6
             HandEvaluator.HandType.FOUR_OF_A_KIND -> 7
             HandEvaluator.HandType.STRAIGHT_FLUSH -> 8
-            HandEvaluator.HandType.ROYAL_FLUSH -> 8
+            HandEvaluator.HandType.ROYAL_FLUSH -> 9
         }
     }
     

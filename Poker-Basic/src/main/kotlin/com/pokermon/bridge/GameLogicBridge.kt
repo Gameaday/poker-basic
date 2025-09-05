@@ -690,9 +690,13 @@ class GameLogicBridge {
                 val cardIndicesArray = cardIndices.toIntArray()
                 engine.exchangeCards(0, cardIndicesArray) // 0 = human player index
                 cardsExchangedThisRound = true // Mark that cards have been exchanged
+                
+                // Complete card exchange and move to final betting phase
+                engine.completeCardExchange()
+                
                 updatePlayerData()
                 clearCardSelection()
-                GameActionResult(true, "Exchanged ${cardIndices.size} cards")
+                GameActionResult(true, "Exchanged ${cardIndices.size} cards - ready for final betting")
             } ?: GameActionResult(false, "Game engine not available")
         } catch (e: Exception) {
             GameActionResult(false, "Error exchanging cards: ${e.message}")

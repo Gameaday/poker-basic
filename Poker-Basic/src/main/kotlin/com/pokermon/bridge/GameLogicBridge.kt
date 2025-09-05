@@ -381,13 +381,19 @@ class GameLogicBridge {
         // Convert to full card names that match the drawable resources
         val suits = arrayOf("Spades", "Hearts", "Diamonds", "Clubs")
         val ranks = arrayOf("?", "Ace", "King", "Queen", "Jack", "Ten", 
-                           "Nine", "Eight", "Seven", "Six", "Five", "Four", "Three", "Two", "1")
+                           "Nine", "Eight", "Seven", "Six", "Five", "Four", "Three", "Two")
+        
+        // Validate input range to prevent out-of-bounds access
+        if (cardInt < 0 || cardInt >= 52) {
+            return "Invalid Card"
+        }
         
         val rank = cardInt / 4 + 1
         val suit = cardInt % 4
         
-        val rankName = ranks.getOrElse(rank) { "Unknown" }
-        val suitName = suits.getOrElse(suit) { "Unknown" }
+        // Ensure indices are within bounds  
+        val rankName = if (rank >= 0 && rank < ranks.size) ranks[rank] else "Unknown"
+        val suitName = if (suit >= 0 && suit < suits.size) suits[suit] else "Unknown"
         
         return "$rankName of $suitName"
     }

@@ -73,9 +73,9 @@ class GameStateManager {
             is GameActions.PauseGame -> {
                 val currentState = _gameState.value
                 if (currentState is GameState.Playing) {
-                    val savedGame = Game.Builder()
-                        .players(currentState.players.toTypedArray())
-                        .build()
+                    val savedGame = Game(
+                        gameMode = GameMode.CLASSIC // TODO: Get actual game mode
+                    )
                     updateGameState(GameState.Paused(savedGame))
                 }
             }

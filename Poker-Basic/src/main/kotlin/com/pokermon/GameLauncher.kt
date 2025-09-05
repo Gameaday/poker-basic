@@ -1,5 +1,7 @@
 package com.pokermon
 
+import com.pokermon.console.ConsoleMain
+
 /**
  * Main entry point for the Pokermon application.
  * Provides a unified launcher that defaults to GUI mode with options for console mode.

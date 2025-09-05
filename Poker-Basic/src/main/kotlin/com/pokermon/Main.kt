@@ -1,6 +1,6 @@
 package com.pokermon
 
-import com.pokermon.ai.PersonalityManager
+import com.pokermon.ai.AIPlayer
 import com.pokermon.modern.CardUtils
 import com.pokermon.players.Player
 import kotlinx.coroutines.runBlocking
@@ -816,7 +816,8 @@ object Main {
         
         // Get personality factor with error handling
         val personalityFactor = try {
-            PersonalityManager.getPlayerPersonality(player.name).aggressiveness
+            // TODO: Reimplement with new AI system
+            0.5 // PersonalityManager.getPlayerPersonality(player.name).aggressiveness
         } catch (e: Exception) {
             0.5 // Default moderate aggressiveness
         }

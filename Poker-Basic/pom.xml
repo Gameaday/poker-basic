@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.pokermon</groupId>
-    <artifactId>pokermon-native</artifactId>
+    <artifactId>pokermon</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
     
-    <name>Pokermon - Kotlin-Native Poker Game</name>
-    <description>Kotlin-native cross-platform poker game with monster collection mechanics, demonstrating modern Kotlin development patterns and native executable creation</description>
+    <name>Pokermon</name>
+    <description>Cross-platform poker game with monster collection mechanics, built with pure Kotlin for Android and desktop platforms</description>
     <url>https://github.com/Gameaday/poker-basic</url>
     
     <developers>

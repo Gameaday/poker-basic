@@ -97,11 +97,21 @@ android {
             excludes += ['/META-INF/{AL2.0,LGPL2.1}']
         }
     }
+    
+    // Include shared Kotlin source files directly for pure Kotlin-native architecture
+    sourceSets {
+        main {
+            java {
+                srcDirs += '../Poker-Basic/src/main/kotlin'
+                srcDirs += '../Poker-Basic/src/main/java'
+            }
+        }
+    }
 }
 
 dependencies {
-    // Direct Kotlin source integration - no JAR dependencies needed
-    implementation project(':Poker-Basic')
+    // Direct Kotlin source integration - no external module dependencies needed
+    // All Kotlin source files are included directly via sourceSets configuration
     
     // Kotlin-native dependencies - aligned with main project
     implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.22'

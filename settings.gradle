@@ -13,6 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PokerGame"
+rootProject.name = "Pokermon"
 include ':android'
-include ':Poker-Basic'

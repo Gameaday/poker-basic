@@ -14,28 +14,7 @@ import java.util.*;
 
 public class Main {
 
-    // Card mapping constants to avoid recreating arrays on every method call
-    private static final String[] CARD_RANKS = {
-        "error", "Ace", "King", "Queen",
-        "Jack", "Ten", "Nine", "Eight",
-        "Seven", "Six", "Five", "Four",
-        "Three", "Two"
-    };
-    
-    private static final String[] CARD_RANKS_EXTENDED = {
-        "error", "Ace", "King", "Queen",
-        "Jack", "Ten", "Nine", "Eight",
-        "Seven", "Six", "Five", "Four",
-        "Three", "Two", "One"
-    };
-    
-    private static final String[] CARD_SUITS = {
-        "Spades", "Hearts", "Diamonds", "Clubs"
-    };
-    
-    private static final String[] MULTICARD_NAMES = {
-        "Error", "High", "Pair", "Three of a kind", "Four of a kind"
-    };
+    // Card pack constants (other constants moved to CardUtils.kt for DRY compliance)
     
     private static final String[] POSSIBLE_NAMES = {
         "Carl", "Jeff", "James", "Chris", "Fred", "Daniel",
@@ -682,13 +661,8 @@ public class Main {
     }
 
     public static String[] convertHand2(int[][] hand) {
-        String[] convertedHand;
-        convertedHand = new String[hand.length];
-        for (int i = 0; i < hand.length; i++) {
-            String Title = multicardName(hand[i][1]);
-            convertedHand[i] = (Title + " " + cardRank2(hand[i][0]));
-        }
-        return convertedHand;
+        // Use unified CardUtils for DRY compliance - single source of truth
+        return CardUtils.INSTANCE.convertHand(hand);
     }
 
     static String[] decideNames(String[] players) {
@@ -854,40 +828,29 @@ public class Main {
     }
 
     private static String cardRank(int card) {
-        String cardRank;
-        int rank = card / 4;
-        if (card % 4 != 0) {
-            rank++;
-        }
-        cardRank = CARD_RANKS[rank];
-//System.out.println("card rank test, Card: " + card + " rank: " + cardRank);
-        return cardRank;
+        // Use unified CardUtils for DRY compliance - single source of truth
+        return CardUtils.INSTANCE.cardRank(card);
     }
 
     private static String multicardName(int quantity) {
-        String title;
-        title = MULTICARD_NAMES[quantity];
-        return title;
+        // Use unified CardUtils for DRY compliance - single source of truth
+        return CardUtils.INSTANCE.multicardName(quantity);
     }
 
     private static String cardSuit(int card) {
-        String cardSuit;
-        int suit = card % 4;
-        cardSuit = CARD_SUITS[suit];
-//System.out.println("card suit test, Card: " + card + " suit: " + suit + cardSuit);
-        return cardSuit;
+        // Use unified CardUtils for DRY compliance - single source of truth
+        return CardUtils.INSTANCE.cardSuit(card);
     }
 
     private static String cardName(int card) {
-        String cardName = (cardRank(card) + " of " + cardSuit(card));
-        return cardName;
+        // Use unified CardUtils for DRY compliance - single source of truth
+        return CardUtils.INSTANCE.cardName(card);
     }
 
     private static String cardRank2(int rank) {
-        String cardRank;
-        cardRank = CARD_RANKS_EXTENDED[rank];
-//System.out.println("card rank test, Card: " + card + " rank: " + cardRank);
-        return cardRank;
+        // Use unified CardUtils for DRY compliance - single source of truth
+        return CardUtils.INSTANCE.cardRank2(rank);
+    }
     }
 
     public static void author() {

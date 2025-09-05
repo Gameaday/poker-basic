@@ -47,7 +47,7 @@ jobs:
       run: |
         chmod +x ./gradlew
         echo "=== Verifying Pure Kotlin Cross-Platform Configuration ==="
-        ./gradlew verifyDualPlatformSetup --no-daemon || {
+        ./gradlew verifyKotlinNativeSetup --no-daemon || {
           echo "⚠️  Gradle verification failed (may be network-related)"
           echo "Continuing with offline validation..."
           ./validate-android-build.sh

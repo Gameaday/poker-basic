@@ -5,8 +5,11 @@ package com.pokermon;
  * This class serves as the single point of truth for all version information
  * across desktop JAR, Android APK, and other build targets.
  * 
- * Version code is dynamically generated based on git commit count to ensure
- * automatic incrementation with each commit, eliminating manual version management
+ * Versioning uses different approaches per platform:
+ * - JAR builds: Git commit count-based versioning for reproducible desktop builds
+ * - Android builds: Timestamp-based versioning for reliable APK update ordering
+ * 
+ * This hybrid approach ensures proper version management across all build targets
  * while maintaining semantic versioning for major and minor releases.
  * 
  * @author Carl Nelson (@Gameaday)
@@ -15,9 +18,10 @@ package com.pokermon;
 public final class Version {
     
     /**
-     * The current version of the application with dynamic patch version based on commit count.
-     * Format: major.minor.commitCount (e.g., "1.0.4" where 4 is the commit count)
-     * This value is replaced during build process with actual git commit count from main branch.
+     * The current version of the application with dynamic patch version for JAR builds.
+     * Format: major.minor.commitCount (e.g., "1.0.4" where 4 is the git commit count)
+     * This value is replaced during Maven build process with actual git commit count from main branch.
+     * Android builds use timestamp-based versioning instead (see android/build.gradle).
      * Fallback to "1.0.0" if replacement fails to ensure valid version string.
      */
     public static final String VERSION = "1.0.8";
@@ -38,10 +42,10 @@ public final class Version {
     public static final String APP_DESCRIPTION = "Educational poker game demonstrating cross-platform development with multiple game modes";
     
     /**
-     * Version code for Android builds - dynamically generated from git commit count from main branch.
-     * This ensures proper APK update handling on Android devices and automatic
-     * incrementation with each commit without manual intervention.
-     * This value is replaced during build process with actual git commit count from main branch.
+     * Version code for JAR builds - dynamically generated from git commit count from main branch.
+     * For Android builds, timestamp-based version codes are used instead (calculated in android/build.gradle).
+     * This ensures proper update handling across different build targets with platform-appropriate versioning.
+     * This value is replaced during Maven build process with actual git commit count from main branch.
      * Fallback to 1 if replacement fails to ensure valid version code.
      */
     public static final int VERSION_CODE = 8;

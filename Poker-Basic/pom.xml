@@ -16,7 +16,8 @@
         <maven.surefire.version>3.2.5</maven.surefire.version>
         <maven.failsafe.version>3.2.5</maven.failsafe.version>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
-        <kotlin.version>1.9.10</kotlin.version>
+        <kotlin.version>1.9.22</kotlin.version>
+        <kotlinx.coroutines.version>1.7.3</kotlinx.coroutines.version>
         <compose.version>1.5.4</compose.version>
         <!-- Git commit count for dynamic versioning -->
         <git.commit.count>0</git.commit.count>
@@ -35,6 +36,19 @@
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
             <version>${kotlin.version}</version>
+        </dependency>
+        
+        <!-- Kotlin Coroutines for Android async programming -->
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-coroutines-core</artifactId>
+            <version>${kotlinx.coroutines.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-coroutines-android</artifactId>
+            <version>${kotlinx.coroutines.version}</version>
         </dependency>
         
         <!-- JavaFX for cross-platform UI -->
@@ -136,7 +150,7 @@
                 </configuration>
             </plugin>
             
-            <!-- Kotlin Maven Plugin - must come before Java compiler -->
+            <!-- Kotlin Maven Plugin - Kotlin-first compilation strategy -->
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
@@ -149,6 +163,7 @@
                             <goal>compile</goal>
                         </goals>
                         <configuration>
+                            <!-- Prioritize Kotlin sources for Kotlin-native approach -->
                             <sourceDirs>
                                 <sourceDir>src/main/kotlin</sourceDir>
                                 <sourceDir>src/main/java</sourceDir>
@@ -171,6 +186,11 @@
                 </executions>
                 <configuration>
                     <jvmTarget>17</jvmTarget>
+                    <!-- Enhanced Kotlin compiler options for native development -->
+                    <args>
+                        <arg>-Xjvm-default=all</arg>
+                        <arg>-Xjsr305=strict</arg>
+                    </args>
                 </configuration>
             </plugin>
             

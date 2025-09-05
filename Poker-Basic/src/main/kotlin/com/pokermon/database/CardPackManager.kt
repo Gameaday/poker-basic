@@ -1,4 +1,4 @@
-package com.pokermon
+package com.pokermon.database
 
 import java.io.File
 import java.util.jar.JarFile

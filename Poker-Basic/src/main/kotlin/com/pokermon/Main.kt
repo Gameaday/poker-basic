@@ -2,6 +2,7 @@ package com.pokermon
 
 import com.pokermon.ai.PersonalityManager
 import com.pokermon.modern.CardUtils
+import com.pokermon.players.Player
 import kotlinx.coroutines.runBlocking
 import java.io.*
 import java.util.*

@@ -1,4 +1,4 @@
-package com.pokermon
+package com.pokermon.database
 
 /**
  * Kotlin-native monster database serving as the single authoritative source for all monster data.

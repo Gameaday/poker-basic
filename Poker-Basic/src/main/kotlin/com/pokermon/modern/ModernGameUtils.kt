@@ -1,6 +1,6 @@
 package com.pokermon.modern
 
-import com.pokermon.Player
+import com.pokermon.players.Player
 import com.pokermon.GameMode
 import com.pokermon.GamePhase
 import kotlinx.coroutines.*

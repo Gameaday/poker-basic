@@ -1,4 +1,4 @@
-package com.pokermon
+package com.pokermon.database
 
 /**
  * Manages a collection of monsters for a player.

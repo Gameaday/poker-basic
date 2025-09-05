@@ -1,6 +1,6 @@
-package com.pokermon
+package com.pokermon.database
 
-import com.pokermon.ai.Personality
+import com.pokermon.ai.AIPersonality
 
 /**
  * Kotlin-native data class representing a monster that can be encountered, battled, or captured.
@@ -18,7 +18,7 @@ data class Monster(
     val effectType: EffectType,
     val effectPower: Int,
     val description: String,
-    val personality: Personality = Personality.getRandomPersonality()
+    val personality: AIPersonality = AIPersonality.getRandomPersonality()
 ) {
     
     /**

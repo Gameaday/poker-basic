@@ -1,4 +1,4 @@
-package com.pokermon
+package com.pokermon.console
 
 import com.pokermon.modern.CardUtils
 import kotlinx.coroutines.runBlocking

@@ -4,6 +4,8 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.random.Random
 
+// Forward declaration for GameContext used in methods
+
 /**
  * Defines the 24 distinct personalities that influence AI behavior across all game modes.
  * Each personality has unique weights for generalized traits that can be combined
@@ -15,7 +17,7 @@ import kotlin.random.Random
  * @author Pokermon AI System
  * @version 1.0.0 (Kotlin-native)
  */
-enum class Personality(
+enum class AIPersonality(
     val displayName: String,
     val courage: Float,          // Willingness to take risks and face challenges
     val gullibility: Float,      // How easily influenced or deceived
@@ -82,6 +84,46 @@ enum class Personality(
      */
     val deception: Float
         get() = clamp(guile * 0.6f + intelligence * 0.2f + (10.0f - empathy) * 0.2f)
+    
+    /**
+     * Calculate aggression level for betting decisions.
+     * @return effective aggression (0.0-10.0)
+     */
+    val aggression: Float
+        get() = clamp(courage * 0.4f + confidence * 0.3f + ambition * 0.3f - timidness * 0.2f)
+    
+    /**
+     * Calculate cautiousness level for risk assessment.
+     * @return effective cautiousness (0.0-10.0)
+     */
+    val cautiousness: Float
+        get() = clamp(caution * 0.6f + intelligence * 0.2f + timidness * 0.2f)
+    
+    /**
+     * Calculate risk tolerance based on personality traits.
+     */
+    fun calculateRiskTolerance(context: Any): Double {
+        val baseRisk = (courage + confidence - caution - timidness) / 40.0
+        return baseRisk.coerceIn(0.0, 1.0)
+    }
+    
+    /**
+     * Calculate confidence level based on hand strength and chips.
+     */
+    fun calculateConfidence(handStrength: Double, chips: Int): Double {
+        val baseConfidence = confidence / 10.0
+        val handBonus = handStrength * 0.3
+        val chipBonus = if (chips > 1000) 0.1 else if (chips < 200) -0.1 else 0.0
+        return (baseConfidence + handBonus + chipBonus).coerceIn(0.0, 1.0)
+    }
+    
+    /**
+     * Calculate maximum call amount based on pot size and personality.
+     */
+    fun calculateMaxCallAmount(potSize: Int): Int {
+        val riskFactor = (courage + confidence - caution) / 30.0
+        return (potSize * riskFactor).toInt().coerceAtLeast(10)
+    }
 
     companion object {
         /**
@@ -93,14 +135,14 @@ enum class Personality(
          * Get a random personality for monster generation.
          * @return a randomly selected personality
          */
-        fun getRandomPersonality(): Personality = values().random()
+        fun getRandomPersonality(): AIPersonality = values().random()
 
         /**
          * Get a personality by name (case-insensitive).
          * @param name the personality name to find
          * @return the matching personality, or null if not found
          */
-        fun getByName(name: String?): Personality? {
+        fun getByName(name: String?): AIPersonality? {
             name ?: return null
             
             return values().find { personality ->

@@ -1,6 +1,7 @@
-package com.pokermon
+package com.pokermon.players
 
 import com.pokermon.modern.CardUtils
+import com.pokermon.database.Monster
 
 /**
  * Kotlin-native data class representing a poker player with their hand, chips, and game state.
@@ -37,6 +38,18 @@ data class Player(
     private var _convertedHand2: Array<String>? = null,
     private var _handMultiples: Array<IntArray>? = null
 ) {
+    
+    // Monster companion system
+    var currentMonster: Monster? = null
+        private set
+        
+    fun assignMonster(monster: Monster) {
+        currentMonster = monster
+    }
+    
+    fun removeMonster() {
+        currentMonster = null
+    }
     
     // Public hand access for compatibility
     var hand: IntArray

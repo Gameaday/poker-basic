@@ -59,7 +59,7 @@ dependencies {
     // Kotlin standard library and coroutines
     implementation "org.jetbrains.kotlin:kotlin-stdlib:${findProperty('kotlin.version') ?: '1.9.22'}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${findProperty('kotlinx.coroutines.version') ?: '1.7.3'}"
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0"
     
     // Testing with Kotlin support
     testImplementation 'org.junit.jupiter:junit-jupiter:5.13.4'

@@ -541,9 +541,60 @@ private fun getMonsterEmoji(monsterName: String): String {
 
 /**
  * Parse card string to extract rank, suit symbol, and color for display.
+ * Handles both full format ("Ace of Spades") and poker notation ("A♠").
  */
 private fun parseCardDisplay(card: String): Triple<String, String, Color> {
+    // Handle full format first (e.g., "Ace of Spades")
     when {
+        card.contains(" of Spades") -> {
+            val rank = card.replace(" of Spades", "").trim()
+            val displayRank = when (rank) {
+                "Ace" -> "A"
+                "King" -> "K"
+                "Queen" -> "Q"
+                "Jack" -> "J"
+                "Ten" -> "10"
+                else -> rank.firstOrNull()?.toString() ?: rank
+            }
+            return Triple(displayRank, "♠", Color.Black)
+        }
+        card.contains(" of Hearts") -> {
+            val rank = card.replace(" of Hearts", "").trim()
+            val displayRank = when (rank) {
+                "Ace" -> "A"
+                "King" -> "K"
+                "Queen" -> "Q"
+                "Jack" -> "J"
+                "Ten" -> "10"
+                else -> rank.firstOrNull()?.toString() ?: rank
+            }
+            return Triple(displayRank, "♥", Color.Red)
+        }
+        card.contains(" of Diamonds") -> {
+            val rank = card.replace(" of Diamonds", "").trim()
+            val displayRank = when (rank) {
+                "Ace" -> "A"
+                "King" -> "K"
+                "Queen" -> "Q"
+                "Jack" -> "J"
+                "Ten" -> "10"
+                else -> rank.firstOrNull()?.toString() ?: rank
+            }
+            return Triple(displayRank, "♦", Color.Red)
+        }
+        card.contains(" of Clubs") -> {
+            val rank = card.replace(" of Clubs", "").trim()
+            val displayRank = when (rank) {
+                "Ace" -> "A"
+                "King" -> "K"
+                "Queen" -> "Q"
+                "Jack" -> "J"
+                "Ten" -> "10"
+                else -> rank.firstOrNull()?.toString() ?: rank
+            }
+            return Triple(displayRank, "♣", Color.Black)
+        }
+        // Handle poker notation format (e.g., "A♠")
         card.contains("♠") -> {
             val rank = card.replace("♠", "").trim()
             return Triple(rank, "♠", Color.Black)

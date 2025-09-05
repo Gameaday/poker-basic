@@ -374,18 +374,22 @@ class GameLogicBridge {
     }
     
     /**
-     * Helper method to get card name in poker notation (e.g., "A♠", "K♥", "Q♦", "J♣").
+     * Helper method to get card name in full notation (e.g., "Ace of Spades", "King of Hearts", etc.).
+     * This format matches the CardGraphicsManager expectations for proper image loading.
      */
     private fun cardName(cardInt: Int): String {
-        // Convert to poker notation with rank and suit symbols
-        val suitSymbols = arrayOf("♠", "♥", "♦", "♣")
-        val rankSymbols = arrayOf("?", "A", "K", "Q", "J", "10", 
-                                 "9", "8", "7", "6", "5", "4", "3", "2", "1")
+        // Convert to full card names that match the drawable resources
+        val suits = arrayOf("Spades", "Hearts", "Diamonds", "Clubs")
+        val ranks = arrayOf("?", "Ace", "King", "Queen", "Jack", "Ten", 
+                           "Nine", "Eight", "Seven", "Six", "Five", "Four", "Three", "Two", "1")
         
         val rank = cardInt / 4 + 1
         val suit = cardInt % 4
         
-        return "${rankSymbols.getOrElse(rank) { "?" }}${suitSymbols.getOrElse(suit) { "?" }}"
+        val rankName = ranks.getOrElse(rank) { "Unknown" }
+        val suitName = suits.getOrElse(suit) { "Unknown" }
+        
+        return "$rankName of $suitName"
     }
     
     /**
@@ -738,6 +742,7 @@ class GameLogicBridge {
     
     /**
      * Determine and return the winner of the current hand.
+     * Automatically advances to the next round after determining winner.
      */
     fun determineWinner(): GameActionResult {
         if (!isGameInitialized) {
@@ -754,11 +759,27 @@ class GameLogicBridge {
                     val message = when {
                         isHumanWinner && winners.size == 1 -> "🎉 You won the hand!"
                         isHumanWinner && winners.size > 1 -> "🤝 You tied for the win!"
-                        else -> "You lost this hand"
+                        else -> {
+                            // Get the winner name(s) for display
+                            val winnerNames = winners.map { index ->
+                                if (index > 0 && index < engine.players.size) {
+                                    engine.players[index].name ?: "Player $index"
+                                } else "Unknown"
+                            }
+                            "🏆 Winner(s): ${winnerNames.joinToString(", ")}"
+                        }
                     }
                     
                     updatePlayerData()
-                    GameActionResult(true, message)
+                    
+                    // Check if we can continue the game
+                    if (engine.canContinue()) {
+                        // Game continues - prepare for next round
+                        GameActionResult(true, "$message\nPreparing next round...")
+                    } else {
+                        // Game over
+                        GameActionResult(true, "$message\nGame Over!")
+                    }
                 } else {
                     GameActionResult(false, "No winners determined")
                 }
@@ -804,10 +825,21 @@ class GameLogicBridge {
     }
     
     /**
-     * Check if card exchange is allowed in the current phase.
+     * Check if cards can be exchanged in the current phase.
      */
     fun canExchangeCards(): Boolean {
         return getCurrentPhase().allowsCardExchange && !cardsExchangedThisRound
+    }
+    
+    /**
+     * Get information about card exchange status for UI display.
+     */
+    fun getCardExchangeStatus(): String {
+        return when {
+            !getCurrentPhase().allowsCardExchange -> "Not in card exchange phase"
+            cardsExchangedThisRound -> "Cards already exchanged this round"
+            else -> "Ready to exchange cards"
+        }
     }
     
     /**

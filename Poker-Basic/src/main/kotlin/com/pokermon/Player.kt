@@ -207,7 +207,6 @@ data class Player(
     /**
      * Java compatibility method with 3 parameters (handSize defaults to 5).
      */
-    @JvmOverloads
     fun setupPlayer(playerName: String, playerChips: Int, deck: IntArray) {
         setupPlayer(playerName, playerChips, deck, 5)
     }

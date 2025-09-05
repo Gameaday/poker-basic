@@ -92,7 +92,6 @@ class CardUtilsTest {
         assertEquals(52, uniqueCards.size)
         
         // Test shuffling
-        val originalDeck = deck.copyOf()
         CardUtils.shuffleDeck(deck)
         
         // Should still have same cards but likely different order

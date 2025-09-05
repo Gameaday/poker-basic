@@ -42,10 +42,10 @@ object Achievements {
         val playerId: String,
         val unlockedAchievements: MutableSet<Achievement> = mutableSetOf(),
         val handTypeCount: MutableMap<String, Int> = mutableMapOf(),
-        val gamesWon: Int = 0,
-        val totalChipsWon: Int = 0,
-        val biggestWin: Int = 0,
-        val comebackWins: Int = 0,
+        var gamesWon: Int = 0,
+        var totalChipsWon: Int = 0,
+        var biggestWin: Int = 0,
+        var comebackWins: Int = 0,
         val monsterWins: MutableMap<String, Int> = mutableMapOf()
     ) {
         fun addAchievement(achievement: Achievement): Boolean {
@@ -164,7 +164,7 @@ object Achievements {
             unlockedAchievements = unlockedCount,
             completionPercentage = completionPercentage,
             totalPoints = progress.getTotalPoints(),
-            recentAchievements = progress.unlockedAchievements.takeLast(5)
+            recentAchievements = progress.unlockedAchievements.toList().takeLast(5)
         )
     }
     

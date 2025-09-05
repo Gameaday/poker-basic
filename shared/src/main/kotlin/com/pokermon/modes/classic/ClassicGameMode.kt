@@ -1,10 +1,18 @@
 package com.pokermon.modes.classic
 
-import com.pokermon.*
+import com.pokermon.GameEngine
+import com.pokermon.Game
+import com.pokermon.GameMode
+import com.pokermon.GamePhase
 import com.pokermon.players.Player
 import com.pokermon.database.MonsterDatabase
+import com.pokermon.database.Monster
 import com.pokermon.HandEvaluator
 import com.pokermon.modes.Achievement
+import com.pokermon.modes.RoundResult
+import com.pokermon.modes.PlayerHandResult
+import com.pokermon.modes.GameContext
+import com.pokermon.modes.MonsterEffect
 
 /**
  * Classic mode implementation - Traditional 5-card draw poker with monster companions.
@@ -15,17 +23,18 @@ import com.pokermon.modes.Achievement
  */
 class ClassicGameMode {
     
-    private val monsterDatabase = MonsterDatabase()
+    private val monsterDatabase = MonsterDatabase
     
     /**
      * Creates a classic game engine instance
      */
     fun createEngine(): GameEngine {
-        return GameEngine.Builder()
-            .gameMode(GameMode.CLASSIC)
-            .enableMonsters(true)
-            .difficultyLevel(2) // Medium difficulty default
-            .build()
+        val gameConfig = Game(
+            gameMode = GameMode.CLASSIC,
+            enableMonsters = true,
+            difficultyLevel = 2 // Medium difficulty default
+        )
+        return GameEngine(gameConfig)
     }
     
     /**
@@ -36,31 +45,27 @@ class ClassicGameMode {
         startingChips: Int = 1000,
         difficultyLevel: Int = 2
     ): Game {
-        val players = Array(playerCount) { index ->
-            if (index == 0) {
-                Player("Human Player", startingChips)
-            } else {
-                Player("AI Player ${index}", startingChips, isAI = true)
-            }
-        }
-        
-        return Game.Builder()
-            .players(*players)
-            .gameMode(GameMode.CLASSIC)
-            .startingChips(startingChips)
-            .build()
+        // Create game configuration
+        return Game(
+            maxPlayers = playerCount,
+            startingChips = startingChips,
+            gameMode = GameMode.CLASSIC,
+            enableMonsters = true,
+            difficultyLevel = difficultyLevel
+        )
     }
     
     /**
      * Handles classic mode specific rules and logic
      */
-    fun processRound(game: Game): RoundResult {
-        val activePlayers = game.players.filter { !it.folded && it.chips > 0 }
+    fun processRound(engine: GameEngine): RoundResult {
+        val players = engine.players ?: emptyArray()
+        val activePlayers = players.filter { !it.fold && it.chips > 0 }
         
         if (activePlayers.size <= 1) {
             return RoundResult(
                 winner = activePlayers.firstOrNull(),
-                potWon = game.pot,
+                potWon = engine.currentPot,
                 gameEnded = true
             )
         }
@@ -76,7 +81,7 @@ class ClassicGameMode {
         
         return RoundResult(
             winner = winner,
-            potWon = game.pot,
+            potWon = engine.currentPot,
             gameEnded = false,
             handResults = handResults
         )
@@ -93,23 +98,26 @@ class ClassicGameMode {
         if (monster != null) {
             val monsterData = monsterDatabase.getMonster(monster.name)
             
-            // Apply classic mode abilities
-            when (monsterData?.type) {
-                "Psychic" -> {
-                    // Psychic types can see one opponent's card
+            // Apply classic mode abilities based on effect type
+            when (monsterData?.effectType) {
+                Monster.EffectType.CARD_ADVANTAGE -> {
+                    // Card advantage can see one opponent's card
                     effects.add(MonsterEffect.CardReveal(1))
                 }
-                "Fire" -> {
-                    // Fire types increase bet aggression
+                Monster.EffectType.BETTING_BOOST -> {
+                    // Betting boost increases bet effectiveness
                     effects.add(MonsterEffect.BetModifier(1.2f))
                 }
-                "Water" -> {
-                    // Water types provide chip protection
+                Monster.EffectType.DEFENSIVE_SHIELD -> {
+                    // Defensive shield provides chip protection
                     effects.add(MonsterEffect.ChipProtection(0.1f))
                 }
-                "Electric" -> {
-                    // Electric types speed up game pace
+                Monster.EffectType.AI_ENHANCEMENT -> {
+                    // AI enhancement speeds up game pace
                     effects.add(MonsterEffect.SpeedBoost(1.5f))
+                }
+                else -> {
+                    // Other effect types don't have special classic mode effects
                 }
             }
         }
@@ -150,42 +158,4 @@ class ClassicGameMode {
         
         return achievements
     }
-}
-
-/**
- * Represents the result of a game round
- */
-data class RoundResult(
-    val winner: Player?,
-    val potWon: Int,
-    val gameEnded: Boolean,
-    val handResults: List<PlayerHandResult>? = null
-)
-
-/**
- * Represents a player's hand evaluation result
- */
-data class PlayerHandResult(
-    val player: Player,
-    val evaluation: HandEvaluator.HandResult
-)
-
-/**
- * Represents the game context for monster abilities
- */
-data class GameContext(
-    val currentPhase: GamePhase,
-    val pot: Int,
-    val currentBet: Int,
-    val playersRemaining: Int
-)
-
-/**
- * Monster effects that can be applied in classic mode
- */
-sealed class MonsterEffect {
-    data class CardReveal(val cardCount: Int) : MonsterEffect()
-    data class BetModifier(val multiplier: Float) : MonsterEffect()
-    data class ChipProtection(val percentage: Float) : MonsterEffect()
-    data class SpeedBoost(val multiplier: Float) : MonsterEffect()
 }

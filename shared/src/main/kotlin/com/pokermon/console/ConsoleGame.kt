@@ -79,7 +79,7 @@ class ConsoleGame {
         stateManager.updateGameState(
             GameState.Playing(
                 players = players,
-                currentPhase = GamePhase.ANTE
+                currentPhase = GamePhase.BETTING_ROUND
             )
         )
         
@@ -93,7 +93,7 @@ class ConsoleGame {
     private suspend fun runGameLoop(players: List<Player>, gameMode: GameMode) {
         var roundNumber = 1
         
-        while (players.count { !it.folded && it.chips > 0 } > 1) {
+        while (players.count { !it.fold && it.chips > 0 } > 1) {
             println("\n" + "=".repeat(50))
             println("                 ROUND $roundNumber")
             println("=".repeat(50))
@@ -106,7 +106,7 @@ class ConsoleGame {
             val ante = 10
             players.forEach { player ->
                 if (player.chips >= ante) {
-                    player.bet(ante)
+                    player.setBet(ante)
                 }
             }
             
@@ -160,11 +160,9 @@ class ConsoleGame {
      */
     private fun dealCards(players: List<Player>) {
         players.forEach { player ->
-            if (!player.folded) {
-                player.hand.clear()
-                repeat(5) {
-                    player.hand.add((1..52).random())
-                }
+            if (!player.fold) {
+                val newHand = IntArray(5) { (1..52).random() }
+                player.hand = newHand
             }
         }
     }
@@ -185,10 +183,10 @@ class ConsoleGame {
         var activePlayerIndex = 0
         var passCount = 0
         
-        while (passCount < players.count { !it.folded }) {
+        while (passCount < players.count { !it.fold }) {
             val player = players[activePlayerIndex]
             
-            if (!player.folded && player.chips > 0) {
+            if (!player.fold && player.chips > 0) {
                 ConsoleUI.displayPlayerStatus(players, activePlayerIndex)
                 ConsoleUI.displayPotInfo(pot, currentBet, 10)
                 
@@ -207,11 +205,11 @@ class ConsoleGame {
                 
                 // Update pot and bet tracking
                 val playerTotalBet = playersBet[player] ?: 0
-                pot += player.currentBet - playerTotalBet
-                playersBet[player] = player.currentBet
+                pot += player.bet - playerTotalBet
+                playersBet[player] = player.bet
                 
-                if (player.currentBet > currentBet) {
-                    currentBet = player.currentBet
+                if (player.bet > currentBet) {
+                    currentBet = player.bet
                     passCount = 0 // Reset pass count when bet is raised
                 } else {
                     passCount++
@@ -234,7 +232,7 @@ class ConsoleGame {
         println("-".repeat(25))
         
         players.forEach { player ->
-            if (!player.folded) {
+            if (!player.fold) {
                 if (player.isAI) {
                     // AI card exchange logic
                     val cardsToExchange = (0..2).random() // Simple AI: exchange 0-2 cards
@@ -269,7 +267,7 @@ class ConsoleGame {
      * Determines the winner in showdown
      */
     private fun showdown(players: List<Player>): Player? {
-        val activePlayers = players.filter { !it.folded }
+        val activePlayers = players.filter { !it.fold }
         if (activePlayers.isEmpty()) return null
         if (activePlayers.size == 1) return activePlayers.first()
         
@@ -332,7 +330,7 @@ class ConsoleGame {
         when (action) {
             "call" -> {
                 val callAmount = currentBet - (playersBet[player] ?: 0)
-                player.bet(callAmount)
+                player.setBet(callAmount)
                 println("${player.name} calls $callAmount")
                 stateManager.emitEvent(GameEvents.PlayerCalled(player, callAmount))
             }
@@ -342,12 +340,12 @@ class ConsoleGame {
                 } else {
                     ConsoleUI.getRaiseAmount(player, 10)
                 }
-                player.bet(currentBet + raiseAmount)
+                player.setBet(currentBet + raiseAmount)
                 println("${player.name} raises by $raiseAmount")
-                stateManager.emitEvent(GameEvents.PlayerRaised(player, raiseAmount, player.currentBet))
+                stateManager.emitEvent(GameEvents.PlayerRaised(player, raiseAmount, player.bet))
             }
             "fold" -> {
-                player.folded = true
+                player.setFold(true)
                 println("${player.name} folds")
                 stateManager.emitEvent(GameEvents.PlayerFolded(player))
             }

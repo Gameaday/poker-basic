@@ -236,6 +236,14 @@ open class Player(
     }
     
     /**
+     * Reset player state for a new round.
+     */
+    fun resetForNewRound() {
+        resetBet()
+        resetFold()
+    }
+    
+    /**
      * Update hand with new cards and sort them.
      */
     fun updateHand(playerHand: IntArray?) {

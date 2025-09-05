@@ -3,6 +3,7 @@ package com.pokermon.modes.adventure
 import com.pokermon.*
 import com.pokermon.players.Player
 import com.pokermon.database.Monster
+import com.pokermon.database.MonsterCollection
 import com.pokermon.modern.CardUtils
 import kotlin.math.min
 import kotlin.math.max

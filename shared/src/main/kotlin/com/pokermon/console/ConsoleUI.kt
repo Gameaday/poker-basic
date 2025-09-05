@@ -83,7 +83,7 @@ object ConsoleUI {
         println("-".repeat(50))
         players.forEachIndexed { index, player ->
             val activeMarker = if (index == activePlayerIndex) "👉 " else "   "
-            val statusIcon = if (player.folded) "❌" else "✅"
+            val statusIcon = if (player.fold) "❌" else "✅"
             println("$activeMarker$statusIcon ${player.name}: $${player.chips} chips")
         }
     }

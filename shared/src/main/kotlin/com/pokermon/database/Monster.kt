@@ -18,7 +18,7 @@ data class Monster(
     val effectType: EffectType,
     val effectPower: Int,
     val description: String,
-    val personality: AIPersonality = AIPersonality.getRandomPersonality()
+    val personality: AIPersonality = AIPersonality.values().random()
 ) {
     
     /**
@@ -67,7 +67,7 @@ data class Monster(
         effectType: EffectType,
         effectPower: Int,
         description: String
-    ) : this(name, rarity, baseHealth, effectType, effectPower, description, Personality.getRandomPersonality())
+    ) : this(name, rarity, baseHealth, effectType, effectPower, description, AIPersonality.values().random())
     
     /**
      * Calculate effective health based on rarity multiplier.

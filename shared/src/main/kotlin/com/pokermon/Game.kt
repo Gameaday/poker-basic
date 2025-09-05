@@ -12,7 +12,9 @@ data class Game @JvmOverloads constructor(
     val maxPlayers: Int = MAX_PLAYERS,
     val startingChips: Int = DEFAULT_STARTING_CHIPS,
     val maxBettingRounds: Int = 2,
-    val gameMode: GameMode = GameMode.CLASSIC
+    val gameMode: GameMode = GameMode.CLASSIC,
+    val enableMonsters: Boolean = false,
+    val difficultyLevel: Int = 1
 ) {
     companion object {
         private const val DEFAULT_HAND_SIZE = 5

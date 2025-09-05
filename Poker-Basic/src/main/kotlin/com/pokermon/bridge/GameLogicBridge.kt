@@ -831,14 +831,14 @@ class GameLogicBridge {
      * Check if betting actions are allowed in the current phase.
      */
     fun canBet(): Boolean {
-        return getCurrentPhase().allowsBetting
+        return getCurrentPhase().allowsBetting()
     }
     
     /**
      * Check if cards can be exchanged in the current phase.
      */
     fun canExchangeCards(): Boolean {
-        return getCurrentPhase().allowsCardExchange && !cardsExchangedThisRound
+        return getCurrentPhase().allowsCardExchange() && !cardsExchangedThisRound
     }
     
     /**
@@ -846,7 +846,7 @@ class GameLogicBridge {
      */
     fun getCardExchangeStatus(): String {
         return when {
-            !getCurrentPhase().allowsCardExchange -> "Not in card exchange phase"
+            !getCurrentPhase().allowsCardExchange() -> "Not in card exchange phase"
             cardsExchangedThisRound -> "Cards already exchanged this round"
             else -> "Ready to exchange cards"
         }
@@ -856,7 +856,7 @@ class GameLogicBridge {
      * Check if round progression is allowed in the current phase.
      */
     fun canProgressRound(): Boolean {
-        return getCurrentPhase().allowsRoundProgression
+        return getCurrentPhase().allowsRoundProgression()
     }
     
     /**

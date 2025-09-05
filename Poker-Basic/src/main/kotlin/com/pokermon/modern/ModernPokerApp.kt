@@ -10,7 +10,7 @@ import javafx.stage.Stage
 import javafx.scene.Node
 import com.pokermon.bridge.GameLogicBridge
 import com.pokermon.bridge.GameActionResult
-import com.pokermon.api.GameMode
+import com.pokermon.GameMode
 import com.pokermon.Version
 import com.pokermon.CardPackManager
 

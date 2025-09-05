@@ -1,8 +1,6 @@
 package com.pokermon.bridge
 
 import com.pokermon.*
-import com.pokermon.api.GameMode
-import com.pokermon.api.GamePhase
 
 /**
  * Data class to track AI player actions for UI feedback.
@@ -226,7 +224,7 @@ class GameLogicBridge {
      */
     private fun processAIPlayerAction(engine: com.pokermon.GameEngine, player: com.pokermon.Player, playerIndex: Int) {
         try {
-            val highBet = engine.currentHighBet
+            val highBet = engine.getCurrentHighBet()
             val playerBet = player.bet
             val playerChips = player.chips
             val callAmount = (highBet - playerBet).coerceAtMost(playerChips)
@@ -565,7 +563,7 @@ class GameLogicBridge {
                     val player = players[0] // Human player
                     
                     // For testing purposes, use a standard call amount if no high bet exists
-                    val highBet = engine.currentHighBet
+                    val highBet = engine.getCurrentHighBet()
                     val callAmount = if (highBet <= 0) 50 else (highBet - player.getBet()).coerceAtMost(player.getChips())
                     
                     if (callAmount <= 0) {

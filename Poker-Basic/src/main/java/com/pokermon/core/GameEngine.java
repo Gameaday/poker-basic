@@ -1,7 +1,7 @@
 package com.pokermon.core;
 
-import com.pokermon.api.Game;
-import com.pokermon.api.GamePhase;
+import com.pokermon.Game;
+import com.pokermon.GamePhase;
 import java.util.Arrays;
 
 /**

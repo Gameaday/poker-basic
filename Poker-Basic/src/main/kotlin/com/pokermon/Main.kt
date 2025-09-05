@@ -218,161 +218,25 @@ object Main {
     }
     
     /**
-     * Sophisticated hand value calculation - Restored from Java version.
-     * Evaluates poker hands with full hierarchy including special cases.
+     * Simplified hand value calculation using HandEvaluator.
+     * Replaces the complex scattered logic with clean, maintainable approach.
      */
     fun handValue(hand: IntArray): Int {
-        val multiples = handMultiples(hand)
-        var value = 13 - multiples[0][0]
-        
-        return when {
-            isRoyalFlush(hand) -> 100
-            isStraightFlush(hand) -> 99
-            is4Kind(multiples) -> value + 85
-            isFullHouse(multiples) -> value + 70
-            isFlush(hand) -> 65
-            isAceStraight(hand) -> 60
-            isStraight(hand) -> 55
-            is3Kind(multiples) -> value + 40
-            is2Pair(multiples) -> value + 25
-            is2Kind(multiples) -> value + 13
-            else -> maxOf(value, 1) // Ensure minimum value of 1 for high card
-        }
+        return HandEvaluator.evaluateHand(hand).score
     }
     
     /**
-     * Generate hand multiples array for sophisticated poker analysis.
-     */
-    fun handMultiples(hand: IntArray): Array<IntArray> {
-        val rankCounts = IntArray(13) { 0 }
-        
-        // Count occurrences of each rank using CardUtils
-        hand.forEach { card ->
-            val rank = CardUtils.cardRank(card)
-            rankCounts[rank]++
-        }
-        
-        // Create array of [rank, count] pairs, sorted by count descending
-        val multiples = mutableListOf<IntArray>()
-        for (rank in rankCounts.indices) {
-            if (rankCounts[rank] > 0) {
-                multiples.add(intArrayOf(rank, rankCounts[rank]))
-            }
-        }
-        
-        // Sort by count (descending), then by rank (descending)
-        multiples.sortWith { a, b ->
-            when {
-                a[1] != b[1] -> b[1] - a[1] // Sort by count descending
-                else -> b[0] - a[0] // Then by rank descending
-            }
-        }
-        
-        return multiples.toTypedArray()
-    }
-    
-    /**
-     * Royal Flush detection - A♠ K♠ Q♠ J♠ 10♠
-     */
-    fun isRoyalFlush(hand: IntArray): Boolean {
-        if (!isFlush(hand)) return false
-        
-        val ranks = hand.map { CardUtils.cardRank(it) }.sorted()
-        return ranks == listOf(8, 9, 10, 11, 12) // 10, J, Q, K, A
-    }
-    
-    /**
-     * Straight Flush detection - Five consecutive cards of same suit
-     */
-    fun isStraightFlush(hand: IntArray): Boolean {
-        return isFlush(hand) && (isStraight(hand) || isAceStraight(hand))
-    }
-    
-    /**
-     * Four of a Kind detection
-     */
-    fun is4Kind(multiples: Array<IntArray>): Boolean {
-        return multiples.isNotEmpty() && multiples[0][1] == 4
-    }
-    
-    /**
-     * Full House detection - Three of a kind + Pair
-     */
-    fun isFullHouse(multiples: Array<IntArray>): Boolean {
-        return multiples.size >= 2 && multiples[0][1] == 3 && multiples[1][1] == 2
-    }
-    
-    /**
-     * Flush detection - All cards same suit
-     */
-    fun isFlush(hand: IntArray): Boolean {
-        val firstSuit = CardUtils.cardSuit(hand[0])
-        return hand.all { CardUtils.cardSuit(it) == firstSuit }
-    }
-    
-    /**
-     * Straight detection - Five consecutive ranks
-     */
-    fun isStraight(hand: IntArray): Boolean {
-        val ranks = hand.map { CardUtils.cardRank(it) }.sorted()
-        
-        // Check for consecutive ranks
-        for (i in 0 until ranks.size - 1) {
-            if (ranks[i + 1] - ranks[i] != 1) {
-                return false
-            }
-        }
-        return true
-    }
-    
-    /**
-     * Ace-low straight detection - A 2 3 4 5
-     */
-    fun isAceStraight(hand: IntArray): Boolean {
-        val ranks = hand.map { CardUtils.cardRank(it) }.sorted()
-        return ranks == listOf(0, 1, 2, 3, 12) // 2, 3, 4, 5, A
-    }
-    
-    /**
-     * Three of a Kind detection
-     */
-    fun is3Kind(multiples: Array<IntArray>): Boolean {
-        return multiples.isNotEmpty() && multiples[0][1] == 3
-    }
-    
-    /**
-     * Two Pair detection
-     */
-    fun is2Pair(multiples: Array<IntArray>): Boolean {
-        return multiples.size >= 2 && multiples[0][1] == 2 && multiples[1][1] == 2
-    }
-    
-    /**
-     * Pair detection
-     */
-    fun is2Kind(multiples: Array<IntArray>): Boolean {
-        return multiples.isNotEmpty() && multiples[0][1] == 2
-    }
-    
-    /**
-     * Get human-readable hand description
+     * Get human-readable hand description using HandEvaluator.
      */
     fun getHandDescription(hand: IntArray): String {
-        val multiples = handMultiples(hand)
-        
-        return when {
-            isRoyalFlush(hand) -> "Royal Flush"
-            isStraightFlush(hand) -> "Straight Flush"
-            is4Kind(multiples) -> "Four of a Kind"
-            isFullHouse(multiples) -> "Full House"
-            isFlush(hand) -> "Flush"
-            isAceStraight(hand) -> "Ace-Low Straight"
-            isStraight(hand) -> "Straight"
-            is3Kind(multiples) -> "Three of a Kind"
-            is2Pair(multiples) -> "Two Pair"
-            is2Kind(multiples) -> "One Pair"
-            else -> "High Card"
-        }
+        return HandEvaluator.evaluateHand(hand).description
+    }
+    
+    /**
+     * Enhanced hand evaluation for detailed analysis.
+     */
+    fun getHandResult(hand: IntArray): HandEvaluator.HandResult {
+        return HandEvaluator.evaluateHand(hand)
     }
     
     /**
@@ -810,22 +674,21 @@ object Main {
     }
     
     /**
-     * Calculate hand value using enhanced Kotlin algorithms.
+     * Calculate hand value using HandEvaluator (0-8 scale for legacy compatibility).
      */
     fun calculateHandValue(hand: IntArray): Int {
-        // Use the same logic as original but with Kotlin enhancements
-        val multiples = cardMultiples(hand)
-        
-        return when {
-            isStraightFlush(hand) -> 8
-            is4Kind(multiples) -> 7
-            isFullHouse(multiples) -> 6
-            isFlush(hand) -> 5
-            isStraight(hand) -> 4
-            is3Kind(multiples) -> 3
-            is2Pair(multiples) -> 2
-            is2Kind(multiples) -> 1
-            else -> 0
+        val result = HandEvaluator.evaluateHand(hand)
+        return when (result.handType) {
+            HandEvaluator.HandType.HIGH_CARD -> 0
+            HandEvaluator.HandType.ONE_PAIR -> 1  
+            HandEvaluator.HandType.TWO_PAIR -> 2
+            HandEvaluator.HandType.THREE_OF_A_KIND -> 3
+            HandEvaluator.HandType.STRAIGHT -> 4
+            HandEvaluator.HandType.FLUSH -> 5
+            HandEvaluator.HandType.FULL_HOUSE -> 6
+            HandEvaluator.HandType.FOUR_OF_A_KIND -> 7
+            HandEvaluator.HandType.STRAIGHT_FLUSH -> 8
+            HandEvaluator.HandType.ROYAL_FLUSH -> 8
         }
     }
     
@@ -911,25 +774,37 @@ object Main {
     // ==================================================================
     
     /**
-     * Calculate AI bet using personality system integration.
+     * Enhanced AI betting using HandEvaluator and personality system.
      */
     fun calculateAdvancedAIBet(player: Player, currentBet: Int, potSize: Int): Int {
-        val handValue = calculateHandValue(player.hand)
-        val handStrength = handValue / 8.0 // Normalize to 0-1
+        val handResult = HandEvaluator.evaluateHand(player.hand)
+        val handStrength = handResult.score / 1000.0 // Normalize to 0-1
         
-        // Base bet calculation with personality influence
-        val personalityFactor = PersonalityManager.getInstance().getPlayerPersonality(player.name).aggressiveness
-        val baseBet = (handStrength * player.chips * personalityFactor.toDouble()).toInt()
-        
-        // Apply strategic considerations
-        val strategicBet = when {
-            handValue >= 6 -> maxOf(baseBet, currentBet * 2) // Strong hand - aggressive
-            handValue >= 3 -> maxOf(baseBet, currentBet) // Medium hand - match bet
-            handValue >= 1 -> minOf(baseBet, currentBet / 2) // Weak hand - conservative
-            else -> minOf(10, currentBet / 4) // Very weak - minimal bet
+        // Get personality factor with error handling
+        val personalityFactor = try {
+            PersonalityManager.getInstance().getPlayerPersonality(player.name).aggressiveness
+        } catch (e: Exception) {
+            0.5 // Default moderate aggressiveness
         }
         
-        return minOf(strategicBet, player.chips)
+        // Calculate base bet using hand strength and personality
+        val baseBet = (handStrength * player.chips * personalityFactor.toDouble() * 0.3).toInt()
+        
+        // Apply strategic considerations based on hand type
+        val strategicBet = when (handResult.handType) {
+            HandEvaluator.HandType.ROYAL_FLUSH, 
+            HandEvaluator.HandType.STRAIGHT_FLUSH,
+            HandEvaluator.HandType.FOUR_OF_A_KIND -> maxOf(baseBet, currentBet * 3) // Premium hands
+            HandEvaluator.HandType.FULL_HOUSE,
+            HandEvaluator.HandType.FLUSH -> maxOf(baseBet, currentBet * 2) // Strong hands
+            HandEvaluator.HandType.STRAIGHT,
+            HandEvaluator.HandType.THREE_OF_A_KIND -> maxOf(baseBet, currentBet) // Good hands
+            HandEvaluator.HandType.TWO_PAIR -> maxOf(baseBet, currentBet / 2) // Decent hands
+            HandEvaluator.HandType.ONE_PAIR -> minOf(baseBet, currentBet / 3) // Weak hands
+            HandEvaluator.HandType.HIGH_CARD -> minOf(10, currentBet / 4) // Very weak
+        }
+        
+        return minOf(strategicBet, player.chips).coerceAtLeast(0)
     }
     
     // ==================================================================

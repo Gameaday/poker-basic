@@ -362,11 +362,12 @@ class GameLogicBridge {
                 playerChips = player.chips
                 
                 // Convert player's hand to poker notation format
-                player.getHand()?.let { handInts ->
+                val handInts = player.hand
+                if (handInts.isNotEmpty()) {
                     playerHand = handInts.map { cardInt ->
                         if (cardInt != 0) CardUtils.cardName(cardInt) else "Empty"
                     }.filter { it != "Empty" }
-                } ?: run {
+                } else {
                     playerHand = emptyList()
                 }
             }
@@ -417,9 +418,9 @@ class GameLogicBridge {
             val players = engine.players
             if (players != null && players.isNotEmpty()) {
                 val player = players[0] // Human player is always at index 0
-                player.getHand()?.map { cardInt ->
+                player.hand.map { cardInt ->
                     getCardImagePath(cardInt)
-                } ?: emptyList()
+                }
             } else {
                 emptyList()
             }
@@ -958,6 +959,112 @@ class GameLogicBridge {
             GameActionResult(false, "Error clearing saved game: ${e.message}")
         }
     }
+    
+    // =================================================================
+    // MISSING METHODS NEEDED BY MODERNPOKERAPP
+    // =================================================================
+    
+    /**
+     * Get current game state for UI display
+     */
+    fun getGameState(): GameActionResult {
+        if (!isGameInitialized || gameEngine == null) {
+            return GameActionResult(false, "Game not initialized")
+        }
+        
+        updatePlayerData()
+        
+        // Convert playerHand list to IntArray if available
+        val handArray = if (playerHand.isNotEmpty()) {
+            // Convert card names back to integers - simplified for now
+            IntArray(playerHand.size) { 0 } // Placeholder - would need proper conversion
+        } else null
+        
+        return GameActionResult(
+            success = true,
+            message = "Game state retrieved",
+            playerHand = handArray,
+            pot = currentPot,
+            playerChips = playerChips
+        )
+    }
+    
+    /**
+     * Check if current player is human
+     */
+    fun isCurrentPlayerHuman(): Boolean {
+        val engine = gameEngine ?: return false
+        val players = engine.players ?: return false
+        val currentIndex = engine.currentPlayerIndex
+        
+        return if (currentIndex < players.size) {
+            players[currentIndex].isHuman
+        } else false
+    }
+    
+    /**
+     * Perform AI action for current player
+     */
+    fun performAIAction(): GameActionResult {
+        val engine = gameEngine ?: return GameActionResult(false, "Game not initialized")
+        
+        try {
+            processAIOpponents()
+            return GameActionResult(true, "AI action performed")
+        } catch (e: Exception) {
+            return GameActionResult(false, "AI action failed: ${e.message}")
+        }
+    }
+    
+    /**
+     * Process player action
+     */
+    fun processPlayerAction(action: String): GameActionResult {
+        val engine = gameEngine ?: return GameActionResult(false, "Game not initialized")
+        val players = engine.players ?: return GameActionResult(false, "No players")
+        
+        val humanPlayer = players.firstOrNull { it.isHuman }
+            ?: return GameActionResult(false, "No human player found")
+        
+        return when {
+            action == "call" -> {
+                val actualBet = humanPlayer.placeBet(currentBet)
+                if (actualBet > 0) {
+                    GameActionResult(true, "Called $actualBet")
+                } else {
+                    GameActionResult(false, "Insufficient chips")
+                }
+            }
+            action.startsWith("raise:") -> {
+                val amount = action.substringAfter(":").toIntOrNull() ?: 0
+                val totalBet = currentBet + amount
+                val actualBet = humanPlayer.placeBet(totalBet)
+                if (actualBet > 0) {
+                    currentBet += amount
+                    GameActionResult(true, "Raised by $amount")
+                } else {
+                    GameActionResult(false, "Insufficient chips for raise")
+                }
+            }
+            action == "fold" -> {
+                humanPlayer.setFold(true)
+                GameActionResult(true, "Folded")
+            }
+            else -> GameActionResult(false, "Invalid action: $action")
+        }
+    }
+    
+    /**
+     * Check if game is over
+     */
+    fun isGameOver(): Boolean {
+        val engine = gameEngine ?: return true
+        val players = engine.players ?: return true
+        
+        // Game is over if only one player has chips or all but one have folded
+        val activePlayers = players.filter { it.chips > 0 && !it.fold }
+        return activePlayers.size <= 1
+    }
 }
 
 /**
@@ -976,7 +1083,10 @@ data class PlayerInfo(
  */
 data class GameActionResult(
     val success: Boolean,
-    val message: String
+    val message: String,
+    val playerHand: IntArray? = null,
+    val pot: Int = 0,
+    val playerChips: Int = 0
 )
 
 /**

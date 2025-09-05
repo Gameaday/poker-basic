@@ -51,12 +51,8 @@ fun Player.getBetSafely(): Int = try { this.bet } catch (e: Exception) { 0 }
 fun Player.getHandDisplay(): String = buildString {
     appendLine("Player: ${name}")
     appendLine("Chips: ${chips}")
-    getHand()?.let { 
-        appendLine("Cards: ${it.contentToString()}")
-    }
-    getConvertedHand()?.let {
-        appendLine("Hand: ${it.contentToString()}")
-    }
+    appendLine("Cards: ${hand.contentToString()}")
+    appendLine("Hand: ${convertedHand.contentToString()}")
     if (handValue > 0) {
         appendLine("Hand Value: ${handValue}")
     }

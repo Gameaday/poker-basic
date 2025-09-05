@@ -110,7 +110,7 @@ class GameEngine(private val gameConfig: Game) {
             currentPhase = GamePhase.PLAYER_ACTIONS
         }
         
-        currentPot = Main.bet(players!!, currentPot)
+        currentPot = Main.conductBettingRound(players!!.toList(), currentPot)
         
         // Move to pot management phase after betting
         currentPhase = GamePhase.POT_MANAGEMENT
@@ -138,8 +138,11 @@ class GameEngine(private val gameConfig: Game) {
             player.removeCardAtIndex(index)
         }
         
-        Main.replaceCards(player.getHandForModification(), deck)
-        player.performAllChecks()
+        val hand = player.getHandForModification()
+        if (hand != null) {
+            Main.replaceCards(hand, deck)
+            player.performAllChecks()
+        }
         
         // Note: Don't auto-advance phase here since multiple players might exchange cards
     }
@@ -156,7 +159,7 @@ class GameEngine(private val gameConfig: Game) {
         // Set to winner determination phase
         currentPhase = GamePhase.WINNER_DETERMINATION
         
-        return intArrayOf(Main.decideWinner(players!!))
+        return intArrayOf(Main.decideWinner(players!!.toList()))
     }
     
     /**

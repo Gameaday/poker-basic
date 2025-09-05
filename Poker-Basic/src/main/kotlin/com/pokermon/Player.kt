@@ -19,11 +19,6 @@ data class Player(
     private var _bet: Int = 0,
     private var _hand: IntArray? = null,
     private var _handValue: Int = 0,
-    
-    // Public hand access for compatibility
-    var hand: IntArray
-        get() = _hand ?: IntArray(0)
-        set(value) { _hand = value }
     private var _straight: Boolean = false,
     private var _aceStraight: Boolean = false,
     private var _flush: Boolean = false,
@@ -40,6 +35,14 @@ data class Player(
     private var _convertedHand2: Array<String>? = null,
     private var _handMultiples: Array<IntArray>? = null
 ) {
+    
+    // Public hand access for compatibility
+    var hand: IntArray
+        get() = _hand ?: IntArray(0)
+        set(value) { 
+            _hand = value.copyOf()
+            updateConvertedHands()
+        }
     
     // Getter properties with null safety
     val lastBet: Int get() = _lastBet
@@ -63,10 +66,7 @@ data class Player(
     val convertedHand: Array<String> get() = _convertedHand ?: arrayOf()
     val convertedHand2: Array<String> get() = _convertedHand2 ?: arrayOf()
     
-    // Safe getters that return copies to prevent external modification
-    fun getHand(): IntArray? = _hand?.copyOf()
-    fun getConvertedHand(): Array<String>? = _convertedHand?.copyOf()
-    fun getConvertedHand2(): Array<String>? = _convertedHand2?.copyOf()
+    // Safe getter for hand multiples to prevent external modification
     fun getHandMultiples(): Array<IntArray>? = _handMultiples?.map { it.copyOf() }?.toTypedArray()
     
     // Setters with validation
@@ -84,13 +84,6 @@ data class Player(
     
     fun setPlayerChips(playerChips: Int) {
         this.chips = maxOf(0, playerChips) // Ensure non-negative
-    }
-    
-    fun setHand(hand: IntArray?) {
-        this._hand = hand?.copyOf()
-        if (hand != null) {
-            updateConvertedHands()
-        }
     }
     
     fun setBet(bet: Int) {
@@ -208,7 +201,7 @@ data class Player(
         for (i in 0 until handSize) {
             newHand[i] = deck[i] // Simple dealing from deck
         }
-        setHand(newHand)
+        hand = newHand
     }
     
     /**
@@ -368,14 +361,6 @@ data class Player(
     )
     
     /**
-     * Legacy setupPlayer method with 3 parameters for backward compatibility.
-     * Delegates to the full setupPlayer method with appropriate defaults.
-     */
-    fun setupPlayer(playerName: String, playerChips: Int, deck: IntArray) {
-        setupPlayer(playerName, playerChips, deck, 5) // Default hand size
-    }
-    
-    /**
      * Public calculateHandValue method for legacy compatibility.
      * Exposes hand value calculation for external use while maintaining encapsulation.
      */
@@ -419,6 +404,7 @@ data class Player(
     }
     
     // Override equals and hashCode for data class behavior with arrays
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

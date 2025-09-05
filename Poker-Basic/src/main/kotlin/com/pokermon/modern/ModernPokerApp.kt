@@ -1,519 +1,245 @@
 package com.pokermon.modern
 
-import javafx.application.Application
-import javafx.geometry.Insets
-import javafx.geometry.Pos
-import javafx.scene.Scene
-import javafx.scene.control.*
-import javafx.scene.layout.*
-import javafx.stage.Stage
-import javafx.scene.Node
 import com.pokermon.bridge.GameLogicBridge
 import com.pokermon.bridge.GameActionResult
 import com.pokermon.GameMode
 import com.pokermon.Version
-import com.pokermon.CardPackManager
+import kotlinx.coroutines.runBlocking
+import java.util.*
 
 /**
- * Modern JavaFX-based UI for the Pokermon game.
- * Provides a cross-platform interface with touch and mouse support.
+ * Modern console-based UI for the Pokermon game.
+ * Provides a sophisticated text interface with enhanced user experience.
+ * 
+ * This replaces the JavaFX implementation with a pure console interface
+ * suitable for server deployment and cross-platform compatibility.
  * 
  * @author Carl Nelson (@Gameaday)
  * @version 1.0.0
  */
-class ModernPokerApp : Application() {
+object ModernPokerApp {
     
     private val gameBridge = GameLogicBridge()
-    private var primaryStage: Stage? = null
+    private val scanner = Scanner(System.`in`)
     
-    // UI state
-    private val potLabel = Label("Pot: $0")
-    private val chipsLabel = Label("Chips: $1000")
-    private val statusLabel = Label("Welcome to ${Version.APP_NAME}!")
+    // Game state
+    private var currentPot = 0
+    private var playerChips = 1000
+    private var statusMessage = "Welcome to ${Version.APP_NAME}!"
     
-    // Game setup controls
-    private val playerNameField = TextField("Player")
-    private val playerCountSlider = Slider(2.0, 4.0, 4.0).apply { 
-        isShowTickLabels = true
-        isShowTickMarks = true
-        majorTickUnit = 1.0
-        isSnapToTicks = true
-    }
-    private val startingChipsSlider = Slider(500.0, 5000.0, 1000.0).apply {
-        isShowTickLabels = true
-        majorTickUnit = 500.0
-    }
-    
-    override fun start(primaryStage: Stage) {
-        this.primaryStage = primaryStage
-        primaryStage.title = "Modern Poker Game - Cross-Platform Edition"
-        
-        // Create main scene
-        val mainScene = createMainMenuScene()
-        primaryStage.scene = mainScene
-        primaryStage.width = 1000.0
-        primaryStage.height = 700.0
-        primaryStage.show()
+    /**
+     * Launch the modern console interface
+     */
+    fun launch() {
+        runBlocking {
+            showMainMenu()
+        }
     }
     
     /**
-     * Creates the main menu scene.
+     * Display the main menu and handle user interaction
      */
-    private fun createMainMenuScene(): Scene {
-        val root = VBox(20.0).apply {
-            alignment = Pos.CENTER
-            padding = Insets(50.0)
-            style = "-fx-background-color: #0f4132;"
-        }
+    private suspend fun showMainMenu() {
+        println("=".repeat(60))
+        println("   🎮 ${Version.APP_NAME} - Modern Console Interface 🎮")
+        println("=".repeat(60))
+        println()
         
-        // Title
-        val title = Label("🃏 Modern Poker Game").apply {
-            style = "-fx-font-size: 36px; -fx-text-fill: white; -fx-font-weight: bold;"
-        }
-        
-        val subtitle = Label("Cross-Platform Kotlin Edition").apply {
-            style = "-fx-font-size: 16px; -fx-text-fill: #cccccc;"
-        }
-        
-        // Menu buttons
-        val newGameBtn = Button("🎮 New Game").apply {
-            prefWidth = 200.0
-            prefHeight = 50.0
-            style = "-fx-font-size: 14px; -fx-background-color: #198754; -fx-text-fill: white;"
-            setOnAction { showGameSetup() }
-        }
-        
-        val settingsBtn = Button("⚙️ Settings").apply {
-            prefWidth = 200.0
-            prefHeight = 50.0
-            style = "-fx-font-size: 14px; -fx-background-color: #6c757d; -fx-text-fill: white;"
-            setOnAction { showSettings() }
-        }
-        
-        val exitBtn = Button("❌ Exit").apply {
-            prefWidth = 200.0
-            prefHeight = 50.0
-            style = "-fx-font-size: 14px; -fx-background-color: #dc3545; -fx-text-fill: white;"
-            setOnAction { primaryStage?.close() }
-        }
-        
-        // Version info
-        val versionLabel = Label("${Version.getVersionInfo()} - Modern UI Edition").apply {
-            style = "-fx-font-size: 12px; -fx-text-fill: #999999;"
-        }
-        
-        root.children.addAll(
-            title, subtitle,
-            Region().apply { prefHeight = 30.0 }, // Spacer
-            newGameBtn, settingsBtn, exitBtn,
-            Region().apply { prefHeight = 30.0 }, // Spacer
-            versionLabel
-        )
-        
-        return Scene(root, 1000.0, 700.0)
-    }
-    
-    /**
-     * Shows the game setup screen.
-     */
-    private fun showGameSetup() {
-        val root = VBox(20.0).apply {
-            alignment = Pos.CENTER
-            padding = Insets(30.0)
-            style = "-fx-background-color: #0f4132;"
-        }
-        
-        // Title
-        val title = Label("🎯 Game Setup").apply {
-            style = "-fx-font-size: 28px; -fx-text-fill: white; -fx-font-weight: bold;"
-        }
-        
-        // Setup form
-        val form = VBox(15.0).apply {
-            alignment = Pos.CENTER
-            maxWidth = 400.0
-        }
-        
-        // Player name
-        form.children.add(Label("Your Name:").apply {
-            style = "-fx-text-fill: white; -fx-font-size: 14px;"
-        })
-        playerNameField.style = "-fx-font-size: 14px;"
-        form.children.add(playerNameField)
-        
-        // Game Mode Selection
-        form.children.add(Label("Game Mode:").apply {
-            style = "-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;"
-        })
-        
-        val gameModeCombo = ComboBox<GameMode>().apply {
-            items.addAll(GameMode.values())
-            value = GameMode.CLASSIC
-            style = "-fx-font-size: 14px;"
-            setOnAction { 
-                gameBridge.setGameMode(value)
+        while (true) {
+            println(statusMessage)
+            println()
+            println("🃏 Main Menu:")
+            println("  [1] 🎲 New Game")
+            println("  [2] ⚙️  Settings")
+            println("  [3] ❓ Help")
+            println("  [4] ❌ Exit")
+            println()
+            print("Select option (1-4): ")
+            
+            when (scanner.nextLine().trim()) {
+                "1" -> startNewGame()
+                "2" -> showSettings()
+                "3" -> showHelp()
+                "4" -> {
+                    println("👋 Thanks for playing ${Version.APP_NAME}!")
+                    return
+                }
+                else -> statusMessage = "❌ Invalid option. Please select 1-4."
             }
         }
-        form.children.add(gameModeCombo)
+    }
+    
+    /**
+     * Start a new game with user configuration
+     */
+    private suspend fun startNewGame() {
+        println("\n🎲 New Game Setup")
+        println("-".repeat(40))
         
-        // Game mode description
-        val modeDescription = Label(GameMode.CLASSIC.description).apply {
-            style = "-fx-text-fill: #cccccc; -fx-font-size: 12px; -fx-wrap-text: true;"
-            maxWidth = 350.0
+        // Get player name
+        print("Enter your name: ")
+        val playerName = scanner.nextLine().trim().ifEmpty { "Player" }
+        
+        // Get number of AI opponents
+        print("Number of AI opponents (1-3): ")
+        val aiCount = scanner.nextLine().trim().toIntOrNull()?.coerceIn(1, 3) ?: 2
+        
+        // Get starting chips
+        print("Starting chips (500, 1000, 2500): ")
+        val startingChips = when (scanner.nextLine().trim().toIntOrNull()) {
+            500, 1000, 2500 -> scanner.nextLine().trim().toInt()
+            else -> 1000
         }
-        gameModeCombo.setOnAction {
-            modeDescription.text = gameModeCombo.value.description
-            // Show additional setup for monster modes
-            if (gameModeCombo.value.hasMonsters()) {
-                statusLabel.text = "Monster mode selected! Enhanced gameplay with creature collection features."
+        
+        // Initialize game
+        val gameResult = gameBridge.initializeGame(playerName, aiCount + 1, startingChips)
+        
+        if (gameResult) {
+            runGameLoop()
+        } else {
+            statusMessage = "❌ Failed to start game"
+        }
+    }
+    
+    /**
+     * Main game loop
+     */
+    private suspend fun runGameLoop() {
+        println("\n🃏 Game Started!")
+        
+        while (true) {
+            val gameState = gameBridge.getGameState()
+            
+            // Display game state
+            displayGameState(gameState)
+            
+            // Handle player input or AI turn
+            val action = if (gameBridge.isCurrentPlayerHuman()) {
+                getPlayerAction()
             } else {
-                statusLabel.text = "Classic poker mode selected."
+                // AI turn - auto-play
+                gameBridge.performAIAction()
+                continue
+            }
+            
+            // Process action
+            val result = gameBridge.processPlayerAction(action)
+            if (!result.success) {
+                println("❌ ${result.message}")
+                continue
+            }
+            
+            // Check if game is over
+            if (gameBridge.isGameOver()) {
+                displayGameResults()
+                break
             }
         }
-        form.children.add(modeDescription)
         
-        // Player count
-        form.children.add(Label("Number of Players: ${playerCountSlider.value.toInt()}").apply {
-            style = "-fx-text-fill: white; -fx-font-size: 14px;"
-        })
-        val playerCountLabel = form.children.last() as Label
-        playerCountSlider.valueProperty().addListener { _, _, newValue ->
-            playerCountLabel.text = "Number of Players: ${newValue.toInt()}"
-        }
-        form.children.add(playerCountSlider)
-        
-        // Starting chips
-        form.children.add(Label("Starting Chips: ${startingChipsSlider.value.toInt()}").apply {
-            style = "-fx-text-fill: white; -fx-font-size: 14px;"
-        })
-        val chipsLabel = form.children.last() as Label
-        startingChipsSlider.valueProperty().addListener { _, _, newValue ->
-            chipsLabel.text = "Starting Chips: ${newValue.toInt()}"
-        }
-        form.children.add(startingChipsSlider)
-        
-        // Buttons
-        val buttonBox = HBox(10.0).apply {
-            alignment = Pos.CENTER
-        }
-        
-        val backBtn = Button("← Back").apply {
-            prefWidth = 100.0
-            style = "-fx-font-size: 14px; -fx-background-color: #6c757d; -fx-text-fill: white;"
-            setOnAction { primaryStage?.scene = createMainMenuScene() }
-        }
-        
-        val startBtn = Button("Start Game →").apply {
-            prefWidth = 120.0
-            style = "-fx-font-size: 14px; -fx-background-color: #198754; -fx-text-fill: white;"
-            setOnAction { startGame() }
-        }
-        
-        buttonBox.children.addAll(backBtn, startBtn)
-        
-        root.children.addAll(
-            title,
-            Region().apply { prefHeight = 20.0 },
-            form,
-            Region().apply { prefHeight = 20.0 },
-            buttonBox
-        )
-        
-        primaryStage?.scene = Scene(root, 1000.0, 700.0)
+        statusMessage = "✅ Game completed!"
     }
     
     /**
-     * Starts the game with the configured settings.
+     * Display current game state
      */
-    private fun startGame() {
-        val success = gameBridge.initializeGame(
-            playerNameField.text.ifEmpty { "Player" },
-            playerCountSlider.value.toInt(),
-            startingChipsSlider.value.toInt()
-        )
-        
-        if (success) {
-            showGamePlay()
-        } else {
-            showAlert("Error", "Failed to initialize game!")
-        }
+    private fun displayGameState(gameState: GameActionResult) {
+        println("\n" + "=".repeat(50))
+        println("🎮 Game State")
+        println("-".repeat(50))
+        println("💰 Pot: $${currentPot}")
+        println("💳 Your Chips: $${playerChips}")
+        println("🃏 Your Hand: ${formatHand(gameState.playerHand)}")
+        println("=".repeat(50))
     }
     
     /**
-     * Shows the main gameplay screen.
+     * Get player action
      */
-    private fun showGamePlay() {
-        val root = BorderPane().apply {
-            style = "-fx-background-color: #0f4132;"
-        }
+    private fun getPlayerAction(): String {
+        println("\n🎯 Your Turn:")
+        println("  [1] Call")
+        println("  [2] Raise")
+        println("  [3] Fold")
+        print("Select action (1-3): ")
         
-        // Top status bar
-        val statusBar = HBox(20.0).apply {
-            alignment = Pos.CENTER
-            padding = Insets(10.0)
-            style = "-fx-background-color: #198754;"
-        }
-        
-        potLabel.text = "Pot: $${gameBridge.getCurrentPot()}"
-        chipsLabel.text = "Chips: $${gameBridge.getPlayerChips()}"
-        
-        potLabel.style = "-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"
-        chipsLabel.style = "-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"
-        
-        statusBar.children.addAll(potLabel, chipsLabel)
-        root.top = statusBar
-        
-        // Center game area
-        val gameArea = VBox(20.0).apply {
-            alignment = Pos.CENTER
-            padding = Insets(20.0)
-        }
-        
-        // Player hand area
-        val handLabel = Label("Your Hand:").apply {
-            style = "-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"
-        }
-        
-        val handArea = HBox(10.0).apply {
-            alignment = Pos.CENTER
-        }
-        
-        // Display cards
-        val handCards = gameBridge.getPlayerHand()
-        val selectedCards = gameBridge.getSelectedCards()
-        
-        handCards.forEachIndexed { index, card ->
-            val cardBtn = Button(card).apply {
-                prefWidth = 80.0
-                prefHeight = 120.0
-                val isSelected = selectedCards.contains(index)
-                style = if (isSelected) {
-                    "-fx-font-size: 14px; -fx-background-color: #ffd700; -fx-border-color: #ff6600; -fx-border-width: 3px; -fx-text-fill: black;"
-                } else {
-                    "-fx-font-size: 14px; -fx-background-color: white; -fx-border-color: black; -fx-text-fill: black;"
-                }
-                setOnAction { 
-                    // Toggle card selection
-                    val nowSelected = gameBridge.toggleCardSelection(index)
-                    style = if (nowSelected) {
-                        "-fx-font-size: 14px; -fx-background-color: #ffd700; -fx-border-color: #ff6600; -fx-border-width: 3px; -fx-text-fill: black;"
-                    } else {
-                        "-fx-font-size: 14px; -fx-background-color: white; -fx-border-color: black; -fx-text-fill: black;"
-                    }
-                }
+        return when (scanner.nextLine().trim()) {
+            "1" -> "call"
+            "2" -> {
+                print("Raise amount: ")
+                val amount = scanner.nextLine().trim().toIntOrNull() ?: 0
+                "raise:$amount"
             }
-            handArea.children.add(cardBtn)
+            "3" -> "fold"
+            else -> "call" // Default action
         }
-        
-        gameArea.children.addAll(handLabel, handArea)
-        root.center = gameArea
-        
-        // Bottom control panel
-        val controls = createGameControls()
-        root.bottom = controls
-        
-        primaryStage?.scene = Scene(root, 1000.0, 700.0)
     }
     
     /**
-     * Creates game control buttons.
+     * Display game results
      */
-    private fun createGameControls(): Node {
-        val controls = VBox(10.0).apply {
-            padding = Insets(20.0)
-            style = "-fx-background-color: #2d5016;"
-        }
-        
-        // Action buttons
-        val actionRow = HBox(10.0).apply {
-            alignment = Pos.CENTER
-        }
-        
-        val callBtn = Button("📞 Call").apply {
-            prefWidth = 100.0
-            style = "-fx-font-size: 14px; -fx-background-color: #198754; -fx-text-fill: white;"
-            setOnAction { performAction("call") }
-        }
-        
-        val raiseBtn = Button("⬆️ Raise").apply {
-            prefWidth = 100.0
-            style = "-fx-font-size: 14px; -fx-background-color: #fd7e14; -fx-text-fill: white;"
-            setOnAction { performAction("raise") }
-        }
-        
-        val checkBtn = Button("✅ Check").apply {
-            prefWidth = 100.0
-            style = "-fx-font-size: 14px; -fx-background-color: #20c997; -fx-text-fill: white;"
-            setOnAction { performAction("check") }
-        }
-        
-        val foldBtn = Button("❌ Fold").apply {
-            prefWidth = 100.0
-            style = "-fx-font-size: 14px; -fx-background-color: #dc3545; -fx-text-fill: white;"
-            setOnAction { performAction("fold") }
-        }
-        
-        actionRow.children.addAll(callBtn, raiseBtn, checkBtn, foldBtn)
-        
-        // Secondary buttons
-        val secondRow = HBox(10.0).apply {
-            alignment = Pos.CENTER
-        }
-        
-        val exchangeBtn = Button("🔄 Exchange Cards").apply {
-            prefWidth = 150.0
-            style = "-fx-font-size: 14px; -fx-background-color: #6f42c1; -fx-text-fill: white;"
-            setOnAction { performAction("exchange") }
-        }
-        
-        val menuBtn = Button("🏠 Menu").apply {
-            prefWidth = 100.0
-            style = "-fx-font-size: 14px; -fx-background-color: #6c757d; -fx-text-fill: white;"
-            setOnAction { primaryStage?.scene = createMainMenuScene() }
-        }
-        
-        secondRow.children.addAll(exchangeBtn, menuBtn)
-        
-        // Status message
-        statusLabel.style = "-fx-text-fill: white; -fx-font-size: 14px;"
-        statusLabel.alignment = Pos.CENTER
-        
-        controls.children.addAll(actionRow, secondRow, statusLabel)
-        return controls
+    private fun displayGameResults() {
+        println("\n🏆 Game Results")
+        println("=".repeat(50))
+        // Implementation would show winners, final standings, etc.
+        println("Thanks for playing!")
     }
     
     /**
-     * Performs a game action.
-     */
-    private fun performAction(action: String) {
-        val result = when (action) {
-            "call" -> gameBridge.performCall()
-            "raise" -> showRaiseDialog()
-            "check" -> gameBridge.performCheck()
-            "fold" -> gameBridge.performFold()
-            "exchange" -> {
-                val selectedCards = gameBridge.getSelectedCards().toList()
-                if (selectedCards.isEmpty()) {
-                    return showAlert("No Selection", "Please select cards to exchange first.")
-                }
-                gameBridge.exchangeCards(selectedCards)
-            }
-            else -> return
-        }
-        
-        statusLabel.text = result.message
-        
-        // Update UI state
-        updateGameDisplay()
-        
-        // Refresh the game display to show updated cards
-        if (action == "exchange") {
-            showGamePlay()
-        }
-    }
-    
-    /**
-     * Shows a dialog for raise amount input.
-     */
-    private fun showRaiseDialog(): GameActionResult {
-        val dialog = TextInputDialog("100").apply {
-            title = "Raise Amount"
-            headerText = "Enter raise amount:"
-            contentText = "Amount:"
-        }
-        
-        val result = dialog.showAndWait()
-        return if (result.isPresent) {
-            try {
-                val amount = result.get().toInt()
-                if (amount > 0) {
-                    gameBridge.performRaise(amount)
-                } else {
-                    GameActionResult(false, "Invalid raise amount")
-                }
-            } catch (e: NumberFormatException) {
-                GameActionResult(false, "Invalid number format")
-            }
-        } else {
-            GameActionResult(false, "Raise cancelled")
-        }
-    }
-    
-    /**
-     * Updates the game display with current state.
-     */
-    private fun updateGameDisplay() {
-        potLabel.text = "Pot: $${gameBridge.getCurrentPot()}"
-        chipsLabel.text = "Chips: $${gameBridge.getPlayerChips()}"
-    }
-    
-    /**
-     * Shows the settings screen.
+     * Show settings menu
      */
     private fun showSettings() {
-        val gameMode = gameBridge.getGameMode()
-        val modeInfo = when (gameMode) {
-            GameMode.CLASSIC -> "Standard poker gameplay"
-            GameMode.ADVENTURE -> "Battle monsters in poker duels"
-            GameMode.SAFARI -> "Capture monsters through poker"
-            GameMode.IRONMAN -> "Convert winnings to monster gacha"
-        }
-        
-        // Get card pack information
-        val cardPackManager = CardPackManager.getInstance()
-        val selectedCardPack = gameBridge.getSelectedCardPack()
-        val selectedCardPackDisplay = cardPackManager.getDisplayName(selectedCardPack)
-        val availablePacks = cardPackManager.availableCardPacks.values.joinToString(", ")
-        
-        val alert = Alert(Alert.AlertType.INFORMATION).apply {
-            title = "Settings"
-            headerText = "Game Settings"
-            contentText = """
-                Graphics Settings:
-                ✓ Modern UI enabled
-                ✓ Touch/mouse support active
-                ✓ Cross-platform compatibility
-                
-                Card Display Settings:
-                ✓ Selected Card Pack: $selectedCardPackDisplay
-                ✓ Available Packs: $availablePacks
-                
-                Game Settings:
-                ✓ Current Mode: ${gameMode.displayName}
-                ✓ Mode Description: $modeInfo
-                ✓ Auto-save enabled
-                ✓ Hints enabled
-                ✓ ${if (gameMode.hasMonsters()) "Monster system active" else "Standard poker rules"}
-                
-                Available Game Modes:
-                • Classic Poker: Traditional gameplay
-                • Adventure Mode: Battle monsters (chips = monster health)
-                • Safari Mode: Capture monsters through poker success
-                • Ironman Mode: Gacha system with rarity chances
-                
-                Platform: JavaFX/Kotlin
-                Version: 0.1b
-            """.trimIndent()
-        }
-        alert.showAndWait()
+        println("\n⚙️ Settings")
+        println("-".repeat(20))
+        println("Settings functionality coming soon!")
+        println()
     }
     
     /**
-     * Shows an alert dialog.
+     * Show help information
      */
-    private fun showAlert(title: String, message: String) {
-        val alert = Alert(Alert.AlertType.ERROR).apply {
-            this.title = title
-            headerText = null
-            contentText = message
-        }
-        alert.showAndWait()
+    private fun showHelp() {
+        println("\n❓ Help - ${Version.APP_NAME}")
+        println("=".repeat(50))
+        println("This is a sophisticated poker game with monster collection mechanics.")
+        println()
+        println("🎮 Game Modes:")
+        println("  • Classic Poker - Traditional 5-card draw poker")
+        println("  • Adventure Mode - Poker with monster battles")
+        println()
+        println("🃏 How to Play:")
+        println("  1. Choose your starting chips")
+        println("  2. Play against AI opponents")
+        println("  3. Win chips through poker hands")
+        println("  4. Collect and battle monsters in Adventure mode")
+        println()
+        println("Press Enter to continue...")
+        scanner.nextLine()
     }
     
-    companion object {
-        @JvmStatic
-        fun launch() {
-            Application.launch(ModernPokerApp::class.java)
-        }
+    /**
+     * Generate AI player names
+     */
+    private fun generateAINames(count: Int): Array<String> {
+        val aiNames = arrayOf("CardShark", "PokerBot", "BluffMaster", "ChipChaser")
+        return aiNames.take(count).toTypedArray()
+    }
+    
+    /**
+     * Format hand for display
+     */
+    private fun formatHand(hand: IntArray?): String {
+        return hand?.joinToString(" ") { cardToString(it) } ?: "No cards"
+    }
+    
+    /**
+     * Convert card number to string representation
+     */
+    private fun cardToString(card: Int): String {
+        val suits = arrayOf("♠", "♥", "♦", "♣")
+        val ranks = arrayOf("A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K")
+        
+        val suit = suits[card / 13]
+        val rank = ranks[card % 13]
+        return "$rank$suit"
     }
 }

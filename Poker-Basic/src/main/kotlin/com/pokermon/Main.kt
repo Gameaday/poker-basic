@@ -690,93 +690,8 @@ object Main {
     }
     
     // =================================================================
-    // UTILITY METHODS FOR COMPATIBILITY AND ENHANCED FUNCTIONALITY  
+    // ENHANCED UTILITY METHODS - MODERN KOTLIN IMPLEMENTATION  
     // =================================================================
-    
-    /**
-     * Display author information.
-     */
-    private fun displayAuthor() {
-        println("Made by: Carl Nelson and Anthony Elizondo") // Creator names
-        println() // space
-    }
-    
-    /**
-     * Prompt for player name with default fallback.
-     */
-    private fun promptName(defaultName: String): String {
-        return if (defaultName.isNotBlank()) defaultName else "A(n) Drew Hussie"
-    }
-    
-    /**
-     * Prompt for ending game with default behavior.
-     */
-    private fun promptEnd(defaultContinue: Boolean): Boolean {
-        return defaultContinue
-    }
-    
-    /**
-     * Read integer with default value and range validation.
-     */
-    private fun readIntWithDefault(default: Int, range: IntRange): Int {
-        return if (default in range) default else range.first
-    }
-    
-    /**
-     * Read integer with validation against allowed values.
-     */
-    private fun readIntWithValidation(validValues: List<Int>): Int {
-        return validValues.getOrElse(1) { validValues.first() } // Default to second option or first if not available
-    }
-    
-    /**
-     * Deal a hand of cards from the deck.
-     */
-    private fun dealHand(): IntArray {
-        val deck = setDeck()
-        val hand = IntArray(DEFAULT_HAND_SIZE)
-        
-        for (i in hand.indices) {
-            hand[i] = drawCard(deck)
-        }
-        
-        return hand
-    }
-    
-    /**
-     * Display hand with sophisticated formatting.
-     */
-    private fun displayHand(hand: IntArray) {
-        println(CardUtils.formatHand(hand, compact = false))
-    }
-    
-    /**
-     * Calculate hand value - wrapper for compatibility.
-     */
-    private fun calculateHandValue(hand: IntArray): Int {
-        return handValue(hand)
-    }
-    
-    /**
-     * Conduct betting round - simplified wrapper for compatibility.
-     */
-    private fun conductBettingRound(players: List<Player>, workingPot: Int, topBet: Int): Pair<Int, Int> {
-        val newPot = conductBettingRound(players, workingPot)
-        return Pair(newPot, topBet) // Return pot and bet amount
-    }
-    
-    /**
-     * Determine winner - simplified wrapper for compatibility.
-     */
-    private fun determineWinner(players: List<Player>): Player? {
-        val activePlayers = players.filter { !it.isFold }
-        if (activePlayers.isEmpty()) return null
-        
-        val maxHandValue = activePlayers.maxOf { handValue(it.hand) }
-        val winners = activePlayers.filter { handValue(it.hand) == maxHandValue }
-        
-        return winners.firstOrNull()
-    }
     
     /**
      * Display author information with enhanced formatting.
@@ -799,6 +714,20 @@ object Main {
         println("Enter your name (or press Enter for '$defaultName'):")
         val input = readLine()?.trim()
         return if (input.isNullOrEmpty()) defaultName else input
+    }
+    
+    /**
+     * Prompt for ending game with enhanced user experience.
+     */
+    private fun promptEnd(defaultContinue: Boolean): Boolean {
+        println("Play another game? (y/n, default: ${if (defaultContinue) "y" else "n"})")
+        val input = readLine()?.trim()?.lowercase()
+        return when {
+            input.isNullOrEmpty() -> defaultContinue
+            input.startsWith("y") -> true
+            input.startsWith("n") -> false
+            else -> defaultContinue
+        }
     }
     
     /**
@@ -887,23 +816,6 @@ object Main {
     }
     
     /**
-     * Get hand description for display.
-     */
-    private fun getHandDescription(hand: IntArray): String {
-        return when (calculateHandValue(hand)) {
-            8 -> "Straight Flush"
-            7 -> "Four of a Kind"
-            6 -> "Full House"
-            5 -> "Flush"
-            4 -> "Straight"
-            3 -> "Three of a Kind"
-            2 -> "Two Pair"
-            1 -> "One Pair"
-            else -> "High Card"
-        }
-    }
-    
-    /**
      * Conduct betting round with enhanced logic.
      */
     private fun conductBettingRound(players: List<Player>, initialPot: Int, initialTopBet: Int): Pair<Int, Int> {
@@ -980,27 +892,6 @@ object Main {
     fun is4Kind(multiples: IntArray): Boolean = 4 in multiples
     fun isFullHouse(multiples: IntArray): Boolean = 2 in multiples && 3 in multiples
     
-    /**
-     * Check for flush using Kotlin collection operations.
-     */
-    fun isFlush(hand: IntArray): Boolean {
-        val suits = hand.map { CardUtils.cardSuit(it) }.distinct()
-        return suits.size == 1
-    }
-    
-    /**
-     * Check for straight using Kotlin range operations.
-     */
-    fun isStraight(hand: IntArray): Boolean {
-        val ranks = hand.map { CardUtils.cardRank(it) }.sorted()
-        return ranks.zipWithNext().all { (a, b) -> b - a == 1 }
-    }
-    
-    /**
-     * Check for straight flush combining both checks.
-     */
-    fun isStraightFlush(hand: IntArray): Boolean = isFlush(hand) && isStraight(hand)
-    
     // ==================================================================
     // AI BETTING LOGIC (Enhanced with Kotlin algorithms)
     // ==================================================================
@@ -1013,8 +904,8 @@ object Main {
         val handStrength = handValue / 8.0 // Normalize to 0-1
         
         // Base bet calculation with personality influence
-        val personalityFactor = PersonalityManager.getPersonalityAggression(player.name)
-        val baseBet = (handStrength * player.chips * personalityFactor).toInt()
+        val personalityFactor = PersonalityManager.getInstance().getPlayerPersonality(player.name).aggressiveness
+        val baseBet = (handStrength * player.chips * personalityFactor.toDouble()).toInt()
         
         // Apply strategic considerations
         val strategicBet = when {

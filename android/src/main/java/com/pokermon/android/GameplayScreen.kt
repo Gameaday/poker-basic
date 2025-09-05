@@ -5,12 +5,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -34,7 +30,7 @@ import kotlinx.coroutines.launch
 private const val BET_INCREMENT = 10
 
 /**
- * Enhanced gameplay screen with monster opponents, card graphics, and improved flow management.
+ * Enhanced gameplay screen with compact layout that fits on one screen without scrolling.
  * Addresses gameplay flow issues and integrates monster system for engaging opponents.
  */
 @Composable
@@ -78,6 +74,9 @@ fun GameplayScreen(
     var canExchangeCards by remember { mutableStateOf(false) }
     var canProgressRound by remember { mutableStateOf(false) }
     
+    // AI action feedback
+    var aiActionMessage by remember { mutableStateOf("") }
+    
     // Function to refresh all game data including phase information
     fun refreshGameData() {
         if (isGameInitialized) {
@@ -100,23 +99,16 @@ fun GameplayScreen(
             // Update selected cards from bridge
             selectedCards = gameBridge.getSelectedCards()
             
-            // Update game flow state
+            // Update waiting for player action
             awaitingPlayerAction = canBet || canExchangeCards
-            gameState = phaseDescription
             
-            // Auto-progress if needed and possible
-            if (!awaitingPlayerAction && canProgressRound) {
-                // Automatically advance to next phase after a short delay
+            // Check for AI action feedback
+            gameBridge.getLastAIAction()?.let { aiAction ->
+                aiActionMessage = aiAction.message
                 coroutineScope.launch {
-                    delay(1500) // Brief pause to show results
-                    if (!awaitingPlayerAction) {
-                        val result = gameBridge.advancePhase()
-                        if (result.success) {
-                            refreshGameData()
-                        } else {
-                            lastActionResult = result.message
-                        }
-                    }
+                    delay(2000) // Show for 2 seconds
+                    gameBridge.clearLastAIAction()
+                    aiActionMessage = ""
                 }
             }
         }
@@ -150,302 +142,346 @@ fun GameplayScreen(
         showExitConfirmDialog = true
     }
     
+    // Compact layout that fits on one screen without scrolling
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
-            .verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .padding(8.dp),
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
-        // Header with round and phase info
+        // Top section: Game stats and phase info (compact)
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 8.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Column {
-                Text(
-                    text = "🐲 ${gameMode.displayName}",
-                    style = MaterialTheme.typography.headlineMedium
+            // Compact game stats
+            Card(
+                modifier = Modifier.weight(1f).padding(end = 4.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer
                 )
-                if (isGameInitialized) {
+            ) {
+                Column(
+                    modifier = Modifier.padding(8.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
                     Text(
-                        text = phaseDisplayName,
+                        text = "💰 $playerChips",
                         style = MaterialTheme.typography.titleSmall,
-                        color = MaterialTheme.colorScheme.secondary
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = "Your Chips",
+                        style = MaterialTheme.typography.labelSmall
                     )
                 }
             }
             
-            if (isGameInitialized) {
-                Text(
-                    text = "Round $currentRound",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.primary
-                )
-            }
-        }
-        
-        // Game stats
-        GameStatsCard(
-            playerChips = playerChips,
-            currentPot = currentPot,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
-        
-        // All players information with monster opponents
-        if (allPlayers.isNotEmpty()) {
-            AllPlayersCard(
-                players = allPlayers,
-                monsterOpponents = monsterOpponents,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-        }
-        
-        // Player hand with card selection for exchange - only show if phase allows
-        if (shouldShowCards && playerCards.isNotEmpty()) {
-            PlayerHandCard(
-                cards = playerCards,
-                selectedCards = selectedCards,
-                onCardSelected = if (canExchangeCards) { cardIndex ->
-                    selectedCards = if (selectedCards.contains(cardIndex)) {
-                        selectedCards - cardIndex
-                    } else {
-                        selectedCards + cardIndex
-                    }
-                    gameBridge.toggleCardSelection(cardIndex)
-                } else { _ -> 
-                    // Card selection disabled when not in exchange phase
-                },
-                canSelectCards = canExchangeCards,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-        }
-        
-        // Game actions - only show if phase allows betting
-        if (isGameInitialized && canBet) {
-            GameActionsCard(
-                onCall = {
-                    val result = gameBridge.performCall()
-                    gameState = result.message
-                    if (result.success) {
-                        refreshGameData()
-                    }
-                },
-                onRaise = { amount ->
-                    val result = gameBridge.performRaise(amount)
-                    gameState = result.message
-                    if (result.success) {
-                        refreshGameData()
-                    }
-                },
-                onFold = {
-                    val result = gameBridge.performFold()
-                    gameState = result.message
-                    if (result.success) {
-                        refreshGameData()
-                    }
-                },
-                onCheck = {
-                    val result = gameBridge.performCheck()
-                    gameState = result.message
-                    if (result.success) {
-                        refreshGameData()
-                    }
-                },
-                onExchangeCards = if (canExchangeCards) { {
-                    if (selectedCards.isNotEmpty()) {
-                        val result = gameBridge.exchangeCards(selectedCards.toList())
-                        gameState = result.message
-                        if (result.success) {
-                            selectedCards = emptySet()
-                            refreshGameData()
-                        }
-                    } else {
-                        gameState = "Select cards to exchange first"
-                    }
-                } } else { {
-                    gameState = "Card exchange not available in current phase"
-                } },
-                betAmount = betAmount,
-                onBetAmountChanged = { betAmount = it },
-                hasSelectedCards = selectedCards.isNotEmpty(),
-                canExchangeCards = canExchangeCards,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-        }
-        
-        // Card exchange actions - separate section when in exchange phase
-        if (isGameInitialized && canExchangeCards && !canBet) {
             Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 16.dp),
+                modifier = Modifier.weight(1f).padding(horizontal = 2.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer
+                )
+            ) {
+                Column(
+                    modifier = Modifier.padding(8.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "🎯 $currentPot",
+                        style = MaterialTheme.typography.titleSmall,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = "Pot",
+                        style = MaterialTheme.typography.labelSmall
+                    )
+                }
+            }
+            
+            Card(
+                modifier = Modifier.weight(1f).padding(start = 4.dp),
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.tertiaryContainer
                 )
             ) {
                 Column(
-                    modifier = Modifier.padding(16.dp),
+                    modifier = Modifier.padding(8.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "🔄 Card Exchange",
-                        style = MaterialTheme.typography.titleMedium,
-                        modifier = Modifier.padding(bottom = 8.dp)
+                        text = "R$currentRound",
+                        style = MaterialTheme.typography.titleSmall,
+                        fontWeight = FontWeight.Bold
                     )
-                    
                     Text(
-                        text = if (selectedCards.isNotEmpty()) 
-                            "${selectedCards.size} card(s) selected for exchange"
-                        else "Select cards to exchange (tap cards above)",
-                        style = MaterialTheme.typography.bodyMedium,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.padding(bottom = 16.dp)
+                        text = "Round",
+                        style = MaterialTheme.typography.labelSmall
+                    )
+                }
+            }
+        }
+        
+        // Player hand section (compact)
+        if (shouldShowCards && playerCards.isNotEmpty()) {
+            Card(
+                modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant
+                )
+            ) {
+                Column(
+                    modifier = Modifier.padding(8.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "🃏 Your Hand",
+                        style = MaterialTheme.typography.titleSmall,
+                        modifier = Modifier.padding(bottom = 4.dp)
                     )
                     
+                    if (canExchangeCards && selectedCards.isNotEmpty()) {
+                        Text(
+                            text = "${selectedCards.size} selected for exchange",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.padding(bottom = 4.dp)
+                        )
+                    }
+                    
+                    // Compact card display
                     Row(
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        modifier = Modifier.horizontalScroll(rememberScrollState()),
+                        horizontalArrangement = Arrangement.spacedBy(2.dp)
                     ) {
-                        Button(
-                            onClick = {
-                                if (selectedCards.isNotEmpty()) {
-                                    val result = gameBridge.exchangeCards(selectedCards.toList())
-                                    gameState = result.message
-                                    if (result.success) {
-                                        selectedCards = emptySet()
-                                        refreshGameData()
-                                    }
-                                } else {
-                                    gameState = "Select cards to exchange first"
-                                }
-                            },
-                            enabled = selectedCards.isNotEmpty()
-                        ) {
-                            Text("Exchange Selected")
-                        }
-                        
-                        OutlinedButton(
-                            onClick = {
-                                val result = gameBridge.completeCardExchange()
-                                gameState = result.message
-                                if (result.success) {
-                                    selectedCards = emptySet()
-                                    refreshGameData()
-                                }
-                            }
-                        ) {
-                            Text("Skip Exchange")
+                        playerCards.forEachIndexed { index, card ->
+                            EnhancedCardDisplay(
+                                card = card,
+                                isSelected = canExchangeCards && selectedCards.contains(index),
+                                onClick = if (canExchangeCards) { 
+                                    { 
+                                        selectedCards = if (selectedCards.contains(index)) {
+                                            selectedCards - index
+                                        } else {
+                                            selectedCards + index
+                                        }
+                                    } 
+                                } else { {} },
+                                canClick = canExchangeCards,
+                                modifier = Modifier.size(width = 48.dp, height = 64.dp)
+                            )
                         }
                     }
                 }
             }
         }
         
-        // Round management - only show if phase allows round progression  
-        if (isGameInitialized && canProgressRound) {
-            RoundManagementCard(
-                isRoundComplete = isRoundComplete,
-                onNextRound = {
-                    val result = gameBridge.nextRound()
-                    gameState = result.message
-                    if (result.success) {
-                        refreshGameData()
-                    }
-                },
-                onDetermineWinner = {
-                    val result = gameBridge.determineWinner()
-                    gameState = result.message
-                    if (result.success) {
-                        refreshGameData()
-                        
-                        // Track game completion in user profile if auto-save is enabled
-                        if (gameSettings.autoSaveEnabled) {
-                            val finalChips = gameBridge.getPlayerChips()
-                            val chipsWon = finalChips - initialChips
-                            val playerWon = chipsWon > 0
-                            val playerInfo = allPlayers.firstOrNull { it.name == userProfile.username }
-                            val handAchieved = playerInfo?.let { 
-                                // Try to get the best hand achieved during the game
-                                // For now, use a simplified approach
-                                when {
-                                    finalChips > initialChips * 2 -> "High Win"
-                                    finalChips > initialChips -> "Good Hand"
-                                    else -> "High Card"
-                                }
-                            } ?: "High Card"
-                            
-                            // Record the game completion
-                            userProfileManager.recordGameCompletion(
-                                won = playerWon,
-                                chipsWon = chipsWon.toLong(),
-                                handAchieved = handAchieved,
-                                gameMode = gameMode.name
-                            )
-                            
-                            // Auto-save current game state if available
-                            gameBridge.saveGameState()
-                        }
-                    }
-                },
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-        }
-        
-        // Game status with phase information
+        // Game phase and status (compact)
         Card(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp),
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.secondaryContainer
             )
         ) {
             Column(
-                modifier = Modifier.padding(16.dp),
+                modifier = Modifier.padding(8.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                if (isGameInitialized) {
-                    Text(
-                        text = phaseDisplayName,
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.padding(bottom = 4.dp)
-                    )
-                    Text(
-                        text = phaseDescription,
-                        style = MaterialTheme.typography.bodyMedium,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.padding(bottom = 8.dp)
-                    )
-                }
-                
+                Text(
+                    text = phaseDisplayName,
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSecondaryContainer
+                )
                 Text(
                     text = gameState,
-                    style = MaterialTheme.typography.bodyMedium,
-                    textAlign = TextAlign.Center
+                    style = MaterialTheme.typography.bodySmall,
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.onSecondaryContainer
                 )
+                if (lastActionResult.isNotEmpty()) {
+                    Text(
+                        text = lastActionResult,
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.primary,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(top = 2.dp)
+                    )
+                }
             }
         }
         
-        Spacer(modifier = Modifier.height(24.dp))
+        // AI feedback area (when available)
+        if (aiActionMessage.isNotEmpty()) {
+            Card(
+                modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.tertiaryContainer
+                )
+            ) {
+                Row(
+                    modifier = Modifier.padding(8.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "🤖",
+                        style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier.padding(end = 4.dp)
+                    )
+                    Text(
+                        text = aiActionMessage,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer
+                    )
+                }
+            }
+        }
         
-        // Back button
-        OutlinedButton(
-            onClick = onBackPressed,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Back to Menu")
+        // Bottom section: Game actions (compact)
+        if (awaitingPlayerAction || canProgressRound || isRoundComplete) {
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surface
+                )
+            ) {
+                Column(
+                    modifier = Modifier.padding(8.dp)
+                ) {
+                    // Exchange cards section (if applicable)
+                    if (canExchangeCards && selectedCards.isNotEmpty()) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceEvenly
+                        ) {
+                            Button(
+                                onClick = {
+                                    val result = gameBridge.exchangeCards(selectedCards.toList())
+                                    lastActionResult = result.message
+                                    if (result.success) {
+                                        refreshGameData()
+                                        selectedCards = emptySet()
+                                    }
+                                },
+                                modifier = Modifier.weight(1f),
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = MaterialTheme.colorScheme.tertiary
+                                )
+                            ) {
+                                Text("Exchange ${selectedCards.size} Cards", style = MaterialTheme.typography.labelSmall)
+                            }
+                        }
+                        Spacer(modifier = Modifier.height(4.dp))
+                    }
+                    
+                    // Betting actions (if applicable)  
+                    if (canBet) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceEvenly
+                        ) {
+                            Button(
+                                onClick = {
+                                    val result = gameBridge.performCall()
+                                    lastActionResult = result.message
+                                    if (result.success) {
+                                        refreshGameData()
+                                    }
+                                },
+                                modifier = Modifier.weight(1f).padding(end = 2.dp),
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = MaterialTheme.colorScheme.primary
+                                )
+                            ) {
+                                Text("Call", style = MaterialTheme.typography.labelSmall)
+                            }
+                            
+                            Button(
+                                onClick = {
+                                    val result = gameBridge.performRaise(betAmount)
+                                    lastActionResult = result.message
+                                    if (result.success) {
+                                        refreshGameData()
+                                    }
+                                },
+                                modifier = Modifier.weight(1f).padding(horizontal = 1.dp),
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = MaterialTheme.colorScheme.secondary
+                                )
+                            ) {
+                                Text("Raise $betAmount", style = MaterialTheme.typography.labelSmall)
+                            }
+                            
+                            Button(
+                                onClick = {
+                                    val result = gameBridge.performFold()
+                                    lastActionResult = result.message
+                                    if (result.success) {
+                                        refreshGameData()
+                                    }
+                                },
+                                modifier = Modifier.weight(1f).padding(start = 2.dp),
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = MaterialTheme.colorScheme.error
+                                )
+                            ) {
+                                Text("Fold", style = MaterialTheme.typography.labelSmall)
+                            }
+                        }
+                    }
+                    
+                    // Round progression actions (if applicable)
+                    if (canProgressRound && isRoundComplete) {
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceEvenly
+                        ) {
+                            Button(
+                                onClick = {
+                                    val result = gameBridge.determineWinner()
+                                    lastActionResult = result.message
+                                    if (result.success) {
+                                        refreshGameData()
+                                    }
+                                },
+                                modifier = Modifier.weight(1f).padding(end = 4.dp),
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = MaterialTheme.colorScheme.secondary
+                                )
+                            ) {
+                                Text("Show Winner", style = MaterialTheme.typography.labelSmall)
+                            }
+                            
+                            Button(
+                                onClick = {
+                                    val result = gameBridge.nextRound()
+                                    lastActionResult = result.message
+                                    if (result.success) {
+                                        refreshGameData()
+                                    }
+                                },
+                                modifier = Modifier.weight(1f).padding(start = 4.dp),
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = MaterialTheme.colorScheme.primary
+                                )
+                            ) {
+                                Text("Next Round", style = MaterialTheme.typography.labelSmall)
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     
-    // Exit confirmation dialog
+    // Exit confirmation dialog with improved opacity
     if (showExitConfirmDialog) {
         AlertDialog(
             onDismissRequest = { showExitConfirmDialog = false },
             title = { 
                 Text(
-                    text = "🚪 Leave Round",
+                    text = "Pause Game?", 
                     color = MaterialTheme.colorScheme.onSurface
                 ) 
             },
@@ -453,7 +489,7 @@ fun GameplayScreen(
                 Text(
                     text = "Do you want to pause this round and return to the menu?\n\n" +
                           "Your game session will be preserved and you can continue later.",
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = MaterialTheme.colorScheme.onSurface
                 ) 
             },
             confirmButton = {
@@ -475,173 +511,31 @@ fun GameplayScreen(
                 TextButton(onClick = { showExitConfirmDialog = false }) {
                     Text("Continue Playing")
                 }
-            }
+            },
+            containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.95f) // More opaque background
         )
     }
 }
 
-@Composable
-fun GameStatsCard(
-    playerChips: Int,
-    currentPot: Int,
-    modifier: Modifier = Modifier
-) {
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer
-        )
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(
-                    text = "💰",
-                    style = MaterialTheme.typography.titleLarge
-                )
-                Text(
-                    text = "Your Chips",
-                    style = MaterialTheme.typography.labelMedium
-                )
-                Text(
-                    text = "$playerChips",
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-            
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(
-                    text = "🎯",
-                    style = MaterialTheme.typography.titleLarge
-                )
-                Text(
-                    text = "Current Pot",
-                    style = MaterialTheme.typography.labelMedium
-                )
-                Text(
-                    text = "$currentPot",
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-        }
-    }
-}
-
-@Composable
-fun PlayerHandCard(
-    cards: List<String>,
-    selectedCards: Set<Int>,
-    onCardSelected: (Int) -> Unit,
-    modifier: Modifier = Modifier,
-    canSelectCards: Boolean = true
-) {
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.tertiaryContainer
-        )
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = "🃏 Your Hand",
-                style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.padding(bottom = 8.dp)
-            )
-            
-            if (canSelectCards && selectedCards.isNotEmpty()) {
-                Text(
-                    text = "${selectedCards.size} card(s) selected for exchange",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.padding(bottom = 8.dp)
-                )
-            }
-            
-            // Show all cards in a scrollable row using enhanced graphics
-            Row(
-                modifier = Modifier.horizontalScroll(rememberScrollState()),
-                horizontalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                cards.forEachIndexed { index, card ->
-                    EnhancedCardDisplay(
-                        card = card,
-                        isSelected = canSelectCards && selectedCards.contains(index),
-                        onClick = if (canSelectCards) { { onCardSelected(index) } } else { {} },
-                        canClick = canSelectCards
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun CardDisplay(
-    card: String,
-    isSelected: Boolean = false,
-    onClick: () -> Unit = {},
-    canClick: Boolean = true
-) {
-    // Parse card string to get rank and suit for better display
-    val (rank, suitSymbol, suitColor) = parseCardDisplay(card)
-    
-    Box(
-        modifier = Modifier
-            .size(width = 50.dp, height = 70.dp) // Reduced size to fit more cards
-            .clickable(enabled = canClick) { onClick() }
-            .background(
-                color = if (isSelected) MaterialTheme.colorScheme.primary 
-                       else Color.White,
-                shape = RoundedCornerShape(6.dp) // Slightly smaller radius
-            ),
-        contentAlignment = Alignment.Center
-    ) {
-        // Add border for selected cards
-        if (isSelected) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(
-                        color = Color.Transparent,
-                        shape = RoundedCornerShape(6.dp)
-                    )
-                    .then(
-                        Modifier.background(
-                            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
-                            shape = RoundedCornerShape(6.dp)
-                        )
-                    )
-            )
-        }
-        
-        // Card content
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            // Rank
-            Text(
-                text = rank,
-                style = MaterialTheme.typography.titleMedium,
-                color = if (isSelected) Color.White else suitColor,
-                fontWeight = FontWeight.Bold
-            )
-            // Suit symbol
-            Text(
-                text = suitSymbol,
-                style = MaterialTheme.typography.titleLarge,
-                color = if (isSelected) Color.White else suitColor
-            )
-        }
+/**
+ * Get monster emoji for display based on monster name.
+ */
+private fun getMonsterEmoji(monsterName: String): String {
+    return when {
+        monsterName.contains("Pup") || monsterName.contains("Dog") -> "🐕"
+        monsterName.contains("Bird") -> "🐦"
+        monsterName.contains("Cat") -> "🐱"
+        monsterName.contains("Fox") -> "🦊"
+        monsterName.contains("Turtle") -> "🐢"
+        monsterName.contains("Shark") -> "🦈"
+        monsterName.contains("Raven") -> "🐦‍⬛"
+        monsterName.contains("Dragon") -> "🐉"
+        monsterName.contains("Phoenix") -> "🔥"
+        monsterName.contains("Ninja") -> "🥷"
+        monsterName.contains("Quokka") -> "🐹"
+        monsterName.contains("AI") || monsterName.contains("Algorithm") -> "🤖"
+        monsterName.contains("Daemon") || monsterName.contains("Compiler") -> "👾"
+        else -> "🎮"
     }
 }
 
@@ -670,312 +564,5 @@ private fun parseCardDisplay(card: String): Triple<String, String, Color> {
             // Fallback for unparseable cards
             return Triple(card, "", Color.Gray)
         }
-    }
-}
-
-@Composable
-fun AllPlayersCard(
-    players: List<PlayerInfo>,
-    monsterOpponents: List<MonsterOpponent>,
-    modifier: Modifier = Modifier
-) {
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
-        )
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(
-                text = "🐲 Battle Participants",
-                style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.padding(bottom = 12.dp)
-            )
-            
-            LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                itemsIndexed(players) { index, player ->
-                    val monster = if (index > 0 && index <= monsterOpponents.size) {
-                        monsterOpponents[index - 1]
-                    } else null
-                    
-                    PlayerInfoDisplay(
-                        player = player,
-                        monster = monster
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun PlayerInfoDisplay(
-    player: PlayerInfo,
-    monster: MonsterOpponent? = null
-) {
-    Card(
-        colors = CardDefaults.cardColors(
-            containerColor = if (player.isCurrentPlayer) 
-                MaterialTheme.colorScheme.primaryContainer 
-            else 
-                MaterialTheme.colorScheme.surface
-        )
-    ) {
-        Column(
-            modifier = Modifier.padding(12.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            // Player/Monster name with emoji
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                if (monster != null) {
-                    Text(
-                        text = getMonsterEmoji(monster.monster.name),
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                }
-                Text(
-                    text = if (player.isCurrentPlayer) "You" else (monster?.displayName ?: player.name),
-                    style = MaterialTheme.typography.labelLarge,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-            
-            Text(
-                text = "💰 ${player.chips}",
-                style = MaterialTheme.typography.bodySmall
-            )
-            
-            if (player.isFolded) {
-                Text(
-                    text = "🚫 Folded",
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.error
-                )
-            } else {
-                Text(
-                    text = "Hand: ${player.handValue}",
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
-        }
-    }
-}
-@Composable
-fun GameActionsCard(
-    onCall: () -> Unit,
-    onRaise: (Int) -> Unit,
-    onFold: () -> Unit,
-    onCheck: () -> Unit,
-    onExchangeCards: () -> Unit,
-    betAmount: Int,
-    onBetAmountChanged: (Int) -> Unit,
-    hasSelectedCards: Boolean,
-    modifier: Modifier = Modifier,
-    canExchangeCards: Boolean = true
-) {
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
-        )
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = "🎮 Game Actions",
-                style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-            
-            // First row: Call, Check, Fold
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                Button(
-                    onClick = onCall,
-                    modifier = Modifier.weight(1f),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.primary
-                    )
-                ) {
-                    Text("Call")
-                }
-                
-                Spacer(modifier = Modifier.width(8.dp))
-                
-                Button(
-                    onClick = onCheck,
-                    modifier = Modifier.weight(1f),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.secondary
-                    )
-                ) {
-                    Text("Check")
-                }
-                
-                Spacer(modifier = Modifier.width(8.dp))
-                
-                Button(
-                    onClick = onFold,
-                    modifier = Modifier.weight(1f),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.error
-                    )
-                ) {
-                    Text("Fold")
-                }
-            }
-            
-            Spacer(modifier = Modifier.height(12.dp))
-            
-            // Raise section
-            Text(
-                text = "Raise Amount: $betAmount",
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.padding(bottom = 8.dp)
-            )
-            
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                OutlinedButton(
-                    onClick = { if (betAmount > BET_INCREMENT) onBetAmountChanged(betAmount - BET_INCREMENT) }
-                ) {
-                    Text("-$BET_INCREMENT")
-                }
-                
-                Button(
-                    onClick = { onRaise(betAmount) },
-                    modifier = Modifier.weight(1f),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.tertiary
-                    )
-                ) {
-                    Text("Raise $betAmount")
-                }
-                
-                OutlinedButton(
-                    onClick = { onBetAmountChanged(betAmount + BET_INCREMENT) }
-                ) {
-                    Text("+$BET_INCREMENT")
-                }
-            }
-            
-            // Card exchange section - only show if card exchange is allowed
-            if (canExchangeCards && hasSelectedCards) {
-                Spacer(modifier = Modifier.height(12.dp))
-                
-                Button(
-                    onClick = onExchangeCards,
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.outline
-                    )
-                ) {
-                    Text("Exchange Selected Cards")
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun RoundManagementCard(
-    isRoundComplete: Boolean,
-    onNextRound: () -> Unit,
-    onDetermineWinner: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer
-        )
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = "🎯 Round Management",
-                style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.padding(bottom = 12.dp)
-            )
-            
-            if (isRoundComplete) {
-                Text(
-                    text = "Round is complete!",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.padding(bottom = 8.dp)
-                )
-                
-                Button(
-                    onClick = onNextRound,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text("Start Next Round")
-                }
-            } else {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    Button(
-                        onClick = onDetermineWinner,
-                        modifier = Modifier.weight(1f),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = MaterialTheme.colorScheme.secondary
-                        )
-                    ) {
-                        Text("Show Winner")
-                    }
-                    
-                    Spacer(modifier = Modifier.width(8.dp))
-                    
-                    OutlinedButton(
-                        onClick = onNextRound,
-                        modifier = Modifier.weight(1f)
-                    ) {
-                        Text("Next Round")
-                    }
-                }
-            }
-        }
-    }
-}
-
-/**
- * Get monster emoji for display based on monster name.
- */
-private fun getMonsterEmoji(monsterName: String): String {
-    return when {
-        monsterName.contains("Pup") || monsterName.contains("Dog") -> "🐕"
-        monsterName.contains("Bird") -> "🐦"
-        monsterName.contains("Cat") -> "🐱"
-        monsterName.contains("Fox") -> "🦊"
-        monsterName.contains("Turtle") -> "🐢"
-        monsterName.contains("Shark") -> "🦈"
-        monsterName.contains("Raven") -> "🐦‍⬛"
-        monsterName.contains("Dragon") -> "🐉"
-        monsterName.contains("Phoenix") -> "🔥"
-        monsterName.contains("Ninja") -> "🥷"
-        monsterName.contains("Quokka") -> "🐹"
-        monsterName.contains("AI") || monsterName.contains("Algorithm") -> "🤖"
-        monsterName.contains("Daemon") || monsterName.contains("Compiler") -> "👾"
-        else -> "🎮"
     }
 }

@@ -3,6 +3,16 @@ package com.pokermon.bridge
 import com.pokermon.*
 
 /**
+ * Data class to track AI player actions for UI feedback.
+ */
+data class AIActionResult(
+    val playerName: String,
+    val action: String,
+    val amount: Int = 0,
+    val message: String
+)
+
+/**
  * Bridge class that connects the Modern UI with the actual game engine.
  * Provides a clean interface for UI operations while maintaining separation of concerns.
  * Uses public interfaces to avoid package-private access issues.
@@ -28,6 +38,12 @@ class GameLogicBridge {
     
     // Flag to enable automatic AI processing (disabled by default for compatibility)
     private var enableAutoAI = false
+    
+    // Track if cards have been exchanged in the current round (limit to once per round)
+    private var cardsExchangedThisRound = false
+    
+    // Track last AI action for UI feedback
+    private var lastAIAction: AIActionResult? = null
     
     /**
      * Initialize a new game with the specified parameters.
@@ -131,6 +147,20 @@ class GameLogicBridge {
     }
     
     /**
+     * Get the last AI action for UI feedback.
+     */
+    fun getLastAIAction(): AIActionResult? {
+        return lastAIAction
+    }
+    
+    /**
+     * Clear the last AI action (called after UI has processed it).
+     */
+    fun clearLastAIAction() {
+        lastAIAction = null
+    }
+    
+    /**
      * Enable or disable automatic AI processing.
      * This should be enabled for Android UI but disabled for tests and console mode.
      */
@@ -198,6 +228,7 @@ class GameLogicBridge {
             val playerBet = player.bet
             val playerChips = player.chips
             val callAmount = (highBet - playerBet).coerceAtMost(playerChips)
+            val playerName = player.name ?: "AI $playerIndex"
             
             // Simple AI decision making based on hand strength and chips
             val handValue = player.handValue
@@ -207,12 +238,29 @@ class GameLogicBridge {
                 // Fold if hand is very weak and call amount is significant
                 handValue < 3 && chipRatio > 0.3 -> {
                     player.setFold(true)
+                    lastAIAction = AIActionResult(
+                        playerName = playerName,
+                        action = "Fold",
+                        message = "$playerName folded"
+                    )
                 }
                 // Call if call amount is reasonable
                 callAmount <= playerChips && chipRatio <= 0.5 -> {
                     if (callAmount > 0) {
                         player.placeBet(playerBet + callAmount)
                         engine.addToPot(callAmount)
+                        lastAIAction = AIActionResult(
+                            playerName = playerName,
+                            action = "Call",
+                            amount = callAmount,
+                            message = "$playerName called for $callAmount chips"
+                        )
+                    } else {
+                        lastAIAction = AIActionResult(
+                            playerName = playerName,
+                            action = "Check",
+                            message = "$playerName checked"
+                        )
                     }
                 }
                 // Raise if hand is strong and has chips
@@ -220,16 +268,39 @@ class GameLogicBridge {
                     val raiseAmount = callAmount + 20.coerceAtMost(playerChips / 4)
                     player.placeBet(playerBet + raiseAmount)
                     engine.addToPot(raiseAmount)
+                    lastAIAction = AIActionResult(
+                        playerName = playerName,
+                        action = "Raise",
+                        amount = raiseAmount,
+                        message = "$playerName raised by $raiseAmount chips"
+                    )
                 }
                 // Default: call if possible, otherwise fold
                 callAmount <= playerChips -> {
                     if (callAmount > 0) {
                         player.placeBet(playerBet + callAmount)
                         engine.addToPot(callAmount)
+                        lastAIAction = AIActionResult(
+                            playerName = playerName,
+                            action = "Call",
+                            amount = callAmount,
+                            message = "$playerName called for $callAmount chips"
+                        )
+                    } else {
+                        lastAIAction = AIActionResult(
+                            playerName = playerName,
+                            action = "Check",
+                            message = "$playerName checked"
+                        )
                     }
                 }
                 else -> {
                     player.setFold(true)
+                    lastAIAction = AIActionResult(
+                        playerName = playerName,
+                        action = "Fold",
+                        message = "$playerName folded"
+                    )
                 }
             }
         } catch (e: Exception) {
@@ -237,6 +308,11 @@ class GameLogicBridge {
             println("Warning: AI player $playerIndex decision error: ${e.message}")
             if (player.chips <= 0) {
                 player.setFold(true)
+                lastAIAction = AIActionResult(
+                    playerName = "AI $playerIndex",
+                    action = "Fold",
+                    message = "AI $playerIndex folded (error)"
+                )
             }
         }
     }
@@ -594,16 +670,22 @@ class GameLogicBridge {
     
     /**
      * Exchange selected cards with new ones from the deck.
+     * Limited to once per round to prevent multiple exchanges.
      */
     fun exchangeCards(cardIndices: List<Int>): GameActionResult {
         if (!isGameInitialized) {
             return GameActionResult(false, "Game not initialized")
         }
         
+        if (cardsExchangedThisRound) {
+            return GameActionResult(false, "Cards can only be exchanged once per round")
+        }
+        
         return try {
             gameEngine?.let { engine ->
                 val cardIndicesArray = cardIndices.toIntArray()
                 engine.exchangeCards(0, cardIndicesArray) // 0 = human player index
+                cardsExchangedThisRound = true // Mark that cards have been exchanged
                 updatePlayerData()
                 clearCardSelection()
                 GameActionResult(true, "Exchanged ${cardIndices.size} cards")
@@ -624,6 +706,7 @@ class GameLogicBridge {
         return try {
             gameEngine?.let { engine ->
                 engine.startNewRound()
+                cardsExchangedThisRound = false // Reset exchange flag for new round
                 updatePlayerData()
                 GameActionResult(true, "Advanced to round ${engine.currentRound}")
             } ?: GameActionResult(false, "Game engine not available")
@@ -724,7 +807,7 @@ class GameLogicBridge {
      * Check if card exchange is allowed in the current phase.
      */
     fun canExchangeCards(): Boolean {
-        return getCurrentPhase().allowsCardExchange
+        return getCurrentPhase().allowsCardExchange && !cardsExchangedThisRound
     }
     
     /**

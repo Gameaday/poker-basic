@@ -111,16 +111,16 @@ versionName "1.0.${getVersionCode.get()}" // Dynamic version name with timestamp
 
 The version code calculation uses days since project epoch plus current hour:
 
-1. **Base Epoch**: January 1, 2024 (project start reference)
+1. **Base Epoch**: June 25, 2025 (project start reference)
 2. **Days Calculation**: Days elapsed since base epoch
 3. **Hour Addition**: Current hour (0-23) for same-day builds
 4. **Formula**: `(days_since_base * 100) + current_hour`
 
 **Example:**
-- Date: March 15, 2025, 14:00 UTC
-- Days since Jan 1, 2024: ~439 days
+- Date: August 15, 2025, 14:00 UTC
+- Days since June 25, 2025: 51 days
 - Current hour: 14
-- Version code = (439 * 100) + 14 = 43914
+- Version code = (51 * 100) + 14 = 5114
 
 ### Benefits
 

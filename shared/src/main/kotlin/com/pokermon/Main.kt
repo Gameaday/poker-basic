@@ -4,6 +4,7 @@ import com.pokermon.ai.AIPlayer
 import com.pokermon.ai.AIPersonality
 import com.pokermon.ai.BettingAction
 import com.pokermon.ai.GameContext
+import com.pokermon.ai.PersonalityManager
 import com.pokermon.modern.CardUtils
 import com.pokermon.players.Player
 import kotlinx.coroutines.runBlocking
@@ -229,6 +230,15 @@ object Main {
             }
             
             println() // Space between player info for neatness
+        }
+        
+        // Setup the sophisticated PersonalityManager system for all AI players
+        val allPlayers = players.filterNotNull()
+        PersonalityManager.setupAllAIPlayers(allPlayers)
+        
+        // Display detailed AI setup information
+        allPlayers.filter { !it.isHuman }.forEach { player ->
+            println("Advanced AI Setup: ${PersonalityManager.getPlayerAIInfo(player.name)}")
         }
     }
     
@@ -842,71 +852,18 @@ object Main {
     // ==================================================================
     
     /**
-     * Enhanced AI betting using HandEvaluator and personality system.
-     * Now properly integrates with the AIPlayer personality-driven decision making.
+     * Enhanced AI betting using the sophisticated PersonalityManager system.
+     * This integrates the complex AI personality system with monster assignments
+     * and provides 10-attribute personality synthesis for decision making.
      */
     fun calculateAdvancedAIBet(player: Player, currentBet: Int, potSize: Int): Int {
-        // If this is an AIPlayer, use the sophisticated decision system
-        if (player is AIPlayer) {
-            val gameContext = GameContext(
-                currentBet = currentBet,
-                pot = potSize,
-                phase = GamePhase.BETTING_ROUND, // Use BETTING_ROUND instead of BETTING
-                opponentCount = 2 // TODO: Pass actual opponent count
-            )
-            
-            val bettingAction = player.makeBettingDecision(
-                currentBet = currentBet,
-                pot = potSize,
-                gamePhase = GamePhase.BETTING_ROUND,
-                opponents = emptyList() // TODO: Pass actual opponents list
-            )
-            
-            // Convert betting action to bet amount based on AI personality
-            return when (bettingAction) {
-                BettingAction.FOLD -> 0
-                BettingAction.CHECK -> currentBet
-                BettingAction.CALL -> currentBet
-                BettingAction.RAISE -> {
-                    val personality = player.personality
-                    val handResult = HandEvaluator.evaluateHand(player.hand)
-                    val handStrength = handResult.score / 1000.0
-                    
-                    // Calculate raise amount based on personality and hand strength
-                    val baseRaise = (potSize * 0.2 * handStrength * personality.aggression / 10.0).toInt()
-                    val personalityRaise = (currentBet * personality.aggression / 10.0).toInt()
-                    
-                    currentBet + maxOf(baseRaise, personalityRaise, 10)
-                }
-                BettingAction.ALL_IN -> player.chips
-            }
+        // Use the sophisticated PersonalityManager system for AI decisions
+        if (!player.isHuman) {
+            return PersonalityManager.calculateAdvancedAIBet(player, currentBet, potSize)
         }
         
-        // Fallback for regular Player objects (legacy compatibility)
-        val handResult = HandEvaluator.evaluateHand(player.hand)
-        val handStrength = handResult.score / 1000.0 // Normalize to 0-1
-        
-        // Default moderate aggressiveness for non-AI players
-        val personalityFactor = 0.5
-        
-        // Calculate base bet using hand strength and default personality
-        val baseBet = (handStrength * player.chips * personalityFactor * 0.3).toInt()
-        
-        // Apply strategic considerations based on hand type
-        val strategicBet = when (handResult.handType) {
-            HandEvaluator.HandType.ROYAL_FLUSH, 
-            HandEvaluator.HandType.STRAIGHT_FLUSH,
-            HandEvaluator.HandType.FOUR_OF_A_KIND -> maxOf(baseBet, currentBet * 3) // Premium hands
-            HandEvaluator.HandType.FULL_HOUSE,
-            HandEvaluator.HandType.FLUSH -> maxOf(baseBet, currentBet * 2) // Strong hands
-            HandEvaluator.HandType.STRAIGHT,
-            HandEvaluator.HandType.THREE_OF_A_KIND -> maxOf(baseBet, currentBet) // Good hands
-            HandEvaluator.HandType.TWO_PAIR -> maxOf(baseBet, currentBet / 2) // Decent hands
-            HandEvaluator.HandType.ONE_PAIR -> minOf(baseBet, currentBet / 3) // Weak hands
-            HandEvaluator.HandType.HIGH_CARD -> minOf(10, currentBet / 4) // Very weak
-        }
-        
-        return minOf(strategicBet, player.chips).coerceAtLeast(0)
+        // Fallback for human players (should not be called)
+        return currentBet
     }
     
     // ==================================================================

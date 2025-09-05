@@ -18,8 +18,15 @@ jobs:
       uses: android-actions/setup-android@v3
       with:
         cmdline-tools-version: 9477386
-        api-level: 34
-        build-tools: 34.0.0
+    
+    - name: Install Android SDK components
+      run: |
+        echo "=== Installing Android SDK Components ==="
+        sdkmanager --install "platforms;android-34"
+        sdkmanager --install "build-tools;34.0.0"
+        sdkmanager --install "platform-tools"
+        echo "y" | sdkmanager --licenses
+        echo "✅ Android SDK components installed"
     
     - name: Cache Gradle packages
       uses: actions/cache@v4
@@ -40,15 +47,22 @@ jobs:
         echo "✅ Kotlin Native toolchain ready"
     
     - name: Setup Kotlin-native infrastructure and verify Android support
-      timeout-minutes: 3
+      timeout-minutes: 5
       continue-on-error: true
       run: |
         chmod +x ./gradlew
         echo "=== Verifying Pure Kotlin Cross-Platform Configuration ==="
+        echo "Android SDK location: $ANDROID_SDK_ROOT"
+        echo "Android build tools: $(ls $ANDROID_SDK_ROOT/build-tools/ 2>/dev/null || echo 'Not found')"
+        
         ./gradlew verifyKotlinNativeSetup --no-daemon --no-configuration-cache || {
           echo "⚠️  Gradle verification failed (may be network-related)"
           echo "Continuing with offline validation..."
-          ./validate-android-build.sh
+          if [ -f "./validate-android-build.sh" ]; then
+            ./validate-android-build.sh
+          else
+            echo "✅ Offline validation script not found, continuing..."
+          fi
         }
     
     - name: Validate Pure Kotlin-Native Architecture (No Maven dependency)

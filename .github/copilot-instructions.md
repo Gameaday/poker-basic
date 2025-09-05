@@ -123,6 +123,45 @@ poker-basic/
 │   │   │   ├── ModernMain.kt       # Modern entry points
 │   │   │   ├── ModernPokerApp.kt   # Enhanced application logic
 │   │   │   └── CardUtils.kt        # Unified card logic (DRY compliance)
+│   │   ├── GameFlows/          # Flow-based reactive state management
+│   │   │   ├── GameState.kt        # Sealed class for game states
+│   │   │   ├── GameEvents.kt       # Event definitions for game actions
+│   │   │   ├── GameActions.kt      # Action definitions for game interactions
+│   │   │   └── GameStateManager.kt # Flow-based game state manager
+│   │   ├── players/                # Player management
+│   │   │   └── Player.kt           # Player class with modern Kotlin patterns
+|   │   ├── ai/                     # AI personality and behavior
+│   │   │   ├── AIPlayer.kt         # AI player implementation
+│   │   │   ├── AIPersonality.kt    # AI personality traits
+│   │   │   └── AIDecisionMaker.kt  # AI decision
+│   │   ├── database/               # Monster database (authoritative source)
+│   │   │   └── MonsterDatabase.kt  # Pure Kotlin-native monster data
+│   │   ├── console/                # Console mode specific code
+│   │   │   ├── ConsoleUI.kt       # Console user interface
+│   │   │   └── ConsoleGame.kt     # Console game flow
+│   │   ├── ui/                     # UI-specific code (shared with Android)
+│   │   │   ├── PokerApp.kt        # Desktop UI application logic
+│   │   │   └── UIComponents.kt    # Shared UI components
+│   │   ├── modes/                  # Game mode specific code (organized by mode)
+│   │   │   ├── adventure/          # Adventure mode specific code
+│   │   │   │   ├── AdventureGameMode.kt # Adventure mode implementation
+│   │   │   │   ├── MonsterBattle.kt    # Monster battle logic
+│   │   │   │   ├── QuestSystem.kt      # Quest management system
+│   │   │   │   └── Achievements.kt     # Adventure achievements management system
+│   │   │   ├── classic/            # Classic mode specific code
+│   │   │   │   ├── ClassicGameMode.kt  # Classic mode implementation
+│   │   │   │   ├── MonsterBattle.kt    # Classic specific logic
+│   │   │   │   └── Achievements.kt     # Classic achievements management system
+│   │   │   ├── safari/             # Safari mode specific code
+│   │   │   │   ├── SafariGameMode.kt   # Safari mode implementation
+│   │   │   │   ├── WildMonsterEncounter.kt # Wild monster encounters
+│   │   │   │   ├── SafariBall.kt       # Safari ball mechanics
+│   │   │   │   └── Achievements.kt      # Safari achievements management system
+│   │   │   └── ironmon/            # Ironmon mode specific code
+│   │   │       ├── IronmonGameMode.kt  # Ironmon mode implementation
+│   │   │       ├── IronmonRules.kt     # Hardcore ironmon rules
+│   │   │       ├── PermadeathSystem.kt # Permadeath mechanics
+│   │   │       └── Achievements.kt      # Ironmon achievements management system
 │   │   └── [Additional Kotlin files]
 │   ├── build.gradle                # Gradle: Pure Kotlin-native compilation
 │   └── build/                      # Build outputs (JAR, reports, native)

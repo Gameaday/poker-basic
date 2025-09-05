@@ -37,7 +37,7 @@ public class MonsterTest {
         Monster uncommon = new Monster("Wolf", Monster.Rarity.UNCOMMON, 50, 
                 Monster.EffectType.BETTING_BOOST, 20, "A cunning wolf");
         
-        assertEquals(30, uncommon.getEffectiveEffectPower()); // 20 * 1.5
+        assertEquals(30, uncommon.getEffectivePower()); // 20 * 1.5
     }
     
     @Test

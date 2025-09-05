@@ -249,6 +249,37 @@ object MonsterDatabase {
     
     @JvmStatic
     fun getRandomMonsterByRarityStatic(rarity: Monster.Rarity): Monster? = getRandomMonsterByRarity(rarity)
+    
+    // =============================================================================
+    // ADDITIONAL METHODS FOR TEST COMPATIBILITY (DRY PRINCIPLE COMPLIANCE)
+    // =============================================================================
+    
+    /**
+     * Get total monster count for test validation.
+     */
+    fun getTotalMonsterCount(): Int = getMonsterCount()
+    
+    /**
+     * Check if a monster exists by name.
+     */
+    fun hasMonster(name: String?): Boolean = getMonster(name) != null
+    
+    /**
+     * Get random monster using provided Random instance.
+     */
+    fun getRandomMonster(random: java.util.Random): Monster? {
+        val monsters = getAllMonsters()
+        return if (monsters.isNotEmpty()) {
+            monsters[random.nextInt(monsters.size)]
+        } else null
+    }
+    
+    /**
+     * Get monster names starting with specified prefix.
+     */
+    fun getMonsterNamesStartingWith(prefix: String): List<String> {
+        return monsterDatabase.keys.filter { it.startsWith(prefix, ignoreCase = true) }.sorted()
+    }
 }
 
 /**

@@ -188,11 +188,11 @@ public class PersonalityManager {
         };
         
         String selectedName = monsterNames[random.nextInt(monsterNames.length)];
-        Monster monster = MonsterDatabase.getMonster(selectedName);
+        Monster monster = MonsterDatabase.INSTANCE.getMonster(selectedName);
         
         // Fallback to PixelPup if the selected monster doesn't exist
         if (monster == null) {
-            monster = MonsterDatabase.getMonster("PixelPup");
+            monster = MonsterDatabase.INSTANCE.getMonster("PixelPup");
         }
         
         // If still null, create a basic monster

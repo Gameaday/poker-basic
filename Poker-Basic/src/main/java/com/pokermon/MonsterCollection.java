@@ -175,7 +175,7 @@ public class MonsterCollection {
      * @return the effective power of the active monster's effect, or 0 if no active monster
      */
     public int getActiveEffectPower() {
-        return activeMonster != null ? activeMonster.getEffectiveEffectPower() : 0;
+        return activeMonster != null ? activeMonster.getEffectivePower() : 0;
     }
     
     /**

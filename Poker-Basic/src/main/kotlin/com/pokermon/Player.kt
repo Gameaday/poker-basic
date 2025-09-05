@@ -160,13 +160,13 @@ data class Player(
     /**
      * Modern Kotlin method to place a bet with validation.
      */
-    fun placeBet(amount: Int): Boolean {
+    fun placeBet(amount: Int): Int {
         return if (amount <= chips && amount >= 0) {
             chips -= amount
             _bet += amount
-            true
+            amount // Return the actual bet amount
         } else {
-            false
+            0 // Return 0 if bet cannot be placed
         }
     }
     
@@ -257,7 +257,7 @@ data class Player(
                 convertHand()
                 
                 // Calculate hand value using existing logic
-                _handValue = calculateHandValue()
+                _handValue = computeHandValue()
                 
                 // Evaluate hand types
                 evaluateHandTypes()
@@ -279,7 +279,7 @@ data class Player(
     /**
      * Calculate hand value using poker rules.
      */
-    private fun calculateHandValue(): Int {
+    private fun computeHandValue(): Int {
         // For now, use simple high card value
         // This will be enhanced with proper poker hand evaluation
         return _hand?.maxOrNull() ?: 0
@@ -313,6 +313,74 @@ data class Player(
         _fold = true
         return fold
     }
+    
+    // =============================================================================
+    // COMPATIBILITY METHODS FOR LEGACY JAVA CODE (DRY PRINCIPLE COMPLIANCE)
+    // =============================================================================
+    
+    /**
+     * Legacy compatibility method for isFold() calls.
+     * Ensures backward compatibility with existing Java code.
+     */
+    fun isFold(): Boolean = _fold
+    
+    /**
+     * Legacy compatibility method for removeChips() calls.
+     * Uses modern chip management while maintaining API compatibility.
+     */
+    fun removeChips(amount: Int): Int {
+        return if (amount <= chips) {
+            chips -= amount
+            amount // Return actual amount removed
+        } else {
+            0 // Return 0 if couldn't remove chips
+        }
+    }
+    
+    /**
+     * Legacy compatibility method for reportPlayer() calls.
+     * Provides player status reporting for console interfaces.
+     */
+    fun reportPlayer(): String {
+        return "Player: $name, Chips: $chips, Bet: $_bet, Folded: $_fold"
+    }
+    
+    /**
+     * Legacy compatibility constructor for simple Player creation.
+     * Maintains backward compatibility while using modern Kotlin patterns.
+     */
+    constructor(name: String, chips: Int) : this(
+        name = name,
+        chips = chips,
+        isHuman = false,
+        _fold = false,
+        _lastBet = 0,
+        _bet = 0,
+        _hand = null,
+        _handValue = 0
+    )
+    
+    /**
+     * Legacy setupPlayer method with 3 parameters for backward compatibility.
+     * Delegates to the full setupPlayer method with appropriate defaults.
+     */
+    fun setupPlayer(playerName: String, playerChips: Int, deck: IntArray) {
+        setupPlayer(playerName, playerChips, deck, 5) // Default hand size
+    }
+    
+    /**
+     * Public calculateHandValue method for legacy compatibility.
+     * Exposes hand value calculation for external use while maintaining encapsulation.
+     */
+    fun calculateHandValue(): Int {
+        updateConvertedHands()
+        _handValue = computeHandValue()
+        return _handValue
+    }
+    
+    // =============================================================================
+    // END COMPATIBILITY METHODS
+    // =============================================================================
     
     /**
      * Adjust chip count for returning players.

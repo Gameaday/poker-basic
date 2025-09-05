@@ -53,13 +53,13 @@ jobs:
           ./validate-android-build.sh
         }
     
-    - name: Validate Kotlin-native setup (APK requires network access)
+    - name: Validate Pure Kotlin-Native Architecture
       timeout-minutes: 10
       run: |
-        echo "=== Testing Pure Kotlin-Native Build ==="
+        echo "=== Testing Pure Kotlin-Native Architecture ==="
         
         # Validate project structure for Kotlin-native approach
-        echo "Validating Kotlin-native project structure..."
+        echo "Validating Kotlin-native project structure (no JAR dependencies)..."
         if [ -d "Poker-Basic/src/main/kotlin" ]; then
           echo "✅ Kotlin source directory found"
           KOTLIN_FILES=$(find Poker-Basic/src/main/kotlin -name "*.kt" | wc -l)
@@ -84,9 +84,9 @@ jobs:
         echo "✅ Android/Gradle infrastructure: Configured"
         echo "✅ No JDK dependency: Achieved"
         echo ""
-        echo "Build Commands Available:"
-        echo "  Native Build: ./gradlew assembleRelease (produces native APK)"
-        echo "  Debug APK:    ./gradlew assembleDebug (requires internet access)"
+        echo "Pure Kotlin-Native Build Commands Available:"
+        echo "  Android APK:  ./gradlew :android:assembleDebug (requires internet access)"
+        echo "  Desktop App:  ./gradlew :desktop:run (native Kotlin application)"
         echo ""
         echo "✅ GitHub Copilot setup completed successfully"
         echo "Ready for pure Kotlin-native cross-platform development"

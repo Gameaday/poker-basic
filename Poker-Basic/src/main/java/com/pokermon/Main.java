@@ -851,7 +851,6 @@ public class Main {
         // Use unified CardUtils for DRY compliance - single source of truth
         return CardUtils.INSTANCE.cardRank2(rank);
     }
-    }
 
     public static void author() {
         System.out.println("Made by: Carl Nelson and Anthony Elizondo"); //Creator names

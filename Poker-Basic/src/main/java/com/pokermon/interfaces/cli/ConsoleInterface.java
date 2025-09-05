@@ -1,6 +1,6 @@
 package com.pokermon.interfaces.cli;
 
-import com.pokermon.core.Player;
+import com.pokermon.Player;
 import com.pokermon.Version;
 import java.util.*;
 

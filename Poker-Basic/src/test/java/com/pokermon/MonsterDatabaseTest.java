@@ -20,30 +20,30 @@ public class MonsterDatabaseTest {
     @Test
     void testDatabaseInitialization() {
         // Test that the database contains monsters
-        assertTrue(MonsterDatabase.getTotalMonsterCount() > 0, 
+        assertTrue(MonsterDatabase.INSTANCE.INSTANCE.getMonsterCount() > 0, 
             "Database should contain monsters after initialization");
         
         // Test that we have a reasonable number of monsters
-        assertTrue(MonsterDatabase.getTotalMonsterCount() >= 15, 
+        assertTrue(MonsterDatabase.INSTANCE.INSTANCE.getMonsterCount() >= 15, 
             "Should have at least 15 monsters in database");
     }
     
     @Test
     void testGetMonsterByName() {
         // Test getting a known monster
-        Monster pixelPup = MonsterDatabase.getMonster("PixelPup");
+        Monster pixelPup = MonsterDatabase.INSTANCE.getMonster("PixelPup");
         assertNotNull(pixelPup, "PixelPup should exist in database");
         assertEquals("PixelPup", pixelPup.getName());
         assertEquals(Monster.Rarity.COMMON, pixelPup.getRarity());
         
         // Test getting a non-existent monster
-        Monster nonExistent = MonsterDatabase.getMonster("NonExistentMonster");
+        Monster nonExistent = MonsterDatabase.INSTANCE.getMonster("NonExistentMonster");
         assertNull(nonExistent, "Non-existent monster should return null");
     }
     
     @Test
     void testGetAllMonsters() {
-        List<Monster> allMonsters = MonsterDatabase.getAllMonsters();
+        List<Monster> allMonsters = MonsterDatabase.INSTANCE.getAllMonsters();
         assertNotNull(allMonsters, "getAllMonsters should not return null");
         assertFalse(allMonsters.isEmpty(), "Monster list should not be empty");
         
@@ -57,7 +57,7 @@ public class MonsterDatabaseTest {
     @Test
     void testGetMonstersByRarity() {
         // Test getting common monsters
-        List<Monster> commonMonsters = MonsterDatabase.getMonstersByRarity(Monster.Rarity.COMMON);
+        List<Monster> commonMonsters = MonsterDatabase.INSTANCE.getMonstersByRarity(Monster.Rarity.COMMON);
         assertNotNull(commonMonsters, "Common monsters list should not be null");
         assertFalse(commonMonsters.isEmpty(), "Should have at least one common monster");
         
@@ -68,7 +68,7 @@ public class MonsterDatabaseTest {
         }
         
         // Test getting legendary monsters
-        List<Monster> legendaryMonsters = MonsterDatabase.getMonstersByRarity(Monster.Rarity.LEGENDARY);
+        List<Monster> legendaryMonsters = MonsterDatabase.INSTANCE.getMonstersByRarity(Monster.Rarity.LEGENDARY);
         assertNotNull(legendaryMonsters, "Legendary monsters list should not be null");
         assertFalse(legendaryMonsters.isEmpty(), "Should have at least one legendary monster");
         
@@ -84,10 +84,10 @@ public class MonsterDatabaseTest {
         Random testRandom = new Random(42); // Fixed seed for reproducible tests
         
         // Test that random monster selection works
-        Monster randomMonster1 = MonsterDatabase.getRandomMonster(testRandom);
+        Monster randomMonster1 = MonsterDatabase.INSTANCE.getRandomMonster(testRandom);
         assertNotNull(randomMonster1, "Random monster should not be null");
         
-        Monster randomMonster2 = MonsterDatabase.getRandomMonster(testRandom);
+        Monster randomMonster2 = MonsterDatabase.INSTANCE.getRandomMonster(testRandom);
         assertNotNull(randomMonster2, "Second random monster should not be null");
         
         // Test with many iterations to check distribution
@@ -99,7 +99,7 @@ public class MonsterDatabaseTest {
         
         Random distributionRandom = new Random(123);
         for (int i = 0; i < 1000; i++) {
-            Monster monster = MonsterDatabase.getRandomMonster(distributionRandom);
+            Monster monster = MonsterDatabase.INSTANCE.getRandomMonster(distributionRandom);
             switch (monster.getRarity()) {
                 case COMMON -> commonCount++;
                 case UNCOMMON -> uncommonCount++;
@@ -121,20 +121,20 @@ public class MonsterDatabaseTest {
     @Test
     void testHasMonster() {
         // Test existing monster
-        assertTrue(MonsterDatabase.hasMonster("PixelPup"), "PixelPup should exist");
+        assertTrue(MonsterDatabase.INSTANCE.hasMonster("PixelPup"), "PixelPup should exist");
         
         // Test non-existing monster
-        assertFalse(MonsterDatabase.hasMonster("NonExistentMonster"), 
+        assertFalse(MonsterDatabase.INSTANCE.hasMonster("NonExistentMonster"), 
             "Non-existent monster should not exist");
         
         // Test case sensitivity
-        assertFalse(MonsterDatabase.hasMonster("pixelpup"), 
+        assertFalse(MonsterDatabase.INSTANCE.hasMonster("pixelpup"), 
             "Monster names should be case sensitive");
     }
     
     @Test
     void testGetMonsterNamesStartingWith() {
-        List<String> monstersStartingWithP = MonsterDatabase.getMonsterNamesStartingWith("P");
+        List<String> monstersStartingWithP = MonsterDatabase.INSTANCE.getMonsterNamesStartingWith("P");
         assertNotNull(monstersStartingWithP, "Result should not be null");
         
         // Should include PixelPup and PhoenixProtocol
@@ -144,13 +144,13 @@ public class MonsterDatabaseTest {
             "Should include PhoenixProtocol");
         
         // Test case insensitivity
-        List<String> monstersStartingWithLowerP = MonsterDatabase.getMonsterNamesStartingWith("p");
+        List<String> monstersStartingWithLowerP = MonsterDatabase.INSTANCE.getMonsterNamesStartingWith("p");
         assertEquals(monstersStartingWithP.size(), monstersStartingWithLowerP.size(), 
             "Case insensitive search should return same number of results");
         
         // Test empty prefix
-        List<String> allMonsterNames = MonsterDatabase.getMonsterNamesStartingWith("");
-        assertEquals(MonsterDatabase.getTotalMonsterCount(), allMonsterNames.size(), 
+        List<String> allMonsterNames = MonsterDatabase.INSTANCE.getMonsterNamesStartingWith("");
+        assertEquals(MonsterDatabase.INSTANCE.getTotalMonsterCount(), allMonsterNames.size(), 
             "Empty prefix should return all monster names");
     }
     
@@ -159,20 +159,20 @@ public class MonsterDatabaseTest {
         // Test some specific monsters to ensure they're properly configured
         
         // Test The Algorithm (legendary)
-        Monster algorithm = MonsterDatabase.getMonster("The Algorithm");
+        Monster algorithm = MonsterDatabase.INSTANCE.getMonster("The Algorithm");
         assertNotNull(algorithm, "The Algorithm should exist");
         assertEquals(Monster.Rarity.LEGENDARY, algorithm.getRarity());
         assertEquals(Monster.EffectType.LUCK_ENHANCEMENT, algorithm.getEffectType());
         assertEquals(700, algorithm.getBaseHealth());
         
         // Test FireFox.exe (uncommon)
-        Monster firefox = MonsterDatabase.getMonster("FireFox.exe");
+        Monster firefox = MonsterDatabase.INSTANCE.getMonster("FireFox.exe");
         assertNotNull(firefox, "FireFox.exe should exist");
         assertEquals(Monster.Rarity.UNCOMMON, firefox.getRarity());
         assertEquals(Monster.EffectType.CHIP_BONUS, firefox.getEffectType());
         
         // Test DragonDrive (epic)
-        Monster dragonDrive = MonsterDatabase.getMonster("DragonDrive");
+        Monster dragonDrive = MonsterDatabase.INSTANCE.getMonster("DragonDrive");
         assertNotNull(dragonDrive, "DragonDrive should exist");
         assertEquals(Monster.Rarity.EPIC, dragonDrive.getRarity());
         assertEquals(Monster.EffectType.CHIP_BONUS, dragonDrive.getEffectType());
@@ -180,7 +180,7 @@ public class MonsterDatabaseTest {
     
     @Test
     void testRarityDistribution() {
-        List<Monster> allMonsters = MonsterDatabase.getAllMonsters();
+        List<Monster> allMonsters = MonsterDatabase.INSTANCE.getAllMonsters();
         
         // Count monsters by rarity
         int commonCount = 0;

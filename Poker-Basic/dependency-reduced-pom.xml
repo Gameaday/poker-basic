@@ -91,6 +91,14 @@
         </configuration>
       </plugin>
       <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.3.1</version>
+        <configuration>
+          <encoding>UTF-8</encoding>
+          <propertiesEncoding>UTF-8</propertiesEncoding>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.jetbrains.kotlin</groupId>
         <artifactId>kotlin-maven-plugin</artifactId>
         <version>${kotlin.version}</version>
@@ -104,7 +112,6 @@
             <configuration>
               <sourceDirs>
                 <sourceDir>src/main/kotlin</sourceDir>
-                <sourceDir>src/main/java</sourceDir>
               </sourceDirs>
             </configuration>
           </execution>
@@ -117,7 +124,6 @@
             <configuration>
               <sourceDirs>
                 <sourceDir>src/test/kotlin</sourceDir>
-                <sourceDir>src/test/java</sourceDir>
               </sourceDirs>
             </configuration>
           </execution>

@@ -1,6 +1,9 @@
 package com.pokermon
 
 import com.pokermon.ai.AIPlayer
+import com.pokermon.ai.AIPersonality
+import com.pokermon.ai.BettingAction
+import com.pokermon.ai.GameContext
 import com.pokermon.modern.CardUtils
 import com.pokermon.players.Player
 import kotlinx.coroutines.runBlocking
@@ -178,7 +181,7 @@ object Main {
     // =================================================================
     
     /**
-     * Initialize players with hands, names, and chips - Enhanced Kotlin version.
+     * Initialize players with hands, names, and chips - Enhanced Kotlin version with AI personality system.
      */
     private fun initializePlayers(
         players: Array<Player?>, 
@@ -196,12 +199,35 @@ object Main {
             playerNames[i] = POSSIBLE_NAMES.random()
         }
         
-        // Initialize each player with full setup
+        // Initialize each player with full setup and AI personalities
         for (i in 0..opponentCount) {
-            val player = Player()
-            player.isHuman = (i == 0) // First player is human
+            val player = if (i == 0) {
+                // Human player
+                Player().apply {
+                    isHuman = true
+                    isAI = false
+                }
+            } else {
+                // AI player with random personality
+                val personality = AIPersonality.getRandomPersonality()
+                AIPlayer(playerNames[i], startingChips, personality).apply {
+                    isHuman = false
+                    isAI = true
+                }
+            }
+            
             player.setupPlayer(playerNames[i], startingChips, deck, DEFAULT_HAND_SIZE)
             players[i] = player
+            
+            // Display personality info for AI players
+            if (player is AIPlayer) {
+                println("${player.name} has ${player.personality.displayName} personality " +
+                       "(Aggression: %.1f, Caution: %.1f)".format(
+                           player.personality.aggression, 
+                           player.personality.cautiousness
+                       ))
+            }
+            
             println() // Space between player info for neatness
         }
     }
@@ -391,9 +417,17 @@ object Main {
     }
     
     /**
-     * Determine which cards AI should exchange based on hand analysis.
+     * Determine which cards AI should exchange based on hand analysis and personality.
+     * Now uses AIPlayer's sophisticated decision making when available.
      */
     fun determineAICardExchange(player: Player): IntArray {
+        // If this is an AIPlayer, use the sophisticated decision system
+        if (player is AIPlayer) {
+            val exchangeDecision = player.makeExchangeDecision()
+            return exchangeDecision.toIntArray()
+        }
+        
+        // Fallback logic for regular Player objects (legacy compatibility)
         val hand = player.hand
         val multiples = handMultiples(hand)
         
@@ -496,7 +530,7 @@ object Main {
      */
     @JvmStatic
     fun setDeck(): IntArray {
-        return IntArray(52) { it }
+        return IntArray(52) { it + 1 } // Cards 1-52
     }
     
     /**
@@ -809,21 +843,54 @@ object Main {
     
     /**
      * Enhanced AI betting using HandEvaluator and personality system.
+     * Now properly integrates with the AIPlayer personality-driven decision making.
      */
     fun calculateAdvancedAIBet(player: Player, currentBet: Int, potSize: Int): Int {
+        // If this is an AIPlayer, use the sophisticated decision system
+        if (player is AIPlayer) {
+            val gameContext = GameContext(
+                currentBet = currentBet,
+                pot = potSize,
+                phase = GamePhase.BETTING_ROUND, // Use BETTING_ROUND instead of BETTING
+                opponentCount = 2 // TODO: Pass actual opponent count
+            )
+            
+            val bettingAction = player.makeBettingDecision(
+                currentBet = currentBet,
+                pot = potSize,
+                gamePhase = GamePhase.BETTING_ROUND,
+                opponents = emptyList() // TODO: Pass actual opponents list
+            )
+            
+            // Convert betting action to bet amount based on AI personality
+            return when (bettingAction) {
+                BettingAction.FOLD -> 0
+                BettingAction.CHECK -> currentBet
+                BettingAction.CALL -> currentBet
+                BettingAction.RAISE -> {
+                    val personality = player.personality
+                    val handResult = HandEvaluator.evaluateHand(player.hand)
+                    val handStrength = handResult.score / 1000.0
+                    
+                    // Calculate raise amount based on personality and hand strength
+                    val baseRaise = (potSize * 0.2 * handStrength * personality.aggression / 10.0).toInt()
+                    val personalityRaise = (currentBet * personality.aggression / 10.0).toInt()
+                    
+                    currentBet + maxOf(baseRaise, personalityRaise, 10)
+                }
+                BettingAction.ALL_IN -> player.chips
+            }
+        }
+        
+        // Fallback for regular Player objects (legacy compatibility)
         val handResult = HandEvaluator.evaluateHand(player.hand)
         val handStrength = handResult.score / 1000.0 // Normalize to 0-1
         
-        // Get personality factor with error handling
-        val personalityFactor = try {
-            // TODO: Reimplement with new AI system
-            0.5 // PersonalityManager.getPlayerPersonality(player.name).aggressiveness
-        } catch (e: Exception) {
-            0.5 // Default moderate aggressiveness
-        }
+        // Default moderate aggressiveness for non-AI players
+        val personalityFactor = 0.5
         
-        // Calculate base bet using hand strength and personality
-        val baseBet = (handStrength * player.chips * personalityFactor.toDouble() * 0.3).toInt()
+        // Calculate base bet using hand strength and default personality
+        val baseBet = (handStrength * player.chips * personalityFactor * 0.3).toInt()
         
         // Apply strategic considerations based on hand type
         val strategicBet = when (handResult.handType) {

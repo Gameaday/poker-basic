@@ -2,24 +2,35 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 /**
- * Get git commit count from main branch for dynamic version code generation.
- * This ensures automatic version code incrementation with each commit on main branch,
- * preventing version resets in pull request branches.
+ * Get git commit count for dynamic version code generation.
+ * Uses master/main branch as baseline plus any additional commits on current branch
+ * to ensure consistent versioning across all builds while preventing version conflicts.
  * Using provider API for configuration cache compatibility.
  */
 def getGitCommitCount = providers.exec {
     commandLine 'bash', '-c', '''
-        # Use main branch commit count specifically to avoid pull request resets
-        MAIN_COMMITS=$(git rev-list --count origin/main 2>/dev/null || git rev-list --count origin/master 2>/dev/null || echo 0)
-        # Fallback to HEAD if main/master not available 
-        HEAD_COMMITS=$(git rev-list --count HEAD 2>/dev/null || echo 0)
-        # Use the higher count to ensure proper versioning
-        if [ "$MAIN_COMMITS" -gt "$HEAD_COMMITS" ]; then 
-            echo "$MAIN_COMMITS"
-        elif [ "$HEAD_COMMITS" -gt 0 ]; then 
-            echo "$HEAD_COMMITS"
-        else 
-            echo "1"
+        # Get master/main branch commit count as baseline
+        MASTER_COMMITS=$(git rev-list --count origin/main 2>/dev/null || git rev-list --count origin/master 2>/dev/null || echo 0)
+        
+        # If we can't access remote master/main, use HEAD count as fallback
+        if [ "$MASTER_COMMITS" -eq 0 ]; then
+            HEAD_COMMITS=$(git rev-list --count HEAD 2>/dev/null || echo 0)
+            if [ "$HEAD_COMMITS" -gt 0 ]; then
+                echo "$HEAD_COMMITS"
+            else
+                echo "1"
+            fi
+        else
+            # Get additional commits on current branch beyond master/main
+            MERGE_BASE=$(git merge-base origin/main HEAD 2>/dev/null || git merge-base origin/master HEAD 2>/dev/null || echo "")
+            if [ -n "$MERGE_BASE" ]; then
+                ADDITIONAL_COMMITS=$(git rev-list --count "${MERGE_BASE}..HEAD" 2>/dev/null || echo 0)
+                TOTAL_COMMITS=$((MASTER_COMMITS + ADDITIONAL_COMMITS))
+                echo "$TOTAL_COMMITS"
+            else
+                # Fallback to master commits if merge-base fails
+                echo "$MASTER_COMMITS"
+            fi
         fi
     '''
 }.standardOutput.asText.map { 

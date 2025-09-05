@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document explains the Android debug build configuration that resolves package conflicts when installing development builds over release builds.
+This document explains the Android debug build configuration that resolves package conflicts when installing development builds over release builds, and ensures proper version code incrementing for seamless debug build updates.
 
 ## Problem Statement
 
@@ -96,7 +96,47 @@ The GitHub Actions workflow builds both variants:
 - `.github/workflows/ci.yml` - CI/CD pipeline
 - `ANDROID_BUILD_GUIDE.md` - General Android build instructions
 
+## Version Code Management
+
+### Automatic Version Incrementing
+
+The project uses a sophisticated git-based versioning system that ensures debug builds update properly:
+
+```gradle
+versionCode getGitCommitCount.get() // Dynamic version code based on git commit count
+versionName "1.0.${getGitCommitCount.get()}" // Dynamic version name with commit count
+```
+
+### Versioning Logic
+
+The version code calculation ensures consistent and predictable versioning:
+
+1. **Baseline**: Uses the master/main branch commit count as the foundation
+2. **Feature Branch Addition**: Adds any additional commits from the current branch
+3. **Consistent Updates**: Ensures version codes always increase, preventing installation conflicts
+
+**Example:**
+- Master branch has 15 commits
+- Feature branch has 3 additional commits  
+- Version code = 15 + 3 = 18
+
+### Benefits
+
+- **Seamless Updates**: New debug builds always have higher version codes
+- **No Installation Conflicts**: Android recognizes new builds as updates
+- **Consistent Baseline**: All builds reference the same master branch foundation
+- **Branch Independence**: Feature branches get proper version increments
+
+### Troubleshooting Version Issues
+
+If debug builds aren't updating properly:
+
+1. **Check git fetch**: Ensure `git fetch origin` has been run to get latest master/main references
+2. **Verify version code**: The version should be master commits + branch commits
+3. **Confirm branch base**: Feature branches should be based on latest master/main
+
 ## References
 
 - [Android Developer Guide: Build Types](https://developer.android.com/studio/build/build-variants#build-types)
 - [Android Package Conflicts](https://developer.android.com/guide/topics/manifest/manifest-element#package)
+- [Android Version Codes](https://developer.android.com/studio/publish/versioning#versioningsettings)

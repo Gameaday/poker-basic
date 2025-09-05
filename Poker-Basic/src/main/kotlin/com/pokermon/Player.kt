@@ -189,7 +189,7 @@ data class Player(
      * Set up player with name, chips, and initial hand.
      * Replaces the Java setupPlayer method with Kotlin implementation.
      */
-    fun setupPlayer(playerName: String, playerChips: Int, deck: IntArray, handSize: Int) {
+    fun setupPlayer(playerName: String, playerChips: Int, deck: IntArray, handSize: Int = 5) {
         name = playerName
         chips = playerChips
         _fold = false
@@ -202,6 +202,14 @@ data class Player(
             newHand[i] = deck[i] // Simple dealing from deck
         }
         hand = newHand
+    }
+    
+    /**
+     * Java compatibility method with 3 parameters (handSize defaults to 5).
+     */
+    @JvmOverloads
+    fun setupPlayer(playerName: String, playerChips: Int, deck: IntArray) {
+        setupPlayer(playerName, playerChips, deck, 5)
     }
     
     /**

@@ -140,7 +140,7 @@ object Main {
                 println("Current Pot Value: $workingPot")
                 
                 // Show all players' stats
-                playersStats(players.filterNotNull())
+                displayPlayerStats(players.filterNotNull())
                 
                 // Determine winner with sophisticated evaluation
                 val gameResult = declareResults(players.filterNotNull())
@@ -149,7 +149,7 @@ object Main {
                 dividePot(players.filterNotNull(), workingPot)
                 
                 // Save updated player statistics
-                playersStats(players.filterNotNull())
+                displayPlayerStats(players.filterNotNull())
                 
                 // Reset for next round
                 workingPot = 0
@@ -503,9 +503,21 @@ object Main {
      */
     @JvmStatic
     fun newHand(deck: IntArray): IntArray {
-        val hand = IntArray(DEFAULT_HAND_SIZE)
-        for (i in hand.indices) {
-            hand[i] = deck[i] // Simple dealing - take first 5 cards
+        return newHand(deck, DEFAULT_HAND_SIZE)
+    }
+    
+    /**
+     * Create a new hand with custom size - Java compatibility.
+     */
+    @JvmStatic
+    fun newHand(deck: IntArray, handSize: Int): IntArray {
+        require(handSize > 0) { "Hand size must be positive" }
+        require(handSize <= 52) { "Hand size cannot exceed deck size" }
+        require(deck.isNotEmpty()) { "Deck cannot be empty" }
+        
+        val hand = IntArray(handSize)
+        for (i in 0 until handSize) {
+            hand[i] = deck[i % deck.size] // Wrap around if needed
         }
         return hand
     }
@@ -573,7 +585,7 @@ object Main {
     /**
      * Display and save player statistics.
      */
-    fun playersStats(players: List<Player>) {
+    fun displayPlayerStats(players: List<Player>) {
         println("\\n=== PLAYER STATISTICS ===")
         players.forEach { player ->
             // Basic player report for now
@@ -803,7 +815,7 @@ object Main {
         
         // Get personality factor with error handling
         val personalityFactor = try {
-            PersonalityManager.getInstance().getPlayerPersonality(player.name).aggressiveness
+            PersonalityManager.getPlayerPersonality(player.name).aggressiveness
         } catch (e: Exception) {
             0.5 // Default moderate aggressiveness
         }
@@ -847,4 +859,79 @@ object Main {
      * Check input validation - Kotlin version with when expression.
      */
     fun check(input: Int, desired: Int): Boolean = input == desired
+    
+    // ==================================================================
+    // JAVA COMPATIBILITY METHODS FOR TEST MIGRATION
+    // ==================================================================
+    
+    /**
+     * Initialize players method for Java test compatibility.
+     */
+    @JvmStatic
+    fun InitializePlayers(players: Array<Player>, names: Array<String>, chips: Int, deck: IntArray) {
+        for (i in players.indices) {
+            if (i < names.size) {
+                players[i].setupPlayer(names[i], chips, deck)
+                players[i].isHuman = (i == 0) // First player is human by convention
+            }
+        }
+    }
+    
+    /**
+     * Initialize players with just deck (chips default to 1000).
+     */
+    @JvmStatic
+    fun InitializePlayers(players: Array<Player>, names: Array<String>, deck: IntArray) {
+        InitializePlayers(players, names, 1000, deck)
+    }
+    
+    /**
+     * Setup list method for Java test compatibility.
+     */
+    @JvmStatic 
+    fun setupList(players: Array<Player>, vararg playerInstances: Player) {
+        for (i in playerInstances.indices) {
+            if (i < players.size) {
+                players[i] = playerInstances[i]
+            }
+        }
+    }
+    
+    /**
+     * Players stats method for Java test compatibility.
+     */
+    @JvmStatic
+    fun playersStatsJava(players: List<Player>) {
+        players.forEach { player ->
+            println("${player.name}: ${player.chips} chips, Hand Value: ${player.handValue}")
+        }
+    }
+    
+    /**
+     * Players stats method for array compatibility.
+     */
+    @JvmStatic 
+    fun playersStats(players: Array<Player>) {
+        playersStatsJava(players.toList())
+    }
+    
+    /**
+     * Betting method for Java test compatibility.
+     */
+    @JvmStatic
+    fun bet(players: Array<Player>, initialPot: Int): Int {
+        return conductBettingRound(players.toList(), initialPot)
+    }
+    
+    /**
+     * Card rank extraction for Java compatibility.
+     */
+    @JvmStatic
+    fun cardRank(card: Int): Int = CardUtils.cardRank(card)
+    
+    /**
+     * Card suit extraction for Java compatibility.  
+     */
+    @JvmStatic
+    fun cardSuit(card: Int): Int = CardUtils.cardSuit(card)
 }

@@ -28,6 +28,39 @@ object CardUtils {
     
     private val CARD_SUITS = arrayOf("Clubs", "Diamonds", "Hearts", "Spades")
     
+    // Legacy compatibility array for InterfaceUtils migration
+    val LEGACY_CARD_RANKS = arrayOf(
+        "error", "Ace", "King", "Queen",
+        "Jack", "Ten", "Nine", "Eight",
+        "Seven", "Six", "Five", "Four",
+        "Three", "Two"
+    )
+    
+    val LEGACY_CARD_SUITS = arrayOf("Spades", "Hearts", "Diamonds", "Clubs")
+    
+    // Game constants consolidated from InterfaceUtils
+    const val DECK_SIZE = 52
+    const val DEFAULT_HAND_SIZE = 5
+    const val MAX_MULTIPLES_ARRAY_SIZE = 3
+    
+    // Chip amounts and player names
+    val VALID_CHIPS = intArrayOf(100, 500, 1000, 2500)
+    
+    val POSSIBLE_NAMES = arrayOf(
+        "Carl", "Jeff", "James", "Chris", "Fred", "Daniel",
+        "Tony", "Jenny", "Susen", "Rory", "Melody",
+        "Liz", "Pamela", "Diane", "Carol", "Ed", "Edward",
+        "Alphonse", "Ricky", "Matt", "Waldo", "Wesley", "GLaDOS",
+        "Joe", "Bob", "Alex", "Josh", "David", "Brenda", "Ann",
+        "Billy", "Naomi", "Vincent", "John", "Jane", "Dave", "Dirk",
+        "Rose", "Roxy", "Jade", "Jake", "Karkat", "Lord English",
+        "Smallie", "Anthony", "Gwen"
+    )
+    
+    val HAND_TYPE_NAMES = arrayOf(
+        "Error", "High", "Pair", "Three of a kind", "Four of a kind"
+    )
+    
     // Short rank names for compact display
     private val SHORT_RANKS = arrayOf(
         "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"
@@ -250,5 +283,140 @@ object CardUtils {
         return multiples.map { (rank, count) ->
             "${CARD_RANKS.getOrElse(rank) { "Unknown" }} ($count)"
         }.toTypedArray()
+    }
+    
+    // ================================================================= 
+    // CONSOLIDATED INTERFACE UTILS FUNCTIONALITY (DRY COMPLIANCE)
+    // =================================================================
+    
+    /**
+     * Legacy convertCard method for compatibility with InterfaceUtils.
+     * @param card the card integer (0-51)
+     * @return the card name (e.g., "Ace of Spades")
+     */
+    fun convertCard(card: Int): String {
+        if (card < 0 || card >= DECK_SIZE) {
+            return "Invalid Card"
+        }
+        
+        val rank = card % 13 + 1
+        val suit = card / 13
+        
+        if (rank >= LEGACY_CARD_RANKS.size || suit >= LEGACY_CARD_SUITS.size) {
+            return "Invalid Card"
+        }
+        
+        return "${LEGACY_CARD_RANKS[rank]} of ${LEGACY_CARD_SUITS[suit]}"
+    }
+    
+    /**
+     * Creates a standard 52-card deck.
+     * @return array representing the deck
+     */
+    fun createDeck(): IntArray {
+        return IntArray(DECK_SIZE) { it }
+    }
+    
+    /**
+     * Shuffles a deck using Fisher-Yates algorithm.
+     * @param deck the deck to shuffle
+     */
+    fun shuffleDeck(deck: IntArray) {
+        for (i in deck.size - 1 downTo 1) {
+            val j = kotlin.random.Random.nextInt(i + 1)
+            val temp = deck[i]
+            deck[i] = deck[j]
+            deck[j] = temp
+        }
+    }
+    
+    /**
+     * Validates if a chip amount is in the list of valid amounts.
+     * @param chips the chip amount to validate
+     * @return true if valid, false otherwise
+     */
+    fun isValidChipAmount(chips: Int): Boolean {
+        return chips in VALID_CHIPS
+    }
+    
+    /**
+     * Gets the closest valid chip amount to the given amount.
+     * @param chips the desired chip amount
+     * @return the closest valid chip amount
+     */
+    fun getClosestValidChipAmount(chips: Int): Int {
+        return VALID_CHIPS.minByOrNull { kotlin.math.abs(chips - it) } ?: VALID_CHIPS[0]
+    }
+    
+    /**
+     * Generates a random AI player name that's not already in use.
+     * @param usedNames set of names already in use
+     * @return a unique AI player name
+     */
+    fun generateAIPlayerName(usedNames: Set<String>): String {
+        val availableNames = POSSIBLE_NAMES.filter { it !in usedNames }
+        return if (availableNames.isNotEmpty()) {
+            availableNames.random()
+        } else {
+            // Fallback to numbered names if all are taken
+            "AI Player ${usedNames.size + 1}"
+        }
+    }
+    
+    /**
+     * Formats a chip amount for display.
+     * @param chips the chip amount
+     * @return formatted string
+     */
+    fun formatChips(chips: Int): String {
+        return when {
+            chips >= 1_000_000 -> String.format("%.1fM", chips / 1_000_000.0)
+            chips >= 1_000 -> String.format("%.1fK", chips / 1_000.0)
+            else -> chips.toString()
+        }
+    }
+    
+    /**
+     * Gets a description of a hand type based on hand value.
+     * @param handValue the numerical hand value
+     * @return description of the hand type
+     */
+    fun getHandDescription(handValue: Int): String {
+        return when {
+            handValue >= 10000 -> "Royal Flush"
+            handValue >= 9000 -> "Straight Flush"
+            handValue >= 8000 -> "Four of a Kind"
+            handValue >= 7000 -> "Full House"
+            handValue >= 6000 -> "Flush"
+            handValue >= 5000 -> "Straight"
+            handValue >= 4000 -> "Three of a Kind"
+            handValue >= 3000 -> "Two Pair"
+            handValue >= 2000 -> "Pair"
+            else -> "High Card"
+        }
+    }
+    
+    /**
+     * Enhanced hand analysis that provides both score and description.
+     * Returns a pair of (handValue, handDescription) for efficiency.
+     */
+    fun analyzeHand(handValue: Int): Pair<Int, String> {
+        return handValue to getHandDescription(handValue)
+    }
+    
+    /**
+     * Convert cards array to their string representations (modern version).
+     * @param cards the card integers
+     * @return list of card names
+     */
+    fun convertCardsToNames(cards: IntArray): List<String> {
+        return cards.map { convertCard(it) }
+    }
+    
+    /**
+     * Batch conversion of multiple hands to string representations.
+     */
+    fun convertMultipleHands(hands: List<IntArray>): List<List<String>> {
+        return hands.map { convertCardsToNames(it) }
     }
 }

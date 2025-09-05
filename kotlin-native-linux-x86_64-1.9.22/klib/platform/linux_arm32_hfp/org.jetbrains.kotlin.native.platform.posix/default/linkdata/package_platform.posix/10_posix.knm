@@ -1,775 +1,0 @@
-
-õ?
-kotlin
-UShort
-platform
-posix
-	u_int16_t
-arg0
-kotlinx
-cinterop
-
-CValuesRef
-
-UByteVarOf
-UByte
-	u_charVar
-arg1
-Unit
-internal
-CCall
-id
-&knifunptr_platform_posix768___putshort
-
-__putshort
-Int
-CPointer
-	ByteVarOf
-Byte
-ByteVar
-%knifunptr_platform_posix769___p_class
-	__p_class
-UInt
-	u_int32_t
-$knifunptr_platform_posix770___p_time
-__p_time
-$knifunptr_platform_posix771___p_type
-__p_type
-%knifunptr_platform_posix772___p_rcode
-	__p_rcode
-arg2
-_IO_FILE
-FILE
-arg3
-'knifunptr_platform_posix773___p_cdnname
-__p_cdnname
-&knifunptr_platform_posix774___p_cdname
-
-__p_cdname
-__cp
-__msg
-arg4
-'knifunptr_platform_posix775___p_fqnname
-__p_fqnname
-&knifunptr_platform_posix776___p_fqname
-
-__p_fqname
-u_long
-__option
-&knifunptr_platform_posix777___p_option
-
-__p_option
-*knifunptr_platform_posix778___p_secstodate
-__p_secstodate
-String
-CString
--knifunptr_platform_posix779___dn_count_labels
-__dn_count_labels
-CPointerVarOf
-CPointerVar
-%knifunptr_platform_posix780___dn_comp
-	__dn_comp
-'knifunptr_platform_posix781___dn_expand
-__dn_expand
-u_int
-*knifunptr_platform_posix782___res_randomid
-__res_randomid
--knifunptr_platform_posix783___res_nameinquery
-__res_nameinquery
-.knifunptr_platform_posix784___res_queriesmatch
-__res_queriesmatch
-__res_state
-	res_state
-'knifunptr_platform_posix785___res_ninit
-__res_ninit
-(knifunptr_platform_posix786___fp_resstat
-__fp_resstat
-size_t
-+knifunptr_platform_posix787___res_hostalias
-__res_hostalias
-arg5
-(knifunptr_platform_posix788___res_nquery
-__res_nquery
-)knifunptr_platform_posix789___res_nsearch
-__res_nsearch
-arg6
-.knifunptr_platform_posix790___res_nquerydomain
-__res_nquerydomain
-arg7
-arg8
-arg9
-*knifunptr_platform_posix791___res_nmkquery
-__res_nmkquery
-'knifunptr_platform_posix792___res_nsend
-__res_nsend
-(knifunptr_platform_posix793___res_nclose
-__res_nclose
-__elem
-__prev
-"knifunptr_platform_posix794_insque
-insque
-"knifunptr_platform_posix795_remque
-remque
-CValue
-entry
-ENTRY
-__item
-ACTION
-__action
-#knifunptr_platform_posix796_hsearch
-hsearch
-__nel
-#knifunptr_platform_posix797_hcreate
-hcreate
-$knifunptr_platform_posix798_hdestroy
-hdestroy
-__key
-CPointed
-COpaquePointer
-COpaquePointerVar
-__rootp
-	CFunction
-	Function2
-__compar_fn_t
-__compar
-#knifunptr_platform_posix799_tsearch
-tsearch
-!knifunptr_platform_posix800_tfind
-tfind
-#knifunptr_platform_posix801_tdelete
-tdelete
-__root
-	Function3
-VISIT
-__action_fn_t
-!knifunptr_platform_posix802_twalk
-twalk
-__base
-	UIntVarOf
-	size_tVar
-__nmemb
-__size
-!knifunptr_platform_posix803_lfind
-lfind
-#knifunptr_platform_posix804_lsearch
-lsearch
-sem_t
-__sem
-	__pshared
-__value
-$knifunptr_platform_posix805_sem_init
-sem_init
-'knifunptr_platform_posix806_sem_destroy
-sem_destroy
-__name
-__oflag
-Array
-Any
-variadicArguments
-$knifunptr_platform_posix807_sem_open
-sem_open
-%knifunptr_platform_posix808_sem_close
-	sem_close
-&knifunptr_platform_posix809_sem_unlink
-
-sem_unlink
-$knifunptr_platform_posix810_sem_wait
-sem_wait
-timespec
-	__abstime
-)knifunptr_platform_posix811_sem_timedwait
-sem_timedwait
-'knifunptr_platform_posix812_sem_trywait
-sem_trywait
-$knifunptr_platform_posix813_sem_post
-sem_post
-IntVarOf
-IntVar
-__sval
-(knifunptr_platform_posix814_sem_getvalue
-sem_getvalue
-__jmp_buf_tag
-jmp_buf
-__env
-"knifunptr_platform_posix815_setjmp
-setjmp
-#knifunptr_platform_posix816__setjmp
-_setjmp
-__val
-#knifunptr_platform_posix817_longjmp
-longjmp
-$knifunptr_platform_posix818__longjmp
-_longjmp
-
-sigjmp_buf
-&knifunptr_platform_posix819_siglongjmp
-
-siglongjmp
-__fd
-	__request
-!knifunptr_platform_posix820_ioctl
-ioctl
-cnames
-structs
-sgttyb
-__params
- knifunptr_platform_posix821_gtty
-gtty
- knifunptr_platform_posix822_stty
-stty
-
-__sigset_t
-)knifunptr_platform_posix823___sigismember
-__sigismember
-'knifunptr_platform_posix824___sigaddset
-__sigaddset
-'knifunptr_platform_posix825___sigdelset
-__sigdelset
-__sig
-	Function1
-__sighandler_t
-	__handler
-)knifunptr_platform_posix826___sysv_signal
-__sysv_signal
-"knifunptr_platform_posix827_signal
-signal
-&knifunptr_platform_posix828_bsd_signal
-
-bsd_signal
-__pid_t
-__pid
- knifunptr_platform_posix829_kill
-kill
-__pgrp
-"knifunptr_platform_posix830_killpg
-killpg
-!knifunptr_platform_posix831_raise
-raise
-__s
-#knifunptr_platform_posix832_psignal
-psignal
-siginfo
-	siginfo_t
-__pinfo
-$knifunptr_platform_posix833_psiginfo
-psiginfo
-__sig_or_mask
-__is_sig
-&knifunptr_platform_posix834___sigpause
-
-__sigpause
-$knifunptr_platform_posix835_sigpause
-sigpause
-__mask
-$knifunptr_platform_posix836_sigblock
-sigblock
-&knifunptr_platform_posix837_sigsetmask
-
-sigsetmask
-&knifunptr_platform_posix838_siggetmask
-
-siggetmask
-sigset_t
-__set
-'knifunptr_platform_posix839_sigemptyset
-sigemptyset
-&knifunptr_platform_posix840_sigfillset
-
-sigfillset
-__signo
-%knifunptr_platform_posix841_sigaddset
-	sigaddset
-%knifunptr_platform_posix842_sigdelset
-	sigdelset
-'knifunptr_platform_posix843_sigismember
-sigismember
-__how
-__oset
-'knifunptr_platform_posix844_sigprocmask
-sigprocmask
-&knifunptr_platform_posix845_sigsuspend
-
-sigsuspend
-	sigaction
-__act
-__oact
-%knifunptr_platform_posix846_sigaction
-&knifunptr_platform_posix847_sigpending
-
-sigpending
-#knifunptr_platform_posix848_sigwait
-sigwait
-__info
-'knifunptr_platform_posix849_sigwaitinfo
-sigwaitinfo
-	__timeout
-(knifunptr_platform_posix850_sigtimedwait
-sigtimedwait
-sigval
-$knifunptr_platform_posix851_sigqueue
-sigqueue
-sigvec
-__vec
-__ovec
-"knifunptr_platform_posix852_sigvec
-
-sigcontext
-__scp
-%knifunptr_platform_posix853_sigreturn
-	sigreturn
-__interrupt
-(knifunptr_platform_posix854_siginterrupt
-siginterrupt
-timeval
-__tv
-timezone
-__timezone_ptr_t
-__tz
-(knifunptr_platform_posix855_gettimeofday
-gettimeofday
-(knifunptr_platform_posix856_settimeofday
-settimeofday
-__delta
-
-__olddelta
-#knifunptr_platform_posix857_adjtime
-adjtime
-__itimer_which_t
-__which
-	itimerval
-%knifunptr_platform_posix858_getitimer
-	getitimer
-__new
-__old
-%knifunptr_platform_posix859_setitimer
-	setitimer
-__file
-__tvp
-"knifunptr_platform_posix860_utimes
-utimes
-#knifunptr_platform_posix861_lutimes
-lutimes
-#knifunptr_platform_posix862_futimes
-futimes
-sigstack
-__ss
-__oss
-$knifunptr_platform_posix863_sigstack
-sigaltstack
-'knifunptr_platform_posix864_sigaltstack
-#knifunptr_platform_posix865_sighold
-sighold
-$knifunptr_platform_posix866_sigrelse
-sigrelse
-%knifunptr_platform_posix867_sigignore
-	sigignore
-__disp
-"knifunptr_platform_posix868_sigset
-sigset
-	__newmask
-	__oldmask
-+knifunptr_platform_posix869_pthread_sigmask
-pthread_sigmask
-	pthread_t
-
-__threadid
-(knifunptr_platform_posix870_pthread_kill
-pthread_kill
-3knifunptr_platform_posix871___libc_current_sigrtmin
-__libc_current_sigrtmin
-3knifunptr_platform_posix872___libc_current_sigrtmax
-__libc_current_sigrtmax
-memory_order
-/knifunptr_platform_posix873_atomic_thread_fence
-atomic_thread_fence
-/knifunptr_platform_posix874_atomic_signal_fence
-atomic_signal_fence
-atomic_flag
-Boolean
-4knifunptr_platform_posix875_atomic_flag_test_and_set
-atomic_flag_test_and_set
-=knifunptr_platform_posix876_atomic_flag_test_and_set_explicit
-!atomic_flag_test_and_set_explicit
--knifunptr_platform_posix877_atomic_flag_clear
-atomic_flag_clear
-6knifunptr_platform_posix878_atomic_flag_clear_explicit
-atomic_flag_clear_explicit
-2knifunptr_platform_posix879___ctype_get_mb_cur_max
-__ctype_get_mb_cur_max
-__nptr
-Double
- knifunptr_platform_posix880_atof
-atof
- knifunptr_platform_posix881_atoi
-atoi
- knifunptr_platform_posix882_atol
-atol
-Long
-!knifunptr_platform_posix883_atoll
-atoll
-__endptr
-"knifunptr_platform_posix884_strtod
-strtod
-Float
-"knifunptr_platform_posix885_strtof
-strtof
-"knifunptr_platform_posix886_strtol
-strtol
-#knifunptr_platform_posix887_strtoul
-strtoul
-"knifunptr_platform_posix888_strtoq
-strtoq
-ULong
-#knifunptr_platform_posix889_strtouq
-strtouq
-#knifunptr_platform_posix890_strtoll
-strtoll
-$knifunptr_platform_posix891_strtoull
-strtoull
-__n
- knifunptr_platform_posix892_l64a
-l64a
- knifunptr_platform_posix893_a64l
-a64l
-"knifunptr_platform_posix894_random
-random
-__seed
-#knifunptr_platform_posix895_srandom
-srandomª
- 
-  
-
-
- 
-
-
- 
-	 
- 
- 
- 
-  
-
- 
-  
- 
- 
-  
- 
-  
- 
-# 
-$ 
-1 
- 7 
-8 
-; 
-< 
-A 
-H 
-I 
-N 
-h 
-i 
-j 
-l 
-v 
-w 
-x 
-z 
- { 
-| 
- Ö 
-Ü 
-á 
-ã 
-å 
-ì 
- ù 
- û 
-® 
-∞ 
-± 
-µ 
-∂ 
-¡ 
-»
-8…
-9  
-– 
- ÿ 
-Ÿ 
-· 
-Ì 
-Ó 
-ˇ 
-í 
-† 
-£ 
-ß 
-Æ 
-∞ 
-± 
-ª 
-Ω 
-Ã 
-– 
-ﬂ 
-Á 
-Ï 
- Ì 
- ˘ 
- Ä 
- Ü 
- è õH?02
-0j`20	0j`
-0Há†“
-(300j`020Há†“
-(700j`02
-0j`Há†“
-(300j`020Há†“
-(3!00j`020Há†“
-( {'0	0j`
-020	0j`
-020	0j`
-02"02%0j`0Há†“
-(&s)0	0j`
-020	0j`
-020	0j`
-02"0j`0Há†“
-((â.0	0j`
-02*0	0j`
-02+0	0j`
-02"02%00j`02,0Há†“
-(-s00	0j`
-020	0j`
-020	0j`
-02"0j`0Há†“
-(/6400j`02
-20j`Há “
-(37600j`02
-0j`Há†“
-(5*:020“
-Há†“
-(9¿>020“
-20	0j`
-02"028%4.,0	0j`
-00j0	0j`
-`028,4.,0	0j`
-00j0	0j`
-`0Há†“
-(=â@020	0j`
-020	0j`
-02"0	0j`
-02%00j`02,0Há†“
-(?C0j`Há “
-(BnE020“
-202"02%0	0j`
-02,0	0j`
-0Há†“
-(DÅG020	0j`
-020	0j`
-02"0	0j`
-02%0	0j`
-0Há†“
-(F/K0200j`Há†“
-(JCM0200j`20j`0Há†“
-(LxP00j`0200j`20“
-2"00j`02
-%0j`Há†“
-(OrS0200j`20“
-2"02%02,0	0j`
-02Q0Há†“
-(RrU0200j`20“
-2"02%02,0	0j`
-02Q0Há†“
-(TÉX0200j`20“
-2"0“
-2%02,02Q0	0j`
-02V0Há†“
-(W∂]0200j`202"0“
-2%02,02Q0	0j`
-02V02Y0	0j`
-02Z0	0j`
-02[0Há†“
-(\s_0200j`20	0j`
-02"02%0	0j`
-02,0Há†“
-(^/a0200j`Há†“
-(`4e02b02c0Há “
-(d&g02b0Há “
-(f>o0!j`"02k0!j`"0 2m0#Há “
-(n$r02
-p0j`Há “
-(qt0Há “
-(s™0$0j`%2u02$y 0$0j`%0j`&02L}H<:640$0j`%0$0j`%00(0'0j`)Há “
-(~¨Å0$0j`%2u02$y 0$0j`%0j`&02L}H<:640$0j`%0$0j`%00(0'0j`)Há “
-	(Ä¨É0$0j`%2u02$y 0$0j`%0j`&02L}H<:640$0j`%0$0j`%00(0'0j`)Há “
-	(Çmâ02Ñ02Bm>20,*0$0j`%0+000*0'0j`,Há “
-	(àΩê0$0j`%2u02ä02ç00-j`.02é0j`2L}H<:640$0j`%0$0j`%00(0'0j`)Há “
-	(èΩí0$0j`%2u02ä02ç00-j`.02é0j`2L}H<:640$0j`%0$0j`%00(0'0j`)Há “
-	(ë=ò02î
-0/02ï02ñ0Há “
-	(ó+ö02î
-0/0Há “
-	(ôT°
-0/02õ0“
-2ú02ü
-0100"01Há “
-	(†+£02î
-0/0Há “
-	(¢,•02õ0“
-Há “
-	(§+ß02î
-0/0Há “
-	(¶<´02î
-0/02©
-020Há “
-	(™+≠02î
-0/0Há “
-	(¨+Ø02î
-0/0Há “
-	(ÆF¥02î
-0/02≤003j`40Há “
-	(≥1π02∑050j`6Há “
-	(∏+ª02∑
-050Há “
-	(∫4æ02∑
-0502º0Há “
-	(Ω4¿02∑
-0502º0Há “
-	(ø:√02∑050j`72º0Há “
-	(¬C«02ƒ02≈02ü
-0100"01Há “
-	(∆4Õ02ƒ02À
-0:0Há “
-	(Ã4œ02ƒ02À
-0:0Há “
-	(Œ3“02
-0;020Há†“
-	(—3‘02
-0;020Há†“
-	(”3÷02
-0;020Há†“
-	(’l‹"000<0'0j`=2◊02'⁄"000<0'0j`=Há “
-	(€lﬁ"000<0'0j`=2◊02'⁄"000<0'0j`=Há “
-	(›l‡"000<0'0j`=2◊02'⁄"000<0'0j`=Há “
-	(ﬂ0‰02‚0j`>2◊0Há “
-	(„0Á02Â0j`>2◊0Há “
-	(Ê#È02◊0Há “
-	(Ë5Ï02◊02Í0“
-Há “
-	(ÎAÒ02Ô0?j`@02Í0“
-Há “
-	(,ı02Ú02Û0Há “
-	(Ù#˜02◊0Há “
-	(ˆ#˙02¯0Há “
-	(˘#¸02¯0Há “
-	(˚˛0Há “
-	(˝/Ç02Ä0;j`A0Há “
-	(Å/Ñ02Ä0;j`A0Há “
-	(É8á02Ä0;j`A02Ö0Há “
-	(Ü8â02Ä0;j`A02Ö0Há “
-	(à8ã02Ä0;j`A02Ö0Há “
-	(äMè02å02Ä0;j`A02ç0;j`A0Há “
-	(é/ë02Ä0;j`A0Há “
-	(êEí02◊02ì
-0B02î
-0B0Há “
-	(ï/ó02Ä0;j`A0Há “
-	(ñJô02Ä0;j`A02◊003j`40Há “
-	(òDú02Ä0;j`A02ö0?j`@0Há “
-	(õUü02Ä0;j`A02ö0?j`@02ù
-020Há “
-	(û?¢02‚0j`>2◊02º0C0 Há “
-	(°E£02◊02§
-0D02•
-0D0Há “
-	(¶+™02®
-0E0Há “
-	(©,≠02◊02´0Há “
-	(¨B¥02Ø
-0F02≤0G0j`HHá “
-	(≥<∂02Ø
-0F02≤
-0G0Há “
-	(µ<∫02∑
-0F02∏
-0F0Há “
-	(π8ø02º0j`I2ñ
-0J0Há “
-	(æI√02º0j`I2¿
-0J02¡
-0J0Há “
-	(¬=«02ƒ0“
-2≈
-0F0Há “
-	(∆=…02ƒ0“
-2≈
-0F0Há “
-	(»4À02ƒ02≈
-0F0Há “
-	( <Ã02Õ
-0K02Œ
-0K0Há “
-	(œ<–02Õ
-0L02Œ
-0L0Há “
-	(—#”02◊0Há “
-	(“#’02◊0Há “
-	(‘#◊02◊0Há “
-	(÷l⁄"000<0'0j`=2◊02'ÿ"000<0'0j`=Há “
-	(ŸEﬁ02å02€
-0;02‹
-0;0Há “
-	(›0‚02‡0j`M2Ö0Há “
-	(·‰0Há “
-	(„Ê0Há “
-	(Â'È02
-0j`NHá†“
-	(Ë'Î02
-0j`NHá†“
-	(Í+Ô0P2
-0O0Há†“
-	(Ó7Ò0P2
-0O02
-0j`NHá†“
-	(+Û02
-0O0Há†“
-	(Ú7ı02
-0O02
-0j`NHá†“
-	(Ù˜0j`Há “
-	(ˆ,˚0Q2¯0“
-Há “
-	(˙,˝02¯0“
-Há “
-	(¸,ˇ02¯0“
-Há “
-	(˛,Ç0R2¯0“
-Há “
-	(ÅgÖ0Q2¯0“
-29É4.,00j`00j00j``0Há “
-	(Ñgà0S2¯0“
-29É4.,00j`00j00j``0Há “
-	(ápä02¯0“
-29É4.,00j`00j00j``02ä0Há “
-	(âpå02¯0“
-29É4.,00j`00j00j``02ä0Há “
-	(ãpé0R2¯0“
-29É4.,00j`00j00j``02ä0Há “
-	(çpë0T2¯0“
-29É4.,00j`00j00j``02ä0Há “
-	(êpì0R2¯0“
-29É4.,00j`00j00j``02ä0Há “
-	(ípï0T2¯0“
-29É4.,00j`00j00j``02ä0Há “
-	(î5ò00j`02ñ0Há “
-	(ó,ö02Í0“
-Há “
-	(ôú0Há “
-	(õ#ü02ù0Há “
-	(ûÿ
-‡
- Í
-platform.posix

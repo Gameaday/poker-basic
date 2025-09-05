@@ -1,1048 +1,0 @@
-
-еg
-kotlinx
-cinterop
-CPointer
-UShortVarOf
-kotlin
-UShort
-platform
-windows
-
-OLECHARVar
-	LPCOLESTR
-szFile
-
-tagREGKIND
-REGKIND
-regkind
-
-CValuesRef
-CPointerVarOf
-ITypeLib
-CPointerVar
-pptlib
-Int
-HRESULT
-internal
-CCall
-id
-,knifunptr_platform_windows5504_LoadTypeLibEx
-LoadTypeLibEx
-posix
-_GUID
-GUID
-rguid
-WORD
-	wVerMajor
-	wVerMinor
-UInt
-LCID
-lcid
--knifunptr_platform_windows5505_LoadRegTypeLib
-LoadRegTypeLib
-guid
-USHORT
-wMaj
-wMin
-BSTR
-BSTRVar
-LPBSTR
-lpbstrPathName
-4knifunptr_platform_windows5506_QueryPathOfRegTypeLib
-QueryPathOfRegTypeLib
-ptlib
-
-szFullPath
-	szHelpDir
-.knifunptr_platform_windows5507_RegisterTypeLib
-RegisterTypeLib
-libID
-SYSKIND
-syskind
-0knifunptr_platform_windows5508_UnRegisterTypeLib
-UnRegisterTypeLib
-ICreateTypeLib
-ppctlib
-,knifunptr_platform_windows5509_CreateTypeLib
-CreateTypeLib
-ICreateTypeLib2
--knifunptr_platform_windows5510_CreateTypeLib2
-CreateTypeLib2
-tagDISPPARAMS
-
-DISPPARAMS
-pdispparams
-UINT
-position
-VARTYPE
-vtTarg
-
-tagVARIANT
-VARIANT
-
-pvarResult
-	UIntVarOf
-UINTVar
-puArgErr
-+knifunptr_platform_windows5511_DispGetParam
-DispGetParam
-	ITypeInfo
-ptinfo
-	rgszNames
-cNames
-IntVarOf
-	DISPIDVar
-rgdispid
-0knifunptr_platform_windows5512_DispGetIDsOfNames
-DispGetIDsOfNames
-_this
-DISPID
-dispidMember
-wFlags
-pparams
-tagEXCEPINFO
-	EXCEPINFO
-
-pexcepinfo
-)knifunptr_platform_windows5513_DispInvoke
-
-DispInvoke
-tagINTERFACEDATA
-INTERFACEDATA
-pidata
-pptinfo
-1knifunptr_platform_windows5514_CreateDispTypeInfo
-CreateDispTypeInfo
-IUnknown
-	punkOuter
-pvThis
-ppunkStdDisp
-0knifunptr_platform_windows5515_CreateStdDispatch
-CreateStdDispatch
-
-pvInstance
-ULong
-	ULONG_PTR
-oVft
-CALLCONV
-cc
-vtReturn
-cActuals
-
-VARTYPEVar
-prgvt
-
-VARIANTARG
-prgpvarg
-pvargResult
-+knifunptr_platform_windows5516_DispCallFunc
-DispCallFunc
-punk
-IID
-rclsid
-DWORD
-dwFlags
-DWORDVar
-pdwRegister
-3knifunptr_platform_windows5517_RegisterActiveObject
-RegisterActiveObject
-
-dwRegister
-
-pvReserved
-1knifunptr_platform_windows5518_RevokeActiveObject
-RevokeActiveObject
-ppunk
-.knifunptr_platform_windows5519_GetActiveObject
-GetActiveObject
-ULONG
-
-dwReserved
-
-IErrorInfo
-perrinfo
-+knifunptr_platform_windows5520_SetErrorInfo
-SetErrorInfo
-	pperrinfo
-+knifunptr_platform_windows5521_GetErrorInfo
-GetErrorInfo
-ICreateErrorInfo
-.knifunptr_platform_windows5522_CreateErrorInfo
-CreateErrorInfo
-	pTypeInfo
-IRecordInfo
-	ppRecInfo
-8knifunptr_platform_windows5523_GetRecordInfoFromTypeInfo
-GetRecordInfoFromTypeInfo
-rGuidTypeLib
-	uVerMajor
-	uVerMinor
-rGuidTypeInfo
-5knifunptr_platform_windows5524_GetRecordInfoFromGuids
-GetRecordInfoFromGuids
--knifunptr_platform_windows5525_OaBuildVersion
-OaBuildVersion
-tagCUSTDATA
-
-LPCUSTDATA
-	pCustData
-Unit
-,knifunptr_platform_windows5526_ClearCustData
-ClearCustData
-.knifunptr_platform_windows5527_OleBuildVersion
-OleBuildVersion
-IStorage
-	LPSTORAGE
-pStg
-CLSID
-pclsid
-+knifunptr_platform_windows5528_ReadClassStg
-ReadClassStg
-,knifunptr_platform_windows5529_WriteClassStg
-WriteClassStg
-IStream
-LPSTREAM
-pStm
-+knifunptr_platform_windows5530_ReadClassStm
-ReadClassStm
-,knifunptr_platform_windows5531_WriteClassStm
-WriteClassStm
-pstg
-
-CLIPFORMAT
-cf
-LPOLESTR
-lpszUserType
-2knifunptr_platform_windows5532_WriteFmtUserTypeStg
-WriteFmtUserTypeStg
-CLIPFORMATVar
-pcf
-LPOLESTRVar
-lplpszUserType
-1knifunptr_platform_windows5533_ReadFmtUserTypeStg
-ReadFmtUserTypeStg
-CPointed
-LPVOID
-,knifunptr_platform_windows5534_OleInitialize
-OleInitialize
-.knifunptr_platform_windows5535_OleUninitialize
-OleUninitialize
-IDataObject
-LPDATAOBJECT
-pSrcDataObject
-3knifunptr_platform_windows5536_OleQueryLinkFromData
-OleQueryLinkFromData
-5knifunptr_platform_windows5537_OleQueryCreateFromData
-OleQueryCreateFromData
-riid
-	renderopt
-tagFORMATETC
-LPFORMATETC
-
-pFormatEtc
-IOleClientSite
-LPOLECLIENTSITE
-pClientSite
-	LPVOIDVar
-ppvObj
-(knifunptr_platform_windows5538_OleCreate
-	OleCreate
-cFormats
-rgAdvf
-rgFormatEtc
-IAdviseSink
-lpAdviseSink
-rgdwConnection
-*knifunptr_platform_windows5539_OleCreateEx
-OleCreateEx
-pSrcDataObj
-0knifunptr_platform_windows5540_OleCreateFromData
-OleCreateFromData
-2knifunptr_platform_windows5541_OleCreateFromDataEx
-OleCreateFromDataEx
-4knifunptr_platform_windows5542_OleCreateLinkFromData
-OleCreateLinkFromData
-6knifunptr_platform_windows5543_OleCreateLinkFromDataEx
-OleCreateLinkFromDataEx
-iid
-6knifunptr_platform_windows5544_OleCreateStaticFromData
-OleCreateStaticFromData
-IMoniker
-	LPMONIKER
-
-pmkLinkSrc
-lpFormatEtc
-,knifunptr_platform_windows5545_OleCreateLink
-OleCreateLink
-.knifunptr_platform_windows5546_OleCreateLinkEx
-OleCreateLinkEx
-lpszFileName
-2knifunptr_platform_windows5547_OleCreateLinkToFile
-OleCreateLinkToFile
-4knifunptr_platform_windows5548_OleCreateLinkToFileEx
-OleCreateLinkToFileEx
-0knifunptr_platform_windows5549_OleCreateFromFile
-OleCreateFromFile
-2knifunptr_platform_windows5550_OleCreateFromFileEx
-OleCreateFromFileEx
-&knifunptr_platform_windows5551_OleLoad
-OleLoad
-IPersistStorage
-LPPERSISTSTORAGE
-pPS
-WINBOOL
-fSameAsLoad
-&knifunptr_platform_windows5552_OleSave
-OleSave
-iidInterface
-0knifunptr_platform_windows5553_OleLoadFromStream
-OleLoadFromStream
-IPersistStream
-LPPERSISTSTREAM
-pPStm
-.knifunptr_platform_windows5554_OleSaveToStream
-OleSaveToStream
-	LPUNKNOWN
-pUnknown
-
-fContained
-4knifunptr_platform_windows5555_OleSetContainedObject
-OleSetContainedObject
-fVisible
-3knifunptr_platform_windows5556_OleNoteObjectVisible
-OleNoteObjectVisible
-HWND__
-HWND
-hwnd
-IDropTarget
-LPDROPTARGET
-pDropTarget
-/knifunptr_platform_windows5557_RegisterDragDrop
-RegisterDragDrop
--knifunptr_platform_windows5558_RevokeDragDrop
-RevokeDragDrop
-pDataObj
-IDropSource
-LPDROPSOURCE
-pDropSource
-dwOKEffects
-LPDWORD
-	pdwEffect
-)knifunptr_platform_windows5559_DoDragDrop
-
-DoDragDrop
-.knifunptr_platform_windows5560_OleSetClipboard
-OleSetClipboard
-LPDATAOBJECTVar
-	ppDataObj
-.knifunptr_platform_windows5561_OleGetClipboard
-OleGetClipboard
-0knifunptr_platform_windows5562_OleFlushClipboard
-OleFlushClipboard
-4knifunptr_platform_windows5563_OleIsCurrentClipboard
-OleIsCurrentClipboard
-HMENU__
-HMENU
-hmenuCombined
-tagOleMenuGroupWidths
-LPOLEMENUGROUPWIDTHS
-lpMenuWidths
-HOLEMENU
-6knifunptr_platform_windows5564_OleCreateMenuDescriptor
-OleCreateMenuDescriptor
-holemenu
-	hwndFrame
-hwndActiveObject
-IOleInPlaceFrame
-LPOLEINPLACEFRAME
-lpFrame
-IOleInPlaceActiveObject
-LPOLEINPLACEACTIVEOBJECT
-lpActiveObj
-3knifunptr_platform_windows5565_OleSetMenuDescriptor
-OleSetMenuDescriptor
-7knifunptr_platform_windows5566_OleDestroyMenuDescriptor
-OleDestroyMenuDescriptor
-tagOIFI
-LPOLEINPLACEFRAMEINFO
-lpFrameInfo
-tagMSG
-LPMSG
-lpmsg
-6knifunptr_platform_windows5567_OleTranslateAccelerator
-OleTranslateAccelerator
-HANDLE
-hSrc
-cfFormat
-uiFlags
-/knifunptr_platform_windows5568_OleDuplicateData
-OleDuplicateData
-dwAspect
-HDC__
-HDC
-hdcDraw
-tagRECT
-RECT
-LPCRECT
-
-lprcBounds
-&knifunptr_platform_windows5569_OleDraw
-OleDraw
-%knifunptr_platform_windows5570_OleRun
-OleRun
-
-IOleObject
-LPOLEOBJECT
-pObject
-+knifunptr_platform_windows5571_OleIsRunning
-OleIsRunning
-fLock
-fLastUnlockCloses
--knifunptr_platform_windows5572_OleLockRunning
-OleLockRunning
-tagSTGMEDIUM
-	STGMEDIUM
-LPSTGMEDIUM
-arg0
-/knifunptr_platform_windows5573_ReleaseStgMedium
-ReleaseStgMedium
-IOleAdviseHolder
-LPOLEADVISEHOLDER
-LPOLEADVISEHOLDERVar
-
-ppOAHolder
-4knifunptr_platform_windows5574_CreateOleAdviseHolder
-CreateOleAdviseHolder
-clsid
-	pUnkOuter
-lplpObj
-6knifunptr_platform_windows5575_OleCreateDefaultHandler
-OleCreateDefaultHandler
-flags
-IClassFactory
-LPCLASSFACTORY
-pCF
-7knifunptr_platform_windows5576_OleCreateEmbeddingHelper
-OleCreateEmbeddingHelper
-HACCEL__
-HACCEL
-hAccel
-cAccelEntries
-lpMsg
-WORDVar
-lpwCmd
-,knifunptr_platform_windows5577_IsAccelerator
-IsAccelerator
-lpszPath
-fUseFileAsLabel
-HGLOBAL
-/knifunptr_platform_windows5578_OleGetIconOfFile
-OleGetIconOfFile
-	lpszLabel
-fUseTypeAsLabel
-0knifunptr_platform_windows5579_OleGetIconOfClass
-OleGetIconOfClass
-HICON__
-HICON
-hIcon
-lpszSourceFile
-
-iIconIndex
->knifunptr_platform_windows5580_OleMetafilePictFromIconAndLabel
-OleMetafilePictFromIconAndLabel
-dwFormOfType
-pszUserType
-0knifunptr_platform_windows5581_OleRegGetUserType
-OleRegGetUserType
-	pdwStatus
-2knifunptr_platform_windows5582_OleRegGetMiscStatus
-OleRegGetMiscStatus
-dwDirection
-IEnumFORMATETC
-LPENUMFORMATETC
-LPENUMFORMATETCVar
-ppenum
-2knifunptr_platform_windows5583_OleRegEnumFormatEtc
-OleRegEnumFormatEtc
-IEnumOLEVERB
-LPENUMOLEVERB
-LPENUMOLEVERBVar
-.knifunptr_platform_windows5584_OleRegEnumVerbs
-OleRegEnumVerbs
-
-_OLESTREAM
-LPOLESTREAM
-lpolestream
-tagDVTARGETDEVICE
-DVTARGETDEVICE
-ptd
-<knifunptr_platform_windows5585_OleConvertOLESTREAMToIStorage
-OleConvertOLESTREAMToIStorage
-<knifunptr_platform_windows5586_OleConvertIStorageToOLESTREAM
-OleConvertIStorageToOLESTREAM
-
-ILockBytes
-LPLOCKBYTES
-plkbyt
-
-HGLOBALVar
-phglobal
-7knifunptr_platform_windows5587_GetHGlobalFromILockBytes
-GetHGlobalFromILockBytes
-hGlobal
-fDeleteOnRelease
-LPLOCKBYTESVar
-pplkbyt
-8knifunptr_platform_windows5588_CreateILockBytesOnHGlobal
-CreateILockBytesOnHGlobal
-LPCLSID
-	pClsidNew
-/knifunptr_platform_windows5589_OleDoAutoConvert
-OleDoAutoConvert
-clsidOld
-0knifunptr_platform_windows5590_OleGetAutoConvert
-OleGetAutoConvert
-clsidNew
-0knifunptr_platform_windows5591_OleSetAutoConvert
-OleSetAutoConvert
-,knifunptr_platform_windows5592_GetConvertStg
-GetConvertStg
-fConvert
-,knifunptr_platform_windows5593_SetConvertStg
-SetConvertStg
-LONG
-lWidth
-lHeight
-dwSize
-pmedium
-polestm
->knifunptr_platform_windows5594_OleConvertIStorageToOLESTREAMEx
-OleConvertIStorageToOLESTREAMEx
-	pcfFormat
-LONGVar
-plwWidth
-plHeight
-pdwSize
->knifunptr_platform_windows5595_OleConvertOLESTREAMToIStorageEx
-OleConvertOLESTREAMToIStorageEx
-dwScope
-LPCVOID
-pvReserved1
-pvReserved2
-
-ULongVarOf
-SCARDCONTEXTVar
-LPSCARDCONTEXT
-	phContext
-4knifunptr_platform_windows5596_SCardEstablishContext
-SCardEstablishContext
-SCARDCONTEXT
-hContext
-2knifunptr_platform_windows5597_SCardReleaseContext
-SCardReleaseContext
-2knifunptr_platform_windows5598_SCardIsValidContext
-SCardIsValidContext
-	ByteVarOf
-Byte
-CHARVar
-LPSTR
-	mszGroups
-
-pcchGroups
-5knifunptr_platform_windows5599_SCardListReaderGroupsA
-SCardListReaderGroupsA
-WCHARVar
-LPWSTR
-5knifunptr_platform_windows5600_SCardListReaderGroupsW
-SCardListReaderGroupsW
-String
-CString
-
-mszReaders
-pcchReaders
-0knifunptr_platform_windows5601_SCardListReadersA
-SCardListReadersA
-WCString
-0knifunptr_platform_windows5602_SCardListReadersW
-SCardListReadersW
-
-UByteVarOf
-UByte
-BYTEVar
-LPCBYTE
-pbAtr
-LPCGUID
-rgquidInterfaces
-cguidInterfaceCount
-mszCards
-	pcchCards
-.knifunptr_platform_windows5603_SCardListCardsA
-SCardListCardsA
-.knifunptr_platform_windows5604_SCardListCardsW
-SCardListCardsW
-szCard
-LPGUID
-pguidInterfaces
-pcguidInterfaces
-3knifunptr_platform_windows5605_SCardListInterfacesA
-SCardListInterfacesA
-3knifunptr_platform_windows5606_SCardListInterfacesW
-SCardListInterfacesW
-pguidProviderId
-2knifunptr_platform_windows5607_SCardGetProviderIdA
-SCardGetProviderIdA
-2knifunptr_platform_windows5608_SCardGetProviderIdW
-SCardGetProviderIdW
-
-szCardName
-dwProviderId
-
-szProvider
-pcchProvider
-<knifunptr_platform_windows5609_SCardGetCardTypeProviderNameA
-SCardGetCardTypeProviderNameA
-<knifunptr_platform_windows5610_SCardGetCardTypeProviderNameW
-SCardGetCardTypeProviderNameW
-szGroupName
-9knifunptr_platform_windows5611_SCardIntroduceReaderGroupA
-SCardIntroduceReaderGroupA
-9knifunptr_platform_windows5612_SCardIntroduceReaderGroupW
-SCardIntroduceReaderGroupW
-6knifunptr_platform_windows5613_SCardForgetReaderGroupA
-SCardForgetReaderGroupA
-6knifunptr_platform_windows5614_SCardForgetReaderGroupW
-SCardForgetReaderGroupW
-szReaderName
-szDeviceName
-4knifunptr_platform_windows5615_SCardIntroduceReaderA
-SCardIntroduceReaderA
-4knifunptr_platform_windows5616_SCardIntroduceReaderW
-SCardIntroduceReaderW
-1knifunptr_platform_windows5617_SCardForgetReaderA
-SCardForgetReaderA
-1knifunptr_platform_windows5618_SCardForgetReaderW
-SCardForgetReaderW
-5knifunptr_platform_windows5619_SCardAddReaderToGroupA
-SCardAddReaderToGroupA
-5knifunptr_platform_windows5620_SCardAddReaderToGroupW
-SCardAddReaderToGroupW
-:knifunptr_platform_windows5621_SCardRemoveReaderFromGroupA
-SCardRemoveReaderFromGroupA
-:knifunptr_platform_windows5622_SCardRemoveReaderFromGroupW
-SCardRemoveReaderFromGroupW
-pguidPrimaryProvider
-rgguidInterfaces
-dwInterfaceCount
-	pbAtrMask
-cbAtrLen
-6knifunptr_platform_windows5623_SCardIntroduceCardTypeA
-SCardIntroduceCardTypeA
-6knifunptr_platform_windows5624_SCardIntroduceCardTypeW
-SCardIntroduceCardTypeW
-<knifunptr_platform_windows5625_SCardSetCardTypeProviderNameA
-SCardSetCardTypeProviderNameA
-<knifunptr_platform_windows5626_SCardSetCardTypeProviderNameW
-SCardSetCardTypeProviderNameW
-3knifunptr_platform_windows5627_SCardForgetCardTypeA
-SCardForgetCardTypeA
-3knifunptr_platform_windows5628_SCardForgetCardTypeW
-SCardForgetCardTypeW
-pvMem
-.knifunptr_platform_windows5629_SCardFreeMemory
-SCardFreeMemory
-6knifunptr_platform_windows5630_SCardAccessStartedEvent
-SCardAccessStartedEvent
-7knifunptr_platform_windows5631_SCardReleaseStartedEvent
-SCardReleaseStartedEvent└
- 
- 
- 
- 
-
- 
-
-
- 
-	 
- 
- 
- 
- 
- 
- 
- 
- 
-
- 
-
- 
- 
- 
-! 
-" 
-' 
-* 
-+ 
-, 
-6 
-: 
-> 
-A 
-B 
-D 
-F 
-H 
-I 
-K 
-L 
-P 
-T 
-U 
-Z 
-^ 
-_ 
-c 
-d 
-i 
-p 
-q 
-s 
-w 
-y 
- 
-Б 
-Г 
-О 
-Р 
-Ч 
-Ы 
-з 
-и 
-к 
-п 
-░ 
-▓ 
-╕ 
-╣ 
-└ 
-┬ 
-╞ 
-╚ 
-╠ 
-═ 
-╥ 
-╙ 
-█ 
-▄ 
-▐ 
-▀ 
-с 
-ш 
-∙ 
-· 
-М 
-Н 
-П 
-Ц 
-Ч 
-Ы 
-г 
-д 
-ж 
-з 
-о 
-п 
-▓ 
-╕ 
-└ 
-┴ 
-├ 
-─ 
-╞ 
-╠ 
-═ 
-╧ 
-╨ 
-╓ 
-╫ 
-┘ 
-┌ 
-▐ 
-х 
-ц 
-ш 
-щ 
-ъ 
-Ё 
-ё 
-∙ 
-· 
-√ 
-  
-А 
-Б 
-Л 
-М 
-Р 
-С 
-Х 
-Ы 
-в 
-г 
-▒ 
-▓ 
-│ 
-╖ 
-╕ 
-╣ 
-╝ 
-╜ 
-┐ 
-└ 
-╞ 
-╟ 
-╔ 
-╧ 
-╙ 
-т 
-ы 
-Є 
-ї 
-Ў 
-ў 
-√ 
-Б 
-В 
-Г 
-Д 
-Й 
-К 
-Н 
-О 
-У 
-Ц 
-Ч 
-Ш 
-Щ 
-Ы 
-е ▀pn0j`2
-00j`0j`	2
-0
-j`2$ 
-000j0`0HЗ ╥
-(z%0j`20j`02
-0j`2
- 0j`2
-#0j`2$ 
-000j0`0HЗ ╥
-($И/0j`2&0j`02
-(0j`2
-)0j`2
-#0j`22-." 00j`0j`0j`0j`HЗ ╥
-(.`40j`20
-002100j`02200j`0HЗ ╥
-(3`90j`250j`02
-0j`2
- 0j`2
-#0j`2
-70j`HЗ ╥
-(8h=0j`2
-70j`2
-00j`02$; 
-000j0`0HЗ ╥
-(<n@0j`2
-70j`2
-00j`0j`	2$; 
-0 00j0 `0HЗ ╥
-(?vO0j`2C0!j`"02
-E0j`#2
-G0j`$2J0%j`&02M00'j`(0HЗ ╥
-(NМX0j`2Q
-0)028R4.,00j`00j00j``02
-S0j`#2V00*j`+0HЗ ╥
-(Wиb0j`2Y02Q
-0)02
-[0j`,2
-\0j`2]0!j`"02J0%j`&02`0-j`.02M00'j`(0HЗ ╥
-(abh0j`2e0/j`002
-#0j`2$f 
-0)00j0)`0HЗ ╥
-(gpn0j`2j
-0102k02Q
-0)02$l 
-0100j01`0HЗ ╥
-(m╢}0j`2o02
-r02j`32
-t0j`42
-u0j`$2
-v0j`#2x00j`502,z(" 0%j`600j0%j`6`02{0%j`&0HЗ ╥
-(|kЖ0j`2~
-0102А0j`702В0j`82Д00'j`90HЗ ╥
-	(Е:К0j`2З0j`82И0HЗ ╥
-	(ЙiН0j`2А0j`702И02%Л 
-0100j01`0HЗ ╥
-	(М<У0j`2П0j`:2С
-0;0HЗ ╥
-	(ТRЦ0j`2П0j`:2%Ф 
-0;00j0;`0HЗ ╥
-	(ХEЩ0j`2%Ф 
-0<00j0<`0HЗ ╥
-	(ШVЮ0j`2Ъ
-0)02%Ь 
-0=00j0=`0HЗ ╥
-	(ЭХд0j`2Я0j`02а0j`:2б0j`:2
-#0j`2в0j`02%Ь 
-0=00j0=`0HЗ ╥
-	(гж0j`:HЗ ╥
-	(е1м0@2й0>0j`?HЗ ╥
-	(ло0j`8HЗ ╥
-	(нJ╡0j`2▒0A0j`B2│0j`C0HЗ ╥
-	(┤J╖0j`2▒0A0j`B2А0j`70HЗ ╥
-	(╢J╝0j`2║0D0j`E2│0j`C0HЗ ╥
-	(╗J╛0j`2║0D0j`E2А0j`70HЗ ╥
-	(╜c┼0j`2┐0A0j`B2┴0j`F2├00j`0j`GHЗ ╥
-	(─╦0j`2┐0A0j`B2╟00j`H02-╔(" 00j`0j`G0j`I0HЗ ╥
-	(╩7╧0j`2И0J0j`KHЗ ╥
-	(╬╤0@HЗ ╥
-	(╨5╓0j`2╘0L0j`MHЗ ╥
-	(╒5╪0j`2╘0L0j`MHЗ ╥
-	(╫┴ф0j`2А0j`702┘0j`702┌0j`82▌0N0j`O2р0P0j`Q2▒0A0j`B2%т 0J0j`K0j`R0HЗ ╥
-	(увь0j`2А0j`702┘0j`702В0j`82┌0j`82х0j`:2ц00'j`902ч0N0j`O2щ
-0S02ъ00'j`902р0P0j`Q2▒0A0j`B2%т 0J0j`K0j`R0HЗ ╥
-	(ы├я0j`2э0L0j`M2┘0j`702┌0j`82▌0N0j`O2р0P0j`Q2▒0A0j`B2%т 0J0j`K0j`R0HЗ ╥
-	(юдё0j`2э0L0j`M2┘0j`702В0j`82┌0j`82х0j`:2ц00'j`902ч0N0j`O2щ
-0S02ъ00'j`902р0P0j`Q2▒0A0j`B2%т 0J0j`K0j`R0HЗ ╥
-	(Ё├є0j`2э0L0j`M2┘0j`702┌0j`82▌0N0j`O2р0P0j`Q2▒0A0j`B2%т 0J0j`K0j`R0HЗ ╥
-	(Єдї0j`2э0L0j`M2┘0j`702В0j`82┌0j`82х0j`:2ц00'j`902ч0N0j`O2щ
-0S02ъ00'j`902р0P0j`Q2▒0A0j`B2%т 0J0j`K0j`R0HЗ ╥
-	(Ї├°0j`2э0L0j`M2Ў0j`702┌0j`82▌0N0j`O2р0P0j`Q2▒0A0j`B2%т 0J0j`K0j`R0HЗ ╥
-	(ў├■0j`2√0T0j`U2┘0j`702┌0j`82№0N0j`O2р0P0j`Q2▒0A0j`B2%т 0J0j`K0j`R0HЗ ╥
-	(¤дА0j`2√0T0j`U2┘0j`702В0j`82┌0j`82х0j`:2ц00'j`902ч0N0j`O2щ
-0S02ъ00'j`902р0P0j`Q2▒0A0j`B2%т 0J0j`K0j`R0HЗ ╥
-	( ═Г0j`2Б00j`0j`	2┘0j`702┌0j`82№0N0j`O2р0P0j`Q2▒0A0j`B2%т 0J0j`K0j`R0HЗ ╥
-	(ВоЕ0j`2Б00j`0j`	2┘0j`702В0j`82┌0j`82х0j`:2ц00'j`902ч0N0j`O2щ
-0S02ъ00'j`902р0P0j`Q2▒0A0j`B2%т 0J0j`K0j`R0HЗ ╥
-	(ДтЗ0j`2А0j`702Б00j`0j`	2┘0j`702┌0j`82№0N0j`O2р0P0j`Q2▒0A0j`B2%т 0J0j`K0j`R0HЗ ╥
-	(Ж├Й0j`2А0j`702Б00j`0j`	2┘0j`702В0j`82┌0j`82х0j`:2ц00'j`902ч0N0j`O2щ
-0S02ъ00'j`902р0P0j`Q2▒0A0j`B2%т 0J0j`K0j`R0HЗ ╥
-	(ИИЛ0j`2▒0A0j`B2┘0j`702р0P0j`Q2%т 0J0j`K0j`R0HЗ ╥
-	(КYТ0j`2О0V0j`W2▒0A0j`B2Р0j`XHЗ ╥
-	(СqХ0j`2║0D0j`E2У0j`702%т 0J0j`K0j`R0HЗ ╥
-	(ФLЪ0j`2Ш0Y0j`Z2║0D0j`EHЗ ╥
-	(ЩBЯ0j`2Ь010j`[2Э0j`XHЗ ╥
-	(ЮBв0j`2Ь010j`[2а0j`XHЗ ╥
-	(бLк0j`2е0\0j`]2и0^0j`_HЗ ╥
-	(й5м0j`2е0\0j`]HЗ ╥
-	(лz╡0j`2н0L0j`M2░0`0j`a2▒0j`82│00'j`90j`bHЗ ╥
-	(┤5╖0j`2н0L0j`MHЗ ╥
-	(╢C╗0j`2#╣0L0j`M0j`c0HЗ ╥
-	(║╜0j`HЗ ╥
-	(╝5┐0j`2н0L0j`MHЗ ╥
-	(╛X╚0J0j`h2┬0d0j`e2┼0f0j`gHЗ ╥
-	(╟У╙0j`2╔0J0j`h2╩0\0j`]2╦0\0j`]2╬0i0j`j2╤0k0j`lHЗ ╥
-	(╥7╒0j`2╔0J0j`hHЗ ╥
-	(╘c▌0j`2╬0i0j`j2╪0m0j`n2█0o0j`pHЗ ╥
-	(▄]у0J0j`q2▀0J0j`q2р0j`F2с0j`#HЗ ╥
-	(тtэ0j`2Ь010j`[2ф0j`82ч0r0j`s2ы0tj`u0j`vHЗ ╥
-	(ь5я0j`2Ь010j`[HЗ ╥
-	(ю5Ї0j`X2Є0w0j`xHЗ ╥
-	(єO°0j`2Ь010j`[2ї0j`X2Ў0j`XHЗ ╥
-	(ў6■0@2№0yj`z0j`{HЗа╥
-	(¤CД0j`2#В0|0j`}0j`~0HЗ ╥
-	(ГЖЙ0j`2Е0j`702Ж010j`[2┘0j`702%З 0J0j`K0j`R0HЗ ╥
-	(ИлП0j`2Е0j`702Ж010j`[2К0j`82Н00j`А2┘0j`702%З 0J0j`K0j`R0HЗ ╥
-	(ОsШ0j`X2Т0Б0j`В2У02Ф0o0j`p2Ц00j`Г0HЗ ╥
-	(ЧYЭ0J0j`Д2Щ00j`0j`G2Ъ0j`XHЗ ╥
-	(Ьnб0J0j`Д2А0j`702Ю00j`0j`G2Я0j`XHЗ ╥
-	(аУи0J0j`Д2д0Е0j`Ж2Ю00j`0j`G2е00j`0j`G2ж0j`#HЗ ╥
-	(зoм0j`2Е0j`702й0j`82-к(" 00j`0j`G0j`I0HЗ ╥
-	(л[п0j`2Е0j`702ф0j`82н00'j`90HЗ ╥
-	(оh╢0j`2Е0j`702░0j`82&┤!0З0j`И0j`Й0HЗ ╥
-	(╡[╗0j`2Е0j`702&┤!0К0j`Л0j`М0HЗ ╥
-	(║e├0j`2╛0Н0j`О2┐0A0j`B2┴
-0Пj`Р0HЗ ╥
-	(┬N┼0j`2┐0A0j`B2╛0Н0j`ОHЗ ╥
-	(─`╠0j`2╚0С0j`Т2'╩"0J0j`Д0j`У0HЗ ╥
-	(╦m╥0j`2═0J0j`Д2╬0j`X2&╨!0С0j`Т0j`Ф0HЗ ╥
-	(╤Q╓0j`2▒0A0j`B2╘0j`C0j`ХHЗ ╥
-	(╒O┘0j`2╫0j`702╘0j`C0j`ХHЗ ╥
-	(╪H▄0j`2╫0j`702┌0j`70HЗ ╥
-	(█5▐0j`2▒0A0j`BHЗ ╥
-	(▌Bс0j`2▒0A0j`B2▀0j`XHЗ ╥
-	(рЯщ0j`2┐0A0j`B2р0j`F2у0j`Ц2ф0j`Ц2х0j`82ц0yj`z0j`{2ч0Н0j`ОHЗ ╥
-	(ш╫Ё0j`2ч0Н0j`О2┐0A0j`B2ъ00j`H02ь00*j`Ч02э00*j`Ч02ю00'j`902ц0yj`z0j`{HЗ ╥
-	(яД·0j`Ц2ё0j`82є0J0j`Ш2Ї0J0j`Ш2"°020Щj`Ъ0j`ЫHЗ ╥
-	(∙-■0j`Ц2№02j`ЬHЗ ╥
-	(¤-А0j`Ц2№02j`ЬHЗ ╥
-	( sИ0j`Ц2№02j`Ь2#Е0Ю0Эj`Я0j`а2Ж00'j`90j`bHЗ ╥
-	(ЗqМ0j`Ц2№02j`Ь2!Е00j`б0j`в2Ж00'j`90j`bHЗ ╥
-	(ЛЗТ0j`Ц2№02j`Ь2Е0г╥
-д2#П0Ю0Эj`Я0j`а2Р00'j`90j`bHЗ ╥
-	(СЕХ0j`Ц2№02j`Ь2Е0г╥
-е2!П00j`б0j`в2Р00'j`90j`bHЗ ╥
-	(Ф┴б0j`Ц2№02j`Ь2#Ъ0з0жj`и0j`й2Ь0j`0j`к2Э0j`82#Ю0Ю0Эj`Я0j`а2Я00'j`90j`bHЗ ╥
-	(а┐г0j`Ц2№02j`Ь2#Ъ0з0жj`и0j`й2Ь0j`0j`к2Э0j`82!Ю00j`б0j`в2Я00'j`90j`bHЗ ╥
-	(в~й0j`Ц2№02j`Ь2д0г╥
-д2ж0j`0j`л2з00'j`90j`bHЗ ╥
-	(и~л0j`Ц2№02j`Ь2д0г╥
-е2ж0j`0j`л2з00'j`90j`bHЗ ╥
-	(к]о0j`Ц2№02j`Ь2д0г╥
-д2м0j`0j`лHЗ ╥
-	(н]░0j`Ц2№02j`Ь2д0г╥
-е2м0j`0j`лHЗ ╥
-	(пФ╢0j`Ц2№02j`Ь2▒0г╥
-д2▓0j`82#│0Ю0Эj`Я0j`а2┤00'j`90j`bHЗ ╥
-	(╡Т╕0j`Ц2№02j`Ь2▒0г╥
-е2▓0j`82!│00j`б0j`в2┤00'j`90j`bHЗ ╥
-	(╖A╗0j`Ц2№02j`Ь2╣0г╥
-дHЗ ╥
-	(║A╜0j`Ц2№02j`Ь2╣0г╥
-еHЗ ╥
-	(╝A┐0j`Ц2№02j`Ь2╣0г╥
-дHЗ ╥
-	(╛A┴0j`Ц2№02j`Ь2╣0г╥
-еHЗ ╥
-	(└U┼0j`Ц2№02j`Ь2┬0г╥
-д2├0г╥
-дHЗ ╥
-	(─U╟0j`Ц2№02j`Ь2┬0г╥
-е2├0г╥
-еHЗ ╥
-	(╞A╔0j`Ц2№02j`Ь2┬0г╥
-дHЗ ╥
-	(╚A╦0j`Ц2№02j`Ь2┬0г╥
-еHЗ ╥
-	(╩U═0j`Ц2№02j`Ь2┬0г╥
-д2╣0г╥
-дHЗ ╥
-	(╠U╧0j`Ц2№02j`Ь2┬0г╥
-е2╣0г╥
-еHЗ ╥
-	(╬U╤0j`Ц2№02j`Ь2┬0г╥
-д2╣0г╥
-дHЗ ╥
-	(╨U╙0j`Ц2№02j`Ь2┬0г╥
-е2╣0г╥
-еHЗ ╥
-	(╥▌┌0j`Ц2№02j`Ь2▒0г╥
-д2╘0j`0j`к2╒0j`0j`к2╓0j`82#Ъ0з0жj`и0j`й2#╫0з0жj`и0j`й2╪0j`8HЗ ╥
-	(┘▌▄0j`Ц2№02j`Ь2▒0г╥
-е2╘0j`0j`к2╒0j`0j`к2╓0j`82#Ъ0з0жj`и0j`й2#╫0з0жj`и0j`й2╪0j`8HЗ ╥
-	(█b▐0j`Ц2№02j`Ь2▒0г╥
-д2▓0j`82│0г╥
-дHЗ ╥
-	(▌bр0j`Ц2№02j`Ь2▒0г╥
-е2▓0j`82│0г╥
-еHЗ ╥
-	(▀Aт0j`Ц2№02j`Ь2▒0г╥
-дHЗ ╥
-	(сAф0j`Ц2№02j`Ь2▒0г╥
-еHЗ ╥
-	(уGч0j`Ц2№02j`Ь2х0J0j`ШHЗ ╥
-	(ц*щ0J0j`qHЗ ╥
-	(шы0@HЗ ╥
-	(ъ╪
-р
- ъ
-platform.windows

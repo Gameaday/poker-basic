@@ -1,351 +1,0 @@
-
-ÝW
-platform
-posix
-_GUID
-IID
-kotlinx
-cinterop
-internal
-CCall
-id
-9knifunptr_platform_windows8417_IID_IXMLDOMDocument_getter
-IID_IXMLDOMDocument
-Aknifunptr_platform_windows8418_IID_IXMLDOMDocumentFragment_getter
-IID_IXMLDOMDocumentFragment
-=knifunptr_platform_windows8419_IID_IXMLDOMDocumentType_getter
-IID_IXMLDOMDocumentType
-8knifunptr_platform_windows8420_IID_IXMLDOMElement_getter
-IID_IXMLDOMElement
-7knifunptr_platform_windows8421_IID_IXMLDOMEntity_getter
-IID_IXMLDOMEntity
-@knifunptr_platform_windows8422_IID_IXMLDOMEntityReference_getter
-IID_IXMLDOMEntityReference
-?knifunptr_platform_windows8423_IID_IXMLDOMImplementation_getter
-IID_IXMLDOMImplementation
-=knifunptr_platform_windows8424_IID_IXMLDOMNamedNodeMap_getter
-IID_IXMLDOMNamedNodeMap
-5knifunptr_platform_windows8425_IID_IXMLDOMNode_getter
-IID_IXMLDOMNode
-9knifunptr_platform_windows8426_IID_IXMLDOMNodeList_getter
-IID_IXMLDOMNodeList
-9knifunptr_platform_windows8427_IID_IXMLDOMNotation_getter
-IID_IXMLDOMNotation
-;knifunptr_platform_windows8428_IID_IXMLDOMParseError_getter
-IID_IXMLDOMParseError
-Fknifunptr_platform_windows8429_IID_IXMLDOMProcessingInstruction_getter
- IID_IXMLDOMProcessingInstruction
-5knifunptr_platform_windows8430_IID_IXMLDOMText_getter
-IID_IXMLDOMText
-8knifunptr_platform_windows8431_IID_IXMLDSOControl_getter
-IID_IXMLDSOControl
-6knifunptr_platform_windows8432_IID_IXMLDocument_getter
-IID_IXMLDocument
-7knifunptr_platform_windows8433_IID_IXMLDocument2_getter
-IID_IXMLDocument2
-5knifunptr_platform_windows8434_IID_IXMLElement_getter
-IID_IXMLElement
-6knifunptr_platform_windows8435_IID_IXMLElement2_getter
-IID_IXMLElement2
-?knifunptr_platform_windows8436_IID_IXMLElementCollection_getter
-IID_IXMLElementCollection
-3knifunptr_platform_windows8437_IID_IXMLError_getter
-IID_IXMLError
-9knifunptr_platform_windows8438_IID_IXMLHttpRequest_getter
-IID_IXMLHttpRequest
-5knifunptr_platform_windows8439_IID_IXTLRuntime_getter
-IID_IXTLRuntime
-GUID
-9knifunptr_platform_windows8440_IID_IZoneIdentifier_getter
-IID_IZoneIdentifier
-5knifunptr_platform_windows8441_IID_IZoomEvents_getter
-IID_IZoomEvents
-0knifunptr_platform_windows8442_IID_StdOle_getter
-
-IID_StdOle
-CPointer
-CPointed
-windows
-RPC_IF_HANDLE
-value
-=knifunptr_platform_windows8443_IOLETypes_v0_0_c_ifspec_getter
-=knifunptr_platform_windows8444_IOLETypes_v0_0_c_ifspec_setter
-IOLETypes_v0_0_c_ifspec
-=knifunptr_platform_windows8445_IOLETypes_v0_0_s_ifspec_getter
-=knifunptr_platform_windows8446_IOLETypes_v0_0_s_ifspec_setter
-IOLETypes_v0_0_s_ifspec
-Gknifunptr_platform_windows8447_IOleAutomationTypes_v1_0_c_ifspec_getter
-Gknifunptr_platform_windows8448_IOleAutomationTypes_v1_0_c_ifspec_setter
-!IOleAutomationTypes_v1_0_c_ifspec
-Gknifunptr_platform_windows8449_IOleAutomationTypes_v1_0_s_ifspec_getter
-Gknifunptr_platform_windows8450_IOleAutomationTypes_v1_0_s_ifspec_setter
-!IOleAutomationTypes_v1_0_s_ifspec
-Dknifunptr_platform_windows8451_IOleControlTypes_v1_0_c_ifspec_getter
-Dknifunptr_platform_windows8452_IOleControlTypes_v1_0_c_ifspec_setter
-IOleControlTypes_v1_0_c_ifspec
-Dknifunptr_platform_windows8453_IOleControlTypes_v1_0_s_ifspec_getter
-Dknifunptr_platform_windows8454_IOleControlTypes_v1_0_s_ifspec_setter
-IOleControlTypes_v1_0_s_ifspec
-Aknifunptr_platform_windows8455_IWinTypesBase_v0_1_c_ifspec_getter
-Aknifunptr_platform_windows8456_IWinTypesBase_v0_1_c_ifspec_setter
-IWinTypesBase_v0_1_c_ifspec
-Aknifunptr_platform_windows8457_IWinTypesBase_v0_1_s_ifspec_getter
-Aknifunptr_platform_windows8458_IWinTypesBase_v0_1_s_ifspec_setter
-IWinTypesBase_v0_1_s_ifspec
-=knifunptr_platform_windows8459_IWinTypes_v0_1_c_ifspec_getter
-=knifunptr_platform_windows8460_IWinTypes_v0_1_c_ifspec_setter
-IWinTypes_v0_1_c_ifspec
-=knifunptr_platform_windows8461_IWinTypes_v0_1_s_ifspec_getter
-=knifunptr_platform_windows8462_IWinTypes_v0_1_s_ifspec_setter
-IWinTypes_v0_1_s_ifspec
-=knifunptr_platform_windows8463_ItemCount_Property_GUID_getter
-ItemCount_Property_GUID
-=knifunptr_platform_windows8464_ItemIndex_Property_GUID_getter
-ItemIndex_Property_GUID
-Eknifunptr_platform_windows8465_KSDATAFORMAT_SUBTYPE_IEEE_FLOAT_getter
-KSDATAFORMAT_SUBTYPE_IEEE_FLOAT
->knifunptr_platform_windows8466_KSDATAFORMAT_SUBTYPE_PCM_getter
-KSDATAFORMAT_SUBTYPE_PCM
-Gknifunptr_platform_windows8467_KSDATAFORMAT_SUBTYPE_WAVEFORMATEX_getter
-!KSDATAFORMAT_SUBTYPE_WAVEFORMATEX
-1knifunptr_platform_windows8468_LIBID_MSXML_getter
-LIBID_MSXML
-:knifunptr_platform_windows8469_LIBID_PropSysObjects_getter
-LIBID_PropSysObjects
-3knifunptr_platform_windows8470_LIBID_SHDocVw_getter
-LIBID_SHDocVw
-3knifunptr_platform_windows8471_LIBID_Shell32_getter
-LIBID_Shell32
-8knifunptr_platform_windows8472_LIBID_ShellObjects_getter
-LIBID_ShellObjects
-6knifunptr_platform_windows8473_NO_SUBGROUP_GUID_getter
-NO_SUBGROUP_GUID
->knifunptr_platform_windows8474_PPM_IDLESTATES_DATA_GUID_getter
-PPM_IDLESTATES_DATA_GUID
-?knifunptr_platform_windows8475_PPM_IDLESTATE_CHANGE_GUID_getter
-PPM_IDLESTATE_CHANGE_GUID
-Aknifunptr_platform_windows8476_PPM_IDLE_ACCOUNTING_EX_GUID_getter
-PPM_IDLE_ACCOUNTING_EX_GUID
->knifunptr_platform_windows8477_PPM_IDLE_ACCOUNTING_GUID_getter
-PPM_IDLE_ACCOUNTING_GUID
-@knifunptr_platform_windows8478_PPM_PERFMON_PERFSTATE_GUID_getter
-PPM_PERFMON_PERFSTATE_GUID
->knifunptr_platform_windows8479_PPM_PERFSTATES_DATA_GUID_getter
-PPM_PERFSTATES_DATA_GUID
-?knifunptr_platform_windows8480_PPM_PERFSTATE_CHANGE_GUID_getter
-PPM_PERFSTATE_CHANGE_GUID
-Fknifunptr_platform_windows8481_PPM_PERFSTATE_DOMAIN_CHANGE_GUID_getter
- PPM_PERFSTATE_DOMAIN_CHANGE_GUID
-@knifunptr_platform_windows8482_PPM_THERMALCONSTRAINT_GUID_getter
-PPM_THERMALCONSTRAINT_GUID
-Dknifunptr_platform_windows8483_PPM_THERMAL_POLICY_CHANGE_GUID_getter
-PPM_THERMAL_POLICY_CHANGE_GUID
-2knifunptr_platform_windows8484_SID_BindHost_getter
-SID_BindHost
-=knifunptr_platform_windows8485_SID_CommandsPropertyBag_getter
-SID_CommandsPropertyBag
->knifunptr_platform_windows8486_SID_CtxQueryAssociations_getter
-SID_CtxQueryAssociations
-1knifunptr_platform_windows8487_SID_DefView_getter
-SID_DefView
-9knifunptr_platform_windows8488_SID_MenuShellFolder_getter
-SID_MenuShellFolder
-9knifunptr_platform_windows8489_SID_SCommDlgBrowser_getter
-SID_SCommDlgBrowser
-:knifunptr_platform_windows8490_SID_SCommandBarState_getter
-SID_SCommandBarState
-<knifunptr_platform_windows8491_SID_SContainerDispatch_getter
-SID_SContainerDispatch
->knifunptr_platform_windows8492_SID_SGetViewFromViewDual_getter
-SID_SGetViewFromViewDual
-9knifunptr_platform_windows8493_SID_SInPlaceBrowser_getter
-SID_SInPlaceBrowser
-@knifunptr_platform_windows8494_SID_SMenuBandBKContextMenu_getter
-SID_SMenuBandBKContextMenu
-9knifunptr_platform_windows8495_SID_SMenuBandBottom_getter
-SID_SMenuBandBottom
-Aknifunptr_platform_windows8496_SID_SMenuBandBottomSelected_getter
-SID_SMenuBandBottomSelected
-8knifunptr_platform_windows8497_SID_SMenuBandChild_getter
-SID_SMenuBandChild
-Fknifunptr_platform_windows8498_SID_SMenuBandContextMenuModifier_getter
- SID_SMenuBandContextMenuModifier
-9knifunptr_platform_windows8499_SID_SMenuBandParent_getter
-SID_SMenuBandParent
-6knifunptr_platform_windows8500_SID_SMenuBandTop_getter
-SID_SMenuBandTop
-4knifunptr_platform_windows8501_SID_SMenuPopup_getter
-SID_SMenuPopup
-8knifunptr_platform_windows8502_SID_SSearchBoxInfo_getter
-SID_SSearchBoxInfo
-:knifunptr_platform_windows8503_SID_STopLevelBrowser_getter
-SID_STopLevelBrowser
-4knifunptr_platform_windows8504_SID_STopWindow_getter
-SID_STopWindow
-Dknifunptr_platform_windows8505_SYNCMGR_OBJECTID_BrowseContent_getter
-SYNCMGR_OBJECTID_BrowseContent
-Dknifunptr_platform_windows8506_SYNCMGR_OBJECTID_ConflictStore_getter
-SYNCMGR_OBJECTID_ConflictStore
-Eknifunptr_platform_windows8507_SYNCMGR_OBJECTID_EventLinkClick_getter
-SYNCMGR_OBJECTID_EventLinkClick
-Aknifunptr_platform_windows8508_SYNCMGR_OBJECTID_EventStore_getter
-SYNCMGR_OBJECTID_EventStore
-;knifunptr_platform_windows8509_SYNCMGR_OBJECTID_Icon_getter
-SYNCMGR_OBJECTID_Icon
-Jknifunptr_platform_windows8510_SYNCMGR_OBJECTID_QueryBeforeActivate_getter
-$SYNCMGR_OBJECTID_QueryBeforeActivate
-Lknifunptr_platform_windows8511_SYNCMGR_OBJECTID_QueryBeforeDeactivate_getter
-&SYNCMGR_OBJECTID_QueryBeforeDeactivate
-Hknifunptr_platform_windows8512_SYNCMGR_OBJECTID_QueryBeforeDelete_getter
-"SYNCMGR_OBJECTID_QueryBeforeDelete
-Iknifunptr_platform_windows8513_SYNCMGR_OBJECTID_QueryBeforeDisable_getter
-#SYNCMGR_OBJECTID_QueryBeforeDisable
-Hknifunptr_platform_windows8514_SYNCMGR_OBJECTID_QueryBeforeEnable_getter
-"SYNCMGR_OBJECTID_QueryBeforeEnable
-Cknifunptr_platform_windows8515_SYNCMGR_OBJECTID_ShowSchedule_getter
-SYNCMGR_OBJECTID_ShowSchedule
-Eknifunptr_platform_windows8516_SelectedItemCount_Property_GUID_getter
-SelectedItemCount_Property_GUID
-1knifunptr_platform_windows8517_VID_Content_getter
-VID_Content
-1knifunptr_platform_windows8518_VID_Details_getter
-VID_Details
-4knifunptr_platform_windows8519_VID_LargeIcons_getter
-VID_LargeIcons
-.knifunptr_platform_windows8520_VID_List_getter
-VID_List
-4knifunptr_platform_windows8521_VID_SmallIcons_getter
-VID_SmallIcons
-4knifunptr_platform_windows8522_VID_ThumbStrip_getter
-VID_ThumbStrip
-4knifunptr_platform_windows8523_VID_Thumbnails_getter
-VID_Thumbnails
-.knifunptr_platform_windows8524_VID_Tile_getter
-VID_Tile
-Kknifunptr_platform_windows8525_VIRTUAL_STORAGE_TYPE_VENDOR_MICROSOFT_getter
-%VIRTUAL_STORAGE_TYPE_VENDOR_MICROSOFT
-Iknifunptr_platform_windows8526_VIRTUAL_STORAGE_TYPE_VENDOR_UNKNOWN_getter
-#VIRTUAL_STORAGE_TYPE_VENDOR_UNKNOWN
-kotlin
-Int
-5knifunptr_platform_windows8527__First_FPE_Indx_getter
-5knifunptr_platform_windows8528__First_FPE_Indx_setter
-_First_FPE_Indx
-.knifunptr_platform_windows8529__Num_FPE_getter
-.knifunptr_platform_windows8530__Num_FPE_setter
-_Num_FPE
-_XCPT_ACTION
-CArrayPointer
-1knifunptr_platform_windows8531__XcptActTab_getter
-_XcptActTab
-6knifunptr_platform_windows8532__XcptActTabCount_getter
-6knifunptr_platform_windows8533__XcptActTabCount_setter
-_XcptActTabCount
-5knifunptr_platform_windows8534__XcptActTabSize_getter
-5knifunptr_platform_windows8535__XcptActTabSize_setter
-_XcptActTabSize
-Iknifunptr_platform_windows8536___MIDL_itf_msxml_0000_v0_0_c_ifspec_getter
-Iknifunptr_platform_windows8537___MIDL_itf_msxml_0000_v0_0_c_ifspec_setter
-#__MIDL_itf_msxml_0000_v0_0_c_ifspec
-Iknifunptr_platform_windows8538___MIDL_itf_msxml_0000_v0_0_s_ifspec_getter
-Iknifunptr_platform_windows8539___MIDL_itf_msxml_0000_v0_0_s_ifspec_setter
-#__MIDL_itf_msxml_0000_v0_0_s_ifspec
-UInt
-DWORD
-/knifunptr_platform_windows8540_dwICValue_getter
-/knifunptr_platform_windows8541_dwICValue_setter
-	dwICValue
-_SCARD_IO_REQUEST
-SCARD_IO_REQUEST
-5knifunptr_platform_windows8542_g_rgSCardRawPci_getter
-g_rgSCardRawPci
-4knifunptr_platform_windows8543_g_rgSCardT0Pci_getter
-g_rgSCardT0Pci
-4knifunptr_platform_windows8544_g_rgSCardT1Pci_getter
-g_rgSCardT1Pci
-in6_addr
-1knifunptr_platform_windows8545_in6addr_any_getter
-in6addr_any
-6knifunptr_platform_windows8546_in6addr_loopback_getter
-in6addr_loopback
-__REQUIRED_RPCNDR_H_VERSION__
-_WIN32_WINNT_NT4
-_WIN32_WINNT_WIN2K
-_WIN32_WINNT_WINXP
-_WIN32_WINNT_WS03
-_WIN32_WINNT_WIN6
-_WIN32_WINNT_VISTA
-_WIN32_WINNT_WS08
-_WIN32_WINNT_LONGHORN
-_WIN32_WINNT_WIN7
-_WIN32_WINNT_WIN8
-_WIN32_WINNT_WINBLUE
-_WIN32_WINNT_WINTHRESHOLD
-_WIN32_WINNT_WIN10
-_WIN32_IE_IE20¥
- 
- 
- 
- 
-
-
-
- 
-7 
-> 
-? 
- @
-A 
-á
-â 
-é 
-ê 
-ù 
-ú 
-þ 
-ÿ 
-† Â$"
-0j`8ÇŠ(	"0j`8ÇŠ("0j`8ÇŠ("0j`8ÇŠ("0j`8ÇŠ("0j`8ÇŠ("0j`8ÇŠ("0j`8ÇŠ("0j`8ÇŠ("0j`8ÇŠ("0j`8ÇŠ(" 0j`8ÇŠ(""0j`8ÇŠ(!"$0j`8ÇŠ(#"&0j`8ÇŠ(%"(0j`8ÇŠ('"*0j`8ÇŠ()",0j`8ÇŠ(+".0j`8ÇŠ(-"00j`8ÇŠ(/"20j`8ÇŠ(1"40j`8ÇŠ(3"60j`8ÇŠ(5"90j`8ÇŠ(8";0j`8ÇŠ(:"=0j`8ÇŠ(<"UE0
-0	j`2B0
-0	j`8Ç@ÇX†Š(C’(D"UH0
-0	j`2B0
-0	j`8Ç@ÇX†Š(F’(G"UK0
-0	j`2B0
-0	j`8Ç@ÇX†Š(I’(J"UN0
-0	j`2B0
-0	j`8Ç@ÇX†Š(L’(M"UQ0
-0	j`2B0
-0	j`8Ç@ÇX†Š(O’(P"UT0
-0	j`2B0
-0	j`8Ç@ÇX†Š(R’(S"UW0
-0	j`2B0
-0	j`8Ç@ÇX†Š(U’(V"UZ0
-0	j`2B0
-0	j`8Ç@ÇX†Š(X’(Y"U]0
-0	j`2B0
-0	j`8Ç@ÇX†Š([’(\"U`0
-0	j`2B0
-0	j`8Ç@ÇX†Š(^’(_"b0j`8ÇŠ(a"d0j`8ÇŠ(c"f0j`8ÇŠ(e"h0j`8ÇŠ(g"j0j`8ÇŠ(i"l0j`8ÇŠ(k"n0j`8ÇŠ(m"p0j`8ÇŠ(o"r0j`8ÇŠ(q"t0j`8ÇŠ(s"v0j`8ÇŠ(u"x0j`8ÇŠ(w"z0j`8ÇŠ(y"|0j`8ÇŠ({"~0j`8ÇŠ(}"€0j`8ÇŠ("‚0j`8ÇŠ	("„0j`8ÇŠ	(ƒ"†0j`8ÇŠ	(…"ˆ0j`8ÇŠ	(‡"Š0j`8ÇŠ	(‰"Œ0j`8ÇŠ	(‹"Ž0j`8ÇŠ	("0j`8ÇŠ	("’0j`8ÇŠ	(‘"”0j`8ÇŠ	(“"–0j`8ÇŠ	(•"˜0j`8ÇŠ	(—"š0j`8ÇŠ	(™"œ0j`8ÇŠ	(›"ž0j`8ÇŠ	(" 0j`8ÇŠ	(Ÿ"¢0j`8ÇŠ	(¡"¤0j`8ÇŠ	(£"¦0j`8ÇŠ	(¥"¨0j`8ÇŠ	(§"ª0j`8ÇŠ	(©"¬0j`8ÇŠ	(«"®0j`8ÇŠ	(­"°0j`8ÇŠ	(¯"²0j`8ÇŠ	(±"´0j`8ÇŠ	(³"¶0j`8ÇŠ	(µ"¸0j`8ÇŠ	(·"º0j`8ÇŠ	(¹"¼0j`8ÇŠ	(»"¾0j`8ÇŠ	(½"À0j`8ÇŠ	(¿"Â0j`8ÇŠ	(Á"Ä0j`8ÇŠ	(Ã"Æ0j`8ÇŠ	(Å"È0j`8ÇŠ	(Ç"Ê0j`8ÇŠ	(É"Ì0j`8ÇŠ	(Ë"Î0j`8ÇŠ	(Í"Ð0j`8ÇŠ	(Ï"Ò0j`8ÇŠ	(Ñ"Ô0j`8ÇŠ	(Ó"Ö0j`8ÇŠ	(Õ"Ø0j`8ÇŠ	(×"Ú0j`8ÇŠ	(Ù"Ü0j`8ÇŠ	(Û"Þ0j`8ÇŠ	(Ý"à0j`8ÇŠ	(ß"8å02B08Ç@ÇX†Š	(ã’	(ä"8è02B08Ç@ÇX†Š	(æ’	(ç"*ì00	j0`8ÇŠ	(ë"8ï02B08Ç@ÇX†Š	(í’	(î"8ò02B08Ç@ÇX†Š	(ð’	(ñ"Xõ0
-0	j`2B0
-0	j`8Ç@ÇX†Š	(ó’	(ô"Xø0
-0	j`2B0
-0	j`8Ç@ÇX†Š	(ö’	(÷"@ý0j`2
-B0j`8Ç@ÇX†Š	(û’	(ü"0j`8ÇŠ	(€"ƒ0j`8ÇŠ	(‚"…0j`8ÇŠ	(„"ˆ08ÇŠ	(‡"Š08ÇŠ	(‰"‹08X†Tê
-¶"Œ08X†Tê
-€"08X†Tê
-€"Ž08X†Tê
-‚"08X†Tê
-„"08X†Tê
-€"‘08X†Tê
-€"’08X†Tê
-€"“08X†Tê
-€"”08X†Tê
-‚"•08X†Tê
-„"–08X†Tê
-†"—08X†Tê
-€("˜08X†Tê
-€("™08X†Tê
-€Ø
-à
- ê
-platform.windows

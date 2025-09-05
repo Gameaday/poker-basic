@@ -1,295 +1,0 @@
-
-ûT
-platform
-posix
-_GUID
-GUID
-kotlinx
-cinterop
-internal
-CCall
-id
-;knifunptr_platform_windows7335_ALL_POWERSCHEMES_GUID_getter
-ALL_POWERSCHEMES_GUID
-;knifunptr_platform_windows7336_BHID_AssociationArray_getter
-BHID_AssociationArray
-5knifunptr_platform_windows7337_BHID_DataObject_getter
-BHID_DataObject
-<knifunptr_platform_windows7338_BHID_EnumAssocHandlers_getter
-BHID_EnumAssocHandlers
-4knifunptr_platform_windows7339_BHID_EnumItems_getter
-BHID_EnumItems
-1knifunptr_platform_windows7340_BHID_Filter_getter
-BHID_Filter
-9knifunptr_platform_windows7341_BHID_LinkTargetItem_getter
-BHID_LinkTargetItem
-8knifunptr_platform_windows7342_BHID_PropertyStore_getter
-BHID_PropertyStore
-=knifunptr_platform_windows7343_BHID_RandomAccessStream_getter
-BHID_RandomAccessStream
-3knifunptr_platform_windows7344_BHID_SFObject_getter
-BHID_SFObject
-5knifunptr_platform_windows7345_BHID_SFUIObject_getter
-BHID_SFUIObject
-7knifunptr_platform_windows7346_BHID_SFViewObject_getter
-BHID_SFViewObject
-2knifunptr_platform_windows7347_BHID_Storage_getter
-BHID_Storage
-6knifunptr_platform_windows7348_BHID_StorageEnum_getter
-BHID_StorageEnum
-1knifunptr_platform_windows7349_BHID_Stream_getter
-BHID_Stream
-;knifunptr_platform_windows7350_BHID_ThumbnailHandler_getter
-BHID_ThumbnailHandler
-3knifunptr_platform_windows7351_BHID_Transfer_getter
-BHID_Transfer
-=knifunptr_platform_windows7352_CATID_BrowsableShellExt_getter
-CATID_BrowsableShellExt
-9knifunptr_platform_windows7353_CATID_BrowseInPlace_getter
-CATID_BrowseInPlace
-4knifunptr_platform_windows7354_CATID_CommBand_getter
-CATID_CommBand
-windows
-CATID
-3knifunptr_platform_windows7355_CATID_Control_getter
-CATID_Control
-Jknifunptr_platform_windows7356_CATID_DesignTimeUIActivatableControl_getter
-$CATID_DesignTimeUIActivatableControl
-4knifunptr_platform_windows7357_CATID_DeskBand_getter
-CATID_DeskBand
-5knifunptr_platform_windows7358_CATID_DocObject_getter
-CATID_DocObject
-4knifunptr_platform_windows7359_CATID_InfoBand_getter
-CATID_InfoBand
-6knifunptr_platform_windows7360_CATID_Insertable_getter
-CATID_Insertable
-9knifunptr_platform_windows7361_CATID_InternetAware_getter
-CATID_InternetAware
-6knifunptr_platform_windows7362_CATID_IsShortcut_getter
-CATID_IsShortcut
-;knifunptr_platform_windows7363_CATID_LocationFactory_getter
-CATID_LocationFactory
-<knifunptr_platform_windows7364_CATID_LocationProvider_getter
-CATID_LocationProvider
-IID
-5knifunptr_platform_windows7365_CATID_MARSHALER_getter
-CATID_MARSHALER
-8knifunptr_platform_windows7366_CATID_NeverShowExt_getter
-CATID_NeverShowExt
-:knifunptr_platform_windows7367_CATID_PersistsToFile_getter
-CATID_PersistsToFile
-<knifunptr_platform_windows7368_CATID_PersistsToMemory_getter
-CATID_PersistsToMemory
-=knifunptr_platform_windows7369_CATID_PersistsToMoniker_getter
-CATID_PersistsToMoniker
-Aknifunptr_platform_windows7370_CATID_PersistsToPropertyBag_getter
-CATID_PersistsToPropertyBag
-=knifunptr_platform_windows7371_CATID_PersistsToStorage_getter
-CATID_PersistsToStorage
-<knifunptr_platform_windows7372_CATID_PersistsToStream_getter
-CATID_PersistsToStream
-@knifunptr_platform_windows7373_CATID_PersistsToStreamInit_getter
-CATID_PersistsToStreamInit
-5knifunptr_platform_windows7374_CATID_Printable_getter
-CATID_Printable
-8knifunptr_platform_windows7375_CATID_Programmable_getter
-CATID_Programmable
-@knifunptr_platform_windows7376_CATID_RequiresDataPathHost_getter
-CATID_RequiresDataPathHost
-Aknifunptr_platform_windows7377_CATID_SearchableApplication_getter
-CATID_SearchableApplication
-2knifunptr_platform_windows7378_CGID_DefView_getter
-CGID_DefView
-3knifunptr_platform_windows7379_CGID_Explorer_getter
-CGID_Explorer
-9knifunptr_platform_windows7380_CGID_ExplorerBarDoc_getter
-CGID_ExplorerBarDoc
-6knifunptr_platform_windows7381_CGID_MENUDESKBAR_getter
-CGID_MENUDESKBAR
-7knifunptr_platform_windows7382_CGID_ShellDocView_getter
-CGID_ShellDocView
-=knifunptr_platform_windows7383_CGID_ShellServiceObject_getter
-CGID_ShellServiceObject
-3knifunptr_platform_windows7384_CGID_ShortCut_getter
-CGID_ShortCut
-CLSID
-4knifunptr_platform_windows7385_CID_CDfsVolume_getter
-CID_CDfsVolume
-8knifunptr_platform_windows7386_CLSID_ACLCustomMRU_getter
-CLSID_ACLCustomMRU
-6knifunptr_platform_windows7387_CLSID_ACLHistory_getter
-CLSID_ACLHistory
-2knifunptr_platform_windows7388_CLSID_ACLMRU_getter
-CLSID_ACLMRU
-4knifunptr_platform_windows7389_CLSID_ACLMulti_getter
-CLSID_ACLMulti
-5knifunptr_platform_windows7390_CLSID_ACListISF_getter
-CLSID_ACListISF
-3knifunptr_platform_windows7391_CLSID_AVIFile_getter
-CLSID_AVIFile
-Gknifunptr_platform_windows7392_CLSID_AccessibilityDockingService_getter
-!CLSID_AccessibilityDockingService
-9knifunptr_platform_windows7393_CLSID_ActiveDesktop_getter
-CLSID_ActiveDesktop
-7knifunptr_platform_windows7394_CLSID_AddrControl_getter
-CLSID_AddrControl
-9knifunptr_platform_windows7395_CLSID_AggStdMarshal_getter
-CLSID_AggStdMarshal
-Cknifunptr_platform_windows7396_CLSID_AlphabeticalCategorizer_getter
-CLSID_AlphabeticalCategorizer
-?knifunptr_platform_windows7397_CLSID_AppShellVerbHandler_getter
-CLSID_AppShellVerbHandler
-:knifunptr_platform_windows7398_CLSID_AppStartupLink_getter
-CLSID_AppStartupLink
-9knifunptr_platform_windows7399_CLSID_AppVisibility_getter
-CLSID_AppVisibility
-Hknifunptr_platform_windows7400_CLSID_ApplicationActivationManager_getter
-"CLSID_ApplicationActivationManager
-Nknifunptr_platform_windows7401_CLSID_ApplicationAssociationRegistration_getter
-(CLSID_ApplicationAssociationRegistration
-Pknifunptr_platform_windows7402_CLSID_ApplicationAssociationRegistrationUI_getter
-*CLSID_ApplicationAssociationRegistrationUI
-Iknifunptr_platform_windows7403_CLSID_ApplicationDesignModeSettings_getter
-#CLSID_ApplicationDesignModeSettings
-Cknifunptr_platform_windows7404_CLSID_ApplicationDestinations_getter
-CLSID_ApplicationDestinations
-Dknifunptr_platform_windows7405_CLSID_ApplicationDocumentLists_getter
-CLSID_ApplicationDocumentLists
->knifunptr_platform_windows7406_CLSID_AttachmentServices_getter
-CLSID_AttachmentServices
-8knifunptr_platform_windows7407_CLSID_AutoComplete_getter
-CLSID_AutoComplete
-Eknifunptr_platform_windows7408_CLSID_CAnchorBrowsePropertyPage_getter
-CLSID_CAnchorBrowsePropertyPage
-7knifunptr_platform_windows7409_CLSID_CCDCheckBox_getter
-CLSID_CCDCheckBox
-Cknifunptr_platform_windows7410_CLSID_CCDCheckBoxPropertyPage_getter
-CLSID_CCDCheckBoxPropertyPage
-@knifunptr_platform_windows7411_CLSID_CCDColorPropertyPage_getter
-CLSID_CCDColorPropertyPage
-7knifunptr_platform_windows7412_CLSID_CCDComboBox_getter
-CLSID_CCDComboBox
-Cknifunptr_platform_windows7413_CLSID_CCDComboBoxPropertyPage_getter
-CLSID_CCDComboBoxPropertyPage
-<knifunptr_platform_windows7414_CLSID_CCDCommandButton_getter
-CLSID_CCDCommandButton
-Hknifunptr_platform_windows7415_CLSID_CCDCommandButtonPropertyPage_getter
-"CLSID_CCDCommandButtonPropertyPage
-?knifunptr_platform_windows7416_CLSID_CCDFontPropertyPage_getter
-CLSID_CCDFontPropertyPage
-9knifunptr_platform_windows7417_CLSID_CCDFormDialog_getter
-CLSID_CCDFormDialog
-7knifunptr_platform_windows7418_CLSID_CCDFormKrnl_getter
-CLSID_CCDFormKrnl
-Bknifunptr_platform_windows7419_CLSID_CCDGeneralPropertyPage_getter
-CLSID_CCDGeneralPropertyPage
-Bknifunptr_platform_windows7420_CLSID_CCDGenericPropertyPage_getter
-CLSID_CCDGenericPropertyPage
-7knifunptr_platform_windows7421_CLSID_CCDGroupBox_getter
-CLSID_CCDGroupBox
-Cknifunptr_platform_windows7422_CLSID_CCDGroupBoxPropertyPage_getter
-CLSID_CCDGroupBoxPropertyPage
-4knifunptr_platform_windows7423_CLSID_CCDLabel_getter
-CLSID_CCDLabel
-@knifunptr_platform_windows7424_CLSID_CCDLabelPropertyPage_getter
-CLSID_CCDLabelPropertyPage
-6knifunptr_platform_windows7425_CLSID_CCDListBox_getter
-CLSID_CCDListBox
-Bknifunptr_platform_windows7426_CLSID_CCDListBoxPropertyPage_getter
-CLSID_CCDListBoxPropertyPage
-;knifunptr_platform_windows7427_CLSID_CCDOptionButton_getter
-CLSID_CCDOptionButton
-Gknifunptr_platform_windows7428_CLSID_CCDOptionButtonPropertyPage_getter
-!CLSID_CCDOptionButtonPropertyPage
-;knifunptr_platform_windows7429_CLSID_CCDPropertyPage_getter
-CLSID_CCDPropertyPage
-8knifunptr_platform_windows7430_CLSID_CCDScrollBar_getter
-CLSID_CCDScrollBar
-Dknifunptr_platform_windows7431_CLSID_CCDScrollBarPropertyPage_getter
-CLSID_CCDScrollBarPropertyPage
-6knifunptr_platform_windows7432_CLSID_CCDTextBox_getter
-CLSID_CCDTextBox
-Bknifunptr_platform_windows7433_CLSID_CCDTextBoxPropertyPage_getter
-CLSID_CCDTextBoxPropertyPage
-Bknifunptr_platform_windows7434_CLSID_CCDXObjectPropertyPage_getter
-CLSID_CCDXObjectPropertyPage
-2knifunptr_platform_windows7435_CLSID_CDBurn_getter
-CLSID_CDBurn
-Bknifunptr_platform_windows7436_CLSID_CDocBrowsePropertyPage_getter
-CLSID_CDocBrowsePropertyPage
-Aknifunptr_platform_windows7437_CLSID_CFSIconOverlayManager_getter
-CLSID_CFSIconOverlayManager
-=knifunptr_platform_windows7438_CLSID_CFormPropertyPage_getter
-CLSID_CFormPropertyPage
-=knifunptr_platform_windows7439_CLSID_CGridPropertyPage_getter
-CLSID_CGridPropertyPage
-Dknifunptr_platform_windows7440_CLSID_CImageBrowsePropertyPage_getter
-CLSID_CImageBrowsePropertyPage
-<knifunptr_platform_windows7441_CLSID_CScriptErrorList_getter
-CLSID_CScriptErrorList
-=knifunptr_platform_windows7442_CLSID_CStdPropertyFrame_getter
-CLSID_CStdPropertyFrame
-7knifunptr_platform_windows7443_CLSID_CSystemPage_getter
-CLSID_CSystemPage
-:knifunptr_platform_windows7444_CLSID_CURLSearchHook_getter
-CLSID_CURLSearchHook
-7knifunptr_platform_windows7445_CLSID_CUrlHistory_getter
-CLSID_CUrlHistory
-;knifunptr_platform_windows7446_CLSID_CWSJArticlePage_getter
-CLSID_CWSJArticlePage
-7knifunptr_platform_windows7447_CLSID_CdlProtocol_getter
-CLSID_CdlProtocol
->knifunptr_platform_windows7448_CLSID_ClassInstallFilter_getter
-CLSID_ClassInstallFilter
-6knifunptr_platform_windows7449_CLSID_ComBinding_getter
-CLSID_ComBinding
-8knifunptr_platform_windows7450_CLSID_ControlPanel_getter
-CLSID_ControlPanel
-=knifunptr_platform_windows7451_CLSID_DCOMAccessControl_getter
-CLSID_DCOMAccessControl
-7knifunptr_platform_windows7452_CLSID_DOMDocument_getter
-CLSID_DOMDocument
-Cknifunptr_platform_windows7453_CLSID_DOMFreeThreadedDocument_getter
-CLSID_DOMFreeThreadedDocument
->knifunptr_platform_windows7454_CLSID_DarwinAppPublisher_getter
-CLSID_DarwinAppPublisher
-9knifunptr_platform_windows7455_CLSID_DefFolderMenu_getter
-CLSID_DefFolderMenu
-9knifunptr_platform_windows7456_CLSID_DesktopGadget_getter
-CLSID_DesktopGadget
-<knifunptr_platform_windows7457_CLSID_DesktopWallpaper_getter
-CLSID_DesktopWallpaper
-;knifunptr_platform_windows7458_CLSID_DestinationList_getter
-CLSID_DestinationList
-<knifunptr_platform_windows7459_CLSID_DocHostUIHandler_getter
-CLSID_DocHostUIHandler
-Aknifunptr_platform_windows7460_CLSID_DocPropShellExtension_getter
-CLSID_DocPropShellExtension
-	UIntVarOf
-_SOCKET_USAGE_TYPE
-kotlin
-UInt
-_SOCKET_USAGE_TYPEVarp
- 
- 
- 
- 
-
-
-
- 
- 1
-2 
-G 
-p 
-â 
-ä 
-ã
-å ˙"
-0j`8«ä(	"0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä(" 0j`8«ä(""0j`8«ä(!"$0j`8«ä(#"&0j`8«ä(%"(0j`8«ä('"*0j`8«ä()",0j`8«ä(+".0j`8«ä(-"00j`8«ä(/"40j`	8«ä(3"60j`	8«ä(5"80j`8«ä(7":0j`	8«ä(9"<0j`8«ä(;">0j`	8«ä(="@0j`	8«ä(?"B0j`	8«ä(A"D0j`8«ä(C"F0j`8«ä(E"I0j`
-8«ä(H"K0j`	8«ä(J"M0j`	8«ä(L"O0j`	8«ä(N"Q0j`	8«ä(P"S0j`	8«ä(R"U0j`	8«ä(T"W0j`	8«ä(V"Y0j`	8«ä(X"[0j`	8«ä(Z"]0j`	8«ä(\"_0j`	8«ä(^"a0j`8«ä(`"c0j`8«ä(b"e0j`8«ä(d"g0j`8«ä(f"i0j`8«ä(h"k0j`8«ä(j"m0j`8«ä(l"o0j`8«ä(n"r0j`8«ä(q"t0j`8«ä(s"v0j`8«ä(u"x0j`8«ä(w"z0j`8«ä(y"|0j`8«ä({"~0j`8«ä(}"Ä0j`8«ä("Ç0j`8«ä	(Å"Ñ0j`8«ä	(É"Ü0j`8«ä	(Ö"à0j`8«ä	(á"ä0j`8«ä	(â"å0j`8«ä	(ã"é0j`8«ä	(ç"ê0j`8«ä	(è"í0j`8«ä	(ë"î0j`8«ä	(ì"ñ0j`8«ä	(ï"ò0j`8«ä	(ó"ö0j`8«ä	(ô"ú0j`8«ä	(õ"û0j`8«ä	(ù"†0j`8«ä	(ü"¢0j`8«ä	(°"§0j`8«ä	(£"¶0j`8«ä	(•"®0j`8«ä	(ß"™0j`8«ä	(©"¨0j`8«ä	(´"Æ0j`8«ä	(≠"∞0j`8«ä	(Ø"≤0j`8«ä	(±"¥0j`8«ä	(≥"∂0j`8«ä	(µ"∏0j`8«ä	(∑"∫0j`8«ä	(π"º0j`8«ä	(ª"æ0j`8«ä	(Ω"¿0j`8«ä	(ø"¬0j`8«ä	(¡"ƒ0j`8«ä	(√"∆0j`8«ä	(≈"»0j`8«ä	(«" 0j`8«ä	(…"Ã0j`8«ä	(À"Œ0j`8«ä	(Õ"–0j`8«ä	(œ"“0j`8«ä	(—"‘0j`8«ä	(”"÷0j`8«ä	(’"ÿ0j`8«ä	(◊"⁄0j`8«ä	(Ÿ"‹0j`8«ä	(€"ﬁ0j`8«ä	(›"‡0j`8«ä	(ﬂ"‚0j`8«ä	(·"‰0j`8«ä	(„"Ê0j`8«ä	(Â"Ë0j`8«ä	(Á"Í0j`8«ä	(È"Ï0j`8«ä	(Î"Ó0j`
-8«ä	(Ì"0j`
-8«ä	(Ô"Ú0j`8«ä	(Ò"Ù0j`8«ä	(Û"ˆ0j`8«ä	(ı"¯0j`8«ä	(˜"˙0j`8«ä	(˘"¸0j`8«ä	(˚"˛0j`8«ä	(˝"Ä0j`8«ä	(ˇ"Ç0j`8«ä	(Å"Ñ0j`8«ä	(É"Ü0j`8«ä	(Ö"à0j`8«ä	(á*ç"`020j`0*ä"020ÿ
-‡
- Í
-platform.windows

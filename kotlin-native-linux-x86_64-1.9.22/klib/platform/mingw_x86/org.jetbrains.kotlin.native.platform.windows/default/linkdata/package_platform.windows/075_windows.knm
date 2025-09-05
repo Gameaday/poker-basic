@@ -1,1162 +1,0 @@
-
-Öe
-kotlinx
-cinterop
-CPointer
-
-UByteVarOf
-kotlin
-UByte
-platform
-windows
-BYTEVar
-PBYTE
-presbits
-Int
-WINBOOL
-fIcon
-internal
-CCall
-id
-8knifunptr_platform_windows2048_LookupIconIdFromDirectory
-LookupIconIdFromDirectory
-	cxDesired
-	cyDesired
-UInt
-UINT
-Flags
-:knifunptr_platform_windows2049_LookupIconIdFromDirectoryEx
-LookupIconIdFromDirectoryEx
-DWORD
-	dwResSize
-dwVer
-HICON__
-HICON
-5knifunptr_platform_windows2050_CreateIconFromResource
-CreateIconFromResource
-7knifunptr_platform_windows2051_CreateIconFromResourceEx
-CreateIconFromResourceEx
-HINSTANCE__
-	HINSTANCE
-hInst
-	ByteVarOf
-Byte
-CHARVar
-LPCSTR
-name
-type
-cx
-cy
-fuLoad
-CPointed
-HANDLE
-)knifunptr_platform_windows2052_LoadImageA
-
-LoadImageA
-UShortVarOf
-UShort
-WCHARVar
-LPCWSTR
-)knifunptr_platform_windows2053_LoadImageW
-
-LoadImageW
-h
-flags
-(knifunptr_platform_windows2054_CopyImage
-	CopyImage
-HDC__
-HDC
-hdc
-xLeft
-yTop
-hIcon
-cxWidth
-cyWidth
-istepIfAniCur
-HBRUSH__
-HBRUSH
-hbrFlickerFreeDraw
-diFlags
-)knifunptr_platform_windows2055_DrawIconEx
-
-DrawIconEx
-	_ICONINFO
-ICONINFO
-	PICONINFO
-	piconinfo
-1knifunptr_platform_windows2056_CreateIconIndirect
-CreateIconIndirect
-'knifunptr_platform_windows2057_CopyIcon
-CopyIcon
-*knifunptr_platform_windows2058_GetIconInfo
-GetIconInfo
-hicon
-_ICONINFOEXA
-PICONINFOEXA
--knifunptr_platform_windows2059_GetIconInfoExA
-GetIconInfoExA
-_ICONINFOEXW
-PICONINFOEXW
--knifunptr_platform_windows2060_GetIconInfoExW
-GetIconInfoExW
-HWND__
-HWND
-hDlg
-tagMSG
-LPMSG
-lpMsg
-/knifunptr_platform_windows2061_IsDialogMessageA
-IsDialogMessageA
-/knifunptr_platform_windows2062_IsDialogMessageW
-IsDialogMessageW
-tagRECT
-LPRECT
-lpRect
-,knifunptr_platform_windows2063_MapDialogRect
-MapDialogRect
-LPSTR
-
-lpPathSpec
-
-nIDListBox
-nIDStaticPath
-	uFileType
-*knifunptr_platform_windows2064_DlgDirListA
-DlgDirListA
-LPWSTR
-*knifunptr_platform_windows2065_DlgDirListW
-DlgDirListW
-hwndDlg
-lpString
-chCount
-	idListBox
-.knifunptr_platform_windows2066_DlgDirSelectExA
-DlgDirSelectExA
-.knifunptr_platform_windows2067_DlgDirSelectExW
-DlgDirSelectExW
-nIDComboBox
-	uFiletype
-2knifunptr_platform_windows2068_DlgDirListComboBoxA
-DlgDirListComboBoxA
-2knifunptr_platform_windows2069_DlgDirListComboBoxW
-DlgDirListComboBoxW
-cchOut
-
-idComboBox
-6knifunptr_platform_windows2070_DlgDirSelectComboBoxExA
-DlgDirSelectComboBoxExA
-6knifunptr_platform_windows2071_DlgDirSelectComboBoxExW
-DlgDirSelectComboBoxExW
-hwnd
-nBar
-tagSCROLLINFO
-
-SCROLLINFO
-LPCSCROLLINFO
-lpsi
-redraw
-,knifunptr_platform_windows2072_SetScrollInfo
-SetScrollInfo
-LPSCROLLINFO
-,knifunptr_platform_windows2073_GetScrollInfo
-GetScrollInfo
-hWnd
-hWndMDIClient
-uMsg
-WPARAM
-wParam
-LPARAM
-lParam
-LRESULT
-,knifunptr_platform_windows2074_DefFrameProcA
-DefFrameProcA
-,knifunptr_platform_windows2075_DefFrameProcW
-DefFrameProcW
-/knifunptr_platform_windows2076_DefMDIChildProcA
-DefMDIChildProcA
-/knifunptr_platform_windows2077_DefMDIChildProcW
-DefMDIChildProcW
-
-hWndClient
-3knifunptr_platform_windows2078_TranslateMDISysAccel
-TranslateMDISysAccel
-3knifunptr_platform_windows2079_ArrangeIconicWindows
-ArrangeIconicWindows
-String
-CString
-lpClassName
-lpWindowName
-dwStyle
-X
-Y
-nWidth
-nHeight
-
-hWndParent
-	hInstance
-/knifunptr_platform_windows2080_CreateMDIWindowA
-CreateMDIWindowA
-WCString
-/knifunptr_platform_windows2081_CreateMDIWindowW
-CreateMDIWindowW
-
-hwndParent
-wHow
-
-CValuesRef
-RECT
-cKids
-CPointerVarOf
-HWNDVar
-lpKids
-WORD
-*knifunptr_platform_windows2082_TileWindows
-TileWindows
--knifunptr_platform_windows2083_CascadeWindows
-CascadeWindows
-hWndMain
-lpszHelp
-uCommand
-	ULONG_PTR
-dwData
-'knifunptr_platform_windows2084_WinHelpA
-WinHelpA
-'knifunptr_platform_windows2085_WinHelpW
-WinHelpW
-hProcess
-uiFlags
-.knifunptr_platform_windows2086_GetGuiResources
-GetGuiResources
-_devicemodeA
-
-LPDEVMODEA
-	lpDevMode
-dwFlags
-LONG
-5knifunptr_platform_windows2087_ChangeDisplaySettingsA
-ChangeDisplaySettingsA
-_devicemodeW
-
-LPDEVMODEW
-5knifunptr_platform_windows2088_ChangeDisplaySettingsW
-ChangeDisplaySettingsW
-lpszDeviceName
-dwflags
-LPVOID
-7knifunptr_platform_windows2089_ChangeDisplaySettingsExA
-ChangeDisplaySettingsExA
-7knifunptr_platform_windows2090_ChangeDisplaySettingsExW
-ChangeDisplaySettingsExW
-iModeNum
-3knifunptr_platform_windows2091_EnumDisplaySettingsA
-EnumDisplaySettingsA
-3knifunptr_platform_windows2092_EnumDisplaySettingsW
-EnumDisplaySettingsW
-5knifunptr_platform_windows2093_EnumDisplaySettingsExA
-EnumDisplaySettingsExA
-5knifunptr_platform_windows2094_EnumDisplaySettingsExW
-EnumDisplaySettingsExW
-lpDevice
-iDevNum
-_DISPLAY_DEVICEA
-PDISPLAY_DEVICEA
-lpDisplayDevice
-2knifunptr_platform_windows2095_EnumDisplayDevicesA
-EnumDisplayDevicesA
-_DISPLAY_DEVICEW
-PDISPLAY_DEVICEW
-2knifunptr_platform_windows2096_EnumDisplayDevicesW
-EnumDisplayDevicesW
-UINT32
-	UIntVarOf
-	UINT32Var
-numPathArrayElements
-numModeInfoArrayElements
-:knifunptr_platform_windows2097_GetDisplayConfigBufferSizes
-GetDisplayConfigBufferSizes
-DISPLAYCONFIG_PATH_INFO
-	pathArray
-DISPLAYCONFIG_MODE_INFO
-modeInfoArray
-/knifunptr_platform_windows2098_SetDisplayConfig
-SetDisplayConfig
-DISPLAYCONFIG_TOPOLOGY_IDVar
-currentTopologyId
-1knifunptr_platform_windows2099_QueryDisplayConfig
-QueryDisplayConfig
- DISPLAYCONFIG_DEVICE_INFO_HEADER
-requestPacket
-9knifunptr_platform_windows2100_DisplayConfigGetDeviceInfo
-DisplayConfigGetDeviceInfo
-	setPacket
-9knifunptr_platform_windows2101_DisplayConfigSetDeviceInfo
-DisplayConfigSetDeviceInfo
-uiAction
-uiParam
-PVOID
-pvParam
-fWinIni
-4knifunptr_platform_windows2102_SystemParametersInfoA
-SystemParametersInfoA
-4knifunptr_platform_windows2103_SystemParametersInfoW
-SystemParametersInfoW
-dwLevel
-Unit
-1knifunptr_platform_windows2104_SetDebugErrorLevel
-SetDebugErrorLevel
-	dwErrCode
-dwType
--knifunptr_platform_windows2105_SetLastErrorEx
-SetLastErrorEx
-pString
-cchMaxCount
-4knifunptr_platform_windows2106_InternalGetWindowText
-InternalGetWindowText
--knifunptr_platform_windows2107_CancelShutdown
-CancelShutdown
-CValue
-tagPOINT
-POINT
-pt
-
-HMONITOR__
-HMONITOR
-/knifunptr_platform_windows2108_MonitorFromPoint
-MonitorFromPoint
-LPCRECT
-lprc
-.knifunptr_platform_windows2109_MonitorFromRect
-MonitorFromRect
-0knifunptr_platform_windows2110_MonitorFromWindow
-MonitorFromWindow
-	fShutDown
-fForce
-&knifunptr_platform_windows2111_EndTask
-EndTask
-*knifunptr_platform_windows2112_SoundSentry
-SoundSentry
-hMonitor
-tagMONITORINFO
-LPMONITORINFO
-lpmi
-.knifunptr_platform_windows2113_GetMonitorInfoA
-GetMonitorInfoA
-.knifunptr_platform_windows2114_GetMonitorInfoW
-GetMonitorInfoW
-lprcClip
-	CFunction
-	Function4
-MONITORENUMPROC
-lpfnEnum
-2knifunptr_platform_windows2115_EnumDisplayMonitors
-EnumDisplayMonitors
-event
-idObject
-idChild
--knifunptr_platform_windows2116_NotifyWinEvent
-NotifyWinEvent
-eventMin
-eventMax
-HMODULE
-hmodWinEventProc
-	Function7
-HWINEVENTHOOK__
-HWINEVENTHOOK
-WINEVENTPROC
-pfnWinEventProc
-	idProcess
-idThread
-.knifunptr_platform_windows2117_SetWinEventHook
-SetWinEventHook
-6knifunptr_platform_windows2118_IsWinEventHookInstalled
-IsWinEventHookInstalled
-hWinEventHook
--knifunptr_platform_windows2119_UnhookWinEvent
-UnhookWinEvent
-tagGUITHREADINFO
-PGUITHREADINFO
-pgui
-/knifunptr_platform_windows2120_GetGUIThreadInfo
-GetGUIThreadInfo
-fBlockIt
-)knifunptr_platform_windows2121_BlockInput
-
-BlockInput
-pszFileName
-cchFileNameMax
-7knifunptr_platform_windows2122_GetWindowModuleFileNameA
-GetWindowModuleFileNameA
-7knifunptr_platform_windows2123_GetWindowModuleFileNameW
-GetWindowModuleFileNameW
-1knifunptr_platform_windows2124_SetProcessDPIAware
-SetProcessDPIAware
-0knifunptr_platform_windows2125_IsProcessDPIAware
-IsProcessDPIAware
-tagCURSORINFO
-PCURSORINFO
-pci
-,knifunptr_platform_windows2126_GetCursorInfo
-GetCursorInfo
-tagWINDOWINFO
-PWINDOWINFO
-pwi
-,knifunptr_platform_windows2127_GetWindowInfo
-GetWindowInfo
-tagTITLEBARINFO
-PTITLEBARINFO
-pti
-.knifunptr_platform_windows2128_GetTitleBarInfo
-GetTitleBarInfo
-idItem
-tagMENUBARINFO
-PMENUBARINFO
-pmbi
--knifunptr_platform_windows2129_GetMenuBarInfo
-GetMenuBarInfo
-tagSCROLLBARINFO
-PSCROLLBARINFO
-psbi
-/knifunptr_platform_windows2130_GetScrollBarInfo
-GetScrollBarInfo
-	hwndCombo
-tagCOMBOBOXINFO
-PCOMBOBOXINFO
-pcbi
-.knifunptr_platform_windows2131_GetComboBoxInfo
-GetComboBoxInfo
-gaFlags
-*knifunptr_platform_windows2132_GetAncestor
-GetAncestor
-ptParentClientCoords
-7knifunptr_platform_windows2133_RealChildWindowFromPoint
-RealChildWindowFromPoint
-ptszClassName
-cchClassNameMax
-2knifunptr_platform_windows2134_RealGetWindowClassA
-RealGetWindowClassA
-2knifunptr_platform_windows2135_RealGetWindowClassW
-RealGetWindowClassW
-iItem
-tagALTTABINFO
-PALTTABINFO
-pati
-pszItemText
-cchItemText
--knifunptr_platform_windows2136_GetAltTabInfoA
-GetAltTabInfoA
--knifunptr_platform_windows2137_GetAltTabInfoW
-GetAltTabInfoW
--knifunptr_platform_windows2138_GetListBoxInfo
-GetListBoxInfo
-.knifunptr_platform_windows2139_LockWorkStation
-LockWorkStation
-hUserHandle
-hJob
-bGrant
-4knifunptr_platform_windows2140_UserHandleGrantAccess
-UserHandleGrantAccess
-HRAWINPUT__
-	HRAWINPUT
-	hRawInput
-	uiCommand
-pData
-UIntVar
-PUINT
-pcbSize
-cbSizeHeader
-.knifunptr_platform_windows2141_GetRawInputData
-GetRawInputData
-hDevice
-5knifunptr_platform_windows2142_GetRawInputDeviceInfoA
-GetRawInputDeviceInfoA
-5knifunptr_platform_windows2143_GetRawInputDeviceInfoW
-GetRawInputDeviceInfoW
-tagRAWINPUT
-	PRAWINPUT
-0knifunptr_platform_windows2144_GetRawInputBuffer
-GetRawInputBuffer
-tagRAWINPUTDEVICE
-RAWINPUTDEVICE
-PCRAWINPUTDEVICE
-pRawInputDevices
-uiNumDevices
-cbSize
-6knifunptr_platform_windows2145_RegisterRawInputDevices
-RegisterRawInputDevices
-PRAWINPUTDEVICE
-puiNumDevices
-;knifunptr_platform_windows2146_GetRegisteredRawInputDevices
-GetRegisteredRawInputDevices
-tagRAWINPUTDEVICELIST
-PRAWINPUTDEVICELIST
-pRawInputDeviceList
-4knifunptr_platform_windows2147_GetRawInputDeviceList
-GetRawInputDeviceList
-PRAWINPUTVar
-
-paRawInput
-INT
-nInput
-.knifunptr_platform_windows2148_DefRawInputProc
-DefRawInputProc
-message
-dwFlag
-8knifunptr_platform_windows2149_ChangeWindowMessageFilter
-ChangeWindowMessageFilter
-action
-tagCHANGEFILTERSTRUCT
-PCHANGEFILTERSTRUCT
-pChangeFilterStruct
-:knifunptr_platform_windows2150_ChangeWindowMessageFilterEx
-ChangeWindowMessageFilterEx
-HGESTUREINFO__
-HGESTUREINFO
-hGestureInfo
-tagGESTUREINFO
-PGESTUREINFO
-pGestureInfo
--knifunptr_platform_windows2151_GetGestureInfo
-GetGestureInfo
-cbExtraArgs
-
-pExtraArgs
-2knifunptr_platform_windows2152_GetGestureExtraArgs
-GetGestureExtraArgs
-5knifunptr_platform_windows2153_CloseGestureInfoHandle
-CloseGestureInfoHandle
-
-dwReserved
-cIDs
-tagGESTURECONFIG
-PGESTURECONFIG
-pGestureConfig
-/knifunptr_platform_windows2154_SetGestureConfig
-SetGestureConfig
-pcIDs
-/knifunptr_platform_windows2155_GetGestureConfig
-GetGestureConfig
-
-pwszReason
-8knifunptr_platform_windows2156_ShutdownBlockReasonCreate
-ShutdownBlockReasonCreate
-pwszBuff
-DWORDVar
-pcchBuff
-7knifunptr_platform_windows2157_ShutdownBlockReasonQuery
-ShutdownBlockReasonQuery
-9knifunptr_platform_windows2158_ShutdownBlockReasonDestroy
-ShutdownBlockReasonDestroy
-tagINPUT_MESSAGE_SOURCE
-INPUT_MESSAGE_SOURCE
-inputMessageSource
-;knifunptr_platform_windows2159_GetCurrentInputMessageSource
-GetCurrentInputMessageSource
-(knifunptr_platform_windows2160_GetCIMSSM
-	GetCIMSSM
-tagAR_STATEVar
-	PAR_STATE
-pState
-3knifunptr_platform_windows2161_GetAutoRotationState
-GetAutoRotationState
-ORIENTATION_PREFERENCEVar
-pOrientation
-@knifunptr_platform_windows2162_GetDisplayAutoRotationPreferences
-!GetDisplayAutoRotationPreferences
-dwProcessId
-IntVarOf
-
-WINBOOLVar
-fRotateScreen
-Kknifunptr_platform_windows2163_GetDisplayAutoRotationPreferencesByProcessId
-,GetDisplayAutoRotationPreferencesByProcessId
-ORIENTATION_PREFERENCE
-orientation
-@knifunptr_platform_windows2164_SetDisplayAutoRotationPreferences
-!SetDisplayAutoRotationPreferences
-1knifunptr_platform_windows2165_IsImmersiveProcess
-IsImmersiveProcess
-fEnableExemption
-=knifunptr_platform_windows2166_SetProcessRestrictionExemption
-SetProcessRestrictionExemption
-lpLocaleName
-_SYSTEMTIME
-
-SYSTEMTIME
-lpTime
-lpFormat
-	lpTimeStr
-cchTime
-.knifunptr_platform_windows2167_GetTimeFormatEx
-GetTimeFormatEx
-lpDate
-	lpDateStr
-cchDate
-
-lpCalendar
-.knifunptr_platform_windows2168_GetDateFormatEx
-GetDateFormatEx
-LCID
-Locale
--knifunptr_platform_windows2169_GetDateFormatA
-GetDateFormatA
--knifunptr_platform_windows2170_GetDateFormatW
-GetDateFormatW
--knifunptr_platform_windows2171_GetTimeFormatA
-GetTimeFormatA
--knifunptr_platform_windows2172_GetTimeFormatW
-GetTimeFormatW
-
-dwCmpFlags
-PCNZWCH
-	lpString1
-	cchCount1
-	lpString2
-	cchCount2
--knifunptr_platform_windows2173_CompareStringW
-CompareStringW
-
-dwMapFlags
-LPCWCH
-lpSrcStr
-cchSrc
-	lpDestStr
-cchDest
-*knifunptr_platform_windows2174_FoldStringW
-FoldStringW
-
-dwInfoType
-WORDVar
-LPWORD
-
-lpCharType
-/knifunptr_platform_windows2175_GetStringTypeExW
-GetStringTypeExWØ
-
- 
- 
- 
- 
-
- 
-
-
- 
-	 
- 
- 
-
- 
- 
- 
- 
- 
- 
-# 
-$ 
-& 
-' 
-( 
-) 
-/ 
-0 
-3 
-4 
-5 
-6 
-= 
-> 
-F 
-G 
-L 
-M 
-N 
-W 
-X 
-[ 
-\ 
-_ 
-` 
-b 
-c 
-i 
-j 
-n 
-u 
-é 
-è 
-ê 
-ï 
-õ 
-ù 
-ü 
-≠ 
-Æ 
-∫ 
-ø 
-¿ 
-¬ 
-√ 
-≈ 
-Õ 
-◊ 
-ÿ 
-€ 
-ﬁ 
-ﬂ 
-‰ 
-Ù 
-ı 
-˘ 
-˙ 
-˝ 
-˛ 
-ˇ 
-Ñ 
-Ü 
-ä 
-é 
-ó 
-ü 
-¨ 
-≠ 
-Æ 
-∞ 
-± 
-¥ 
-¡ 
-¬ 
-… 
-  
-À 
-÷ 
-ÿ 
-Ÿ 
-⁄ 
-€ 
-Ê 
-Á 
-¯ 
-˘ 
-˝ 
-˛ 
-Ç 
-É 
-à 
-â 
-ç 
-é 
-ì 
-î 
-• 
-¶ 
-∑ 
-∏ 
-º 
-Ω 
-« 
-» 
-À 
-Ã 
-Õ 
-” 
-◊ 
-ÿ 
-‹ 
-ﬁ 
-Á 
-Ë 
-Ï 
-Ì 
-Ô 
- 
-¸ 
-˝ 
-à 
-é 
-è 
-ï 
-ñ 
-ö 
-ü 
-† 
-§ 
-Æ 
-Ø 
-º 
-« 
-œ 
-◊ 
-ÿ Î_D0
-2
-00j`0j`	2
-0
-j`Há “
-(`0
-2
-00j`0j`	2
-0
-j`20
-20
-2
-0j`Há “
-(j 00j`2
-00j`0j`	2
-0j`2
-0
-j`2
-0j`Há “
-(Ü"00j`2
-00j`0j`	2
-0j`2
-0
-j`2
-0j`20
-20
-2
-0j`Há “
-(!Ü200j`2%00j`2*00j`0j`2
-+0j`2,0
-2-0
-2
-.0j`Há “
-(1Ü800j`2%00j`2*00j`0j`2
-+0j`2,0
-2-0
-2
-.0j`Há “
-(7h<00j`2900j`2
-+0j`2,0
-2-0
-2
-:0j`Há “
-(;ñK0
-j`2?00j` 2@0
-2A0
-2B00j`2C0
-2D0
-2
-E0j`2H0!0j`"2
-I0j`Há “
-(J@Q00j`2O0#j`$0j`%Há “
-(P<S00j`2B00j`Há “
-(RLU0
-j`2B00j`2O0#j`$0j`%Há “
-(THZ0
-j`2V00j`2O0&0j`'Há “
-(YH^0
-j`2V00j`2O0(0j`)Há “
-(]Hf0
-j`2a0*0j`+2d0,0j`-Há “
-(eHh0
-j`2a0*0j`+2d0,0j`-Há “
-(gHm0
-j`2a0*0j`+2k0.0j`/Há “
-(ljt0
-2a0*0j`+2o00j`0j`02p0
-2q0
-2
-r0j`Há “
-(sjw0
-2a0*0j`+2o00j`0j`12p0
-2q0
-2
-r0j`Há “
-(vb}0
-j`2x0*0j`+2y00j`0j`02z0
-2{0
-Há “
-(|b0
-j`2x0*0j`+2y00j`0j`12z0
-2{0
-Há “
-(~nÉ0
-2a0*0j`+2o00j`0j`02Ä0
-2q0
-2Å0j`Há “
-	(ÇnÖ0
-2a0*0j`+2o00j`0j`12Ä0
-2q0
-2Å0j`Há “
-	(Ñfâ0
-j`2x0*0j`+2y00j`0j`02Ü0
-2á0
-Há “
-	(àfã0
-j`2x0*0j`+2y00j`0j`12Ü0
-2á0
-Há “
-	(äbî0
-2å0*0j`+2ç0
-2ë02j`30j`42í0
-j`Há “
-	(ìUó0
-j`2å0*0j`+2ç0
-2ë020j`5Há “
-	(ñs°0
-j`82ò0*0j`+2ô0*0j`+2ö0j`2ú0j`62û0
-j`7Há “
-	(†s£0
-j`82ò0*0j`+2ô0*0j`+2ö0j`2ú0j`62û0
-j`7Há “
-	(¢\•0
-j`82ò0*0j`+2ö0j`2ú0j`62û0
-j`7Há “
-	(§\ß0
-j`82ò0*0j`+2ö0j`2ú0j`62û0
-j`7Há “
-	(¶K™0
-j`2®0*0j`+2d0,0j`-Há “
-	(©5¨0j`2ò0*0j`+Há “
-	(´∏π0*0j`+2Ø09“
-:2∞09“
-:2±0j`2≤0
-2≥0
-2¥0
-2µ0
-2∂0*0j`+2∑00j`2û0
-j`7Há “
-	(∏∏º0*0j`+2Ø09“
-;2∞09“
-;2±0j`2≤0
-2≥0
-2¥0
-2µ0
-2∂0*0j`+2∑00j`2û0
-j`7Há “
-	(ªà«0j`@2Ω0*0j`+2æ0j`2k0.j`=0<2¡0j`2#ƒ0*0j`+0>j`?0<Há “
-	(∆à…0j`@2Ω0*0j`+2æ0j`2k0.j`=0<2¡0j`2#ƒ0*0j`+0>j`?0<Há “
-	(»a–0
-j`2 0*0j`+2À09“
-:2Ã0j`2Œ0j`AHá “
-	(œa“0
-j`2 0*0j`+2À09“
-;2Ã0j`2Œ0j`AHá “
-	(—D÷0j`2”00j`2‘0j`Há “
-	(’B›0
-j`D2Ÿ0B0j`C2⁄0j`Há “
-	(‹B·0
-j`D2Ÿ0E0j`F2⁄0j`Há “
-	(‡ÑÊ0
-j`D2‚09“
-:2Ÿ0B0j`C2å0*0j`+2„0j`2û00j`GHá “
-	(ÂÑË0
-j`D2‚09“
-;2Ÿ0E0j`F2å0*0j`+2„0j`2û00j`GHá “
-	(ÁTÎ0
-j`2‚09“
-:2È0j`2Ÿ0B0j`CHá “
-	(ÍTÌ0
-j`2‚09“
-;2È0j`2Ÿ0E0j`FHá “
-	(ÏaÔ0
-j`2‚09“
-:2È0j`2Ÿ0B0j`C2⁄0j`Há “
-	(ÓaÒ0
-j`2‚09“
-;2È0j`2Ÿ0E0j`F2⁄0j`Há “
-	(a¯0
-j`2Ú09“
-:2Û0j`2ˆ0H0j`I2⁄0j`Há “
-	(˜a¸0
-j`2Ú09“
-;2Û0j`2ˆ0J0j`K2⁄0j`Há “
-	(˚`É0
-j`D2
-:0j`L2Ä00Mj`N0<2Å00Mj`N0<Há “
-	(Çfâ0
-j`D2Ä0j`L2Ö
-0O0<2Å0j`L2á
-0P0<2
-:0j`LHá “
-	(àùç0
-j`D2
-:0j`L2Ä00Mj`N0<2Ö
-0O0<2Å00Mj`N0<2á
-0P0<2ã00Mj`Q0<Há “
-	(å/ë0
-j`D2è
-0R0<Há “
-	(ê/î0
-j`D2í
-0R0<Há “
-	(ì^õ0
-j`2ï0j`2ñ0j`2ò00j`S2ô0j`Há “
-	(ö^ù0
-j`2ï0j`2ñ0j`2ò00j`S2ô0j`Há “
-	(ú'°0T2û0j`Há “
-	(†4•0T2¢0j`2£0j`Há “
-	(§[©0
-2ò0*0j`+2¶00j`0j`12ß0
-Há “
-	(®´0
-j`Há “
-	(™H≥0X0j`Y2Ø0Vj`W0U2⁄0j`Há “
-	(≤P∑0X0j`Y2µ0.j`=0j`Z2⁄0j`Há “
-	(∂Lπ0X0j`Y2å0*0j`+2⁄0j`Há “
-	(∏OΩ0
-j`2ò0*0j`+2∫0
-j`2ª0
-j`Há “
-	(ºø0
-j`Há “
-	(æL≈0
-j`2¿0X0j`Y2√0[0j`\Há “
-	(ƒL«0
-j`2¿0X0j`Y2√0[0j`\Há “
-	(∆…Œ0
-j`2?00j` 2»0.j`=0j`Z2kÃfZXTR0X0j`Y00j` 0.0j`/0
-j`70
-j`0^0]0j`_2Œ0
-j`7Há “
-	(ÕX”0T2œ0j`2å0*0j`+2–0
-j`D2—0
-j`DHá “
-	(“˝‡0b0j`c2‘0j`2’0j`2◊00j``2{‹vjhdb0b0j`c0j`0*0j`+0
-j`D0
-j`D0j`0j`0T0a0]0j`d2›0j`2ﬁ0j`2⁄0j`Há “
-	(ﬂ+‚0
-j`2œ0j`Há “
-	(·5Â0
-j`2„0b0j`cHá “
-	(‰BÍ0
-j`2ﬁ0j`2Ë0e0j`fHá “
-	(È+Ì0
-j`2Î0
-j`Há “
-	(ÏcÒ0j`2å0*0j`+2Ó00j`0j`02Ô0j`Há “
-	(cÛ0j`2å0*0j`+2Ó00j`0j`12Ô0j`Há “
-	(Úı0
-j`Há “
-	(Ù˜0
-j`Há “
-	(ˆ5¸0
-j`2˙0g0j`hHá “
-	(˚LÅ0
-j`2å0*0j`+2ˇ0i0j`jHá “
-	(ÄLÜ0
-j`2å0*0j`+2Ñ0k0j`lHá “
-	(Öfå0
-j`2å0*0j`+2–0
-j`D2á0
-j`D2ä0m0j`nHá “
-	(ãYë0
-j`2å0*0j`+2–0
-j`D2è0o0j`pHá “
-	(êLó0
-j`2í0*0j`+2ï0q0j`rHá “
-	(ñLö0*0j`+2å0*0j`+2ò0j`Há “
-	(ôRù0*0j`+2Ω0*0j`+2õ0Vj`W0UHá “
-	(úc°0j`2å0*0j`+2û00j`0j`02ü0j`Há “
-	(†c£0j`2å0*0j`+2û00j`0j`12ü0j`Há “
-	(¢É´0
-j`2å0*0j`+2§0
-2ß0s0j`t2®00j`0j`02©0j`Há “
-	(™É≠0
-j`2å0*0j`+2§0
-2ß0s0j`t2®00j`0j`12©0j`Há “
-	(¨5Ø0j`2å0*0j`+Há “
-	(Æ±0
-j`Há “
-	(∞]∂0
-j`2≤00j`2≥00j`2¥0
-j`Há “
-	(µâ¡0j`2π0u0j`v2∫0j`2ª00j`G2æ00Mj`w0j`x2ø0j`Há “
-	(¿~ƒ0j`2¬00j`2∫0j`2ª00j`G2æ00Mj`w0j`xHá “
-	(√~∆0j`2¬00j`2∫0j`2ª00j`G2æ00Mj`w0j`xHá “
-	(≈c 0j`2ª0y0j`z2æ00Mj`w0j`x2ø0j`Há “
-	(…S“0
-j`2Œ0{j`|0j`}2œ0j`2–0j`Há “
-	(—c÷0j`2Œ0{0j`~2‘00Mj`w0j`x2–0j`Há “
-	(’d€0j`2Ÿ00j`Ä2‘00Mj`w0j`x2–0j`Há “
-	(⁄_·0
-j`82$›0y0j`z0>j`Å0<2ﬂ0
-j`Ç2ø0j`Há “
-	(‡8Â0
-j`2‚0j`2„0j`Há “
-	(‰hÎ0
-j`2å0*0j`+2‚0j`2Ê0j`2È0É0j`ÑHá “
-	(ÍPÛ0
-j`2Ó0Ö0j`Ü2Ò0á0j`àHá “
-	(Úe˜0
-j`2Ó0Ö0j`Ü2Ù0j`2ı00j`0j`	Há “
-	(ˆ7˘0
-j`2Ó0Ö0j`ÜHá “
-	(¯uÄ0
-j`2å0*0j`+2˙0j`2˚0j`2˛0â0j`ä2–0j`Há “
-	(ˇñÉ0
-j`2å0*0j`+2˙0j`2⁄0j`2Å00Mj`w0j`x2˛0â0j`ä2–0j`Há “
-	(ÇGÜ0
-j`2ò0*0j`+2Ñ09“
-;Há “
-	(Örã0
-j`2ò0*0j`+2á00j`0j`12â00Mj`ã0<Há “
-	(ä5ç0
-j`2ò0*0j`+Há “
-	(å5í0
-j`2ê
-0åj`ç0<Há “
-	(ë5î0
-j`2ê
-0åj`ç0<Há “
-	(ìAô0
-j`2!ó00Mj`é0j`èHá “
-	(ò:ù0
-j`2õ00Mj`ê0<Há “
-	(úd£0
-j`2û0j`2õ00Mj`ê0<2°0
-0ëj`í0<Há “
-	(¢,ß0
-j`2•0j`ìHá “
-	(¶7©0
-j`2”00j`Há “
-	(®+¨0
-j`2™0
-j`Há “
-	(´åµ0
-2≠09“
-;2⁄0j`2∞
-0îj`ï0<2±09“
-;2≤00j`0j`12≥0
-Há “
-	(¥ûª0
-2≠09“
-;2⁄0j`2∂
-0îj`ï0<2±09“
-;2∑00j`0j`12∏0
-2π09“
-;Há “
-	(∫àø0
-2Ω0j`ñ2⁄0j`2∂
-0îj`ï0<2±09“
-:2∑00j`0j`02∏0
-Há “
-	(æà¡0
-2Ω0j`ñ2⁄0j`2∂
-0îj`ï0<2±09“
-;2∑00j`0j`12∏0
-Há “
-	(¿à√0
-2Ω0j`ñ2⁄0j`2∞
-0îj`ï0<2±09“
-:2≤00j`0j`02≥0
-Há “
-	(¬à≈0
-2Ω0j`ñ2⁄0j`2∞
-0îj`ï0<2±09“
-;2≤00j`0j`12≥0
-Há “
-	(ƒãÕ0
-2Ω0j`ñ2∆0j`2 »00j`0j`ó2…0
-2  00j`0j`ó2À0
-Há “
-	(Ã|’0
-2Œ0j`2 –00j`0j`ò2—0
-2“00j`0j`12”0
-Há “
-	(‘á€0
-j`2Ω0j`ñ2÷0j`2 –00j`0j`ò2—0
-2!Ÿ00j`ô0j`öHá “
-	(⁄ÿ
-‡
- Í
-platform.windows

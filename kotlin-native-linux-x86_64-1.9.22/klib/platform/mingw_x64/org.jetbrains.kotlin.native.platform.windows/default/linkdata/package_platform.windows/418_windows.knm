@@ -1,358 +1,0 @@
-
-⁄C
-kotlin
-UInt
-
-SIO_RCVALL
-SIO_RCVALL_MCAST
-SIO_RCVALL_IGMPMCAST
-SIO_KEEPALIVE_VALS
-SIO_ABSORB_RTRALERT
-SIO_UCAST_IF
-SIO_LIMIT_BROADCASTS
-SIO_INDEX_BIND
-SIO_INDEX_MCASTIF
-SIO_INDEX_ADD_MCAST
-SIO_INDEX_DEL_MCAST
-Int
-
-RCVALL_OFF
-	RCVALL_ON
-RCVALL_SOCKETLEVELONLY
-RCVALL_IPLEVEL
-$SOCKET_SETTINGS_GUARANTEE_ENCRYPTION
-SOCKET_SETTINGS_ALLOW_INSECURE
-SOCKET_INFO_CONNECTION_SECURED
- SOCKET_INFO_CONNECTION_ENCRYPTED
-#SOCKET_INFO_CONNECTION_IMPERSONATED
-/SOCKET_SETTINGS_IPSEC_SKIP_FILTER_INSTANTIATION
-kotlinx
-cinterop
-CPointer
-	CFunction
-	Function0
-internal
-CCall
-id
-6knifunptr_platform_windows8667_GetExceptionCode_getter
-GetExceptionCode
-4knifunptr_platform_windows8668_exception_code_getter
-exception_code
-platform
-windows
-_EXCEPTION_POINTERS
-=knifunptr_platform_windows8669_GetExceptionInformation_getter
-GetExceptionInformation
-4knifunptr_platform_windows8670_exception_info_getter
-exception_info
-9knifunptr_platform_windows8671_AbnormalTermination_getter
-AbnormalTermination
-:knifunptr_platform_windows8672_abnormal_termination_getter
-abnormal_termination
-CPointed
-COpaquePointer
-*knifunptr_platform_windows8673_NULL_getter
-NULL
-	Function2
-UByte
-1knifunptr_platform_windows8674_RotateLeft8_getter
-RotateLeft8
-UShort
-2knifunptr_platform_windows8675_RotateLeft16_getter
-RotateLeft16
-2knifunptr_platform_windows8676_RotateRight8_getter
-RotateRight8
-3knifunptr_platform_windows8677_RotateRight16_getter
-RotateRight16
-2knifunptr_platform_windows8678_RotateLeft32_getter
-RotateLeft32
-ULong
-2knifunptr_platform_windows8679_RotateLeft64_getter
-RotateLeft64
-3knifunptr_platform_windows8680_RotateRight32_getter
-RotateRight32
-3knifunptr_platform_windows8681_RotateRight64_getter
-RotateRight64
-IntVarOf
-IntVar
--knifunptr_platform_windows8682_BitTest_getter
-BitTest
-:knifunptr_platform_windows8683_BitTestAndComplement_getter
-BitTestAndComplement
-3knifunptr_platform_windows8684_BitTestAndSet_getter
-BitTestAndSet
-5knifunptr_platform_windows8685_BitTestAndReset_getter
-BitTestAndReset
-	LongVarOf
-Long
-LongVar
-/knifunptr_platform_windows8686_BitTest64_getter
-	BitTest64
-<knifunptr_platform_windows8687_BitTestAndComplement64_getter
-BitTestAndComplement64
-5knifunptr_platform_windows8688_BitTestAndSet64_getter
-BitTestAndSet64
-7knifunptr_platform_windows8689_BitTestAndReset64_getter
-BitTestAndReset64
-	UIntVarOf
-UIntVar
-4knifunptr_platform_windows8690_BitScanForward_getter
-BitScanForward
-4knifunptr_platform_windows8691_BitScanReverse_getter
-BitScanReverse
-6knifunptr_platform_windows8692_BitScanForward64_getter
-BitScanForward64
-6knifunptr_platform_windows8693_BitScanReverse64_getter
-BitScanReverse64
-	Function1
-
-ShortVarOf
-Short
-ShortVar
-<knifunptr_platform_windows8694_InterlockedIncrement16_getter
-InterlockedIncrement16
-<knifunptr_platform_windows8695_InterlockedDecrement16_getter
-InterlockedDecrement16
-	Function3
-Bknifunptr_platform_windows8696_InterlockedCompareExchange16_getter
-InterlockedCompareExchange16
-4knifunptr_platform_windows8697_InterlockedAnd_getter
-InterlockedAnd
-3knifunptr_platform_windows8698_InterlockedOr_getter
-InterlockedOr
-4knifunptr_platform_windows8699_InterlockedXor_getter
-InterlockedXor
-:knifunptr_platform_windows8700_InterlockedIncrement_getter
-InterlockedIncrement
-Aknifunptr_platform_windows8701_InterlockedIncrementAcquire_getter
-InterlockedIncrementAcquire
-Aknifunptr_platform_windows8702_InterlockedIncrementRelease_getter
-InterlockedIncrementRelease
-:knifunptr_platform_windows8703_InterlockedDecrement_getter
-InterlockedDecrement
-Aknifunptr_platform_windows8704_InterlockedDecrementAcquire_getter
-InterlockedDecrementAcquire
-Aknifunptr_platform_windows8705_InterlockedDecrementRelease_getter
-InterlockedDecrementRelease
-4knifunptr_platform_windows8706_InterlockedAdd_getter
-InterlockedAdd
-9knifunptr_platform_windows8707_InterlockedExchange_getter
-InterlockedExchange
-<knifunptr_platform_windows8708_InterlockedExchangeAdd_getter
-InterlockedExchangeAdd
-@knifunptr_platform_windows8709_InterlockedCompareExchange_getter
-InterlockedCompareExchange
-Gknifunptr_platform_windows8710_InterlockedCompareExchangeAcquire_getter
-!InterlockedCompareExchangeAcquire
-Gknifunptr_platform_windows8711_InterlockedCompareExchangeRelease_getter
-!InterlockedCompareExchangeRelease
-6knifunptr_platform_windows8712_InterlockedAnd64_getter
-InterlockedAnd64
-<knifunptr_platform_windows8713_InterlockedAndAffinity_getter
-InterlockedAndAffinity
-5knifunptr_platform_windows8714_InterlockedOr64_getter
-InterlockedOr64
-;knifunptr_platform_windows8715_InterlockedOrAffinity_getter
-InterlockedOrAffinity
-6knifunptr_platform_windows8716_InterlockedXor64_getter
-InterlockedXor64
-<knifunptr_platform_windows8717_InterlockedIncrement64_getter
-InterlockedIncrement64
-<knifunptr_platform_windows8718_InterlockedDecrement64_getter
-InterlockedDecrement64
-6knifunptr_platform_windows8719_InterlockedAdd64_getter
-InterlockedAdd64
-;knifunptr_platform_windows8720_InterlockedExchange64_getter
-InterlockedExchange64
-Bknifunptr_platform_windows8721_InterlockedExchangeAcquire64_getter
-InterlockedExchangeAcquire64
->knifunptr_platform_windows8722_InterlockedExchangeAdd64_getter
-InterlockedExchangeAdd64
-Bknifunptr_platform_windows8723_InterlockedCompareExchange64_getter
-InterlockedCompareExchange64
-Iknifunptr_platform_windows8724_InterlockedCompareExchangeAcquire64_getter
-#InterlockedCompareExchangeAcquire64
-Iknifunptr_platform_windows8725_InterlockedCompareExchangeRelease64_getter
-#InterlockedCompareExchangeRelease64
-CPointerVarOf
-COpaquePointerVar
-@knifunptr_platform_windows8726_InterlockedExchangePointer_getter
-InterlockedExchangePointer
-Gknifunptr_platform_windows8727_InterlockedCompareExchangePointer_getter
-!InterlockedCompareExchangePointer
-Nknifunptr_platform_windows8728_InterlockedCompareExchangePointerAcquire_getter
-(InterlockedCompareExchangePointerAcquire
-Nknifunptr_platform_windows8729_InterlockedCompareExchangePointerRelease_getter
-(InterlockedCompareExchangePointerRelease
-,knifunptr_platform_windows8730__lrotl_getter
-_lrotl
-,knifunptr_platform_windows8731__lrotr_getter
-_lrotr
-Unit
-.knifunptr_platform_windows8732__m_empty_getter
-_m_empty
-1knifunptr_platform_windows8733__m_from_int_getter
-_m_from_int
-3knifunptr_platform_windows8734__m_from_int64_getter
-_m_from_int64
-/knifunptr_platform_windows8735__m_to_int_getter
-	_m_to_int
-1knifunptr_platform_windows8736__m_to_int64_getter
-_m_to_int64
-1knifunptr_platform_windows8737__m_packsswb_getter
-_m_packsswb
-1knifunptr_platform_windows8738__m_packssdw_getter
-_m_packssdw
-1knifunptr_platform_windows8739__m_packuswb_getter
-_m_packuswb
-2knifunptr_platform_windows8740__m_punpckhbw_getter
-_m_punpckhbw
-2knifunptr_platform_windows8741__m_punpckhwd_getter
-_m_punpckhwd
-2knifunptr_platform_windows8742__m_punpckhdq_getter
-_m_punpckhdq
-2knifunptr_platform_windows8743__m_punpcklbw_getter
-_m_punpcklbw
-2knifunptr_platform_windows8744__m_punpcklwd_getter
-_m_punpcklwd
-2knifunptr_platform_windows8745__m_punpckldq_getter
-_m_punpckldq
-.knifunptr_platform_windows8746__m_paddb_getter
-_m_paddb
-.knifunptr_platform_windows8747__m_paddw_getter
-_m_paddw
-.knifunptr_platform_windows8748__m_paddd_getter
-_m_paddd
-/knifunptr_platform_windows8749__m_paddsb_getter
-	_m_paddsb
-/knifunptr_platform_windows8750__m_paddsw_getter
-	_m_paddsw
-0knifunptr_platform_windows8751__m_paddusb_getter
-
-_m_paddusb
-0knifunptr_platform_windows8752__m_paddusw_getter
-
-_m_paddusw
-.knifunptr_platform_windows8753__m_psubb_getter
-_m_psubb
-.knifunptr_platform_windows8754__m_psubw_getter
-_m_psubw
-.knifunptr_platform_windows8755__m_psubd_getter
-_m_psubd
-/knifunptr_platform_windows8756__m_psubsb_getter
-	_m_psubsb
-/knifunptr_platform_windows8757__m_psubsw_getter
-	_m_psubsw
-0knifunptr_platform_windows8758__m_psubusb_getter
-
-_m_psubusb
-0knifunptr_platform_windows8759__m_psubusw_getter
-
-_m_psubusw
-0knifunptr_platform_windows8760__m_pmaddwd_getter
-
-_m_pmaddwd
-/knifunptr_platform_windows8761__m_pmulhw_getter
-	_m_pmulhw
-/knifunptr_platform_windows8762__m_pmullw_getter
-	_m_pmullw
-.knifunptr_platform_windows8763__m_psllw_getter
-_m_psllw
-/knifunptr_platform_windows8764__m_psllwi_getter
-	_m_psllwi
-.knifunptr_platform_windows8765__m_pslld_getter
-_m_pslld
-/knifunptr_platform_windows8766__m_pslldi_getter
-	_m_pslldi
-.knifunptr_platform_windows8767__m_psllq_getter
-_m_psllq
-/knifunptr_platform_windows8768__m_psllqi_getter
-	_m_psllqi
-.knifunptr_platform_windows8769__m_psraw_getter
-_m_psraw
-/knifunptr_platform_windows8770__m_psrawi_getter
-	_m_psrawi
-.knifunptr_platform_windows8771__m_psrad_getter
-_m_psrad
-/knifunptr_platform_windows8772__m_psradi_getter
-	_m_psradi
-.knifunptr_platform_windows8773__m_psrlw_getter
-_m_psrlwÅ
- 
-  
-  
-
-
- 
- 
-  
-
- 
-$
-
-%
-& 
-/ 
-0 
- 3 
- 4 
- 7 
- @ 
-G 
-H 
-Q 
- R 
-S 
-\ 
-] 
- f 
-g 
- h 
-i 
- n 
-´ 
-¨ 
- π È7"08XÜTÍ
-
-ÇÄÄÄP"08XÜTÍ
-
-ÑÄÄÄP"08XÜTÍ
-
-ÜÄÄÄP"08XÜTÍ
-
-àÄÄÄP"08XÜTÍ
-
-äÄÄÄP"08XÜTÍ
-
-åÄÄÄP"08XÜTÍ
-
-éÄÄÄP"	08XÜTÍ
-
-êÄÄÄP"
-08XÜTÍ
-
-íÄÄÄP"08XÜTÍ
-
-îÄÄÄP"08XÜTÍ
-
-ñÄÄÄP"08XÜTÍ
- "08XÜTÍ
-"08XÜTÍ
-"08XÜTÍ
-"08XÜTÍ
-"08XÜTÍ
-"08XÜTÍ
-"08XÜTÍ
-"08XÜTÍ
-"08XÜTÍ
-",!
-00008«ä	( ",#
-00008«ä	("" (
-008«ä	('" *
-008«ä	()",,
-00008«ä	(+",.
-00008«ä	(-"(200j`8«ä	(1"86"0000008«ä	(5"89"0000008«ä	(8"8;"0000008«ä	(:"8="0000008«ä	(<"8?"0000008«ä	(>"8B"0000008«ä	(A"8D"0000008«ä	(C"8F"0000008«ä	(E"JJ4.,(&00j`0000008«ä	(I"JL4.,(&00j`0000008«ä	(K"JN4.,(&00j`0000008«ä	(M"JP4.,(&00j`0000008«ä	(O"JU4.,(&00j`0000008«ä	(T"JW4.,(&00j`0000008«ä	(V"JY4.,(&00j`0000008«ä	(X"J[4.,(&00j`0000008«ä	(Z"J_4.,(&00j`0000008«ä	(^"Ja4.,(&00j`0000008«ä	(`"Jc4.,(&00j`0000008«ä	(b"Je4.,(&00j`0000008«ä	(d"Dk.(&" 00j`000008«ä	(j"Dm.(&" 00j`000008«ä	(l"Pp:42.,00j`00000008«ä	(o"Jr4.,(&00j`0000008«ä	(q"Jt4.,(&00j`0000008«ä	(s"Jv4.,(&00j`0000008«ä	(u"Dx.(&" 00j`000008«ä	(w"Dz.(&" 00j`000008«ä	(y"D|.(&" 00j`000008«ä	({"D~.(&" 00j`000008«ä	(}"EÄ.(&" 00j`000008«ä	("FÇ.(&" 00j`000008«ä		(Å"LÑ4.,(&00j`0000008«ä		(É"LÜ4.,(&00j`0000008«ä		(Ö"Là4.,(&00j`0000008«ä		(á"Rä:42.,00j`00000008«ä		(â"Rå:42.,00j`00000008«ä		(ã"Ré:42.,00j`00000008«ä		(ç"Lê4.,(&00j`0000008«ä		(è"Lí4.,(&00j`0000008«ä		(ë"Lî4.,(&00j`0000008«ä		(ì"Lñ4.,(&00j`0000008«ä		(ï"Lò4.,(&00j`0000008«ä		(ó"Fö.(&" 00j`000008«ä		(ô"Fú.(&" 00j`000008«ä		(õ"Lû4.,(&00j`0000008«ä		(ù"L†4.,(&00j`0000008«ä		(ü"L¢4.,(&00j`0000008«ä		(°"L§4.,(&00j`0000008«ä		(£"R¶:42.,00j`00000008«ä		(•"R®:42.,00j`00000008«ä		(ß"R™:42.,00j`00000008«ä		(©"xÆ`ZXTR" 00j`0j` 000j`00j`0008«ä		(≠"é∞vpnjh" 00j`0j` 000j`00j`00j`0008«ä		(Ø"é≤vpnjh" 00j`0j` 000j`00j`00j`0008«ä		(±"é¥vpnjh" 00j`0j` 000j`00j`00j`0008«ä		(≥":∂"0000008«ä		(µ":∏"0000008«ä		(∑".ª
-0!0008«ä		(∫"*Ω00j`8«ä		(º"*ø00j`8«ä		(æ"*¡00j`8«ä		(¿"*√00j`8«ä		(¬"*≈00j`8«ä		(ƒ"*«00j`8«ä		(∆"*…00j`8«ä		(»"*À00j`8«ä		( "*Õ00j`8«ä		(Ã"*œ00j`8«ä		(Œ"*—00j`8«ä		(–"*”00j`8«ä		(“"*’00j`8«ä		(‘"*◊00j`8«ä		(÷"*Ÿ00j`8«ä		(ÿ"*€00j`8«ä		(⁄"*›00j`8«ä		(‹"*ﬂ00j`8«ä		(ﬁ"*·00j`8«ä		(‡"*„00j`8«ä		(‚"*Â00j`8«ä		(‰"*Á00j`8«ä		(Ê"*È00j`8«ä		(Ë"*Î00j`8«ä		(Í"*Ì00j`8«ä		(Ï"*Ô00j`8«ä		(Ó"*Ò00j`8«ä		("*Û00j`8«ä		(Ú"*ı00j`8«ä		(Ù"*˜00j`8«ä		(ˆ"*˘00j`8«ä		(¯"*˚00j`8«ä		(˙"*˝00j`8«ä		(¸"*ˇ00j`8«ä		(˛"*Å00j`8«ä		(Ä"*É00j`8«ä		(Ç"*Ö00j`8«ä		(Ñ"*á00j`8«ä		(Ü"*â00j`8«ä		(à"*ã00j`8«ä		(ä"*ç00j`8«ä		(åÿ
-‡
- Í
-platform.windows

@@ -1,815 +1,0 @@
-
-˝F
-kotlin
-UInt
-platform
-gles3
-GLenum
-texture
-Unit
-kotlinx
-cinterop
-internal
-CCall
-id
-)knifunptr_platform_gles30_glActiveTexture
-glActiveTexture
-GLuint
-program
-shader
-(knifunptr_platform_gles31_glAttachShader
-glAttachShader
-index
-String
-CString
-name
-.knifunptr_platform_gles32_glBindAttribLocation
-glBindAttribLocation
-target
-buffer
-&knifunptr_platform_gles33_glBindBuffer
-glBindBuffer
-framebuffer
-+knifunptr_platform_gles34_glBindFramebuffer
-glBindFramebuffer
-renderbuffer
-,knifunptr_platform_gles35_glBindRenderbuffer
-glBindRenderbuffer
-'knifunptr_platform_gles36_glBindTexture
-glBindTexture
-Float
-GLfloat
-red
-green
-blue
-alpha
-&knifunptr_platform_gles37_glBlendColor
-glBlendColor
-mode
-)knifunptr_platform_gles38_glBlendEquation
-glBlendEquation
-modeRGB
-	modeAlpha
-1knifunptr_platform_gles39_glBlendEquationSeparate
-glBlendEquationSeparate
-sfactor
-dfactor
-&knifunptr_platform_gles310_glBlendFunc
-glBlendFunc
-
-sfactorRGB
-
-dfactorRGB
-sfactorAlpha
-dfactorAlpha
-.knifunptr_platform_gles311_glBlendFuncSeparate
-glBlendFuncSeparate
-Long
-
-GLsizeiptr
-size
-
-CValuesRef
-data
-usage
-'knifunptr_platform_gles312_glBufferData
-glBufferData
-GLintptr
-offset
-*knifunptr_platform_gles313_glBufferSubData
-glBufferSubData
-3knifunptr_platform_gles314_glCheckFramebufferStatus
-glCheckFramebufferStatus
-
-GLbitfield
-mask
-"knifunptr_platform_gles315_glClear
-glClear
-'knifunptr_platform_gles316_glClearColor
-glClearColor
-d
-(knifunptr_platform_gles317_glClearDepthf
-glClearDepthf
-Int
-GLint
-s
-)knifunptr_platform_gles318_glClearStencil
-glClearStencil
-UByte
-	GLboolean
-&knifunptr_platform_gles319_glColorMask
-glColorMask
-*knifunptr_platform_gles320_glCompileShader
-glCompileShader
-level
-internalformat
-GLsizei
-width
-height
-border
-	imageSize
-1knifunptr_platform_gles321_glCompressedTexImage2D
-glCompressedTexImage2D
-xoffset
-yoffset
-format
-4knifunptr_platform_gles322_glCompressedTexSubImage2D
-glCompressedTexSubImage2D
-x
-y
-+knifunptr_platform_gles323_glCopyTexImage2D
-glCopyTexImage2D
-.knifunptr_platform_gles324_glCopyTexSubImage2D
-glCopyTexSubImage2D
-*knifunptr_platform_gles325_glCreateProgram
-glCreateProgram
-type
-)knifunptr_platform_gles326_glCreateShader
-glCreateShader
-%knifunptr_platform_gles327_glCullFace
-
-glCullFace
-n
-	UIntVarOf
-	GLuintVar
-buffers
-*knifunptr_platform_gles328_glDeleteBuffers
-glDeleteBuffers
-framebuffers
-/knifunptr_platform_gles329_glDeleteFramebuffers
-glDeleteFramebuffers
-*knifunptr_platform_gles330_glDeleteProgram
-glDeleteProgram
-renderbuffers
-0knifunptr_platform_gles331_glDeleteRenderbuffers
-glDeleteRenderbuffers
-)knifunptr_platform_gles332_glDeleteShader
-glDeleteShader
-textures
-+knifunptr_platform_gles333_glDeleteTextures
-glDeleteTextures
-func
-&knifunptr_platform_gles334_glDepthFunc
-glDepthFunc
-flag
-&knifunptr_platform_gles335_glDepthMask
-glDepthMask
-f
-(knifunptr_platform_gles336_glDepthRangef
-glDepthRangef
-)knifunptr_platform_gles337_glDetachShader
-glDetachShader
-cap
-$knifunptr_platform_gles338_glDisable
-	glDisable
-5knifunptr_platform_gles339_glDisableVertexAttribArray
-glDisableVertexAttribArray
-first
-count
-'knifunptr_platform_gles340_glDrawArrays
-glDrawArrays
-indices
-)knifunptr_platform_gles341_glDrawElements
-glDrawElements
-#knifunptr_platform_gles342_glEnable
-glEnable
-4knifunptr_platform_gles343_glEnableVertexAttribArray
-glEnableVertexAttribArray
-#knifunptr_platform_gles344_glFinish
-glFinish
-"knifunptr_platform_gles345_glFlush
-glFlush
-
-attachment
-renderbuffertarget
-4knifunptr_platform_gles346_glFramebufferRenderbuffer
-glFramebufferRenderbuffer
-	textarget
-1knifunptr_platform_gles347_glFramebufferTexture2D
-glFramebufferTexture2D
-&knifunptr_platform_gles348_glFrontFace
-glFrontFace
-'knifunptr_platform_gles349_glGenBuffers
-glGenBuffers
-+knifunptr_platform_gles350_glGenerateMipmap
-glGenerateMipmap
-,knifunptr_platform_gles351_glGenFramebuffers
-glGenFramebuffers
--knifunptr_platform_gles352_glGenRenderbuffers
-glGenRenderbuffers
-(knifunptr_platform_gles353_glGenTextures
-glGenTextures
-bufSize
-IntVarOf
-
-GLsizeiVar
-length
-GLintVar
-	GLenumVar
-	ByteVarOf
-Byte
-	GLcharVar
-,knifunptr_platform_gles354_glGetActiveAttrib
-glGetActiveAttrib
--knifunptr_platform_gles355_glGetActiveUniform
-glGetActiveUniform
-maxCount
-shaders
-/knifunptr_platform_gles356_glGetAttachedShaders
-glGetAttachedShaders
-.knifunptr_platform_gles357_glGetAttribLocation
-glGetAttribLocation
-pname
-
-UByteVarOf
-GLbooleanVar
-(knifunptr_platform_gles358_glGetBooleanv
-glGetBooleanv
-params
-1knifunptr_platform_gles359_glGetBufferParameteriv
-glGetBufferParameteriv
-%knifunptr_platform_gles360_glGetError
-
-glGetError
-
-FloatVarOf
-
-GLfloatVar
-&knifunptr_platform_gles361_glGetFloatv
-glGetFloatv
-@knifunptr_platform_gles362_glGetFramebufferAttachmentParameteriv
-%glGetFramebufferAttachmentParameteriv
-(knifunptr_platform_gles363_glGetIntegerv
-glGetIntegerv
-)knifunptr_platform_gles364_glGetProgramiv
-glGetProgramiv
-infoLog
-.knifunptr_platform_gles365_glGetProgramInfoLog
-glGetProgramInfoLog
-7knifunptr_platform_gles366_glGetRenderbufferParameteriv
-glGetRenderbufferParameteriv
-(knifunptr_platform_gles367_glGetShaderiv
-glGetShaderiv
--knifunptr_platform_gles368_glGetShaderInfoLog
-glGetShaderInfoLog
-
-shadertype
-precisiontype
-range
-	precision
-5knifunptr_platform_gles369_glGetShaderPrecisionFormat
-glGetShaderPrecisionFormat
-source
-,knifunptr_platform_gles370_glGetShaderSource
-glGetShaderSource
-CPointer
-
-GLubyteVar
-&knifunptr_platform_gles371_glGetString
-glGetString
-.knifunptr_platform_gles372_glGetTexParameterfv
-glGetTexParameterfv
-.knifunptr_platform_gles373_glGetTexParameteriv
-glGetTexParameteriv
-location
-)knifunptr_platform_gles374_glGetUniformfv
-glGetUniformfv
-)knifunptr_platform_gles375_glGetUniformiv
-glGetUniformiv
-/knifunptr_platform_gles376_glGetUniformLocation
-glGetUniformLocation
-.knifunptr_platform_gles377_glGetVertexAttribfv
-glGetVertexAttribfv
-.knifunptr_platform_gles378_glGetVertexAttribiv
-glGetVertexAttribiv
-CPointerVarOf
-CPointed
-COpaquePointer
-COpaquePointerVar
-pointer
-4knifunptr_platform_gles379_glGetVertexAttribPointerv
-glGetVertexAttribPointerv
-!knifunptr_platform_gles380_glHint
-glHint
-%knifunptr_platform_gles381_glIsBuffer
-
-glIsBuffer
-&knifunptr_platform_gles382_glIsEnabled
-glIsEnabled
-*knifunptr_platform_gles383_glIsFramebuffer
-glIsFramebuffer
-&knifunptr_platform_gles384_glIsProgram
-glIsProgram
-+knifunptr_platform_gles385_glIsRenderbuffer
-glIsRenderbuffer
-%knifunptr_platform_gles386_glIsShader
-
-glIsShader
-&knifunptr_platform_gles387_glIsTexture
-glIsTexture
-&knifunptr_platform_gles388_glLineWidth
-glLineWidth
-(knifunptr_platform_gles389_glLinkProgram
-glLinkProgram
-param
-(knifunptr_platform_gles390_glPixelStorei
-glPixelStorei
-factor
-units
-*knifunptr_platform_gles391_glPolygonOffset
-glPolygonOffset
-pixels
-'knifunptr_platform_gles392_glReadPixels
-glReadPixels
-2knifunptr_platform_gles393_glReleaseShaderCompiler
-glReleaseShaderCompiler
-0knifunptr_platform_gles394_glRenderbufferStorage
-glRenderbufferStorage
-value
-invert
-+knifunptr_platform_gles395_glSampleCoverage
-glSampleCoverage
-$knifunptr_platform_gles396_glScissor
-	glScissor
-binaryformat
-binary
-)knifunptr_platform_gles397_glShaderBinary
-glShaderBinary
-CPointerVar
-string
-)knifunptr_platform_gles398_glShaderSource
-glShaderSource
-ref
-(knifunptr_platform_gles399_glStencilFunc
-glStencilFunc
-face
-1knifunptr_platform_gles3100_glStencilFuncSeparate
-glStencilFuncSeparate
-)knifunptr_platform_gles3101_glStencilMask
-glStencilMask
-1knifunptr_platform_gles3102_glStencilMaskSeparate
-glStencilMaskSeparate
-fail
-zfail
-zpass
-'knifunptr_platform_gles3103_glStencilOp
-glStencilOp
-sfail
-dpfail
-dppass
-/knifunptr_platform_gles3104_glStencilOpSeparate
-glStencilOpSeparate
-(knifunptr_platform_gles3105_glTexImage2D
-glTexImage2D
-+knifunptr_platform_gles3106_glTexParameterf
-glTexParameterf
-,knifunptr_platform_gles3107_glTexParameterfv
-glTexParameterfv
-+knifunptr_platform_gles3108_glTexParameteri
-glTexParameteri
-,knifunptr_platform_gles3109_glTexParameteriv
-glTexParameteriv
-+knifunptr_platform_gles3110_glTexSubImage2D
-glTexSubImage2D
-v0
-'knifunptr_platform_gles3111_glUniform1f
-glUniform1f
-(knifunptr_platform_gles3112_glUniform1fv
-glUniform1fv
-'knifunptr_platform_gles3113_glUniform1i
-glUniform1i
-(knifunptr_platform_gles3114_glUniform1iv
-glUniform1iv
-v1
-'knifunptr_platform_gles3115_glUniform2f
-glUniform2f
-(knifunptr_platform_gles3116_glUniform2fv
-glUniform2fv
-'knifunptr_platform_gles3117_glUniform2i
-glUniform2i
-(knifunptr_platform_gles3118_glUniform2iv
-glUniform2iv
-v2
-'knifunptr_platform_gles3119_glUniform3f
-glUniform3f
-(knifunptr_platform_gles3120_glUniform3fv
-glUniform3fv
-'knifunptr_platform_gles3121_glUniform3i
-glUniform3i
-(knifunptr_platform_gles3122_glUniform3iv
-glUniform3iv
-v3
-'knifunptr_platform_gles3123_glUniform4f
-glUniform4f
-(knifunptr_platform_gles3124_glUniform4fv
-glUniform4fv
-'knifunptr_platform_gles3125_glUniform4i
-glUniform4i
-(knifunptr_platform_gles3126_glUniform4iv
-glUniform4iv
-	transpose
-.knifunptr_platform_gles3127_glUniformMatrix2fv
-glUniformMatrix2fvË
- 
-  
-
-
- 
-  
-
-
-	
-
- 
- 
-  
-	 
- % 
-& 
- > 
-? 
-A 
-F 
-L 
- U 
-V 
- Z 
-[ 
-b 
-| 
-} 
-¡ 
-¬ 
-ƒ 
-≈ 
-∆ 
- « 
-» 
-‘ 
-’ 
-› 
-ﬁ 
-˘ 
-˙ 
-å 
-ç 
-é 
-è 
-ø ´E$02
-0j`Há “
-	(002
-0j`
-2
-0j`
-Há “
-	(A02
-0j`
-2
-0j`
-20“
-Há “
-	(002
-0j`2
-0j`
-Há “
-	(002
-0j`2
-0j`
-Há “
-	(0"02
-0j`2
- 0j`
-Há “
-	(!0$02
-0j`2
-0j`
-Há “
-	(#H,02
-'0j`2
-(0j`2
-)0j`2
-*0j`Há “
-	(+$/02
--0j`Há “
-	(.0302
-00j`2
-10j`Há “
-	(20702
-40j`2
-50j`Há “
-	(6H=02
-80j`2
-90j`2
-:0j`2
-;0j`Há “
-	(<JE02
-0j`2
-@0j`2B02
-C0j`Há “
-	(DJI02
-0j`2
-G0j`2
-@0j`2B0Há “
-	(H(K0j`2
-0j`Há “
-	(J$O02
-M0j`Há “
-	(NHQ02
-'0j`2
-(0j`2
-)0j`2
-*0j`Há “
-	(P$T02
-R0j`Há “
-	(S$Y02
-W0j`Há “
-	(XH]02
-'0j`2
-(0j`2
-)0j`2
-*0j`Há “
-	(\$_02
-0j`
-Há “
-	(^zh02
-0j`2
-`0j`2
-a0j`2
-c0j`2
-d0j`2
-e0j`2
-f0j`2B0Há “
-	(gÜm02
-0j`2
-`0j`2
-i0j`2
-j0j`2
-c0j`2
-d0j`2
-k0j`2
-f0j`2B0Há “
-	(lxq02
-0j`2
-`0j`2
-a0j`2
-n0j`2
-o0j`2
-c0j`2
-d0j`2
-e0j`Há “
-	(pxs02
-0j`2
-`0j`2
-i0j`2
-j0j`2
-n0j`2
-o0j`2
-c0j`2
-d0j`Há “
-	(ru0j`
-Há “
-	(t(x0j`
-2
-v0j`Há “
-	(w$z02
--0j`Há “
-	(y?Ä02
-{0j`2~00j`0Há “
-	(AÉ02
-{0j`2Å00j`0Há “
-		(Ç&Ö02
-0j`
-Há “
-		(ÑAà02
-{0j`2Ü00j`0Há “
-		(á&ä02
-0j`
-Há “
-		(âAç02
-{0j`2ã00j`0Há “
-		(å'ê02é0j`Há “
-		(è'ì02ë0j`Há “
-		(í3ñ02
-{0j`2î0j`Há “
-		(ï2ò02
-0j`
-2
-0j`
-Há “
-		(ó'õ02ô0j`Há “
-		(ö&ù02
-0j`
-Há “
-		(ú@°02
--0j`2û0j`2ü0j`Há “
-		(†N§02
--0j`2ü0j`2
-v0j`2¢0Há “
-		(£'¶02ô0j`Há “
-		(•&®02
-0j`
-Há “
-		(ß™0Há “
-		(©¨0Há “
-		(´L∞02
-0j`2≠0j`2Æ0j`2
- 0j`
-Há “
-		(ØX≥02
-0j`2≠0j`2±0j`2
-0j`
-2
-`0j`Há “
-		(≤&µ02
--0j`Há “
-		(¥@∑02
-{0j`2~00j`0Há “
-		(∂&π02
-0j`Há “
-		(∏Aª02
-{0j`2Å00j`0Há “
-		(∫AΩ02
-{0j`2Ü00j`0Há “
-		(ºAø02
-{0j`2ã00j`0Há “
-		(æ® 02
-0j`
-2
-0j`
-2¿0j`2√00j`02@00j`02v00j`020 0j`!0Há “
-		(…®Ã02
-0j`
-2
-0j`
-2¿0j`2√00j`02@00j`02v00j`020 0j`!0Há “
-		(Ài–02
-0j`
-2Õ0j`2ü00j`02Œ00j`0Há “
-		(œ;“0j`2
-0j`
-20“
-Há “
-		(—A◊02”0j`2B00"j`#0Há “
-		(÷N⁄02
-0j`2”0j`2ÿ00j`0Há “
-		(Ÿ‹0j`Há “
-		(€A‡02”0j`2B00$j`%0Há “
-		(ﬂ[‚02
-0j`2≠0j`2”0j`2ÿ00j`0Há “
-		(·A‰02”0j`2B00j`0Há “
-		(„NÊ02
-0j`
-2”0j`2ÿ00j`0Há “
-		(ÂiÈ02
-0j`
-2¿0j`2√00j`02Á0 0j`!0Há “
-		(ËNÎ02
-0j`2”0j`2ÿ00j`0Há “
-		(ÍNÌ02
-0j`
-2”0j`2ÿ00j`0Há “
-		(ÏiÔ02
-0j`
-2¿0j`2√00j`02Á0 0j`!0Há “
-		(Ójı020j`2Ò0j`2Ú00j`02Û00j`0Há “
-		(Ùi¯02
-0j`
-2¿0j`2√00j`02ˆ0 0j`!0Há “
-		(˜8¸00"j`'0&2
-0j`Há “
-		(˚N˛02
-0j`2”0j`2ÿ00$j`%0Há “
-		(˝NÄ02
-0j`2”0j`2ÿ00j`0Há “
-		(ˇNÉ02
-0j`
-2Å0j`2ÿ00$j`%0Há “
-		(ÇNÖ02
-0j`
-2Å0j`2ÿ00j`0Há “
-		(Ñ;á0j`2
-0j`
-20“
-Há “
-		(ÜNâ02
-0j`
-2”0j`2ÿ00$j`%0Há “
-		(àNã02
-0j`
-2”0j`2ÿ00j`0Há “
-		(äZí02
-0j`
-2”0j`2%ê 0)0&j`*0(j`+0Há “
-		(ë2î02
-0j`2
--0j`Há “
-		(ì*ñ0j`2
-0j`
-Há “
-		(ï+ò0j`2ô0j`Há “
-		(ó*ö0j`2
-0j`
-Há “
-		(ô*ú0j`2
-0j`
-Há “
-		(õ*û0j`2
- 0j`
-Há “
-		(ù*†0j`2
-0j`
-Há “
-		(ü*¢0j`2
-0j`
-Há “
-		(°&§02
-c0j`Há “
-		(£&¶02
-0j`
-Há “
-		(•4©02”0j`2ß0j`Há “
-		(®4≠02™0j`2´0j`Há “
-		(¨q∞02
-n0j`2
-o0j`2
-c0j`2
-d0j`2
-k0j`2
-v0j`2Æ0Há “
-		(Ø≤0Há “
-		(±J¥02
-0j`2
-a0j`2
-c0j`2
-d0j`Há “
-		(≥4∏02µ0j`2∂0j`Há “
-		(∑J∫02
-n0j`2
-o0j`2
-c0j`2
-d0j`Há “
-		(πkæ02ü0j`2Œ00j`02ª0j`2º02√0j`Há “
-		(Ωâ¬02
-0j`
-2ü0j`29¿4.,0 0j`!0&0(j0 0j`!`,02√00j`0Há “
-		(¡@≈02é0j`2√0j`2
-M0j`
-Há “
-		(ƒM»02∆0j`2é0j`2√0j`2
-M0j`
-Há “
-		(«& 02
-M0j`
-Há “
-		(…3Ã02∆0j`2
-M0j`
-Há “
-		(ÀA—02Õ0j`2Œ0j`2œ0j`Há “
-		(–N÷02∆0j`2“0j`2”0j`2‘0j`Há “
-		(’âÿ02
-0j`2
-`0j`2
-a0j`2
-c0j`2
-d0j`2
-e0j`2
-k0j`2
-v0j`2Æ0Há “
-		(◊@⁄02
-0j`2”0j`2ß0j`Há “
-		(ŸN‹02
-0j`2”0j`2ÿ00$j`%0Há “
-		(€@ﬁ02
-0j`2”0j`2ß0j`Há “
-		(›N‡02
-0j`2”0j`2ÿ00j`0Há “
-		(ﬂâ‚02
-0j`2
-`0j`2
-i0j`2
-j0j`2
-c0j`2
-d0j`2
-k0j`2
-v0j`2Æ0Há “
-		(·4Â02Å0j`2„0j`Há “
-		(‰OÁ02Å0j`2ü0j`2µ00$j`%0Há “
-		(Ê4È02Å0j`2„0j`Há “
-		(ËOÎ02Å0j`2ü0j`2µ00j`0Há “
-		(ÍAÓ02Å0j`2„0j`2Ï0j`Há “
-		(ÌO02Å0j`2ü0j`2µ00$j`%0Há “
-		(ÔAÚ02Å0j`2„0j`2Ï0j`Há “
-		(ÒOÙ02Å0j`2ü0j`2µ00j`0Há “
-		(ÛN˜02Å0j`2„0j`2Ï0j`2ı0j`Há “
-		(ˆO˘02Å0j`2ü0j`2µ00$j`%0Há “
-		(¯N˚02Å0j`2„0j`2Ï0j`2ı0j`Há “
-		(˙O˝02Å0j`2ü0j`2µ00j`0Há “
-		(¸[Ä02Å0j`2„0j`2Ï0j`2ı0j`2˛0j`Há “
-		(ˇOÇ02Å0j`2ü0j`2µ00$j`%0Há “
-		(Å[Ñ02Å0j`2„0j`2Ï0j`2ı0j`2˛0j`Há “
-		(ÉOÜ02Å0j`2ü0j`2µ00j`0Há “
-		(Ö\â02Å0j`2ü0j`2á0j`2µ00$j`%0Há “
-		(àÿ
-‡
- Í
-platform.gles3

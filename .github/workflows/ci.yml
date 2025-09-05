@@ -45,18 +45,16 @@ jobs:
       if: always()
       with:
         name: Pure Kotlin-Native Tests
-        path: Poker-Basic/build/test-results/test/*.xml
+        path: shared/build/test-results/test/*.xml
         reporter: java-junit
         fail-on-error: false
-    
-    - name: Upload test results
     
     - name: Upload test results
       uses: actions/upload-artifact@v4
       if: always()
       with:
         name: test-results
-        path: Poker-Basic/build/test-results/test/
+        path: shared/build/test-results/test/
         retention-days: 30
     
     - name: Build Pure Kotlin-Native JAR
@@ -65,7 +63,7 @@ jobs:
         ./gradlew :shared:fatJar --no-daemon
         echo ""
         echo "=== JAR Build Complete ==="
-        ls -la Poker-Basic/build/libs/
+        ls -la shared/build/libs/
         
   native-builds:
     runs-on: ${{ matrix.os }}
@@ -110,7 +108,7 @@ jobs:
           echo "Creating placeholder JAR instead..."
           ./gradlew :shared:fatJar --no-daemon
           mkdir -p desktop/build/distributions/
-          cp Poker-Basic/build/libs/*-fat.jar desktop/build/distributions/pokermon-${{ matrix.platform }}${{ matrix.extension }} || true
+          cp shared/build/libs/*-fat.jar desktop/build/distributions/pokermon-${{ matrix.platform }}${{ matrix.extension }} || true
         }
     
     - name: Determine artifact retention  
@@ -131,7 +129,7 @@ jobs:
         name: ${{ steps.retention.outputs.artifact_name }}
         path: |
           desktop/build/distributions/*${{ matrix.extension }}
-          Poker-Basic/build/libs/*-fat.jar
+          shared/build/libs/*-fat.jar
         retention-days: ${{ steps.retention.outputs.retention_days }}
         
   package:
@@ -163,7 +161,7 @@ jobs:
     
     - name: Verify JAR was created
       run: |
-        cd Poker-Basic/build/libs
+        cd shared/build/libs
         ls -la *.jar
         echo "=== Verifying Pure Kotlin-Native JAR ==="
         JAR_FILE=$(find . -name "*-fat.jar" | head -1)
@@ -193,7 +191,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: ${{ steps.retention.outputs.artifact_name }}
-        path: Poker-Basic/build/libs/*.jar
+        path: shared/build/libs/*.jar
         retention-days: ${{ steps.retention.outputs.retention_days }}
 
   android-build:

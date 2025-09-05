@@ -1,5 +1,8 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'org.jetbrains.kotlin.plugin.compose' version '2.2.10'
+}
 
 /**
  * Generate dynamic version code using timestamp-based approach.
@@ -85,10 +88,6 @@ android {
     buildFeatures {
         compose true
         buildConfig = true
-    }
-    
-    composeOptions {
-        kotlinCompilerExtensionVersion '1.5.8'
     }
     
     // Optimization settings for faster builds

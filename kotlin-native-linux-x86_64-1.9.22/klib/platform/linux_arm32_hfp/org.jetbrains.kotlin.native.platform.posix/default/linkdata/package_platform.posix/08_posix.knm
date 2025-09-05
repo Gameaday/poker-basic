@@ -1,882 +1,0 @@
-
-ÖR
-kotlinx
-cinterop
-
-CValuesRef
-platform
-posix
-pthread_attr_t
-__attr
-sched_param
-__param
-kotlin
-Int
-internal
-CCall
-id
-6knifunptr_platform_posix512_pthread_attr_setschedparam
-pthread_attr_setschedparam
-IntVarOf
-IntVar
-__policy
-7knifunptr_platform_posix513_pthread_attr_getschedpolicy
-pthread_attr_getschedpolicy
-7knifunptr_platform_posix514_pthread_attr_setschedpolicy
-pthread_attr_setschedpolicy
-	__inherit
-8knifunptr_platform_posix515_pthread_attr_getinheritsched
-pthread_attr_getinheritsched
-8knifunptr_platform_posix516_pthread_attr_setinheritsched
-pthread_attr_setinheritsched
-__scope
-1knifunptr_platform_posix517_pthread_attr_getscope
-pthread_attr_getscope
-1knifunptr_platform_posix518_pthread_attr_setscope
-pthread_attr_setscope
-CPointerVarOf
-CPointer
-CPointed
-COpaquePointer
-COpaquePointerVar
-__stackaddr
-5knifunptr_platform_posix519_pthread_attr_getstackaddr
-pthread_attr_getstackaddr
-5knifunptr_platform_posix520_pthread_attr_setstackaddr
-pthread_attr_setstackaddr
-	UIntVarOf
-UInt
-	size_tVar
-__stacksize
-5knifunptr_platform_posix521_pthread_attr_getstacksize
-pthread_attr_getstacksize
-size_t
-5knifunptr_platform_posix522_pthread_attr_setstacksize
-pthread_attr_setstacksize
-1knifunptr_platform_posix523_pthread_attr_getstack
-pthread_attr_getstack
-1knifunptr_platform_posix524_pthread_attr_setstack
-pthread_attr_setstack
-	pthread_t
-__target_thread
-1knifunptr_platform_posix525_pthread_setschedparam
-pthread_setschedparam
-1knifunptr_platform_posix526_pthread_getschedparam
-pthread_getschedparam
-__prio
-0knifunptr_platform_posix527_pthread_setschedprio
-pthread_setschedprio
-2knifunptr_platform_posix528_pthread_getconcurrency
-pthread_getconcurrency
-__level
-2knifunptr_platform_posix529_pthread_setconcurrency
-pthread_setconcurrency
-pthread_once_tVar
-__once_control
-	CFunction
-	Function0
-Unit
-__init_routine
-(knifunptr_platform_posix530_pthread_once
-pthread_once
-__state
-
-__oldstate
-2knifunptr_platform_posix531_pthread_setcancelstate
-pthread_setcancelstate
-__type
-	__oldtype
-1knifunptr_platform_posix532_pthread_setcanceltype
-pthread_setcanceltype
-__th
-*knifunptr_platform_posix533_pthread_cancel
-pthread_cancel
-.knifunptr_platform_posix534_pthread_testcancel
-pthread_testcancel
-__pthread_cleanup_frame
-__frame
-5knifunptr_platform_posix535___pthread_cleanup_routine
-__pthread_cleanup_routine
-__jmp_buf_tag
-__env
-
-__savemask
-'knifunptr_platform_posix536___sigsetjmp
-__sigsetjmp
-pthread_mutex_t
-__mutex
-pthread_mutexattr_t
-__mutexattr
-.knifunptr_platform_posix537_pthread_mutex_init
-pthread_mutex_init
-1knifunptr_platform_posix538_pthread_mutex_destroy
-pthread_mutex_destroy
-1knifunptr_platform_posix539_pthread_mutex_trylock
-pthread_mutex_trylock
-.knifunptr_platform_posix540_pthread_mutex_lock
-pthread_mutex_lock
-timespec
-	__abstime
-3knifunptr_platform_posix541_pthread_mutex_timedlock
-pthread_mutex_timedlock
-0knifunptr_platform_posix542_pthread_mutex_unlock
-pthread_mutex_unlock
-__prioceiling
-8knifunptr_platform_posix543_pthread_mutex_getprioceiling
-pthread_mutex_getprioceiling
-__old_ceiling
-8knifunptr_platform_posix544_pthread_mutex_setprioceiling
-pthread_mutex_setprioceiling
-4knifunptr_platform_posix545_pthread_mutex_consistent
-pthread_mutex_consistent
-2knifunptr_platform_posix546_pthread_mutexattr_init
-pthread_mutexattr_init
-5knifunptr_platform_posix547_pthread_mutexattr_destroy
-pthread_mutexattr_destroy
-	__pshared
-8knifunptr_platform_posix548_pthread_mutexattr_getpshared
-pthread_mutexattr_getpshared
-8knifunptr_platform_posix549_pthread_mutexattr_setpshared
-pthread_mutexattr_setpshared
-__kind
-5knifunptr_platform_posix550_pthread_mutexattr_gettype
-pthread_mutexattr_gettype
-5knifunptr_platform_posix551_pthread_mutexattr_settype
-pthread_mutexattr_settype
-
-__protocol
-9knifunptr_platform_posix552_pthread_mutexattr_getprotocol
-pthread_mutexattr_getprotocol
-9knifunptr_platform_posix553_pthread_mutexattr_setprotocol
-pthread_mutexattr_setprotocol
-<knifunptr_platform_posix554_pthread_mutexattr_getprioceiling
- pthread_mutexattr_getprioceiling
-<knifunptr_platform_posix555_pthread_mutexattr_setprioceiling
- pthread_mutexattr_setprioceiling
-__robustness
-7knifunptr_platform_posix556_pthread_mutexattr_getrobust
-pthread_mutexattr_getrobust
-7knifunptr_platform_posix557_pthread_mutexattr_setrobust
-pthread_mutexattr_setrobust
-pthread_rwlock_t
-__rwlock
-pthread_rwlockattr_t
-/knifunptr_platform_posix558_pthread_rwlock_init
-pthread_rwlock_init
-2knifunptr_platform_posix559_pthread_rwlock_destroy
-pthread_rwlock_destroy
-1knifunptr_platform_posix560_pthread_rwlock_rdlock
-pthread_rwlock_rdlock
-4knifunptr_platform_posix561_pthread_rwlock_tryrdlock
-pthread_rwlock_tryrdlock
-6knifunptr_platform_posix562_pthread_rwlock_timedrdlock
-pthread_rwlock_timedrdlock
-1knifunptr_platform_posix563_pthread_rwlock_wrlock
-pthread_rwlock_wrlock
-4knifunptr_platform_posix564_pthread_rwlock_trywrlock
-pthread_rwlock_trywrlock
-6knifunptr_platform_posix565_pthread_rwlock_timedwrlock
-pthread_rwlock_timedwrlock
-1knifunptr_platform_posix566_pthread_rwlock_unlock
-pthread_rwlock_unlock
-3knifunptr_platform_posix567_pthread_rwlockattr_init
-pthread_rwlockattr_init
-6knifunptr_platform_posix568_pthread_rwlockattr_destroy
-pthread_rwlockattr_destroy
-9knifunptr_platform_posix569_pthread_rwlockattr_getpshared
-pthread_rwlockattr_getpshared
-9knifunptr_platform_posix570_pthread_rwlockattr_setpshared
-pthread_rwlockattr_setpshared
-__pref
-9knifunptr_platform_posix571_pthread_rwlockattr_getkind_np
-pthread_rwlockattr_getkind_np
-9knifunptr_platform_posix572_pthread_rwlockattr_setkind_np
-pthread_rwlockattr_setkind_np
-pthread_cond_t
-__cond
-pthread_condattr_t
-__cond_attr
--knifunptr_platform_posix573_pthread_cond_init
-pthread_cond_init
-0knifunptr_platform_posix574_pthread_cond_destroy
-pthread_cond_destroy
-/knifunptr_platform_posix575_pthread_cond_signal
-pthread_cond_signal
-2knifunptr_platform_posix576_pthread_cond_broadcast
-pthread_cond_broadcast
--knifunptr_platform_posix577_pthread_cond_wait
-pthread_cond_wait
-2knifunptr_platform_posix578_pthread_cond_timedwait
-pthread_cond_timedwait
-1knifunptr_platform_posix579_pthread_condattr_init
-pthread_condattr_init
-4knifunptr_platform_posix580_pthread_condattr_destroy
-pthread_condattr_destroy
-7knifunptr_platform_posix581_pthread_condattr_getpshared
-pthread_condattr_getpshared
-7knifunptr_platform_posix582_pthread_condattr_setpshared
-pthread_condattr_setpshared
-__clockid_tVar
-
-__clock_id
-5knifunptr_platform_posix583_pthread_condattr_getclock
-pthread_condattr_getclock
-__clockid_t
-5knifunptr_platform_posix584_pthread_condattr_setclock
-pthread_condattr_setclock
-pthread_spinlock_tVar
-__lock
--knifunptr_platform_posix585_pthread_spin_init
-pthread_spin_init
-0knifunptr_platform_posix586_pthread_spin_destroy
-pthread_spin_destroy
--knifunptr_platform_posix587_pthread_spin_lock
-pthread_spin_lock
-0knifunptr_platform_posix588_pthread_spin_trylock
-pthread_spin_trylock
-/knifunptr_platform_posix589_pthread_spin_unlock
-pthread_spin_unlock
-pthread_barrier_t
-	__barrier
-pthread_barrierattr_t
-__count
-0knifunptr_platform_posix590_pthread_barrier_init
-pthread_barrier_init
-3knifunptr_platform_posix591_pthread_barrier_destroy
-pthread_barrier_destroy
-0knifunptr_platform_posix592_pthread_barrier_wait
-pthread_barrier_wait
-4knifunptr_platform_posix593_pthread_barrierattr_init
-pthread_barrierattr_init
-7knifunptr_platform_posix594_pthread_barrierattr_destroy
-pthread_barrierattr_destroy
-:knifunptr_platform_posix595_pthread_barrierattr_getpshared
-pthread_barrierattr_getpshared
-:knifunptr_platform_posix596_pthread_barrierattr_setpshared
-pthread_barrierattr_setpshared
-pthread_key_tVar
-__key
-	Function1
-__destr_function
-.knifunptr_platform_posix597_pthread_key_create
-pthread_key_create
-pthread_key_t
-.knifunptr_platform_posix598_pthread_key_delete
-pthread_key_delete
-/knifunptr_platform_posix599_pthread_getspecific
-pthread_getspecific
-	__pointer
-/knifunptr_platform_posix600_pthread_setspecific
-pthread_setspecific
-__thread_id
-1knifunptr_platform_posix601_pthread_getcpuclockid
-pthread_getcpuclockid
-	__prepare
-__parent
-__child
-*knifunptr_platform_posix602_pthread_atfork
-pthread_atfork
-$knifunptr_platform_posix603_setpwent
-setpwent
-$knifunptr_platform_posix604_endpwent
-endpwent
-passwd
-$knifunptr_platform_posix605_getpwent
-getpwent
-__uid_t
-__uid
-$knifunptr_platform_posix606_getpwuid
-getpwuid
-String
-CString
-__name
-$knifunptr_platform_posix607_getpwnam
-getpwnam
-__resultbuf
-	ByteVarOf
-Byte
-ByteVar
-__buffer
-__buflen
-CPointerVar
-__result
-&knifunptr_platform_posix608_getpwent_r
-
-getpwent_r
-&knifunptr_platform_posix609_getpwuid_r
-
-getpwuid_r
-&knifunptr_platform_posix610_getpwnam_r
-
-getpwnam_r
-re_pattern_buffer
-regex_t
-__preg
-	__pattern
-__cflags
-#knifunptr_platform_posix611_regcomp
-regcomp
-__string
-__nmatch
-
-regmatch_t
-__pmatch
-__eflags
-#knifunptr_platform_posix612_regexec
-regexec
-	__errcode
-__errbuf
-__errbuf_size
-$knifunptr_platform_posix613_regerror
-regerror
-#knifunptr_platform_posix614_regfree
-regfree
-_IO_FILE
-arg0
-'knifunptr_platform_posix615___underflow
-__underflow
-#knifunptr_platform_posix616___uflow
-__uflow
-arg1
-&knifunptr_platform_posix617___overflow
-
-__overflow
-__fp
-$knifunptr_platform_posix618__IO_getc
-_IO_getc
-__c
-$knifunptr_platform_posix619__IO_putc
-_IO_putc
-$knifunptr_platform_posix620__IO_feof
-_IO_feof
-&knifunptr_platform_posix621__IO_ferror
-
-_IO_ferror
-,knifunptr_platform_posix622__IO_peekc_locked
-_IO_peekc_locked
-)knifunptr_platform_posix623__IO_flockfile
-_IO_flockfile
-+knifunptr_platform_posix624__IO_funlockfile
-_IO_funlockfile
-
-Deprecated
-message
-!Unable to import this declaration
-replaceWith
-ReplaceWith
-imports
-
-expression
- 
-level
-DeprecationLevel
-ERROR
-_IO_ftrylockfile
-CValue
-	__va_list
-__gnuc_va_list
-arg2
-arg3
-_IO_vfscanf
-_IO_vfprintf
-	__ssize_t
-$knifunptr_platform_posix628__IO_padn
-_IO_padn
-%knifunptr_platform_posix629__IO_sgetn
-	_IO_sgetn
-Long
-	__off64_t
-'knifunptr_platform_posix630__IO_seekoff
-_IO_seekoff
-'knifunptr_platform_posix631__IO_seekpos
-_IO_seekpos
-0knifunptr_platform_posix632__IO_free_backup_area
-_IO_free_backup_area
-
-__filename
-"knifunptr_platform_posix633_remove
-remove
-__old
-__new
-"knifunptr_platform_posix634_rename
-rename
-FILE
-#knifunptr_platform_posix635_tmpfile
-tmpfile
-__s
-"knifunptr_platform_posix636_tmpnam
-tmpnam
-$knifunptr_platform_posix637_tmpnam_r
-tmpnam_r
-__dir
-__pfx
-#knifunptr_platform_posix638_tempnam
-tempnam
-__stream
-"knifunptr_platform_posix639_fclose
-fclose†
- 
- 
- 
-
-
- 
- 
-	
-
- 
-
-	 
- 
- 
-! 
-" 
-# 
-$ 
-% 
-+ 
-, 
-- 
-1 
-8 
-F 
-H 
-I 
-J 
-[ 
-_ 
-d 
-f 
-p 
-ö 
-ú 
-º 
-æ 
-‘ 
-ÿ 
-€ 
-Á 
-È 
-˘ 
-˚ 
-ˇ 
-ì 
-ñ 
-ö 
-
-õ 
-† 
-° 
-¢ 
-• 
-≠ 
-Æ 
-∂ 
-¬ 
-€ 
-ﬂ 
-‰ 
-Á 
-Ë 
-È 
-Ó 
-Û 
-Ù 
-Ç Œ<802
-002
-00Há “
-
-(B02
-00200j`0Há “
-
-(002
-0020Há “
-
-(B02
-00200j`0Há “
-
-(002
-0020Há “
-
-(B02
-00200j`0Há “
-
-(0 02
-0020Há “
-
-(N(02
-002$& 00j`0j`0Há “
-
-('6*02
-002&0Há “
-
-()B002
-002.00j`0Há “
-
-(/4302
-002
-.0j`Há “
-
-(2h502
-002$& 00j`0j`02.00j`0Há “
-
-(4B702
-002&02
-.0j`Há “
-
-(6<;02
-90j`202
-00Há “
-
-(:N=02
-90j`200j`02
-00Há “
-
-(<,@02
-90j`2>0Há “
-
-(?B0Há “
-
-(A E02C0Há “
-
-(DNM02G00j`02K
-0000Há “
-
-(L:Q02N02O00j`0Há “
-
-(P:U02R02S00j`0Há “
-
-(T$X02
-V0j`Há “
-
-(WZ0Há “
-
-(Y(^02\
-00Há “
-
-(]0c02`
-002a0Há “
-
-(b8i02e
-002g
-00Há “
-
-(h(k02e
-00Há “
-
-(j(m02e
-00Há “
-
-(l(o02e
-00Há “
-
-(n8s02e
-002q
-00Há “
-
-(r(u02e
-00Há “
-
-(tBx02e
-002v00j`0Há “
-
-(wJ{02e
-002v02y00j`0Há “
-
-(z(}02e
-00Há “
-
-(|(02
-00Há “
-
-(~*Å02
-00Há “
-
-	(ÄEÑ02
-002Ç00j`0Há “
-
-	(É3Ü02
-002Ç0Há “
-
-	(ÖEâ02
-002á00j`0Há “
-
-	(à3ã02
-002á0Há “
-
-	(äEé02
-002å00j`0Há “
-
-	(ç3ê02
-002å0Há “
-
-	(èDí02
-002v00j`0Há “
-
-	(ë2î02
-002v0Há “
-
-	(ìEó02
-002ï00j`0Há “
-
-	(ñ3ô02
-002ï0Há “
-
-	(ò;û02õ
-0 02
-0!0Há “
-
-	(ù+†02õ
-0 0Há “
-
-	(ü+¢02õ
-0 0Há “
-
-	(°+§02õ
-0 0Há “
-
-	(£;¶02õ
-0 02q
-00Há “
-
-	(•+®02õ
-0 0Há “
-
-	(ß+™02õ
-0 0Há “
-
-	(©;¨02õ
-0 02q
-00Há “
-
-	(´+Æ02õ
-0 0Há “
-
-	(≠*∞02
-0!0Há “
-
-	(Ø*≤02
-0!0Há “
-
-	(±E¥02
-0!02Ç00j`0Há “
-
-	(≥3∂02
-0!02Ç0Há “
-
-	(µEπ02
-0!02∑00j`0Há “
-
-	(∏3ª02
-0!02∑0Há “
-
-	(∫<¡02Ω
-0"02ø
-0#0Há “
-
-	(¿+√02Ω
-0"0Há “
-
-	(¬+≈02Ω
-0"0Há “
-
-	(ƒ+«02Ω
-0"0Há “
-
-	(∆;…02Ω
-0"02e
-00Há “
-
-	(»KÀ02Ω
-0"02e
-002q
-00Há “
-
-	( *Õ02
-0#0Há “
-
-	(Ã*œ02
-0#0Há “
-
-	(ŒE—02
-0#02Ç00j`0Há “
-
-	(–3”02
-0#02Ç0Há “
-
-	(“E◊02
-0#02’00j`$0Há “
-
-	(÷7⁄02
-0#02’0j`%Há “
-
-	(Ÿ>ﬁ02‹00j`&02Ç0Há “
-
-	(›5‡02‹00j`&0Há “
-
-	(ﬂ5‚02‹00j`&0Há “
-
-	(·5‰02‹00j`&0Há “
-
-	(„5Ê02‹00j`&0Há “
-
-	(ÂDÏ02Ë
-0'02
-0(02Í0Há “
-
-	(Î+Ó02Ë
-0'0Há “
-
-	(Ì+02Ë
-0'0Há “
-
-	(Ô*Ú02
-0(0Há “
-
-	(Ò*Ù02
-0(0Há “
-
-	(ÛEˆ02
-0(02Ç00j`0Há “
-
-	(ı3¯02
-0(02Ç0Há “
-
-	(˜h˛02˙00j`)021¸,&$ 00j`00*00Há “
-
-	(˝'Å02˙0j`+Há “
-
-	(Ä7É00j`2˙0j`+Há “
-
-	(Ç6Ü02˙0j`+2Ñ0Há “
-
-	(ÖBâ02á0j`2’00j`$0Há “
-
-	(àqé02ä
-00002ã
-00002å
-0000Há “
-
-	(çê0Há “
-
-	(èí0Há “
-
-	(ë"ï
-0,0Há “
-
-	(î/ô
-0,02ó0j`-Há “
-
-	(ò4û
-0,02ú0.“
-/Há “
-
-	(ùz®02ü
-0,02£0100j`202§0j`2%¶ 
-0,00j0,`30Há “
-
-	(ßá™02ó0j`-2ü
-0,02£0100j`202§0j`2%¶ 
-0,00j0,`30Há “
-
-	(©å¨02ú0.“
-/2ü
-0,02£0100j`202§0j`2%¶ 
-0,00j0,`30Há “
-
-	(´J≥02Ø04j`502∞0.“
-/2±0Há “
-
-	(≤h∫02Ø04j`502¥0.“
-/2µ0j`2∑
-0602∏0Há “
-
-	(πdø0j`2ª02Ø04j`502º0100j`202Ω0j`Há “
-
-	(æ/¡02Ø04j`50Há “
-
-	(¿,≈02√
-070Há†“
-
-	(ƒ,«02√
-070Há†“
-
-	(∆5 02√
-0702»0Há†“
-
-	(…+Õ02À
-070Há “
-
-	(Ã4–02Œ02À
-070Há “
-
-	(œ+“02À
-070Há “
-
-	(—+‘02À
-070Há “
-
-	(”+÷02À
-070Há “
-
-	(’,ÿ02√
-070Há†“
-
-	(◊,⁄02√
-070Há†“
-
-	(Ÿ]Ê02√
-070HáÄ“
->8
-‹(› ﬁB9‡
-·(‚„
-0:8ÂùÏ02√
-0702»0.“
-/2Í0<j`=0;2Î00j`0HáÄ“
->8
-‹(› ﬁB9‡
-·(‚„
-0:8ÂÇÌ02√
-0702»0.“
-/2Í0<j`=0;HáÄ“
->8
-‹(› ﬁB9‡
-·(‚„
-0:8ÂF0j`>2√
-0702»02Í0j`>Há†“
-
-	(ÔLÚ0j`2√
-0702»02Í0j`Há†“
-
-	(ÒOˆ0?j`@2√
-0702»0?j`@2Í02Î0Há†“
-
-	(ıF¯0?j`@2√
-0702»0?j`@2Í0Há†“
-
-	(˜,˙02√
-070Há†“
-
-	(˘,˝02˚0.“
-/Há “
-
-	(¸>Å02˛0.“
-/2ˇ0.“
-/Há “
-
-	(Ä&Ñ07j`A0Há “
-
-	(ÉGá0100j`202Ö0100j`20Há “
-
-	(ÜGâ0100j`202Ö0100j`20Há “
-
-	(àPç0100j`202ä0.“
-/2ã0.“
-/Há “
-
-	(å/ê02é07j`A0Há “
-
-	(èÿ
-‡
- Í
-platform.posix

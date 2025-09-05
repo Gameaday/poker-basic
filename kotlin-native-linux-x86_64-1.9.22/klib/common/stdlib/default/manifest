@@ -1,7 +1,0 @@
-builtins_platform=NATIVE
-unique_name=stdlib
-compiler_version=1.9.22
-abi_version=1.8.0
-ir_signature_versions=1,2
-native_targets=mingw_x86 mingw_x64 android_x86 android_x64 linux_mips32 linux_arm32_hfp linux_mipsel32 linux_x64 wasm32 android_arm64 linux_arm64 android_arm32
-metadata_version=1.4.1

@@ -35,10 +35,10 @@ data class PersonalityTraits(
 
     companion object {
         /**
-         * Creates personality traits from a Personality enum.
+         * Creates personality traits from an AIPersonality enum.
          * This maps the personality's generalized traits to the trait system.
          */
-        fun fromPersonality(personality: Personality): PersonalityTraits {
+        fun fromPersonality(personality: AIPersonality): PersonalityTraits {
             return PersonalityTraits(
                 bravery = personality.courage,
                 tenacity = (personality.confidence + (10.0f - personality.timidness)) / 2.0f,

@@ -4,6 +4,7 @@ import com.pokermon.*
 import com.pokermon.players.Player
 import com.pokermon.database.MonsterDatabase
 import com.pokermon.HandEvaluator
+import com.pokermon.modes.Achievement
 
 /**
  * Classic mode implementation - Traditional 5-card draw poker with monster companions.
@@ -126,13 +127,22 @@ class ClassicGameMode {
             if (handResult.player == player) {
                 when (handResult.evaluation.handType) {
                     HandEvaluator.HandType.ROYAL_FLUSH -> {
-                        achievements.add(Achievement.ROYAL_VICTORY)
+                        achievements.add(Achievement.ROYAL_FLUSH)
                     }
                     HandEvaluator.HandType.STRAIGHT_FLUSH -> {
-                        achievements.add(Achievement.STRAIGHT_FLUSH_MASTER)
+                        achievements.add(Achievement.STRAIGHT_FLUSH)
                     }
                     HandEvaluator.HandType.FOUR_OF_A_KIND -> {
-                        achievements.add(Achievement.QUAD_KING)
+                        achievements.add(Achievement.FOUR_OF_A_KIND)
+                    }
+                    HandEvaluator.HandType.HIGH_CARD,
+                    HandEvaluator.HandType.ONE_PAIR,
+                    HandEvaluator.HandType.TWO_PAIR,
+                    HandEvaluator.HandType.THREE_OF_A_KIND,
+                    HandEvaluator.HandType.STRAIGHT,
+                    HandEvaluator.HandType.FLUSH,
+                    HandEvaluator.HandType.FULL_HOUSE -> {
+                        // No special achievements for these hand types
                     }
                 }
             }

@@ -13,10 +13,11 @@ import com.pokermon.database.Monster
  * @author Carl Nelson (@Gameaday)
  * @version 1.0.0
  */
-data class Player(
+open class Player(
     var name: String = "",
     var chips: Int = 0,
     var isHuman: Boolean = false,
+    var isAI: Boolean = false,
     private var _fold: Boolean = false,
     private var _lastBet: Int = 0,
     private var _bet: Int = 0,

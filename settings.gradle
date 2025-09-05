@@ -17,12 +17,12 @@ dependencyResolutionManagement {
 // Pokermon - Pure Kotlin-Native Cross-Platform Project
 rootProject.name = "Pokermon"
 
+// Include shared Kotlin-native module
+include ':shared'
+project(':shared').projectDir = new File('shared')
+
 // Include Android module
 include ':android'
-
-// Include shared Kotlin-native module (source from Poker-Basic)
-include ':shared'
-project(':shared').projectDir = new File('Poker-Basic')
 
 // Include desktop module for native executable generation  
 include ':desktop'

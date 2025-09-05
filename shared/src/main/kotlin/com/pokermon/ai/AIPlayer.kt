@@ -31,7 +31,7 @@ class AIPlayer(
         val handStrength = evaluateHandStrength()
         val gameContext = GameContext(currentBet, pot, gamePhase, opponents.size)
         
-        return decisionMaker.decideBettingAction(hand, handStrength, gameContext)
+        return decisionMaker.decideBettingAction(hand.toList(), handStrength, gameContext)
     }
     
     /**
@@ -39,7 +39,7 @@ class AIPlayer(
      */
     fun makeExchangeDecision(): List<Int> {
         val handStrength = evaluateHandStrength()
-        return decisionMaker.decideCardExchange(hand, handStrength)
+        return decisionMaker.decideCardExchange(hand.toList(), handStrength)
     }
     
     /**

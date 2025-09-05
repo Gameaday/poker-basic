@@ -2,6 +2,8 @@ package com.pokermon.bridge
 
 import com.pokermon.*
 import com.pokermon.modern.CardUtils
+import com.pokermon.players.Player
+import com.pokermon.database.CardPackManager
 
 /**
  * Data class to track AI player actions for UI feedback.
@@ -223,12 +225,12 @@ class GameLogicBridge {
     /**
      * Process a single AI player's action using simple poker AI logic.
      */
-    private fun processAIPlayerAction(engine: com.pokermon.GameEngine, player: com.pokermon.Player, playerIndex: Int) {
+    private fun processAIPlayerAction(engine: com.pokermon.GameEngine, player: Player, playerIndex: Int) {
         try {
-            val highBet = engine.getCurrentHighBet()
-            val playerBet = player.bet
-            val playerChips = player.chips
-            val callAmount = (highBet - playerBet).coerceAtMost(playerChips)
+            val highBet: Int = engine.getCurrentHighBet()
+            val playerBet: Int = player.bet
+            val playerChips: Int = player.chips
+            val callAmount: Int = (highBet - playerBet).coerceAtMost(playerChips)
             val playerName = player.name ?: "AI $playerIndex"
             
             // Simple AI decision making based on hand strength and chips

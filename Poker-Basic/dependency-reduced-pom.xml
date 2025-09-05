@@ -115,6 +115,10 @@
         </executions>
         <configuration>
           <jvmTarget>17</jvmTarget>
+          <args>
+            <arg>-Xjvm-default=all</arg>
+            <arg>-Xjsr305=strict</arg>
+          </args>
         </configuration>
       </plugin>
       <plugin>
@@ -394,15 +398,16 @@
     </dependency>
   </dependencies>
   <properties>
-    <kotlin.version>1.9.10</kotlin.version>
-    <compose.version>1.5.4</compose.version>
-    <maven.compiler.source>17</maven.compiler.source>
-    <git.commit.count>0</git.commit.count>
-    <maven.compiler.target>17</maven.compiler.target>
+    <kotlin.version>1.9.22</kotlin.version>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
     <maven.failsafe.version>3.2.5</maven.failsafe.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit.version>5.13.4</junit.version>
     <maven.surefire.version>3.2.5</maven.surefire.version>
+    <kotlinx.coroutines.version>1.7.3</kotlinx.coroutines.version>
+    <compose.version>1.5.4</compose.version>
+    <maven.compiler.source>17</maven.compiler.source>
+    <git.commit.count>0</git.commit.count>
+    <maven.compiler.target>17</maven.compiler.target>
   </properties>
 </project>

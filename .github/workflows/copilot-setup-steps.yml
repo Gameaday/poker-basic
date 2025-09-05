@@ -44,7 +44,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gradle-
     
-    - name: Install dependencies and compile Java project
+    - name: Install dependencies and compile Kotlin-native project
       timeout-minutes: 5
       run: |
         cd Poker-Basic
@@ -67,7 +67,7 @@ jobs:
     - name: Validate setup and build JAR (APK requires network access)
       timeout-minutes: 10
       run: |
-        echo "=== Testing Java/Maven Build ==="
+        echo "=== Testing Kotlin-Native/Maven Build ==="
         cd Poker-Basic
         
         # First, ensure basic compilation and packaging works
@@ -91,8 +91,8 @@ jobs:
         cd ..
         
         echo ""
-        echo "=== Final Dual Platform Status ==="
-        echo "✅ Java/Maven build: Complete and functional ($TEST_COUNT tests available)"
+        echo "=== Final Kotlin-Native Cross-Platform Status ==="
+        echo "✅ Kotlin-Native/Maven build: Complete and functional ($TEST_COUNT tests available)"
         echo "✅ Android/Gradle infrastructure: Configured and ready"
         echo ""
         echo "Build Commands Available:"
@@ -100,4 +100,4 @@ jobs:
         echo "  APK Build:  ./gradlew assembleDebug (requires internet access)"
         echo ""
         echo "✅ GitHub Copilot setup completed successfully"
-        echo "Ready for dual platform development with both JAR and APK support"
+        echo "Ready for Kotlin-native cross-platform development with both JAR and APK support"

@@ -33,15 +33,15 @@ This project follows DRY principles to create single authoritative sources of tr
 **Guidelines are Iterative**: These principles can be broken when there is valuable reason, but should be the default approach for new development.
 
 ### Core Kotlin-Native Benefits
-- **Native Android compatibility** with Kotlin-first design
-- **Unified codebase** eliminating Java-Kotlin compilation conflicts  
+- **Native Android compatibility** with Kotlin-native design
+- **Unified codebase** with pure Kotlin implementation  
 - **Modern null safety** with Kotlin's type system
 - **Coroutines support** for async programming and reactive patterns
 - **Data classes** for immutable game state management
 - **Sealed classes** for type-safe game phases and modes
 
 ### Architectural Principles
-- **Kotlin classes are primary** - Java classes exist only for legacy compatibility during migration
+- **Pure Kotlin-native classes** throughout the entire codebase
 - **Bridge pattern** provides unified API for all platforms through `GameLogicBridge.kt`
 - **Rich enum classes** with extension functions (GameMode.kt, GamePhase.kt)
 - **Type safety first** with null-safe operators and smart casts
@@ -150,7 +150,7 @@ poker-basic/
 - `com.pokermon.modern.*` - **Modern utilities** with Kotlin-specific enhancements
 
 ### Test Organization (Comprehensive Coverage)
-Tests are organized in `src/test/kotlin/` and `src/test/java/` for comprehensive validation:
+Tests are organized in `src/test/kotlin/` for comprehensive validation:
 - **Core game tests**: Basic functionality validation
 - **Bridge tests**: Cross-platform API validation  
 - **AI tests**: Personality and behavior testing
@@ -234,15 +234,15 @@ enum class GameMode(val displayName: String, val isMultiplayer: Boolean) {
 
 ## Network and Environment Limitations
 
-### Works Offline (After Initial Maven Dependencies)
-- Maven compilation, testing, and packaging
+### Works Offline (After Initial Gradle Dependencies)
+- Gradle compilation, testing, and packaging
 - JAR execution (console and GUI modes)
 - Validation scripts
 - All documentation and code analysis
 
 ### Requires Internet Access
 - **Android builds**: Downloads Android SDK and dependencies
-- **Initial Maven setup**: First-time dependency downloads
+- **Initial Gradle setup**: First-time dependency downloads
 - **CI/CD**: Full functionality requires network access
 
 ### Sandbox Environment Behavior

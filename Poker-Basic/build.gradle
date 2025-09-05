@@ -10,7 +10,7 @@ plugins {
 
 // Application configuration
 application {
-    mainClass = 'com.pokermon.GameLauncherKt'
+    mainClass = 'com.pokermon.GameLauncher'
 }
 
 // Java compatibility
@@ -104,7 +104,7 @@ task fatJar(type: Jar) {
         attributes(
             'Implementation-Title': 'Pokermon Kotlin-Native',
             'Implementation-Version': project.version,
-            'Main-Class': 'com.pokermon.GameLauncherKt',
+            'Main-Class': 'com.pokermon.GameLauncher',
             'Built-By': System.getProperty('user.name'),
             'Built-Date': new Date().toString(),
             'Kotlin-Version': findProperty('kotlin.version') ?: '1.9.22'

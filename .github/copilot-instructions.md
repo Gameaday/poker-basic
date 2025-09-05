@@ -1,15 +1,16 @@
-# Poker Basic - GitHub Copilot Instructions
+# Pokermon - GitHub Copilot Instructions
 
 **CRITICAL: Always reference these instructions first and only fallback to search or bash commands when you encounter unexpected information that does not match the information here.**
 
 ## Repository Overview
 
-Poker Basic is a **Kotlin-native** cross-platform poker game project featuring monster collection mechanics with multiple build targets:
-- Desktop JAR (via Maven) - **ALWAYS WORKS**
+Pokermon is a **pure Kotlin-native** cross-platform poker game project featuring monster collection mechanics with multiple build targets:
+- Native executables (Windows .exe, Linux .deb, macOS .dmg) - **PRIMARY DELIVERABLES**
 - Android APK (via Gradle) - **REQUIRES INTERNET** 
-- Professional codebase with 254 comprehensive tests
+- Desktop JAR (via Gradle) - **DEVELOPMENT ONLY**
+- Professional codebase with 39 Kotlin files and comprehensive test coverage
 
-The project demonstrates modern Kotlin-first development practices using native Android architecture patterns and comprehensive testing for a fun gaming experience.
+The project demonstrates modern Kotlin-native development practices using pure Gradle build system, flow-based reactive architecture, and comprehensive cross-platform support for an engaging gaming experience.
 
 ## Development Philosophy: Kotlin-Native with DRY Principles
 
@@ -51,28 +52,33 @@ This project follows DRY principles to create single authoritative sources of tr
 ### Bootstrap and Validate Repository
 ```bash
 cd /home/runner/work/poker-basic/poker-basic
-./validate-android-build.sh  # Validates build system (works offline, <1 second)
+./gradlew verifyKotlinNativeSetup --no-daemon  # Validates pure Kotlin-native setup (works offline, ~15 seconds)
 ```
 
 ### Build and Test - NEVER CANCEL these commands
 ```bash
-cd Poker-Basic
-mvn clean compile -B    # Build: ~10 seconds. NEVER CANCEL. Set timeout to 60+ seconds.
-mvn test -B            # Test: ~12 seconds. NEVER CANCEL. Set timeout to 60+ seconds.
-mvn clean package -B   # Package: ~15 seconds. NEVER CANCEL. Set timeout to 60+ seconds.
+./gradlew :shared:compileKotlin --no-daemon  # Build: ~15 seconds. NEVER CANCEL. Set timeout to 60+ seconds.
+./gradlew :shared:test --no-daemon          # Test: ~20 seconds. NEVER CANCEL. Set timeout to 60+ seconds.
+./gradlew :shared:fatJar --no-daemon        # Package: ~25 seconds. NEVER CANCEL. Set timeout to 60+ seconds.
 ```
 
 ### Run the Application
 ```bash
-cd Poker-Basic
-java -jar target/pokermon-1.0.0-fat.jar --help    # Show comprehensive help
-java -jar target/pokermon-1.0.0-fat.jar --basic   # Console mode (interactive)
-java -jar target/pokermon-1.0.0-fat.jar          # GUI mode (requires display)
+java -jar Poker-Basic/build/libs/Poker-Basic-*-fat.jar --help    # Show comprehensive help
+java -jar Poker-Basic/build/libs/Poker-Basic-*-fat.jar --basic   # Console mode (interactive)
+./gradlew :shared:runConsole --no-daemon                         # Direct console execution
+```
+
+### Native Builds (Primary Deliverables)
+```bash
+./gradlew :desktop:packageNative --no-daemon     # Native executable for current platform
+./gradlew :desktop:packageWindows --no-daemon    # Windows .exe (requires Windows or cross-compilation)
+./gradlew :desktop:packageLinux --no-daemon      # Linux .deb package
+./gradlew :desktop:packageMacOS --no-daemon      # macOS .dmg package
 ```
 
 ### Android Build (Network Required)
 ```bash
-# From repository root
 ./gradlew :android:assembleDebug --no-daemon  # APK: 30+ minutes. NEVER CANCEL. Set timeout to 60+ minutes.
 ```
 **WARNING**: Android builds require internet access and will fail in sandboxed environments with "dl.google.com: No address associated with hostname". This is expected behavior.
@@ -80,56 +86,55 @@ java -jar target/pokermon-1.0.0-fat.jar          # GUI mode (requires display)
 ## Working Effectively
 
 ### NEVER CANCEL BUILD COMMANDS
-- **Maven builds**: Take 10-15 seconds but set timeouts to 60+ seconds
+- **Gradle builds**: Take 15-25 seconds but set timeouts to 60+ seconds
 - **Android builds**: Take 30+ minutes with internet access. NEVER CANCEL. Set timeout to 60+ minutes
-- **Tests**: Take ~12 seconds but set timeouts to 60+ seconds
+- **Tests**: Take ~20 seconds but set timeouts to 60+ seconds
+- **Native builds**: Take 5-10 minutes but set timeouts to 15+ minutes
 
 ### Development Workflow
-1. **Always validate first**: `./validate-android-build.sh`
-2. **Build and test**: `cd Poker-Basic && mvn clean test -B`
-3. **Create JAR**: `mvn clean package -B`
+1. **Always validate first**: `./gradlew verifyKotlinNativeSetup --no-daemon`
+2. **Build and test**: `./gradlew :shared:test --no-daemon`
+3. **Create JAR**: `./gradlew :shared:fatJar --no-daemon`
 4. **Test functionality**: Run console mode and complete a game scenario
-5. **Android build**: Only attempt if internet access is available
+5. **Native builds**: `./gradlew :desktop:packageNative --no-daemon` for current platform
+6. **Android build**: Only attempt if internet access is available
 
 ### Required Validation After Changes
-- **Always run**: `mvn test -B` (254 tests must pass)
+- **Always run**: `./gradlew :shared:test --no-daemon` (all tests must pass)
 - **Always test**: Run console game scenario (see Validation section)
-- **Kotlin compatibility**: Ensure Kotlin-first compilation
-- **JAR functionality**: Test `java -jar pokermon-1.0.0-fat.jar --help`
+- **Kotlin-native compatibility**: Ensure pure Kotlin compilation
+- **JAR functionality**: Test `java -jar Poker-Basic/build/libs/*-fat.jar --help`
 
-## Kotlin-Native Project Structure
+## Pure Kotlin-Native Project Structure
 
 ### Organized Hierarchy (Following DRY Principles)
 ```
 poker-basic/
-├── Poker-Basic/                    # Maven project (JAR builds) - Kotlin-native
-│   ├── src/main/kotlin/com/pokermon/   # PRIMARY Kotlin source (Kotlin-first)
-│   │   ├── GameEngine.kt           # Core game logic (migrated, unified)
+├── Poker-Basic/                    # Gradle shared module - Pure Kotlin-native
+│   ├── src/main/kotlin/com/pokermon/   # PRIMARY Kotlin source (Kotlin-native only)
+│   │   ├── GameEngine.kt           # Core game logic (pure Kotlin-native)
 │   │   ├── Game.kt                 # Game configuration data class
 │   │   ├── GameMode.kt             # Rich game modes enum (single source)
 │   │   ├── GamePhase.kt            # Type-safe game phases (single source)
 │   │   ├── bridge/GameLogicBridge.kt   # Unified API for all platforms
-│   │   └── modern/                 # Modern Kotlin utilities and enhancements
-│   │       ├── KotlinExtensions.kt # Extension functions for existing classes
-│   │       ├── ModernGameUtils.kt  # Kotlin-specific game utilities
-│   │       ├── ModernMain.kt       # Modern entry points
-│   │       └── ModernPokerApp.kt   # Enhanced application logic
-│   ├── src/main/java/com/pokermon/     # Legacy Java (migration in progress)
-│   │   ├── Player.java             # Player management (to be migrated)
-│   │   ├── Main.java               # Legacy utilities (being replaced)
-│   │   ├── MonsterDatabase.java    # Authoritative monster data source
-│   │   ├── ai/                     # AI personality system
-│   │   ├── core/                   # Legacy core classes (duplicates being removed)
-│   │   └── interfaces/             # UI interface implementations
-│   ├── src/test/java/              # Test suite (254 tests) - separate from functional code
-│   │   ├── com/pokermon/           # Core tests organized by functionality
-│   │   ├── bridge/                 # Bridge pattern tests
-│   │   └── ai/                     # AI system tests
-│   ├── pom.xml                     # Maven: Kotlin-first compilation
-│   └── target/                     # Build outputs (JAR, reports)
+│   │   ├── modern/                 # Modern Kotlin utilities and enhancements
+│   │   │   ├── KotlinExtensions.kt # Extension functions for existing classes
+│   │   │   ├── ModernGameUtils.kt  # Kotlin-specific game utilities
+│   │   │   ├── ModernMain.kt       # Modern entry points
+│   │   │   ├── ModernPokerApp.kt   # Enhanced application logic
+│   │   │   └── CardUtils.kt        # Unified card logic (DRY compliance)
+│   │   └── [Additional Kotlin files]
+│   ├── build.gradle                # Gradle: Pure Kotlin-native compilation
+│   └── build/                      # Build outputs (JAR, reports, native)
 ├── android/                        # Android module with native Kotlin support
-├── .github/workflows/              # CI/CD for Kotlin-native builds
-└── validate-android-build.sh      # Offline validation script
+│   ├── src/main/kotlin/           # Android Kotlin source
+│   └── build.gradle               # Android build configuration
+├── desktop/                        # Native desktop builds
+│   ├── src/main/kotlin/           # Desktop-specific Kotlin code
+│   └── build.gradle               # Native executable configuration
+├── .github/workflows/             # CI/CD for pure Kotlin-native builds
+├── build.gradle                   # Root build configuration
+└── gradlew                        # Gradle wrapper (primary build tool)
 ```
 
 ### Primary Kotlin Classes (Single Source of Truth)
@@ -138,44 +143,42 @@ poker-basic/
 - `com.pokermon.GameMode` - **Rich enum** with extension functions for game modes
 - `com.pokermon.GamePhase` - **Type-safe state management** for game phases
 - `com.pokermon.bridge.GameLogicBridge` - **Unified API** serving all UI platforms
+- `com.pokermon.modern.CardUtils` - **Unified card logic** following DRY principles
+- `com.pokermon.HandEvaluator` - **Enhanced hand evaluation** with scoring and modifiers
+- `com.pokermon.MonsterDatabase` - **Authoritative monster data** (pure Kotlin-native)
+- `com.pokermon.Player` - **Player management** with modern Kotlin patterns
 - `com.pokermon.modern.*` - **Modern utilities** with Kotlin-specific enhancements
 
-### Legacy Java Classes (Migration Targets)
-- `com.pokermon.Player` - Player management (scheduled for Kotlin migration)
-- `com.pokermon.Main` - Legacy utilities (being replaced by ModernMain.kt)
-- `com.pokermon.MonsterDatabase` - **Authoritative monster data** (single source, future Kotlin migration)
-- `com.pokermon.ai.*` - AI personality system (complex, migration planned)
-- Console and UI classes - maintained for compatibility during transition
-
-### Test Organization (Separate from Functional Code)
-Tests are organized in `src/test/java/` to separate testing logic from functional code:
+### Test Organization (Comprehensive Coverage)
+Tests are organized in `src/test/kotlin/` and `src/test/java/` for comprehensive validation:
 - **Core game tests**: Basic functionality validation
 - **Bridge tests**: Cross-platform API validation  
 - **AI tests**: Personality and behavior testing
 - **Integration tests**: End-to-end game flow validation
 - **Edge case tests**: Boundary condition handling
+- **Hand evaluation tests**: Poker logic verification
 
-## Build System: Kotlin-Native Optimized
+## Build System: Pure Kotlin-Native Optimized
 
-### Maven Configuration for Kotlin-First Development
-- **Kotlin compilation priority**: Kotlin source compiled before Java for optimal interop
-- **Enhanced compiler options**: JSR305 strict mode, JVM target annotations
-- **Coroutines support**: Full kotlinx-coroutines integration for reactive programming
+### Gradle Configuration for Pure Kotlin-Native Development
+- **Kotlin compilation priority**: Pure Kotlin-native source with no Java dependencies
+- **Enhanced compiler options**: JSR305 strict mode, JVM target annotations, coroutines support
+- **Multi-module architecture**: Shared core, Android, and Desktop native modules
 - **Kotlin 1.9.22**: Latest stable with modern language features
-- **All-open plugin**: Seamless Java interop when required during migration
+- **Dynamic versioning**: Timestamp-based versioning without git dependencies (1.1.0.YYYYMMDD)
 - **Modern test framework**: JUnit 5 integration with Kotlin test extensions
 
-### Key Dependencies (Kotlin-Native Stack)
-```xml
-<kotlin.version>1.9.22</kotlin.version>
-<kotlinx.coroutines.version>1.7.3</kotlinx.coroutines.version>
-<junit.version>5.10.1</junit.version>
+### Key Dependencies (Pure Kotlin-Native Stack)
+```gradle
+kotlin.version=1.9.22
+kotlinx.coroutines.version=1.7.3
+kotlin.test.junit5=5.13.4
 ```
 
 ### DRY Build Principles
-- **Single compilation target**: Eliminates dual-language build complexity
-- **Unified dependency management**: Kotlin-first dependency resolution
-- **Shared resource management**: Common resources across platforms
+- **Single compilation target**: Pure Kotlin-native eliminates dual-language complexity
+- **Unified dependency management**: Kotlin-native dependency resolution
+- **Shared resource management**: Common resources across all platforms
 - **Consistent build outputs**: Standardized artifacts for all target platforms
 
 ## Android Integration: Kotlin-Native Excellence

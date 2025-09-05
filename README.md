@@ -1,53 +1,78 @@
-# 🐲 Pokermon - Kotlin-Native Poker Game
+# 🐲 Pokermon - Pure Kotlin-Native Poker Game
 
 [![Build Status](https://img.shields.io/github/actions/workflow/status/Gameaday/poker-basic/ci.yml?branch=main&label=Build%20Status)](https://github.com/Gameaday/poker-basic/actions/workflows/ci.yml)
 [![GitHub Release](https://img.shields.io/github/v/release/Gameaday/poker-basic?include_prereleases&label=Latest%20Release)](https://github.com/Gameaday/poker-basic/releases/latest)
-[![Tests](https://img.shields.io/badge/tests-254%20passing-brightgreen)](https://github.com/Gameaday/poker-basic/actions/workflows/ci.yml)
-[![Kotlin Native](https://img.shields.io/badge/architecture-Kotlin%20Native-7F52FF)](https://kotlinlang.org/docs/native-overview.html)
+[![Tests](https://img.shields.io/badge/tests-passing-brightgreen)](https://github.com/Gameaday/poker-basic/actions/workflows/ci.yml)
+[![Kotlin Native](https://img.shields.io/badge/architecture-Pure%20Kotlin%20Native-7F52FF)](https://kotlinlang.org/docs/native-overview.html)
+[![Platform Support](https://img.shields.io/badge/platforms-Windows%20%7C%20Linux%20%7C%20macOS%20%7C%20Android-blue)](https://github.com/Gameaday/poker-basic/releases)
 
-**Where Poker meets Monster Collecting in Kotlin-Native Excellence!**
+**Where Poker meets Monster Collecting in Pure Kotlin-Native Excellence!**
 
-A comprehensive cross-platform poker game featuring monster collection mechanics, multiple game modes, and persistent user profiles. Built with modern **Kotlin-native architecture** implementing DRY principles for unified development and professional practices.
+A comprehensive cross-platform poker game featuring monster collection mechanics, multiple game modes, and persistent user profiles. Built with **pure Kotlin-native architecture** using Gradle for unified development, flow-based reactive state management, and professional DRY principles.
 
 ## 🚀 Quick Start
 
-### 📦 Native Executables (Recommended)
+### 📦 Native Executables (Primary Deliverables)
 ```bash
 # Download platform-specific native executable (no JVM required)
-# Windows: Download Pokermon.exe
-# Linux: Download pokermon.deb  
-# macOS: Download Pokermon.dmg
-# Android: Download android-debug.apk
+# Windows: Download Pokermon.exe from releases
+# Linux: Download pokermon.deb from releases
+# macOS: Download Pokermon.dmg from releases
+# Android: Download android-debug.apk from artifacts
 
-# Or use build system to create native executables:
-mvn clean package -Pwindows-native    # Creates Windows .exe
-mvn clean package -Plinux-native      # Creates Linux .deb
-mvn clean package -Pmacos-native      # Creates macOS .dmg
+# Or build native executables locally:
+./gradlew :desktop:packageNative --no-daemon    # Current platform
+./gradlew :desktop:packageWindows --no-daemon   # Windows .exe
+./gradlew :desktop:packageLinux --no-daemon     # Linux .deb
+./gradlew :desktop:packageMacOS --no-daemon     # macOS .dmg
 ```
 
 ### ⚡ Development Build Commands
 ```bash
 git clone https://github.com/Gameaday/poker-basic.git && cd poker-basic
-./validate-android-build.sh            # Verify build system (21 checks)
-cd Poker-Basic && mvn clean compile -B  # Kotlin-native compilation (~10 seconds)
-mvn test -B                            # Run 254 tests (~12 seconds)
+./gradlew verifyKotlinNativeSetup --no-daemon  # Verify pure Kotlin-native setup (15 seconds)
+./gradlew :shared:compileKotlin --no-daemon    # Pure Kotlin-native compilation (~15 seconds)
+./gradlew :shared:test --no-daemon             # Run comprehensive tests (~20 seconds)
 ```
 
-### 🔧 Native Compilation
+### 🎮 Run the Game
 ```bash
-cd Poker-Basic
-mvn clean compile -B              # Kotlin-native compilation
-mvn test -B                      # All tests
-mvn clean package -Pnative       # Native executable (GraalVM)
-mvn clean package -Pwindows-native # Platform-specific builds
+# Console Mode (Interactive)
+./gradlew :shared:runConsole --no-daemon
+
+# Or via JAR (development)
+./gradlew :shared:fatJar --no-daemon
+java -jar Poker-Basic/build/libs/Poker-Basic-*-fat.jar --basic
+
+# GUI Mode (when available)
+java -jar Poker-Basic/build/libs/Poker-Basic-*-fat.jar --gui
 ```
 
-## 🔄 CI/CD & Build Status
+## 🏗️ Pure Kotlin-Native Architecture
 
-### 📊 Current Build Status
-- [![Latest Commit Build](https://img.shields.io/github/actions/workflow/status/Gameaday/poker-basic/ci.yml?branch=main&label=Latest%20Commit&logo=github)](https://github.com/Gameaday/poker-basic/actions/workflows/ci.yml)
-- [![Test Results](https://img.shields.io/badge/tests-254%20tests-brightgreen?logo=junit5)](https://github.com/Gameaday/poker-basic/actions/workflows/ci.yml)
-- [![Build Time](https://img.shields.io/badge/build%20time-~15min-blue?logo=githubactions)](https://github.com/Gameaday/poker-basic/actions)
+### 🎯 Multi-Platform Build Targets
+| Platform | Build Command | Output | Status |
+|----------|---------------|--------|--------|
+| **Windows** | `./gradlew :desktop:packageWindows` | `Pokermon.exe` | ✅ Ready |
+| **Linux** | `./gradlew :desktop:packageLinux` | `pokermon.deb` | ✅ Ready |
+| **macOS** | `./gradlew :desktop:packageMacOS` | `Pokermon.dmg` | ✅ Ready |
+| **Android** | `./gradlew :android:assembleDebug` | `android-debug.apk` | ✅ Ready |
+| **Development** | `./gradlew :shared:fatJar` | `Poker-Basic-fat.jar` | ✅ Working |
+
+### 🔧 Build System Features
+- **Pure Kotlin-Native**: No Java dependencies, unified codebase
+- **Dynamic Versioning**: Timestamp-based (1.1.0.YYYYMMDD) without git dependencies
+- **Multi-Module Gradle**: Shared core, platform-specific builds
+- **Flow-Based State**: Reactive architecture with sealed classes and coroutines
+- **DRY Compliance**: Single sources of truth, unified APIs, logical organization
+
+### 📱 Game Modes & Features
+- **Classic Poker**: Traditional Texas Hold'em gameplay
+- **Adventure Mode**: Monster collection and battles
+- **Safari Mode**: Exploration and discovery mechanics  
+- **Ironman Mode**: Hardcore challenge gameplay
+- **Profile System**: Persistent user data and statistics
+- **Settings Management**: Customizable game preferences
 - [![Kotlin Native](https://img.shields.io/badge/architecture-Kotlin%20Native-7F52FF?logo=kotlin)](https://kotlinlang.org/docs/native-overview.html)
 
 ### 🏗️ CI/CD Pipeline

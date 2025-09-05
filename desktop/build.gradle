@@ -1,17 +1,17 @@
-// Pokermon Desktop - Native Executable Module
-// Pure Kotlin-native desktop application
+// Pokermon Desktop - Native Executable Builds
+// Creates platform-specific native executables
 
 plugins {
     id 'org.jetbrains.kotlin.jvm'
     id 'application'
 }
 
-// Application configuration
+// Application configuration for desktop
 application {
-    mainClass = 'com.pokermon.DesktopLauncherKt'
+    mainClass = 'com.pokermon.GameLauncher'
 }
 
-// Java compatibility for native builds
+// Java compatibility
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
@@ -26,65 +26,15 @@ kotlin {
 version = rootProject.version
 group = rootProject.group
 
-// Source configuration
-sourceSets {
-    main {
-        kotlin {
-            srcDirs 'src/main/kotlin'
-        }
-    }
-}
-
-// Dependencies
+// Dependencies - Use shared module
 dependencies {
-    // Use shared Kotlin-native core
     implementation project(':shared')
     
-    // Kotlin standard library
+    // Desktop-specific dependencies for native builds
     implementation "org.jetbrains.kotlin:kotlin-stdlib:${findProperty('kotlin.version') ?: '1.9.22'}"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${findProperty('kotlinx.coroutines.version') ?: '1.7.3'}"
     
-    // Desktop-specific dependencies (if needed)
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.7.3'
-}
-
-// Task to create native executable
-task createNativeExecutable(type: JavaExec) {
-    group = 'native'
-    description = 'Creates native executable for current platform'
-    dependsOn 'classes'
-    
-    mainClass = application.mainClass
-    classpath = sourceSets.main.runtimeClasspath
-    
-    doFirst {
-        println "Creating native executable for Pokermon..."
-        println "Main class: ${mainClass.get()}"
-        println "Version: ${project.version}"
-    }
-}
-
-// Task to run desktop application
-task runDesktop(type: JavaExec) {
-    group = 'application'
-    description = 'Run Pokermon desktop application'
-    
-    mainClass = application.mainClass
-    classpath = sourceSets.main.runtimeClasspath
-}
-
-// Distribution task for packaging
-distributions {
-    main {
-        distributionBaseName = 'pokermon-desktop'
-        contents {
-            from 'src/main/resources'
-            into('lib') {
-                from configurations.runtimeClasspath
-                from jar.outputs.files
-            }
-        }
-    }
+    // For future native compilation support
+    // implementation 'org.graalvm.nativeimage:svm:23.0.0' // Future: GraalVM Native Image
 }
 
 // Kotlin compilation options
@@ -98,19 +48,148 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
     }
 }
 
-// Information task
-task info {
-    group = 'help'
-    description = 'Display desktop module information'
+// Task to create Windows native executable (placeholder)
+task packagewindows {
+    group = 'native'
+    description = 'Package Windows native executable (.exe)'
     
     doLast {
-        println "=== Pokermon Desktop Module ==="
-        println "Version: ${project.version}"
-        println "Main class: ${application.mainClass.get()}"
-        println ""
-        println "Available tasks:"
-        println "  ./gradlew :desktop:runDesktop              - Run desktop app"
-        println "  ./gradlew :desktop:createNativeExecutable  - Create native executable"
-        println "  ./gradlew :desktop:installDist             - Create distribution"
+        println "=== Windows Native Build (Future Implementation) ==="
+        println "Currently creating enhanced JAR for Windows compatibility"
+        
+        // Ensure shared JAR is built first
+        if (!project(':shared').tasks.getByName('fatJar').state.executed) {
+            project(':shared').tasks.getByName('fatJar').execute()
+        }
+        
+        def buildDir = new File(project.buildDir, 'distributions')
+        buildDir.mkdirs()
+        
+        def sharedLibsDir = new File(project(':shared').buildDir, 'libs')
+        def sourceJar = sharedLibsDir.listFiles()
+            ?.find { it.name.endsWith('-fat.jar') }
+        
+        if (sourceJar && sourceJar.exists()) {
+            def targetFile = new File(buildDir, 'pokermon-windows.exe')
+            // Copy instead of rename to preserve original
+            targetFile.bytes = sourceJar.bytes
+            println "Windows executable placeholder created: ${targetFile.absolutePath}"
+        } else {
+            throw new GradleException("Could not find fat JAR in ${sharedLibsDir}")
+        }
     }
 }
+
+// Task to create Linux native executable (placeholder)  
+task packagelinux {
+    group = 'native'
+    description = 'Package Linux native executable (.deb)'
+    
+    doLast {
+        println "=== Linux Native Build (Future Implementation) ==="
+        println "Currently creating enhanced JAR for Linux compatibility"
+        
+        // Ensure shared JAR is built first
+        if (!project(':shared').tasks.getByName('fatJar').state.executed) {
+            project(':shared').tasks.getByName('fatJar').execute()
+        }
+        
+        def buildDir = new File(project.buildDir, 'distributions')
+        buildDir.mkdirs()
+        
+        def sharedLibsDir = new File(project(':shared').buildDir, 'libs')
+        def sourceJar = sharedLibsDir.listFiles()
+            ?.find { it.name.endsWith('-fat.jar') }
+        
+        if (sourceJar && sourceJar.exists()) {
+            def targetFile = new File(buildDir, 'pokermon-linux.deb')
+            // Copy instead of rename to preserve original
+            targetFile.bytes = sourceJar.bytes
+            println "Linux executable placeholder created: ${targetFile.absolutePath}"
+        } else {
+            throw new GradleException("Could not find fat JAR in ${sharedLibsDir}")
+        }
+    }
+}
+
+// Task to create macOS native executable (placeholder)
+task packagemacos {
+    group = 'native'
+    description = 'Package macOS native executable (.dmg)'
+    
+    doLast {
+        println "=== macOS Native Build (Future Implementation) ==="
+        println "Currently creating enhanced JAR for macOS compatibility"
+        
+        // Ensure shared JAR is built first
+        if (!project(':shared').tasks.getByName('fatJar').state.executed) {
+            project(':shared').tasks.getByName('fatJar').execute()
+        }
+        
+        def buildDir = new File(project.buildDir, 'distributions')
+        buildDir.mkdirs()
+        
+        def sharedLibsDir = new File(project(':shared').buildDir, 'libs')
+        def sourceJar = sharedLibsDir.listFiles()
+            ?.find { it.name.endsWith('-fat.jar') }
+        
+        if (sourceJar && sourceJar.exists()) {
+            def targetFile = new File(buildDir, 'pokermon-macos.dmg')
+            // Copy instead of rename to preserve original
+            targetFile.bytes = sourceJar.bytes
+            println "macOS executable placeholder created: ${targetFile.absolutePath}"
+        } else {
+            throw new GradleException("Could not find fat JAR in ${sharedLibsDir}")
+        }
+    }
+}
+
+// Task to create native executable for current platform
+task packageNative {
+    group = 'native'
+    description = 'Package native executable for current platform'
+    
+    doLast {
+        def osName = System.getProperty('os.name').toLowerCase()
+        println "=== Detecting Platform: ${osName} ==="
+        
+        if (osName.contains('windows')) {
+            tasks.packagewindows.execute()
+        } else if (osName.contains('linux')) {
+            tasks.packagelinux.execute()
+        } else if (osName.contains('mac')) {
+            tasks.packagemacos.execute()
+        } else {
+            println "Unknown platform: ${osName}, defaulting to JAR"
+            project(':shared').tasks.getByName('fatJar').execute()
+        }
+    }
+}
+
+// Development information task
+task nativeInfo {
+    group = 'help'
+    description = 'Display native build information'
+    
+    doLast {
+        println "=== Pokermon Native Build Information ==="
+        println "Project: ${project.name}"
+        println "Version: ${project.version}"
+        println "Platform: ${System.getProperty('os.name')}"
+        println ""
+        println "Native Build Commands:"
+        println "  ./gradlew :desktop:packageNative    - Build for current platform"
+        println "  ./gradlew :desktop:packagewindows   - Build Windows .exe"
+        println "  ./gradlew :desktop:packagelinux     - Build Linux .deb"
+        println "  ./gradlew :desktop:packagemacos     - Build macOS .dmg"
+        println ""
+        println "Note: Native compilation is planned for future implementation."
+        println "Currently generating enhanced JAR files as placeholders."
+    }
+}
+
+// Ensure shared module JAR is built before packaging
+packagewindows.dependsOn ':shared:fatJar'
+packagelinux.dependsOn ':shared:fatJar'
+packagemacos.dependsOn ':shared:fatJar'
+packageNative.dependsOn ':shared:fatJar'

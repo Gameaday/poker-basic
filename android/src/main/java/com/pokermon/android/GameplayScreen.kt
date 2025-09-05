@@ -260,11 +260,10 @@ fun GameplayScreen(
                                 isSelected = canExchangeCards && selectedCards.contains(index),
                                 onClick = if (canExchangeCards) { 
                                     { 
-                                        selectedCards = if (selectedCards.contains(index)) {
-                                            selectedCards - index
-                                        } else {
-                                            selectedCards + index
-                                        }
+                                        // Use bridge method for consistent card selection logic
+                                        gameBridge.toggleCardSelection(index)
+                                        // Update local state to reflect bridge state
+                                        selectedCards = gameBridge.getSelectedCards()
                                     } 
                                 } else { {} },
                                 canClick = canExchangeCards,

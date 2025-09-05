@@ -7,7 +7,7 @@
     <groupId>com.pokermon</groupId>
     <artifactId>pokermon</artifactId>
     <version>1.0.0</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
     
     <name>Pokermon</name>
     <description>Cross-platform poker game with monster collection mechanics, built with pure Kotlin for Android and desktop platforms</description>
@@ -157,7 +157,7 @@
                 </executions>
             </plugin>
             
-            <!-- Replace placeholders in Version.java with actual git commit count -->
+            <!-- Replace placeholders in Version.kt with actual git commit count -->
             <plugin>
                 <groupId>com.google.code.maven-replacer-plugin</groupId>
                 <artifactId>replacer</artifactId>
@@ -172,7 +172,7 @@
                 </executions>
                 <configuration>
                     <includes>
-                        <include>${project.build.sourceDirectory}/com/pokermon/Version.java</include>
+                        <include>src/main/kotlin/com/pokermon/Version.kt</include>
                     </includes>
                     <replacements>
                         <replacement>
@@ -237,28 +237,6 @@
                     <encoding>UTF-8</encoding>
                     <propertiesEncoding>UTF-8</propertiesEncoding>
                 </configuration>
-            </plugin>
-            
-            <!-- Java Compiler Plugin for legacy Java sources (runs after Kotlin) -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
-                <configuration>
-                    <source>17</source>
-                    <target>17</target>
-                    <encoding>UTF-8</encoding>
-                    <!-- Java compilation happens after Kotlin for optimal interop -->
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>default-compile</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             
             <plugin>

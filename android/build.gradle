@@ -2,30 +2,38 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 /**
- * Get git commit count from main branch for dynamic version code generation.
- * This ensures automatic version code incrementation with each commit on main branch,
- * preventing version resets in pull request branches.
+ * Generate dynamic version code using timestamp-based approach.
+ * This ensures monotonically increasing version codes that work regardless of git history depth.
+ * Uses days since epoch (June 25, 2025) plus hours to create reasonable version codes.
  * Using provider API for configuration cache compatibility.
  */
-def getGitCommitCount = providers.exec {
+def getVersionCode = providers.exec {
     commandLine 'bash', '-c', '''
-        # Use main branch commit count specifically to avoid pull request resets
-        MAIN_COMMITS=$(git rev-list --count origin/main 2>/dev/null || git rev-list --count origin/master 2>/dev/null || echo 0)
-        # Fallback to HEAD if main/master not available 
-        HEAD_COMMITS=$(git rev-list --count HEAD 2>/dev/null || echo 0)
-        # Use the higher count to ensure proper versioning
-        if [ "$MAIN_COMMITS" -gt "$HEAD_COMMITS" ]; then 
-            echo "$MAIN_COMMITS"
-        elif [ "$HEAD_COMMITS" -gt 0 ]; then 
-            echo "$HEAD_COMMITS"
-        else 
-            echo "1"
+        # Base date: June 25, 2025 (epoch for this project)
+        BASE_EPOCH=1750809600  # June 25, 2025 00:00:00 UTC
+        CURRENT_EPOCH=$(date +%s)
+        
+        # Calculate days since base epoch
+        DAYS_SINCE_BASE=$(( (CURRENT_EPOCH - BASE_EPOCH) / 86400 ))
+        
+        # Get current hour (0-23) to allow multiple builds per day
+        CURRENT_HOUR=$(date +%H)
+        
+        # Version code = (days * 100) + hour
+        # This allows up to 24 builds per day with predictable incrementing
+        VERSION_CODE=$(( (DAYS_SINCE_BASE * 100) + CURRENT_HOUR ))
+        
+        # Ensure minimum version code of 100 (for compatibility)
+        if [ "$VERSION_CODE" -lt 100 ]; then
+            VERSION_CODE=100
         fi
+        
+        echo "$VERSION_CODE"
     '''
 }.standardOutput.asText.map { 
-    def count = it.trim().toInteger()
-    // Ensure minimum version code of 1
-    return count > 0 ? count : 1
+    def versionCode = it.trim().toInteger()
+    // Ensure reasonable bounds for Android version codes
+    return versionCode > 0 ? versionCode : 100
 }
 
 android {
@@ -37,8 +45,8 @@ android {
         applicationId "com.pokermon.android"
         minSdk 28
         targetSdk 35  // Using latest stable target SDK
-        versionCode getGitCommitCount.get() // Dynamic version code based on git commit count
-        versionName "1.0.${getGitCommitCount.get()}" // Dynamic version name with commit count as patch version
+        versionCode getVersionCode.get() // Dynamic version code based on timestamp
+        versionName "1.0.${getVersionCode.get()}" // Dynamic version name with timestamp-based version
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         
@@ -56,6 +64,8 @@ android {
             // Faster debug builds
             minifyEnabled false
             debuggable true
+            // Use debug suffix to avoid package conflicts with release builds
+            applicationIdSuffix ".debug"
         }
     }
     

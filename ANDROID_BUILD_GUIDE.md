@@ -78,5 +78,12 @@ This checks that both Maven and Android configurations are properly set up.
 1. **"Plugin not found" errors**: Ensure internet connection for first Android build
 2. **SDK not found**: Android SDK will be automatically downloaded on first build
 3. **Build fails in CI**: Expected in environments without internet access
+4. **"Package conflicts with existing package"**: See `ANDROID_DEBUG_BUILDS.md` for debug build configuration
+
+### Development Build Conflicts
+
+If you encounter "App not installed as package conflicts with an existing package" when installing development builds, see the dedicated guide:
+
+📖 **[ANDROID_DEBUG_BUILDS.md](ANDROID_DEBUG_BUILDS.md)** - Resolving package conflicts between debug and release builds
 
 The Android infrastructure is fully configured and ready for development environments with network access.

@@ -4,13 +4,13 @@ apply plugin: 'kotlin-android'
 /**
  * Generate dynamic version code using timestamp-based approach.
  * This ensures monotonically increasing version codes that work regardless of git history depth.
- * Uses days since epoch (Jan 1, 2024) plus hours to create reasonable version codes.
+ * Uses days since epoch (June 25, 2025) plus hours to create reasonable version codes.
  * Using provider API for configuration cache compatibility.
  */
 def getVersionCode = providers.exec {
     commandLine 'bash', '-c', '''
-        # Base date: January 1, 2024 (epoch for this project)
-        BASE_EPOCH=1704067200  # Jan 1, 2024 00:00:00 UTC
+        # Base date: June 25, 2025 (epoch for this project)
+        BASE_EPOCH=1750809600  # June 25, 2025 00:00:00 UTC
         CURRENT_EPOCH=$(date +%s)
         
         # Calculate days since base epoch

@@ -11,6 +11,19 @@ Poker Basic is a Java 17 cross-platform poker game project featuring monster col
 
 The project demonstrates modern software development practices using professional architecture patterns and comprehensive testing for a fun gaming experience.
 
+## Development Principles
+
+### DRY (Don't Repeat Yourself) Guidelines
+This project follows DRY principles to create single authoritative sources of truth for APIs and methods that govern the project outside of any specific platform (agnostic) where possible:
+
+- **Centralized Game Logic**: Core poker mechanics in `Poker-Basic/src/main/java/com/pokermon/` are platform-agnostic
+- **Shared Bridge Pattern**: `GameLogicBridge.kt` provides unified API for all UI platforms (Android, Desktop, Console)
+- **Single Monster Database**: `MonsterDatabase.java` serves as the authoritative source for all monster data
+- **Unified Phase Management**: `GamePhase.java` enum defines game states used across all platforms
+- **Centralized Card Management**: `CardPackManager.java` handles card assets for all platforms
+
+These guidelines are educational and iterative - they can be broken if there is a good valuable reason to do so, but should be the default approach for new development.
+
 ## Quick Start - Essential Commands
 
 ### Bootstrap and Validate Repository

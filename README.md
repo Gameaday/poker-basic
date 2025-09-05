@@ -181,6 +181,38 @@ OPTIONS:
   -v, --version      Show version information
 ```
 
+## 🏗️ Architecture & Design Principles
+
+### DRY (Don't Repeat Yourself) Architecture
+Pokermon follows DRY principles to maintain single authoritative sources of truth for all platform-agnostic components:
+
+#### 🎯 Core Architecture Components
+- **`GameLogicBridge.kt`** - Unified API bridging all UI platforms (Android, Desktop, Console)
+- **`GameEngine.java`** - Platform-agnostic poker game logic and state management  
+- **`MonsterDatabase.java`** - Centralized monster data and collection system
+- **`GamePhase.java`** - Universal game state definitions across all platforms
+- **`CardPackManager.java`** - Unified card asset management for all UI implementations
+
+#### 🔄 Cross-Platform Consistency
+```
+┌─────────────────┬─────────────────┬─────────────────┐
+│   Android UI    │   Desktop UI    │   Console UI    │
+├─────────────────┼─────────────────┼─────────────────┤
+│                 │  GameLogicBridge (Kotlin)        │
+├─────────────────┼─────────────────┼─────────────────┤
+│              Core Game Logic (Java)                │
+│  • GameEngine  • MonsterDatabase  • CardPacks      │
+└─────────────────────────────────────────────────────┘
+```
+
+#### 🎮 Platform-Specific Features
+- **Android**: Native Material Design UI with touch interactions
+- **Desktop**: JavaFX interface with traditional mouse/keyboard controls  
+- **Console**: Text-based interface for headless environments
+- **All Platforms**: Shared game logic, save states, and progression
+
+This architecture ensures that game features, bug fixes, and improvements automatically benefit all platforms while maintaining platform-specific optimizations.
+
 ## 🔗 Links
 
 - **[🏗️ GitHub Actions](https://github.com/Gameaday/poker-basic/actions)** - Build status and CI/CD

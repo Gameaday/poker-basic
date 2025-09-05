@@ -125,12 +125,27 @@ fun GameplayScreen(
         val skillLevel = (userProfile.gamesWon / 10).coerceAtMost(4) // 0-4 skill level
         monsterOpponents = monsterOpponentManager.generateOpponents(3, skillLevel)
         
-        val success = gameBridge.initializeGame(userProfile.username, 3, 1000)
-        if (success) {
+        // Try to load saved game state first
+        val loadResult = gameBridge.loadGameState()
+        
+        val success = if (loadResult.success) {
+            // Game state loaded successfully
             isGameInitialized = true
-            initialChips = 1000
+            gameState = "Game resumed"
+            true
+        } else {
+            // No saved game, initialize new game
+            val initSuccess = gameBridge.initializeGame(userProfile.username, 3, 1000)
+            if (initSuccess) {
+                isGameInitialized = true
+                initialChips = 1000
+                gameState = "New game started"
+            }
+            initSuccess
+        }
+        
+        if (success) {
             refreshGameData()
-            gameState = phaseDescription
             awaitingPlayerAction = canBet || canExchangeCards
         } else {
             gameState = "Failed to initialize game"
@@ -275,6 +290,96 @@ fun GameplayScreen(
             }
         }
         
+        // Opponents information section (compact)
+        if (allPlayers.isNotEmpty() && allPlayers.size > 1) {
+            Card(
+                modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant
+                )
+            ) {
+                Column(
+                    modifier = Modifier.padding(8.dp)
+                ) {
+                    Text(
+                        text = "👥 Opponents",
+                        style = MaterialTheme.typography.titleSmall,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(bottom = 4.dp)
+                    )
+                    
+                    Row(
+                        modifier = Modifier.horizontalScroll(rememberScrollState()),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        // Show all players except the human player (index 0)
+                        allPlayers.drop(1).forEachIndexed { index, player ->
+                            val actualIndex = index + 1 // Adjust for dropped first player
+                            val monster = if (actualIndex - 1 < monsterOpponents.size) {
+                                monsterOpponents[actualIndex - 1]
+                            } else null
+                            
+                            Card(
+                                modifier = Modifier.size(width = 100.dp, height = 80.dp),
+                                colors = CardDefaults.cardColors(
+                                    containerColor = if (player.isFolded) {
+                                        MaterialTheme.colorScheme.errorContainer
+                                    } else {
+                                        MaterialTheme.colorScheme.primaryContainer
+                                    }
+                                )
+                            ) {
+                                Column(
+                                    modifier = Modifier.padding(4.dp),
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    // Monster emoji or player indicator
+                                    Text(
+                                        text = if (monster != null) {
+                                            getMonsterEmoji(monster.displayName)
+                                        } else {
+                                            "🤖"
+                                        },
+                                        style = MaterialTheme.typography.titleMedium
+                                    )
+                                    
+                                    // Player/Monster name (truncated if needed)
+                                    Text(
+                                        text = if (monster != null) {
+                                            monster.displayName.take(8) + if (monster.displayName.length > 8) "..." else ""
+                                        } else {
+                                            player.name.take(8) + if (player.name.length > 8) "..." else ""
+                                        },
+                                        style = MaterialTheme.typography.labelSmall,
+                                        fontWeight = FontWeight.Bold,
+                                        textAlign = TextAlign.Center,
+                                        maxLines = 1
+                                    )
+                                    
+                                    // Status and chips
+                                    if (player.isFolded) {
+                                        Text(
+                                            text = "FOLDED",
+                                            style = MaterialTheme.typography.labelSmall,
+                                            color = MaterialTheme.colorScheme.onErrorContainer,
+                                            fontWeight = FontWeight.Bold
+                                        )
+                                    } else {
+                                        Text(
+                                            text = "💰${player.chips}",
+                                            style = MaterialTheme.typography.labelSmall,
+                                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                                            fontWeight = FontWeight.Bold
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
         // Game phase and status (compact)
         Card(
             modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp),
@@ -360,6 +465,8 @@ fun GameplayScreen(
                                     if (result.success) {
                                         refreshGameData()
                                         selectedCards = emptySet()
+                                        // Auto-save after card exchange
+                                        gameBridge.saveGameState()
                                     }
                                 },
                                 modifier = Modifier.weight(1f),
@@ -373,8 +480,8 @@ fun GameplayScreen(
                         Spacer(modifier = Modifier.height(4.dp))
                     }
                     
-                    // Betting actions (if applicable)  
-                    if (canBet) {
+                    // Betting actions (only show if not in card exchange phase)  
+                    if (canBet && !canExchangeCards) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceEvenly
@@ -385,6 +492,8 @@ fun GameplayScreen(
                                     lastActionResult = result.message
                                     if (result.success) {
                                         refreshGameData()
+                                        // Auto-save after betting action
+                                        gameBridge.saveGameState()
                                     }
                                 },
                                 modifier = Modifier.weight(1f).padding(end = 2.dp),
@@ -401,6 +510,8 @@ fun GameplayScreen(
                                     lastActionResult = result.message
                                     if (result.success) {
                                         refreshGameData()
+                                        // Auto-save after betting action
+                                        gameBridge.saveGameState()
                                     }
                                 },
                                 modifier = Modifier.weight(1f).padding(horizontal = 1.dp),
@@ -417,6 +528,8 @@ fun GameplayScreen(
                                     lastActionResult = result.message
                                     if (result.success) {
                                         refreshGameData()
+                                        // Auto-save after betting action
+                                        gameBridge.saveGameState()
                                     }
                                 },
                                 modifier = Modifier.weight(1f).padding(start = 2.dp),
@@ -442,6 +555,8 @@ fun GameplayScreen(
                                     lastActionResult = result.message
                                     if (result.success) {
                                         refreshGameData()
+                                        // Auto-save after determining winner
+                                        gameBridge.saveGameState()
                                     }
                                 },
                                 modifier = Modifier.weight(1f).padding(end = 4.dp),
@@ -458,6 +573,8 @@ fun GameplayScreen(
                                     lastActionResult = result.message
                                     if (result.success) {
                                         refreshGameData()
+                                        // Auto-save after advancing to next round
+                                        gameBridge.saveGameState()
                                     }
                                 },
                                 modifier = Modifier.weight(1f).padding(start = 4.dp),
@@ -495,10 +612,7 @@ fun GameplayScreen(
                 TextButton(
                     onClick = {
                         // Save game state before exiting
-                        if (gameSettings.autoSaveEnabled) {
-                            // Game state is automatically preserved in the bridge
-                            // The user can return to continue the same session
-                        }
+                        val saveResult = gameBridge.saveGameState()
                         showExitConfirmDialog = false
                         onBackPressed()
                     }

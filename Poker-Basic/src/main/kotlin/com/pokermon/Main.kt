@@ -574,6 +574,7 @@ object Main {
     /**
      * Draw a card from the deck and mark it as used.
      */
+    @JvmStatic
     fun drawCard(deck: IntArray): Int {
         val availableCards = workingDeck(deck)
         if (availableCards.isEmpty()) {
@@ -607,8 +608,21 @@ object Main {
     /**
      * Initialize a standard 52-card deck.
      */
+    @JvmStatic
     fun setDeck(): IntArray {
         return IntArray(52) { it }
+    }
+    
+    /**
+     * Deal a new hand from the deck.
+     */
+    @JvmStatic
+    fun newHand(deck: IntArray): IntArray {
+        val hand = IntArray(DEFAULT_HAND_SIZE)
+        for (i in hand.indices) {
+            hand[i] = deck[i] // Simple dealing - take first 5 cards
+        }
+        return hand
     }
     
     /**

@@ -7,7 +7,7 @@ package com.pokermon
  * @author Carl Nelson (@Gameaday)
  * @version 1.0.0
  */
-data class Game(
+data class Game @JvmOverloads constructor(
     val handSize: Int = DEFAULT_HAND_SIZE,
     val maxPlayers: Int = MAX_PLAYERS,
     val startingChips: Int = DEFAULT_STARTING_CHIPS,

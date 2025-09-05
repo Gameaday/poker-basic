@@ -2,7 +2,7 @@ package com.pokermon;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-import com.pokermon.api.GameMode;
+import com.pokermon.GameMode;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**

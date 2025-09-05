@@ -21,8 +21,8 @@ class GameEngine(private val gameConfig: Game) {
      * @param playerNames array of player names
      * @return true if initialization was successful
      */
-    fun initializeGame(playerNames: Array<String>): Boolean {
-        if (!gameConfig.isValidPlayerCount(playerNames.size)) {
+    fun initializeGame(playerNames: Array<String>?): Boolean {
+        if (playerNames == null || !gameConfig.isValidPlayerCount(playerNames.size)) {
             return false
         }
         
@@ -223,6 +223,12 @@ class GameEngine(private val gameConfig: Game) {
     fun getPlayers(): Array<Player> {
         return players?.clone() ?: emptyArray()
     }
+    
+    /**
+     * Gets the current pot value for backward compatibility.
+     * @return current pot amount  
+     */
+    fun getCurrentPot(): Int = currentPot
     
     /**
      * Gets the current round number.

@@ -1,5 +1,7 @@
 package com.pokermon;
 
+import com.pokermon.ai.Personality;
+
 /**
  * Represents a monster that can be encountered, battled, or captured in the game.
  * Monsters have various properties that affect gameplay and provide different advantages.
@@ -53,6 +55,7 @@ public class Monster {
     private final EffectType effectType;
     private final int effectPower;
     private final String description;
+    private final Personality personality;
     
     /**
      * Creates a new monster with the specified properties.
@@ -64,6 +67,20 @@ public class Monster {
      * @param description a description of the monster
      */
     public Monster(String name, Rarity rarity, int baseHealth, EffectType effectType, int effectPower, String description) {
+        this(name, rarity, baseHealth, effectType, effectPower, description, Personality.getRandomPersonality());
+    }
+    
+    /**
+     * Creates a new monster with the specified properties and personality.
+     * @param name the monster's name
+     * @param rarity the rarity level of the monster
+     * @param baseHealth the base health points (used as chips in battles)
+     * @param effectType the type of effect this monster provides
+     * @param effectPower the strength of the monster's effect
+     * @param description a description of the monster
+     * @param personality the monster's AI personality for poker behavior
+     */
+    public Monster(String name, Rarity rarity, int baseHealth, EffectType effectType, int effectPower, String description, Personality personality) {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Monster name cannot be null or empty");
         }
@@ -79,6 +96,9 @@ public class Monster {
         if (effectPower < 0) {
             throw new IllegalArgumentException("Monster effect power cannot be negative");
         }
+        if (personality == null) {
+            throw new IllegalArgumentException("Monster personality cannot be null");
+        }
         
         this.name = name.trim();
         this.rarity = rarity;
@@ -86,6 +106,7 @@ public class Monster {
         this.effectType = effectType;
         this.effectPower = effectPower;
         this.description = description != null ? description.trim() : "";
+        this.personality = personality;
     }
     
     // Getters
@@ -95,6 +116,7 @@ public class Monster {
     public EffectType getEffectType() { return effectType; }
     public int getEffectPower() { return effectPower; }
     public String getDescription() { return description; }
+    public Personality getPersonality() { return personality; }
     
     /**
      * Calculates the effective health of this monster based on its rarity.
@@ -114,8 +136,8 @@ public class Monster {
     
     @Override
     public String toString() {
-        return String.format("%s (%s) - Health: %d, Effect: %s (+%d)", 
-                name, rarity.getDisplayName(), getEffectiveHealth(), 
+        return String.format("%s (%s, %s) - Health: %d, Effect: %s (+%d)", 
+                name, rarity.getDisplayName(), personality.getDisplayName(), getEffectiveHealth(), 
                 effectType.name(), getEffectiveEffectPower());
     }
     

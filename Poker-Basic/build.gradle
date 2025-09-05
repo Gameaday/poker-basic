@@ -82,6 +82,11 @@ test {
     systemProperty 'kotlin.test.junit5.displayMode', 'verbose'
 }
 
+// Handle duplicate resources
+processResources {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
 // Fat JAR for standalone execution
 task fatJar(type: Jar) {
     group = 'build'

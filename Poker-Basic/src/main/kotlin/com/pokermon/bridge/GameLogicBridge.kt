@@ -380,11 +380,9 @@ class GameLogicBridge {
      * Uses unified CardUtils for consistent card logic across all platforms.
      */
     fun getCardImagePath(cardInt: Int): String {
-        val cardPackManager = CardPackManager.getInstance()
-        
         if (cardInt == 0) {
             // Return card back path or null for text symbols
-            return cardPackManager.getCardBackImagePath(selectedCardPack) ?: "TEXT_BACK"
+            return CardPackManager.getCardBackImagePath(selectedCardPack) ?: "TEXT_BACK"
         }
         
         // Use unified CardUtils for DRY compliance
@@ -392,7 +390,7 @@ class GameLogicBridge {
         val suitName = CardUtils.cardSuit(cardInt)
         
         // Use CardPackManager to get the correct path
-        return cardPackManager.getCardImagePath(selectedCardPack, rankName, suitName) 
+        return CardPackManager.getCardImagePath(selectedCardPack, rankName, suitName) 
             ?: "TEXT_${rankName}_${suitName}"
     }
     

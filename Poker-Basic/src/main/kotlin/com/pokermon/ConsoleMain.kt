@@ -50,7 +50,7 @@ object ConsoleMain {
             val players: List<Player>,
             val pot: Int = 0,
             val round: Int = 1,
-            val phase: GamePhase = GamePhase.DEALING,
+            val phase: GamePhase = GamePhase.HAND_DEALING,
             val deck: MutableList<Int> = mutableListOf()
         ) : GameState()
         data class HandEvaluation(

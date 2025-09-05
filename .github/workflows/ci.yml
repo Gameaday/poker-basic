@@ -1,4 +1,4 @@
-name: Java CI/CD
+name: Kotlin-Native CI/CD
 
 on:
   push:
@@ -18,51 +18,47 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v5
     
-    - name: Set up JDK 17
-      uses: actions/setup-java@v5
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-    
-    - name: Cache Maven packages
+    - name: Cache Gradle packages
       uses: actions/cache@v4
       with:
-        path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-m2
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
     
-    - name: Verify Maven configuration
+    - name: Verify Kotlin-native configuration
       run: |
-        cd Poker-Basic
-        mvn --version
-        mvn help:effective-pom -q
+        ./gradlew --version
+        ./gradlew verifyKotlinNativeSetup --no-daemon
     
     - name: Run tests
       run: |
-        cd Poker-Basic
-        mvn clean test -B
+        ./gradlew :shared:test --no-daemon
     
     - name: Generate test report
       uses: dorny/test-reporter@v2
       if: always()
       with:
-        name: Maven Tests
-        path: Poker-Basic/target/surefire-reports/*.xml
+        name: Kotlin-Native Tests
+        path: Poker-Basic/build/test-results/test/*.xml
         reporter: java-junit
         fail-on-error: false
+    
+    - name: Upload test results
     
     - name: Upload test results
       uses: actions/upload-artifact@v4
       if: always()
       with:
         name: test-results
-        path: Poker-Basic/target/surefire-reports/
+        path: Poker-Basic/build/test-results/test/
         retention-days: 30
     
-    - name: Build with Maven
+    - name: Build with Gradle
       run: |
-        cd Poker-Basic
-        mvn clean compile -B
+        ./gradlew :shared:fatJar --no-daemon
         
   package:
     runs-on: ubuntu-latest
@@ -74,30 +70,26 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v5
     
-    - name: Set up JDK 17
-      uses: actions/setup-java@v5
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-    
-    - name: Cache Maven packages
+    - name: Cache Gradle packages
       uses: actions/cache@v4
       with:
-        path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-m2
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
     
-    - name: Package application
+    - name: Package application with Gradle
       run: |
-        cd Poker-Basic
-        mvn clean package -DskipTests -B
+        ./gradlew :shared:fatJar --no-daemon
     
     - name: Verify JAR was created
       run: |
-        cd Poker-Basic/target
+        cd Poker-Basic/build/libs
         ls -la *.jar
         echo "Verifying JAR is executable..."
-        java -jar *.jar --help || echo "JAR created successfully (help command may not be implemented)"
+        java -jar *-fat.jar --help || echo "JAR created successfully (help command may not be implemented)"
     
     - name: Determine artifact retention
       id: retention
@@ -105,19 +97,19 @@ jobs:
         if [ "${{ github.event_name }}" = "pull_request" ]; then
           PR_NUMBER="${{ github.event.number }}"
           echo "retention_days=14" >> $GITHUB_OUTPUT
-          echo "artifact_name=poker-game-jar-pr-${PR_NUMBER}" >> $GITHUB_OUTPUT
-          echo "apk_artifact_name=poker-game-apk-pr-${PR_NUMBER}" >> $GITHUB_OUTPUT
+          echo "artifact_name=pokermon-kotlin-native-pr-${PR_NUMBER}" >> $GITHUB_OUTPUT
+          echo "apk_artifact_name=pokermon-android-pr-${PR_NUMBER}" >> $GITHUB_OUTPUT
         else
           echo "retention_days=90" >> $GITHUB_OUTPUT
-          echo "artifact_name=poker-game-jar" >> $GITHUB_OUTPUT
-          echo "apk_artifact_name=poker-game-apk" >> $GITHUB_OUTPUT
+          echo "artifact_name=pokermon-kotlin-native" >> $GITHUB_OUTPUT
+          echo "apk_artifact_name=pokermon-android" >> $GITHUB_OUTPUT
         fi
     
     - name: Upload JAR artifacts
       uses: actions/upload-artifact@v4
       with:
         name: ${{ steps.retention.outputs.artifact_name }}
-        path: Poker-Basic/target/*.jar
+        path: Poker-Basic/build/libs/*.jar
         retention-days: ${{ steps.retention.outputs.retention_days }}
 
   android-build:
@@ -129,12 +121,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v5
-    
-    - name: Set up JDK 17
-      uses: actions/setup-java@v5
-      with:
-        java-version: '17'
-        distribution: 'temurin'
 
     - name: Cache Android SDK
       uses: actions/cache@v4
@@ -217,19 +203,9 @@ jobs:
     - name: Make gradlew executable
       run: chmod +x ./gradlew
     
-    - name: Build fat JAR for Android dependency
+    - name: Build Android APK with Kotlin-native
       run: |
-        cd Poker-Basic
-        mvn clean package -DskipTests -B
-    
-    - name: Verify fat JAR exists for Android
-      run: |
-        ls -la Poker-Basic/target/pokermon-1.0.0.jar
-        echo "Regular JAR verified for Android build"
-    
-    - name: Build Android APK
-      run: |
-        echo "Starting Android APK build..."
+        echo "Starting Android APK build with Kotlin-native..."
         echo "Gradle version:"
         ./gradlew --version
         
@@ -243,7 +219,7 @@ jobs:
         echo "SDK Manager packages:"
         sdkmanager --list_installed | head -20
         
-        echo "Building APK with detailed logging..."
+        echo "Building APK with Kotlin-native source integration..."
         ./gradlew :android:assembleDebug --no-daemon --stacktrace --info || {
           echo "=== BUILD FAILED - Diagnostic Information ==="
           echo "Android SDK location: $ANDROID_HOME"
@@ -266,10 +242,10 @@ jobs:
         if [ "${{ github.event_name }}" = "pull_request" ]; then
           PR_NUMBER="${{ github.event.number }}"
           echo "retention_days=14" >> $GITHUB_OUTPUT
-          echo "apk_artifact_name=poker-game-apk-pr-${PR_NUMBER}" >> $GITHUB_OUTPUT
+          echo "apk_artifact_name=pokermon-android-pr-${PR_NUMBER}" >> $GITHUB_OUTPUT
         else
           echo "retention_days=90" >> $GITHUB_OUTPUT
-          echo "apk_artifact_name=poker-game-apk" >> $GITHUB_OUTPUT
+          echo "apk_artifact_name=pokermon-android" >> $GITHUB_OUTPUT
         fi
     
     - name: Upload APK artifacts
@@ -277,386 +253,4 @@ jobs:
       with:
         name: ${{ steps.retention.outputs.apk_artifact_name }}
         path: android/build/outputs/apk/debug/*.apk
-        retention-days: ${{ steps.retention.outputs.retention_days }}
-
-  release:
-    runs-on: ubuntu-latest
-    needs: [test, package, android-build]
-    # Run on push events or PR events from same repository (skip only external forks), and only for specific branches/tags
-    if: (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) && (startsWith(github.ref, 'refs/heads/alpha-') || startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v5
-    
-    - name: Download JAR artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: poker-game-jar
-        path: ./artifacts
-    
-    - name: Download APK artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: poker-game-apk
-        path: ./artifacts
-    
-    - name: Download Windows EXE artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: poker-game-exe
-        path: ./artifacts/windows
-      continue-on-error: true
-    
-    - name: Download Linux DEB artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: poker-game-deb
-        path: ./artifacts/linux
-      continue-on-error: true
-    
-    - name: Download macOS DMG artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: poker-game-dmg
-        path: ./artifacts/macos
-      continue-on-error: true
-    
-    - name: Get version from pom.xml
-      id: version
-      run: |
-        cd Poker-Basic
-        VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-        echo "version=$VERSION" >> $GITHUB_OUTPUT
-        echo "Project version: $VERSION"
-    
-    - name: Determine release type
-      id: release_type
-      run: |
-        if [[ "${{ github.ref }}" == refs/heads/alpha-* ]]; then
-          echo "type=alpha" >> $GITHUB_OUTPUT
-          echo "prerelease=true" >> $GITHUB_OUTPUT
-          echo "tag_name=alpha-${{ steps.version.outputs.version }}-$(date +%Y%m%d-%H%M%S)" >> $GITHUB_OUTPUT
-          echo "release_name=Alpha Test Release ${{ steps.version.outputs.version }}" >> $GITHUB_OUTPUT
-        elif [[ "${{ github.ref }}" == refs/tags/v* ]]; then
-          echo "type=release" >> $GITHUB_OUTPUT
-          echo "prerelease=false" >> $GITHUB_OUTPUT
-          echo "tag_name=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
-          echo "release_name=Release ${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
-        else
-          echo "type=development" >> $GITHUB_OUTPUT
-          echo "prerelease=true" >> $GITHUB_OUTPUT
-          echo "tag_name=dev-${{ steps.version.outputs.version }}-$(date +%Y%m%d-%H%M%S)" >> $GITHUB_OUTPUT
-          echo "release_name=Development Build ${{ steps.version.outputs.version }}" >> $GITHUB_OUTPUT
-        fi
-
-    - name: Generate changelog
-      id: changelog
-      run: |
-        echo "Generating changelog from git history..."
-        
-        # Find the last tag (if any)
-        LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
-        
-        if [ -z "$LAST_TAG" ]; then
-          echo "No previous tag found, generating changelog from entire history"
-          CHANGELOG=$(git log --oneline --pretty=format:"- %s (%h)" --reverse)
-          echo "changelog_title=All Changes" >> $GITHUB_OUTPUT
-        else
-          echo "Found last tag: $LAST_TAG"
-          echo "Generating changelog since $LAST_TAG"
-          CHANGELOG=$(git log "${LAST_TAG}..HEAD" --oneline --pretty=format:"- %s (%h)" --reverse)
-          echo "changelog_title=Changes since $LAST_TAG" >> $GITHUB_OUTPUT
-          
-          # If no changes since last tag, use the single latest commit
-          if [ -z "$CHANGELOG" ]; then
-            CHANGELOG=$(git log -1 --oneline --pretty=format:"- %s (%h)")
-            echo "changelog_title=Latest Changes" >> $GITHUB_OUTPUT
-          fi
-        fi
-        
-        # Handle empty changelog
-        if [ -z "$CHANGELOG" ]; then
-          CHANGELOG="- No changes found"
-        fi
-        
-        # Store changelog in file to handle multiline content
-        echo "$CHANGELOG" > /tmp/changelog.txt
-        echo "changelog_file=/tmp/changelog.txt" >> $GITHUB_OUTPUT
-        
-        echo "Generated changelog:"
-        echo "$CHANGELOG"
-    
-    - name: Create Release
-      uses: softprops/action-gh-release@v2
-      with:
-        tag_name: ${{ steps.release_type.outputs.tag_name }}
-        name: ${{ steps.release_type.outputs.release_name }}
-        body: |
-          ## Poker Game Educational Project - Cross Platform Release
-          
-          ### Release Information
-          - **Version**: ${{ steps.version.outputs.version }}
-          - **Build Date**: ${{ github.event.head_commit.timestamp }}
-          - **Commit**: ${{ github.sha }}
-          - **Branch**: ${{ github.ref_name }}
-          
-          ### ${{ steps.changelog.outputs.changelog_title }}
-          
-          $(cat ${{ steps.changelog.outputs.changelog_file }})
-          
-          ### What's Included
-          This release provides native executables and packages for all major platforms:
-          
-          #### Desktop Applications
-          - **Windows**: `PokerGame-${{ steps.version.outputs.version }}.exe` - Native Windows installer
-          - **Linux**: `pokergame_${{ steps.version.outputs.version }}-1_amd64.deb` - Debian package for Linux
-          - **macOS**: `PokerGame-${{ steps.version.outputs.version }}.dmg` - macOS disk image
-          - **Java JAR**: `pokermon-${{ steps.version.outputs.version }}.jar` - Cross-platform JAR (requires Java 17+)
-          
-          #### Mobile Application
-          - **Android**: `android-debug.apk` - Android app (API 21+/Android 5.0+)
-          
-          ### Quick Start
-          
-          #### Windows
-          1. Download `PokerGame-${{ steps.version.outputs.version }}.exe`
-          2. Run the installer
-          3. Launch from Start Menu or Desktop shortcut
-          
-          #### Linux (Ubuntu/Debian)
-          ```bash
-          # Download the DEB package
-          sudo dpkg -i pokergame_${{ steps.version.outputs.version }}-1_amd64.deb
-          
-          # Install dependencies if needed
-          sudo apt-get install -f
-          
-          # Launch from Applications menu or command line
-          pokergame
-          ```
-          
-          #### macOS
-          1. Download `PokerGame-${{ steps.version.outputs.version }}.dmg`
-          2. Open the DMG file
-          3. Drag PokerGame to Applications folder
-          4. Launch from Applications or Launchpad
-          
-          #### Cross-Platform JAR
-          ```bash
-          # Download the JAR file
-          # Modern UI (Default)
-          java -jar pokermon-${{ steps.version.outputs.version }}.jar
-          
-          # Console Version for Testing
-          java -jar pokermon-${{ steps.version.outputs.version }}.jar --basic
-          ```
-          
-          #### Android
-          - Download and install the APK file on your Android device
-          - Enable "Install from unknown sources" if required
-          - Supports Android 5.0 (API 21) and higher
-          
-          ### System Requirements
-          - **Windows**: Windows 10 or later (64-bit)
-          - **Linux**: Ubuntu 18.04+ or equivalent (amd64)
-          - **macOS**: macOS 10.14+ (Intel/Apple Silicon)
-          - **Java JAR**: Java 17 or higher on any platform
-          - **Android**: Android 5.0+ (API 21+)
-          
-          ### Platform-Specific Features
-          
-          #### Native Desktop Apps (Windows/Linux/macOS)
-          - Self-contained executables (no Java installation required)
-          - Native OS integration (menus, shortcuts, file associations)
-          - Optimized performance and memory usage
-          - Platform-specific UI styling
-          
-          #### Java JAR (Cross-Platform)
-          - Full JavaFX UI with card graphics
-          - Console/text mode option
-          - Mouse and keyboard controls
-          - Works on any Java 17+ compatible system
-          
-          #### Android APK
-          - Native Material Design interface
-          - Touch-friendly game controls
-          - Optimized for phones and tablets
-          - Modern Jetpack Compose UI
-          
-          ---
-          
-          This is an educational project demonstrating professional software development practices and cross-platform deployment strategies.
-        draft: false
-        prerelease: ${{ steps.release_type.outputs.prerelease }}
-        files: |
-          ./artifacts/pokermon-${{ steps.version.outputs.version }}.jar
-          ./artifacts/*.apk
-          ./artifacts/windows/*.exe
-          ./artifacts/linux/*.deb
-          ./artifacts/macos/*.dmg
-        token: ${{ secrets.GITHUB_TOKEN }}
-
-  # Windows native executable build
-  windows-native:
-    runs-on: windows-latest
-    needs: test
-    # Run on push events or PR events from same repository (skip only external forks)
-    if: (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || github.event_name == 'pull_request')
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v5
-    
-    - name: Set up JDK 17
-      uses: actions/setup-java@v5
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-    
-    - name: Cache Maven packages
-      uses: actions/cache@v4
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-m2
-    
-    - name: Package Windows EXE
-      run: |
-        cd Poker-Basic
-        mvn clean package -Pwindows-exe -DskipTests -B
-    
-    - name: Verify EXE was created
-      run: |
-        cd Poker-Basic/target/jpackage
-        ls -la *.exe
-        echo "Windows EXE created successfully"
-      shell: bash
-    
-    - name: Determine artifact retention
-      id: retention
-      run: |
-        if [ "${{ github.event_name }}" = "pull_request" ]; then
-          PR_NUMBER="${{ github.event.number }}"
-          echo "retention_days=14" >> $GITHUB_OUTPUT
-          echo "exe_artifact_name=poker-game-exe-pr-${PR_NUMBER}" >> $GITHUB_OUTPUT
-        else
-          echo "retention_days=90" >> $GITHUB_OUTPUT
-          echo "exe_artifact_name=poker-game-exe" >> $GITHUB_OUTPUT
-        fi
-      shell: bash
-    
-    - name: Upload Windows EXE artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: ${{ steps.retention.outputs.exe_artifact_name }}
-        path: Poker-Basic/target/jpackage/*.exe
-        retention-days: ${{ steps.retention.outputs.retention_days }}
-
-  # Linux native package build
-  linux-native:
-    runs-on: ubuntu-latest
-    needs: test
-    # Run on push events or PR events from same repository (skip only external forks)
-    if: (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || github.event_name == 'pull_request')
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v5
-    
-    - name: Set up JDK 17
-      uses: actions/setup-java@v5
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-    
-    - name: Cache Maven packages
-      uses: actions/cache@v4
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-m2
-    
-    - name: Package Linux DEB
-      run: |
-        cd Poker-Basic
-        mvn clean package -Plinux-exe -DskipTests -B
-    
-    - name: Verify DEB was created
-      run: |
-        cd Poker-Basic/target/jpackage
-        ls -la *.deb
-        echo "Linux DEB created successfully"
-    
-    - name: Determine artifact retention
-      id: retention
-      run: |
-        if [ "${{ github.event_name }}" = "pull_request" ]; then
-          PR_NUMBER="${{ github.event.number }}"
-          echo "retention_days=14" >> $GITHUB_OUTPUT
-          echo "deb_artifact_name=poker-game-deb-pr-${PR_NUMBER}" >> $GITHUB_OUTPUT
-        else
-          echo "retention_days=90" >> $GITHUB_OUTPUT
-          echo "deb_artifact_name=poker-game-deb" >> $GITHUB_OUTPUT
-        fi
-    
-    - name: Upload Linux DEB artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: ${{ steps.retention.outputs.deb_artifact_name }}
-        path: Poker-Basic/target/jpackage/*.deb
-        retention-days: ${{ steps.retention.outputs.retention_days }}
-
-  # macOS native package build
-  macos-native:
-    runs-on: macos-latest
-    needs: test
-    # Run on push events or PR events from same repository (skip only external forks)
-    if: (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || github.event_name == 'pull_request')
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v5
-    
-    - name: Set up JDK 17
-      uses: actions/setup-java@v5
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-    
-    - name: Cache Maven packages
-      uses: actions/cache@v4
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-m2
-    
-    - name: Package macOS DMG
-      run: |
-        cd Poker-Basic
-        mvn clean package -Pmacos-exe -DskipTests -B
-    
-    - name: Verify DMG was created
-      run: |
-        cd Poker-Basic/target/jpackage
-        ls -la *.dmg
-        echo "macOS DMG created successfully"
-    
-    - name: Determine artifact retention
-      id: retention
-      run: |
-        if [ "${{ github.event_name }}" = "pull_request" ]; then
-          PR_NUMBER="${{ github.event.number }}"
-          echo "retention_days=14" >> $GITHUB_OUTPUT
-          echo "dmg_artifact_name=poker-game-dmg-pr-${PR_NUMBER}" >> $GITHUB_OUTPUT
-        else
-          echo "retention_days=90" >> $GITHUB_OUTPUT
-          echo "dmg_artifact_name=poker-game-dmg" >> $GITHUB_OUTPUT
-        fi
-    
-    - name: Upload macOS DMG artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: ${{ steps.retention.outputs.dmg_artifact_name }}
-        path: Poker-Basic/target/jpackage/*.dmg
         retention-days: ${{ steps.retention.outputs.retention_days }}

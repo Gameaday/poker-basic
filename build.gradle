@@ -74,7 +74,7 @@ task verifyKotlinNativeSetup {
         
         // Check Kotlin source setup
         def kotlinSourcePath = 'Poker-Basic/src/main/kotlin/com/pokermon'
-        def kotlinSource = new File(kotlinSourcePath)
+        def kotlinSource = new File(project.rootDir, kotlinSourcePath)
         
         if (kotlinSource.exists()) {
             def kotlinFiles = kotlinSource.listFiles().findAll { it.name.endsWith('.kt') }
@@ -94,7 +94,7 @@ task verifyKotlinNativeSetup {
         }
         
         // Check for Maven removal 
-        def pomFile = new File('Poker-Basic/pom.xml')
+        def pomFile = new File(project.rootDir, 'Poker-Basic/pom.xml')
         if (pomFile.exists()) {
             println "⚠️  Maven pom.xml still present - will be removed in pure Kotlin-native migration"
         } else {
@@ -106,9 +106,9 @@ task verifyKotlinNativeSetup {
         def gradleWrapperPath = 'gradlew'
         def androidActivityPath = 'android/src/main/java/com/pokermon/android/MainActivity.kt'
         
-        def androidBuildGradle = new File(androidBuildGradlePath)
-        def gradleWrapper = new File(gradleWrapperPath)
-        def androidActivity = new File(androidActivityPath)
+        def androidBuildGradle = new File(project.rootDir, androidBuildGradlePath)
+        def gradleWrapper = new File(project.rootDir, gradleWrapperPath)
+        def androidActivity = new File(project.rootDir, androidActivityPath)
         
         if (androidBuildGradle.exists() && gradleWrapper.exists() && androidActivity.exists()) {
             println "✅ Android/Gradle build configuration complete"
@@ -120,8 +120,9 @@ task verifyKotlinNativeSetup {
         println ""
         println "=== Build Commands (Pure Kotlin-Native) ==="
         println "Android APK:      ./gradlew :android:assembleDebug (requires internet)"
-        println "Desktop Native:   ./gradlew :desktop:createNativeExecutable"
-        println "Run Desktop:      ./gradlew :desktop:run"
+        println "Desktop JAR:      ./gradlew :shared:fatJar"
+        println "Console App:      ./gradlew :shared:runConsole"
+        println "Run Tests:        ./gradlew :shared:test"
         println "Clean All:        ./gradlew clean"
         println ""
         println "✅ Pure Kotlin-native cross-platform architecture verified!"

@@ -1,8 +1,8 @@
 version: 2
 updates:
-  # Enable version updates for Maven
-  - package-ecosystem: "maven"
-    directory: "/Poker-Basic"
+  # Enable version updates for Gradle
+  - package-ecosystem: "gradle"
+    directory: "/"
     schedule:
       interval: "weekly"
       day: "monday"

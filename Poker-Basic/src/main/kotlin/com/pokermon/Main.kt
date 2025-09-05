@@ -369,6 +369,27 @@ object Main {
     }
     
     /**
+     * Analyze multiples (pairs, triples, etc.) in a hand.
+     * Returns array where each element is [rank, count] in descending order by count.
+     */
+    fun handMultiples(hand: IntArray): Array<IntArray> {
+        if (hand.isEmpty()) return emptyArray()
+        
+        // Count occurrences of each rank
+        val rankCounts = mutableMapOf<Int, Int>()
+        for (card in hand) {
+            val rank = CardUtils.cardRank(card)
+            rankCounts[rank] = rankCounts.getOrDefault(rank, 0) + 1
+        }
+        
+        // Convert to array format [rank, count] sorted by count (descending), then rank (descending)
+        return rankCounts.entries
+            .sortedWith(compareByDescending<Map.Entry<Int, Int>> { it.value }.thenByDescending { it.key })
+            .map { intArrayOf(it.key, it.value) }
+            .toTypedArray()
+    }
+    
+    /**
      * Determine which cards AI should exchange based on hand analysis.
      */
     fun determineAICardExchange(player: Player): IntArray {
@@ -381,7 +402,7 @@ object Main {
         }
         
         // Keep pairs, exchange the rest
-        if (is2Kind(multiples)) {
+        if (is2Kind(multiples[0])) {
             val pairRank = multiples[0][0]
             val cardsToExchange = mutableListOf<Int>()
             

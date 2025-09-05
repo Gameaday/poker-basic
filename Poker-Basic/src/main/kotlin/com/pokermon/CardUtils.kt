@@ -336,32 +336,7 @@ object CardUtils {
     fun List<Int>.toCardNamesSymbol(): List<String> = map { cardNameSymbol(it) }
     
     /**
-     * Extension function to check if cards form a flush.
-     */
-    fun IntArray.isFlush(): Boolean = isFlush(this)
-    
-    /**
-     * Extension function to check if cards form a straight.
-     */
-    fun IntArray.isStraight(): Boolean = isStraight(this)
-    
-    /**
      * Extension function to sort cards by rank.
      */
     fun IntArray.sortByRank(): IntArray = sortHand(this)
-    
-    /**
-     * Extension function to get formatted hand string.
-     */
-    fun IntArray.formatHand(): String = formatHand(this)
-    
-    /**
-     * Extension function to get short formatted hand string.
-     */
-    fun IntArray.formatHandShort(): String = formatHandShort(this)
-    
-    /**
-     * Extension function to get symbolic formatted hand string.
-     */
-    fun IntArray.formatHandSymbols(): String = formatHandSymbols(this)
 }

@@ -192,7 +192,7 @@ class GameLogicBridge {
                         break
                     }
                     
-                    val currentPlayer = players[currentPlayerIndex]
+                    val currentPlayer = players?.get(currentPlayerIndex) ?: continue
                     
                     // If current player has folded or is out of chips, advance to next
                     if (currentPlayer.isFold() || currentPlayer.chips <= 0) {
@@ -324,7 +324,7 @@ class GameLogicBridge {
     private fun shouldForceAdvancePhase(engine: com.pokermon.GameEngine): Boolean {
         return try {
             val players = engine.players
-            val activePlayers = players.filter { !it.isFold() && it.chips > 0 }
+            val activePlayers = players?.filter { !it.isFold() && it.chips > 0 } ?: emptyList()
             
             // If only one active player remains, advance phase
             if (activePlayers.size <= 1) {
@@ -333,8 +333,8 @@ class GameLogicBridge {
             
             // Check if all active players have acted and bets are equal
             val currentPlayerIndex = engine.currentPlayerIndex
-            val currentPlayer = if (currentPlayerIndex >= 0 && currentPlayerIndex < players.size) {
-                players[currentPlayerIndex]
+            val currentPlayer = if (currentPlayerIndex >= 0 && currentPlayerIndex < (players?.size ?: 0)) {
+                players?.get(currentPlayerIndex)
             } else null
             
             // If current player has folded or has no chips, we should advance
@@ -357,7 +357,7 @@ class GameLogicBridge {
         gameEngine?.let { engine ->
             currentPot = engine.currentPot
             val players = engine.players
-            if (players.isNotEmpty()) {
+            if (players != null && players.isNotEmpty()) {
                 val player = players[0] // Human player is always at index 0
                 playerChips = player.getChips()
                 
@@ -452,7 +452,7 @@ class GameLogicBridge {
     fun getPlayerHandImagePaths(): List<String> {
         return gameEngine?.let { engine ->
             val players = engine.players
-            if (players.isNotEmpty()) {
+            if (players != null && players.isNotEmpty()) {
                 val player = players[0] // Human player is always at index 0
                 player.getHand()?.map { cardInt ->
                     getCardImagePath(cardInt)
@@ -492,7 +492,7 @@ class GameLogicBridge {
         return if (isGameInitialized) {
             gameEngine?.let { engine ->
                 val players = engine.players
-                players.mapIndexed { index, player ->
+                players?.mapIndexed { index, player ->
                     PlayerInfo(
                         name = player.getName() ?: "Player $index",
                         chips = player.getChips(),
@@ -500,7 +500,7 @@ class GameLogicBridge {
                         isCurrentPlayer = index == 0, // Human player is always at index 0
                         handValue = player.getHandValue()
                     )
-                }
+                } ?: emptyList()
             } ?: emptyList()
         } else {
             emptyList()
@@ -559,7 +559,7 @@ class GameLogicBridge {
         return try {
             gameEngine?.let { engine ->
                 val players = engine.players
-                if (players.isNotEmpty()) {
+                if (players != null && players.isNotEmpty()) {
                     val player = players[0] // Human player
                     
                     // For testing purposes, use a standard call amount if no high bet exists
@@ -602,7 +602,7 @@ class GameLogicBridge {
         return try {
             gameEngine?.let { engine ->
                 val players = engine.players
-                if (players.isNotEmpty()) {
+                if (players != null && players.isNotEmpty()) {
                     val player = players[0] // Human player
                     
                     if (amount > player.getChips()) {
@@ -638,7 +638,7 @@ class GameLogicBridge {
         return try {
             gameEngine?.let { engine ->
                 val players = engine.players
-                if (players.isNotEmpty()) {
+                if (players != null && players.isNotEmpty()) {
                     val player = players[0] // Human player
                     player.setFold(true)
                     // Advance to next player after action
@@ -772,8 +772,8 @@ class GameLogicBridge {
                         else -> {
                             // Get the winner name(s) for display
                             val winnerNames = winners.map { index ->
-                                if (index > 0 && index < engine.players.size) {
-                                    engine.players[index].name ?: "Player $index"
+                                if (index > 0 && index < (engine.players?.size ?: 0)) {
+                                    engine.players?.get(index)?.name ?: "Player $index"
                                 } else "Unknown"
                             }
                             "🏆 Winner(s): ${winnerNames.joinToString(", ")}"

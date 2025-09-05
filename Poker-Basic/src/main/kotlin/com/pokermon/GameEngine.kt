@@ -10,7 +10,7 @@ package com.pokermon
 class GameEngine(private val gameConfig: Game) {
     internal var players: Array<Player>? = null  // Made internal for bridge access
     private var deck: IntArray = intArrayOf()
-    private var currentPot: Int = 0
+    internal var currentPot: Int = 0
     internal var currentRound: Int = 0  // Made internal for bridge access
     private var gameActive: Boolean = false
     internal var currentPlayerIndex: Int = 0  // Made internal for bridge access
@@ -223,12 +223,6 @@ class GameEngine(private val gameConfig: Game) {
     fun getPlayers(): Array<Player> {
         return players?.clone() ?: emptyArray()
     }
-    
-    /**
-     * Gets the current pot value.
-     * @return current pot amount
-     */
-    fun getCurrentPot(): Int = currentPot
     
     /**
      * Gets the current round number.

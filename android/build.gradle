@@ -2,41 +2,38 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 /**
- * Get git commit count for dynamic version code generation.
- * Uses master/main branch as baseline plus any additional commits on current branch
- * to ensure consistent versioning across all builds while preventing version conflicts.
+ * Generate dynamic version code using timestamp-based approach.
+ * This ensures monotonically increasing version codes that work regardless of git history depth.
+ * Uses days since epoch (Jan 1, 2024) plus hours to create reasonable version codes.
  * Using provider API for configuration cache compatibility.
  */
-def getGitCommitCount = providers.exec {
+def getVersionCode = providers.exec {
     commandLine 'bash', '-c', '''
-        # Get master/main branch commit count as baseline
-        MASTER_COMMITS=$(git rev-list --count origin/main 2>/dev/null || git rev-list --count origin/master 2>/dev/null || echo 0)
+        # Base date: January 1, 2024 (epoch for this project)
+        BASE_EPOCH=1704067200  # Jan 1, 2024 00:00:00 UTC
+        CURRENT_EPOCH=$(date +%s)
         
-        # If we can't access remote master/main, use HEAD count as fallback
-        if [ "$MASTER_COMMITS" -eq 0 ]; then
-            HEAD_COMMITS=$(git rev-list --count HEAD 2>/dev/null || echo 0)
-            if [ "$HEAD_COMMITS" -gt 0 ]; then
-                echo "$HEAD_COMMITS"
-            else
-                echo "1"
-            fi
-        else
-            # Get additional commits on current branch beyond master/main
-            MERGE_BASE=$(git merge-base origin/main HEAD 2>/dev/null || git merge-base origin/master HEAD 2>/dev/null || echo "")
-            if [ -n "$MERGE_BASE" ]; then
-                ADDITIONAL_COMMITS=$(git rev-list --count "${MERGE_BASE}..HEAD" 2>/dev/null || echo 0)
-                TOTAL_COMMITS=$((MASTER_COMMITS + ADDITIONAL_COMMITS))
-                echo "$TOTAL_COMMITS"
-            else
-                # Fallback to master commits if merge-base fails
-                echo "$MASTER_COMMITS"
-            fi
+        # Calculate days since base epoch
+        DAYS_SINCE_BASE=$(( (CURRENT_EPOCH - BASE_EPOCH) / 86400 ))
+        
+        # Get current hour (0-23) to allow multiple builds per day
+        CURRENT_HOUR=$(date +%H)
+        
+        # Version code = (days * 100) + hour
+        # This allows up to 24 builds per day with predictable incrementing
+        VERSION_CODE=$(( (DAYS_SINCE_BASE * 100) + CURRENT_HOUR ))
+        
+        # Ensure minimum version code of 100 (for compatibility)
+        if [ "$VERSION_CODE" -lt 100 ]; then
+            VERSION_CODE=100
         fi
+        
+        echo "$VERSION_CODE"
     '''
 }.standardOutput.asText.map { 
-    def count = it.trim().toInteger()
-    // Ensure minimum version code of 1
-    return count > 0 ? count : 1
+    def versionCode = it.trim().toInteger()
+    // Ensure reasonable bounds for Android version codes
+    return versionCode > 0 ? versionCode : 100
 }
 
 android {
@@ -48,8 +45,8 @@ android {
         applicationId "com.pokermon.android"
         minSdk 28
         targetSdk 35  // Using latest stable target SDK
-        versionCode getGitCommitCount.get() // Dynamic version code based on git commit count
-        versionName "1.0.${getGitCommitCount.get()}" // Dynamic version name with commit count as patch version
+        versionCode getVersionCode.get() // Dynamic version code based on timestamp
+        versionName "1.0.${getVersionCode.get()}" // Dynamic version name with timestamp-based version
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         

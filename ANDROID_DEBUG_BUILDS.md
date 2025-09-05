@@ -98,42 +98,55 @@ The GitHub Actions workflow builds both variants:
 
 ## Version Code Management
 
-### Automatic Version Incrementing
+### Timestamp-Based Version Incrementing
 
-The project uses a sophisticated git-based versioning system that ensures debug builds update properly:
+The project uses a robust timestamp-based versioning system that ensures debug builds update properly regardless of git history depth:
 
 ```gradle
-versionCode getGitCommitCount.get() // Dynamic version code based on git commit count
-versionName "1.0.${getGitCommitCount.get()}" // Dynamic version name with commit count
+versionCode getVersionCode.get() // Dynamic version code based on timestamp
+versionName "1.0.${getVersionCode.get()}" // Dynamic version name with timestamp-based version
 ```
 
 ### Versioning Logic
 
-The version code calculation ensures consistent and predictable versioning:
+The version code calculation uses days since project epoch plus current hour:
 
-1. **Baseline**: Uses the master/main branch commit count as the foundation
-2. **Feature Branch Addition**: Adds any additional commits from the current branch
-3. **Consistent Updates**: Ensures version codes always increase, preventing installation conflicts
+1. **Base Epoch**: January 1, 2024 (project start reference)
+2. **Days Calculation**: Days elapsed since base epoch
+3. **Hour Addition**: Current hour (0-23) for same-day builds
+4. **Formula**: `(days_since_base * 100) + current_hour`
 
 **Example:**
-- Master branch has 15 commits
-- Feature branch has 3 additional commits  
-- Version code = 15 + 3 = 18
+- Date: March 15, 2025, 14:00 UTC
+- Days since Jan 1, 2024: ~439 days
+- Current hour: 14
+- Version code = (439 * 100) + 14 = 43914
 
 ### Benefits
 
-- **Seamless Updates**: New debug builds always have higher version codes
-- **No Installation Conflicts**: Android recognizes new builds as updates
-- **Consistent Baseline**: All builds reference the same master branch foundation
-- **Branch Independence**: Feature branches get proper version increments
+- **Always Incrementing**: Version codes increase with time, never conflict
+- **Git-Independent**: Works regardless of repository history depth or grafting
+- **Multiple Builds Per Day**: Hour component allows up to 24 builds daily
+- **Predictable**: Easy to understand and troubleshoot
+- **Android Compatible**: Generates reasonable version codes (typically 5-6 digits)
 
 ### Troubleshooting Version Issues
 
-If debug builds aren't updating properly:
+#### Problem: Version code not incrementing
+**Solution**: 
+- Timestamp-based versioning automatically increments with time
+- If building multiple times in the same hour, version code remains the same (intended behavior)
+- Wait for next hour or modify the timestamp logic if more granular versioning is needed
 
-1. **Check git fetch**: Ensure `git fetch origin` has been run to get latest master/main references
-2. **Verify version code**: The version should be master commits + branch commits
-3. **Confirm branch base**: Feature branches should be based on latest master/main
+#### Problem: Version code too large
+**Solution**: 
+- Current system generates reasonable codes (typically 40000-70000 range)
+- Android supports version codes up to 2.1 billion, so no practical limit
+
+#### Problem: Inconsistent version across builds
+**Solution**: 
+- All builds use system time, so they should be consistent within the same hour
+- Ensure system time is correct and synchronized
 
 ## References
 

@@ -112,6 +112,9 @@ versionName "1.0.${getVersionCode.get()}" // Dynamic version name with timestamp
 The version code calculation uses days since project epoch plus current hour:
 
 1. **Base Epoch**: June 25, 2025 (project start reference)
+   - **Important**: This is June 25, 2025 00:00:00 UTC (Unix timestamp: 1750809600)
+   - **Not**: January 1, 2024 or any other date
+   - **Rationale**: Chosen as the project's version control reference point
 2. **Days Calculation**: Days elapsed since base epoch
 3. **Hour Addition**: Current hour (0-23) for same-day builds
 4. **Formula**: `(days_since_base * 100) + current_hour`
@@ -129,6 +132,32 @@ The version code calculation uses days since project epoch plus current hour:
 - **Multiple Builds Per Day**: Hour component allows up to 24 builds daily
 - **Predictable**: Easy to understand and troubleshoot
 - **Android Compatible**: Generates reasonable version codes (typically 5-6 digits)
+
+### Epoch Date Verification
+
+**Critical Information**: The base epoch date used throughout this project is **June 25, 2025**.
+
+- **Implementation**: `android/build.gradle` uses `BASE_EPOCH=1750809600` (June 25, 2025 00:00:00 UTC)
+- **Documentation**: All references consistently state June 25, 2025
+- **Verification**: You can verify this timestamp with: `date -d "@1750809600" --utc`
+- **Important**: This is NOT January 1, 2024 or any other date
+
+**Quick Verification Commands:**
+```bash
+# Verify the epoch date
+date -d "@1750809600" --utc
+# Expected output: Wed Jun 25 00:00:00 UTC 2025
+
+# Test version code calculation (example)
+BASE_EPOCH=1750809600
+CURRENT_EPOCH=$(date +%s)
+DAYS_SINCE_BASE=$(( (CURRENT_EPOCH - BASE_EPOCH) / 86400 ))
+CURRENT_HOUR=$(date +%H)
+VERSION_CODE=$(( (DAYS_SINCE_BASE * 100) + CURRENT_HOUR ))
+echo "Generated version code: $VERSION_CODE"
+```
+
+This consistency ensures that all developers understand the exact reference point for version code calculations.
 
 ### Troubleshooting Version Issues
 

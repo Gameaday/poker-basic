@@ -18,6 +18,56 @@ allprojects {
     group = 'com.pokermon'
 }
 
+// Java home detection and configuration
+def findJavaHome() {
+    // Priority list of Java 21 locations
+    def java21Paths = [
+        System.getenv('JAVA_HOME_21_X64'),
+        '/usr/lib/jvm/temurin-21-jdk-amd64',
+        '/usr/lib/jvm/java-21-openjdk',
+        '/usr/lib/jvm/java-21-temurin'
+    ]
+    
+    for (String path : java21Paths) {
+        if (path && new File(path).exists() && new File(path, 'bin/java').exists()) {
+            println("✅ Using Java 21: ${path}")
+            return path
+        }
+    }
+    
+    // Fallback to Java 17 if Java 21 not available
+    def java17Paths = [
+        System.getenv('JAVA_HOME_17_X64'),
+        '/usr/lib/jvm/temurin-17-jdk-amd64',
+        '/usr/lib/jvm/java-17-openjdk'
+    ]
+    
+    for (String path : java17Paths) {
+        if (path && new File(path).exists() && new File(path, 'bin/java').exists()) {
+            println("⚠️  Using Java 17 fallback: ${path}")
+            return path
+        }
+    }
+    
+    // Final fallback to current JAVA_HOME
+    def currentJavaHome = System.getenv('JAVA_HOME')
+    if (currentJavaHome && new File(currentJavaHome).exists()) {
+        println("⚠️  Using current JAVA_HOME: ${currentJavaHome}")
+        return currentJavaHome
+    }
+    
+    println("❌ No suitable Java installation found")
+    return null
+}
+
+// Apply Java home configuration if not already set in gradle.properties
+if (!project.hasProperty('org.gradle.java.home')) {
+    def detectedJavaHome = findJavaHome()
+    if (detectedJavaHome) {
+        System.setProperty('org.gradle.java.home', detectedJavaHome)
+    }
+}
+
 buildscript {
     ext.kotlin_version = '2.2.10'
     repositories {

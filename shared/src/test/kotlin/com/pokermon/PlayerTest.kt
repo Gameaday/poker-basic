@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import com.pokermon.modern.CardUtils
+import com.pokermon.players.Player
 
 /**
  * Kotlin-native test class for Player functionality.

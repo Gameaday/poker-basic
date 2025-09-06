@@ -45,17 +45,17 @@ def getVersionCode = providers.exec {
 
 android {
     namespace = 'com.pokermon.android'
-    compileSdk 35  // Latest stable compile SDK
-    buildToolsVersion "35.0.0"
+    compileSdk = 35  // Latest stable compile SDK
+    buildToolsVersion = "35.0.0"
 
     defaultConfig {
-        applicationId "com.pokermon.android"
-        minSdk 28
-        targetSdk 35  // Using latest stable target SDK
-        versionCode getVersionCode.get() // Dynamic version code based on timestamp
-        versionName "1.0.${getVersionCode.get()}" // Dynamic version name with timestamp-based version
+        applicationId = "com.pokermon.android"
+        minSdk = 28
+        targetSdk = 35  // Using latest stable target SDK
+        versionCode = getVersionCode.get() // Dynamic version code based on timestamp
+        versionName = "1.0.${getVersionCode.get()}" // Dynamic version name with timestamp-based version
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         
         // Optimize for API 28+ features
         vectorDrawables.useSupportLibrary = true
@@ -63,22 +63,22 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled = true
             shrinkResources = true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
             // Faster debug builds
-            minifyEnabled false
-            debuggable true
+            minifyEnabled = false
+            debuggable = true
             // Use debug suffix to avoid package conflicts with release builds
-            applicationIdSuffix ".debug"
+            applicationIdSuffix = ".debug"
         }
     }
     
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     
     kotlinOptions {
@@ -101,8 +101,8 @@ android {
     sourceSets {
         main {
             java {
-                srcDirs += '../Poker-Basic/src/main/kotlin'
-                srcDirs += '../Poker-Basic/src/main/java'
+                srcDirs += '../shared/src/main/kotlin'
+                srcDirs += '../shared/src/main/java'
             }
         }
     }

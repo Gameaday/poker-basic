@@ -32,6 +32,7 @@ dependencies {
     
     // Desktop-specific dependencies for native builds
     implementation "org.jetbrains.kotlin:kotlin-stdlib:${findProperty('kotlin.version') ?: '1.9.22'}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${findProperty('kotlinx.coroutines.version') ?: '1.7.3'}"
     
     // For future native compilation support
     // implementation 'org.graalvm.nativeimage:svm:23.0.0' // Future: GraalVM Native Image
@@ -49,23 +50,19 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
 }
 
 // Task to create Windows native executable (placeholder)
-task packagewindows {
+tasks.register('packageWindows') {
     group = 'native'
     description = 'Package Windows native executable (.exe)'
+    dependsOn ':shared:fatJar'
     
     doLast {
         println "=== Windows Native Build (Future Implementation) ==="
         println "Currently creating enhanced JAR for Windows compatibility"
         
-        // Ensure shared JAR is built first
-        if (!project(':shared').tasks.getByName('fatJar').state.executed) {
-            project(':shared').tasks.getByName('fatJar').execute()
-        }
-        
-        def buildDir = new File(project.buildDir, 'distributions')
+        def buildDir = layout.buildDirectory.dir('distributions').get().asFile
         buildDir.mkdirs()
         
-        def sharedLibsDir = new File(project(':shared').buildDir, 'libs')
+        def sharedLibsDir = project(':shared').layout.buildDirectory.dir('libs').get().asFile
         def sourceJar = sharedLibsDir.listFiles()
             ?.find { it.name.endsWith('-fat.jar') }
         
@@ -81,23 +78,19 @@ task packagewindows {
 }
 
 // Task to create Linux native executable (placeholder)  
-task packagelinux {
+tasks.register('packageLinux') {
     group = 'native'
     description = 'Package Linux native executable (.deb)'
+    dependsOn ':shared:fatJar'
     
     doLast {
         println "=== Linux Native Build (Future Implementation) ==="
         println "Currently creating enhanced JAR for Linux compatibility"
         
-        // Ensure shared JAR is built first
-        if (!project(':shared').tasks.getByName('fatJar').state.executed) {
-            project(':shared').tasks.getByName('fatJar').execute()
-        }
-        
-        def buildDir = new File(project.buildDir, 'distributions')
+        def buildDir = layout.buildDirectory.dir('distributions').get().asFile
         buildDir.mkdirs()
         
-        def sharedLibsDir = new File(project(':shared').buildDir, 'libs')
+        def sharedLibsDir = project(':shared').layout.buildDirectory.dir('libs').get().asFile
         def sourceJar = sharedLibsDir.listFiles()
             ?.find { it.name.endsWith('-fat.jar') }
         
@@ -113,23 +106,19 @@ task packagelinux {
 }
 
 // Task to create macOS native executable (placeholder)
-task packagemacos {
+tasks.register('packageMacOS') {
     group = 'native'
     description = 'Package macOS native executable (.dmg)'
+    dependsOn ':shared:fatJar'
     
     doLast {
         println "=== macOS Native Build (Future Implementation) ==="
         println "Currently creating enhanced JAR for macOS compatibility"
         
-        // Ensure shared JAR is built first
-        if (!project(':shared').tasks.getByName('fatJar').state.executed) {
-            project(':shared').tasks.getByName('fatJar').execute()
-        }
-        
-        def buildDir = new File(project.buildDir, 'distributions')
+        def buildDir = layout.buildDirectory.dir('distributions').get().asFile
         buildDir.mkdirs()
         
-        def sharedLibsDir = new File(project(':shared').buildDir, 'libs')
+        def sharedLibsDir = project(':shared').layout.buildDirectory.dir('libs').get().asFile
         def sourceJar = sharedLibsDir.listFiles()
             ?.find { it.name.endsWith('-fat.jar') }
         
@@ -145,29 +134,30 @@ task packagemacos {
 }
 
 // Task to create native executable for current platform
-task packageNative {
+tasks.register('packageNative') {
     group = 'native'
     description = 'Package native executable for current platform'
+    dependsOn ':shared:fatJar'
     
     doLast {
         def osName = System.getProperty('os.name').toLowerCase()
         println "=== Detecting Platform: ${osName} ==="
         
         if (osName.contains('windows')) {
-            tasks.packagewindows.execute()
+            tasks.packageWindows.actions.each { it.execute(tasks.packageWindows) }
         } else if (osName.contains('linux')) {
-            tasks.packagelinux.execute()
+            tasks.packageLinux.actions.each { it.execute(tasks.packageLinux) }
         } else if (osName.contains('mac')) {
-            tasks.packagemacos.execute()
+            tasks.packageMacOS.actions.each { it.execute(tasks.packageMacOS) }
         } else {
             println "Unknown platform: ${osName}, defaulting to JAR"
-            project(':shared').tasks.getByName('fatJar').execute()
+            // JAR already built due to dependsOn
         }
     }
 }
 
 // Development information task
-task nativeInfo {
+tasks.register('nativeInfo') {
     group = 'help'
     description = 'Display native build information'
     
@@ -179,17 +169,13 @@ task nativeInfo {
         println ""
         println "Native Build Commands:"
         println "  ./gradlew :desktop:packageNative    - Build for current platform"
-        println "  ./gradlew :desktop:packagewindows   - Build Windows .exe"
-        println "  ./gradlew :desktop:packagelinux     - Build Linux .deb"
-        println "  ./gradlew :desktop:packagemacos     - Build macOS .dmg"
+        println "  ./gradlew :desktop:packageWindows   - Build Windows .exe"
+        println "  ./gradlew :desktop:packageLinux     - Build Linux .deb"
+        println "  ./gradlew :desktop:packageMacOS     - Build macOS .dmg"
         println ""
         println "Note: Native compilation is planned for future implementation."
         println "Currently generating enhanced JAR files as placeholders."
     }
 }
 
-// Ensure shared module JAR is built before packaging
-packagewindows.dependsOn ':shared:fatJar'
-packagelinux.dependsOn ':shared:fatJar'
-packagemacos.dependsOn ':shared:fatJar'
-packageNative.dependsOn ':shared:fatJar'
+// Remove old dependency declarations since they're now handled in task definitions

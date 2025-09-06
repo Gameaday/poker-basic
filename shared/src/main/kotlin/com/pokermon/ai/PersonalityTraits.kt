@@ -4,23 +4,22 @@ package com.pokermon.ai
  * Represents the core traits that define a personality using Kotlin-native patterns.
  * These traits can be reused across different game modes and provide
  * a modular way to create personality variations.
- * 
+ *
  * Each trait is scored from 0.0 to 10.0.
- * 
+ *
  * @author Pokermon AI System
  * @version 1.0.0
  */
 data class PersonalityTraits(
-    val bravery: Float,       // How willing to take risks
-    val tenacity: Float,      // How persistent and stubborn
-    val intelligence: Float,  // How strategic and analytical
-    val confidence: Float,    // How self-assured
-    val tactfulness: Float,   // How diplomatic and subtle
-    val empathy: Float,       // How well they read others
-    val patience: Float,      // How tolerant of slow play
-    val adaptability: Float   // How well they adjust strategies
+    val bravery: Float, // How willing to take risks
+    val tenacity: Float, // How persistent and stubborn
+    val intelligence: Float, // How strategic and analytical
+    val confidence: Float, // How self-assured
+    val tactfulness: Float, // How diplomatic and subtle
+    val empathy: Float, // How well they read others
+    val patience: Float, // How tolerant of slow play
+    val adaptability: Float, // How well they adjust strategies
 ) {
-    
     init {
         // Validate all traits are in valid range during construction
         require(bravery in 0.0f..10.0f) { "Bravery must be between 0.0 and 10.0" }
@@ -47,7 +46,7 @@ data class PersonalityTraits(
                 tactfulness = (personality.guile + personality.caution) / 2.0f,
                 empathy = personality.empathy,
                 patience = personality.patience,
-                adaptability = (personality.guile + personality.intelligence) / 2.0f
+                adaptability = (personality.guile + personality.intelligence) / 2.0f,
             )
         }
 
@@ -60,17 +59,20 @@ data class PersonalityTraits(
     /**
      * Calculate an overall "strength" score based on all traits.
      * This can be used for opponent difficulty assessment.
-     * 
+     *
      * @return overall strength score (0.0-10.0)
      */
     val overallStrength: Float
-        get() = (bravery + tenacity + intelligence + confidence + 
-                tactfulness + empathy + patience + adaptability) / 8.0f
+        get() =
+            (
+                bravery + tenacity + intelligence + confidence +
+                    tactfulness + empathy + patience + adaptability
+            ) / 8.0f
 
     /**
      * Creates a modified version of these traits with multipliers applied.
      * Useful for monster rarity bonuses or special circumstances.
-     * 
+     *
      * @param multiplier the factor to apply to all traits
      * @return new PersonalityTraits with modified values
      */
@@ -83,7 +85,7 @@ data class PersonalityTraits(
             tactfulness = clamp(tactfulness * multiplier),
             empathy = clamp(empathy * multiplier),
             patience = clamp(patience * multiplier),
-            adaptability = clamp(adaptability * multiplier)
+            adaptability = clamp(adaptability * multiplier),
         )
     }
 
@@ -99,7 +101,7 @@ data class PersonalityTraits(
         tactfulnessBoost: Float = 1.0f,
         empathyBoost: Float = 1.0f,
         patienceBoost: Float = 1.0f,
-        adaptabilityBoost: Float = 1.0f
+        adaptabilityBoost: Float = 1.0f,
     ): PersonalityTraits {
         return PersonalityTraits(
             bravery = clamp(bravery * braveryBoost),
@@ -109,14 +111,14 @@ data class PersonalityTraits(
             tactfulness = clamp(tactfulness * tactfulnessBoost),
             empathy = clamp(empathy * empathyBoost),
             patience = clamp(patience * patienceBoost),
-            adaptability = clamp(adaptability * adaptabilityBoost)
+            adaptability = clamp(adaptability * adaptabilityBoost),
         )
     }
 
     override fun toString(): String {
         return "PersonalityTraits(bravery=%.1f, tenacity=%.1f, intelligence=%.1f, " +
-                "confidence=%.1f, tactfulness=%.1f, empathy=%.1f, patience=%.1f, adaptability=%.1f)".format(
-                    bravery, tenacity, intelligence, confidence, tactfulness, empathy, patience, adaptability
-                )
+            "confidence=%.1f, tactfulness=%.1f, empathy=%.1f, patience=%.1f, adaptability=%.1f)".format(
+                bravery, tenacity, intelligence, confidence, tactfulness, empathy, patience, adaptability,
+            )
     }
 }

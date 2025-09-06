@@ -5,16 +5,15 @@ import com.pokermon.console.ConsoleMain
 /**
  * Main entry point for the Pokermon application.
  * Provides a unified launcher that defaults to GUI mode with options for console mode.
- * 
+ *
  * @author Carl Nelson (@Gameaday)
  * @version 1.0.0
  */
 object GameLauncher {
-    
     /**
      * Main entry point for the application.
      * Defaults to modern JavaFX UI unless console mode is explicitly requested.
-     * 
+     *
      * @param args Command line arguments
      */
     @JvmStatic
@@ -25,7 +24,7 @@ object GameLauncher {
             launchModern()
             return
         }
-        
+
         for (arg in args) {
             when (arg.lowercase()) {
                 "-h", "--help" -> {
@@ -52,7 +51,7 @@ object GameLauncher {
             }
         }
     }
-    
+
     /**
      * Launch the modern JavaFX UI version of the game.
      */
@@ -70,7 +69,7 @@ object GameLauncher {
             launchConsole()
         }
     }
-    
+
     /**
      * Launch the console version of the game.
      */
@@ -78,7 +77,7 @@ object GameLauncher {
         println("Starting ${Version.APP_NAME} (Console Mode)...")
         ConsoleMain.main(emptyArray())
     }
-    
+
     /**
      * Launch the console version with interactive mode selection.
      */
@@ -86,7 +85,7 @@ object GameLauncher {
         println("Starting ${Version.APP_NAME} (Console Mode - Interactive Selection)...")
         ConsoleMain.main(emptyArray())
     }
-    
+
     /**
      * Launch the modern JavaFX UI version of the game.
      */
@@ -104,7 +103,7 @@ object GameLauncher {
             launchConsole()
         }
     }
-    
+
     /**
      * Display version information.
      */
@@ -113,7 +112,7 @@ object GameLauncher {
         println("A Java-based poker game with GUI and console modes.")
         println(Version.COPYRIGHT)
     }
-    
+
     /**
      * Display comprehensive help information.
      */

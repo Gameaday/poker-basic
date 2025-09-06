@@ -1,692 +1,0 @@
-
-ÇA
-kotlinx
-cinterop
-
-CValuesRef
-cnames
-structs
-AInputEvent
-motion_event
-kotlin
-ULong
-platform
-posix
-size_t
-pointer_index
-history_index
-Float
-internal
-CCall
-id
-9knifunptr_platform_android128_AMotionEvent_getHistoricalX
-AMotionEvent_getHistoricalX
-9knifunptr_platform_android129_AMotionEvent_getHistoricalY
-AMotionEvent_getHistoricalY
-@knifunptr_platform_android130_AMotionEvent_getHistoricalPressure
-"AMotionEvent_getHistoricalPressure
-<knifunptr_platform_android131_AMotionEvent_getHistoricalSize
-AMotionEvent_getHistoricalSize
-Bknifunptr_platform_android132_AMotionEvent_getHistoricalTouchMajor
-$AMotionEvent_getHistoricalTouchMajor
-Bknifunptr_platform_android133_AMotionEvent_getHistoricalTouchMinor
-$AMotionEvent_getHistoricalTouchMinor
-Aknifunptr_platform_android134_AMotionEvent_getHistoricalToolMajor
-#AMotionEvent_getHistoricalToolMajor
-Aknifunptr_platform_android135_AMotionEvent_getHistoricalToolMinor
-#AMotionEvent_getHistoricalToolMinor
-Cknifunptr_platform_android136_AMotionEvent_getHistoricalOrientation
-%AMotionEvent_getHistoricalOrientation
-Int
-int32_t
-axis
-Aknifunptr_platform_android137_AMotionEvent_getHistoricalAxisValue
-#AMotionEvent_getHistoricalAxisValue
-AInputQueue
-queue
-ALooper
-looper
-ident
-CPointer
-	CFunction
-	Function3
-CPointed
-COpaquePointer
-android
-ALooper_callbackFunc
-callback
-data
-Unit
-6knifunptr_platform_android138_AInputQueue_attachLooper
-AInputQueue_attachLooper
-6knifunptr_platform_android139_AInputQueue_detachLooper
-AInputQueue_detachLooper
-3knifunptr_platform_android140_AInputQueue_hasEvents
-AInputQueue_hasEvents
-CPointerVarOf
-CPointerVar
-outEvent
-2knifunptr_platform_android141_AInputQueue_getEvent
-AInputQueue_getEvent
-event
-:knifunptr_platform_android142_AInputQueue_preDispatchEvent
-AInputQueue_preDispatchEvent
-handled
-5knifunptr_platform_android143_AInputQueue_finishEvent
-AInputQueue_finishEvent
-prio
-String
-CString
-tag
-text
-1knifunptr_platform_android144___android_log_write
-__android_log_write
-fmt
-Array
-Any
-variadicArguments
-1knifunptr_platform_android145___android_log_print
-__android_log_print
-__va_list_tag
-va_list
-ap
-2knifunptr_platform_android146___android_log_vprint
-__android_log_vprint
-cond
-2knifunptr_platform_android147___android_log_assert
-__android_log_assert
-bufID
-5knifunptr_platform_android148___android_log_buf_write
-__android_log_buf_write
-5knifunptr_platform_android149___android_log_buf_print
-__android_log_buf_print
-ANativeWindow
-window
-3knifunptr_platform_android150_ANativeWindow_acquire
-ANativeWindow_acquire
-3knifunptr_platform_android151_ANativeWindow_release
-ANativeWindow_release
-4knifunptr_platform_android152_ANativeWindow_getWidth
-ANativeWindow_getWidth
-5knifunptr_platform_android153_ANativeWindow_getHeight
-ANativeWindow_getHeight
-5knifunptr_platform_android154_ANativeWindow_getFormat
-ANativeWindow_getFormat
-width
-height
-format
->knifunptr_platform_android155_ANativeWindow_setBuffersGeometry
- ANativeWindow_setBuffersGeometry
-ANativeWindow_Buffer
-	outBuffer
-ARect
-inOutDirtyBounds
-0knifunptr_platform_android156_ANativeWindow_lock
-ANativeWindow_lock
-9knifunptr_platform_android157_ANativeWindow_unlockAndPost
-ANativeWindow_unlockAndPost
-ANativeActivity
-arg0
-arg1
-arg2
-6knifunptr_platform_android158_ANativeActivity_onCreate
-ANativeActivity_onCreate
-activity
-4knifunptr_platform_android159_ANativeActivity_finish
-ANativeActivity_finish
-=knifunptr_platform_android160_ANativeActivity_setWindowFormat
-ANativeActivity_setWindowFormat
-UInt
-uint32_t
-addFlags
-removeFlags
-<knifunptr_platform_android161_ANativeActivity_setWindowFlags
-ANativeActivity_setWindowFlags
-flags
-;knifunptr_platform_android162_ANativeActivity_showSoftInput
-ANativeActivity_showSoftInput
-;knifunptr_platform_android163_ANativeActivity_hideSoftInput
-ANativeActivity_hideSoftInput
-JNINativeInterface
-JNIEnv
-	JNIEnvVar
-env
-jobject
-surface
-7knifunptr_platform_android164_ANativeWindow_fromSurface
-ANativeWindow_fromSurface
-filename
-AObbInfo
-4knifunptr_platform_android165_AObbScanner_getObbInfo
-AObbScanner_getObbInfo
-obbInfo
--knifunptr_platform_android166_AObbInfo_delete
-AObbInfo_delete
-	ByteVarOf
-Byte
-ByteVar
-5knifunptr_platform_android167_AObbInfo_getPackageName
-AObbInfo_getPackageName
-1knifunptr_platform_android168_AObbInfo_getVersion
-AObbInfo_getVersion
-/knifunptr_platform_android169_AObbInfo_getFlags
-AObbInfo_getFlags
-ASensorManager
-8knifunptr_platform_android170_ASensorManager_getInstance
-ASensorManager_getInstance
-manager
-ASensor
-
-ASensorRef
-ASensorRefVar
-ASensorList
-ASensorListVar
-list
-:knifunptr_platform_android171_ASensorManager_getSensorList
-ASensorManager_getSensorList
-type
-=knifunptr_platform_android172_ASensorManager_getDefaultSensor
-ASensorManager_getDefaultSensor
-Boolean
-wakeUp
-?knifunptr_platform_android173_ASensorManager_getDefaultSensorEx
-!ASensorManager_getDefaultSensorEx
-ASensorEventQueue
-=knifunptr_platform_android174_ASensorManager_createEventQueue
-ASensorManager_createEventQueue
->knifunptr_platform_android175_ASensorManager_destroyEventQueue
- ASensorManager_destroyEventQueue
-sensor
-samplingPeriodUs
-Long
-int64_t
-maxBatchReportLatencyUs
->knifunptr_platform_android176_ASensorEventQueue_registerSensor
- ASensorEventQueue_registerSensor
-<knifunptr_platform_android177_ASensorEventQueue_enableSensor
-ASensorEventQueue_enableSensor
-=knifunptr_platform_android178_ASensorEventQueue_disableSensor
-ASensorEventQueue_disableSensor
-usec
-<knifunptr_platform_android179_ASensorEventQueue_setEventRate
-ASensorEventQueue_setEventRate
-9knifunptr_platform_android180_ASensorEventQueue_hasEvents
-ASensorEventQueue_hasEvents
-ASensorEvent
-events
-count
-ssize_t
-9knifunptr_platform_android181_ASensorEventQueue_getEvents
-ASensorEventQueue_getEvents
--knifunptr_platform_android182_ASensor_getName
-ASensor_getName
-/knifunptr_platform_android183_ASensor_getVendor
-ASensor_getVendor
--knifunptr_platform_android184_ASensor_getType
-ASensor_getType
-3knifunptr_platform_android185_ASensor_getResolution
-ASensor_getResolution
-1knifunptr_platform_android186_ASensor_getMinDelay
-ASensor_getMinDelay
-:knifunptr_platform_android187_ASensor_getFifoMaxEventCount
-ASensor_getFifoMaxEventCount
-?knifunptr_platform_android188_ASensor_getFifoReservedEventCount
-!ASensor_getFifoReservedEventCount
-3knifunptr_platform_android189_ASensor_getStringType
-ASensor_getStringType
-6knifunptr_platform_android190_ASensor_getReportingMode
-ASensor_getReportingMode
-4knifunptr_platform_android191_ASensor_isWakeUpSensor
-ASensor_isWakeUpSensor
-__msg
-7knifunptr_platform_android192_android_set_abort_message
-android_set_abort_message
-AStorageManager
-1knifunptr_platform_android193_AStorageManager_new
-AStorageManager_new
-mgr
-4knifunptr_platform_android194_AStorageManager_delete
-AStorageManager_delete
-key
-AStorageManager_obbCallbackFunc
-cb
-6knifunptr_platform_android195_AStorageManager_mountObb
-AStorageManager_mountObb
-force
-8knifunptr_platform_android196_AStorageManager_unmountObb
-AStorageManager_unmountObb
-:knifunptr_platform_android197_AStorageManager_isObbMounted
-AStorageManager_isObbMounted
-?knifunptr_platform_android198_AStorageManager_getMountedObbPath
-!AStorageManager_getMountedObbPath
-surfacetexture
-ASurfaceTexture
-@knifunptr_platform_android199_ASurfaceTexture_fromSurfaceTexture
-"ASurfaceTexture_fromSurfaceTexture
-NativeActivityState
-state
-4knifunptr_platform_android200_getNativeActivityState
-getNativeActivityState
-5knifunptr_platform_android201_notifySysEventProcessed
-notifySysEventProcessed
-
-UByteVarOf
-jboolean
-UByte
-jbooleanVar
-uint8_t
-jbyte
-jbyteVar
-int8_t
-UShortVarOf
-jchar
-UShort
-jcharVar
-uint16_t
-
-ShortVarOf
-jshort
-Short
-	jshortVar
-int16_t
-IntVarOf
-jint
-jintVar
-	LongVarOf
-jlong
-jlongVar
-
-FloatVarOf
-jfloat
-	jfloatVar
-DoubleVarOf
-jdouble
-Double
-
-jdoubleVar
-jsize
-jsizeVar
-
-jobjectVar
-jclass
-	jclassVar
-jstring
-
-jstringVar
-jarray
-	jarrayVar
-jobjectArray
-jobjectArrayVar
-jbooleanArray
-jbooleanArrayVar
-
-jbyteArray
-jbyteArrayVar
-
-jcharArray
-jcharArrayVar
-jshortArray
-jshortArrayVar
-	jintArray
-jintArrayVar
-
-jlongArray
-jlongArrayVar
-jfloatArray
-jfloatArrayVar
-jdoubleArray
-jdoubleArrayVar
-
-jthrowable
-jthrowableVar
-jweak
-jweakVar
-jfieldID
-	_jfieldID
-jfieldIDVar
-	jmethodID
-
-_jmethodID
-jmethodIDVar
-JavaVM
-JNIInvokeInterface
-	JavaVMVarå
- 
- 
- 
-
-
- 
-
- 
-	
-
-
-	 
- 
-
- 
-$ 
-	% 
-) 
-+ 
-. 
-/ 
-0 
-1 
-2 
-3
-4 
-7 
-> 
-? 
-J 
-K 
-Q 
-R 
-	V 
-	W 
-c 
-t 
-v 
-| 
-á 
-	à 
-í 
-ì 
-î 
-ñ 
-õ 
-° 
-¢ 
-£ 
-™ 
-Æ 
-Ø 
-∞ 
-± 
-≤ 
-π 
-Ω 
-ƒ 
-	≈ 
-“ 
-	’ 
-Ô 
-ˆ 
-Ç 
-Ö 
-ã 
-å 
-ç 
-	è 
-ê 
-	í 
-ì 
-î 
-ï 
-	ó 
-ò 
-ô 
-ö 
-	ú 
-ù 
-û 
-† 
-° 
-£ 
-§ 
-¶ 
-ß 
-® 
-™ 
-≠ 
-Ø 
-± 
-≥ 
-µ 
-∑ 
-π 
-ª 
-Ω 
-ø 
-¡ 
-√ 
-≈ 
-« 
-… 
-  
-Ã 
-Õ 
-œ 
-– Û2@02
-002
-0j`
-2
-0j`
-Há “
-(@02
-002
-0j`
-2
-0j`
-Há “
-(@02
-002
-0j`
-2
-0j`
-Há “
-(@02
-002
-0j`
-2
-0j`
-Há “
-(@02
-002
-0j`
-2
-0j`
-Há “
-(@02
-002
-0j`
-2
-0j`
-Há “
-(@02
-002
-0j`
-2
-0j`
-Há “
-(@!02
-002
-0j`
-2
-0j`
-Há “
-( @#02
-002
-0j`
-2
-0j`
-Há “
-("L(02
-002
-&0j`2
-0j`
-2
-0j`
-Há “
-('í902*
-002,
-002-02B5>20,*0000j`0000j`260Há “
-(8(;02*
-00Há “
-(:,=0j`2*
-00Há “
-(<RB0j`2*
-002$@ 
-000j0`0Há “
-(A<E0j`2*
-002C
-00Há “
-(D@H02*
-002C
-002F0Há “
-(GBO02I02L0“
-2M0“
-Há “
-(NXU02I02L0“
-2P0“
-2S
-00"0Há “
-(TXZ02I02L0“
-2P0“
-2X0 0j`!Há “
-(Ya]02[0“
-2L0“
-2P0“
-2S
-00"0Há “
-(\J`02^02I02L0“
-2M0“
-Há “
-(_`b02^02I02L0“
-2P0“
-2S
-00"0Há “
-(a(f02d
-0"0Há “
-(e(h02d
-0"0Há “
-(g,j0j`2d
-0"0Há “
-(i,l0j`2d
-0"0Há “
-(k,n0j`2d
-0"0Há “
-(mPs0j`2d
-0"02
-o0j`2
-p0j`2
-q0j`Há “
-(rLy0j`2d
-0"02u
-0#02w
-0$0Há “
-(x,{0j`2d
-0"0Há “
-(zEÅ02}
-0%02~02
-0j`
-Há†“
-	(Ä+Ñ02Ç
-0%0Há “
-	(É7Ü02Ç
-0%02
-q0j`Há “
-	(ÖEå02Ç
-0%02â0&j`'2ä0&j`'Há “
-	(ã8è02Ç
-0%02ç0&j`'Há “
-	(é8ë02Ç
-0%02ç0&j`'Há “
-	(ê`ô
-0"02#ï0(0j`)0j`*02ó00j`+Há “
-	(ò4ù
-0,02ö0“
-Há “
-	(ú+†02û
-0,0Há “
-	(ü=•0.0-j`/02û
-0,0Há “
-	(§/ß0j`2û
-0,0Há “
-	(¶/©0j`2û
-0,0Há “
-	(®"¨
-000Há “
-	(´dµ02≠
-00027≥2,*" 010j`20j`30j`40j`50Há “
-	(¥<∏
-0102≠
-0002∂0Há “
-	(∑Eº
-0102≠
-0002∂02∫06Há “
-	(ªùø
-0702≠
-0002,
-002-02B5>20,*0000j`0000j`260Há “
-	(æ;¡02≠
-0002*
-070Há “
-	(¿U»02*
-0702¬
-0102√0j`2∆08j`9Há “
-	(«; 02*
-0702¬
-010Há “
-	(…;Ã02*
-0702¬
-010Há “
-	(ÀHœ02*
-0702¬
-0102Õ0j`Há “
-	(Œ*—02*
-070Há “
-	(–L◊08j`;2*
-0702”
-0:02‘0j`
-Há “
-	(÷=Ÿ0.0-j`/02¬
-010Há “
-	(ÿ=€0.0-j`/02¬
-010Há “
-	(⁄+›02¬
-010Há “
-	(‹+ﬂ02¬
-010Há “
-	(ﬁ+·02¬
-010Há “
-	(‡+„02¬
-010Há “
-	(‚+Â02¬
-010Há “
-	(‰=Á0.0-j`/02¬
-010Há “
-	(Ê+È02¬
-010Há “
-	(Ë+Î062¬
-010Há “
-	(Í,Ó02Ï0“
-Há “
-	(Ì"Ò
-0<0Há “
-	(+Ù02Ú
-0<0Há “
-	(Û∏˘02Ú
-0<02ö0“
-2ı0“
-2Y˜THFB@0.0-j`/00j`00j`0000j`=260Há “
-	(¯Ø¸02Ú
-0<02ö0“
-2˙02Y˜THFB@0.0-j`/00j`00j`0000j`=260Há “
-	(˚=˛02Ú
-0<02ö0“
-Há “
-	(˝OÄ0.0-j`/02Ú
-0<02ö0“
-Há “
-	(ˇ`Ñ
-0>02#ï0(0j`)0j`*02Å00j`+Há “
-	(É+à02Ü
-0?0Há “
-	(áä0Há “
-	(â*é"`A0@20Bj`A0@*å"`C20Bj`C*ë"`D0-20.j`D0-*ê"`E20.j`E*ñ"`G0F20Hj`G0F*î"`I20Hj`I*õ"`K0J20Lj`K0J*ô"`M20Lj`M*ü"`O0N20j`O0N*û"`20j`*¢"`Q0P208j`Q0P*°"`9208j`9*•"`S0R20j`S0R*§"020*©"`U0T20Vj`U0T*ß"0V20V*´"`W0N20j`W0N*™"`O20j`O*#¨"`+0200j`+0*ñ"`200j`*#Æ"`X0200j`X0*≠"`+200j`+*#∞"`Y0200j`Y0*Ø"`+200j`+*#≤"`Z0200j`Z0*±"`+200j`+*#¥"`[0200j`[0*≥"`Z200j`Z*#∂"`\0200j`\0*µ"`Z200j`Z*#∏"`]0200j`]0*∑"`Z200j`Z*#∫"`^0200j`^0*π"`Z200j`Z*#º"`_0200j`_0*ª"`Z200j`Z*#æ"``0200j``0*Ω"`Z200j`Z*#¿"`a0200j`a0*ø"`Z200j`Z*#¬"`b0200j`b0*¡"`Z200j`Z*#ƒ"`c0200j`c0*√"`Z200j`Z*#∆"`d0200j`d0*≈"`+200j`+*#»"`e0200j`e0*«"`+200j`+*!À"`f020g0j`f0*…"0g020g0*!Œ"`h020i0j`h0*Ã"0i020i0*!—"`j020k0j`j0*œ"0k020k0ÿ
-‡
- Í
-platform.android

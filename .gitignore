@@ -294,3 +294,7 @@ gradle-app.setting
 # Android build outputs  
 android/build/
 android/.gradle/
+
+# Kotlin Native binaries and cache
+kotlin-native-*/
+*.konan/

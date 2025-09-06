@@ -1,1022 +1,0 @@
-
-úh
-kotlinx
-cinterop
-CPointer
-	CFunction
-kotlin
-	Function1
-UShortVarOf
-UShort
-platform
-windows
-WCHARVar
-LPWSTR
-Int
-WINBOOL
-DATEFMT_ENUMPROCW
-lpDateFmtEnumProc
-UInt
-LCID
-Locale
-DWORD
-dwFlags
-internal
-CCall
-id
-/knifunptr_platform_windows2304_EnumDateFormatsW
-EnumDateFormatsW
-	Function2
-	ByteVarOf
-Byte
-CHARVar
-LPSTR
-CALID
-DATEFMT_ENUMPROCEXA
-lpDateFmtEnumProcEx
-1knifunptr_platform_windows2305_EnumDateFormatsExA
-EnumDateFormatsExA
-DATEFMT_ENUMPROCEXW
-1knifunptr_platform_windows2306_EnumDateFormatsExW
-EnumDateFormatsExW
-LGRPID
-LanguageGroup
-3knifunptr_platform_windows2307_IsValidLanguageGroup
-IsValidLanguageGroup
-NLS_FUNCTION
-Function
-_nlsversioninfo
-LPNLSVERSIONINFO
-lpVersionInformation
-,knifunptr_platform_windows2308_GetNLSVersion
-GetNLSVersion
-String
-WCString
-lpString
-INT
-cchStr
-1knifunptr_platform_windows2309_IsNLSDefinedString
-IsNLSDefinedString
-,knifunptr_platform_windows2310_IsValidLocale
-IsValidLocale
-LCTYPE
-LCType
-CString
-lpLCData
--knifunptr_platform_windows2311_SetLocaleInfoA
-SetLocaleInfoA
--knifunptr_platform_windows2312_SetLocaleInfoW
-SetLocaleInfoW
-Calendar
-CALTYPE
-CalType
-	lpCalData
-cchData
-	UIntVarOf
-DWORDVar
-LPDWORD
-lpValue
-/knifunptr_platform_windows2313_GetCalendarInfoA
-GetCalendarInfoA
-/knifunptr_platform_windows2314_GetCalendarInfoW
-GetCalendarInfoW
-/knifunptr_platform_windows2315_SetCalendarInfoA
-SetCalendarInfoA
-/knifunptr_platform_windows2316_SetCalendarInfoW
-SetCalendarInfoW
-
-CValuesRef
-_SYSTEMTIME
-
-SYSTEMTIME
-
-lpDuration
-ULong
-	ULONGLONG
-ullDuration
-lpFormat
-lpDurationStr
-cchDuration
-0knifunptr_platform_windows2317_GetDurationFormat
-GetDurationFormat
-dwFindNLSStringFlags
-lpStringSource
-	cchSource
-lpStringValue
-cchValue
-IntVarOf
-IntVar
-LPINT
-	pcchFound
-,knifunptr_platform_windows2318_FindNLSString
-FindNLSString
-Flags
-PCWSTR
-Language
-SourceString
-PWSTR
-Buffer
-ULONG
-	cchBuffer
-	Directory
-ULONGVar
-PULONG
-pcchBufferOut
-4knifunptr_platform_windows2319_LoadStringByReference
-LoadStringByReference
-GEOID
-Location
-GEOTYPE
-GeoType
-	lpGeoData
-LANGID
-LangId
-*knifunptr_platform_windows2320_GetGeoInfoA
-GetGeoInfoA
-*knifunptr_platform_windows2321_GetGeoInfoW
-GetGeoInfoW
-GEOCLASS
-GeoClass
-ParentGeoId
-GEO_ENUMPROC
-lpGeoEnumProc
-.knifunptr_platform_windows2322_EnumSystemGeoID
-EnumSystemGeoID
-+knifunptr_platform_windows2323_GetUserGeoID
-GetUserGeoID
-UINT
-CodePage
-_cpinfo
-LPCPINFO
-lpCPInfo
-(knifunptr_platform_windows2324_GetCPInfo
-	GetCPInfo
-
-_cpinfoexA
-LPCPINFOEXA
-
-lpCPInfoEx
-+knifunptr_platform_windows2325_GetCPInfoExA
-GetCPInfoExA
-
-_cpinfoexW
-LPCPINFOEXW
-+knifunptr_platform_windows2326_GetCPInfoExW
-GetCPInfoExW
-lpName
-cchName
-/knifunptr_platform_windows2327_LCIDToLocaleName
-LCIDToLocaleName
-/knifunptr_platform_windows2328_LocaleNameToLCID
-LocaleNameToLCID
-GeoId
-+knifunptr_platform_windows2329_SetUserGeoID
-SetUserGeoID
-3knifunptr_platform_windows2330_ConvertDefaultLocale
-ConvertDefaultLocale
-.knifunptr_platform_windows2331_GetThreadLocale
-GetThreadLocale
-.knifunptr_platform_windows2332_SetThreadLocale
-SetThreadLocale
-9knifunptr_platform_windows2333_GetSystemDefaultUILanguage
-GetSystemDefaultUILanguage
-7knifunptr_platform_windows2334_GetUserDefaultUILanguage
-GetUserDefaultUILanguage
-5knifunptr_platform_windows2335_GetSystemDefaultLangID
-GetSystemDefaultLangID
-3knifunptr_platform_windows2336_GetUserDefaultLangID
-GetUserDefaultLangID
-3knifunptr_platform_windows2337_GetSystemDefaultLCID
-GetSystemDefaultLCID
-1knifunptr_platform_windows2338_GetUserDefaultLCID
-GetUserDefaultLCID
-2knifunptr_platform_windows2339_SetThreadUILanguage
-SetThreadUILanguage
-
-dwInfoType
-lpSrcStr
-cchSrc
-WORDVar
-LPWORD
-
-lpCharType
-/knifunptr_platform_windows2340_GetStringTypeExA
-GetStringTypeExA
--knifunptr_platform_windows2341_GetStringTypeA
-GetStringTypeA
-
-dwMapFlags
-	lpDestStr
-cchDest
-*knifunptr_platform_windows2342_FoldStringA
-FoldStringA
-LOCALE_ENUMPROCA
-lpLocaleEnumProc
-1knifunptr_platform_windows2343_EnumSystemLocalesA
-EnumSystemLocalesA
-LOCALE_ENUMPROCW
-1knifunptr_platform_windows2344_EnumSystemLocalesW
-EnumSystemLocalesW
-	Function5
-Long
-LONG_PTR
-LANGUAGEGROUP_ENUMPROCA
-lpLanguageGroupEnumProc
-lParam
-8knifunptr_platform_windows2345_EnumSystemLanguageGroupsA
-EnumSystemLanguageGroupsA
-LANGUAGEGROUP_ENUMPROCW
-8knifunptr_platform_windows2346_EnumSystemLanguageGroupsW
-EnumSystemLanguageGroupsW
-	Function4
-LANGGROUPLOCALE_ENUMPROCA
-lpLangGroupLocaleEnumProc
-8knifunptr_platform_windows2347_EnumLanguageGroupLocalesA
-EnumLanguageGroupLocalesA
-LANGGROUPLOCALE_ENUMPROCW
-8knifunptr_platform_windows2348_EnumLanguageGroupLocalesW
-EnumLanguageGroupLocalesW
-UILANGUAGE_ENUMPROCA
-lpUILanguageEnumProc
-/knifunptr_platform_windows2349_EnumUILanguagesA
-EnumUILanguagesA
-UILANGUAGE_ENUMPROCW
-/knifunptr_platform_windows2350_EnumUILanguagesW
-EnumUILanguagesW
-2knifunptr_platform_windows2351_GetThreadUILanguage
-GetThreadUILanguage
-pulNumLanguages
-PZZWSTR
-pwszLanguagesBuffer
-pcchLanguagesBuffer
-=knifunptr_platform_windows2352_GetProcessPreferredUILanguages
-GetProcessPreferredUILanguages
-PCZZWSTR
-=knifunptr_platform_windows2353_SetProcessPreferredUILanguages
-SetProcessPreferredUILanguages
-:knifunptr_platform_windows2354_GetUserPreferredUILanguages
-GetUserPreferredUILanguages
-<knifunptr_platform_windows2355_GetSystemPreferredUILanguages
-GetSystemPreferredUILanguages
-<knifunptr_platform_windows2356_GetThreadPreferredUILanguages
-GetThreadPreferredUILanguages
-<knifunptr_platform_windows2357_SetThreadPreferredUILanguages
-SetThreadPreferredUILanguages
-pcwszFilePath
-_FILEMUIINFO
-PFILEMUIINFO
-pFileMUIInfo
-pcbFileMUIInfo
--knifunptr_platform_windows2358_GetFileMUIInfo
-GetFileMUIInfo
-pwszLanguage
-pcchLanguage
-pwszFileMUIPath
-pcchFileMUIPath
-
-ULongVarOf
-ULONGLONGVar
-
-PULONGLONG
-pululEnumerator
--knifunptr_platform_windows2359_GetFileMUIPath
-GetFileMUIPath
-pwmszLanguage
-pwszFallbackLanguages
-PDWORD
-pcchFallbackLanguages
-pAttributes
-0knifunptr_platform_windows2360_GetUILanguageInfo
-GetUILanguageInfo
-pcwstrNewLanguage
-pcwstrPreviousLanguage
-
-dwReserved
-pdwStatusRtrn
-5knifunptr_platform_windows2361_NotifyUILanguageChange
-NotifyUILanguageChange
-CODEPAGE_ENUMPROCA
-lpCodePageEnumProc
-3knifunptr_platform_windows2362_EnumSystemCodePagesA
-EnumSystemCodePagesA
-CODEPAGE_ENUMPROCW
-3knifunptr_platform_windows2363_EnumSystemCodePagesW
-EnumSystemCodePagesW
-	NORM_FORM
-NormForm
-lpSrcString
-cwSrcLength
-lpDstString
-cwDstLength
-.knifunptr_platform_windows2364_NormalizeString
-NormalizeString
-cwLength
-1knifunptr_platform_windows2365_IsNormalizedString
-IsNormalizedString
-lpUnicodeCharStr
-cchUnicodeChar
-lpASCIICharStr
-cchASCIIChar
-)knifunptr_platform_windows2366_IdnToAscii
-
-IdnToAscii
-lpNameprepCharStr
-cchNameprepChar
-3knifunptr_platform_windows2367_IdnToNameprepUnicode
-IdnToNameprepUnicode
-+knifunptr_platform_windows2368_IdnToUnicode
-IdnToUnicode
-lpLocaleScripts
-cchLocaleScripts
-lpTestScripts
-cchTestScripts
-,knifunptr_platform_windows2369_VerifyScripts
-VerifyScripts
-	cchString
-	lpScripts
-
-cchScripts
-/knifunptr_platform_windows2370_GetStringScripts
-GetStringScripts
-lpLocaleName
-.knifunptr_platform_windows2371_GetLocaleInfoEx
-GetLocaleInfoEx
-
-lpReserved
-0knifunptr_platform_windows2372_GetCalendarInfoEx
-GetCalendarInfoEx
-2knifunptr_platform_windows2373_GetDurationFormatEx
-GetDurationFormatEx
-_numberfmtW
-
-NUMBERFMTW
-lpNumberStr
-	cchNumber
-0knifunptr_platform_windows2374_GetNumberFormatEx
-GetNumberFormatEx
-_currencyfmtW
-CURRENCYFMTW
-lpCurrencyStr
-cchCurrency
-2knifunptr_platform_windows2375_GetCurrencyFormatEx
-GetCurrencyFormatEx
-cchLocaleName
-7knifunptr_platform_windows2376_GetUserDefaultLocaleName
-GetUserDefaultLocaleName
-9knifunptr_platform_windows2377_GetSystemDefaultLocaleName
-GetSystemDefaultLocaleName
-function
-_nlsversioninfoex
-LPNLSVERSIONINFOEX
-.knifunptr_platform_windows2378_GetNLSVersionEx
-GetNLSVersionEx
-CPointed
-LPVOID
-LPARAM
-
-sortHandle
-.knifunptr_platform_windows2379_FindNLSStringEx
-FindNLSStringEx
-,knifunptr_platform_windows2380_LCMapStringEx
-LCMapStringEx
-0knifunptr_platform_windows2381_IsValidLocaleName
-IsValidLocaleName
-CALINFO_ENUMPROCEXEX
-pCalInfoEnumProcExEx
-3knifunptr_platform_windows2382_EnumCalendarInfoExEx
-EnumCalendarInfoExEx
-	Function3
-DATEFMT_ENUMPROCEXEX
-lpDateFmtEnumProcExEx
-2knifunptr_platform_windows2383_EnumDateFormatsExEx
-EnumDateFormatsExEx
-TIMEFMT_ENUMPROCEX
-lpTimeFmtEnumProcEx
-0knifunptr_platform_windows2384_EnumTimeFormatsEx
-EnumTimeFormatsEx
-LOCALE_ENUMPROCEX
-lpLocaleEnumProcEx
-2knifunptr_platform_windows2385_EnumSystemLocalesEx
-EnumSystemLocalesEx
-lpNameToResolve
-0knifunptr_platform_windows2386_ResolveLocaleName
-ResolveLocaleName
-HANDLE
-hConsoleInput
-_INPUT_RECORD
-PINPUT_RECORD
-lpBuffer
-nLength
-lpNumberOfEventsRead
-0knifunptr_platform_windows2387_PeekConsoleInputA
-PeekConsoleInputA
-0knifunptr_platform_windows2388_PeekConsoleInputW
-PeekConsoleInputW
-0knifunptr_platform_windows2389_ReadConsoleInputA
-ReadConsoleInputA
-0knifunptr_platform_windows2390_ReadConsoleInputW
-ReadConsoleInputW
-INPUT_RECORD
-lpNumberOfEventsWritten
-1knifunptr_platform_windows2391_WriteConsoleInputA
-WriteConsoleInputA
-1knifunptr_platform_windows2392_WriteConsoleInputW
-WriteConsoleInputW
-hConsoleOutput
-
-_CHAR_INFO
-
-PCHAR_INFO
-CValue
-_COORD
-COORD
-dwBufferSize
-dwBufferCoord
-_SMALL_RECT
-PSMALL_RECT
-lpReadRegion
-1knifunptr_platform_windows2393_ReadConsoleOutputA
-ReadConsoleOutputA
-1knifunptr_platform_windows2394_ReadConsoleOutputW
-ReadConsoleOutputW
-	CHAR_INFO
-lpWriteRegion
-2knifunptr_platform_windows2395_WriteConsoleOutputA
-WriteConsoleOutputA
-2knifunptr_platform_windows2396_WriteConsoleOutputW
-WriteConsoleOutputW
-lpCharacter
-dwReadCoord
-lpNumberOfCharsRead
-:knifunptr_platform_windows2397_ReadConsoleOutputCharacterA
-ReadConsoleOutputCharacterA
-:knifunptr_platform_windows2398_ReadConsoleOutputCharacterW
-ReadConsoleOutputCharacterW
-lpAttribute
-lpNumberOfAttrsRead
-9knifunptr_platform_windows2399_ReadConsoleOutputAttribute
-ReadConsoleOutputAttribute
-dwWriteCoord
-lpNumberOfCharsWritten
-;knifunptr_platform_windows2400_WriteConsoleOutputCharacterA
-WriteConsoleOutputCharacterA
-;knifunptr_platform_windows2401_WriteConsoleOutputCharacterW
-WriteConsoleOutputCharacterW
-lpNumberOfAttrsWritten
-:knifunptr_platform_windows2402_WriteConsoleOutputAttribute
-WriteConsoleOutputAttribute
-CHAR
-
-cCharacter
-:knifunptr_platform_windows2403_FillConsoleOutputCharacterA
-FillConsoleOutputCharacterA
-WCHAR
-:knifunptr_platform_windows2404_FillConsoleOutputCharacterW
-FillConsoleOutputCharacterW
-WORD
-
-wAttribute
-9knifunptr_platform_windows2405_FillConsoleOutputAttribute
-FillConsoleOutputAttribute
-hConsoleHandle
-lpMode
--knifunptr_platform_windows2406_GetConsoleMode
-GetConsoleMode
-lpNumberOfEvents
-<knifunptr_platform_windows2407_GetNumberOfConsoleInputEvents
-GetNumberOfConsoleInputEvents
-_CONSOLE_SCREEN_BUFFER_INFO
-PCONSOLE_SCREEN_BUFFER_INFO
-lpConsoleScreenBufferInfo
-9knifunptr_platform_windows2408_GetConsoleScreenBufferInfo
-GetConsoleScreenBufferInfo
-:knifunptr_platform_windows2409_GetLargestConsoleWindowSize
-GetLargestConsoleWindowSize
-_CONSOLE_CURSOR_INFO
-PCONSOLE_CURSOR_INFO
-lpConsoleCursorInfo
-3knifunptr_platform_windows2410_GetConsoleCursorInfo
-GetConsoleCursorInfo
-bMaximumWindow
-_CONSOLE_FONT_INFO
-PCONSOLE_FONT_INFO
-lpConsoleCurrentFont
-4knifunptr_platform_windows2411_GetCurrentConsoleFont
-GetCurrentConsoleFont
-nFont
-1knifunptr_platform_windows2412_GetConsoleFontSize
-GetConsoleFontSize
-_CONSOLE_SELECTION_INFO
-PCONSOLE_SELECTION_INFO
-lpConsoleSelectionInfo
-6knifunptr_platform_windows2413_GetConsoleSelectionInfo
-GetConsoleSelectionInfo
-lpNumberOfMouseButtons
-=knifunptr_platform_windows2414_GetNumberOfConsoleMouseButtons
-GetNumberOfConsoleMouseButtons
-dwMode
--knifunptr_platform_windows2415_SetConsoleMode
-SetConsoleMode
-;knifunptr_platform_windows2416_SetConsoleActiveScreenBuffer
-SetConsoleActiveScreenBuffer
-6knifunptr_platform_windows2417_FlushConsoleInputBuffer
-FlushConsoleInputBuffer
-dwSize
-9knifunptr_platform_windows2418_SetConsoleScreenBufferSize
-SetConsoleScreenBufferSize
-dwCursorPosition
-7knifunptr_platform_windows2419_SetConsoleCursorPosition
-SetConsoleCursorPosition
-CONSOLE_CURSOR_INFO
-3knifunptr_platform_windows2420_SetConsoleCursorInfo
-SetConsoleCursorInfo
-
-SMALL_RECT
-lpScrollRectangle
-lpClipRectangle
-dwDestinationOrigin
-lpFill
-9knifunptr_platform_windows2421_ScrollConsoleScreenBufferA
-ScrollConsoleScreenBufferA
-9knifunptr_platform_windows2422_ScrollConsoleScreenBufferW
-ScrollConsoleScreenBufferW
-	bAbsolute
-lpConsoleWindow
-3knifunptr_platform_windows2423_SetConsoleWindowInfo
-SetConsoleWindowInfo
-wAttributes
-6knifunptr_platform_windows2424_SetConsoleTextAttribute
-SetConsoleTextAttribute
-PHANDLER_ROUTINE
-HandlerRoutine
-Add
-4knifunptr_platform_windows2425_SetConsoleCtrlHandler
-SetConsoleCtrlHandler
-dwCtrlEvent
-dwProcessGroupId
-7knifunptr_platform_windows2426_GenerateConsoleCtrlEvent
-GenerateConsoleCtrlEvent
-+knifunptr_platform_windows2427_AllocConsole
-AllocConsole
-*knifunptr_platform_windows2428_FreeConsole
-FreeConsole
-dwProcessId
-,knifunptr_platform_windows2429_AttachConsole
-AttachConsole
-lpConsoleTitle
-nSize
-/knifunptr_platform_windows2430_GetConsoleTitleA
-GetConsoleTitleA
-/knifunptr_platform_windows2431_GetConsoleTitleW
-GetConsoleTitleW–
- 
- 
- 
- 
-
- 
- 
- 
-
-	
-	
- 
-	 
- 
-	 
-	 
- 
-	 
-	 
-
- 
- 
- 
- 
-	 
-	 
-	 
-	  
-	$ 
-	' 
-	+ 
-	- 
-	. 
-2 
-3 
-	5 
-	; 
-= 
-	D 
-H 
-	I 
-	J 
-T 
-	U 
-	V 
-X 
-	Y 
-e 
-f 
-	g 
-	l 
-	o 
-	q 
-	t 
-	u 
-	y 
-	{ 
-	~ 
-	Ñ 
-	á 
-	ç 
-	è 
-	ê 
-	î 
-	ï 
-	ô 
-	ö 
-	Ω 
-	æ 
-	… 
-	Õ 
-– 
-— 
-	“ 
-	” 
-	ÿ 
-€ 
-	‹ 
-	‡ 
-	„ 
-	Á 
-	Ì 
-	Ú 
-	˛ 
-	ˇ 
-à 
-	â 
-	ä 
-	ê 
-	õ 
-	ü 
-	¢ 
-	Ã 
-	Õ 
-	“ 
-	” 
-	ﬁ 
-	ﬂ 
-‚ 
-	„ 
-	‰ 
-	Ï 
- 
-	Ò 
-	ı 
-	˘ 
-	Ä 
-	Ç 
-	É 
-	è 
-	ñ 
-	ó 
-ò 
-	ô 
-	ö 
-	ù 
-	û 
-	§ 
-	æ 
-	¬ 
-	≈ 
-	– 
-	— 
-	◊ 
-	ÿ 
-	› 
-	ﬁ 
-	Â 
-	Ê 
-	˙ 
-	˝ 
-	ç „jx0j`2B>20,*00j`
-0j`0j`000j`2
-0j`2
-0j`Há “
-(Ç#0j`2L!H<:6400j`0j`0j`0j`000j`2
-0j`2
-0j`Há “
-("Ç&0j`2L!H<:6400j`
-0j`0j`0j`000j`2
-0j`2
-0j`Há “
-(%4*0j`2
-(0j`2
-0j`Há “
-()J10j`2
-,0j`2
-0j`2/00j`Há “
-(0g80j`2
-,0j`2
-0j`2/00j`240 “
-!2
-60j`"Há “
-(74:0j`2
-0j`2
-0j`Há “
-(9E@0j`2
-0j`2
-<0j`#2>0 “
-$Há “
-(?EB0j`2
-0j`2
-<0j`#2>0 “
-!Há “
-(AÑM02
-0j`2
-C0j`2
-E0j`%2F00j`0j`2G02K00&j`'0j`(Há “
-(LÑO02
-0j`2
-C0j`2
-E0j`%2F00j`
-0j`2G02K00&j`'0j`(Há “
-(NQQ0j`2
-0j`2
-C0j`2
-E0j`%2F0 “
-$Há “
-(PQS0j`2
-0j`2
-C0j`2
-E0j`%2F0 “
-!Há “
-(Râ_02
-0j`2
-0j`2W0*j`+0)2
-Z0,j`-2[0 “
-!2\00j`
-0j`2]0Há “
-(^Çj02
-0j`2
-`0j`2a0 “
-!2b02c0 “
-!2d02h00.j`/0j`0Há “
-(i‘x0j`2
-k0j`2m00j`
-0j`12n00j`
-0j`12p00j`
-0j`22
-r0j`32s00j`
-0j`12v00&j`40j`5Há “
-(wfÅ02
-z0j`62
-|0j`72}00j`0j`2G02
-0j`8Há “
-	(ÄfÉ02
-z0j`62
-|0j`72}00j`
-0j`2G02
-0j`8Há “
-	(Çiä0j`2Ö0j`92Ü0j`62/à*0j`60j`000j`:Há “
-	(â+å0j`62Ö0j`9Há “
-	(ãBì0j`2é0j`;2ë0<0j`=Há “
-	(íNò0j`2é0j`;2
-0j`2ñ0>0j`?Há “
-	(óNú0j`2é0j`;2
-0j`2ñ0@0j`AHá “
-	(õ\†02
-0j`2ù00j`
-0j`2û02
-0j`Há “
-	(ü<¢0j`2ù0 “
-!2
-0j`Há “
-	(°+•0j`2£0j`6Há “
-	(§*ß0j`2
-0j`Há “
-	(¶©0j`Há “
-	(®*´0j`2
-0j`Há “
-	(™≠0j`8Há “
-	(¨Ø0j`8Há “
-	(Æ±0j`8Há “
-	(∞≥0j`8Há “
-	(≤µ0j`Há “
-	(¥∑0j`Há “
-	(∂*π0j`82
-0j`8Há “
-	(∏s¡0j`2
-0j`2∫0j`2ª0 “
-$2º02ø00j`B0j`CHá “
-	(¿s√0j`2
-0j`2∫0j`2ª0 “
-$2º02ø00j`B0j`CHá “
-	(¬l»02ƒ0j`2ª0 “
-$2º02≈00j`0j`2∆0Há “
-	(«oÃ0j`2C >20,*00j`0j`0j`000j`D2
-0j`Há “
-	(Àoœ0j`2C >20,*00j`
-0j`0j`000j`E2
-0j`Há “
-	(Œ∏◊0j`2‘znlhf0j`00j`0j`00j`0j`0j`0Gj`H0j`0F00j`I2
-0j`2’0Gj`HHá “
-	(÷∏⁄0j`2‘znlhf0j`00j`
-0j`00j`
-0j`0j`0Gj`H0j`0F00j`J2
-0j`2’0Gj`HHá “
-	(Ÿ¶ﬂ0j`2a›\PNJH0j`0j`00j`0j`0Gj`H0j`0K00j`L2
-(0j`2
-0j`2’0Gj`HHá “
-	(ﬁ¶‚0j`2a›\PNJH0j`0j`00j`
-0j`0Gj`H0j`0K00j`M2
-(0j`2
-0j`2’0Gj`HHá “
-	(·ÜÊ0j`2M‰H<:6400j`0j`0Gj`H0j`000j`N2
-0j`2’0Gj`HHá “
-	(ÂÜÈ0j`2M‰H<:6400j`
-0j`0Gj`H0j`000j`O2
-0j`2’0Gj`HHá “
-	(ËÎ0j`8Há “
-	(ÍçÒ0j`2
-0j`2Ï00&j`40j`52Ó00j`
-0j`P2Ô00&j`40j`5Há “
-	(lÙ0j`2
-0j`2Ó00j`
-0j`Q2Ï00&j`40j`5Há “
-	(Ûçˆ0j`2
-0j`2Ï00&j`40j`52Ó00j`
-0j`P2Ô00&j`40j`5Há “
-	(ıç¯0j`2
-0j`2Ï00&j`40j`52Ó00j`
-0j`P2Ô00&j`40j`5Há “
-	(˜ç˙0j`2
-0j`2Ï00&j`40j`52Ó00j`
-0j`P2Ô00&j`40j`5Há “
-	(˘l¸0j`2
-0j`2Ó00j`
-0j`Q2Ï00&j`40j`5Há “
-	(˚}É0j`2
-0j`2˝00j`
-0j`12Ä0R0j`S2Å00&j`'0)Há “
-	(Çç0j`2
-0j`2˝00j`
-0j`12Ñ00j`
-0j`22Ö00&j`40j`52Ü00j`
-0j`22á00&j`40j`52ã0,0Tj`U0j`VHá “
-	(åÆî0j`2
-0j`2é00j`
-0j`Q2è00j`
-0j`P2ë00&j`'0j`W2í00&j`'0j`WHá “
-	(ìöö0j`2
-0j`2ï00j`
-0j`12ñ00j`
-0j`12ó0j`2ò00&j`'0j`WHá “
-	(ôoû0j`2Cú>20,*00j`0j`0j`000j`X2
-0j`Há “
-	(ùo°0j`2Cú>20,*00j`
-0j`0j`000j`Y2
-0j`Há “
-	(†l©02£0j`Z2§0 “
-!2•02¶00j`
-0j`2ß0Há “
-	(®E¨0j`2£0j`Z240 “
-!2™0Há “
-	(´k≤02
-0j`2≠0 “
-!2Æ02Ø00j`
-0j`2∞0Há “
-	(±k∂02
-0j`2≠0 “
-!2Æ02≥00j`
-0j`2¥0Há “
-	(µk∏02
-0j`2Ø0 “
-!2∞02≠00j`
-0j`2Æ0Há “
-	(∑`æ0j`2
-0j`2π0 “
-!2∫02ª0 “
-!2º0Há “
-	(Ωj√02
-0j`240 “
-!2ø02¿00j`
-0j`2¡0Há “
-	(¬`∆02ƒ0 “
-!2
-<0j`#2>00j`
-0j`2G0Há “
-	(≈û…02ƒ0 “
-!2
-C0j`2«0 “
-!2
-E0j`%2F00j`
-0j`2G02K00&j`'0j`(Há “
-	(»ëÀ02ƒ0 “
-!2
-0j`2W0*j`+0)2
-Z0,j`-2[0 “
-!2\00j`
-0j`2]0Há “
-	( á—02ƒ0 “
-!2
-0j`2K0 “
-!2[0[j`\0)2Œ00j`
-0j`2œ0Há “
-	(–á◊02ƒ0 “
-!2
-0j`2K0 “
-!2[0]j`^0)2‘00j`
-0j`2’0Há “
-	(÷D⁄02ƒ00j`
-0j`2ÿ0Há “
-	(ŸD‹02ƒ00j`
-0j`2ÿ0Há “
-	(€S·0j`2›0j`2ƒ0 “
-!2/0_0j``Há “
-	(‡∆Á02ƒ0 “
-!2
-`0j`2a0 “
-!2b02c0 “
-!2d02h00.j`/0j`02/00j`2«0a0j`b2Â0Gj`cHá “
-	(Ê∫È02ƒ0 “
-!2ƒ0j`2ª0 “
-!2º02≈00j`
-0j`2∆02/00j`2«0a0j`b2Â0Gj`cHá “
-	(Ë0Î0j`2ƒ0 “
-!Há “
-	(ÍﬁÔ0j`2uÌpdb^\00j`
-0j`0j`00j`
-0j`0Gj`c0j`0K00j`d2ƒ0 “
-!2
-C0j`2«0 “
-!2
-E0j`%2’0Gj`cHá “
-	(Ó¢Ù0j`2WÚRFD@>00j`
-0j`0j`0Gj`c0j`0e00j`f2ƒ0 “
-!2
-0j`2’0Gj`cHá “
-	(Ûò¯0j`2MˆH<:6400j`
-0j`0Gj`c0j`000j`g2ƒ0 “
-!2
-0j`2’0Gj`cHá “
-	(˜©¸0j`2W˙RFD@>00j`
-0j`0j`0Gj`c0j`0e00j`h2
-0j`2’0Gj`c2«0a0j`bHá “
-	(˚Vˇ02˝0 “
-!2ƒ00j`
-0j`2ÿ0Há “
-	(˛|à0j`2Å0a0j`i2Ñ0j0j`k2Ö0j`2Ü00&j`'0j`(Há “
-	(á|ä0j`2Å0a0j`i2Ñ0j0j`k2Ö0j`2Ü00&j`'0j`(Há “
-	(â|å0j`2Å0a0j`i2Ñ0j0j`k2Ö0j`2Ü00&j`'0j`(Há “
-	(ã|é0j`2Å0a0j`i2Ñ0j0j`k2Ö0j`2Ü00&j`'0j`(Há “
-	(çzí0j`2Å0a0j`i2Ñ0jj`l0)2Ö0j`2ê00&j`'0j`(Há “
-	(ëzî0j`2Å0a0j`i2Ñ0jj`l0)2Ö0j`2ê00&j`'0j`(Há “
-	(ìã°0j`2ï0a0j`i2Ñ0m0j`n2õ0pj`q0o2ú0pj`q0o2ü0r0j`sHá “
-	(†ã£0j`2ï0a0j`i2Ñ0m0j`n2õ0pj`q0o2ú0pj`q0o2ü0r0j`sHá “
-	(¢âß0j`2ï0a0j`i2Ñ0mj`t0)2õ0pj`q0o2ú0pj`q0o2•0r0j`sHá “
-	(¶â©0j`2ï0a0j`i2Ñ0mj`t0)2õ0pj`q0o2ú0pj`q0o2•0r0j`sHá “
-	(®ôÆ0j`2ï0a0j`i2™00j`0j`2Ö0j`2´0pj`q0o2¨00&j`'0j`(Há “
-	(≠ô∞0j`2ï0a0j`i2™00j`
-0j`2Ö0j`2´0pj`q0o2¨00&j`'0j`(Há “
-	(Øô¥0j`2ï0a0j`i2±00j`B0j`C2Ö0j`2´0pj`q0o2≤00&j`'0j`(Há “
-	(≥ä∏0j`2ï0a0j`i2™0 “
-$2Ö0j`2µ0pj`q0o2∂00&j`'0j`(Há “
-	(∑ä∫0j`2ï0a0j`i2™0 “
-!2Ö0j`2µ0pj`q0o2∂00&j`'0j`(Há “
-	(πìΩ0j`2ï0a0j`i2±00j`B0)2Ö0j`2µ0pj`q0o2ª00&j`'0j`(Há “
-	(ºÖ¡0j`2ï0a0j`i2ø0j`u2Ö0j`2µ0pj`q0o2∂00&j`'0j`(Há “
-	(¿Öƒ0j`2ï0a0j`i2ø0j`v2Ö0j`2µ0pj`q0o2∂00&j`'0j`(Há “
-	(√Ö»0j`2ï0a0j`i2∆0j`w2Ö0j`2µ0pj`q0o2ª00&j`'0j`(Há “
-	(«XÃ0j`2…0a0j`i2 00&j`'0j`(Há “
-	(ÀXœ0j`2Å0a0j`i2Õ00&j`'0j`(Há “
-	(ŒN‘0j`2ï0a0j`i2“0x0j`yHá “
-	(”=÷0pj`q0o2ï0a0j`iHá “
-	(’N€0j`2ï0a0j`i2Ÿ0z0j`{Há “
-	(⁄[·0j`2ï0a0j`i2‹0j`2ﬂ0|0j`}Há “
-	(‡J‰0pj`q0o2ï0a0j`i2‚0j`Há “
-	(„5È0j`2Á0~0j`Há “
-	(Ë?Ï0j`2Í00&j`'0j`(Há “
-	(ÎDÔ0j`2…0a0j`i2Ì0j`Há “
-	(Ó7Ò0j`2ï0a0j`iHá “
-	(7Û0j`2Å0a0j`iHá “
-	(ÚJˆ0j`2ï0a0j`i2Ù0pj`q0oHá “
-	(ıJ˘0j`2ï0a0j`i2˜0pj`q0oHá “
-	(¯M¸0j`2ï0a0j`i2Ÿ	0zj`Ä0)Há “
-	(˚ãÉ0j`2ï0a0j`i2˛	0rj`Å0)2ˇ	0rj`Å0)2Ä0pj`q0o2Å0mj`t0)Há “
-	(ÇãÖ0j`2ï0a0j`i2˛	0rj`Å0)2ˇ	0rj`Å0)2Ä0pj`q0o2Å0mj`t0)Há “
-	(ÑZâ0j`2ï0a0j`i2Ü0j`2á	0rj`Å0)Há “
-	(àDå0j`2ï0a0j`i2ä0j`wHá “
-	(ã]ë0j`20é+0j`0j`000j`Ç2è0j`Há “
-	(ê8ï0j`2í0j`2ì0j`Há “
-	(îó0j`Há “
-	(ñô0j`Há “
-	(ò+ú0j`2ö0j`Há “
-	(õL†0j`2ù00j`0j`2û0j`Há “
-	(üL¢0j`2ù00j`
-0j`2û0j`Há “
-	(°ÿ
-	‡
- Í
-platform.windows

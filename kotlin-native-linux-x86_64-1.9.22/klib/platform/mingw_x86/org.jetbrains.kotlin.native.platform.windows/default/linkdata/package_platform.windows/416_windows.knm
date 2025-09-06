@@ -1,360 +1,0 @@
-
-™C
-kotlin
-UInt
-SIO_UCAST_IF
-SIO_LIMIT_BROADCASTS
-SIO_INDEX_BIND
-SIO_INDEX_MCASTIF
-SIO_INDEX_ADD_MCAST
-SIO_INDEX_DEL_MCAST
-Int
-
-RCVALL_OFF
-	RCVALL_ON
-RCVALL_SOCKETLEVELONLY
-RCVALL_IPLEVEL
-$SOCKET_SETTINGS_GUARANTEE_ENCRYPTION
-SOCKET_SETTINGS_ALLOW_INSECURE
-SOCKET_INFO_CONNECTION_SECURED
- SOCKET_INFO_CONNECTION_ENCRYPTED
-#SOCKET_INFO_CONNECTION_IMPERSONATED
-/SOCKET_SETTINGS_IPSEC_SKIP_FILTER_INSTANTIATION
-kotlinx
-cinterop
-CPointer
-	CFunction
-	Function0
-internal
-CCall
-id
-6knifunptr_platform_windows8547_GetExceptionCode_getter
-GetExceptionCode
-4knifunptr_platform_windows8548_exception_code_getter
-exception_code
-platform
-windows
-_EXCEPTION_POINTERS
-=knifunptr_platform_windows8549_GetExceptionInformation_getter
-GetExceptionInformation
-4knifunptr_platform_windows8550_exception_info_getter
-exception_info
-9knifunptr_platform_windows8551_AbnormalTermination_getter
-AbnormalTermination
-:knifunptr_platform_windows8552_abnormal_termination_getter
-abnormal_termination
-CPointed
-COpaquePointer
-*knifunptr_platform_windows8553_NULL_getter
-NULL
-	Function2
-2knifunptr_platform_windows8554_RotateLeft32_getter
-RotateLeft32
-ULong
-2knifunptr_platform_windows8555_RotateLeft64_getter
-RotateLeft64
-3knifunptr_platform_windows8556_RotateRight32_getter
-RotateRight32
-3knifunptr_platform_windows8557_RotateRight64_getter
-RotateRight64
-IntVarOf
-IntVar
-UByte
--knifunptr_platform_windows8558_BitTest_getter
-BitTest
-:knifunptr_platform_windows8559_BitTestAndComplement_getter
-BitTestAndComplement
-3knifunptr_platform_windows8560_BitTestAndSet_getter
-BitTestAndSet
-5knifunptr_platform_windows8561_BitTestAndReset_getter
-BitTestAndReset
-	UIntVarOf
-UIntVar
-4knifunptr_platform_windows8562_BitScanForward_getter
-BitScanForward
-4knifunptr_platform_windows8563_BitScanReverse_getter
-BitScanReverse
-	Function1
-
-ShortVarOf
-Short
-ShortVar
-<knifunptr_platform_windows8564_InterlockedIncrement16_getter
-InterlockedIncrement16
-<knifunptr_platform_windows8565_InterlockedDecrement16_getter
-InterlockedDecrement16
-	Function3
-Bknifunptr_platform_windows8566_InterlockedCompareExchange16_getter
-InterlockedCompareExchange16
-4knifunptr_platform_windows8567_InterlockedAnd_getter
-InterlockedAnd
-3knifunptr_platform_windows8568_InterlockedOr_getter
-InterlockedOr
-4knifunptr_platform_windows8569_InterlockedXor_getter
-InterlockedXor
-:knifunptr_platform_windows8570_InterlockedIncrement_getter
-InterlockedIncrement
-Aknifunptr_platform_windows8571_InterlockedIncrementAcquire_getter
-InterlockedIncrementAcquire
-Aknifunptr_platform_windows8572_InterlockedIncrementRelease_getter
-InterlockedIncrementRelease
-:knifunptr_platform_windows8573_InterlockedDecrement_getter
-InterlockedDecrement
-Aknifunptr_platform_windows8574_InterlockedDecrementAcquire_getter
-InterlockedDecrementAcquire
-Aknifunptr_platform_windows8575_InterlockedDecrementRelease_getter
-InterlockedDecrementRelease
-4knifunptr_platform_windows8576_InterlockedAdd_getter
-InterlockedAdd
-9knifunptr_platform_windows8577_InterlockedExchange_getter
-InterlockedExchange
-<knifunptr_platform_windows8578_InterlockedExchangeAdd_getter
-InterlockedExchangeAdd
-@knifunptr_platform_windows8579_InterlockedCompareExchange_getter
-InterlockedCompareExchange
-Gknifunptr_platform_windows8580_InterlockedCompareExchangeAcquire_getter
-!InterlockedCompareExchangeAcquire
-Gknifunptr_platform_windows8581_InterlockedCompareExchangeRelease_getter
-!InterlockedCompareExchangeRelease
-	LongVarOf
-Long
-LONGLONGVar
-LONGLONG
-6knifunptr_platform_windows8582_InterlockedAnd64_getter
-InterlockedAnd64
-<knifunptr_platform_windows8583_InterlockedAndAffinity_getter
-InterlockedAndAffinity
-5knifunptr_platform_windows8584_InterlockedOr64_getter
-InterlockedOr64
-;knifunptr_platform_windows8585_InterlockedOrAffinity_getter
-InterlockedOrAffinity
-6knifunptr_platform_windows8586_InterlockedXor64_getter
-InterlockedXor64
-<knifunptr_platform_windows8587_InterlockedIncrement64_getter
-InterlockedIncrement64
-<knifunptr_platform_windows8588_InterlockedDecrement64_getter
-InterlockedDecrement64
-LongVar
-6knifunptr_platform_windows8589_InterlockedAdd64_getter
-InterlockedAdd64
-;knifunptr_platform_windows8590_InterlockedExchange64_getter
-InterlockedExchange64
-Bknifunptr_platform_windows8591_InterlockedExchangeAcquire64_getter
-InterlockedExchangeAcquire64
->knifunptr_platform_windows8592_InterlockedExchangeAdd64_getter
-InterlockedExchangeAdd64
-Bknifunptr_platform_windows8593_InterlockedCompareExchange64_getter
-InterlockedCompareExchange64
-Iknifunptr_platform_windows8594_InterlockedCompareExchangeAcquire64_getter
-#InterlockedCompareExchangeAcquire64
-Iknifunptr_platform_windows8595_InterlockedCompareExchangeRelease64_getter
-#InterlockedCompareExchangeRelease64
-CPointerVarOf
-COpaquePointerVar
-@knifunptr_platform_windows8596_InterlockedExchangePointer_getter
-InterlockedExchangePointer
-Unit
-.knifunptr_platform_windows8597__m_empty_getter
-_m_empty
-1knifunptr_platform_windows8598__m_from_int_getter
-_m_from_int
-3knifunptr_platform_windows8599__m_from_int64_getter
-_m_from_int64
-/knifunptr_platform_windows8600__m_to_int_getter
-	_m_to_int
-1knifunptr_platform_windows8601__m_to_int64_getter
-_m_to_int64
-1knifunptr_platform_windows8602__m_packsswb_getter
-_m_packsswb
-1knifunptr_platform_windows8603__m_packssdw_getter
-_m_packssdw
-1knifunptr_platform_windows8604__m_packuswb_getter
-_m_packuswb
-2knifunptr_platform_windows8605__m_punpckhbw_getter
-_m_punpckhbw
-2knifunptr_platform_windows8606__m_punpckhwd_getter
-_m_punpckhwd
-2knifunptr_platform_windows8607__m_punpckhdq_getter
-_m_punpckhdq
-2knifunptr_platform_windows8608__m_punpcklbw_getter
-_m_punpcklbw
-2knifunptr_platform_windows8609__m_punpcklwd_getter
-_m_punpcklwd
-2knifunptr_platform_windows8610__m_punpckldq_getter
-_m_punpckldq
-.knifunptr_platform_windows8611__m_paddb_getter
-_m_paddb
-.knifunptr_platform_windows8612__m_paddw_getter
-_m_paddw
-.knifunptr_platform_windows8613__m_paddd_getter
-_m_paddd
-/knifunptr_platform_windows8614__m_paddsb_getter
-	_m_paddsb
-/knifunptr_platform_windows8615__m_paddsw_getter
-	_m_paddsw
-0knifunptr_platform_windows8616__m_paddusb_getter
-
-_m_paddusb
-0knifunptr_platform_windows8617__m_paddusw_getter
-
-_m_paddusw
-.knifunptr_platform_windows8618__m_psubb_getter
-_m_psubb
-.knifunptr_platform_windows8619__m_psubw_getter
-_m_psubw
-.knifunptr_platform_windows8620__m_psubd_getter
-_m_psubd
-/knifunptr_platform_windows8621__m_psubsb_getter
-	_m_psubsb
-/knifunptr_platform_windows8622__m_psubsw_getter
-	_m_psubsw
-0knifunptr_platform_windows8623__m_psubusb_getter
-
-_m_psubusb
-0knifunptr_platform_windows8624__m_psubusw_getter
-
-_m_psubusw
-0knifunptr_platform_windows8625__m_pmaddwd_getter
-
-_m_pmaddwd
-/knifunptr_platform_windows8626__m_pmulhw_getter
-	_m_pmulhw
-/knifunptr_platform_windows8627__m_pmullw_getter
-	_m_pmullw
-.knifunptr_platform_windows8628__m_psllw_getter
-_m_psllw
-/knifunptr_platform_windows8629__m_psllwi_getter
-	_m_psllwi
-.knifunptr_platform_windows8630__m_pslld_getter
-_m_pslld
-/knifunptr_platform_windows8631__m_pslldi_getter
-	_m_pslldi
-.knifunptr_platform_windows8632__m_psllq_getter
-_m_psllq
-/knifunptr_platform_windows8633__m_psllqi_getter
-	_m_psllqi
-.knifunptr_platform_windows8634__m_psraw_getter
-_m_psraw
-/knifunptr_platform_windows8635__m_psrawi_getter
-	_m_psrawi
-.knifunptr_platform_windows8636__m_psrad_getter
-_m_psrad
-/knifunptr_platform_windows8637__m_psradi_getter
-	_m_psradi
-.knifunptr_platform_windows8638__m_psrlw_getter
-_m_psrlw
-/knifunptr_platform_windows8639__m_psrlwi_getter
-	_m_psrlwi
-.knifunptr_platform_windows8640__m_psrld_getter
-_m_psrld
-/knifunptr_platform_windows8641__m_psrldi_getter
-	_m_psrldi
-.knifunptr_platform_windows8642__m_psrlq_getter
-_m_psrlq
-/knifunptr_platform_windows8643__m_psrlqi_getter
-	_m_psrlqi
--knifunptr_platform_windows8644__m_pand_getter
-_m_pand
-.knifunptr_platform_windows8645__m_pandn_getter
-_m_pandn
-,knifunptr_platform_windows8646__m_por_getter
-_m_por
--knifunptr_platform_windows8647__m_pxor_getter
-_m_pxor
-0knifunptr_platform_windows8648__m_pcmpeqb_getter
-
-_m_pcmpeqb
-0knifunptr_platform_windows8649__m_pcmpeqw_getter
-
-_m_pcmpeqw
-0knifunptr_platform_windows8650__m_pcmpeqd_getter
-
-_m_pcmpeqd
-0knifunptr_platform_windows8651__m_pcmpgtb_getter
-
-_m_pcmpgtb
-0knifunptr_platform_windows8652__m_pcmpgtw_getter
-
-_m_pcmpgtw
-0knifunptr_platform_windows8653__m_pcmpgtd_getter
-
-_m_pcmpgtd
-/knifunptr_platform_windows8654__m_pmaxsw_getter
-	_m_pmaxsw
-/knifunptr_platform_windows8655__m_pmaxub_getter
-	_m_pmaxub
-/knifunptr_platform_windows8656__m_pminsw_getter
-	_m_pminsw
-/knifunptr_platform_windows8657__m_pminub_getter
-	_m_pminub
-1knifunptr_platform_windows8658__m_pmovmskb_getter
-_m_pmovmskbä
- 
-  
-  
-
-
- 
- 
-  
-
- 
-
-
- 
-! 
-* 
-+ 
- . 
- 1 
-8 
-9 
- : 
-C 
-D 
- I 
-J 
- K 
-L 
- Q 
-r 
- s 
-t 
-u 
-Ñ 
-ì 
-î 
- ó ´4"08XÜTÍ
-
-åÄÄÄP"08XÜTÍ
-
-éÄÄÄP"08XÜTÍ
-
-êÄÄÄP"08XÜTÍ
-
-íÄÄÄP"08XÜTÍ
-
-îÄÄÄP"08XÜTÍ
-
-ñÄÄÄP"	08XÜTÍ
- "
-08XÜTÍ
-"08XÜTÍ
-"08XÜTÍ
-"08XÜTÍ
-"08XÜTÍ
-"08XÜTÍ
-"08XÜTÍ
-"08XÜTÍ
-"08XÜTÍ
-",
-00008«ä	(",
-00008«ä	(" #
-008«ä	("" %
-008«ä	($",'
-00008«ä	(&",)
-00008«ä	(("(-00j`8«ä	(,"80"0000008«ä	(/"83"0000008«ä	(2"85"0000008«ä	(4"87"0000008«ä	(6"J<4.,(&00j`0000008«ä	(;"J>4.,(&00j`0000008«ä	(="J@4.,(&00j`0000008«ä	(?"JB4.,(&00j`0000008«ä	(A"JF4.,(&00j`0000008«ä	(E"JH4.,(&00j`0000008«ä	(G"DN.(&" 00j`000008«ä	(M"DP.(&" 00j`000008«ä	(O"PS:42.,00j`00000008«ä	(R"JU4.,(&00j`0000008«ä	(T"JW4.,(&00j`0000008«ä	(V"JY4.,(&00j`0000008«ä	(X"D[.(&" 00j`000008«ä	(Z"D].(&" 00j`000008«ä	(\"D_.(&" 00j`000008«ä	(^"Da.(&" 00j`000008«ä	(`"Dc.(&" 00j`000008«ä	(b"De.(&" 00j`000008«ä	(d"Jg4.,(&00j`0000008«ä	(f"Ji4.,(&00j`0000008«ä	(h"Jk4.,(&00j`0000008«ä	(j"Pm:42.,00j`00000008«ä	(l"Po:42.,00j`00000008«ä	(n"Pq:42.,00j`00000008«ä	(p"Rw<640.00j`00j`0j`0008«ä	(v"Ry<640.00j`00j`0j`0008«ä	(x"R{<640.00j`00j`0j`0008«ä	(z"R}<640.00j`00j`0j`0008«ä	(|"R<640.00j`00j`0j`0008«ä	(~"JÅ2,*&$00j`00j`0008«ä		(Ä"JÉ2,*&$00j`00j`0008«ä		(Ç"LÜ4.,(&00j`0000008«ä		(Ö"Tà<640.00j`00j`0j`0008«ä		(á"Tä<640.00j`00j`0j`0008«ä		(â"Tå<640.00j`00j`0j`0008«ä		(ã"Ré:42.,00j`00000008«ä		(ç"Rê:42.,00j`00000008«ä		(è"Rí:42.,00j`00000008«ä		(ë"xñ`ZXTR" 00j`0 j`!000j`00j`0008«ä		(ï".ô
-0"0008«ä		(ò"*õ00j`8«ä		(ö"*ù00j`8«ä		(ú"*ü00j`8«ä		(û"*°00j`8«ä		(†"*£00j`8«ä		(¢"*•00j`8«ä		(§"*ß00j`8«ä		(¶"*©00j`8«ä		(®"*´00j`8«ä		(™"*≠00j`8«ä		(¨"*Ø00j`8«ä		(Æ"*±00j`8«ä		(∞"*≥00j`8«ä		(≤"*µ00j`8«ä		(¥"*∑00j`8«ä		(∂"*π00j`8«ä		(∏"*ª00j`8«ä		(∫"*Ω00j`8«ä		(º"*ø00j`8«ä		(æ"*¡00j`8«ä		(¿"*√00j`8«ä		(¬"*≈00j`8«ä		(ƒ"*«00j`8«ä		(∆"*…00j`8«ä		(»"*À00j`8«ä		( "*Õ00j`8«ä		(Ã"*œ00j`8«ä		(Œ"*—00j`8«ä		(–"*”00j`8«ä		(“"*’00j`8«ä		(‘"*◊00j`8«ä		(÷"*Ÿ00j`8«ä		(ÿ"*€00j`8«ä		(⁄"*›00j`8«ä		(‹"*ﬂ00j`8«ä		(ﬁ"*·00j`8«ä		(‡"*„00j`8«ä		(‚"*Â00j`8«ä		(‰"*Á00j`8«ä		(Ê"*È00j`8«ä		(Ë"*Î00j`8«ä		(Í"*Ì00j`8«ä		(Ï"*Ô00j`8«ä		(Ó"*Ò00j`8«ä		("*Û00j`8«ä		(Ú"*ı00j`8«ä		(Ù"*˜00j`8«ä		(ˆ"*˘00j`8«ä		(¯"*˚00j`8«ä		(˙"*˝00j`8«ä		(¸"*ˇ00j`8«ä		(˛"*Å00j`8«ä		(Ä"*É00j`8«ä		(Ç"*Ö00j`8«ä		(Ñ"*á00j`8«ä		(Ü"*â00j`8«ä		(à"*ã00j`8«ä		(ä"*ç00j`8«ä		(å"*è00j`8«ä		(é"*ë00j`8«ä		(ê"*ì00j`8«ä		(íÿ
-‡
- Í
-platform.windows

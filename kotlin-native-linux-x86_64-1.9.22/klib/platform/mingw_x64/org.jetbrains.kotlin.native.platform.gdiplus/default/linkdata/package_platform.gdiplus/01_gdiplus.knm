@@ -1,723 +1,0 @@
-
-¯X
-kotlin
-UInt
-platform
-gdiplus
-
-ObjectType
-type
-Int
-windows
-BOOL
-kotlinx
-cinterop
-internal
-CCall
-id
--knifunptr_platform_gdiplus0_ObjectTypeIsValid
-ObjectTypeIsValid
-
-CValuesRef
-
-ULongVarOf
-ULong
-ULONG_PTRVar
-arg0
-GdiplusStartupInput
-arg1
-GdiplusStartupOutput
-arg2
-GpStatus
-*knifunptr_platform_gdiplus1_GdiplusStartup
-GdiplusStartup
-	ULONG_PTR
-Unit
-+knifunptr_platform_gdiplus2_GdiplusShutdown
-GdiplusShutdown
-3knifunptr_platform_gdiplus3_GdiplusNotificationHook
-GdiplusNotificationHook
-5knifunptr_platform_gdiplus4_GdiplusNotificationUnhook
-GdiplusNotificationUnhook
-posix
-size_t
-CPointer
-CPointed
-COpaquePointer
-%knifunptr_platform_gdiplus5_GdipAlloc
-	GdipAlloc
-$knifunptr_platform_gdiplus6_GdipFree
-GdipFree
-PixelFormat
-pixfmt
-UINT
-.knifunptr_platform_gdiplus7_GetPixelFormatSize
-GetPixelFormatSize
-.knifunptr_platform_gdiplus8_IsAlphaPixelFormat
-IsAlphaPixelFormat
-2knifunptr_platform_gdiplus9_IsCanonicalPixelFormat
-IsCanonicalPixelFormat
-2knifunptr_platform_gdiplus10_IsExtendedPixelFormat
-IsExtendedPixelFormat
-1knifunptr_platform_gdiplus11_IsIndexedPixelFormat
-IsIndexedPixelFormat
-Float
-REAL
-CPointerVarOf
-COpaquePointerVar
-arg3
-9knifunptr_platform_gdiplus12_GdipCreateAdjustableArrowCap
-GdipCreateAdjustableArrowCap
-<knifunptr_platform_gdiplus13_GdipSetAdjustableArrowCapHeight
-GdipSetAdjustableArrowCapHeight
-
-FloatVarOf
-REALVar
-<knifunptr_platform_gdiplus14_GdipGetAdjustableArrowCapHeight
-GdipGetAdjustableArrowCapHeight
-;knifunptr_platform_gdiplus15_GdipSetAdjustableArrowCapWidth
-GdipSetAdjustableArrowCapWidth
-;knifunptr_platform_gdiplus16_GdipGetAdjustableArrowCapWidth
-GdipGetAdjustableArrowCapWidth
-Aknifunptr_platform_gdiplus17_GdipSetAdjustableArrowCapMiddleInset
-$GdipSetAdjustableArrowCapMiddleInset
-Aknifunptr_platform_gdiplus18_GdipGetAdjustableArrowCapMiddleInset
-$GdipGetAdjustableArrowCapMiddleInset
-?knifunptr_platform_gdiplus19_GdipSetAdjustableArrowCapFillState
-"GdipSetAdjustableArrowCapFillState
-IntVarOf
-BOOLVar
-?knifunptr_platform_gdiplus20_GdipGetAdjustableArrowCapFillState
-"GdipGetAdjustableArrowCapFillState
-IStream
-7knifunptr_platform_gdiplus21_GdipCreateBitmapFromStream
-GdipCreateBitmapFromStream
-UShortVarOf
-UShort
-WCHARVar
-5knifunptr_platform_gdiplus22_GdipCreateBitmapFromFile
-GdipCreateBitmapFromFile
-:knifunptr_platform_gdiplus23_GdipCreateBitmapFromStreamICM
-GdipCreateBitmapFromStreamICM
-8knifunptr_platform_gdiplus24_GdipCreateBitmapFromFileICM
-GdipCreateBitmapFromFileICM
-INT
-
-UByteVarOf
-UByte
-BYTEVar
-arg4
-arg5
-6knifunptr_platform_gdiplus25_GdipCreateBitmapFromScan0
-GdipCreateBitmapFromScan0
-9knifunptr_platform_gdiplus26_GdipCreateBitmapFromGraphics
-GdipCreateBitmapFromGraphics
-cnames
-structs
-IDirectDrawSurface7
-Bknifunptr_platform_gdiplus27_GdipCreateBitmapFromDirectDrawSurface
-%GdipCreateBitmapFromDirectDrawSurface
-tagBITMAPINFO
-
-BITMAPINFO
-7knifunptr_platform_gdiplus28_GdipCreateBitmapFromGdiDib
-GdipCreateBitmapFromGdiDib
-	HBITMAP__
-HBITMAP
-
-HPALETTE__
-HPALETTE
-8knifunptr_platform_gdiplus29_GdipCreateBitmapFromHBITMAP
-GdipCreateBitmapFromHBITMAP
-
-HBITMAPVar
-ARGB
-8knifunptr_platform_gdiplus30_GdipCreateHBITMAPFromBitmap
-GdipCreateHBITMAPFromBitmap
-HICON__
-HICON
-6knifunptr_platform_gdiplus31_GdipCreateBitmapFromHICON
-GdipCreateBitmapFromHICON
-HICONVar
-6knifunptr_platform_gdiplus32_GdipCreateHICONFromBitmap
-GdipCreateHICONFromBitmap
-HINSTANCE__
-	HINSTANCE
-9knifunptr_platform_gdiplus33_GdipCreateBitmapFromResource
-GdipCreateBitmapFromResource
-arg6
-0knifunptr_platform_gdiplus34_GdipCloneBitmapArea
-GdipCloneBitmapArea
-1knifunptr_platform_gdiplus35_GdipCloneBitmapAreaI
-GdipCloneBitmapAreaI
-Rect
-GpRect
-
-BitmapData
-/knifunptr_platform_gdiplus36_GdipBitmapLockBits
-GdipBitmapLockBits
-1knifunptr_platform_gdiplus37_GdipBitmapUnlockBits
-GdipBitmapUnlockBits
-	UIntVarOf
-ARGBVar
-/knifunptr_platform_gdiplus38_GdipBitmapGetPixel
-GdipBitmapGetPixel
-/knifunptr_platform_gdiplus39_GdipBitmapSetPixel
-GdipBitmapSetPixel
-4knifunptr_platform_gdiplus40_GdipBitmapSetResolution
-GdipBitmapSetResolution
-
-DitherType
-PaletteType
-ColorPalette
-4knifunptr_platform_gdiplus41_GdipBitmapConvertFormat
-GdipBitmapConvertFormat
-2knifunptr_platform_gdiplus42_GdipInitializePalette
-GdipInitializePalette
-tagRECT
-RECT
-INTVar
-2knifunptr_platform_gdiplus43_GdipBitmapApplyEffect
-GdipBitmapApplyEffect
-arg7
-arg8
-8knifunptr_platform_gdiplus44_GdipBitmapCreateApplyEffect
-GdipBitmapCreateApplyEffect
-HistogramFormat
-UINTVar
-3knifunptr_platform_gdiplus45_GdipBitmapGetHistogram
-GdipBitmapGetHistogram
-7knifunptr_platform_gdiplus46_GdipBitmapGetHistogramSize
-GdipBitmapGetHistogramSize
-+knifunptr_platform_gdiplus47_GdipCloneBrush
-GdipCloneBrush
-,knifunptr_platform_gdiplus48_GdipDeleteBrush
-GdipDeleteBrush
-GpBrushTypeVar
--knifunptr_platform_gdiplus49_GdipGetBrushType
-GdipGetBrushType
-3knifunptr_platform_gdiplus50_GdipCreateCachedBitmap
-GdipCreateCachedBitmap
-3knifunptr_platform_gdiplus51_GdipDeleteCachedBitmap
-GdipDeleteCachedBitmap
-1knifunptr_platform_gdiplus52_GdipDrawCachedBitmap
-GdipDrawCachedBitmap
-	GpLineCap
-4knifunptr_platform_gdiplus53_GdipCreateCustomLineCap
-GdipCreateCustomLineCap
-4knifunptr_platform_gdiplus54_GdipDeleteCustomLineCap
-GdipDeleteCustomLineCap
-3knifunptr_platform_gdiplus55_GdipCloneCustomLineCap
-GdipCloneCustomLineCap
-CustomLineCapTypeVar
-5knifunptr_platform_gdiplus56_GdipGetCustomLineCapType
-GdipGetCustomLineCapType
-;knifunptr_platform_gdiplus57_GdipSetCustomLineCapStrokeCaps
-GdipSetCustomLineCapStrokeCaps
-GpLineCapVar
-;knifunptr_platform_gdiplus58_GdipGetCustomLineCapStrokeCaps
-GdipGetCustomLineCapStrokeCaps
-
-GpLineJoin
-;knifunptr_platform_gdiplus59_GdipSetCustomLineCapStrokeJoin
-GdipSetCustomLineCapStrokeJoin
-GpLineJoinVar
-;knifunptr_platform_gdiplus60_GdipGetCustomLineCapStrokeJoin
-GdipGetCustomLineCapStrokeJoin
-8knifunptr_platform_gdiplus61_GdipSetCustomLineCapBaseCap
-GdipSetCustomLineCapBaseCap
-8knifunptr_platform_gdiplus62_GdipGetCustomLineCapBaseCap
-GdipGetCustomLineCapBaseCap
-:knifunptr_platform_gdiplus63_GdipSetCustomLineCapBaseInset
-GdipSetCustomLineCapBaseInset
-:knifunptr_platform_gdiplus64_GdipGetCustomLineCapBaseInset
-GdipGetCustomLineCapBaseInset
-;knifunptr_platform_gdiplus65_GdipSetCustomLineCapWidthScale
-GdipSetCustomLineCapWidthScale
-;knifunptr_platform_gdiplus66_GdipGetCustomLineCapWidthScale
-GdipGetCustomLineCapWidthScale
-CValue
-_GUID
-GUID
--knifunptr_platform_gdiplus67_GdipCreateEffect
-GdipCreateEffect
--knifunptr_platform_gdiplus68_GdipDeleteEffect
-GdipDeleteEffect
-7knifunptr_platform_gdiplus69_GdipGetEffectParameterSize
-GdipGetEffectParameterSize
-4knifunptr_platform_gdiplus70_GdipSetEffectParameters
-GdipSetEffectParameters
-4knifunptr_platform_gdiplus71_GdipGetEffectParameters
-GdipGetEffectParameters
-HDC__
-HDC
-1knifunptr_platform_gdiplus72_GdipCreateFontFromDC
-GdipCreateFontFromDC
-tagLOGFONTA
-LOGFONTA
-7knifunptr_platform_gdiplus73_GdipCreateFontFromLogfontA
-GdipCreateFontFromLogfontA
-tagLOGFONTW
-LOGFONTW
-7knifunptr_platform_gdiplus74_GdipCreateFontFromLogfontW
-GdipCreateFontFromLogfontW
-+knifunptr_platform_gdiplus75_GdipCreateFont
-GdipCreateFont
-*knifunptr_platform_gdiplus76_GdipCloneFont
-GdipCloneFont
-+knifunptr_platform_gdiplus77_GdipDeleteFont
-GdipDeleteFont
-*knifunptr_platform_gdiplus78_GdipGetFamily
-GdipGetFamily
--knifunptr_platform_gdiplus79_GdipGetFontStyle
-GdipGetFontStyle
-,knifunptr_platform_gdiplus80_GdipGetFontSize
-GdipGetFontSize
-UnitVar
-,knifunptr_platform_gdiplus81_GdipGetFontUnit
-GdipGetFontUnit
-.knifunptr_platform_gdiplus82_GdipGetFontHeight
-GdipGetFontHeight
-6knifunptr_platform_gdiplus83_GdipGetFontHeightGivenDPI
-GdipGetFontHeightGivenDPI
-,knifunptr_platform_gdiplus84_GdipGetLogFontA
-GdipGetLogFontA
-,knifunptr_platform_gdiplus85_GdipGetLogFontW
-GdipGetLogFontW
-;knifunptr_platform_gdiplus86_GdipNewInstalledFontCollection
-GdipNewInstalledFontCollection
-9knifunptr_platform_gdiplus87_GdipNewPrivateFontCollection
-GdipNewPrivateFontCollection
-<knifunptr_platform_gdiplus88_GdipDeletePrivateFontCollection
-GdipDeletePrivateFontCollection
-=knifunptr_platform_gdiplus89_GdipGetFontCollectionFamilyCount
- GdipGetFontCollectionFamilyCount
-<knifunptr_platform_gdiplus90_GdipGetFontCollectionFamilyList
-GdipGetFontCollectionFamilyList
-3knifunptr_platform_gdiplus91_GdipPrivateAddFontFile
-GdipPrivateAddFontFile
-5knifunptr_platform_gdiplus92_GdipPrivateAddMemoryFont
-GdipPrivateAddMemoryFont
-9knifunptr_platform_gdiplus93_GdipCreateFontFamilyFromName
-GdipCreateFontFamilyFromName
-1knifunptr_platform_gdiplus94_GdipDeleteFontFamily
-GdipDeleteFontFamily
-0knifunptr_platform_gdiplus95_GdipCloneFontFamily
-GdipCloneFontFamily
->knifunptr_platform_gdiplus96_GdipGetGenericFontFamilySansSerif
-!GdipGetGenericFontFamilySansSerif
-:knifunptr_platform_gdiplus97_GdipGetGenericFontFamilySerif
-GdipGetGenericFontFamilySerif
->knifunptr_platform_gdiplus98_GdipGetGenericFontFamilyMonospace
-!GdipGetGenericFontFamilyMonospace
-LANGID
-.knifunptr_platform_gdiplus99_GdipGetFamilyName
-GdipGetFamilyName
-2knifunptr_platform_gdiplus100_GdipIsStyleAvailable
-GdipIsStyleAvailable
-:knifunptr_platform_gdiplus101_GdipFontCollectionEnumerable
-GdipFontCollectionEnumerable
-9knifunptr_platform_gdiplus102_GdipFontCollectionEnumerate
-GdipFontCollectionEnumerate
-	UINT16Var
--knifunptr_platform_gdiplus103_GdipGetEmHeight
-GdipGetEmHeight
-/knifunptr_platform_gdiplus104_GdipGetCellAscent
-GdipGetCellAscent
-0knifunptr_platform_gdiplus105_GdipGetCellDescent
-GdipGetCellDescent
-0knifunptr_platform_gdiplus106_GdipGetLineSpacing
-GdipGetLineSpacing
-GpFlushIntention
-'knifunptr_platform_gdiplus107_GdipFlush
-	GdipFlush
-/knifunptr_platform_gdiplus108_GdipCreateFromHDC
-GdipCreateFromHDC
-HANDLE
-0knifunptr_platform_gdiplus109_GdipCreateFromHDC2
-GdipCreateFromHDC2
-HWND__
-HWND
-0knifunptr_platform_gdiplus110_GdipCreateFromHWND
-GdipCreateFromHWND
-3knifunptr_platform_gdiplus111_GdipCreateFromHWNDICM
-GdipCreateFromHWNDICM
-0knifunptr_platform_gdiplus112_GdipDeleteGraphics
-GdipDeleteGraphics
-HDCVar
-'knifunptr_platform_gdiplus113_GdipGetDC
-	GdipGetDC
-+knifunptr_platform_gdiplus114_GdipReleaseDC
-GdipReleaseDC
-CompositingMode
-4knifunptr_platform_gdiplus115_GdipSetCompositingMode
-GdipSetCompositingMode
-CompositingModeVar
-4knifunptr_platform_gdiplus116_GdipGetCompositingMode
-GdipGetCompositingMode
-4knifunptr_platform_gdiplus117_GdipSetRenderingOrigin
-GdipSetRenderingOrigin
-4knifunptr_platform_gdiplus118_GdipGetRenderingOrigin
-GdipGetRenderingOrigin
-CompositingQuality
-7knifunptr_platform_gdiplus119_GdipSetCompositingQuality
-GdipSetCompositingQuality
-CompositingQualityVar
-7knifunptr_platform_gdiplus120_GdipGetCompositingQuality
-GdipGetCompositingQuality
-SmoothingMode
-2knifunptr_platform_gdiplus121_GdipSetSmoothingMode
-GdipSetSmoothingMode
-SmoothingModeVar
-2knifunptr_platform_gdiplus122_GdipGetSmoothingMode
-GdipGetSmoothingMode
-PixelOffsetMode
-4knifunptr_platform_gdiplus123_GdipSetPixelOffsetMode
-GdipSetPixelOffsetMode
-PixelOffsetModeVar
-4knifunptr_platform_gdiplus124_GdipGetPixelOffsetMode
-GdipGetPixelOffsetMode
-TextRenderingHint
-6knifunptr_platform_gdiplus125_GdipSetTextRenderingHint
-GdipSetTextRenderingHint
-TextRenderingHintVar
-6knifunptr_platform_gdiplus126_GdipGetTextRenderingHint
-GdipGetTextRenderingHint
-1knifunptr_platform_gdiplus127_GdipSetTextContrast
-GdipSetTextContrastí
- 
-  
-
-
- 
-  
-
- 
-	
-
-
-	
-
- 
-	 
-	 
-  
- 
- 
- 
- 
- 
-  
-$
-% 
-	& 
-	' 
-	( 
-- 
-/ 
- : 
-; 
-	< 
-	= 
-	C 
-D 
-	Q 
-R 
-U 
-	X 
- Y 
-Z 
-a 
-	b 
- c 
-d 
-k
-,l
--m 
-p 
-q 
-t 
-u 
-v 
-w 
-z 
-{ 
-~ 
- 
-‚ 
-… 
-† 
-Ž 
- 
- 
-	• 
-– 
- 
-ž 
-Ÿ 
-¤ 
-¥ 
-¦ 
-­ 
-® 
-· 
-À 
-Ç 
-Ì 
-Ï 
-Ò 
-	á 
-â 
-ã 
-î 
-ï 
-ò 
-ó 
-ö 
-÷ 
- 
-† 
-« 
-´ 
-½ 
-Â 
-Å 
-Æ 
-Í 
-Ò 
-Õ 
-Ü 
-ß 
-â 
-å 
-è 
-ë 
-î 
-ñ ¨Q(0j`2
-0j`H‡ Ò
-(W0j`200j`02
-002
-00H‡ Ò
-(%02
-0j`H‡ Ò
-(7!0j`200j`0H‡ Ò
-( %#02
-0j`H‡ Ò
-("5*00j`2
-0j`H‡ Ò
-()',020H‡ Ò
-(+(10j`2
-.0j`H‡ Ò
-(0(30j`2
-.0j`H‡ Ò
-(2(50j`2
-.0j`H‡ Ò
-(4(70j`2
-.0j`H‡ Ò
-(6(90j`2
-.0j`H‡ Ò
-(8g@0j`2
-0j`2
-0j`2
-0j`2$> 00j`0j`0H‡ Ò
-(?7B0j`202
-0j`H‡ Ò
-(AEF0j`20200 j`!0H‡ Ò
-(E7H0j`202
-0j`H‡ Ò
-(GEJ0j`20200 j`!0H‡ Ò
-(I7L0j`202
-0j`H‡ Ò
-(KEN0j`20200 j`!0H‡ Ò
-(M7P0j`202
-0j`H‡ Ò
-(OET0j`20200"j`#0H‡ Ò
-(SSW0j`2
-0$02$ 00j`0j`0H‡ Ò
-(V]\0j`20&0%j`'02$ 00j`0j`0H‡ Ò
-([S^0j`2
-0$02$ 00j`0j`0H‡ Ò
-(]]`0j`20&0%j`'02$ 00j`0j`0H‡ Ò
-(_h0j`2
-0j`(2
-0j`(2
-0j`(2
->0j`2e0*0)j`+02$f 00j`0j`0H‡ Ò
-(gij0j`2
-0j`(2
-0j`(202$> 00j`0j`0H‡ Ò
-(iSo0j`2
-0.02$ 00j`0j`0H‡ Ò
-(nes0j`20/j`00202$ 00j`0j`0H‡ Ò
-(roy0j`2010j`22030j`42$ 00j`0j`0H‡ Ò
-(x[}0j`202"010j`20j`502
-0j`6H‡ Ò
-(|[0j`2070j`82$ 00j`0j`0H‡ Ò
-	(€Q„0j`202"070j`80j`90H‡ Ò
-	(ƒuˆ0j`20:0j`;20&0%j`'02$ 00j`0j`0H‡ Ò
-	(‡‹0j`2
-0j`2
-0j`2
-0j`2
->0j`2
-e0j`2f02%‰ 00j`0j`0H‡ Ò
-	(Š0j`2
-0j`(2
-0j`(2
-0j`(2
->0j`(2
-e0j`2f02%‰ 00j`0j`0H‡ Ò
-	(Œi’0j`2020<j`=02
-0j`2
->0j`2e
-0>0H‡ Ò
-	(‘=”0j`202
-0>0H‡ Ò
-	(“_˜0j`202
-0j`(2
-0j`(2>00?j`@0H‡ Ò
-	(—Qš0j`202
-0j`(2
-0j`(2
->0j`6H‡ Ò
-	(™Eœ0j`202
-0j`2
-0j`H‡ Ò
-	(›m¡0j`202
-0j`2
-0j`A2
->0j`B2e
-0C02
-f0j`H‡ Ò
-	( a£0j`2
-0C02
-0j`B2
-0j`(2
->0j`2e0H‡ Ò
-	(¢›¨0j`202020Dj`E02
->0j`2$e 00j`0j`02f00"j`F0H‡ Ò
-	(§ü¬0j`2$ 00j`0j`02
-0j`(202>0Dj`E02e0Dj`E02$f 00j`0j`02‰0j`2%© 00j`0j`02ª00"j`F0H‡ Ò
-	(«®°0j`202
-0j`G2
-0j`2>00?j`H02e00?j`H02f00?j`H02‰00?j`H0H‡ Ò
-	(¯E²0j`2
-0j`G200?j`H0H‡ Ò
-	(±S´0j`202$ 00j`0j`0H‡ Ò
-	(³-¶0j`20H‡ Ò
-	(µG¹0j`20200?j`I0H‡ Ò
-	(¸a»0j`20202$ 00j`0j`0H‡ Ò
-	(º-½0j`20H‡ Ò
-	(¼S¿0j`20202
-0j`(2
->0j`(H‡ Ò
-	(¾yÂ0j`20202
-0j`J2
->0j`2$e 00j`0j`0H‡ Ò
-	(Á-Ä0j`20H‡ Ò
-	(ÃSÆ0j`202$ 00j`0j`0H‡ Ò
-	(ÅGÉ0j`20200?j`K0H‡ Ò
-	(ÈEË0j`202
-0j`J2
-0j`JH‡ Ò
-	(ÊaÎ0j`20200?j`L0200?j`L0H‡ Ò
-	(Í9Ñ0j`202
-0j`MH‡ Ò
-	(ÐGÔ0j`20200?j`N0H‡ Ò
-	(Ó9Ö0j`202
-0j`JH‡ Ò
-	(ÕGØ0j`20200?j`L0H‡ Ò
-	(×9Ú0j`202
-0j`H‡ Ò
-	(ÙGÜ0j`20200 j`!0H‡ Ò
-	(Û9Þ0j`202
-0j`H‡ Ò
-	(ÝGà0j`20200 j`!0H‡ Ò
-	(ßWå0j`20Pj`Q0O2$ 00j`0j`0H‡ Ò
-	(ä-ç0j`20H‡ Ò
-	(æGé0j`20200?j`H0H‡ Ò
-	(èGë0j`20202
-0j`H‡ Ò
-	(êUí0j`20200?j`H020H‡ Ò
-	(ì[ñ0j`20R0j`S2$ 00j`0j`0H‡ Ò
-	(ðoõ0j`20R0j`S20Tj`U02$ 00j`0j`0H‡ Ò
-	(ôoù0j`20R0j`S20Vj`W02$ 00j`0j`0H‡ Ò
-	(øwû0j`202
-0j`2
-0j`(2
->0j`X2$e 00j`0j`0H‡ Ò
-	(úSý0j`202$ 00j`0j`0H‡ Ò
-	(ü-ÿ0j`20H‡ Ò
-	(þS0j`202$ 00j`0j`0H‡ Ò
-	(€Gƒ0j`20200"j`F0H‡ Ò
-	(‚G…0j`20200 j`!0H‡ Ò
-	(„Gˆ0j`20200?j`Y0H‡ Ò
-	(‡UŠ0j`2020200 j`!0H‡ Ò
-	(‰SŒ0j`202
-0j`200 j`!0H‡ Ò
-	(‹OŽ0j`202020Tj`U0H‡ Ò
-	(O0j`202020Vj`W0H‡ Ò
-	(E’0j`2$ 00j`0j`0H‡ Ò
-	(‘E”0j`2$ 00j`0j`0H‡ Ò
-	(“E–0j`2$ 00j`0j`0H‡ Ò
-	(•G˜0j`20200"j`F0H‡ Ò
-	(—yš0j`202
-0j`(2$ 00j`0j`02>00"j`F0H‡ Ò
-	(™Gœ0j`2020&0%j`'0H‡ Ò
-	(›Gž0j`20202
-0j`(H‡ Ò
-	(m 0j`20&0%j`'0202$ 00j`0j`0H‡ Ò
-	(Ÿ-¢0j`20H‡ Ò
-	(¡S¤0j`202$ 00j`0j`0H‡ Ò
-	(£E¦0j`2$ 00j`0j`0H‡ Ò
-	(¥E¨0j`2$ 00j`0j`0H‡ Ò
-	(§Eª0j`2$ 00j`0j`0H‡ Ò
-	(©S­0j`2020&0%j`'02
-0&j`ZH‡ Ò
-	(¬S¯0j`202
-0j`(200"j`#0H‡ Ò
-	(®U±0j`2020200"j`F0H‡ Ò
-	(°‡³0j`202
-0j`(2$ 00j`0j`02>00"j`F02e0H‡ Ò
-	(²S¶0j`202
-0j`(20&0%j`[0H‡ Ò
-	(µS¸0j`202
-0j`(20&0%j`[0H‡ Ò
-	(·Sº0j`202
-0j`(20&0%j`[0H‡ Ò
-	(¹S¼0j`202
-0j`(20&0%j`[0H‡ Ò
-	(»9¿0j`202
-0j`\H‡ Ò
-	(¾[Á0j`20R0j`S2$ 00j`0j`0H‡ Ò
-	(ÀsÄ0j`20R0j`S200j`]2$ 00j`0j`0H‡ Ò
-	(Ã[È0j`20^0j`_2$ 00j`0j`0H‡ Ò
-	(Ç[Ê0j`20^0j`_2$ 00j`0j`0H‡ Ò
-	(É-Ì0j`20H‡ Ò
-	(ËQÏ0j`202"0R0j`S0j``0H‡ Ò
-	(ÎCÑ0j`2020R0j`SH‡ Ò
-	(Ð9Ô0j`202
-0j`aH‡ Ò
-	(ÓG×0j`20200?j`b0H‡ Ò
-	(ÖEÙ0j`202
-0j`(2
-0j`(H‡ Ò
-	(ØaÛ0j`20200"j`F0200"j`F0H‡ Ò
-	(Ú9Þ0j`202
-0j`cH‡ Ò
-	(ÝGá0j`20200?j`d0H‡ Ò
-	(à9ä0j`202
-0j`eH‡ Ò
-	(ãGç0j`20200"j`f0H‡ Ò
-	(æ9ê0j`202
-0j`gH‡ Ò
-	(éGí0j`20200"j`h0H‡ Ò
-	(ì9ð0j`202
-0j`iH‡ Ò
-	(ïGó0j`20200?j`j0H‡ Ò
-	(ò9õ0j`202
-0j`H‡ Ò
-	(ôØ
-à
- ê
-platform.gdiplus

@@ -1,697 +1,0 @@
-
-ÁA
-kotlin
-UInt
-platform
-windows
-ULONG
-ulIn
-kotlinx
-cinterop
-
-CValuesRef
-
-UByteVarOf
-UByte
-BYTEVar
-pbOut
-Int
-HRESULT
-internal
-CCall
-id
-,knifunptr_platform_windows5120_VarUI1FromUI4
-VarUI1FromUI4
-ULong
-ULONG64
-ui64In
-,knifunptr_platform_windows5121_VarUI1FromUI8
-VarUI1FromUI8
-tagDEC
-DECIMAL
-pdecIn
-,knifunptr_platform_windows5122_VarUI1FromDec
-VarUI1FromDec
-BYTE
-bIn
-
-ShortVarOf
-Short
-SHORTVar
-psOut
-+knifunptr_platform_windows5123_VarI2FromUI1
-VarI2FromUI1
-LONG
-lIn
-*knifunptr_platform_windows5124_VarI2FromI4
-VarI2FromI4
-Long
-LONG64
-i64In
-*knifunptr_platform_windows5125_VarI2FromI8
-VarI2FromI8
-Float
-FLOAT
-fltIn
-*knifunptr_platform_windows5126_VarI2FromR4
-VarI2FromR4
-Double
-DOUBLE
-dblIn
-*knifunptr_platform_windows5127_VarI2FromR8
-VarI2FromR8
-CValue
-tagCY
-CY
-cyIn
-*knifunptr_platform_windows5128_VarI2FromCy
-VarI2FromCy
-DATE
-dateIn
-,knifunptr_platform_windows5129_VarI2FromDate
-VarI2FromDate
-UShortVarOf
-UShort
-
-OLECHARVar
-strIn
-LCID
-lcid
-dwFlags
-+knifunptr_platform_windows5130_VarI2FromStr
-VarI2FromStr
-	IDispatch
-pdispIn
-,knifunptr_platform_windows5131_VarI2FromDisp
-VarI2FromDisp
-VARIANT_BOOL
-boolIn
-,knifunptr_platform_windows5132_VarI2FromBool
-VarI2FromBool
-Byte
-CHAR
-cIn
-*knifunptr_platform_windows5133_VarI2FromI1
-VarI2FromI1
-USHORT
-uiIn
-+knifunptr_platform_windows5134_VarI2FromUI2
-VarI2FromUI2
-+knifunptr_platform_windows5135_VarI2FromUI4
-VarI2FromUI4
-+knifunptr_platform_windows5136_VarI2FromUI8
-VarI2FromUI8
-+knifunptr_platform_windows5137_VarI2FromDec
-VarI2FromDec
-IntVarOf
-LONGVar
-plOut
-+knifunptr_platform_windows5138_VarI4FromUI1
-VarI4FromUI1
-SHORT
-sIn
-*knifunptr_platform_windows5139_VarI4FromI2
-VarI4FromI2
-*knifunptr_platform_windows5140_VarI4FromI8
-VarI4FromI8
-*knifunptr_platform_windows5141_VarI4FromR4
-VarI4FromR4
-*knifunptr_platform_windows5142_VarI4FromR8
-VarI4FromR8
-*knifunptr_platform_windows5143_VarI4FromCy
-VarI4FromCy
-,knifunptr_platform_windows5144_VarI4FromDate
-VarI4FromDate
-+knifunptr_platform_windows5145_VarI4FromStr
-VarI4FromStr
-,knifunptr_platform_windows5146_VarI4FromDisp
-VarI4FromDisp
-,knifunptr_platform_windows5147_VarI4FromBool
-VarI4FromBool
-*knifunptr_platform_windows5148_VarI4FromI1
-VarI4FromI1
-+knifunptr_platform_windows5149_VarI4FromUI2
-VarI4FromUI2
-+knifunptr_platform_windows5150_VarI4FromUI4
-VarI4FromUI4
-+knifunptr_platform_windows5151_VarI4FromUI8
-VarI4FromUI8
-+knifunptr_platform_windows5152_VarI4FromDec
-VarI4FromDec
-INT
-intIn
-+knifunptr_platform_windows5153_VarI4FromInt
-VarI4FromInt
-	LongVarOf
-	LONG64Var
-pi64Out
-+knifunptr_platform_windows5154_VarI8FromUI1
-VarI8FromUI1
-*knifunptr_platform_windows5155_VarI8FromI2
-VarI8FromI2
-*knifunptr_platform_windows5156_VarI8FromI4
-VarI8FromI4
-*knifunptr_platform_windows5157_VarI8FromR4
-VarI8FromR4
-*knifunptr_platform_windows5158_VarI8FromR8
-VarI8FromR8
-*knifunptr_platform_windows5159_VarI8FromCy
-VarI8FromCy
-,knifunptr_platform_windows5160_VarI8FromDate
-VarI8FromDate
-+knifunptr_platform_windows5161_VarI8FromStr
-VarI8FromStr
-,knifunptr_platform_windows5162_VarI8FromDisp
-VarI8FromDisp
-,knifunptr_platform_windows5163_VarI8FromBool
-VarI8FromBool
-*knifunptr_platform_windows5164_VarI8FromI1
-VarI8FromI1
-+knifunptr_platform_windows5165_VarI8FromUI2
-VarI8FromUI2
-+knifunptr_platform_windows5166_VarI8FromUI4
-VarI8FromUI4
-+knifunptr_platform_windows5167_VarI8FromUI8
-VarI8FromUI8
-+knifunptr_platform_windows5168_VarI8FromDec
-VarI8FromDec
-+knifunptr_platform_windows5169_VarI8FromInt
-VarI8FromInt
-
-FloatVarOf
-FLOATVar
-pfltOut
-+knifunptr_platform_windows5170_VarR4FromUI1
-VarR4FromUI1
-*knifunptr_platform_windows5171_VarR4FromI2
-VarR4FromI2
-*knifunptr_platform_windows5172_VarR4FromI4
-VarR4FromI4
-*knifunptr_platform_windows5173_VarR4FromI8
-VarR4FromI8
-*knifunptr_platform_windows5174_VarR4FromR8
-VarR4FromR8
-*knifunptr_platform_windows5175_VarR4FromCy
-VarR4FromCy
-,knifunptr_platform_windows5176_VarR4FromDate
-VarR4FromDate
-+knifunptr_platform_windows5177_VarR4FromStr
-VarR4FromStr
-,knifunptr_platform_windows5178_VarR4FromDisp
-VarR4FromDisp
-,knifunptr_platform_windows5179_VarR4FromBool
-VarR4FromBool
-*knifunptr_platform_windows5180_VarR4FromI1
-VarR4FromI1
-+knifunptr_platform_windows5181_VarR4FromUI2
-VarR4FromUI2
-+knifunptr_platform_windows5182_VarR4FromUI4
-VarR4FromUI4
-+knifunptr_platform_windows5183_VarR4FromUI8
-VarR4FromUI8
-+knifunptr_platform_windows5184_VarR4FromDec
-VarR4FromDec
-DoubleVarOf
-	DOUBLEVar
-pdblOut
-+knifunptr_platform_windows5185_VarR8FromUI1
-VarR8FromUI1
-*knifunptr_platform_windows5186_VarR8FromI2
-VarR8FromI2
-*knifunptr_platform_windows5187_VarR8FromI4
-VarR8FromI4
-*knifunptr_platform_windows5188_VarR8FromI8
-VarR8FromI8
-*knifunptr_platform_windows5189_VarR8FromR4
-VarR8FromR4
-*knifunptr_platform_windows5190_VarR8FromCy
-VarR8FromCy
-,knifunptr_platform_windows5191_VarR8FromDate
-VarR8FromDate
-+knifunptr_platform_windows5192_VarR8FromStr
-VarR8FromStr
-,knifunptr_platform_windows5193_VarR8FromDisp
-VarR8FromDisp
-,knifunptr_platform_windows5194_VarR8FromBool
-VarR8FromBool
-*knifunptr_platform_windows5195_VarR8FromI1
-VarR8FromI1
-+knifunptr_platform_windows5196_VarR8FromUI2
-VarR8FromUI2
-+knifunptr_platform_windows5197_VarR8FromUI4
-VarR8FromUI4
-+knifunptr_platform_windows5198_VarR8FromUI8
-VarR8FromUI8
-+knifunptr_platform_windows5199_VarR8FromDec
-VarR8FromDec
-DATEVar
-pdateOut
--knifunptr_platform_windows5200_VarDateFromUI1
-VarDateFromUI1
-,knifunptr_platform_windows5201_VarDateFromI2
-VarDateFromI2
-,knifunptr_platform_windows5202_VarDateFromI4
-VarDateFromI4
-,knifunptr_platform_windows5203_VarDateFromI8
-VarDateFromI8
-,knifunptr_platform_windows5204_VarDateFromR4
-VarDateFromR4
-,knifunptr_platform_windows5205_VarDateFromR8
-VarDateFromR8
-,knifunptr_platform_windows5206_VarDateFromCy
-VarDateFromCy
--knifunptr_platform_windows5207_VarDateFromStr
-VarDateFromStr
-.knifunptr_platform_windows5208_VarDateFromDisp
-VarDateFromDisp
-.knifunptr_platform_windows5209_VarDateFromBool
-VarDateFromBool
-,knifunptr_platform_windows5210_VarDateFromI1
-VarDateFromI1
--knifunptr_platform_windows5211_VarDateFromUI2
-VarDateFromUI2
--knifunptr_platform_windows5212_VarDateFromUI4
-VarDateFromUI4
--knifunptr_platform_windows5213_VarDateFromUI8
-VarDateFromUI8
--knifunptr_platform_windows5214_VarDateFromDec
-VarDateFromDec
-pcyOut
-+knifunptr_platform_windows5215_VarCyFromUI1
-VarCyFromUI1
-*knifunptr_platform_windows5216_VarCyFromI2
-VarCyFromI2
-*knifunptr_platform_windows5217_VarCyFromI4
-VarCyFromI4
-*knifunptr_platform_windows5218_VarCyFromI8
-VarCyFromI8
-*knifunptr_platform_windows5219_VarCyFromR4
-VarCyFromR4
-*knifunptr_platform_windows5220_VarCyFromR8
-VarCyFromR8
-,knifunptr_platform_windows5221_VarCyFromDate
-VarCyFromDate
-+knifunptr_platform_windows5222_VarCyFromStr
-VarCyFromStr
-,knifunptr_platform_windows5223_VarCyFromDisp
-VarCyFromDisp
-,knifunptr_platform_windows5224_VarCyFromBool
-VarCyFromBool
-*knifunptr_platform_windows5225_VarCyFromI1
-VarCyFromI1
-+knifunptr_platform_windows5226_VarCyFromUI2
-VarCyFromUI2
-+knifunptr_platform_windows5227_VarCyFromUI4
-VarCyFromUI4
-+knifunptr_platform_windows5228_VarCyFromUI8
-VarCyFromUI8
-+knifunptr_platform_windows5229_VarCyFromDec
-VarCyFromDec
-bVal
-CPointerVarOf
-CPointer
-BSTR
-BSTRVar
-pbstrOut
--knifunptr_platform_windows5230_VarBstrFromUI1
-VarBstrFromUI1
-iVal
-,knifunptr_platform_windows5231_VarBstrFromI2
-VarBstrFromI2
-,knifunptr_platform_windows5232_VarBstrFromI4
-VarBstrFromI4
-,knifunptr_platform_windows5233_VarBstrFromI8
-VarBstrFromI8
-,knifunptr_platform_windows5234_VarBstrFromR4
-VarBstrFromR4
-,knifunptr_platform_windows5235_VarBstrFromR8
-VarBstrFromR8
-,knifunptr_platform_windows5236_VarBstrFromCy
-VarBstrFromCy
-.knifunptr_platform_windows5237_VarBstrFromDate
-VarBstrFromDate
-.knifunptr_platform_windows5238_VarBstrFromDisp
-VarBstrFromDisp
-.knifunptr_platform_windows5239_VarBstrFromBool
-VarBstrFromBool
-,knifunptr_platform_windows5240_VarBstrFromI1
-VarBstrFromI1
--knifunptr_platform_windows5241_VarBstrFromUI2
-VarBstrFromUI2
--knifunptr_platform_windows5242_VarBstrFromUI4
-VarBstrFromUI4
--knifunptr_platform_windows5243_VarBstrFromUI8
-VarBstrFromUI8
--knifunptr_platform_windows5244_VarBstrFromDec
-VarBstrFromDec
-VARIANT_BOOLVar
-pboolOut
--knifunptr_platform_windows5245_VarBoolFromUI1
-VarBoolFromUI1
-,knifunptr_platform_windows5246_VarBoolFromI2
-VarBoolFromI2
-,knifunptr_platform_windows5247_VarBoolFromI4
-VarBoolFromI4Ó
- 
-  
-
-
- 
-
-
- 
-	 
- 
- 
- 
-  
- 
-
- 
-  
- 
- 
- 
- 
-  
- ! 
-" 
-& 
- * 
-+ 
- / 
-0 
- 4 
-5 
-9 
-: 
-; 
-? 
-C 
- D 
-E 
-G 
-L 
-P 
- T 
-U 
-Y 
-c 
-d 
-h 
-† 
-Š 
-‹ 
-­ 
-® 
-Î 
-Ï 
-ï 
-¯ 
-° 
-± 
-² 
-Ó ÇNB0j`2
-0j`20	0j`
-0H‡ Ò
-(B0j`2
-0j`20	0j`
-0H‡ Ò
-(J0j`20j`020	0j`
-0H‡ Ò
-(B%0j`2
-0	j`2#00j`0H‡ Ò
-($B)0j`2
-'0j`2#00j`0H‡ Ò
-((B.0j`2
-,0j`2#00j`0H‡ Ò
-(-B30j`2
-10j`2#00j`0H‡ Ò
-(2B80j`2
-60j`2#00j`0H‡ Ò
-(7H>0j`2<0j` 02#00j`0H‡ Ò
-(=BB0j`2
-@0j`!2#00j`0H‡ Ò
-(AhK0j`2F0#0"j`$02
-H0j`%2
-I0j`2#00j`0H‡ Ò
-(JRO0j`2M
-0&02
-H0j`%2#00j`0H‡ Ò
-(NBS0j`2
-Q0j`'2#00j`0H‡ Ò
-(RBX0j`2
-V0(j`)2#00j`0H‡ Ò
-(WB\0j`2
-Z0#j`*2#00j`0H‡ Ò
-([B^0j`2
-0j`2#00j`0H‡ Ò
-(]B`0j`2
-0j`2#00j`0H‡ Ò
-(_Jb0j`20j`02#00j`0H‡ Ò
-(aBg0j`2
-0	j`2e00+j`,0H‡ Ò
-(fBk0j`2
-i0j`-2e00+j`,0H‡ Ò
-(jBm0j`2
-,0j`2e00+j`,0H‡ Ò
-(lBo0j`2
-10j`2e00+j`,0H‡ Ò
-(nBq0j`2
-60j`2e00+j`,0H‡ Ò
-(pHs0j`2<0j` 02e00+j`,0H‡ Ò
-(rBu0j`2
-@0j`!2e00+j`,0H‡ Ò
-(thw0j`2F0#0"j`$02
-H0j`%2
-I0j`2e00+j`,0H‡ Ò
-(vRy0j`2M
-0&02
-H0j`%2e00+j`,0H‡ Ò
-(xB{0j`2
-Q0j`'2e00+j`,0H‡ Ò
-(zB}0j`2
-V0(j`)2e00+j`,0H‡ Ò
-(|B0j`2
-Z0#j`*2e00+j`,0H‡ Ò
-(~D0j`2
-0j`2e00+j`,0H‡ Ò
-	(€Dƒ0j`2
-0j`2e00+j`,0H‡ Ò
-	(‚L…0j`20j`02e00+j`,0H‡ Ò
-	(„E‰0j`2‡0j`.2e00+j`,0H‡ Ò
-	(ˆEŽ0j`2
-0	j`2Œ00/j`00H‡ Ò
-	(E0j`2
-i0j`-2Œ00/j`00H‡ Ò
-	(E’0j`2
-'0j`2Œ00/j`00H‡ Ò
-	(‘E”0j`2
-10j`2Œ00/j`00H‡ Ò
-	(“E–0j`2
-60j`2Œ00/j`00H‡ Ò
-	(•K˜0j`2<0j` 02Œ00/j`00H‡ Ò
-	(—Eš0j`2
-@0j`!2Œ00/j`00H‡ Ò
-	(™gœ0j`2F0#0"j`$02
-H0j`%2I02Œ00/j`00H‡ Ò
-	(›Už0j`2M
-0&02
-H0j`%2Œ00/j`00H‡ Ò
-	(E 0j`2
-Q0j`'2Œ00/j`00H‡ Ò
-	(ŸE¢0j`2
-V0(j`)2Œ00/j`00H‡ Ò
-	(¡E¤0j`2
-Z0#j`*2Œ00/j`00H‡ Ò
-	(£E¦0j`2
-0j`2Œ00/j`00H‡ Ò
-	(¥E¨0j`2
-0j`2Œ00/j`00H‡ Ò
-	(§Mª0j`20j`02Œ00/j`00H‡ Ò
-	(©F¬0j`2‡0j`.2Œ00/j`00H‡ Ò
-	(«E±0j`2
-0	j`2¯001j`20H‡ Ò
-	(°E³0j`2
-i0j`-2¯001j`20H‡ Ò
-	(²Eµ0j`2
-'0j`2¯001j`20H‡ Ò
-	(´E·0j`2
-,0j`2¯001j`20H‡ Ò
-	(¶E¹0j`2
-60j`2¯001j`20H‡ Ò
-	(¸K»0j`2<0j` 02¯001j`20H‡ Ò
-	(ºE½0j`2
-@0j`!2¯001j`20H‡ Ò
-	(¼k¿0j`2F0#0"j`$02
-H0j`%2
-I0j`2¯001j`20H‡ Ò
-	(¾UÁ0j`2M
-0&02
-H0j`%2¯001j`20H‡ Ò
-	(ÀEÃ0j`2
-Q0j`'2¯001j`20H‡ Ò
-	(ÂEÅ0j`2
-V0(j`)2¯001j`20H‡ Ò
-	(ÄEÇ0j`2
-Z0#j`*2¯001j`20H‡ Ò
-	(ÆEÉ0j`2
-0j`2¯001j`20H‡ Ò
-	(ÈEË0j`2
-0j`2¯001j`20H‡ Ò
-	(ÊMÍ0j`20j`02¯001j`20H‡ Ò
-	(ÌEÒ0j`2
-0	j`2Ð003j`40H‡ Ò
-	(ÑEÔ0j`2
-i0j`-2Ð003j`40H‡ Ò
-	(ÓEÖ0j`2
-'0j`2Ð003j`40H‡ Ò
-	(ÕEØ0j`2
-,0j`2Ð003j`40H‡ Ò
-	(×EÚ0j`2
-10j`2Ð003j`40H‡ Ò
-	(ÙKÜ0j`2<0j` 02Ð003j`40H‡ Ò
-	(ÛEÞ0j`2
-@0j`!2Ð003j`40H‡ Ò
-	(Ýkà0j`2F0#0"j`$02
-H0j`%2
-I0j`2Ð003j`40H‡ Ò
-	(ßUâ0j`2M
-0&02
-H0j`%2Ð003j`40H‡ Ò
-	(áEä0j`2
-Q0j`'2Ð003j`40H‡ Ò
-	(ãEæ0j`2
-V0(j`)2Ð003j`40H‡ Ò
-	(åEè0j`2
-Z0#j`*2Ð003j`40H‡ Ò
-	(çEê0j`2
-0j`2Ð003j`40H‡ Ò
-	(éEì0j`2
-0j`2Ð003j`40H‡ Ò
-	(ëMî0j`20j`02Ð003j`40H‡ Ò
-	(íEò0j`2
-0	j`2ð003j`50H‡ Ò
-	(ñEô0j`2
-i0j`-2ð003j`50H‡ Ò
-	(óEö0j`2
-'0j`2ð003j`50H‡ Ò
-	(õEø0j`2
-,0j`2ð003j`50H‡ Ò
-	(÷Eú0j`2
-10j`2ð003j`50H‡ Ò
-	(ùEü0j`2
-60j`2ð003j`50H‡ Ò
-	(ûKþ0j`2<0j` 02ð003j`50H‡ Ò
-	(ýk€0j`2F0#0"j`$02
-H0j`%2
-I0j`2ð003j`50H‡ Ò
-	(ÿU‚0j`2M
-0&02
-H0j`%2ð003j`50H‡ Ò
-	(E„0j`2
-Q0j`'2ð003j`50H‡ Ò
-	(ƒE†0j`2
-V0(j`)2ð003j`50H‡ Ò
-	(…Eˆ0j`2
-Z0#j`*2ð003j`50H‡ Ò
-	(‡EŠ0j`2
-0j`2ð003j`50H‡ Ò
-	(‰EŒ0j`2
-0j`2ð003j`50H‡ Ò
-	(‹MŽ0j`20j`02ð003j`50H‡ Ò
-	(?‘0j`2
-0	j`20j` 0H‡ Ò
-	(?“0j`2
-i0j`-20j` 0H‡ Ò
-	(’?•0j`2
-'0j`20j` 0H‡ Ò
-	(”?—0j`2
-,0j`20j` 0H‡ Ò
-	(–?™0j`2
-10j`20j` 0H‡ Ò
-	(˜?›0j`2
-60j`20j` 0H‡ Ò
-	(š?0j`2
-@0j`!20j` 0H‡ Ò
-	(œeŸ0j`2F0#0"j`$02
-H0j`%2
-I0j`20j` 0H‡ Ò
-	(žO¡0j`2M
-0&02
-H0j`%20j` 0H‡ Ò
-	( ?£0j`2
-Q0j`'20j` 0H‡ Ò
-	(¢?¥0j`2
-V0(j`)20j` 0H‡ Ò
-	(¤?§0j`2
-Z0#j`*20j` 0H‡ Ò
-	(¦?©0j`2
-0j`20j` 0H‡ Ò
-	(¨?«0j`2
-0j`20j` 0H‡ Ò
-	(ªG­0j`20j`020j` 0H‡ Ò
-	(¬rµ0j`2®0	j`2
-H0j`%2
-I0j`2-³(" 0#0"j`$07j`806j`90H‡ Ò
-	(´r¸0j`2¶0j`-2
-H0j`%2
-I0j`2-³(" 0#0"j`$07j`806j`90H‡ Ò
-	(·qº0j`2
-'0j`2
-H0j`%2
-I0j`2-³(" 0#0"j`$07j`806j`90H‡ Ò
-	(¹m¼0j`2
-,0j`2
-H0j`%2I02-³(" 0#0"j`$07j`806j`90H‡ Ò
-	(»q¾0j`2
-10j`2
-H0j`%2
-I0j`2-³(" 0#0"j`$07j`806j`90H‡ Ò
-	(½qÀ0j`2
-60j`2
-H0j`%2
-I0j`2-³(" 0#0"j`$07j`806j`90H‡ Ò
-	(¿wÂ0j`2<0j` 02
-H0j`%2
-I0j`2-³(" 0#0"j`$07j`806j`90H‡ Ò
-	(ÁqÄ0j`2
-@0j`!2
-H0j`%2
-I0j`2-³(" 0#0"j`$07j`806j`90H‡ Ò
-	(ÃuÆ0j`2M
-0&02
-H0j`%2
-I0j`2-³(" 0#0"j`$07j`806j`90H‡ Ò
-	(ÅqÈ0j`2
-Q0j`'2
-H0j`%2
-I0j`2-³(" 0#0"j`$07j`806j`90H‡ Ò
-	(ÇqÊ0j`2
-V0(j`)2
-H0j`%2
-I0j`2-³(" 0#0"j`$07j`806j`90H‡ Ò
-	(ÉqÌ0j`2
-Z0#j`*2
-H0j`%2
-I0j`2-³(" 0#0"j`$07j`806j`90H‡ Ò
-	(ËqÎ0j`2
-0j`2
-H0j`%2
-I0j`2-³(" 0#0"j`$07j`806j`90H‡ Ò
-	(ÍmÐ0j`2
-0j`2
-H0j`%2I02-³(" 0#0"j`$07j`806j`90H‡ Ò
-	(ÏyÒ0j`20j`02
-H0j`%2
-I0j`2-³(" 0#0"j`$07j`806j`90H‡ Ò
-	(ÑEÖ0j`2
-0	j`2Ô00j`:0H‡ Ò
-	(ÕEØ0j`2
-i0j`-2Ô00j`:0H‡ Ò
-	(×EÚ0j`2
-'0j`2Ô00j`:0H‡ Ò
-	(ÙØ
-à
- ê
-platform.windows

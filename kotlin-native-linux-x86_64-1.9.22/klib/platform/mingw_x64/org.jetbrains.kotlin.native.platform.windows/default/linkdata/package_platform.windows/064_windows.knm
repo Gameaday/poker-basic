@@ -1,975 +1,0 @@
-
-æb
-kotlinx
-cinterop
-CPointer
-platform
-windows
-_SECURITY_ATTRIBUTES
-LPSECURITY_ATTRIBUTES
-lpMutexAttributes
-kotlin
-String
-internal
-CCall
-WCString
-lpName
-UInt
-DWORD
-dwFlags
-dwDesiredAccess
-CPointed
-HANDLE
-id
-,knifunptr_platform_windows640_CreateMutexExW
-CreateMutexExW
-lpEventAttributes
-CString
-,knifunptr_platform_windows641_CreateEventExA
-CreateEventExA
-,knifunptr_platform_windows642_CreateEventExW
-CreateEventExW
-lpSemaphoreAttributes
-Int
-LONG
-lInitialCount
-lMaximumCount
-0knifunptr_platform_windows643_CreateSemaphoreExW
-CreateSemaphoreExW
-_RTL_CRITICAL_SECTION
-LPCRITICAL_SECTION
-lpCriticalSection
-Unit
-7knifunptr_platform_windows644_InitializeCriticalSection
-InitializeCriticalSection
-dwSpinCount
-WINBOOL
-Cknifunptr_platform_windows645_InitializeCriticalSectionAndSpinCount
-%InitializeCriticalSectionAndSpinCount
-9knifunptr_platform_windows646_SetCriticalSectionSpinCount
-SetCriticalSectionSpinCount
-hHandle
-dwMilliseconds
-1knifunptr_platform_windows647_WaitForSingleObject
-WaitForSingleObject
-
-bAlertable
-%knifunptr_platform_windows648_SleepEx
-SleepEx
-bInitialOwner
-*knifunptr_platform_windows649_CreateMutexA
-CreateMutexA
-*knifunptr_platform_windows650_CreateMutexW
-CreateMutexW
-bManualReset
-bInitialState
-*knifunptr_platform_windows651_CreateEventA
-CreateEventA
-*knifunptr_platform_windows652_CreateEventW
-CreateEventW
-hTimer
-
-CValuesRef
-_LARGE_INTEGER
-LARGE_INTEGER
-	lpDueTime
-lPeriod
-	CFunction
-	Function3
-LPVOID
-PTIMERAPCROUTINE
-pfnCompletionRoutine
-lpArgToCompletionRoutine
-fResume
-.knifunptr_platform_windows653_SetWaitableTimer
-SetWaitableTimer
-1knifunptr_platform_windows654_CancelWaitableTimer
-CancelWaitableTimer
-bInheritHandle
-lpTimerName
-0knifunptr_platform_windows655_OpenWaitableTimerW
-OpenWaitableTimerW
-_RTL_BARRIER
-LPSYNCHRONIZATION_BARRIER
-	lpBarrier
-9knifunptr_platform_windows656_EnterSynchronizationBarrier
-EnterSynchronizationBarrier
-lTotalThreads
-
-lSpinCount
->knifunptr_platform_windows657_InitializeSynchronizationBarrier
- InitializeSynchronizationBarrier
-:knifunptr_platform_windows658_DeleteSynchronizationBarrier
-DeleteSynchronizationBarrier
-#knifunptr_platform_windows659_Sleep
-Sleep
-hObjectToSignal
-hObjectToWaitOn
-1knifunptr_platform_windows660_SignalObjectAndWait
-SignalObjectAndWait
-lpTimerAttributes
-4knifunptr_platform_windows661_CreateWaitableTimerExW
-CreateWaitableTimerExW
-_REASON_CONTEXT
-PREASON_CONTEXT
-WakeContext
-ULONG
-TolerableDelay
-0knifunptr_platform_windows662_SetWaitableTimerEx
-SetWaitableTimerEx
-_SYSTEMTIME
-LPSYSTEMTIME
-lpSystemTime
-+knifunptr_platform_windows663_GetSystemTime
-GetSystemTime
-	_FILETIME
-
-LPFILETIME
-lpSystemTimeAsFileTime
-5knifunptr_platform_windows664_GetSystemTimeAsFileTime
-GetSystemTimeAsFileTime
-*knifunptr_platform_windows665_GetLocalTime
-GetLocalTime
-_SYSTEM_INFO
-LPSYSTEM_INFO
-lpSystemInfo
-1knifunptr_platform_windows666_GetNativeSystemInfo
-GetNativeSystemInfo
-ULong
-	ULONGLONG
-,knifunptr_platform_windows667_GetTickCount64
-GetTickCount64
-+knifunptr_platform_windows668_GetSystemInfo
-GetSystemInfo
-_MEMORYSTATUSEX
-LPMEMORYSTATUSEX
-lpBuffer
-2knifunptr_platform_windows669_GlobalMemoryStatusEx
-GlobalMemoryStatusEx
-*knifunptr_platform_windows670_GetTickCount
-GetTickCount
-<knifunptr_platform_windows671_GetSystemTimePreciseAsFileTime
-GetSystemTimePreciseAsFileTime
-_OSVERSIONINFOA
-LPOSVERSIONINFOA
-lpVersionInformation
-+knifunptr_platform_windows672_GetVersionExA
-GetVersionExA
-_OSVERSIONINFOW
-LPOSVERSIONINFOW
-+knifunptr_platform_windows673_GetVersionExW
-GetVersionExW
-(knifunptr_platform_windows674_GetVersion
-
-GetVersion
-
-SYSTEMTIME
-*knifunptr_platform_windows675_SetLocalTime
-SetLocalTime
-	UIntVarOf
-DWORDVar
-PDWORD
-lpTimeAdjustment
-lpTimeIncrement
-IntVarOf
-
-WINBOOLVar
-PBOOL
-lpTimeAdjustmentDisabled
-5knifunptr_platform_windows676_GetSystemTimeAdjustment
-GetSystemTimeAdjustment
-	ByteVarOf
-Byte
-CHARVar
-LPSTR
-UINT
-uSize
-1knifunptr_platform_windows677_GetSystemDirectoryA
-GetSystemDirectoryA
-UShortVarOf
-UShort
-WCHARVar
-LPWSTR
-1knifunptr_platform_windows678_GetSystemDirectoryW
-GetSystemDirectoryW
-2knifunptr_platform_windows679_GetWindowsDirectoryA
-GetWindowsDirectoryA
-2knifunptr_platform_windows680_GetWindowsDirectoryW
-GetWindowsDirectoryW
-8knifunptr_platform_windows681_GetSystemWindowsDirectoryA
-GetSystemWindowsDirectoryA
-8knifunptr_platform_windows682_GetSystemWindowsDirectoryW
-GetSystemWindowsDirectoryW
-_COMPUTER_NAME_FORMAT
-COMPUTER_NAME_FORMAT
-NameType
-LPDWORD
-nSize
-0knifunptr_platform_windows683_GetComputerNameExA
-GetComputerNameExA
-0knifunptr_platform_windows684_GetComputerNameExW
-GetComputerNameExW
-0knifunptr_platform_windows685_SetComputerNameExW
-SetComputerNameExW
-+knifunptr_platform_windows686_SetSystemTime
-SetSystemTime
-%_SYSTEM_LOGICAL_PROCESSOR_INFORMATION
-%PSYSTEM_LOGICAL_PROCESSOR_INFORMATION
-Buffer
-ReturnedLength
-<knifunptr_platform_windows687_GetLogicalProcessorInformation
-GetLogicalProcessorInformation
-FirmwareTableProviderSignature
-PVOID
-pFirmwareTableEnumBuffer
-
-BufferSize
-6knifunptr_platform_windows688_EnumSystemFirmwareTables
-EnumSystemFirmwareTables
-FirmwareTableID
-pFirmwareTableBuffer
-4knifunptr_platform_windows689_GetSystemFirmwareTable
-GetSystemFirmwareTable
-dwOSMajorVersion
-dwOSMinorVersion
-dwSpMajorVersion
-dwSpMinorVersion
-pdwReturnedProductType
-,knifunptr_platform_windows690_GetProductInfo
-GetProductInfo
-LOGICAL_PROCESSOR_RELATIONSHIP
-RelationshipType
-(_SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX
-(PSYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX
->knifunptr_platform_windows691_GetLogicalProcessorInformationEx
- GetLogicalProcessorInformationEx
-Flags
-/knifunptr_platform_windows692_GetOsSafeBootMode
-GetOsSafeBootMode
-ULONGVar
-PULONG
-HighestNodeNumber
-6knifunptr_platform_windows693_GetNumaHighestNodeNumber
-GetNumaHighestNodeNumber
-USHORT
-Node
-_GROUP_AFFINITY
-PGROUP_AFFINITY
-ProcessorMask
-8knifunptr_platform_windows694_GetNumaNodeProcessorMaskEx
-GetNumaNodeProcessorMaskEx
-reserved
-cnames
-structs
-_TP_POOL
-PTP_POOL
-.knifunptr_platform_windows695_CreateThreadpool
-CreateThreadpool
-ptpp
-	cthrdMost
-8knifunptr_platform_windows696_SetThreadpoolThreadMaximum
-SetThreadpoolThreadMaximum
-cthrdMic
-8knifunptr_platform_windows697_SetThreadpoolThreadMinimum
-SetThreadpoolThreadMinimum
-_TP_POOL_STACK_INFORMATION
-PTP_POOL_STACK_INFORMATION
-ptpsi
-;knifunptr_platform_windows698_SetThreadpoolStackInformation
-SetThreadpoolStackInformation
-=knifunptr_platform_windows699_QueryThreadpoolStackInformation
-QueryThreadpoolStackInformation
--knifunptr_platform_windows700_CloseThreadpool
-CloseThreadpool
-_TP_CLEANUP_GROUP
-PTP_CLEANUP_GROUP
-:knifunptr_platform_windows701_CreateThreadpoolCleanupGroup
-CreateThreadpoolCleanupGroup
-ptpcg
-fCancelPendingCallbacks
-pvCleanupContext
-@knifunptr_platform_windows702_CloseThreadpoolCleanupGroupMembers
-"CloseThreadpoolCleanupGroupMembers
-9knifunptr_platform_windows703_CloseThreadpoolCleanupGroup
-CloseThreadpoolCleanupGroup
-_TP_CALLBACK_INSTANCE
-PTP_CALLBACK_INSTANCE
-pci
-evt
-9knifunptr_platform_windows704_SetEventWhenCallbackReturns
-SetEventWhenCallbackReturns
-sem
-crel
-Aknifunptr_platform_windows705_ReleaseSemaphoreWhenCallbackReturns
-#ReleaseSemaphoreWhenCallbackReturns
-mut
-=knifunptr_platform_windows706_ReleaseMutexWhenCallbackReturns
-ReleaseMutexWhenCallbackReturns
-PCRITICAL_SECTION
-pcs
-Eknifunptr_platform_windows707_LeaveCriticalSectionWhenCallbackReturns
-'LeaveCriticalSectionWhenCallbackReturns
-HINSTANCE__
-HMODULE
-mod
-<knifunptr_platform_windows708_FreeLibraryWhenCallbackReturns
-FreeLibraryWhenCallbackReturns
-0knifunptr_platform_windows709_CallbackMayRunLong
-CallbackMayRunLong
-Cknifunptr_platform_windows710_DisassociateCurrentThreadFromCallback
-%DisassociateCurrentThreadFromCallback
-	Function2
-PTP_SIMPLE_CALLBACK
-pfns
-pv
-_TP_CALLBACK_ENVIRON_V3
-TP_CALLBACK_ENVIRON_V3
-PTP_CALLBACK_ENVIRON
-pcbe
-9knifunptr_platform_windows711_TrySubmitThreadpoolCallback
-TrySubmitThreadpoolCallback
-_TP_WORK
-PTP_WORK
-PTP_WORK_CALLBACK
-pfnwk
-2knifunptr_platform_windows712_CreateThreadpoolWork
-CreateThreadpoolWork
-pwk
-2knifunptr_platform_windows713_SubmitThreadpoolWork
-SubmitThreadpoolWork
-<knifunptr_platform_windows714_WaitForThreadpoolWorkCallbacks
-WaitForThreadpoolWorkCallbacks
-1knifunptr_platform_windows715_CloseThreadpoolWork
-CloseThreadpoolWork
-	_TP_TIMER
-	PTP_TIMER
-PTP_TIMER_CALLBACK
-pfnti
-3knifunptr_platform_windows716_CreateThreadpoolTimer
-CreateThreadpoolTimer
-pti
-	PFILETIME
-
-pftDueTime
-msPeriod
-msWindowLength
-0knifunptr_platform_windows717_SetThreadpoolTimer
-SetThreadpoolTimer
-2knifunptr_platform_windows718_IsThreadpoolTimerSet
-IsThreadpoolTimerSet
-=knifunptr_platform_windows719_WaitForThreadpoolTimerCallbacks
-WaitForThreadpoolTimerCallbacks
-2knifunptr_platform_windows720_CloseThreadpoolTimer
-CloseThreadpoolTimer
-	Function4
-_TP_WAIT
-PTP_WAIT
-TP_WAIT_RESULT
-PTP_WAIT_CALLBACK
-pfnwa
-2knifunptr_platform_windows721_CreateThreadpoolWait
-CreateThreadpoolWait
-pwa
-h
-
-pftTimeout
-/knifunptr_platform_windows722_SetThreadpoolWait
-SetThreadpoolWait
-<knifunptr_platform_windows723_WaitForThreadpoolWaitCallbacks
-WaitForThreadpoolWaitCallbacks
-1knifunptr_platform_windows724_CloseThreadpoolWait
-CloseThreadpoolWait
-fl
-	Function6
-	ULONG_PTR
-_TP_IO
-PTP_IO
-PTP_WIN32_IO_CALLBACK
-pfnio
-0knifunptr_platform_windows725_CreateThreadpoolIo
-CreateThreadpoolIo
-pio
-/knifunptr_platform_windows726_StartThreadpoolIo
-StartThreadpoolIo
-0knifunptr_platform_windows727_CancelThreadpoolIo
-CancelThreadpoolIo
-:knifunptr_platform_windows728_WaitForThreadpoolIoCallbacks
-WaitForThreadpoolIoCallbacks
-/knifunptr_platform_windows729_CloseThreadpoolIo
-CloseThreadpoolIo
-2knifunptr_platform_windows730_SetThreadpoolTimerEx
-SetThreadpoolTimerEx
-Reserved
-1knifunptr_platform_windows731_SetThreadpoolWaitEx
-SetThreadpoolWaitEx
-CPointerVarOf
-	HANDLEVar
-PHANDLE
-
-phNewTimer
-
-TimerQueue
-UByte
-BOOLEAN
-WAITORTIMERCALLBACK
-Callback
-	Parameter
-DueTime
-Period
-3knifunptr_platform_windows732_CreateTimerQueueTimer
-CreateTimerQueueTimer
-Timer
-CompletionEvent
-3knifunptr_platform_windows733_DeleteTimerQueueTimer
-DeleteTimerQueueTimer
-	Function1
-LPTHREAD_START_ROUTINE
-Function
-Context
-/knifunptr_platform_windows734_QueueUserWorkItem
-QueueUserWorkItem
-
-WaitHandle
-.knifunptr_platform_windows735_UnregisterWaitEx
-UnregisterWaitEx
-.knifunptr_platform_windows736_CreateTimerQueue
-CreateTimerQueue
-3knifunptr_platform_windows737_ChangeTimerQueueTimer
-ChangeTimerQueueTimer
-0knifunptr_platform_windows738_DeleteTimerQueueEx
-DeleteTimerQueueEx
-Ptr
-+knifunptr_platform_windows739_EncodePointer
-EncodePointer
-+knifunptr_platform_windows740_DecodePointer
-DecodePointer
-1knifunptr_platform_windows741_EncodeSystemPointer
-EncodeSystemPointer
-1knifunptr_platform_windows742_DecodeSystemPointer
-DecodeSystemPointer
-dwFreq
-
-dwDuration
-"knifunptr_platform_windows743_Beep
-Beep
-PVOIDVar
-OldValue
-<knifunptr_platform_windows744_Wow64DisableWow64FsRedirection
-Wow64DisableWow64FsRedirection
-OlValue
-;knifunptr_platform_windows745_Wow64RevertWow64FsRedirection
-Wow64RevertWow64FsRedirection
-hProcess
-Wow64Process
-,knifunptr_platform_windows746_IsWow64Process
-IsWow64Process
-ByteVar
-Destination
-Value
-.knifunptr_platform_windows747__InterlockedAnd8
-_InterlockedAnd8
--knifunptr_platform_windows748__InterlockedOr8
-_InterlockedOr8
-.knifunptr_platform_windows749__InterlockedXor8
-_InterlockedXor8
-
-ShortVarOf
-Short
-SHORTVar
-SHORT
-/knifunptr_platform_windows750__InterlockedAnd16
-_InterlockedAnd16
-.knifunptr_platform_windows751__InterlockedOr16
-_InterlockedOr16
-/knifunptr_platform_windows752__InterlockedXor16
-_InterlockedXor16
-uFlags
-SIZE_T
-uBytes
-HLOCAL
-(knifunptr_platform_windows753_LocalAlloc
-
-LocalAlloc
-hMem
-'knifunptr_platform_windows754_LocalFree
-	LocalFree
-	HINSTANCE
-	hInstance
-hPrevInstance
-	lpCmdLine
-nShowCmd
-%knifunptr_platform_windows755_WinMain
-WinMain
-&knifunptr_platform_windows756_wWinMain
-wWinMain
-dwBytes
-HGLOBAL
-)knifunptr_platform_windows757_GlobalAlloc
-GlobalAlloc
-+knifunptr_platform_windows758_GlobalReAlloc
-GlobalReAlloc
-(knifunptr_platform_windows759_GlobalSize
-
-GlobalSize
-)knifunptr_platform_windows760_GlobalFlags
-GlobalFlags
-(knifunptr_platform_windows761_GlobalLock
-
-GlobalLock
-LPCVOID
-pMem
-*knifunptr_platform_windows762_GlobalHandle
-GlobalHandle
-*knifunptr_platform_windows763_GlobalUnlock
-GlobalUnlock
-(knifunptr_platform_windows764_GlobalFree
-
-GlobalFree
-	dwMinFree
-+knifunptr_platform_windows765_GlobalCompact
-GlobalCompact
-'knifunptr_platform_windows766_GlobalFix
-	GlobalFix
-)knifunptr_platform_windows767_GlobalUnfix
-GlobalUnfixÏ
- 
- 
- 
-
-
- 
- 
-
-	 
-
-
-	 
-
- 
- 
- 
- 
- 
-
- 
- 
- 
-$ 
-% 
-' 
-+ 
-C 
-D 
-E 
-H 
-I 
-J 
-K 
-W 
-X 
-k 
-l 
-n 
-r 
-s 
-w 
-x 
-~ 
- 
-É 
-Ñ 
-â 
-ä 
-í 
-ì 
-ó 
-ò 
-ù 
-† 
-° 
-¢ 
-• 
-¶ 
-ß 
-´ 
-¨ 
-≠ 
-Æ 
-Ø 
-≥ 
-¥ 
-µ 
-∂ 
-¡ 
-¬ 
-ƒ 
-Œ 
-œ 
-’ 
-Â 
-Á 
-Ë 
-Ó 
-Ô 
-Û 
-ı 
-ˆ 
-˚
-O¸
-P˝ 
-˛ 
-à 
-â 
-Pë 
-í 
-Pú 
-ù 
-© 
-≠ 
-Æ 
-∂ 
-∑ 
-∫ 
-ª 
-º 
-P¿ 
-¡ 
-¬ 
-PÕ 
-Œ 
-œ 
-‘ 
-‡ 
-P· 
-‚ 
-„ 
-‰ 
-Ú 
-Û 
-PÙ 
-ı 
-ˆ 
-à 
-â 
-ä 
-ç 
-é 
-è 
-ö 
-õ 
-∂ 
-¡ 
-  
-À 
-Ã 
-Õ 
-’ 
-◊ 
-› 
-Á 
-Ú òQg00j`200j`20“
-2
-0j`2
-0j`Há “
-
-(g00j`200j`20“
-2
-0j`2
-0j`Há “
-
-(g00j`200j`20“
-2
-0j`2
-0j`Há “
-
-(#00j`200j`2
- 0j`2
-!0j`20“
-2
-0j`2
-0j`Há “
-
-(".)02&00j`Há “
-
-((>-0j`2&00j`2
-*0j`Há “
-
-(,>/0j`2&00j`2
-*0j`Há “
-
-(.@30j`2000j`2
-10j`Há “
-
-(2460j`2
-10j`2
-40j`Há “
-
-(5[900j`200j`2
-70j`20“
-Há “
-
-(8[;00j`200j`2
-70j`20“
-Há “
-
-(:g?00j`200j`2
-<0j`2
-=0j`20“
-Há “
-
-(>gA00j`200j`2
-<0j`2
-=0j`20“
-Há “
-
-(@ƒP0j`2B00j`2F0j`02
-G0j`2JLF:84200j`0j`0j`0000j`2M00j`2
-N0j`Há “
-
-(O4R0j`2B00j`Há “
-
-(QQV00j`2
-0j`2
-S0j`2T0“
-Há “
-
-(U>[0j`2Y00j`2
-0j`Há “
-
-(ZJ_0j`2Y00j`2
-\0j`2
-]0j`Há “
-
-(^2a0j`2Y00j`Há “
-
-(`$c02
-10j`Há “
-
-(bdg0j`2d00j`2e00j`2
-10j`2
-40j`Há “
-
-(fgj00j`2h00j`2T0“
-2
-0j`2
-0j`Há “
-
-(i⁄q0j`2B00j`2F0j`02
-G0j`2JLF:84200j`0j`0j`0000j`2M00j`2m0 0j`!2
-o0j`"Há “
-
-(p.v02t0#0j`$Há “
-
-(u.{02y0%0j`&Há “
-
-(z.}02t0#0j`$Há “
-
-(|1Ç02Ä0'0j`(Há “
-
-	(ÅÜ0)j`*Há “
-
-	(Ö1à02Ä0'0j`(Há “
-
-	(á5ç0j`2ã0+0j`,Há “
-
-	(åè0j`Há “
-
-	(é0ë02y0%0j`&Há “
-
-	(ê5ñ0j`2î0-0j`.Há “
-
-	(ï5ö0j`2î0/0j`0Há “
-
-	(ôú0j`Há “
-
-	(õ2ü0j`2t0#j`10Há “
-
-	(ûÅ™0j`2£002j`30j`42§002j`30j`42®005j`60j`7Há “
-
-	(©L≤0j`<2ã0908j`:0j`;2∞0j`<Há “
-
-	(±L∏0j`<2ã0>0=j`?0j`@2∞0j`<Há “
-
-	(∑L∫0j`<2ã0908j`:0j`;2∞0j`<Há “
-
-	(πLº0j`<2ã0>0=j`?0j`@2∞0j`<Há “
-
-	(ªLæ0j`<2ã0908j`:0j`;2∞0j`<Há “
-
-	(ΩL¿0j`<2ã0>0=j`?0j`@2∞0j`<Há “
-
-	(øm«0j`2√0Aj`B2ã0908j`:0j`;2≈002j`30j`CHá “
-
-	(∆m…0j`2√0Aj`B2ã0>0=j`?0j`@2≈002j`30j`CHá “
-
-	(»=À0j`2√0Aj`B2ã0“
-Há “
-
-	( 2Õ0j`2t0#j`10Há “
-
-	(ÃV”0j`2–0D0j`E2—002j`30j`4Há “
-
-	(“QŸ0j`<2‘0j`2÷00j`F2◊0j`Há “
-
-	(ÿ^›0j`<2‘0j`2⁄0j`2€00j`F2◊0j`Há “
-
-	(‹s‰0j`2ﬁ0j`2ﬂ0j`2‡0j`2·0j`2‚002j`30j`4Há “
-
-	(„cÍ0j`2Ê0j`G2–0H0j`I2—002j`30j`4Há “
-
-	(È?Ì0j`2Î002j`30j`4Há “
-
-	(Ï?Ú0j`2002j`J0j`KHá “
-
-	(ÒB˘0j`2Ù0>j`L2˜0M0j`NHá “
-
-	(¯AÄ0Q0j`R2˙00j`FHá “
-
-	(ˇ>Ñ02Å0Q0j`R2Ç0j`Há “
-
-	(ÉBá0j`2Å0Q0j`R2Ö0j`Há “
-
-	(ÜLå0j`2Å0Q0j`R2ä0S0j`THá “
-
-	(ãLé0j`2Å0Q0j`R2ä0S0j`THá “
-
-	(ç1ê02Å0Q0j`RHá “
-
-	(è(î0U0j`VHá “
-
-	(ìWô02ï0U0j`V2ñ0j`2ó00j`FHá “
-
-	(ò1õ02ï0U0j`VHá “
-
-	(öJ°02û0W0j`X2ü00j`Há “
-
-	(†W•02û0W0j`X2¢00j`2£0j`Há “
-
-	(§J®02û0W0j`X2¶00j`Há “
-
-	(ßH¨02û0W0j`X2™00j`YHá “
-
-	(´H±02û0W0j`X2Ø0Z0j`[Há “
-
-	(∞5≥0j`2û0W0j`XHá “
-
-	(≤1µ02û0W0j`XHá “
-
-	(¥üø0j`2K∏F:8420W0j`X00j`F00\00j`]2π00j`F2Ω0^j`_0j``Há “
-
-	(æΩ≈0a0j`b2_√ZNLHF0W0j`X00j`F0a0j`b0000j`c2π00j`F2Ω0^j`_0j``Há “
-
-	(ƒ1»02∆0a0j`bHá “
-
-	(«> 02∆0a0j`b2ñ0j`Há “
-
-	(…1Ã02∆0a0j`bHá “
-
-	(ÀΩ“0d0j`e2_–ZNLHF0W0j`X00j`F0d0j`e0000j`f2π00j`F2Ω0^j`_0j``Há “
-
-	(—bŸ02”0d0j`e2’0%0j`g2÷0j`2◊0j`Há “
-
-	(ÿ5€0j`2”0d0j`eHá “
-
-	(⁄>›02”0d0j`e2ñ0j`Há “
-
-	(‹1ﬂ02”0d0j`eHá “
-
-	(ﬁ«Á0i0j`j2iÂdXVRP0W0j`X00j`F0i0j`j0j`k00h00j`l2π00j`F2Ω0^j`_0j``Há “
-
-	(ÊaÏ02Ë0i0j`j2È00j`2Í0%0j`gHá “
-
-	(Î>Ó02Ë0i0j`j2ñ0j`Há “
-
-	(Ì102Ë0i0j`jHá “
-
-	(ÔÇ˘0o0j`p2Ò00j`2ä˜Ñxvrp0W0j`X00j`F00j`F0j`"0)j`n0o0j`p00m00j`q2π00j`F2Ω0^j`_0j``Há “
-
-	(¯1¸02˙0o0j`pHá “
-
-	(˚1˛02˙0o0j`pHá “
-
-	(˝>Ä02˙0o0j`p2ñ0j`Há “
-
-	(ˇ1Ç02˙0o0j`pHá “
-
-	(ÅfÑ0j`2”0d0j`e2’0%0j`g2÷0j`2◊0j`Há “
-
-	(É~á0j`2Ë0i0j`j2È00j`2Í0%0j`g2Ö00j`FHá “
-
-	(ÜÁï0j`2+ã&00j`0rj`s0j`t2å00j`2Aê<0.*(00j`F0uj`v00\00j`w2ë00j`F2í0j`2ì0j`2Î0j`"Há “
-
-	(îiô0j`2å00j`2ñ00j`2ó00j`Há “
-
-	(òÅü0j`2;ú6*($"00j`0j`0x00j`y2ù00j`F2Î0j`"Há “
-
-	(ûP¢0j`2†00j`2ó00j`Há “
-
-	(°*§00j`Há “
-
-	(£j¶0j`2å00j`2ñ00j`2í0j`"2ì0j`"Há “
-
-	(•P®0j`2å00j`2ó00j`Há “
-
-	(ßC´00j`F2©00j`FHá “
-
-	(™C≠00j`F2©00j`FHá “
-
-	(¨CØ00j`F2©00j`FHá “
-
-	(ÆC±00j`F2©00j`FHá “
-
-	(∞8µ0j`2≤0j`2≥0j`Há “
-
-	(¥Eπ0j`2%∑ 00j`F0rj`z0Há “
-
-	(∏7º0j`2∫00j`FHá “
-
-	(ªX¿0j`2Ω00j`2æ005j`60j`7Há “
-
-	(ø>≈092¬0908j`{02√09Há “
-
-	(ƒ>«092¬0908j`{02√09Há “
-
-	(∆>…092¬0908j`{02√09Há “
-
-	(»Fœ0}j`2¬0}0|j`~02√0}j`Há “
-
-	(ŒF—0}j`2¬0}0|j`~02√0}j`Há “
-
-	(–F”0}j`2¬0}0|j`~02√0}j`Há “
-
-	(“FŸ00j`Å2‘0j`<2÷0)j`ÄHá “
-
-	(ÿE‹00j`Å2⁄00j`ÅHá “
-
-	(€t„02ﬁ0Z0j`Ç2ﬂ0Z0j`Ç2‡0908j`:0j`;2·0Há “
-
-	(‚tÂ02ﬁ0Z0j`Ç2ﬂ0Z0j`Ç2‡0>0=j`?0j`@2·0Há “
-
-	(‰FÈ00j`É2‘0j`<2Ê0)j`ÄHá “
-
-	(Ë`Î00j`É2⁄00j`É2Ê0)j`Ä2‘0j`<Há “
-
-	(Í9Ì0)j`Ä2⁄00j`ÉHá “
-
-	(Ï8Ô0j`<2⁄00j`ÉHá “
-
-	(ÓDÒ00j`2⁄00j`ÉHá “
-
-	(Eı00j`É2Û00j`ÑHá “
-
-	(Ù8˜0j`2⁄00j`ÉHá “
-
-	(ˆE˘00j`É2⁄00j`ÉHá “
-
-	(¯,¸0)j`Ä2˙0j`Há “
-
-	(˚4˛02⁄00j`ÉHá “
-
-	(˝4Ä02⁄00j`ÉHá “
-
-	(ˇÿ
-‡
- Í
-platform.windows

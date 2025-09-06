@@ -1,7 +1,0 @@
-depends = CFCGTypes CFNetwork CoreFoundation CoreFoundationBase CoreGraphics Foundation ImageIO Security darwin posix
-language = Objective-C
-package = platform.SensitiveContentAnalysis
-
-modules = SensitiveContentAnalysis
-compilerOpts = -framework SensitiveContentAnalysis
-linkerOpts = -framework SensitiveContentAnalysis

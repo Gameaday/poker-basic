@@ -1,284 +1,0 @@
-
-ÿU
-platform
-posix
-_GUID
-GUID
-kotlinx
-cinterop
-internal
-CCall
-id
-Iknifunptr_platform_windows7777_GUID_PROCESSOR_PERF_DECREASE_POLICY_getter
-#GUID_PROCESSOR_PERF_DECREASE_POLICY
-Lknifunptr_platform_windows7778_GUID_PROCESSOR_PERF_DECREASE_THRESHOLD_getter
-&GUID_PROCESSOR_PERF_DECREASE_THRESHOLD
-Gknifunptr_platform_windows7779_GUID_PROCESSOR_PERF_DECREASE_TIME_getter
-!GUID_PROCESSOR_PERF_DECREASE_TIME
-Aknifunptr_platform_windows7780_GUID_PROCESSOR_PERF_HISTORY_getter
-GUID_PROCESSOR_PERF_HISTORY
-Iknifunptr_platform_windows7781_GUID_PROCESSOR_PERF_INCREASE_POLICY_getter
-#GUID_PROCESSOR_PERF_INCREASE_POLICY
-Lknifunptr_platform_windows7782_GUID_PROCESSOR_PERF_INCREASE_THRESHOLD_getter
-&GUID_PROCESSOR_PERF_INCREASE_THRESHOLD
-Gknifunptr_platform_windows7783_GUID_PROCESSOR_PERF_INCREASE_TIME_getter
-!GUID_PROCESSOR_PERF_INCREASE_TIME
-Fknifunptr_platform_windows7784_GUID_PROCESSOR_PERF_LATENCY_HINT_getter
- GUID_PROCESSOR_PERF_LATENCY_HINT
-Dknifunptr_platform_windows7785_GUID_PROCESSOR_PERF_TIME_CHECK_getter
-GUID_PROCESSOR_PERF_TIME_CHECK
-Fknifunptr_platform_windows7786_GUID_PROCESSOR_SETTINGS_SUBGROUP_getter
- GUID_PROCESSOR_SETTINGS_SUBGROUP
-Eknifunptr_platform_windows7787_GUID_PROCESSOR_THROTTLE_MAXIMUM_getter
-GUID_PROCESSOR_THROTTLE_MAXIMUM
-Eknifunptr_platform_windows7788_GUID_PROCESSOR_THROTTLE_MINIMUM_getter
-GUID_PROCESSOR_THROTTLE_MINIMUM
-Dknifunptr_platform_windows7789_GUID_PROCESSOR_THROTTLE_POLICY_getter
-GUID_PROCESSOR_THROTTLE_POLICY
-Aknifunptr_platform_windows7790_GUID_SESSION_DISPLAY_STATUS_getter
-GUID_SESSION_DISPLAY_STATUS
-@knifunptr_platform_windows7791_GUID_SESSION_USER_PRESENCE_getter
-GUID_SESSION_USER_PRESENCE
-=knifunptr_platform_windows7792_GUID_SLEEPBUTTON_ACTION_getter
-GUID_SLEEPBUTTON_ACTION
-?knifunptr_platform_windows7793_GUID_SLEEP_IDLE_THRESHOLD_getter
-GUID_SLEEP_IDLE_THRESHOLD
-9knifunptr_platform_windows7794_GUID_SLEEP_SUBGROUP_getter
-GUID_SLEEP_SUBGROUP
-:knifunptr_platform_windows7795_GUID_STANDBY_TIMEOUT_getter
-GUID_STANDBY_TIMEOUT
-:knifunptr_platform_windows7796_GUID_SYSTEM_AWAYMODE_getter
-GUID_SYSTEM_AWAYMODE
-Aknifunptr_platform_windows7797_GUID_SYSTEM_BUTTON_SUBGROUP_getter
-GUID_SYSTEM_BUTTON_SUBGROUP
-@knifunptr_platform_windows7798_GUID_SYSTEM_COOLING_POLICY_getter
-GUID_SYSTEM_COOLING_POLICY
-3knifunptr_platform_windows7799_GUID_TRISTATE_getter
-GUID_TRISTATE
-@knifunptr_platform_windows7800_GUID_TYPICAL_POWER_SAVINGS_getter
-GUID_TYPICAL_POWER_SAVINGS
-Aknifunptr_platform_windows7801_GUID_UNATTEND_SLEEP_TIMEOUT_getter
-GUID_UNATTEND_SLEEP_TIMEOUT
-Eknifunptr_platform_windows7802_GUID_USERINTERFACEBUTTON_ACTION_getter
-GUID_USERINTERFACEBUTTON_ACTION
-Lknifunptr_platform_windows7803_GUID_VIDEO_ADAPTIVE_DISPLAY_BRIGHTNESS_getter
-&GUID_VIDEO_ADAPTIVE_DISPLAY_BRIGHTNESS
-Jknifunptr_platform_windows7804_GUID_VIDEO_ADAPTIVE_PERCENT_INCREASE_getter
-$GUID_VIDEO_ADAPTIVE_PERCENT_INCREASE
-Cknifunptr_platform_windows7805_GUID_VIDEO_ADAPTIVE_POWERDOWN_getter
-GUID_VIDEO_ADAPTIVE_POWERDOWN
-Bknifunptr_platform_windows7806_GUID_VIDEO_ANNOYANCE_TIMEOUT_getter
-GUID_VIDEO_ANNOYANCE_TIMEOUT
-Eknifunptr_platform_windows7807_GUID_VIDEO_CONSOLE_LOCK_TIMEOUT_getter
-GUID_VIDEO_CONSOLE_LOCK_TIMEOUT
-Kknifunptr_platform_windows7808_GUID_VIDEO_CURRENT_MONITOR_BRIGHTNESS_getter
-%GUID_VIDEO_CURRENT_MONITOR_BRIGHTNESS
-<knifunptr_platform_windows7809_GUID_VIDEO_DIM_TIMEOUT_getter
-GUID_VIDEO_DIM_TIMEOUT
-Bknifunptr_platform_windows7810_GUID_VIDEO_POWERDOWN_TIMEOUT_getter
-GUID_VIDEO_POWERDOWN_TIMEOUT
-9knifunptr_platform_windows7811_GUID_VIDEO_SUBGROUP_getter
-GUID_VIDEO_SUBGROUP
-:knifunptr_platform_windows7812_IID_AsyncIAdviseSink_getter
-IID_AsyncIAdviseSink
-;knifunptr_platform_windows7813_IID_AsyncIAdviseSink2_getter
-IID_AsyncIAdviseSink2
-7knifunptr_platform_windows7814_IID_AsyncIMultiQI_getter
-IID_AsyncIMultiQI
-7knifunptr_platform_windows7815_IID_AsyncIUnknown_getter
-IID_AsyncIUnknown
-2knifunptr_platform_windows7816_IID_CDefView_getter
-IID_CDefView
-6knifunptr_platform_windows7817_IID_DFConstraint_getter
-IID_DFConstraint
-0knifunptr_platform_windows7818_IID_Folder_getter
-
-IID_Folder
-1knifunptr_platform_windows7819_IID_Folder2_getter
-IID_Folder2
-1knifunptr_platform_windows7820_IID_Folder3_getter
-IID_Folder3
-4knifunptr_platform_windows7821_IID_FolderItem_getter
-IID_FolderItem
-5knifunptr_platform_windows7822_IID_FolderItem2_getter
-IID_FolderItem2
-8knifunptr_platform_windows7823_IID_FolderItemVerb_getter
-IID_FolderItemVerb
-9knifunptr_platform_windows7824_IID_FolderItemVerbs_getter
-IID_FolderItemVerbs
-5knifunptr_platform_windows7825_IID_FolderItems_getter
-IID_FolderItems
-6knifunptr_platform_windows7826_IID_FolderItems2_getter
-IID_FolderItems2
-6knifunptr_platform_windows7827_IID_FolderItems3_getter
-IID_FolderItems3
-1knifunptr_platform_windows7828_IID_IACList_getter
-IID_IACList
-2knifunptr_platform_windows7829_IID_IACList2_getter
-IID_IACList2
-5knifunptr_platform_windows7830_IID_IADesktopP2_getter
-IID_IADesktopP2
-8knifunptr_platform_windows7831_IID_IAVIEditStream_getter
-IID_IAVIEditStream
-2knifunptr_platform_windows7832_IID_IAVIFile_getter
-IID_IAVIFile
-9knifunptr_platform_windows7833_IID_IAVIPersistFile_getter
-IID_IAVIPersistFile
-4knifunptr_platform_windows7834_IID_IAVIStream_getter
-IID_IAVIStream
-7knifunptr_platform_windows7835_IID_IAVIStreaming_getter
-IID_IAVIStreaming
-;knifunptr_platform_windows7836_IID_IAccessibleObject_getter
-IID_IAccessibleObject
-9knifunptr_platform_windows7837_IID_IActionProgress_getter
-IID_IActionProgress
-?knifunptr_platform_windows7838_IID_IActionProgressDialog_getter
-IID_IActionProgressDialog
-8knifunptr_platform_windows7839_IID_IActiveDesktop_getter
-IID_IActiveDesktop
-9knifunptr_platform_windows7840_IID_IActiveDesktopP_getter
-IID_IActiveDesktopP
-?knifunptr_platform_windows7841_IID_IAddrExclusionControl_getter
-IID_IAddrExclusionControl
->knifunptr_platform_windows7842_IID_IAddrTrackingControl_getter
-IID_IAddrTrackingControl
-5knifunptr_platform_windows7843_IID_IAdviseSink_getter
-IID_IAdviseSink
-6knifunptr_platform_windows7844_IID_IAdviseSink2_getter
-IID_IAdviseSink2
-7knifunptr_platform_windows7845_IID_IAdviseSinkEx_getter
-IID_IAdviseSinkEx
-6knifunptr_platform_windows7846_IID_IAgileObject_getter
-IID_IAgileObject
-9knifunptr_platform_windows7847_IID_IAgileReference_getter
-IID_IAgileReference
-<knifunptr_platform_windows7848_IID_IApartmentShutdown_getter
-IID_IApartmentShutdown
-Mknifunptr_platform_windows7849_IID_IApplicationAssociationRegistration_getter
-'IID_IApplicationAssociationRegistration
-Oknifunptr_platform_windows7850_IID_IApplicationAssociationRegistrationUI_getter
-)IID_IApplicationAssociationRegistrationUI
-Bknifunptr_platform_windows7851_IID_IApplicationDestinations_getter
-IID_IApplicationDestinations
-Cknifunptr_platform_windows7852_IID_IApplicationDocumentLists_getter
-IID_IApplicationDocumentLists
-7knifunptr_platform_windows7853_IID_IAssocHandler_getter
-IID_IAssocHandler
->knifunptr_platform_windows7854_IID_IAssocHandlerInvoker_getter
-IID_IAssocHandlerInvoker
-IID
-7knifunptr_platform_windows7855_IID_IAsyncBindCtx_getter
-IID_IAsyncBindCtx
-7knifunptr_platform_windows7856_IID_IAsyncManager_getter
-IID_IAsyncManager
-7knifunptr_platform_windows7857_IID_IAsyncMoniker_getter
-IID_IAsyncMoniker
-@knifunptr_platform_windows7858_IID_IAsyncRpcChannelBuffer_getter
-IID_IAsyncRpcChannelBuffer
-<knifunptr_platform_windows7859_IID_IAttachmentExecute_getter
-IID_IAttachmentExecute
-7knifunptr_platform_windows7860_IID_IAuthenticate_getter
-IID_IAuthenticate
-9knifunptr_platform_windows7861_IID_IAuthenticateEx_getter
-IID_IAuthenticateEx
-7knifunptr_platform_windows7862_IID_IAutoComplete_getter
-IID_IAutoComplete
-8knifunptr_platform_windows7863_IID_IAutoComplete2_getter
-IID_IAutoComplete2
-?knifunptr_platform_windows7864_IID_IAutoCompleteDropDown_getter
-IID_IAutoCompleteDropDown
-3knifunptr_platform_windows7865_IID_IBandHost_getter
-IID_IBandHost
-3knifunptr_platform_windows7866_IID_IBandSite_getter
-IID_IBandSite
-6knifunptr_platform_windows7867_IID_IBanneredBar_getter
-IID_IBanneredBar
-?knifunptr_platform_windows7868_IID_IBindCallbackRedirect_getter
-IID_IBindCallbackRedirect
-2knifunptr_platform_windows7869_IID_IBindCtx_getter
-IID_IBindCtx
-3knifunptr_platform_windows7870_IID_IBindHost_getter
-IID_IBindHost
-7knifunptr_platform_windows7871_IID_IBindProtocol_getter
-IID_IBindProtocol
-=knifunptr_platform_windows7872_IID_IBindStatusCallback_getter
-IID_IBindStatusCallback
-?knifunptr_platform_windows7873_IID_IBindStatusCallbackEx_getter
-IID_IBindStatusCallbackEx
-2knifunptr_platform_windows7874_IID_IBinding_getter
-IID_IBinding
-7knifunptr_platform_windows7875_IID_IBlockingLock_getter
-IID_IBlockingLock
-7knifunptr_platform_windows7876_IID_IBriefcaseStg_getter
-IID_IBriefcaseStg
->knifunptr_platform_windows7877_IID_IBrowserFrameOptions_getter
-IID_IBrowserFrameOptions
-1knifunptr_platform_windows7878_IID_ICDBurn_getter
-IID_ICDBurn
-4knifunptr_platform_windows7879_IID_ICDBurnExt_getter
-IID_ICDBurnExt
-6knifunptr_platform_windows7880_IID_ICallFactory_getter
-IID_ICallFactory
-Sknifunptr_platform_windows7881_IID_ICallbackWithNoReentrancyToApplicationSTA_getter
--IID_ICallbackWithNoReentrancyToApplicationSTA
-<knifunptr_platform_windows7882_IID_ICancelMethodCalls_getter
-IID_ICancelMethodCalls
-9knifunptr_platform_windows7883_IID_ICatInformation_getter
-IID_ICatInformation
-6knifunptr_platform_windows7884_IID_ICatRegister_getter
-IID_ICatRegister
-:knifunptr_platform_windows7885_IID_ICatalogFileInfo_getter
-IID_ICatalogFileInfo
-6knifunptr_platform_windows7886_IID_ICategorizer_getter
-IID_ICategorizer
-;knifunptr_platform_windows7887_IID_ICategoryProvider_getter
-IID_ICategoryProvider
-6knifunptr_platform_windows7888_IID_IChannelHook_getter
-IID_IChannelHook
-9knifunptr_platform_windows7889_IID_IClassActivator_getter
-IID_IClassActivator
-7knifunptr_platform_windows7890_IID_IClassFactory_getter
-IID_IClassFactory
-8knifunptr_platform_windows7891_IID_IClassFactory2_getter
-IID_IClassFactory2
-9knifunptr_platform_windows7892_IID_IClientSecurity_getter
-IID_IClientSecurity
-6knifunptr_platform_windows7893_IID_ICodeInstall_getter
-IID_ICodeInstall
-8knifunptr_platform_windows7894_IID_IColumnManager_getter
-IID_IColumnManager
-9knifunptr_platform_windows7895_IID_IColumnProvider_getter
-IID_IColumnProvider
-;knifunptr_platform_windows7896_IID_IComThreadingInfo_getter
-IID_IComThreadingInfo
-9knifunptr_platform_windows7897_IID_ICommDlgBrowser_getter
-IID_ICommDlgBrowser
-:knifunptr_platform_windows7898_IID_ICommDlgBrowser2_getter
-IID_ICommDlgBrowser2
-:knifunptr_platform_windows7899_IID_ICommDlgBrowser3_getter
-IID_ICommDlgBrowser3
-Cknifunptr_platform_windows7900_IID_IComputerInfoChangeNotify_getter
-IID_IComputerInfoChangeNotify
-4knifunptr_platform_windows7901_IID_ICondition_getter
-IID_ICondition
-5knifunptr_platform_windows7902_IID_ICondition2_getter
-IID_ICondition2
-:knifunptr_platform_windows7903_IID_IConnectionPoint_getter
-IID_IConnectionPoint
-Cknifunptr_platform_windows7904_IID_IConnectionPointContainer_getter
-IID_IConnectionPointContainer
-windowsB
- 
- 
- 
- 
-
-
-
- 
-• 
- äå"
-0j`8«ä(	"0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä(" 0j`8«ä(""0j`8«ä(!"$0j`8«ä(#"&0j`8«ä(%"(0j`8«ä('"*0j`8«ä()",0j`8«ä(+".0j`8«ä(-"00j`8«ä(/"20j`8«ä(1"40j`8«ä(3"60j`8«ä(5"80j`8«ä(7":0j`8«ä(9"<0j`8«ä(;">0j`8«ä(="@0j`8«ä(?"B0j`8«ä(A"D0j`8«ä(C"F0j`8«ä(E"H0j`8«ä(G"J0j`8«ä(I"L0j`8«ä(K"N0j`8«ä(M"P0j`8«ä(O"R0j`8«ä(Q"T0j`8«ä(S"V0j`8«ä(U"X0j`8«ä(W"Z0j`8«ä(Y"\0j`8«ä(["^0j`8«ä(]"`0j`8«ä(_"b0j`8«ä(a"d0j`8«ä(c"f0j`8«ä(e"h0j`8«ä(g"j0j`8«ä(i"l0j`8«ä(k"n0j`8«ä(m"p0j`8«ä(o"r0j`8«ä(q"t0j`8«ä(s"v0j`8«ä(u"x0j`8«ä(w"z0j`8«ä(y"|0j`8«ä({"~0j`8«ä(}"Ä0j`8«ä("Ç0j`8«ä	(Å"Ñ0j`8«ä	(É"Ü0j`8«ä	(Ö"à0j`8«ä	(á"ä0j`8«ä	(â"å0j`8«ä	(ã"é0j`8«ä	(ç"ê0j`8«ä	(è"í0j`8«ä	(ë"î0j`8«ä	(ì"ñ0j`8«ä	(ï"ò0j`8«ä	(ó"ö0j`8«ä	(ô"ú0j`8«ä	(õ"û0j`8«ä	(ù"†0j`8«ä	(ü"¢0j`8«ä	(°"§0j`8«ä	(£"ß0j`8«ä	(¶"©0j`8«ä	(®"´0j`8«ä	(™"≠0j`8«ä	(¨"Ø0j`8«ä	(Æ"±0j`8«ä	(∞"≥0j`8«ä	(≤"µ0j`8«ä	(¥"∑0j`8«ä	(∂"π0j`8«ä	(∏"ª0j`8«ä	(∫"Ω0j`8«ä	(º"ø0j`8«ä	(æ"¡0j`8«ä	(¿"√0j`8«ä	(¬"≈0j`8«ä	(ƒ"«0j`8«ä	(∆"…0j`8«ä	(»"À0j`8«ä	( "Õ0j`8«ä	(Ã"œ0j`8«ä	(Œ"—0j`8«ä	(–"”0j`8«ä	(“"’0j`8«ä	(‘"◊0j`8«ä	(÷"Ÿ0j`8«ä	(ÿ"€0j`8«ä	(⁄"›0j`8«ä	(‹"ﬂ0j`8«ä	(ﬁ"·0j`8«ä	(‡"„0j`8«ä	(‚"Â0j`8«ä	(‰"Á0j`8«ä	(Ê"È0j`8«ä	(Ë"Î0j`8«ä	(Í"Ì0j`8«ä	(Ï"Ô0j`8«ä	(Ó"Ò0j`8«ä	("Û0j`8«ä	(Ú"ı0j`8«ä	(Ù"˜0j`8«ä	(ˆ"˘0j`8«ä	(¯"˚0j`8«ä	(˙"˝0j`8«ä	(¸"ˇ0j`8«ä	(˛"Å0j`8«ä	(Ä"É0j`8«ä	(Ç"Ö0j`8«ä	(Ñ"á0j`8«ä	(Ü"â0j`8«ä	(àÿ
-	‡
- Í
-platform.windows

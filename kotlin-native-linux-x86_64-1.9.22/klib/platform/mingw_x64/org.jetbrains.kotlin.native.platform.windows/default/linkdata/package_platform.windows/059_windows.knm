@@ -1,543 +1,0 @@
-
-èC
-kotlinx
-cinterop
-
-CValuesRef
-platform
-windows
-_EXCEPTION_RECORD
-_ExceptionRecord
-_EstablisherFrame
-_CONTEXT
-_ContextRecord
-_DISPATCHER_CONTEXT
-_DispatcherContext
-kotlin
-Int
-internal
-CCall
-id
-0knifunptr_platform_windows0___C_specific_handler
-__C_specific_handler
-UInt
-+knifunptr_platform_windows1__exception_code
-_exception_code
-CPointer
-CPointed
-COpaquePointer
-+knifunptr_platform_windows2__exception_info
-_exception_info
-1knifunptr_platform_windows3__abnormal_termination
-_abnormal_termination
-_ExceptionNum
-_EXCEPTION_POINTERS
-_ExceptionPtr
-+knifunptr_platform_windows4___CppXcptFilter
-__CppXcptFilter
-'knifunptr_platform_windows5__XcptFilter
-_XcptFilter
-Unit
-,knifunptr_platform_windows6___faststorefence
-__faststorefence
-
-ULongVarOf
-ULong
-ULongVar
-arg0
-arg1
-posix
-size_t
-arg2
-#knifunptr_platform_windows7___stosq
-__stosq
-	LongVarOf
-Long
-LongVar
-a
-b
-UByte
-7knifunptr_platform_windows8__interlockedbittestandset64
-_interlockedbittestandset64
-9knifunptr_platform_windows9__interlockedbittestandreset64
-_interlockedbittestandreset64
-?knifunptr_platform_windows10__interlockedbittestandcomplement64
-"_interlockedbittestandcomplement64
-7knifunptr_platform_windows11_InterlockedBitTestAndSet64
-InterlockedBitTestAndSet64
-9knifunptr_platform_windows12_InterlockedBitTestAndReset64
-InterlockedBitTestAndReset64
->knifunptr_platform_windows13_InterlockedBitTestAndComplement64
-!InterlockedBitTestAndComplement64
-.knifunptr_platform_windows14__InterlockedAnd64
-_InterlockedAnd64
--knifunptr_platform_windows15__InterlockedOr64
-_InterlockedOr64
-.knifunptr_platform_windows16__InterlockedXor64
-_InterlockedXor64
-Addend
-4knifunptr_platform_windows17__InterlockedIncrement64
-_InterlockedIncrement64
-4knifunptr_platform_windows18__InterlockedDecrement64
-_InterlockedDecrement64
-Target
-Value
-3knifunptr_platform_windows19__InterlockedExchange64
-_InterlockedExchange64
-6knifunptr_platform_windows20__InterlockedExchangeAdd64
-_InterlockedExchangeAdd64
-Offset
-)knifunptr_platform_windows21___readgsbyte
-__readgsbyte
-UShort
-)knifunptr_platform_windows22___readgsword
-__readgsword
-*knifunptr_platform_windows23___readgsdword
-__readgsdword
-*knifunptr_platform_windows24___readgsqword
-__readgsqword
-Data
-*knifunptr_platform_windows25___writegsbyte
-__writegsbyte
-*knifunptr_platform_windows26___writegsword
-__writegsword
-+knifunptr_platform_windows27___writegsdword
-__writegsdword
-+knifunptr_platform_windows28___writegsqword
-__writegsqword
-	UIntVarOf
-UIntVar
-Index
-Mask
-.knifunptr_platform_windows29__BitScanForward64
-_BitScanForward64
-.knifunptr_platform_windows30__BitScanReverse64
-_BitScanReverse64
-'knifunptr_platform_windows31__bittest64
-
-_bittest64
--knifunptr_platform_windows32__bittestandset64
-_bittestandset64
-/knifunptr_platform_windows33__bittestandreset64
-_bittestandreset64
-4knifunptr_platform_windows34__bittestandcomplement64
-_bittestandcomplement64
-Dest
-Source
-Count
-$knifunptr_platform_windows35___movsq
-__movsq
-IntVarOf
-IntVar
-,knifunptr_platform_windows36__InterlockedAnd
-_InterlockedAnd
-+knifunptr_platform_windows37__InterlockedOr
-_InterlockedOr
-,knifunptr_platform_windows38__InterlockedXor
-_InterlockedXor
-
-ShortVarOf
-Short
-ShortVar
-4knifunptr_platform_windows39__InterlockedIncrement16
-_InterlockedIncrement16
-4knifunptr_platform_windows40__InterlockedDecrement16
-_InterlockedDecrement16
-Destination
-ExChange
-	Comperand
-:knifunptr_platform_windows41__InterlockedCompareExchange16
-_InterlockedCompareExchange16
-4knifunptr_platform_windows42__InterlockedExchangeAdd
-_InterlockedExchangeAdd
-8knifunptr_platform_windows43__InterlockedCompareExchange
-_InterlockedCompareExchange
-2knifunptr_platform_windows44__InterlockedIncrement
-_InterlockedIncrement
-2knifunptr_platform_windows45__InterlockedDecrement
-_InterlockedDecrement
-,knifunptr_platform_windows46__InterlockedAdd
-_InterlockedAdd
-.knifunptr_platform_windows47__InterlockedAdd64
-_InterlockedAdd64
-1knifunptr_platform_windows48__InterlockedExchange
-_InterlockedExchange
-:knifunptr_platform_windows49__InterlockedCompareExchange64
-_InterlockedCompareExchange64
-CPointerVarOf
-COpaquePointerVar
-?knifunptr_platform_windows50__InterlockedCompareExchangePointer
-"_InterlockedCompareExchangePointer
-8knifunptr_platform_windows51__InterlockedExchangePointer
-_InterlockedExchangePointer
-$knifunptr_platform_windows52___int2c
-__int2c
-
-UByteVarOf
-UByteVar
-$knifunptr_platform_windows53___stosb
-__stosb
-UShortVarOf
-	UShortVar
-$knifunptr_platform_windows54___stosw
-__stosw
-$knifunptr_platform_windows55___stosd
-__stosd
-6knifunptr_platform_windows56__interlockedbittestandset
-_interlockedbittestandset
-8knifunptr_platform_windows57__interlockedbittestandreset
-_interlockedbittestandreset
-=knifunptr_platform_windows58__interlockedbittestandcomplement
- _interlockedbittestandcomplement
-5knifunptr_platform_windows59_InterlockedBitTestAndSet
-InterlockedBitTestAndSet
-7knifunptr_platform_windows60_InterlockedBitTestAndReset
-InterlockedBitTestAndReset
-<knifunptr_platform_windows61_InterlockedBitTestAndComplement
-InterlockedBitTestAndComplement
-,knifunptr_platform_windows62__BitScanForward
-_BitScanForward
-,knifunptr_platform_windows63__BitScanReverse
-_BitScanReverse
-%knifunptr_platform_windows64__bittest
-_bittest
-+knifunptr_platform_windows65__bittestandset
-_bittestandset
--knifunptr_platform_windows66__bittestandreset
-_bittestandreset
-2knifunptr_platform_windows67__bittestandcomplement
-_bittestandcomplement
-$knifunptr_platform_windows68___movsb
-__movsb
-$knifunptr_platform_windows69___movsw
-__movsw
-$knifunptr_platform_windows70___movsd
-__movsd
-h
-*knifunptr_platform_windows71_HandleToULong
-HandleToULong
-)knifunptr_platform_windows72_HandleToLong
-HandleToLong
-*knifunptr_platform_windows73_ULongToHandle
-ULongToHandle
-)knifunptr_platform_windows74_LongToHandle
-LongToHandle
-p
-'knifunptr_platform_windows75_PtrToUlong
-
-PtrToUlong
-&knifunptr_platform_windows76_PtrToUint
-	PtrToUint
-(knifunptr_platform_windows77_PtrToUshort
-PtrToUshort
-&knifunptr_platform_windows78_PtrToLong
-	PtrToLong
-%knifunptr_platform_windows79_PtrToInt
-PtrToInt
-'knifunptr_platform_windows80_PtrToShort
-
-PtrToShort
-i
-%knifunptr_platform_windows81_IntToPtr
-IntToPtr
-ui
-&knifunptr_platform_windows82_UIntToPtr
-	UIntToPtr
-l
-&knifunptr_platform_windows83_LongToPtr
-	LongToPtr
-ul
-'knifunptr_platform_windows84_ULongToPtr
-
-ULongToPtr
-'knifunptr_platform_windows85_Ptr32ToPtr
-
-Ptr32ToPtr
--knifunptr_platform_windows86_Handle32ToHandle
-Handle32ToHandle
-'knifunptr_platform_windows87_PtrToPtr32
-
-PtrToPtr32
-Shift
-#knifunptr_platform_windows88__rotl8
-_rotl8
-$knifunptr_platform_windows89__rotl16
-_rotl16
-#knifunptr_platform_windows90__rotr8
-_rotr8
-$knifunptr_platform_windows91__rotr16
-_rotr16
-"knifunptr_platform_windows92__rotl
-_rotl
-"knifunptr_platform_windows93__rotr
-_rotr
-$knifunptr_platform_windows94__rotl64
-_rotl64
-$knifunptr_platform_windows95__rotr64
-_rotr64
-__A
-#knifunptr_platform_windows96___bsfd
-__bsfd
-#knifunptr_platform_windows97___bsrd
-__bsrd
-%knifunptr_platform_windows98___bswapd
-__bswapd
-#knifunptr_platform_windows99__bswap
-_bswap
-$knifunptr_platform_windows100___bsfq
-__bsfq
-$knifunptr_platform_windows101___bsrq
-__bsrq
-&knifunptr_platform_windows102___bswapq
-__bswapq
-'knifunptr_platform_windows103___popcntd
-	__popcntd
-'knifunptr_platform_windows104___popcntq
-	__popcntq
-*knifunptr_platform_windows105___readeflags
-__readeflags
-__f
-+knifunptr_platform_windows106___writeeflags
-__writeeflags
-Float
-*knifunptr_platform_windows107__castf32_u32
-_castf32_u32
-Double
-*knifunptr_platform_windows108__castf64_u64
-_castf64_u64
-*knifunptr_platform_windows109__castu32_f32
-_castu32_f32
-*knifunptr_platform_windows110__castu64_f64
-_castu64_f64
-%knifunptr_platform_windows111___rdpmc
-__rdpmc
-&knifunptr_platform_windows112___rdtscp
-__rdtscp
-%knifunptr_platform_windows113__wbinvd
-_wbinvd
-__X
-__C
-$knifunptr_platform_windows114___rolb
-__rolb
-$knifunptr_platform_windows115___rorb
-__rorb
-$knifunptr_platform_windows116___rolw
-__rolw
-$knifunptr_platform_windows117___rorw
-__rorw
-$knifunptr_platform_windows118___rold
-__rold
-$knifunptr_platform_windows119___rord
-__rord
-$knifunptr_platform_windows120___rolq
-__rolq
-$knifunptr_platform_windows121___rorq
-__rorq
-(knifunptr_platform_windows122__mm_sfence
-
-_mm_sfence
-(knifunptr_platform_windows123__mm_getcsr
-
-_mm_getcsr
-__i
-(knifunptr_platform_windows124__mm_setcsr
-
-_mm_setcsr
-__p
-)knifunptr_platform_windows125__mm_clflush
-_mm_clflush
-(knifunptr_platform_windows126__mm_lfence
-
-_mm_lfence
-(knifunptr_platform_windows127__mm_mfence
-
-_mm_mfenceœ
- 
- 
- 
-
-
- 
- 
-
- 
-
- 
-
-
- 
- 
- 
- 
- 
- 
-$ 
-' 
-( 
-) 
-,
-- 
-1 
-2 
-3 
-6 
-W 
-g 
-h 
-| 
-} 
-Ñ 
-Ö 
-Ü 
-† 
-° 
-® 
-© 
-¨ 
-≠ 
-° 
-§ õ4V0	2
-00202	
-002
-00Há “
-(0Há “
-((00j`Há “
-(0	Há “
-(0!0	202
-00Há “
-( 0#0	202
-00Há “
-("&0Há “
-(%G002*00j`02+02
-.0j`Há†“
-(/:802400j`0250Há “
-(7::02400j`0250Há “
-(9:<02400j`0250Há “
-(;:>02400j`0250Há “
-(=:@02400j`0250Há “
-(?:B02400j`0250Há “
-(A;D02*00j`02+0Há†“
-(C;F02*00j`02+0Há†“
-(E;H02*00j`02+0Há†“
-(G2K02I00j`0Há “
-(J2M02I00j`0Há “
-(L:Q02N00j`02O0Há “
-(P:S02I00j`02O0Há “
-(R V02T0Há “
-(U Y02T0Há “
-(X [02T0Há “
-(Z ]02T0Há “
-(\(`02T02^0Há “
-(_(b02T02^0Há “
-(a(d02T02^0Há “
-(c(f02T02^0Há “
-(e:l02i00j`02j0Há “
-(k:n02i00j`02j0Há “
-(m:p02400j`0250Há “
-(o:r02400j`0250Há “
-(q:t02400j`0250Há “
-(s:v02400j`0250Há “
-(uX{02w00j`02x00j`02
-y0j`Há “
-(z;0	2*0	0j`02+0	Há†“
-(~=Å0	2*0	0j`02+0	Há†“
-	(Ä=É0	2*0	0j`02+0	Há†“
-	(Ç4à0!2I0!0 j`"0Há “
-	(á4ä0!2I0!0 j`"0Há “
-	(âGè0!2ã0!0 j`"02å0!2ç0!Há “
-	(é<ë0	2I0	0j`02O0	Há “
-	(êGì0	2ã0	0j`02å0	2ç0	Há “
-	(í4ï0	2I0	0j`0Há “
-	(î4ó0	2I0	0j`0Há “
-	(ñ<ô0	2I0	0j`02O0	Há “
-	(ò<õ02I00j`02O0Há “
-	(ö<ù0	2N0	0j`02O0	Há “
-	(úGü02ã00j`02å02ç0Há “
-	(ûo£00j`2%ã 00j`0#j`$02å02ç0Há “
-	(¢^•00j`2$N 00j`0#j`$02O0Há “
-	(§ß0Há “
-	(¶I´02*00%j`&02+02
-.0j`Há†“
-	(™IØ02*00'j`(02+02
-.0j`Há†“
-	(ÆI±02*00j`02+02
-.0j`Há†“
-	(∞<≥0240	0j`0250	Há “
-	(≤<µ0240	0j`0250	Há “
-	(¥<∑0240	0j`0250	Há “
-	(∂<π0240	0j`0250	Há “
-	(∏<ª0240	0j`0250	Há “
-	(∫<Ω0240	0j`0250	Há “
-	(º<ø02i00j`02j0Há “
-	(æ<¡02i00j`02j0Há “
-	(¿<√0240	0j`0250	Há “
-	(¬<≈0240	0j`0250	Há “
-	(ƒ<«0240	0j`0250	Há “
-	(∆<…0240	0j`0250	Há “
-	(»[À02ã00%j`&02x00%j`&02
-y0j`Há “
-	( ZÕ02w00'j`(02x00'j`(02
-y0j`Há “
-	(ÃZœ02w00j`02x00j`02
-y0j`Há “
-	(Œ)“02–0Há “
-	(—)‘0	2–0Há “
-	(”3÷00j`2–0Há “
-	(’3ÿ00j`2–0	Há “
-	(◊)€02Ÿ0Há “
-	(⁄)›02Ÿ0Há “
-	(‹)ﬂ02Ÿ0Há “
-	(ﬁ)·0	2Ÿ0Há “
-	(‡)„0	2Ÿ0Há “
-	(‚)Â0!2Ÿ0Há “
-	(‰3Ë00j`2Ê0	Há “
-	(Á3Î00j`2È0Há “
-	(Í3Ó00j`2Ï0	Há “
-	(Ì3Ò00j`2Ô0Há “
-	(9Û00j`2Ÿ0Há “
-	(Ú9ı00j`2–0Há “
-	(Ù9˜00j`2Ÿ0Há “
-	(ˆ+˙02O02¯0Há “
-	(˘+¸02O02¯0Há “
-	(˚+˛02O02¯0Há “
-	(˝+Ä02O02¯0Há “
-	(ˇ+Ç02O02¯0	Há “
-	(Å+Ñ02O02¯0	Há “
-	(É+Ü02O02¯0	Há “
-	(Ö+à02O02¯0	Há “
-	(á#ã0	2â0	Há “
-	(ä#ç0	2â0	Há “
-	(å#è0	2â0	Há “
-	(é#ë0	2â0	Há “
-	(ê#ì0	2â0Há “
-	(í#ï0	2â0Há “
-	(î#ó02â0Há “
-	(ñ#ô0	2â0Há “
-	(ò#õ02â0Há “
-	(öù0Há “
-	(ú#†02û0Há “
-	(ü#£02â0)Há “
-	(¢#¶02â0*Há “
-	(•#®0)2â0Há “
-	(ß#™0*2â0Há “
-	(©#¨02â0	Há “
-	(´5Æ02â00j`0Há “
-	(≠∞0Há “
-	(Ø,¥02±02≤0	Há “
-	(≥,∂02±02≤0	Há “
-	(µ,∏02±02≤0	Há “
-	(∑,∫02±02≤0	Há “
-	(π,º02±02≤0	Há “
-	(ª,æ02±02≤0	Há “
-	(Ω,¿02±02≤0	Há “
-	(ø,¬02±02≤0	Há “
-	(¡ƒ0Há “
-	(√∆0Há “
-	(≈#…02«0Há “
-	(»)Ã02 0Há “
-	(ÀŒ0Há “
-	(Õ–0Há “
-	(œÿ
-‡
- Í
-platform.windows

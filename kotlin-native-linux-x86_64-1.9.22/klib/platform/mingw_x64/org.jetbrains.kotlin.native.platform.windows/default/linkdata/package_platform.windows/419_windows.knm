@@ -1,637 +1,0 @@
-
-œT
-kotlinx
-cinterop
-CPointer
-CPointed
-COpaquePointer
-internal
-CCall
-id
-/knifunptr_platform_windows8774__m_psrlwi_getter
-	_m_psrlwi
-.knifunptr_platform_windows8775__m_psrld_getter
-_m_psrld
-/knifunptr_platform_windows8776__m_psrldi_getter
-	_m_psrldi
-.knifunptr_platform_windows8777__m_psrlq_getter
-_m_psrlq
-/knifunptr_platform_windows8778__m_psrlqi_getter
-	_m_psrlqi
--knifunptr_platform_windows8779__m_pand_getter
-_m_pand
-.knifunptr_platform_windows8780__m_pandn_getter
-_m_pandn
-,knifunptr_platform_windows8781__m_por_getter
-_m_por
--knifunptr_platform_windows8782__m_pxor_getter
-_m_pxor
-0knifunptr_platform_windows8783__m_pcmpeqb_getter
-
-_m_pcmpeqb
-0knifunptr_platform_windows8784__m_pcmpeqw_getter
-
-_m_pcmpeqw
-0knifunptr_platform_windows8785__m_pcmpeqd_getter
-
-_m_pcmpeqd
-0knifunptr_platform_windows8786__m_pcmpgtb_getter
-
-_m_pcmpgtb
-0knifunptr_platform_windows8787__m_pcmpgtw_getter
-
-_m_pcmpgtw
-0knifunptr_platform_windows8788__m_pcmpgtd_getter
-
-_m_pcmpgtd
-/knifunptr_platform_windows8789__m_pmaxsw_getter
-	_m_pmaxsw
-/knifunptr_platform_windows8790__m_pmaxub_getter
-	_m_pmaxub
-/knifunptr_platform_windows8791__m_pminsw_getter
-	_m_pminsw
-/knifunptr_platform_windows8792__m_pminub_getter
-	_m_pminub
-1knifunptr_platform_windows8793__m_pmovmskb_getter
-_m_pmovmskb
-0knifunptr_platform_windows8794__m_pmulhuw_getter
-
-_m_pmulhuw
-1knifunptr_platform_windows8795__m_maskmovq_getter
-_m_maskmovq
-.knifunptr_platform_windows8796__m_pavgb_getter
-_m_pavgb
-.knifunptr_platform_windows8797__m_pavgw_getter
-_m_pavgw
-/knifunptr_platform_windows8798__m_psadbw_getter
-	_m_psadbw
-:knifunptr_platform_windows8799__mm512_setzero_epi32_getter
-_mm512_setzero_epi32
-4knifunptr_platform_windows8800__mm512_setzero_getter
-_mm512_setzero
-=knifunptr_platform_windows8801__mm512_permutevar_epi32_getter
-_mm512_permutevar_epi32
-Bknifunptr_platform_windows8802__mm512_mask_permutevar_epi32_getter
-_mm512_mask_permutevar_epi32
-	CFunction
-kotlin
-	Function2
-UShort
-platform
-windows
-	__mmask16
-2knifunptr_platform_windows8803__kand_mask16_getter
-_kand_mask16
-3knifunptr_platform_windows8804__kandn_mask16_getter
-_kandn_mask16
-	Function1
-2knifunptr_platform_windows8805__knot_mask16_getter
-_knot_mask16
-1knifunptr_platform_windows8806__kor_mask16_getter
-_kor_mask16
-3knifunptr_platform_windows8807__kxnor_mask16_getter
-_kxnor_mask16
-2knifunptr_platform_windows8808__kxor_mask16_getter
-_kxor_mask16
-	Vector128
-__m128
-Int
-3knifunptr_platform_windows8809__mm_cvtss_i32_getter
-_mm_cvtss_i32
-__m128d
-3knifunptr_platform_windows8810__mm_cvtsd_i32_getter
-_mm_cvtsd_i32
-3knifunptr_platform_windows8811__mm_cvti32_sd_getter
-_mm_cvti32_sd
-3knifunptr_platform_windows8812__mm_cvti32_ss_getter
-_mm_cvti32_ss
-Long
-3knifunptr_platform_windows8813__mm_cvtss_i64_getter
-_mm_cvtss_i64
-3knifunptr_platform_windows8814__mm_cvtsd_i64_getter
-_mm_cvtsd_i64
-3knifunptr_platform_windows8815__mm_cvti64_sd_getter
-_mm_cvti64_sd
-3knifunptr_platform_windows8816__mm_cvti64_ss_getter
-_mm_cvti64_ss
-	Function0
-Unit
-/knifunptr_platform_windows8817_FastFence_getter
-	FastFence
->knifunptr_platform_windows8818_DbgRaiseAssertionFailure_getter
-DbgRaiseAssertionFailure
-UInt
-DWORD
-5knifunptr_platform_windows8819_GetSegmentLimit_getter
-GetSegmentLimit
-LONGLONG
-2knifunptr_platform_windows8820_MultiplyHigh_getter
-MultiplyHigh
-ULong
-	ULONGLONG
-:knifunptr_platform_windows8821_UnsignedMultiplyHigh_getter
-UnsignedMultiplyHigh
-	Function3
-DWORD64
-UByte
-BYTE
-2knifunptr_platform_windows8822_ShiftLeft128_getter
-ShiftLeft128
-3knifunptr_platform_windows8823_ShiftRight128_getter
-ShiftRight128
-LONG64
-	LongVarOf
-	LONG64Var
-1knifunptr_platform_windows8824_Multiply128_getter
-Multiply128
-
-ULongVarOf
-
-DWORD64Var
-9knifunptr_platform_windows8825_UnsignedMultiply128_getter
-UnsignedMultiply128
-UShortVarOf
-WCHARVar
-LPCWSTR
-7knifunptr_platform_windows8826_OutputDebugString_getter
-OutputDebugString
-	Function7
-_SECURITY_ATTRIBUTES
-LPSECURITY_ATTRIBUTES
-HANDLE
-0knifunptr_platform_windows8827_CreateFile_getter
-
-CreateFile
-7knifunptr_platform_windows8828_GetFileAttributes_getter
-GetFileAttributes
-WINBOOL
-5knifunptr_platform_windows8829_DefineDosDevice_getter
-DefineDosDevice
-<knifunptr_platform_windows8830_DeleteVolumeMountPoint_getter
-DeleteVolumeMountPoint
-LPWSTR
-5knifunptr_platform_windows8831_FindFirstVolume_getter
-FindFirstVolume
-4knifunptr_platform_windows8832_FindNextVolume_getter
-FindNextVolume
-<knifunptr_platform_windows8833_GetLogicalDriveStrings_getter
-GetLogicalDriveStrings
-6knifunptr_platform_windows8834_GetShortPathName_getter
-GetShortPathName
-	Function8
-	UIntVarOf
-DWORDVar
-LPDWORD
-:knifunptr_platform_windows8835_GetVolumeInformation_getter
-GetVolumeInformation
-7knifunptr_platform_windows8836_GetVolumePathName_getter
-GetVolumePathName
-4knifunptr_platform_windows8837_QueryDosDevice_getter
-QueryDosDevice
-Fknifunptr_platform_windows8838_GetVolumeNameForVolumeMountPoint_getter
- GetVolumeNameForVolumeMountPoint
-	Function4
-LPWCH
-PDWORD
-Eknifunptr_platform_windows8839_GetVolumePathNamesForVolumeName_getter
-GetVolumePathNamesForVolumeName
-Aknifunptr_platform_windows8840_FindFirstChangeNotification_getter
-FindFirstChangeNotification
-_WIN32_FIND_DATAW
-LPWIN32_FIND_DATAW
-3knifunptr_platform_windows8841_FindFirstFile_getter
-FindFirstFile
-	Function5
-6knifunptr_platform_windows8842_GetDiskFreeSpace_getter
-GetDiskFreeSpace
-UINT
-2knifunptr_platform_windows8843_GetDriveType_getter
-GetDriveType
-CPointerVarOf
-	LPWSTRVar
-5knifunptr_platform_windows8844_GetFullPathName_getter
-GetFullPathName
-5knifunptr_platform_windows8845_GetLongPathName_getter
-GetLongPathName
-1knifunptr_platform_windows8846_GetTempPath_getter
-GetTempPath
-5knifunptr_platform_windows8847_GetTempFileName_getter
-GetTempFileName
->knifunptr_platform_windows8848_GetFinalPathNameByHandle_getter
-GetFinalPathNameByHandle
-5knifunptr_platform_windows8849_CreateDirectory_getter
-CreateDirectory
-0knifunptr_platform_windows8850_DeleteFile_getter
-
-DeleteFile
-	Function6
-_FINDEX_INFO_LEVELS
-FINDEX_INFO_LEVELS
-LPVOID
-_FINDEX_SEARCH_OPS
-FINDEX_SEARCH_OPS
-5knifunptr_platform_windows8851_FindFirstFileEx_getter
-FindFirstFileEx
-2knifunptr_platform_windows8852_FindNextFile_getter
-FindNextFile
-_ULARGE_INTEGER
-ULARGE_INTEGER
-PULARGE_INTEGER
-8knifunptr_platform_windows8853_GetDiskFreeSpaceEx_getter
-GetDiskFreeSpaceEx
-_GET_FILEEX_INFO_LEVELS
-GET_FILEEX_INFO_LEVELS
-9knifunptr_platform_windows8854_GetFileAttributesEx_getter
-GetFileAttributesEx
-5knifunptr_platform_windows8855_RemoveDirectory_getter
-RemoveDirectory
-7knifunptr_platform_windows8856_SetFileAttributes_getter
-SetFileAttributes
-:knifunptr_platform_windows8857_INVALID_HANDLE_VALUE_getter
-INVALID_HANDLE_VALUE
-HINSTANCE__
-HMODULE
-
-HMODULEVar
-7knifunptr_platform_windows8858_GetModuleHandleEx_getter
-GetModuleHandleEx
-WORD
-HRSRC__
-HRSRC
-4knifunptr_platform_windows8859_FindResourceEx_getter
-FindResourceEx
-	HINSTANCE
-0knifunptr_platform_windows8860_LoadString_getter
-
-LoadString
-5knifunptr_platform_windows8861_GetModuleHandle_getter
-GetModuleHandle
-3knifunptr_platform_windows8862_LoadLibraryEx_getter
-LoadLibraryEx
-LONG_PTR
-ENUMRESLANGPROCW
-;knifunptr_platform_windows8863_EnumResourceLanguages_getter
-EnumResourceLanguages
-LANGID
-=knifunptr_platform_windows8864_EnumResourceLanguagesEx_getter
-EnumResourceLanguagesEx
-ENUMRESNAMEPROCW
-9knifunptr_platform_windows8865_EnumResourceNamesEx_getter
-EnumResourceNamesEx
-ENUMRESTYPEPROCW
-9knifunptr_platform_windows8866_EnumResourceTypesEx_getter
-EnumResourceTypesEx
-7knifunptr_platform_windows8867_GetModuleFileName_getter
-GetModuleFileName
-7knifunptr_platform_windows8868_CreateFileMapping_getter
-CreateFileMapping
-5knifunptr_platform_windows8869_OpenFileMapping_getter
-OpenFileMapping
-;knifunptr_platform_windows8870_CreateFileMappingNuma_getter
-CreateFileMappingNuma
-5knifunptr_platform_windows8871_CreateNamedPipe_getter
-CreateNamedPipe
-3knifunptr_platform_windows8872_WaitNamedPipe_getter
-WaitNamedPipe
-ULONG
-Dknifunptr_platform_windows8873_GetNamedPipeClientComputerName_getter
-GetNamedPipeClientComputerName
-<knifunptr_platform_windows8874_CreatePrivateNamespace_getter
-CreatePrivateNamespace
->knifunptr_platform_windows8875_CreateBoundaryDescriptor_getter
-CreateBoundaryDescriptor
-;knifunptr_platform_windows8876_SetEnvironmentStrings_getter
-SetEnvironmentStrings
-4knifunptr_platform_windows8877_GetCommandLine_getter
-GetCommandLine
-9knifunptr_platform_windows8878_GetCurrentDirectory_getter
-GetCurrentDirectory
-Dknifunptr_platform_windows8879_NeedCurrentDirectoryForExePath_getter
-NeedCurrentDirectoryForExePath
-0knifunptr_platform_windows8880_SearchPath_getter
-
-SearchPath
-9knifunptr_platform_windows8881_SetCurrentDirectory_getter
-SetCurrentDirectory
-;knifunptr_platform_windows8882_GetEnvironmentStrings_getter
-GetEnvironmentStrings
->knifunptr_platform_windows8883_ExpandEnvironmentStrings_getter
-ExpandEnvironmentStrings
-<knifunptr_platform_windows8884_FreeEnvironmentStrings_getter
-FreeEnvironmentStrings
-<knifunptr_platform_windows8885_GetEnvironmentVariable_getter
-GetEnvironmentVariable
-<knifunptr_platform_windows8886_SetEnvironmentVariable_getter
-SetEnvironmentVariable
-_STARTUPINFOW
-LPSTARTUPINFOW
-4knifunptr_platform_windows8887_GetStartupInfo_getter
-GetStartupInfo
-
-Function10
-_PROCESS_INFORMATION
-LPPROCESS_INFORMATION
-3knifunptr_platform_windows8888_CreateProcess_getter
-CreateProcess
-
-Function11
-9knifunptr_platform_windows8889_CreateProcessAsUser_getter
-CreateProcessAsUser
-PSECURITY_DESCRIPTOR
-_GENERIC_MAPPING
-GENERIC_MAPPING
-PGENERIC_MAPPING
-IntVarOf
-
-WINBOOLVar
-LPBOOL
->knifunptr_platform_windows8890_AccessCheckAndAuditAlarm_getter
-AccessCheckAndAuditAlarm
-
-Function16
-PSID
-_AUDIT_EVENT_TYPE
-AUDIT_EVENT_TYPE
-_OBJECT_TYPE_LIST
-POBJECT_TYPE_LIST
-Dknifunptr_platform_windows8891_AccessCheckByTypeAndAuditAlarm_getter
-AccessCheckByTypeAndAuditAlarm
-Nknifunptr_platform_windows8892_AccessCheckByTypeResultListAndAuditAlarm_getter
-(AccessCheckByTypeResultListAndAuditAlarm
-
-Function17
-Vknifunptr_platform_windows8893_AccessCheckByTypeResultListAndAuditAlarmByHandle_getter
-0AccessCheckByTypeResultListAndAuditAlarmByHandle
-SECURITY_INFORMATION
-5knifunptr_platform_windows8894_GetFileSecurity_getter
-GetFileSecurity
-;knifunptr_platform_windows8895_ObjectCloseAuditAlarm_getter
-ObjectCloseAuditAlarm
-<knifunptr_platform_windows8896_ObjectDeleteAuditAlarm_getter
-ObjectDeleteAuditAlarm
-
-Function12
-_PRIVILEGE_SET
-PPRIVILEGE_SET
-:knifunptr_platform_windows8897_ObjectOpenAuditAlarm_getter
-ObjectOpenAuditAlarm
-?knifunptr_platform_windows8898_ObjectPrivilegeAuditAlarm_getter
-ObjectPrivilegeAuditAlarm
-Aknifunptr_platform_windows8899_PrivilegedServiceAuditAlarm_getter
-PrivilegedServiceAuditAlarm
-5knifunptr_platform_windows8900_SetFileSecurity_getter
-SetFileSecurity
-3knifunptr_platform_windows8901_CreateMutexEx_getter
-CreateMutexExâ
- 
- 
- 
- 
- 
-
- 
-B 
-C
-D 
-E 
-F
-G
-H 
-M 
-V 
-W 
-X 
-[ 
-b 
-k 
-l 
-q 
-r 
-u 
-x 
-y 
-| 
-} 
-~ 
- 
-Ñ 
-Ö 
-Ü 
-â 
-ä 
-ç 
-é 
-è 
-í 
-ì 
-î 
-ï 
-ö 
-ü 
-® 
-© 
-™ 
-´ 
-¥ 
-µ 
-∂ 
-ª 
-º 
-ø 
-¬ 
-≈ 
-∆ 
-’ 
-÷ 
-◊ 
-ÿ 
-Ÿ 
-⁄ 
-ﬂ 
-‡ 
-· 
-‰ 
-Â 
-Ó 
-Ô 
- 
-Û 
-Ù 
-ı 
-¯ 
-ˇ 
-Ä 
-É 
-Ü 
-â 
-ò 
-µ 
-∂ 
-π 
-∫ 
-ª 
-æ 
-¡ 
-¬ 
-√ 
-ƒ 
-≈ 
-∆ 
-« 
-  
-À 
-Ã 
-Õ 
-Œ 
-œ 
-‘ 
-◊ 
-ﬁ 
-ﬂ 
-‡ •n"(	00j`8«ä("(00j`8«ä(
-"(00j`8«ä("(00j`8«ä("(00j`8«ä("(00j`8«ä("(00j`8«ä("(00j`8«ä("(00j`8«ä("(00j`8«ä("(00j`8«ä("(00j`8«ä("(!00j`8«ä( "(#00j`8«ä(""(%00j`8«ä($"('00j`8«ä(&"()00j`8«ä(("(+00j`8«ä(*"(-00j`8«ä(,"(/00j`8«ä(."(100j`8«ä(0"(300j`8«ä(2"(500j`8«ä(4"(700j`8«ä(6"(900j`8«ä(8"(;00j`8«ä(:"(=00j`8«ä(<"(?00j`8«ä(>"(A00j`8«ä(@"DJ.(&" 0
-j`0
-j`0
-j`0	008«ä(I"DL.(&" 0
-j`0
-j`0
-j`0	008«ä(K":O$0
-j`0
-j`0008«ä(N"DQ.(&" 0
-j`0
-j`0
-j`0	008«ä(P"DS.(&" 0
-j`0
-j`0
-j`0	008«ä(R"DU.(&" 0
-j`0
-j`0
-j`0	008«ä(T"6Z 0j`00008«ä(Y"6] 0j`00008«ä(\"@_*$"0j`00j`0	008«ä(^"@a*$"0j`00j`0	008«ä(`"6d 0j`00008«ä(c"6f 0j`00008«ä(e"@h*$"0j`00j`0	008«ä(g"@j*$"0j`00j`0	008«ä(i",n
-00008«ä(m",p
-00008«ä(o":t$0j`0j`0008«ä(s"Dw.(&" 0j`0j`0j`0	008«ä(v"D{.(&" 0j`0j`0j`0	008«ä(z"PÅ820,*0j`0j`0j`0j`0008«ä	(Ä"PÉ820,*0j`0j`0j`0j`0008«ä	(Ç"^àF@>:80j`0j`00 j`!00j`0008«ä	(á"^åF@>:80j`0j`00"j`#00j`0008«ä	(ã"Lë4.,(&0
-0$j`%0j`&00008«ä	(ê"≥óöìêãà0
-0$j`%0j`&0j`0j`0(0j`)0j`0j`00j`*00j`*0'008«ä	(ñ"Pô820,*0
-0$j`%0j`&0j`0008«ä	(ò"xú`ZXTR0j`0
-0$j`%0j`&0
-0$j`%0j`&0j`+0008«ä	(õ"Pû820,*0
-0$j`%0j`&0j`+0008«ä	(ù"f°NHFB@0
-0$j`%0j`,0j`00j`*0	008«ä	(†"p£XRPLJ00j`*0
-0$j`%0j`,0j`0j`+0008«ä	(¢"Z•B<:640j`0
-0$j`%0j`,0j`0	008«ä	(§"xß`ZXTR0
-0$j`%0j`&0
-0$j`%0j`,0j`0j`0008«ä	(¶"ˇ≠Êﬂ‹◊‘0
-0$j`%0j`&0
-0$j`%0j`,0j`00.j`/0j`000.j`/0j`000.j`/0j`00
-0$j`%0j`,0j`0j`+0-008«ä	(¨"xØ`ZXTR0
-0$j`%0j`&0
-0$j`%0j`,0j`0j`+0008«ä	(Æ"x±`ZXTR0
-0$j`%0j`&0
-0$j`%0j`,0j`0j`0008«ä	(∞"x≥`ZXTR0
-0$j`%0j`&0
-0$j`%0j`,0j`0j`+0008«ä	(≤"ñ∏~xvrp0
-0$j`%0j`&0
-0$j`%0j`20j`00.j`/0j`30j`+01008«ä	(∑"p∫XRPLJ0
-0$j`%0j`&0j`+0j`00j`*0008«ä	(π"pæXRPLJ0
-0$j`%0j`&040j`500j`*0	008«ä	(Ω"Õ¡¥≠™•¢0
-0$j`%0j`&00.j`/0j`000.j`/0j`000.j`/0j`000.j`/0j`00j`+06008«ä	(¿"Pƒ820,*0
-0$j`%0j`&0j`70008«ä	(√"®»èàÖÄ~0
-0$j`%0j`&0j`0
-0$j`%0j`,*(" 0
-0$j`%0j`,08j`900j`01008«ä	(«"x `ZXTR0
-0$j`%0j`&0
-0$j`%0j`,0j`0j`0008«ä	(…"ZÃB<:640j`0
-0$j`%0j`,0j`0	008«ä	(À"ñŒ~xvrp0
-0$j`%0j`&0
-0$j`%0j`&0j`70
-0$j`%0j`,0j`701008«ä	(Õ"z–b\ZVT00j`*0
-0$j`%0j`,0j`0j`0j`01008«ä	(œ"d“LFD@>0
-0$j`%0j`&0(0j`)0j`+0	008«ä	(—"P‘820,*0
-0$j`%0j`&0j`+0008«ä	(”"´‹íãàÉÄ0
-0$j`%0j`&0;j`<00j`=0>j`?00j`=0j`00j`*0:008«ä	(€"\ﬁD><8600j`*040j`50j`+0	008«ä	(›"ô„Äzxtr0
-0$j`%0j`&0@j`A0j`B0@j`A0j`B0@j`A0j`B0j`+01008«ä	(‚"pÁXRPLJ0
-0$j`%0j`&0Cj`D00j`=0j`+0008«ä	(Ê"PÈ820,*0
-0$j`%0j`&0j`+0008«ä	(Ë"ZÎB<:640
-0$j`%0j`&0j`0j`+0	008«ä	(Í"*Ì00j`*8«ä	(Ï"|Úd^\XV0j`0
-0$j`%0j`& 0E0j`F08j`G00j`+0008«ä	(Ò"ñ˜~xvrp0E0j`F0
-0$j`%0j`&0
-0$j`%0j`&0
-j`H0I0j`J01008«ä	(ˆ"p˙XRPLJ0E0j`K0j`70
-0$j`%0j`,0001008«ä	(˘"Z¸B<:640
-0$j`%0j`&0E0j`F0008«ä	(˚"z˛b\ZVT0
-0$j`%0j`&00j`*0j`0E0j`F0008«ä	(˝"õÇÇ˚¯Û0E0j`F0
-0$j`%0j`&0
-0$j`%0j`&áÑxvrp0E0j`F0
-0$j`%0j`&0
-0$j`%0j`&0
-j`H0j`L0j`+0600j`M0j`L0j`+06008«ä	(Å"ØÖñèåáÑ0E0j`F0
-0$j`%0j`&0
-0$j`%0j`&áÑxvrp0E0j`F0
-0$j`%0j`&0
-0$j`%0j`&0
-j`H0j`L0j`+0600j`M0j`L0j`0
-j`N0j`+0'008«ä	(Ñ"ÖàÏÂ‚›⁄0E0j`F0
-0$j`%0j`&|znlhf0E0j`F0
-0$j`%0j`&0
-0$j`%0j`,0j`L0j`+0100j`O0j`L0j`0
-j`N0j`+0:008«ä	(á"…ã∞©¶°û0E0j`F^\PNJH0E0j`F0
-0$j`%0j`,0j`L0j`+000j`P0j`L0j`0
-j`N0j`+06008«ä	(ä"nçVPNJH0E0j`F0
-0$j`%0j`,0j`0j`0008«ä	(å"®èèàÖÄ~00j`*0(0j`)0j`0j`0j`0
-0$j`%0j`&00j`*0:008«ä	(é"pëXRPLJ0j`0j`+0
-0$j`%0j`&00j`*0008«ä	(ê"≥ìöìêãà00j`*0(0j`)0j`0j`0j`0
-0$j`%0j`&0j`00j`*0'008«ä	(í"±ïòëéâÜ0
-0$j`%0j`&0j`0j`0j`0j`0j`0j`0(0j`)00j`*0-008«ä	(î"ZóB<:640
-0$j`%0j`&0j`0j`+0	008«ä	(ñ"pöXRPLJ00j`*0
-0$j`%0j`,0j`Q0j`+0008«ä	(ô"Üúnhfb`0(0j`)00j`=0
-0$j`%0j`&00j`*0008«ä	(õ"fûNHFB@0
-0$j`%0j`&0j`Q00j`*0	008«ä	(ù"P†820,*0
-0$j`%0j`20j`+0008«ä	(ü"F¢.(&" 0
-0$j`%0j`,0008«ä	(°"Z§B<:640j`0
-0$j`%0j`,0j`0	008«ä	(£"P¶820,*0
-0$j`%0j`&0j`+0008«ä	(•"Â®Ã≈¬Ω∫0
-0$j`%0j`&0
-0$j`%0j`&0
-0$j`%0j`&0j`0
-0$j`%0j`,*(" 0
-0$j`%0j`,08j`900j`0:008«ä	(ß"P™820,*0
-0$j`%0j`&0j`+0008«ä	(©"F¨.(&" 0
-0$j`%0j`20008«ä	(´"xÆ`ZXTR0
-0$j`%0j`&0
-0$j`%0j`,0j`0j`0008«ä	(≠"P∞820,*0
-0$j`%0j`20j`+0008«ä	(Ø"x≤`ZXTR0
-0$j`%0j`&0
-0$j`%0j`,0j`0j`0008«ä	(±"n¥VPNJH0
-0$j`%0j`&0
-0$j`%0j`&0j`+0	008«ä	(≥"B∏*$"0R0j`S00008«ä	(∑"ãΩÚÎË„‡0
-0$j`%0j`&0
-0$j`%0j`,0(0j`)0(0j`)0j`+0j`00j`=0
-0$j`%0j`&0R0j`S0U0j`V0j`+0T008«ä	(º"°¿àÅ˛˘ˆ00j`*0
-0$j`%0j`&0
-0$j`%0j`,0(0j`)0(0j`)0j`+0j`00j`=0
-0$j`%0j`&0R0j`S0U0j`V0j`+0W008«ä	(ø"√…™£†õò0
-0$j`%0j`&00j`=0
-0$j`%0j`,0
-0$j`%0j`,00j`X0j`0Yj`Z0j`[0j`+00.j`/0j`000\j`]0j`^00\j`]0j`^0j`+0W008«ä	(»"ã—ÚÎË„‡0
-0$j`%0j`&00j`=0
-0$j`%0j`&0
-0$j`%0j`&00j`X00j``0j`0aj`b0j`0c0j`d0j`0Yj`Z0j`[0j`+00.j`/0j`000\j`]0j`^00\j`]0j`^0j`+0_008«ä	(–"ã”ÚÎË„‡0
-0$j`%0j`&00j`=0
-0$j`%0j`&0
-0$j`%0j`&00j`X00j``0j`0aj`b0j`0c0j`d0j`0Yj`Z0j`[0j`+00.j`/0j`000.j`/0j`000\j`]0j`^0j`+0_008«ä	(“"°÷àÅ˛˘ˆ0
-0$j`%0j`&00j`=00j`*0
-0$j`%0j`&0
-0$j`%0j`&00j`X00j``0j`0aj`b0j`0c0j`d0j`0Yj`Z0j`[0j`+00.j`/0j`000.j`/0j`000\j`]0j`^0j`+0e008«ä	(’"ôŸÄzxtr0
-0$j`%0j`&0j`f00j`X0j`00.j`/0j`00j`+06008«ä	(ÿ"p€XRPLJ0
-0$j`%0j`&00j`=0j`+0j`+0008«ä	(⁄"p›XRPLJ0
-0$j`%0j`&00j`=0j`+0j`+0008«ä	(‹"≠‚îçäÖÇ0
-0$j`%0j`&00j`=0
-0$j`%0j`,0
-0$j`%0j`,00j`X00j`*0j`0j`0h0j`i0j`+0j`+00\j`]0j`^0j`+0g008«ä	(·"®‰èàÖÄ~0
-0$j`%0j`&00j`=00j`*0j`0h0j`i0j`+0j`+0:008«ä	(„"•ÊåÖÇ~|0
-0$j`%0j`&0
-0$j`%0j`&00j`*0h0j`i0j`+0j`+06008«ä	(Â"pËXRPLJ0
-0$j`%0j`&0j`f00j`X0j`+0008«ä	(Á"ÑÍlfd`^0(0j`)0
-0$j`%0j`&0j`0j`00j`*01008«ä	(Èÿ
-‡
- Í
-platform.windows

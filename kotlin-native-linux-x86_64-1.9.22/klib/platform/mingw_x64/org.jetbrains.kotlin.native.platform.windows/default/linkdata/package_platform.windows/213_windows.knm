@@ -1,284 +1,0 @@
-
-ºb
-platform
-posix
-_GUID
-GUID
-kotlinx
-cinterop
-internal
-CCall
-id
-Hknifunptr_platform_windows7845_GUID_ENABLE_SWITCH_FORCED_SHUTDOWN_getter
-"GUID_ENABLE_SWITCH_FORCED_SHUTDOWN
-Mknifunptr_platform_windows7846_GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT_getter
-'GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT
-?knifunptr_platform_windows7847_GUID_GLOBAL_USER_PRESENCE_getter
-GUID_GLOBAL_USER_PRESENCE
-Bknifunptr_platform_windows7848_GUID_HIBERNATE_FASTS4_POLICY_getter
-GUID_HIBERNATE_FASTS4_POLICY
-<knifunptr_platform_windows7849_GUID_HIBERNATE_TIMEOUT_getter
-GUID_HIBERNATE_TIMEOUT
-?knifunptr_platform_windows7850_GUID_IDLE_BACKGROUND_TASK_getter
-GUID_IDLE_BACKGROUND_TASK
-Aknifunptr_platform_windows7851_GUID_IDLE_RESILIENCY_PERIOD_getter
-GUID_IDLE_RESILIENCY_PERIOD
-Cknifunptr_platform_windows7852_GUID_IDLE_RESILIENCY_SUBGROUP_getter
-GUID_IDLE_RESILIENCY_SUBGROUP
-:knifunptr_platform_windows7853_GUID_LIDCLOSE_ACTION_getter
-GUID_LIDCLOSE_ACTION
-=knifunptr_platform_windows7854_GUID_LIDOPEN_POWERSTATE_getter
-GUID_LIDOPEN_POWERSTATE
-Aknifunptr_platform_windows7855_GUID_LIDSWITCH_STATE_CHANGE_getter
-GUID_LIDSWITCH_STATE_CHANGE
-?knifunptr_platform_windows7856_GUID_LOCK_CONSOLE_ON_WAKE_getter
-GUID_LOCK_CONSOLE_ON_WAKE
-<knifunptr_platform_windows7857_GUID_MAX_POWER_SAVINGS_getter
-GUID_MAX_POWER_SAVINGS
-<knifunptr_platform_windows7858_GUID_MIN_POWER_SAVINGS_getter
-GUID_MIN_POWER_SAVINGS
-;knifunptr_platform_windows7859_GUID_MONITOR_POWER_ON_getter
-GUID_MONITOR_POWER_ON
-Eknifunptr_platform_windows7860_GUID_NON_ADAPTIVE_INPUT_TIMEOUT_getter
-GUID_NON_ADAPTIVE_INPUT_TIMEOUT
-IID
-/knifunptr_platform_windows7861_GUID_NULL_getter
-	GUID_NULL
-Aknifunptr_platform_windows7862_GUID_PCIEXPRESS_ASPM_POLICY_getter
-GUID_PCIEXPRESS_ASPM_POLICY
-Gknifunptr_platform_windows7863_GUID_PCIEXPRESS_SETTINGS_SUBGROUP_getter
-!GUID_PCIEXPRESS_SETTINGS_SUBGROUP
-=knifunptr_platform_windows7864_GUID_POWERBUTTON_ACTION_getter
-GUID_POWERBUTTON_ACTION
-Bknifunptr_platform_windows7865_GUID_POWERSCHEME_PERSONALITY_getter
-GUID_POWERSCHEME_PERSONALITY
-Eknifunptr_platform_windows7866_GUID_PROCESSOR_ALLOW_THROTTLING_getter
-GUID_PROCESSOR_ALLOW_THROTTLING
-bknifunptr_platform_windows7867_GUID_PROCESSOR_CORE_PARKING_AFFINITY_HISTORY_DECREASE_FACTOR_getter
-<GUID_PROCESSOR_CORE_PARKING_AFFINITY_HISTORY_DECREASE_FACTOR
-\knifunptr_platform_windows7868_GUID_PROCESSOR_CORE_PARKING_AFFINITY_HISTORY_THRESHOLD_getter
-6GUID_PROCESSOR_CORE_PARKING_AFFINITY_HISTORY_THRESHOLD
-Tknifunptr_platform_windows7869_GUID_PROCESSOR_CORE_PARKING_AFFINITY_WEIGHTING_getter
-.GUID_PROCESSOR_CORE_PARKING_AFFINITY_WEIGHTING
-Qknifunptr_platform_windows7870_GUID_PROCESSOR_CORE_PARKING_DECREASE_POLICY_getter
-+GUID_PROCESSOR_CORE_PARKING_DECREASE_POLICY
-Tknifunptr_platform_windows7871_GUID_PROCESSOR_CORE_PARKING_DECREASE_THRESHOLD_getter
-.GUID_PROCESSOR_CORE_PARKING_DECREASE_THRESHOLD
-Oknifunptr_platform_windows7872_GUID_PROCESSOR_CORE_PARKING_DECREASE_TIME_getter
-)GUID_PROCESSOR_CORE_PARKING_DECREASE_TIME
-Qknifunptr_platform_windows7873_GUID_PROCESSOR_CORE_PARKING_INCREASE_POLICY_getter
-+GUID_PROCESSOR_CORE_PARKING_INCREASE_POLICY
-Tknifunptr_platform_windows7874_GUID_PROCESSOR_CORE_PARKING_INCREASE_THRESHOLD_getter
-.GUID_PROCESSOR_CORE_PARKING_INCREASE_THRESHOLD
-Oknifunptr_platform_windows7875_GUID_PROCESSOR_CORE_PARKING_INCREASE_TIME_getter
-)GUID_PROCESSOR_CORE_PARKING_INCREASE_TIME
-Kknifunptr_platform_windows7876_GUID_PROCESSOR_CORE_PARKING_MAX_CORES_getter
-%GUID_PROCESSOR_CORE_PARKING_MAX_CORES
-Kknifunptr_platform_windows7877_GUID_PROCESSOR_CORE_PARKING_MIN_CORES_getter
-%GUID_PROCESSOR_CORE_PARKING_MIN_CORES
-jknifunptr_platform_windows7878_GUID_PROCESSOR_CORE_PARKING_OVER_UTILIZATION_HISTORY_DECREASE_FACTOR_getter
-DGUID_PROCESSOR_CORE_PARKING_OVER_UTILIZATION_HISTORY_DECREASE_FACTOR
-dknifunptr_platform_windows7879_GUID_PROCESSOR_CORE_PARKING_OVER_UTILIZATION_HISTORY_THRESHOLD_getter
->GUID_PROCESSOR_CORE_PARKING_OVER_UTILIZATION_HISTORY_THRESHOLD
-\knifunptr_platform_windows7880_GUID_PROCESSOR_CORE_PARKING_OVER_UTILIZATION_THRESHOLD_getter
-6GUID_PROCESSOR_CORE_PARKING_OVER_UTILIZATION_THRESHOLD
-\knifunptr_platform_windows7881_GUID_PROCESSOR_CORE_PARKING_OVER_UTILIZATION_WEIGHTING_getter
-6GUID_PROCESSOR_CORE_PARKING_OVER_UTILIZATION_WEIGHTING
-Gknifunptr_platform_windows7882_GUID_PROCESSOR_DISTRIBUTE_UTILITY_getter
-!GUID_PROCESSOR_DISTRIBUTE_UTILITY
-Eknifunptr_platform_windows7883_GUID_PROCESSOR_IDLESTATE_POLICY_getter
-GUID_PROCESSOR_IDLESTATE_POLICY
-Gknifunptr_platform_windows7884_GUID_PROCESSOR_IDLE_ALLOW_SCALING_getter
-!GUID_PROCESSOR_IDLE_ALLOW_SCALING
-Jknifunptr_platform_windows7885_GUID_PROCESSOR_IDLE_DEMOTE_THRESHOLD_getter
-$GUID_PROCESSOR_IDLE_DEMOTE_THRESHOLD
-Aknifunptr_platform_windows7886_GUID_PROCESSOR_IDLE_DISABLE_getter
-GUID_PROCESSOR_IDLE_DISABLE
-Kknifunptr_platform_windows7887_GUID_PROCESSOR_IDLE_PROMOTE_THRESHOLD_getter
-%GUID_PROCESSOR_IDLE_PROMOTE_THRESHOLD
-Gknifunptr_platform_windows7888_GUID_PROCESSOR_IDLE_STATE_MAXIMUM_getter
-!GUID_PROCESSOR_IDLE_STATE_MAXIMUM
-Dknifunptr_platform_windows7889_GUID_PROCESSOR_IDLE_TIME_CHECK_getter
-GUID_PROCESSOR_IDLE_TIME_CHECK
-Rknifunptr_platform_windows7890_GUID_PROCESSOR_PARKING_CONCURRENCY_THRESHOLD_getter
-,GUID_PROCESSOR_PARKING_CONCURRENCY_THRESHOLD
-Jknifunptr_platform_windows7891_GUID_PROCESSOR_PARKING_CORE_OVERRIDE_getter
-$GUID_PROCESSOR_PARKING_CORE_OVERRIDE
-Oknifunptr_platform_windows7892_GUID_PROCESSOR_PARKING_HEADROOM_THRESHOLD_getter
-)GUID_PROCESSOR_PARKING_HEADROOM_THRESHOLD
-Gknifunptr_platform_windows7893_GUID_PROCESSOR_PARKING_PERF_STATE_getter
-!GUID_PROCESSOR_PARKING_PERF_STATE
-Eknifunptr_platform_windows7894_GUID_PROCESSOR_PERFSTATE_POLICY_getter
-GUID_PROCESSOR_PERFSTATE_POLICY
-Dknifunptr_platform_windows7895_GUID_PROCESSOR_PERF_BOOST_MODE_getter
-GUID_PROCESSOR_PERF_BOOST_MODE
-Fknifunptr_platform_windows7896_GUID_PROCESSOR_PERF_BOOST_POLICY_getter
- GUID_PROCESSOR_PERF_BOOST_POLICY
-Iknifunptr_platform_windows7897_GUID_PROCESSOR_PERF_DECREASE_POLICY_getter
-#GUID_PROCESSOR_PERF_DECREASE_POLICY
-Lknifunptr_platform_windows7898_GUID_PROCESSOR_PERF_DECREASE_THRESHOLD_getter
-&GUID_PROCESSOR_PERF_DECREASE_THRESHOLD
-Gknifunptr_platform_windows7899_GUID_PROCESSOR_PERF_DECREASE_TIME_getter
-!GUID_PROCESSOR_PERF_DECREASE_TIME
-Aknifunptr_platform_windows7900_GUID_PROCESSOR_PERF_HISTORY_getter
-GUID_PROCESSOR_PERF_HISTORY
-Iknifunptr_platform_windows7901_GUID_PROCESSOR_PERF_INCREASE_POLICY_getter
-#GUID_PROCESSOR_PERF_INCREASE_POLICY
-Lknifunptr_platform_windows7902_GUID_PROCESSOR_PERF_INCREASE_THRESHOLD_getter
-&GUID_PROCESSOR_PERF_INCREASE_THRESHOLD
-Gknifunptr_platform_windows7903_GUID_PROCESSOR_PERF_INCREASE_TIME_getter
-!GUID_PROCESSOR_PERF_INCREASE_TIME
-Fknifunptr_platform_windows7904_GUID_PROCESSOR_PERF_LATENCY_HINT_getter
- GUID_PROCESSOR_PERF_LATENCY_HINT
-Dknifunptr_platform_windows7905_GUID_PROCESSOR_PERF_TIME_CHECK_getter
-GUID_PROCESSOR_PERF_TIME_CHECK
-Fknifunptr_platform_windows7906_GUID_PROCESSOR_SETTINGS_SUBGROUP_getter
- GUID_PROCESSOR_SETTINGS_SUBGROUP
-Eknifunptr_platform_windows7907_GUID_PROCESSOR_THROTTLE_MAXIMUM_getter
-GUID_PROCESSOR_THROTTLE_MAXIMUM
-Eknifunptr_platform_windows7908_GUID_PROCESSOR_THROTTLE_MINIMUM_getter
-GUID_PROCESSOR_THROTTLE_MINIMUM
-Dknifunptr_platform_windows7909_GUID_PROCESSOR_THROTTLE_POLICY_getter
-GUID_PROCESSOR_THROTTLE_POLICY
-Aknifunptr_platform_windows7910_GUID_SESSION_DISPLAY_STATUS_getter
-GUID_SESSION_DISPLAY_STATUS
-@knifunptr_platform_windows7911_GUID_SESSION_USER_PRESENCE_getter
-GUID_SESSION_USER_PRESENCE
-=knifunptr_platform_windows7912_GUID_SLEEPBUTTON_ACTION_getter
-GUID_SLEEPBUTTON_ACTION
-?knifunptr_platform_windows7913_GUID_SLEEP_IDLE_THRESHOLD_getter
-GUID_SLEEP_IDLE_THRESHOLD
-9knifunptr_platform_windows7914_GUID_SLEEP_SUBGROUP_getter
-GUID_SLEEP_SUBGROUP
-:knifunptr_platform_windows7915_GUID_STANDBY_TIMEOUT_getter
-GUID_STANDBY_TIMEOUT
-:knifunptr_platform_windows7916_GUID_SYSTEM_AWAYMODE_getter
-GUID_SYSTEM_AWAYMODE
-Aknifunptr_platform_windows7917_GUID_SYSTEM_BUTTON_SUBGROUP_getter
-GUID_SYSTEM_BUTTON_SUBGROUP
-@knifunptr_platform_windows7918_GUID_SYSTEM_COOLING_POLICY_getter
-GUID_SYSTEM_COOLING_POLICY
-3knifunptr_platform_windows7919_GUID_TRISTATE_getter
-GUID_TRISTATE
-@knifunptr_platform_windows7920_GUID_TYPICAL_POWER_SAVINGS_getter
-GUID_TYPICAL_POWER_SAVINGS
-Aknifunptr_platform_windows7921_GUID_UNATTEND_SLEEP_TIMEOUT_getter
-GUID_UNATTEND_SLEEP_TIMEOUT
-Eknifunptr_platform_windows7922_GUID_USERINTERFACEBUTTON_ACTION_getter
-GUID_USERINTERFACEBUTTON_ACTION
-Lknifunptr_platform_windows7923_GUID_VIDEO_ADAPTIVE_DISPLAY_BRIGHTNESS_getter
-&GUID_VIDEO_ADAPTIVE_DISPLAY_BRIGHTNESS
-Jknifunptr_platform_windows7924_GUID_VIDEO_ADAPTIVE_PERCENT_INCREASE_getter
-$GUID_VIDEO_ADAPTIVE_PERCENT_INCREASE
-Cknifunptr_platform_windows7925_GUID_VIDEO_ADAPTIVE_POWERDOWN_getter
-GUID_VIDEO_ADAPTIVE_POWERDOWN
-Bknifunptr_platform_windows7926_GUID_VIDEO_ANNOYANCE_TIMEOUT_getter
-GUID_VIDEO_ANNOYANCE_TIMEOUT
-Eknifunptr_platform_windows7927_GUID_VIDEO_CONSOLE_LOCK_TIMEOUT_getter
-GUID_VIDEO_CONSOLE_LOCK_TIMEOUT
-Kknifunptr_platform_windows7928_GUID_VIDEO_CURRENT_MONITOR_BRIGHTNESS_getter
-%GUID_VIDEO_CURRENT_MONITOR_BRIGHTNESS
-<knifunptr_platform_windows7929_GUID_VIDEO_DIM_TIMEOUT_getter
-GUID_VIDEO_DIM_TIMEOUT
-Bknifunptr_platform_windows7930_GUID_VIDEO_POWERDOWN_TIMEOUT_getter
-GUID_VIDEO_POWERDOWN_TIMEOUT
-9knifunptr_platform_windows7931_GUID_VIDEO_SUBGROUP_getter
-GUID_VIDEO_SUBGROUP
-:knifunptr_platform_windows7932_IID_AsyncIAdviseSink_getter
-IID_AsyncIAdviseSink
-;knifunptr_platform_windows7933_IID_AsyncIAdviseSink2_getter
-IID_AsyncIAdviseSink2
-7knifunptr_platform_windows7934_IID_AsyncIMultiQI_getter
-IID_AsyncIMultiQI
-7knifunptr_platform_windows7935_IID_AsyncIUnknown_getter
-IID_AsyncIUnknown
-2knifunptr_platform_windows7936_IID_CDefView_getter
-IID_CDefView
-6knifunptr_platform_windows7937_IID_DFConstraint_getter
-IID_DFConstraint
-0knifunptr_platform_windows7938_IID_Folder_getter
-
-IID_Folder
-1knifunptr_platform_windows7939_IID_Folder2_getter
-IID_Folder2
-1knifunptr_platform_windows7940_IID_Folder3_getter
-IID_Folder3
-4knifunptr_platform_windows7941_IID_FolderItem_getter
-IID_FolderItem
-5knifunptr_platform_windows7942_IID_FolderItem2_getter
-IID_FolderItem2
-8knifunptr_platform_windows7943_IID_FolderItemVerb_getter
-IID_FolderItemVerb
-9knifunptr_platform_windows7944_IID_FolderItemVerbs_getter
-IID_FolderItemVerbs
-5knifunptr_platform_windows7945_IID_FolderItems_getter
-IID_FolderItems
-6knifunptr_platform_windows7946_IID_FolderItems2_getter
-IID_FolderItems2
-6knifunptr_platform_windows7947_IID_FolderItems3_getter
-IID_FolderItems3
-1knifunptr_platform_windows7948_IID_IACList_getter
-IID_IACList
-2knifunptr_platform_windows7949_IID_IACList2_getter
-IID_IACList2
-5knifunptr_platform_windows7950_IID_IADesktopP2_getter
-IID_IADesktopP2
-8knifunptr_platform_windows7951_IID_IAVIEditStream_getter
-IID_IAVIEditStream
-2knifunptr_platform_windows7952_IID_IAVIFile_getter
-IID_IAVIFile
-9knifunptr_platform_windows7953_IID_IAVIPersistFile_getter
-IID_IAVIPersistFile
-4knifunptr_platform_windows7954_IID_IAVIStream_getter
-IID_IAVIStream
-7knifunptr_platform_windows7955_IID_IAVIStreaming_getter
-IID_IAVIStreaming
-;knifunptr_platform_windows7956_IID_IAccessibleObject_getter
-IID_IAccessibleObject
-9knifunptr_platform_windows7957_IID_IActionProgress_getter
-IID_IActionProgress
-?knifunptr_platform_windows7958_IID_IActionProgressDialog_getter
-IID_IActionProgressDialog
-8knifunptr_platform_windows7959_IID_IActiveDesktop_getter
-IID_IActiveDesktop
-9knifunptr_platform_windows7960_IID_IActiveDesktopP_getter
-IID_IActiveDesktopP
-?knifunptr_platform_windows7961_IID_IAddrExclusionControl_getter
-IID_IAddrExclusionControl
->knifunptr_platform_windows7962_IID_IAddrTrackingControl_getter
-IID_IAddrTrackingControl
-5knifunptr_platform_windows7963_IID_IAdviseSink_getter
-IID_IAdviseSink
-6knifunptr_platform_windows7964_IID_IAdviseSink2_getter
-IID_IAdviseSink2
-7knifunptr_platform_windows7965_IID_IAdviseSinkEx_getter
-IID_IAdviseSinkEx
-6knifunptr_platform_windows7966_IID_IAgileObject_getter
-IID_IAgileObject
-9knifunptr_platform_windows7967_IID_IAgileReference_getter
-IID_IAgileReference
-<knifunptr_platform_windows7968_IID_IApartmentShutdown_getter
-IID_IApartmentShutdown
-Mknifunptr_platform_windows7969_IID_IApplicationAssociationRegistration_getter
-'IID_IApplicationAssociationRegistration
-Oknifunptr_platform_windows7970_IID_IApplicationAssociationRegistrationUI_getter
-)IID_IApplicationAssociationRegistrationUI
-Bknifunptr_platform_windows7971_IID_IApplicationDestinations_getter
-IID_IApplicationDestinations
-Cknifunptr_platform_windows7972_IID_IApplicationDocumentLists_getter
-IID_IApplicationDocumentLists
-windowsA
- 
- 
- 
- 
-
-
-
- 
-) 
- äç"
-0j`8«ä(	"0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä("0j`8«ä(" 0j`8«ä(""0j`8«ä(!"$0j`8«ä(#"&0j`8«ä(%"(0j`8«ä('"+0j`8«ä(*"-0j`8«ä(,"/0j`8«ä(."10j`8«ä(0"30j`8«ä(2"50j`8«ä(4"70j`8«ä(6"90j`8«ä(8";0j`8«ä(:"=0j`8«ä(<"?0j`8«ä(>"A0j`8«ä(@"C0j`8«ä(B"E0j`8«ä(D"G0j`8«ä(F"I0j`8«ä(H"K0j`8«ä(J"M0j`8«ä(L"O0j`8«ä(N"Q0j`8«ä(P"S0j`8«ä(R"U0j`8«ä(T"W0j`8«ä(V"Y0j`8«ä(X"[0j`8«ä(Z"]0j`8«ä(\"_0j`8«ä(^"a0j`8«ä(`"c0j`8«ä(b"e0j`8«ä(d"g0j`8«ä(f"i0j`8«ä(h"k0j`8«ä(j"m0j`8«ä(l"o0j`8«ä(n"q0j`8«ä(p"s0j`8«ä(r"u0j`8«ä(t"w0j`8«ä(v"y0j`8«ä(x"{0j`8«ä(z"}0j`8«ä(|"0j`8«ä(~"Å0j`8«ä	(Ä"É0j`8«ä	(Ç"Ö0j`8«ä	(Ñ"á0j`8«ä	(Ü"â0j`8«ä	(à"ã0j`8«ä	(ä"ç0j`8«ä	(å"è0j`8«ä	(é"ë0j`8«ä	(ê"ì0j`8«ä	(í"ï0j`8«ä	(î"ó0j`8«ä	(ñ"ô0j`8«ä	(ò"õ0j`8«ä	(ö"ù0j`8«ä	(ú"ü0j`8«ä	(û"°0j`8«ä	(†"£0j`8«ä	(¢"•0j`8«ä	(§"ß0j`8«ä	(¶"©0j`8«ä	(®"´0j`8«ä	(™"≠0j`8«ä	(¨"Ø0j`8«ä	(Æ"±0j`8«ä	(∞"≥0j`8«ä	(≤"µ0j`8«ä	(¥"∑0j`8«ä	(∂"π0j`8«ä	(∏"ª0j`8«ä	(∫"Ω0j`8«ä	(º"ø0j`8«ä	(æ"¡0j`8«ä	(¿"√0j`8«ä	(¬"≈0j`8«ä	(ƒ"«0j`8«ä	(∆"…0j`8«ä	(»"À0j`8«ä	( "Õ0j`8«ä	(Ã"œ0j`8«ä	(Œ"—0j`8«ä	(–"”0j`8«ä	(“"’0j`8«ä	(‘"◊0j`8«ä	(÷"Ÿ0j`8«ä	(ÿ"€0j`8«ä	(⁄"›0j`8«ä	(‹"ﬂ0j`8«ä	(ﬁ"·0j`8«ä	(‡"„0j`8«ä	(‚"Â0j`8«ä	(‰"Á0j`8«ä	(Ê"È0j`8«ä	(Ë"Î0j`8«ä	(Í"Ì0j`8«ä	(Ï"Ô0j`8«ä	(Ó"Ò0j`8«ä	("Û0j`8«ä	(Ú"ı0j`8«ä	(Ù"˜0j`8«ä	(ˆ"˘0j`8«ä	(¯"˚0j`8«ä	(˙"˝0j`8«ä	(¸"ˇ0j`8«ä	(˛"Å0j`8«ä	(Ä"É0j`8«ä	(Ç"Ö0j`8«ä	(Ñ"á0j`8«ä	(Ü"â0j`8«ä	(àÿ
-	‡
- Í
-platform.windows

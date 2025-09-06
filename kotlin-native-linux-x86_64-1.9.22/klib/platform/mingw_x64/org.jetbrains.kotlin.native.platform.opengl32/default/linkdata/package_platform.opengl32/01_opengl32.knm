@@ -1,0 +1,664 @@
+
+ã@
+kotlin
+UInt
+platform
+opengl32
+GLenum
+target
+mode
+Unit
+kotlinx
+cinterop
+internal
+CCall
+id
+%knifunptr_platform_opengl32128_glHint
+glHint
+GLuint
+mask
+*knifunptr_platform_opengl32129_glIndexMask
+glIndexMask
+type
+Int
+GLsizei
+stride
+
+CValuesRef
+pointer
+-knifunptr_platform_opengl32130_glIndexPointer
+glIndexPointer
+Double
+GLdouble
+c
+'knifunptr_platform_opengl32131_glIndexd
+glIndexd
+DoubleVarOf
+GLdoubleVar
+(knifunptr_platform_opengl32132_glIndexdv
+	glIndexdv
+Float
+GLfloat
+'knifunptr_platform_opengl32133_glIndexf
+glIndexf
+
+FloatVarOf
+
+GLfloatVar
+(knifunptr_platform_opengl32134_glIndexfv
+	glIndexfv
+GLint
+'knifunptr_platform_opengl32135_glIndexi
+glIndexi
+IntVarOf
+GLintVar
+(knifunptr_platform_opengl32136_glIndexiv
+	glIndexiv
+Short
+GLshort
+'knifunptr_platform_opengl32137_glIndexs
+glIndexs
+
+ShortVarOf
+
+GLshortVar
+(knifunptr_platform_opengl32138_glIndexsv
+	glIndexsv
+UByte
+GLubyte
+(knifunptr_platform_opengl32139_glIndexub
+	glIndexub
+
+UByteVarOf
+
+GLubyteVar
+)knifunptr_platform_opengl32140_glIndexubv
+
+glIndexubv
+*knifunptr_platform_opengl32141_glInitNames
+glInitNames
+format
+2knifunptr_platform_opengl32142_glInterleavedArrays
+glInterleavedArrays
+cap
+	GLboolean
+*knifunptr_platform_opengl32143_glIsEnabled
+glIsEnabled
+list
+'knifunptr_platform_opengl32144_glIsList
+glIsList
+texture
+*knifunptr_platform_opengl32145_glIsTexture
+glIsTexture
+pname
+param
+,knifunptr_platform_opengl32146_glLightModelf
+glLightModelf
+params
+-knifunptr_platform_opengl32147_glLightModelfv
+glLightModelfv
+,knifunptr_platform_opengl32148_glLightModeli
+glLightModeli
+-knifunptr_platform_opengl32149_glLightModeliv
+glLightModeliv
+light
+'knifunptr_platform_opengl32150_glLightf
+glLightf
+(knifunptr_platform_opengl32151_glLightfv
+	glLightfv
+'knifunptr_platform_opengl32152_glLighti
+glLighti
+(knifunptr_platform_opengl32153_glLightiv
+	glLightiv
+factor
+UShort
+GLushort
+pattern
+,knifunptr_platform_opengl32154_glLineStipple
+glLineStipple
+width
+*knifunptr_platform_opengl32155_glLineWidth
+glLineWidth
+base
+)knifunptr_platform_opengl32156_glListBase
+
+glListBase
+-knifunptr_platform_opengl32157_glLoadIdentity
+glLoadIdentity
+m
+,knifunptr_platform_opengl32158_glLoadMatrixd
+glLoadMatrixd
+,knifunptr_platform_opengl32159_glLoadMatrixf
+glLoadMatrixf
+name
+)knifunptr_platform_opengl32160_glLoadName
+
+glLoadName
+opcode
+(knifunptr_platform_opengl32161_glLogicOp
+	glLogicOp
+u1
+u2
+order
+points
+&knifunptr_platform_opengl32162_glMap1d
+glMap1d
+&knifunptr_platform_opengl32163_glMap1f
+glMap1f
+ustride
+uorder
+v1
+v2
+vstride
+vorder
+&knifunptr_platform_opengl32164_glMap2d
+glMap2d
+&knifunptr_platform_opengl32165_glMap2f
+glMap2f
+un
+*knifunptr_platform_opengl32166_glMapGrid1d
+glMapGrid1d
+*knifunptr_platform_opengl32167_glMapGrid1f
+glMapGrid1f
+vn
+*knifunptr_platform_opengl32168_glMapGrid2d
+glMapGrid2d
+*knifunptr_platform_opengl32169_glMapGrid2f
+glMapGrid2f
+face
+*knifunptr_platform_opengl32170_glMaterialf
+glMaterialf
++knifunptr_platform_opengl32171_glMaterialfv
+glMaterialfv
+*knifunptr_platform_opengl32172_glMateriali
+glMateriali
++knifunptr_platform_opengl32173_glMaterialiv
+glMaterialiv
++knifunptr_platform_opengl32174_glMatrixMode
+glMatrixMode
+,knifunptr_platform_opengl32175_glMultMatrixd
+glMultMatrixd
+,knifunptr_platform_opengl32176_glMultMatrixf
+glMultMatrixf
+(knifunptr_platform_opengl32177_glNewList
+	glNewList
+Byte
+GLbyte
+nx
+ny
+nz
+)knifunptr_platform_opengl32178_glNormal3b
+
+glNormal3b
+	ByteVarOf
+	GLbyteVar
+v
+*knifunptr_platform_opengl32179_glNormal3bv
+glNormal3bv
+)knifunptr_platform_opengl32180_glNormal3d
+
+glNormal3d
+*knifunptr_platform_opengl32181_glNormal3dv
+glNormal3dv
+)knifunptr_platform_opengl32182_glNormal3f
+
+glNormal3f
+*knifunptr_platform_opengl32183_glNormal3fv
+glNormal3fv
+)knifunptr_platform_opengl32184_glNormal3i
+
+glNormal3i
+*knifunptr_platform_opengl32185_glNormal3iv
+glNormal3iv
+)knifunptr_platform_opengl32186_glNormal3s
+
+glNormal3s
+*knifunptr_platform_opengl32187_glNormal3sv
+glNormal3sv
+.knifunptr_platform_opengl32188_glNormalPointer
+glNormalPointer
+left
+right
+bottom
+top
+zNear
+zFar
+&knifunptr_platform_opengl32189_glOrtho
+glOrtho
+token
+,knifunptr_platform_opengl32190_glPassThrough
+glPassThrough
+map
+mapsize
+values
++knifunptr_platform_opengl32191_glPixelMapfv
+glPixelMapfv
+	UIntVarOf
+	GLuintVar
+,knifunptr_platform_opengl32192_glPixelMapuiv
+glPixelMapuiv
+UShortVarOf
+GLushortVar
+,knifunptr_platform_opengl32193_glPixelMapusv
+glPixelMapusv
+,knifunptr_platform_opengl32194_glPixelStoref
+glPixelStoref
+,knifunptr_platform_opengl32195_glPixelStorei
+glPixelStorei
+/knifunptr_platform_opengl32196_glPixelTransferf
+glPixelTransferf
+/knifunptr_platform_opengl32197_glPixelTransferi
+glPixelTransferi
+xfactor
+yfactor
+*knifunptr_platform_opengl32198_glPixelZoom
+glPixelZoom
+size
+*knifunptr_platform_opengl32199_glPointSize
+glPointSize
+,knifunptr_platform_opengl32200_glPolygonMode
+glPolygonMode
+units
+.knifunptr_platform_opengl32201_glPolygonOffset
+glPolygonOffset
+/knifunptr_platform_opengl32202_glPolygonStipple
+glPolygonStipple
+*knifunptr_platform_opengl32203_glPopAttrib
+glPopAttrib
+0knifunptr_platform_opengl32204_glPopClientAttrib
+glPopClientAttrib
+*knifunptr_platform_opengl32205_glPopMatrix
+glPopMatrix
+(knifunptr_platform_opengl32206_glPopName
+	glPopName
+n
+textures
+GLclampfVar
+
+priorities
+3knifunptr_platform_opengl32207_glPrioritizeTextures
+glPrioritizeTextures
+
+GLbitfield
++knifunptr_platform_opengl32208_glPushAttrib
+glPushAttrib
+1knifunptr_platform_opengl32209_glPushClientAttrib
+glPushClientAttrib
++knifunptr_platform_opengl32210_glPushMatrix
+glPushMatrix
+)knifunptr_platform_opengl32211_glPushName
+
+glPushName
+x
+y
+,knifunptr_platform_opengl32212_glRasterPos2d
+glRasterPos2d
+-knifunptr_platform_opengl32213_glRasterPos2dv
+glRasterPos2dv
+,knifunptr_platform_opengl32214_glRasterPos2f
+glRasterPos2f
+-knifunptr_platform_opengl32215_glRasterPos2fv
+glRasterPos2fv
+,knifunptr_platform_opengl32216_glRasterPos2i
+glRasterPos2i
+-knifunptr_platform_opengl32217_glRasterPos2iv
+glRasterPos2iv
+,knifunptr_platform_opengl32218_glRasterPos2s
+glRasterPos2s
+-knifunptr_platform_opengl32219_glRasterPos2sv
+glRasterPos2sv
+z
+,knifunptr_platform_opengl32220_glRasterPos3d
+glRasterPos3d
+-knifunptr_platform_opengl32221_glRasterPos3dv
+glRasterPos3dv
+,knifunptr_platform_opengl32222_glRasterPos3f
+glRasterPos3f
+-knifunptr_platform_opengl32223_glRasterPos3fv
+glRasterPos3fv
+,knifunptr_platform_opengl32224_glRasterPos3i
+glRasterPos3i
+-knifunptr_platform_opengl32225_glRasterPos3iv
+glRasterPos3iv
+,knifunptr_platform_opengl32226_glRasterPos3s
+glRasterPos3s
+-knifunptr_platform_opengl32227_glRasterPos3sv
+glRasterPos3sv
+w
+,knifunptr_platform_opengl32228_glRasterPos4d
+glRasterPos4d
+-knifunptr_platform_opengl32229_glRasterPos4dv
+glRasterPos4dv
+,knifunptr_platform_opengl32230_glRasterPos4f
+glRasterPos4f
+-knifunptr_platform_opengl32231_glRasterPos4fv
+glRasterPos4fv
+,knifunptr_platform_opengl32232_glRasterPos4i
+glRasterPos4i
+-knifunptr_platform_opengl32233_glRasterPos4iv
+glRasterPos4iv
+,knifunptr_platform_opengl32234_glRasterPos4s
+glRasterPos4s
+-knifunptr_platform_opengl32235_glRasterPos4sv
+glRasterPos4sv
++knifunptr_platform_opengl32236_glReadBuffer
+glReadBuffer
+height
+pixels
++knifunptr_platform_opengl32237_glReadPixels
+glReadPixels
+x1
+y1
+x2
+y2
+&knifunptr_platform_opengl32238_glRectd
+glRectd
+'knifunptr_platform_opengl32239_glRectdv
+glRectdv
+&knifunptr_platform_opengl32240_glRectf
+glRectf
+'knifunptr_platform_opengl32241_glRectfv
+glRectfv
+&knifunptr_platform_opengl32242_glRecti
+glRecti
+'knifunptr_platform_opengl32243_glRectiv
+glRectiv
+&knifunptr_platform_opengl32244_glRects
+glRects
+'knifunptr_platform_opengl32245_glRectsv
+glRectsv
++knifunptr_platform_opengl32246_glRenderMode
+glRenderMode
+angle
+(knifunptr_platform_opengl32247_glRotated
+	glRotated
+(knifunptr_platform_opengl32248_glRotatef
+	glRotatef
+'knifunptr_platform_opengl32249_glScaled
+glScaled
+'knifunptr_platform_opengl32250_glScalef
+glScalef
+(knifunptr_platform_opengl32251_glScissor
+	glScissor
+buffer
+-knifunptr_platform_opengl32252_glSelectBuffer
+glSelectBuffer
++knifunptr_platform_opengl32253_glShadeModel
+glShadeModel
+func
+ref
+,knifunptr_platform_opengl32254_glStencilFunc
+glStencilFunc
+,knifunptr_platform_opengl32255_glStencilMask
+glStencilMaskè
+ 
+  
+
+
+ 
+  
+
+	
+
+
+ 
+ 
+  
+ 
+ 
+  
+ 
+  
+! 
+ $ 
+% 
+( 
+) 
+, 
+/ 
+0 
+ 3 
+4 
+7 
+8 
+ ; 
+< 
+? 
+@ 
+I 
+ g 
+h 
+ ¬ 
+­ 
+³ 
+´ 
+Ú 
+Û 
+Þ 
+ß 
+‚ 
+† ¨=002
+0j`2
+0j`H‡ Ò
+	($02
+0j`
+H‡ Ò
+	(>02
+0j`2
+0j`20H‡ Ò
+	($02
+0j`H‡ Ò
+	(2#0200j`0H‡ Ò
+	("$'02
+0j`H‡ Ò
+	(&2+0200j`0H‡ Ò
+	(*$.02
+0j`H‡ Ò
+	(-220200j`0H‡ Ò
+	(1$602
+0j`H‡ Ò
+	(52:0200j`0H‡ Ò
+	(9$>02
+0j`H‡ Ò
+	(=2B0200j` 0H‡ Ò
+	(AD0H‡ Ò
+	(C>G02
+E0j`2
+0j`20H‡ Ò
+	(F(K0j`!2
+H0j`H‡ Ò
+	(J(N0j`!2
+L0j`
+H‡ Ò
+	(M(Q0j`!2
+O0j`
+H‡ Ò
+	(P0U02
+R0j`2
+S0j`H‡ Ò
+	(T>X02
+R0j`2V00j`0H‡ Ò
+	(W0Z02
+R0j`2
+S0j`H‡ Ò
+	(Y>\02
+R0j`2V00j`0H‡ Ò
+	([<_02
+]0j`2
+R0j`2
+S0j`H‡ Ò
+	(^Ja02
+]0j`2
+R0j`2V00j`0H‡ Ò
+	(`<c02
+]0j`2
+R0j`2
+S0j`H‡ Ò
+	(bJe02
+]0j`2
+R0j`2V00j`0H‡ Ò
+	(d0k02
+f0j`2
+i0"j`#H‡ Ò
+	(j$n02
+l0j`H‡ Ò
+	(m$q02
+o0j`
+H‡ Ò
+	(ps0H‡ Ò
+	(r2v02t00j`0H‡ Ò
+	(u2x02t00j`0H‡ Ò
+	(w${02
+y0j`
+H‡ Ò
+	(z$~02
+|0j`H‡ Ò
+	(}s„02
+0j`2
+0j`2€0j`2
+0j`20j`2‚00j`0H‡ Ò
+		(ƒs†02
+0j`2
+0j`2€0j`2
+0j`20j`2‚00j`0H‡ Ò
+		(…¨Ž02
+0j`2
+0j`2€0j`2‡0j`2ˆ0j`2‰0j`2Š0j`2‹0j`2Œ0j`2‚00j`0H‡ Ò
+		(¨02
+0j`2
+0j`2€0j`2‡0j`2ˆ0j`2‰0j`2Š0j`2‹0j`2Œ0j`2‚00j`0H‡ Ò
+		(@“02‘0j`2
+0j`2€0j`H‡ Ò
+		(’@•02‘0j`2
+0j`2€0j`H‡ Ò
+		(”g˜02‘0j`2
+0j`2€0j`2–0j`2‰0j`2Š0j`H‡ Ò
+		(—gš02‘0j`2
+0j`2€0j`2–0j`2‰0j`2Š0j`H‡ Ò
+		(™?02›0j`2
+R0j`2
+S0j`H‡ Ò
+		(œMŸ02›0j`2
+R0j`2V00j`0H‡ Ò
+		(ž?¡02›0j`2
+R0j`2
+S0j`H‡ Ò
+		( M£02›0j`2
+R0j`2V00j`0H‡ Ò
+		(¢&¥02
+0j`H‡ Ò
+		(¤4§02t00j`0H‡ Ò
+		(¦4©02t00j`0H‡ Ò
+		(¨2«02
+L0j`
+2
+0j`H‡ Ò
+		(ªA²02®0$j`%2¯0$j`%2°0$j`%H‡ Ò
+		(±5·02µ0$0&j`'0H‡ Ò
+		(¶A¹02®0j`2¯0j`2°0j`H‡ Ò
+		(¸5»02µ00j`0H‡ Ò
+		(ºA½02®0j`2¯0j`2°0j`H‡ Ò
+		(¼5¿02µ00j`0H‡ Ò
+		(¾AÁ02®0j`2¯0j`2°0j`H‡ Ò
+		(À5Ã02µ00j`0H‡ Ò
+		(ÂAÅ02®0j`2¯0j`2°0j`H‡ Ò
+		(Ä5Ç02µ00j`0H‡ Ò
+		(Æ@É02
+0j`2
+0j`20H‡ Ò
+		(ÈhÑ02Ê0j`2Ë0j`2Ì0j`2Í0j`2Î0j`2Ï0j`H‡ Ò
+		(Ð'Ô02Ò0j`H‡ Ò
+		(ÓOÙ02Õ0j`2Ö0j`2×00j`0H‡ Ò
+		(ØOÝ02Õ0j`2Ö0j`2×00(j`)0H‡ Ò
+		(ÜOá02Õ0j`2Ö0j`2×0"0*j`+0H‡ Ò
+		(à2ã02
+R0j`2
+S0j`H‡ Ò
+		(â2å02
+R0j`2
+S0j`H‡ Ò
+		(ä2ç02
+R0j`2
+S0j`H‡ Ò
+		(æ2é02
+R0j`2
+S0j`H‡ Ò
+		(è4í02ê0j`2ë0j`H‡ Ò
+		(ì'ð02î0j`H‡ Ò
+		(ï3ò02›0j`2
+0j`H‡ Ò
+		(ñ3õ02
+f0j`2ó0j`H‡ Ò
+		(ô4÷0200j` 0H‡ Ò
+		(öù0H‡ Ò
+		(øû0H‡ Ò
+		(úý0H‡ Ò
+		(üÿ0H‡ Ò
+		(þ]…02€0j`200(j`)02ƒ00j`,0H‡ Ò
+		(„&ˆ02
+0j`-H‡ Ò
+		(‡&Š02
+0j`-H‡ Ò
+		(‰Œ0H‡ Ò
+		(‹&Ž02
+y0j`
+H‡ Ò
+		(4’020j`20j`H‡ Ò
+		(‘5”02µ00j`0H‡ Ò
+		(“4–020j`20j`H‡ Ò
+		(•5˜02µ00j`0H‡ Ò
+		(—4š020j`20j`H‡ Ò
+		(™5œ02µ00j`0H‡ Ò
+		(›4ž020j`20j`H‡ Ò
+		(5 02µ00j`0H‡ Ò
+		(ŸA£020j`20j`2¡0j`H‡ Ò
+		(¢5¥02µ00j`0H‡ Ò
+		(¤A§020j`20j`2¡0j`H‡ Ò
+		(¦5©02µ00j`0H‡ Ò
+		(¨A«020j`20j`2¡0j`H‡ Ò
+		(ª5­02µ00j`0H‡ Ò
+		(¬A¯020j`20j`2¡0j`H‡ Ò
+		(®5±02µ00j`0H‡ Ò
+		(°N´020j`20j`2¡0j`2²0j`H‡ Ò
+		(³5¶02µ00j`0H‡ Ò
+		(µN¸020j`20j`2¡0j`2²0j`H‡ Ò
+		(·5º02µ00j`0H‡ Ò
+		(¹N¼020j`20j`2¡0j`2²0j`H‡ Ò
+		(»5¾02µ00j`0H‡ Ò
+		(½NÀ020j`20j`2¡0j`2²0j`H‡ Ò
+		(¿5Â02µ00j`0H‡ Ò
+		(Á&Ä02
+0j`H‡ Ò
+		(ÃtÈ020j`20j`2
+l0j`2Å0j`2
+E0j`2
+0j`2Æ0H‡ Ò
+		(ÇNÎ02É0j`2Ê0j`2Ë0j`2Ì0j`H‡ Ò
+		(ÍPÐ02‰00j`02Š00j`0H‡ Ò
+		(ÏNÒ02É0j`2Ê0j`2Ë0j`2Ì0j`H‡ Ò
+		(ÑPÔ02‰00j`02Š00j`0H‡ Ò
+		(ÓNÖ02É0j`2Ê0j`2Ë0j`2Ì0j`H‡ Ò
+		(ÕPØ02‰00j`02Š00j`0H‡ Ò
+		(×NÚ02É0j`2Ê0j`2Ë0j`2Ì0j`H‡ Ò
+		(ÙPÜ02‰00j`02Š00j`0H‡ Ò
+		(Û*Þ0j`2
+0j`H‡ Ò
+		(ÝNá02ß0j`20j`20j`2¡0j`H‡ Ò
+		(àNã02ß0j`20j`20j`2¡0j`H‡ Ò
+		(âAå020j`20j`2¡0j`H‡ Ò
+		(äAç020j`20j`2¡0j`H‡ Ò
+		(æMé020j`20j`2
+l0j`2Å0j`H‡ Ò
+		(èBì02î0j`2ê00(j`)0H‡ Ò
+		(ë&î02
+0j`H‡ Ò
+		(í@ò02ï0j`2ð0j`2
+0j`
+H‡ Ò
+		(ñ&ô02
+0j`
+H‡ Ò
+		(óØ
+à
+ ê
+platform.opengl32

@@ -1,0 +1,766 @@
+
+ÀL
+kotlinx
+cinterop
+
+CValuesRef
+platform
+posix
+timespec
+	__request
+__remainder
+kotlin
+Int
+internal
+CCall
+id
+%knifunptr_platform_posix384_nanosleep
+	nanosleep
+tm
+__tm
+CPointer
+	ByteVarOf
+Byte
+ByteVar
+#knifunptr_platform_posix385_asctime
+asctime
+__buf
+%knifunptr_platform_posix386_asctime_r
+	asctime_r
+Long
+time_t
+__lhs
+__rhs
+Double
+$knifunptr_platform_posix387_difftime
+difftime
+"knifunptr_platform_posix388_mktime
+mktime
+	LongVarOf
+	time_tVar
+__t
+%knifunptr_platform_posix389_localtime
+	localtime
+'knifunptr_platform_posix390_localtime_r
+localtime_r
+"knifunptr_platform_posix391_gmtime
+gmtime
+$knifunptr_platform_posix392_gmtime_r
+gmtime_r
+String
+CString
+__s
+__fmt
+$knifunptr_platform_posix393_strptime
+strptime
+ULong
+size_t
+__n
+$knifunptr_platform_posix394_strftime
+strftime
+cnames
+structs
+
+__locale_t
+locale_t
+__l
+&knifunptr_platform_posix395_strftime_l
+
+strftime_l
+!knifunptr_platform_posix396_ctime
+ctime
+#knifunptr_platform_posix397_ctime_r
+ctime_r
+Unit
+!knifunptr_platform_posix398_tzset
+tzset
+clock_t
+!knifunptr_platform_posix399_clock
+clock
+	clockid_t
+__clock
+__resolution
+(knifunptr_platform_posix400_clock_getres
+clock_getres
+__ts
+)knifunptr_platform_posix401_clock_gettime
+clock_gettime
+__flags
++knifunptr_platform_posix402_clock_nanosleep
+clock_nanosleep
+)knifunptr_platform_posix403_clock_settime
+clock_settime
+sigevent
+__event
+CPointerVarOf
+CPointed
+timer_t
+
+timer_tVar
+__timer_ptr
+(knifunptr_platform_posix404_timer_create
+timer_create
+__timer
+(knifunptr_platform_posix405_timer_delete
+timer_delete
+
+itimerspec
+__new_value
+__old_value
+)knifunptr_platform_posix406_timer_settime
+timer_settime
+)knifunptr_platform_posix407_timer_gettime
+timer_gettime
+,knifunptr_platform_posix408_timer_getoverrun
+timer_getoverrun
+%knifunptr_platform_posix409_timelocal
+	timelocal
+"knifunptr_platform_posix410_timegm
+timegm
+pollfd
+__fds
+UInt
+nfds_t
+__count
+__timeout_ms
+ knifunptr_platform_posix411_poll
+poll
+	__timeout
+
+ULongVarOf
+sigset_tVar
+__mask
+!knifunptr_platform_posix412_ppoll
+ppoll
+pid_t
+__pid
+__policy
+sched_param
+__param
+.knifunptr_platform_posix413_sched_setscheduler
+sched_setscheduler
+.knifunptr_platform_posix414_sched_getscheduler
+sched_getscheduler
+'knifunptr_platform_posix415_sched_yield
+sched_yield
+2knifunptr_platform_posix416_sched_get_priority_max
+sched_get_priority_max
+2knifunptr_platform_posix417_sched_get_priority_min
+sched_get_priority_min
+*knifunptr_platform_posix418_sched_setparam
+sched_setparam
+*knifunptr_platform_posix419_sched_getparam
+sched_getparam
+	__quantum
+1knifunptr_platform_posix420_sched_rr_get_interval
+sched_rr_get_interval
+	CFunction
+	Function0
+	__prepare
+__parent
+__child
+*knifunptr_platform_posix421_pthread_atfork
+pthread_atfork
+pthread_attr_t
+__attr
+0knifunptr_platform_posix422_pthread_attr_destroy
+pthread_attr_destroy
+IntVarOf
+IntVar
+__state
+7knifunptr_platform_posix423_pthread_attr_getdetachstate
+pthread_attr_getdetachstate
+	size_tVar
+__size
+5knifunptr_platform_posix424_pthread_attr_getguardsize
+pthread_attr_getguardsize
+6knifunptr_platform_posix425_pthread_attr_getschedparam
+pthread_attr_getschedparam
+7knifunptr_platform_posix426_pthread_attr_getschedpolicy
+pthread_attr_getschedpolicy
+__scope
+1knifunptr_platform_posix427_pthread_attr_getscope
+pthread_attr_getscope
+COpaquePointer
+COpaquePointerVar
+__addr
+1knifunptr_platform_posix428_pthread_attr_getstack
+pthread_attr_getstack
+5knifunptr_platform_posix429_pthread_attr_getstacksize
+pthread_attr_getstacksize
+-knifunptr_platform_posix430_pthread_attr_init
+pthread_attr_init
+7knifunptr_platform_posix431_pthread_attr_setdetachstate
+pthread_attr_setdetachstate
+5knifunptr_platform_posix432_pthread_attr_setguardsize
+pthread_attr_setguardsize
+6knifunptr_platform_posix433_pthread_attr_setschedparam
+pthread_attr_setschedparam
+7knifunptr_platform_posix434_pthread_attr_setschedpolicy
+pthread_attr_setschedpolicy
+1knifunptr_platform_posix435_pthread_attr_setscope
+pthread_attr_setscope
+1knifunptr_platform_posix436_pthread_attr_setstack
+pthread_attr_setstack
+5knifunptr_platform_posix437_pthread_attr_setstacksize
+pthread_attr_setstacksize
+pthread_condattr_tVar
+4knifunptr_platform_posix438_pthread_condattr_destroy
+pthread_condattr_destroy
+clockid_tVar
+5knifunptr_platform_posix439_pthread_condattr_getclock
+pthread_condattr_getclock
+__shared
+7knifunptr_platform_posix440_pthread_condattr_getpshared
+pthread_condattr_getpshared
+1knifunptr_platform_posix441_pthread_condattr_init
+pthread_condattr_init
+5knifunptr_platform_posix442_pthread_condattr_setclock
+pthread_condattr_setclock
+7knifunptr_platform_posix443_pthread_condattr_setpshared
+pthread_condattr_setpshared
+pthread_cond_t
+__cond
+2knifunptr_platform_posix444_pthread_cond_broadcast
+pthread_cond_broadcast
+0knifunptr_platform_posix445_pthread_cond_destroy
+pthread_cond_destroy
+-knifunptr_platform_posix446_pthread_cond_init
+pthread_cond_init
+/knifunptr_platform_posix447_pthread_cond_signal
+pthread_cond_signal
+pthread_mutex_t
+__mutex
+2knifunptr_platform_posix448_pthread_cond_timedwait
+pthread_cond_timedwait
+-knifunptr_platform_posix449_pthread_cond_wait
+pthread_cond_wait
+pthread_tVar
+__pthread_ptr
+	Function1
+__start_routine
+arg3
+*knifunptr_platform_posix450_pthread_create
+pthread_create
+	pthread_t
+	__pthread
+*knifunptr_platform_posix451_pthread_detach
+pthread_detach
+__return_value
+(knifunptr_platform_posix452_pthread_exit
+pthread_exit
+)knifunptr_platform_posix453_pthread_equal
+pthread_equal
+.knifunptr_platform_posix454_pthread_getattr_np
+pthread_getattr_np
+1knifunptr_platform_posix455_pthread_getcpuclockid
+pthread_getcpuclockid
+1knifunptr_platform_posix456_pthread_getschedparam
+pthread_getschedparam
+pthread_key_t
+__key
+/knifunptr_platform_posix457_pthread_getspecific
+pthread_getspecific
+-knifunptr_platform_posix458_pthread_gettid_np
+pthread_gettid_np
+__return_value_ptr
+(knifunptr_platform_posix459_pthread_join
+pthread_join
+pthread_key_tVar
+	__key_ptr
+__key_destructor
+.knifunptr_platform_posix460_pthread_key_create
+pthread_key_create
+.knifunptr_platform_posix461_pthread_key_delete
+pthread_key_delete
+pthread_mutexattr_tVar
+5knifunptr_platform_posix462_pthread_mutexattr_destroy
+pthread_mutexattr_destroy
+8knifunptr_platform_posix463_pthread_mutexattr_getpshared
+pthread_mutexattr_getpshared
+__type
+5knifunptr_platform_posix464_pthread_mutexattr_gettype
+pthread_mutexattr_gettype
+2knifunptr_platform_posix465_pthread_mutexattr_init
+pthread_mutexattr_init
+8knifunptr_platform_posix466_pthread_mutexattr_setpshared
+pthread_mutexattr_setpshared
+5knifunptr_platform_posix467_pthread_mutexattr_settype
+pthread_mutexattr_settype
+1knifunptr_platform_posix468_pthread_mutex_destroy
+pthread_mutex_destroy
+.knifunptr_platform_posix469_pthread_mutex_init
+pthread_mutex_init
+.knifunptr_platform_posix470_pthread_mutex_lock
+pthread_mutex_lock
+3knifunptr_platform_posix471_pthread_mutex_timedlock
+pthread_mutex_timedlock
+1knifunptr_platform_posix472_pthread_mutex_trylock
+pthread_mutex_trylock
+0knifunptr_platform_posix473_pthread_mutex_unlock
+pthread_mutex_unlock
+pthread_once_tVar
+__once
+__init_routine
+(knifunptr_platform_posix474_pthread_once
+pthread_once
+pthread_rwlockattr_tVar
+3knifunptr_platform_posix475_pthread_rwlockattr_init
+pthread_rwlockattr_init
+6knifunptr_platform_posix476_pthread_rwlockattr_destroy
+pthread_rwlockattr_destroy
+9knifunptr_platform_posix477_pthread_rwlockattr_getpshared
+pthread_rwlockattr_getpshared
+9knifunptr_platform_posix478_pthread_rwlockattr_setpshared
+pthread_rwlockattr_setpshared
+pthread_rwlock_t
+__rwlock
+2knifunptr_platform_posix479_pthread_rwlock_destroy
+pthread_rwlock_destroy
+/knifunptr_platform_posix480_pthread_rwlock_init
+pthread_rwlock_init
+1knifunptr_platform_posix481_pthread_rwlock_rdlock
+pthread_rwlock_rdlock
+6knifunptr_platform_posix482_pthread_rwlock_timedrdlock
+pthread_rwlock_timedrdlock
+6knifunptr_platform_posix483_pthread_rwlock_timedwrlock
+pthread_rwlock_timedwrlock
+4knifunptr_platform_posix484_pthread_rwlock_tryrdlock
+pthread_rwlock_tryrdlock
+4knifunptr_platform_posix485_pthread_rwlock_trywrlock
+pthread_rwlock_trywrlock
+1knifunptr_platform_posix486_pthread_rwlock_unlock
+pthread_rwlock_unlock
+1knifunptr_platform_posix487_pthread_rwlock_wrlock
+pthread_rwlock_wrlock
+(knifunptr_platform_posix488_pthread_self
+pthread_self
+__name
+.knifunptr_platform_posix489_pthread_setname_np
+pthread_setname_np
+1knifunptr_platform_posix490_pthread_setschedparam
+pthread_setschedparam
+__value
+/knifunptr_platform_posix491_pthread_setspecific
+pthread_setspecific
+__pthread_cleanup_t
+c
+__pthread_cleanup_func_t
+arg1
+arg2
+2knifunptr_platform_posix492___pthread_cleanup_push
+__pthread_cleanup_push
+arg0
+1knifunptr_platform_posix493___pthread_cleanup_pop
+__pthread_cleanup_pop
+passwd
+$knifunptr_platform_posix494_getpwnam
+getpwnam
+uid_t
+__uid
+$knifunptr_platform_posix495_getpwuid
+getpwuid
+__pwd
+CPointerVar
+__result
+&knifunptr_platform_posix496_getpwnam_r
+
+getpwnam_r
+&knifunptr_platform_posix497_getpwuid_r
+
+getpwuid_r
+regex_t
+__re
+__regex
+#knifunptr_platform_posix498_regcomp
+regcomp
+__error_code
+$knifunptr_platform_posix499_regerror
+regerror
+__match_count
+
+regmatch_t
+	__matches
+#knifunptr_platform_posix500_regexec
+regexec
+#knifunptr_platform_posix501_regfree
+regfree
+uint32_t
+__x
+!knifunptr_platform_posix502_htonl
+htonl
+UShort
+uint16_t
+!knifunptr_platform_posix503_htons
+htons
+!knifunptr_platform_posix504_ntohl
+ntohl
+!knifunptr_platform_posix505_ntohs
+ntohs
+__sFILE
+FILE
+__fp
+$knifunptr_platform_posix506_clearerr
+clearerr
+"knifunptr_platform_posix507_fclose
+fclose
+ knifunptr_platform_posix508_feof
+feof
+"knifunptr_platform_posix509_ferror
+ferror
+"knifunptr_platform_posix510_fflush
+fflush
+!knifunptr_platform_posix511_fgetc
+fgetcÚ
+ 
+ 
+ 
+
+
+ 
+
+	 
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+# 
+$ 
+. 
+	/ 
+4 
+5 
+9
+:
+; 
+< 
+D 
+G 
+J 
+W 
+Y 
+Z 
+[ 
+\ 
+c 
+p 
+r 
+s 
+y 
+z 
+~ 
+Å 
+î 
+ï 
+õ 
+ü 
+† 
+§ 
+Ø 
+∞ 
+∆ 
+… 
+’ 
+ﬂ 
+Â 
+Á 
+Ï 
+˚ 
+Ñ 
+ã 
+• 
+™ 
+≥ 
+— 
+” 
+€ 
+ﬁ 
+„ 
+È 
+Ú 
+¯ 
+¸ 
+˝ 
+Ñ 
+Ö …?802
+002
+00Há “
+	(:00j`02
+0
+0Há “
+	(T00j`02
+0
+0200j`0Há “
+	(0 02
+0j`2
+0j`Há “
+	(,"0j`2
+0
+0Há “
+	(!:'
+0
+02%00j`0Há “
+	(&J)
+0
+02%00j`02
+0
+0Há “
+	((:+
+0
+02%00j`0Há “
+	(*J-
+0
+02%00j`02
+0
+0Há “
+	(,\300j`0200“
+210“
+2
+0
+0Há “
+	(2c80j`200j`02
+60j`210“
+2
+0
+0Há “
+	(7y?0j`200j`02
+60j`210“
+2
+0
+02=00j`Há “
+	(>DA00j`02%00j`0Há “
+	(@^C00j`02%00j`0200j`0Há “
+	(BF0Há “
+	(EI0j`Há “
+	(H4N02
+K0j`2L
+00Há “
+	(M4Q02
+K0j`2O
+00Há “
+	(PLT02
+K0j`2R02
+002
+00Há “
+	(S4V02
+K0j`2O
+00Há “
+	(UZ_02
+K0j`2X
+002$] 0!0j`"0 j`#0Há “
+	(^0b02`0!0j`"Há “
+	(aXg02`0!0j`"2R02d
+0$02e
+0$0Há “
+	(f@i02`0!0j`"2O
+0$0Há “
+	(h0k02`0!0j`"Há “
+	(j,m0j`2
+0
+0Há “
+	(l,o0j`2
+0
+0Há “
+	(n<w02q
+0%02
+t0&j`'2u0Há “
+	(v^}02q
+0%02
+t0&j`'2x
+002{00(j`)0Há “
+	(|@Ñ02
+0j`*2Ä02Ç
+0+0Há “
+		(É&Ü02
+0j`*Há “
+		(Öà0Há “
+		(á#ä02Ä0Há “
+		(â#å02Ä0Há “
+		(ã7é02
+0j`*2Ç
+0+0Há “
+		(ç7ê02
+0j`*2Ç
+0+0Há “
+		(è7ì02
+0j`*2ë
+00Há “
+		(íqö02ñ
+00-0,02ó
+00-0,02ò
+00-0,0Há “
+		(ô+û02ú
+0.0Há “
+		(ùF£02ú
+0.02°00/j`00Há “
+		(¢Fß02ú
+0.02•00(j`10Há “
+		(¶<©02ú
+0.02Ç
+0+0Há “
+		(®F´02ú
+0.02Ä00/j`00Há “
+		(™FÆ02ú
+0.02¨00/j`00Há “
+		(≠m≥02ú
+0.02%± 0!0j`20 j`302•00(j`10Há “
+		(≤Fµ02ú
+0.02•00(j`10Há “
+		(¥+∑02ú
+0.0Há “
+		(∂4π02ú
+0.02°0Há “
+		(∏8ª02ú
+0.02•0j`Há “
+		(∫<Ω02ú
+0.02Ç
+0+0Há “
+		(º4ø02ú
+0.02Ä0Há “
+		(æ4¡02ú
+0.02¨0Há “
+		(¿G√02ú
+0.02±02•0j`Há “
+		(¬8≈02±
+0.02•0j`Há “
+		(ƒ5»02ú00j`40Há “
+		(«OÀ02ú00j`402K00/j`50Há “
+		( PŒ02ú00j`402Ã00/j`00Há “
+		(Õ5–02ú00j`40Há “
+		(œA“02ú00j`402
+K0j`Há “
+		(—>‘02ú00j`402Ã0Há “
+		(”+ÿ02÷
+060Há “
+		(◊+⁄02÷
+060Há “
+		(ŸF‹02÷
+0602ú00j`40Há “
+		(€+ﬁ02÷
+060Há “
+		(›L‚02÷
+0602‡
+0702x
+00Há “
+		(·<‰02÷
+0602‡
+070Há “
+		(„ôÎ02Ê00j`802ú
+0.02AË<640.0!0j`20!0j`2090,02È0Há†“
+		(Í'Ô02Ì0j`:Há “
+		(Ó)Ú020Há “
+		(Ò2Ù02
+0j`:2
+0j`:Há “
+		(Û8ˆ02Ì0j`:2ú
+0.0Há “
+		(ıA¯02Ì0j`:2K00/j`50Há “
+		(˜S˙02Ì0j`:2Ä00/j`002Ç
+0+0Há “
+		(˘7˛0!0j`22¸0j`;Há “
+		(˝+Ä0j`*2Ì0j`:Há “
+		(ˇNÉ02Ì0j`:2%Å 0!0j`20 j`30Há “
+		(Çhà02Ö00/j`<021Ü,&$ 0!0j`20090,0Há “
+		(á'ä02¸0j`;Há “
+		(â5ç02ú00j`=0Há “
+		(åPè02ú00j`=02Ã00/j`00Há “
+		(éPí02ú00j`=02ê00/j`00Há “
+		(ë5î02ú00j`=0Há “
+		(ì>ñ02ú00j`=02Ã0Há “
+		(ï>ò02ú00j`=02ê0Há “
+		(ó+ö02‡
+070Há “
+		(ôFú02‡
+0702ú00j`=0Há “
+		(õ+û02‡
+070Há “
+		(ù;†02‡
+0702x
+00Há “
+		(ü+¢02‡
+070Há “
+		(°+§02‡
+070Há “
+		(£R©02¶00/j`>02ß
+00-0,0Há “
+		(®5¨02ú00j`?0Há “
+		(´5Æ02ú00j`?0Há “
+		(≠P∞02ú00j`?02Ã00/j`00Há “
+		(Ø>≤02ú00j`?02Ã0Há “
+		(±+∂02¥
+0@0Há “
+		(µF∏02¥
+0@02ú00j`?0Há “
+		(∑+∫02¥
+0@0Há “
+		(π;º02¥
+0@02x
+00Há “
+		(ª;æ02¥
+0@02x
+00Há “
+		(Ω+¿02¥
+0@0Há “
+		(ø+¬02¥
+0@0Há “
+		(¡+ƒ02¥
+0@0Há “
+		(√+∆02¥
+0@0Há “
+		(≈»0j`:Há “
+		(«9À02Ì0j`:2…0“
+Há “
+		( AÕ02Ì0j`:2Ä02Ç
+0+0Há “
+		(Ã6–02¸0j`;2Œ0Há “
+		(œt◊02“
+0A027‘2&$ 0!0j`20090,0j`B2’0Há†“
+		(÷5⁄02ÿ
+0A02‘0Há†“
+		(Ÿ4›
+0C02…0“
+Há “
+		(‹/·
+0C02ﬂ0&j`DHá “
+		(‡äÊ02…0“
+2‚
+0C0200j`02
+60j`2%‰ 
+0C00 j0C`E0Há “
+		(ÂÖË02ﬂ0&j`D2‚
+0C0200j`02
+60j`2%‰ 
+0C00 j0C`E0Há “
+		(ÁEÌ02Í
+0F02Î0“
+2R0Há “
+		(Ï^0j`2Ó02Í
+0F0200j`02
+60j`Há “
+		(Ôbı02Í
+0F0200“
+2Ò0j`2Û
+0G02R0Há “
+		(Ù+˜02Í
+0F0Há “
+		(ˆ+˚0&j`H2˘0&j`HHá “
+		(˙+ˇ0Ij`J2˘0Ij`JHá “
+		(˛+Å0&j`H2˘0&j`HHá “
+		(Ä+É0Ij`J2˘0Ij`JHá “
+		(Ç/à02Ü0Kj`L0Há “
+		(á/ä02Ü0Kj`L0Há “
+		(â/å02Ü0Kj`L0Há “
+		(ã/é02Ü0Kj`L0Há “
+		(ç/ê02Ü0Kj`L0Há “
+		(è/í02Ü0Kj`L0Há “
+		(ëÿ
+‡
+ Í
+platform.posix

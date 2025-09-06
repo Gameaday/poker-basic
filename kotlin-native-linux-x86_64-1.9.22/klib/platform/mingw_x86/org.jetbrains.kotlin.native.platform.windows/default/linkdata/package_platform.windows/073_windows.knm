@@ -1,0 +1,809 @@
+
+÷P
+kotlin
+UInt
+platform
+windows
+UINT
+uCode
+uMapType
+kotlinx
+cinterop
+CPointer
+HKL__
+HKL
+dwhkl
+internal
+CCall
+id
+/knifunptr_platform_windows1792_MapVirtualKeyExA
+MapVirtualKeyExA
+/knifunptr_platform_windows1793_MapVirtualKeyExW
+MapVirtualKeyExW
+Int
+WINBOOL
+,knifunptr_platform_windows1794_GetInputState
+GetInputState
+flags
+DWORD
+-knifunptr_platform_windows1795_GetQueueStatus
+GetQueueStatus
+HWND__
+HWND
+)knifunptr_platform_windows1796_GetCapture
+
+GetCapture
+hWnd
+)knifunptr_platform_windows1797_SetCapture
+
+SetCapture
+-knifunptr_platform_windows1798_ReleaseCapture
+ReleaseCapture
+nCount
+
+CValuesRef
+CPointerVarOf
+CPointed
+HANDLE
+	HANDLEVar
+pHandles
+fWaitAll
+dwMilliseconds
+
+dwWakeMask
+8knifunptr_platform_windows1799_MsgWaitForMultipleObjects
+MsgWaitForMultipleObjects
+dwFlags
+:knifunptr_platform_windows1800_MsgWaitForMultipleObjectsEx
+MsgWaitForMultipleObjectsEx
+UINT_PTR
+nIDEvent
+uElapse
+	CFunction
+	Function4
+Unit
+	TIMERPROC
+lpTimerFunc
+'knifunptr_platform_windows1801_SetTimer
+SetTimer
+uIDEvent
+(knifunptr_platform_windows1802_KillTimer
+	KillTimer
+.knifunptr_platform_windows1803_IsWindowUnicode
+IsWindowUnicode
+bEnable
++knifunptr_platform_windows1804_EnableWindow
+EnableWindow
+.knifunptr_platform_windows1805_IsWindowEnabled
+IsWindowEnabled
+HINSTANCE__
+	HINSTANCE
+	hInstance
+String
+CString
+lpTableName
+HACCEL__
+HACCEL
+0knifunptr_platform_windows1806_LoadAcceleratorsA
+LoadAcceleratorsA
+WCString
+0knifunptr_platform_windows1807_LoadAcceleratorsW
+LoadAcceleratorsW
+tagACCEL
+LPACCEL
+paccel
+cAccel
+6knifunptr_platform_windows1808_CreateAcceleratorTableA
+CreateAcceleratorTableA
+6knifunptr_platform_windows1809_CreateAcceleratorTableW
+CreateAcceleratorTableW
+hAccel
+6knifunptr_platform_windows1810_DestroyAcceleratorTable
+DestroyAcceleratorTable
+	hAccelSrc
+
+lpAccelDst
+cAccelEntries
+4knifunptr_platform_windows1811_CopyAcceleratorTableA
+CopyAcceleratorTableA
+4knifunptr_platform_windows1812_CopyAcceleratorTableW
+CopyAcceleratorTableW
+	hAccTable
+tagMSG
+LPMSG
+lpMsg
+4knifunptr_platform_windows1813_TranslateAcceleratorA
+TranslateAcceleratorA
+4knifunptr_platform_windows1814_TranslateAcceleratorW
+TranslateAcceleratorW
+ULONG
+uToleranceDelay
+2knifunptr_platform_windows1815_SetCoalescableTimer
+SetCoalescableTimer
+nIndex
+/knifunptr_platform_windows1816_GetSystemMetrics
+GetSystemMetrics
+
+lpMenuName
+HMENU__
+HMENU
+(knifunptr_platform_windows1817_LoadMenuA
+	LoadMenuA
+(knifunptr_platform_windows1818_LoadMenuW
+	LoadMenuW
+lpMenuTemplate
+0knifunptr_platform_windows1819_LoadMenuIndirectA
+LoadMenuIndirectA
+0knifunptr_platform_windows1820_LoadMenuIndirectW
+LoadMenuIndirectW
+&knifunptr_platform_windows1821_GetMenu
+GetMenu
+hMenu
+&knifunptr_platform_windows1822_SetMenu
+SetMenu
+cmd
+lpszNewItem
+	cmdInsert
+*knifunptr_platform_windows1823_ChangeMenuA
+ChangeMenuA
+*knifunptr_platform_windows1824_ChangeMenuW
+ChangeMenuW
+uIDHiliteItem
+uHilite
+-knifunptr_platform_windows1825_HiliteMenuItem
+HiliteMenuItem
+uIDItem
+	ByteVarOf
+Byte
+CHARVar
+LPSTR
+lpString
+cchMax
+-knifunptr_platform_windows1826_GetMenuStringA
+GetMenuStringA
+UShortVarOf
+UShort
+WCHARVar
+LPWSTR
+-knifunptr_platform_windows1827_GetMenuStringW
+GetMenuStringW
+uId
+uFlags
++knifunptr_platform_windows1828_GetMenuState
+GetMenuState
+*knifunptr_platform_windows1829_DrawMenuBar
+DrawMenuBar
+bRevert
+,knifunptr_platform_windows1830_GetSystemMenu
+GetSystemMenu
+)knifunptr_platform_windows1831_CreateMenu
+
+CreateMenu
+.knifunptr_platform_windows1832_CreatePopupMenu
+CreatePopupMenu
+*knifunptr_platform_windows1833_DestroyMenu
+DestroyMenu
+uIDCheckItem
+uCheck
+,knifunptr_platform_windows1834_CheckMenuItem
+CheckMenuItem
+uIDEnableItem
+uEnable
+-knifunptr_platform_windows1835_EnableMenuItem
+EnableMenuItem
+nPos
+)knifunptr_platform_windows1836_GetSubMenu
+
+GetSubMenu
+,knifunptr_platform_windows1837_GetMenuItemID
+GetMenuItemID
+/knifunptr_platform_windows1838_GetMenuItemCount
+GetMenuItemCount
+	uPosition
+
+uIDNewItem
+	lpNewItem
+*knifunptr_platform_windows1839_InsertMenuA
+InsertMenuA
+*knifunptr_platform_windows1840_InsertMenuW
+InsertMenuW
+*knifunptr_platform_windows1841_AppendMenuA
+AppendMenuA
+*knifunptr_platform_windows1842_AppendMenuW
+AppendMenuW
+hMnu
+*knifunptr_platform_windows1843_ModifyMenuA
+ModifyMenuA
+*knifunptr_platform_windows1844_ModifyMenuW
+ModifyMenuW
+)knifunptr_platform_windows1845_RemoveMenu
+
+RemoveMenu
+)knifunptr_platform_windows1846_DeleteMenu
+
+DeleteMenu
+	HBITMAP__
+HBITMAP
+hBitmapUnchecked
+hBitmapChecked
+1knifunptr_platform_windows1847_SetMenuItemBitmaps
+SetMenuItemBitmaps
+LONG
+9knifunptr_platform_windows1848_GetMenuCheckMarkDimensions
+GetMenuCheckMarkDimensions
+x
+y
+	nReserved
+tagRECT
+RECT
+prcRect
+-knifunptr_platform_windows1849_TrackPopupMenu
+TrackPopupMenu
+arg0
+arg1
+arg2
+arg3
+arg4
+tagTPMPARAMS
+	TPMPARAMS
+LPTPMPARAMS
+arg5
+/knifunptr_platform_windows1850_TrackPopupMenuEx
+TrackPopupMenuEx
+tagMENUINFO
+
+LPMENUINFO
+*knifunptr_platform_windows1851_GetMenuInfo
+GetMenuInfo
+MENUINFO
+LPCMENUINFO
+*knifunptr_platform_windows1852_SetMenuInfo
+SetMenuInfo
+&knifunptr_platform_windows1853_EndMenu
+EndMenu
+tagPOINT
+POINT
+anchorPoint
+tagSIZE
+SIZE
+
+windowSize
+excludeRect
+popupWindowPosition
+;knifunptr_platform_windows1854_CalculatePopupWindowPosition
+CalculatePopupWindowPosition
+hmenu
+item
+fByPosition
+tagMENUITEMINFOA
+MENUITEMINFOA
+LPCMENUITEMINFOA
+lpmi
+.knifunptr_platform_windows1855_InsertMenuItemA
+InsertMenuItemA
+tagMENUITEMINFOW
+MENUITEMINFOW
+LPCMENUITEMINFOW
+.knifunptr_platform_windows1856_InsertMenuItemW
+InsertMenuItemW
+LPMENUITEMINFOA
+lpmii
+/knifunptr_platform_windows1857_GetMenuItemInfoA
+GetMenuItemInfoA
+LPMENUITEMINFOW
+/knifunptr_platform_windows1858_GetMenuItemInfoW
+GetMenuItemInfoW
+
+fByPositon
+/knifunptr_platform_windows1859_SetMenuItemInfoA
+SetMenuItemInfoA
+/knifunptr_platform_windows1860_SetMenuItemInfoW
+SetMenuItemInfoW
+fByPos
+	gmdiFlags
+1knifunptr_platform_windows1861_GetMenuDefaultItem
+GetMenuDefaultItem
+uItem
+1knifunptr_platform_windows1862_SetMenuDefaultItem
+SetMenuDefaultItem
+LPRECT
+lprcItem
+.knifunptr_platform_windows1863_GetMenuItemRect
+GetMenuItemRect
+CValue
+ptScreen
+0knifunptr_platform_windows1864_MenuItemFromPoint
+MenuItemFromPoint
+
+hwndParent
+hwndFrom
+fmt
+	ULONG_PTR
+data
+HICON__
+HCURSOR
+hcur
+)knifunptr_platform_windows1865_DragObject
+
+DragObject
+hwnd
+pt
+)knifunptr_platform_windows1866_DragDetect
+
+DragDetect
+HDC__
+HDC
+hDC
+X
+Y
+HICON
+hIcon
+'knifunptr_platform_windows1867_DrawIcon
+DrawIcon
+hdc
+lpchText
+cchText
+lprc
+format
+(knifunptr_platform_windows1868_DrawTextA
+	DrawTextA
+(knifunptr_platform_windows1869_DrawTextW
+	DrawTextW
+tagDRAWTEXTPARAMS
+LPDRAWTEXTPARAMS
+lpdtp
+*knifunptr_platform_windows1870_DrawTextExA
+DrawTextExA
+*knifunptr_platform_windows1871_DrawTextExW
+DrawTextExW
+HBRUSH__
+HBRUSH
+hBrush
+	Function3
+LPARAM
+GRAYSTRINGPROC
+lpOutputFunc
+lpData
+nWidth
+nHeight
+*knifunptr_platform_windows1872_GrayStringA
+GrayStringA
+*knifunptr_platform_windows1873_GrayStringW
+GrayStringW
+hbrFore
+	Function5
+WPARAM
+DRAWSTATEPROC
+qfnCallBack
+lData
+wData
+cx
+cy
+)knifunptr_platform_windows1874_DrawStateA
+
+DrawStateA
+)knifunptr_platform_windows1875_DrawStateW
+
+DrawStateW
+chCount
+nTabPositions
+IntVarOf
+INTVar
+lpnTabStopPositions
+
+nTabOrigin
+-knifunptr_platform_windows1876_TabbedTextOutA
+TabbedTextOutA
+-knifunptr_platform_windows1877_TabbedTextOutW
+TabbedTextOutW
+3knifunptr_platform_windows1878_GetTabbedTextExtentA
+GetTabbedTextExtentA
+3knifunptr_platform_windows1879_GetTabbedTextExtentW
+GetTabbedTextExtentW
++knifunptr_platform_windows1880_UpdateWindow
+UpdateWindow
+.knifunptr_platform_windows1881_SetActiveWindow
+SetActiveWindow
+2knifunptr_platform_windows1882_GetForegroundWindow
+GetForegroundWindow
++knifunptr_platform_windows1883_PaintDesktop
+PaintDesktop
+fUnknown
+1knifunptr_platform_windows1884_SwitchToThisWindow
+SwitchToThisWindow
+2knifunptr_platform_windows1885_SetForegroundWindow
+SetForegroundWindow
+dwProcessId
+7knifunptr_platform_windows1886_AllowSetForegroundWindow
+AllowSetForegroundWindow
+	uLockCode
+6knifunptr_platform_windows1887_LockSetForegroundWindow
+LockSetForegroundWindow
++knifunptr_platform_windows1888_WindowFromDC
+WindowFromDC
+$knifunptr_platform_windows1889_GetDC
+GetDC
+HRGN__
+HRGN
+hrgnClip
+&knifunptr_platform_windows1890_GetDCEx
+GetDCEx
+*knifunptr_platform_windows1891_GetWindowDC
+GetWindowDC
+(knifunptr_platform_windows1892_ReleaseDC
+	ReleaseDC
+tagPAINTSTRUCT
+LPPAINTSTRUCT
+lpPaint
+)knifunptr_platform_windows1893_BeginPaint
+
+BeginPaint
+PAINTSTRUCT
+'knifunptr_platform_windows1894_EndPaint
+EndPaint
+lpRect
+bErase
+,knifunptr_platform_windows1895_GetUpdateRect
+GetUpdateRect
+hRgn
++knifunptr_platform_windows1896_GetUpdateRgn
+GetUpdateRgn
+bRedraw
++knifunptr_platform_windows1897_SetWindowRgn
+SetWindowRgn
++knifunptr_platform_windows1898_GetWindowRgn
+GetWindowRgn
+.knifunptr_platform_windows1899_GetWindowRgnBox
+GetWindowRgnBox
+/knifunptr_platform_windows1900_ExcludeUpdateRgn
+ExcludeUpdateRgn
+-knifunptr_platform_windows1901_InvalidateRect
+InvalidateRect
++knifunptr_platform_windows1902_ValidateRect
+ValidateRect
+,knifunptr_platform_windows1903_InvalidateRgn
+InvalidateRgn
+*knifunptr_platform_windows1904_ValidateRgn
+ValidateRgn
+
+lprcUpdate
+
+hrgnUpdate
++knifunptr_platform_windows1905_RedrawWindow
+RedrawWindow
+hWndLock
+/knifunptr_platform_windows1906_LockWindowUpdate
+LockWindowUpdate
+XAmount
+YAmount
+
+lpClipRect
++knifunptr_platform_windows1907_ScrollWindow
+ScrollWindow
+dx
+dy
+
+lprcScroll
+lprcClip
+'knifunptr_platform_windows1908_ScrollDC
+ScrollDC
+	prcScroll
+prcClip
+	prcUpdate
+-knifunptr_platform_windows1909_ScrollWindowEx
+ScrollWindowEx
+nBar
++knifunptr_platform_windows1910_SetScrollPos
+SetScrollPos
++knifunptr_platform_windows1911_GetScrollPos
+GetScrollPos
+nMinPos
+nMaxPos
+-knifunptr_platform_windows1912_SetScrollRange
+SetScrollRange
+IntVar
+LPINT
+lpMinPos
+lpMaxPos
+-knifunptr_platform_windows1913_GetScrollRange
+GetScrollRange
+wBar
+bShow
+,knifunptr_platform_windows1914_ShowScrollBar
+ShowScrollBar
+wSBflags
+wArrows
+.knifunptr_platform_windows1915_EnableScrollBar
+EnableScrollBar
+hData
+'knifunptr_platform_windows1916_SetPropA
+SetPropA
+'knifunptr_platform_windows1917_SetPropW
+SetPropW
+'knifunptr_platform_windows1918_GetPropA
+GetPropA
+'knifunptr_platform_windows1919_GetPropW
+GetPropW…
+ 
+  
+
+
+ 
+
+
+	 
+
+ 
+ 
+
+
+ 
+  
+ 
+ 
+ 
+ 
+& 
+' 
+( 
+) 
+* 
+4 
+7 
+ 8 
+ 9 
+: 
+H 
+I 
+ K 
+L 
+N 
+O 
+R 
+U 
+V 
+h 
+i 
+o 
+w 
+x 
+ì 
+ î 
+ï 
+ñ 
+õ 
+ ú 
+ù 
+û 
+” 
+‘ 
+Ÿ 
+ﬂ 
+‡ 
+È 
+Í 
+Î 
+Ô 
+ 
+Û 
+Ù 
+˘ 
+˙ 
+¸ 
+˝ 
+Ü 
+á 
+à 
+å 
+ç 
+é 
+ë 
+ï 
+§ 
+® 
+Ø 
+± 
+≤ 
+∫ 
+ª 
+ø 
+Ã 
+Õ 
+” 
+‘ 
+ ÷ 
+◊ 
+ÿ 
+ ‚ 
+„ 
+‰ 
+ 
+Ò 
+ì 
+î 
+ú 
+ù 
+° 
+‹ 
+› Å[J0j`2
+0j`2
+0j`200j`	Há “
+(J0j`2
+0j`2
+0j`200j`	Há “
+(0j`Há “
+((0j`2
+0j`Há “
+(&00j`Há “
+(<"00j`2 00j`Há “
+(!$0j`Há “
+(#r00j`2
+%0j`2$+ 00j`0j`02
+,0j`2
+-0j`2
+.0j`Há “
+(/r30j`2
+%0j`2$+ 00j`0j`02
+-0j`2
+.0j`2
+10j`Há “
+(2û=0j`2 00j`2
+50j`2
+60j`2R;NB@<:00j`0j`0j`0j`0000j`Há “
+(<>@0j`2 00j`2
+>0j`Há “
+(?2B0j`2 00j`Há “
+(A>E0j`2 00j`2
+C0j`Há “
+(D2G0j`2 00j`Há “
+(FMQ00j` 2J00j`2M0“
+Há “
+(PMT00j` 2J00j`2M0“
+!Há “
+(SDZ00j` 2W0"0j`#2X0Há “
+(YD\00j` 2W0"0j`#2X0Há “
+([2_0j`2]00j` Há “
+(^Ld02`00j` 2a0"0j`#2b0Há “
+(cLf02`00j` 2a0"0j`#2b0Há “
+(eZl02 00j`2g00j` 2j0$0j`%Há “
+(kZn02 00j`2g00j` 2j0$0j`%Há “
+(m™r0j`2 00j`2
+50j`2
+60j`2R;NB@<:00j`0j`0j`0j`0000j`2
+p0j`&Há “
+(q u02s0Há “
+(tMz0'0j`(2J00j`2v0“
+Há “
+(yM|0'0j`(2J00j`2v0“
+!Há “
+({40'0j`(2}0Há “
+(~6Å0'0j`(2}0Há “
+	(Ä>É0'0j`(2 00j`Há “
+	(ÇKÜ0j`2 00j`2Ñ0'0j`(Há “
+	(Ömã0j`2Ñ0'0j`(2á0j`2à0“
+2â0j`2
+0j`Há “
+	(ämç0j`2Ñ0'0j`(2á0j`2à0“
+!2â0j`2
+0j`Há “
+	(åeë0j`2 00j`2Ñ0'0j`(2é0j`2è0j`Há “
+	(êtö02Ñ0'0j`(2í0j`2ó0*0)j`+0j`,2ò02
+0j`Há “
+	(ôt†02Ñ0'0j`(2í0j`2ó0.0-j`/0j`02ò02
+0j`Há “
+	(üO§0j`2Ñ0'0j`(2°0j`2¢0j`Há “
+	(£4¶0j`2 00j`Há “
+	(•K©0'0j`(2 00j`2ß0j`Há “
+	(®(´0'0j`(Há “
+	(™(≠0'0j`(Há “
+	(¨5Ø0j`2Ñ0'0j`(Há “
+	(ÆO≥0j`2Ñ0'0j`(2∞0j`2±0j`Há “
+	(≤O∑0j`2Ñ0'0j`(2¥0j`2µ0j`Há “
+	(∂H∫0'0j`(2Ñ0'0j`(2∏0Há “
+	(π>º0j`2Ñ0'0j`(2∏0Há “
+	(ª1æ02Ñ0'0j`(Há “
+	(Ωn√0j`2Ñ0'0j`(2ø0j`2¢0j`2¿0j`2¡0“
+Há “
+	(¬n≈0j`2Ñ0'0j`(2ø0j`2¢0j`2¿0j`2¡0“
+!Há “
+	(ƒa«0j`2Ñ0'0j`(2¢0j`2¿0j`2¡0“
+Há “
+	(∆a…0j`2Ñ0'0j`(2¢0j`2¿0j`2¡0“
+!Há “
+	(»nÃ0j`2 0'0j`(2ø0j`2¢0j`2¿0j`2¡0“
+Há “
+	(ÀnŒ0j`2 0'0j`(2ø0j`2¢0j`2¿0j`2¡0“
+!Há “
+	(ÕO–0j`2Ñ0'0j`(2ø0j`2¢0j`Há “
+	(œO“0j`2Ñ0'0j`(2ø0j`2¢0j`Há “
+	(—}ÿ0j`2Ñ0'0j`(2ø0j`2¢0j`2’010j`22÷010j`2Há “
+	(◊€0j`3Há “
+	(⁄à„0j`2Ñ0'0j`(2¢0j`2‹02›02ﬁ02 00j`2·04j`50Há “
+	(‚áÓ0j`2‰0'0j`(2Â0j`2Ê02Á02Ë00j`2Ï06j`70j`8Há†“
+	(ÌMÚ0j`2‰0'0j`(2Â090j`:Há†“
+	(ÒQˆ0j`2‰0'0j`(2Â09j`;0j`<Há†“
+	(ı¯0j`Há “
+	(˜~Ç0j`2˚0=j`>02˛0?j`@02
+0j`2ˇ04j`502Ä04j`50Há “
+	(Åjã0j`2É0'0j`(2Ñ0j`2Ö0j`2â0Aj`B0j`CHá “
+	(äjê0j`2É0'0j`(2Ñ0j`2Ö0j`2â0Dj`E0j`FHá “
+	(èfî0j`2É0'0j`(2Ñ0j`2Ö0j`2í0A0j`GHá “
+	(ìfó0j`2É0'0j`(2Ñ0j`2Ö0j`2í0D0j`HHá “
+	(ñjö0j`2É0'0j`(2Ñ0j`2ò0j`2í0Aj`B0j`CHá “
+	(ôjú0j`2É0'0j`(2Ñ0j`2ò0j`2í0Dj`E0j`FHá “
+	(õO†0j`2Ñ0'0j`(2ù0j`2û0j`Há “
+	(üO£0j`2Ñ0'0j`(2°0j`2ù0j`Há “
+	(¢oß0j`2 00j`2Ñ0'0j`(2°0j`2•040j`IHá “
+	(¶Z´02 00j`2Ñ0'0j`(2©0=j`>0JHá “
+	(™}µ0j`2¨00j`2≠00j`2Æ0j`2∞0j`K2≥0L0j`MHá “
+	(¥Hπ0j`2∂00j`2∑0=j`>0JHá “
+	(∏^¬0j`2º0N0j`O2Ω02æ02¿0L0j`PHá “
+	(¡p…02√0N0j`O2ƒ0“
+2≈02∆040j`I2«0j`Há “
+	(»pÀ02√0N0j`O2ƒ0“
+!2≈02∆040j`I2«0j`Há “
+	( ñ–02√0N0j`O2ƒ0*0)j`+0j`,2≈02∆040j`I2«0j`2Œ0Q0j`RHá “
+	(œñ“02√0N0j`O2ƒ0.0-j`/0j`02≈02∆040j`I2«0j`2Œ0Q0j`RHá “
+	(—–ﬁ0j`2º0N0j`O2’0S0j`T2IŸD86200N0j`O0j`V00j`0U00j`W2⁄0j`V2%02Ω02æ02€02‹0Há “
+	(›–‡0j`2º0N0j`O2’0S0j`T2IŸD86200N0j`O0j`V00j`0U00j`W2⁄0j`V2%02Ω02æ02€02‹0Há “
+	(ﬂÚÎ0j`2√0N0j`O2·0S0j`T2YÂTHFB@0N0j`O0j`V0j`Y000j`0X00j`Z2Ê0j`V2Á0j`Y2‹02›02Ë02È02¢0j`Há “
+	(ÍÚÌ0j`2√0N0j`O2·0S0j`T2YÂTHFB@0N0j`O0j`V0j`Y000j`0X00j`Z2Ê0j`V2Á0j`Y2‹02›02Ë02È02¢0j`Há “
+	(Ïèı0j`32√0N0j`O2‹02›02ó0“
+2Ó02Ô02Ú00[j`\02Û0Há “
+	(Ùè˜0j`32√0N0j`O2‹02›02ó0“
+!2Ó02Ô02Ú00[j`\02Û0Há “
+	(ˆt˘0j`2√0N0j`O2ó0“
+2Ó02Ô02Ú00[j`\0Há “
+	(¯t˚0j`2√0N0j`O2ó0“
+!2Ó02Ô02Ú00[j`\0Há “
+	(˙4˝0j`2 00j`Há “
+	(¸>ˇ00j`2 00j`Há “
+	(˛(Å00j`Há “
+	(Ä5É0j`2√0N0j`OHá “
+	(Ç>Ü02∂00j`2Ñ0j`Há “
+	(Ö4à0j`2 00j`Há “
+	(á+ã0j`2â0j`Há “
+	(ä+é0j`2å0j`Há “
+	(ç?ê00j`2º0N0j`OHá “
+	(è>í0N0j`O2 00j`Há “
+	(ëaó0N0j`O2 00j`2ï0]0j`^2
+0j`Há “
+	(ñ>ô0N0j`O2 00j`Há “
+	(òGõ02 00j`2º0N0j`OHá “
+	(öU†0N0j`O2 00j`2û0_0j``Há “
+	(üI£0j`2 00j`2û0_j`a0Há “
+	(¢Xß0j`2 00j`2§040j`I2•0j`Há “
+	(¶T™02 00j`2®0]0j`^2•0j`Há “
+	(©T≠02 00j`2®0]0j`^2´0j`Há “
+	(¨GØ02 00j`2®0]0j`^Há “
+	(ÆG±02 00j`2∆040j`IHá “
+	(∞G≥02º0N0j`O2 00j`Há “
+	(≤Vµ0j`2 00j`2§04j`502•0j`Há “
+	(¥I∑0j`2 00j`2§04j`50Há “
+	(∂Xπ0j`2 00j`2®0]0j`^2•0j`Há “
+	(∏Kª0j`2 00j`2®0]0j`^Há “
+	(∫lø0j`2 00j`2º04j`502Ω0]0j`^2
+0j`Há “
+	(æ5¬0j`2¿00j`Há “
+	(¡p«0j`2 00j`2√02ƒ02§04j`502≈04j`50Há “
+	(∆üÕ0j`2º0N0j`O2»02…02 04j`502À04j`502Ω0]0j`^2º040j`IHá “
+	(Ã¶“02 00j`2»02…02Œ04j`502œ04j`502Ω0]0j`^2–040j`I2
+0j`Há “
+	(—O’02 00j`2”02∏02´0j`Há “
+	(‘9◊02 00j`2”0Há “
+	(÷\€0j`2 00j`2”02ÿ02Ÿ02´0j`Há “
+	(⁄·0j`2 00j`2”02ﬁ00[j`b0j`c2ﬂ00[j`b0j`cHá “
+	(‡JÂ0j`2 00j`2‚02„0j`Há “
+	(‰NÈ0j`2 00j`2Ê0j`2Á0j`Há “
+	(Ë_Ï0j`2 00j`2ó0“
+2Í00j`Há “
+	(Î_Ó0j`2 00j`2ó0“
+!2Í00j`Há “
+	(ÌR00j`2 00j`2ó0“
+Há “
+	(ÔRÚ00j`2 00j`2ó0“
+!Há “
+	(Òÿ
+‡
+ Í
+platform.windows

@@ -1,0 +1,750 @@
+
+øZ
+kotlinx
+cinterop
+
+CValuesRef
+arg0
+kotlin
+Int
+platform
+android
+jint
+internal
+CCall
+id
+8knifunptr_platform_android0_JNI_GetDefaultJavaVMInitArgs
+JNI_GetDefaultJavaVMInitArgs
+CPointerVarOf
+CPointer
+JNIInvokeInterface
+JavaVM
+	JavaVMVar
+CPointerVar
+JNINativeInterface
+JNIEnv
+	JNIEnvVar
+arg1
+arg2
+,knifunptr_platform_android1_JNI_CreateJavaVM
+JNI_CreateJavaVM
+jsize
+IntVarOf
+jsizeVar
+1knifunptr_platform_android2_JNI_GetCreatedJavaVMs
+JNI_GetCreatedJavaVMs
+vm
+reserved
+&knifunptr_platform_android3_JNI_OnLoad
+
+JNI_OnLoad
+Unit
+(knifunptr_platform_android4_JNI_OnUnload
+JNI_OnUnload
+cnames
+structs
+AAssetManager
+mgr
+String
+CString
+dirName
+	AAssetDir
+1knifunptr_platform_android5_AAssetManager_openDir
+AAssetManager_openDir
+filename
+mode
+AAsset
+.knifunptr_platform_android6_AAssetManager_open
+AAssetManager_open
+assetDir
+	ByteVarOf
+Byte
+ByteVar
+5knifunptr_platform_android7_AAssetDir_getNextFileName
+AAssetDir_getNextFileName
+,knifunptr_platform_android8_AAssetDir_rewind
+AAssetDir_rewind
++knifunptr_platform_android9_AAssetDir_close
+AAssetDir_close
+asset
+buf
+UInt
+posix
+size_t
+count
+(knifunptr_platform_android10_AAsset_read
+AAsset_read
+off_t
+offset
+whence
+(knifunptr_platform_android11_AAsset_seek
+AAsset_seek
+Long
+off64_t
+*knifunptr_platform_android12_AAsset_seek64
+AAsset_seek64
+)knifunptr_platform_android13_AAsset_close
+AAsset_close
+CPointed
+COpaquePointer
+-knifunptr_platform_android14_AAsset_getBuffer
+AAsset_getBuffer
+-knifunptr_platform_android15_AAsset_getLength
+AAsset_getLength
+/knifunptr_platform_android16_AAsset_getLength64
+AAsset_getLength64
+6knifunptr_platform_android17_AAsset_getRemainingLength
+AAsset_getRemainingLength
+8knifunptr_platform_android18_AAsset_getRemainingLength64
+AAsset_getRemainingLength64
+off_tVar
+outStart
+	outLength
+6knifunptr_platform_android19_AAsset_openFileDescriptor
+AAsset_openFileDescriptor
+	LongVarOf
+
+off64_tVar
+8knifunptr_platform_android20_AAsset_openFileDescriptor64
+AAsset_openFileDescriptor64
+/knifunptr_platform_android21_AAsset_isAllocated
+AAsset_isAllocated
+env
+jobject
+assetManager
+3knifunptr_platform_android22_AAssetManager_fromJava
+AAssetManager_fromJava
+jbitmap
+AndroidBitmapInfo
+info
+2knifunptr_platform_android23_AndroidBitmap_getInfo
+AndroidBitmap_getInfo
+COpaquePointerVar
+addrPtr
+5knifunptr_platform_android24_AndroidBitmap_lockPixels
+AndroidBitmap_lockPixels
+7knifunptr_platform_android25_AndroidBitmap_unlockPixels
+AndroidBitmap_unlockPixels
+AConfiguration
+/knifunptr_platform_android26_AConfiguration_new
+AConfiguration_new
+config
+2knifunptr_platform_android27_AConfiguration_delete
+AConfiguration_delete
+out
+am
+<knifunptr_platform_android28_AConfiguration_fromAssetManager
+AConfiguration_fromAssetManager
+dest
+src
+0knifunptr_platform_android29_AConfiguration_copy
+AConfiguration_copy
+int32_t
+2knifunptr_platform_android30_AConfiguration_getMcc
+AConfiguration_getMcc
+mcc
+2knifunptr_platform_android31_AConfiguration_setMcc
+AConfiguration_setMcc
+2knifunptr_platform_android32_AConfiguration_getMnc
+AConfiguration_getMnc
+mnc
+2knifunptr_platform_android33_AConfiguration_setMnc
+AConfiguration_setMnc
+outLanguage
+7knifunptr_platform_android34_AConfiguration_getLanguage
+AConfiguration_getLanguage
+language
+7knifunptr_platform_android35_AConfiguration_setLanguage
+AConfiguration_setLanguage
+
+outCountry
+6knifunptr_platform_android36_AConfiguration_getCountry
+AConfiguration_getCountry
+country
+6knifunptr_platform_android37_AConfiguration_setCountry
+AConfiguration_setCountry
+:knifunptr_platform_android38_AConfiguration_getOrientation
+AConfiguration_getOrientation
+orientation
+:knifunptr_platform_android39_AConfiguration_setOrientation
+AConfiguration_setOrientation
+:knifunptr_platform_android40_AConfiguration_getTouchscreen
+AConfiguration_getTouchscreen
+touchscreen
+:knifunptr_platform_android41_AConfiguration_setTouchscreen
+AConfiguration_setTouchscreen
+6knifunptr_platform_android42_AConfiguration_getDensity
+AConfiguration_getDensity
+density
+6knifunptr_platform_android43_AConfiguration_setDensity
+AConfiguration_setDensity
+7knifunptr_platform_android44_AConfiguration_getKeyboard
+AConfiguration_getKeyboard
+keyboard
+7knifunptr_platform_android45_AConfiguration_setKeyboard
+AConfiguration_setKeyboard
+9knifunptr_platform_android46_AConfiguration_getNavigation
+AConfiguration_getNavigation
+
+navigation
+9knifunptr_platform_android47_AConfiguration_setNavigation
+AConfiguration_setNavigation
+9knifunptr_platform_android48_AConfiguration_getKeysHidden
+AConfiguration_getKeysHidden
+
+keysHidden
+9knifunptr_platform_android49_AConfiguration_setKeysHidden
+AConfiguration_setKeysHidden
+8knifunptr_platform_android50_AConfiguration_getNavHidden
+AConfiguration_getNavHidden
+	navHidden
+8knifunptr_platform_android51_AConfiguration_setNavHidden
+AConfiguration_setNavHidden
+9knifunptr_platform_android52_AConfiguration_getSdkVersion
+AConfiguration_getSdkVersion
+
+sdkVersion
+9knifunptr_platform_android53_AConfiguration_setSdkVersion
+AConfiguration_setSdkVersion
+9knifunptr_platform_android54_AConfiguration_getScreenSize
+AConfiguration_getScreenSize
+
+screenSize
+9knifunptr_platform_android55_AConfiguration_setScreenSize
+AConfiguration_setScreenSize
+9knifunptr_platform_android56_AConfiguration_getScreenLong
+AConfiguration_getScreenLong
+
+screenLong
+9knifunptr_platform_android57_AConfiguration_setScreenLong
+AConfiguration_setScreenLong
+:knifunptr_platform_android58_AConfiguration_getScreenRound
+AConfiguration_getScreenRound
+screenRound
+:knifunptr_platform_android59_AConfiguration_setScreenRound
+AConfiguration_setScreenRound
+9knifunptr_platform_android60_AConfiguration_getUiModeType
+AConfiguration_getUiModeType
+
+uiModeType
+9knifunptr_platform_android61_AConfiguration_setUiModeType
+AConfiguration_setUiModeType
+:knifunptr_platform_android62_AConfiguration_getUiModeNight
+AConfiguration_getUiModeNight
+uiModeNight
+:knifunptr_platform_android63_AConfiguration_setUiModeNight
+AConfiguration_setUiModeNight
+<knifunptr_platform_android64_AConfiguration_getScreenWidthDp
+AConfiguration_getScreenWidthDp
+value
+<knifunptr_platform_android65_AConfiguration_setScreenWidthDp
+AConfiguration_setScreenWidthDp
+=knifunptr_platform_android66_AConfiguration_getScreenHeightDp
+ AConfiguration_getScreenHeightDp
+=knifunptr_platform_android67_AConfiguration_setScreenHeightDp
+ AConfiguration_setScreenHeightDp
+Dknifunptr_platform_android68_AConfiguration_getSmallestScreenWidthDp
+'AConfiguration_getSmallestScreenWidthDp
+Dknifunptr_platform_android69_AConfiguration_setSmallestScreenWidthDp
+'AConfiguration_setSmallestScreenWidthDp
+>knifunptr_platform_android70_AConfiguration_getLayoutDirection
+!AConfiguration_getLayoutDirection
+>knifunptr_platform_android71_AConfiguration_setLayoutDirection
+!AConfiguration_setLayoutDirection
+config1
+config2
+0knifunptr_platform_android72_AConfiguration_diff
+AConfiguration_diff
+base
+	requested
+1knifunptr_platform_android73_AConfiguration_match
+AConfiguration_match
+test
+8knifunptr_platform_android74_AConfiguration_isBetterThan
+AConfiguration_isBetterThan
+
+__filename
+__flags
+android_dlextinfo
+__info
+/knifunptr_platform_android75_android_dlopen_ext
+android_dlopen_ext
+hardwareBufferObj
+AHardwareBuffer
+?knifunptr_platform_android76_AHardwareBuffer_fromHardwareBuffer
+"AHardwareBuffer_fromHardwareBuffer
+hardwareBuffer
+=knifunptr_platform_android77_AHardwareBuffer_toHardwareBuffer
+ AHardwareBuffer_toHardwareBuffer
+ALooper
+.knifunptr_platform_android78_ALooper_forThread
+ALooper_forThread
+opts
+,knifunptr_platform_android79_ALooper_prepare
+ALooper_prepare
+looper
+,knifunptr_platform_android80_ALooper_acquire
+ALooper_acquire
+,knifunptr_platform_android81_ALooper_release
+ALooper_release
+timeoutMillis
+IntVar
+outFd
+	outEvents
+outData
+-knifunptr_platform_android82_ALooper_pollOnce
+ALooper_pollOnce
+,knifunptr_platform_android83_ALooper_pollAll
+ALooper_pollAll
+)knifunptr_platform_android84_ALooper_wake
+ALooper_wake
+fd
+ident
+events
+	CFunction
+	Function3
+ALooper_callbackFunc
+callback
+data
+*knifunptr_platform_android85_ALooper_addFd
+ALooper_addFd
+-knifunptr_platform_android86_ALooper_removeFd
+ALooper_removeFd
+AInputEvent
+event
+0knifunptr_platform_android87_AInputEvent_getType
+AInputEvent_getType
+4knifunptr_platform_android88_AInputEvent_getDeviceId
+AInputEvent_getDeviceId
+2knifunptr_platform_android89_AInputEvent_getSource
+AInputEvent_getSource
+	key_event
+0knifunptr_platform_android90_AKeyEvent_getAction
+AKeyEvent_getAction
+/knifunptr_platform_android91_AKeyEvent_getFlags
+AKeyEvent_getFlags
+1knifunptr_platform_android92_AKeyEvent_getKeyCode
+AKeyEvent_getKeyCode
+2knifunptr_platform_android93_AKeyEvent_getScanCode
+AKeyEvent_getScanCode
+3knifunptr_platform_android94_AKeyEvent_getMetaState
+AKeyEvent_getMetaState
+5knifunptr_platform_android95_AKeyEvent_getRepeatCount
+AKeyEvent_getRepeatCount
+int64_t
+2knifunptr_platform_android96_AKeyEvent_getDownTime
+AKeyEvent_getDownTime
+3knifunptr_platform_android97_AKeyEvent_getEventTime
+AKeyEvent_getEventTime
+motion_event
+3knifunptr_platform_android98_AMotionEvent_getAction
+AMotionEvent_getAction
+2knifunptr_platform_android99_AMotionEvent_getFlags
+AMotionEvent_getFlags
+7knifunptr_platform_android100_AMotionEvent_getMetaState
+AMotionEvent_getMetaState
+9knifunptr_platform_android101_AMotionEvent_getButtonState
+AMotionEvent_getButtonState
+7knifunptr_platform_android102_AMotionEvent_getEdgeFlags
+AMotionEvent_getEdgeFlags
+6knifunptr_platform_android103_AMotionEvent_getDownTime
+AMotionEvent_getDownTime
+7knifunptr_platform_android104_AMotionEvent_getEventTime
+AMotionEvent_getEventTime
+Float
+5knifunptr_platform_android105_AMotionEvent_getXOffset
+AMotionEvent_getXOffset
+5knifunptr_platform_android106_AMotionEvent_getYOffset
+AMotionEvent_getYOffset
+8knifunptr_platform_android107_AMotionEvent_getXPrecision
+AMotionEvent_getXPrecision
+8knifunptr_platform_android108_AMotionEvent_getYPrecision
+AMotionEvent_getYPrecision
+:knifunptr_platform_android109_AMotionEvent_getPointerCount
+AMotionEvent_getPointerCount
+pointer_index
+7knifunptr_platform_android110_AMotionEvent_getPointerId
+AMotionEvent_getPointerId
+6knifunptr_platform_android111_AMotionEvent_getToolType
+AMotionEvent_getToolType
+2knifunptr_platform_android112_AMotionEvent_getRawX
+AMotionEvent_getRawX
+2knifunptr_platform_android113_AMotionEvent_getRawY
+AMotionEvent_getRawY
+/knifunptr_platform_android114_AMotionEvent_getX
+AMotionEvent_getX
+/knifunptr_platform_android115_AMotionEvent_getY
+AMotionEvent_getY
+6knifunptr_platform_android116_AMotionEvent_getPressure
+AMotionEvent_getPressure
+2knifunptr_platform_android117_AMotionEvent_getSize
+AMotionEvent_getSize
+8knifunptr_platform_android118_AMotionEvent_getTouchMajor
+AMotionEvent_getTouchMajor
+8knifunptr_platform_android119_AMotionEvent_getTouchMinor
+AMotionEvent_getTouchMinor
+7knifunptr_platform_android120_AMotionEvent_getToolMajor
+AMotionEvent_getToolMajor
+7knifunptr_platform_android121_AMotionEvent_getToolMinor
+AMotionEvent_getToolMinor
+9knifunptr_platform_android122_AMotionEvent_getOrientation
+AMotionEvent_getOrientation
+axis
+7knifunptr_platform_android123_AMotionEvent_getAxisValue
+AMotionEvent_getAxisValue
+9knifunptr_platform_android124_AMotionEvent_getHistorySize
+AMotionEvent_getHistorySize
+history_index
+Aknifunptr_platform_android125_AMotionEvent_getHistoricalEventTime
+#AMotionEvent_getHistoricalEventTime
+<knifunptr_platform_android126_AMotionEvent_getHistoricalRawX
+AMotionEvent_getHistoricalRawX
+<knifunptr_platform_android127_AMotionEvent_getHistoricalRawY
+AMotionEvent_getHistoricalRawY…
+ 
+ 
+ 
+
+ 
+
+
+ 
+	
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+$ 
+'
+(
+) 
++ 
+	, 
+. 
+3 
+7 
+8 
+9 
+B 
+C
+"D 
+"H 
+M 
+"N 
+S 
+T 
+"_ 
+d 
+"e 
+k 
+p 
+t 
+z 
+"à 
+˛ 
+É 
+â 
+ï 
+¢ 
+£ 
+§ 
+´ 
+"¿ 
+‘ ¸<+0j`20Há†“
+	(«0j`2LHB@00j`0
+j`00
+j00j`0
+j``02LHB@00j`0
+j`00
+j00j`0
+j``020Há†“
+	(ë0j`2LHB@00j`0
+j`00
+j00j`0
+j``02
+0j`200j`0Há†“
+	(N#0j`2" 00j`0
+j`02!0Há “
+	("J&02" 00j`0
+j`02!0Há “
+	(%A0
+002*
+002-0“
+Há “
+	(/I5
+002*
+00210“
+220Há “
+	(4:;00j` 026
+00Há “
+	(:(=026
+00Há “
+	(<(?026
+00Há “
+	(>BG02@
+002A02
+E0!j`#Há “
+	(F@L0j`$2@
+002
+I0j`$2J0Há “
+	(K@P0%j`&2@
+002
+I0%j`&2J0Há “
+	(O(R02@
+00Há “
+	(Q8V0'0j`(2@
+00Há “
+	(U,X0j`$2@
+00Há “
+	(W,Z0%j`&2@
+00Há “
+	(Y,\0j`$2@
+00Há “
+	([,^0%j`&2@
+00Há “
+	(]\c02@
+002`00j`)02a00j`)0Há “
+	(b\g02@
+002`0%0*j`+02a0%0*j`+0Há “
+	(f(i02@
+00Há “
+	(h\n
+002"j00j`0
+j`02l0'0j`,Há “
+	(mds02"j00j`0
+j`02o0'0j`,2q
+0-0Há “
+	(rzw02"j00j`0
+j`02o0'0j`,2$u 0'0j`(0
+j`.0Há “
+	(vTy02"j00j`0
+j`02o0'0j`,Há “
+	(x |
+0/0Há “
+	({(02}
+0/0Há “
+	(~<É02Ä
+0/02Å
+00Há “
+		(Ç<á02Ñ
+0/02Ö
+0/0Há “
+		(Ü.ä0j`02}
+0/0Há “
+		(â7ç02}
+0/02ã0j`0Há “
+		(å.è0j`02}
+0/0Há “
+		(é7í02}
+0/02ê0j`0Há “
+		(ëEï02}
+0/02ì00j` 0Há “
+		(î<ò02}
+0/02ñ0“
+Há “
+		(óEõ02}
+0/02ô00j` 0Há “
+		(ö<û02}
+0/02ú0“
+Há “
+		(ù.†0j`02}
+0/0Há “
+		(ü7£02}
+0/02°0j`0Há “
+		(¢.•0j`02}
+0/0Há “
+		(§7®02}
+0/02¶0j`0Há “
+		(ß.™0j`02}
+0/0Há “
+		(©7≠02}
+0/02´0j`0Há “
+		(¨.Ø0j`02}
+0/0Há “
+		(Æ7≤02}
+0/02∞0j`0Há “
+		(±.¥0j`02}
+0/0Há “
+		(≥7∑02}
+0/02µ0j`0Há “
+		(∂.π0j`02}
+0/0Há “
+		(∏7º02}
+0/02∫0j`0Há “
+		(ª.æ0j`02}
+0/0Há “
+		(Ω7¡02}
+0/02ø0j`0Há “
+		(¿.√0j`02}
+0/0Há “
+		(¬7∆02}
+0/02ƒ0j`0Há “
+		(≈.»0j`02}
+0/0Há “
+		(«7À02}
+0/02…0j`0Há “
+		( .Õ0j`02}
+0/0Há “
+		(Ã7–02}
+0/02Œ0j`0Há “
+		(œ.“0j`02}
+0/0Há “
+		(—7’02}
+0/02”0j`0Há “
+		(‘.◊0j`02}
+0/0Há “
+		(÷7⁄02}
+0/02ÿ0j`0Há “
+		(Ÿ.‹0j`02}
+0/0Há “
+		(€7ﬂ02}
+0/02›0j`0Há “
+		(ﬁ.·0j`02}
+0/0Há “
+		(‡7‰02}
+0/02‚0j`0Há “
+		(„.Ê0j`02}
+0/0Há “
+		(Â7Ë02}
+0/02‚0j`0Há “
+		(Á.Í0j`02}
+0/0Há “
+		(È7Ï02}
+0/02‚0j`0Há “
+		(Î.Ó0j`02}
+0/0Há “
+		(Ì702}
+0/02‚0j`0Há “
+		(Ô@Ù0j`02Ò
+0/02Ú
+0/0Há “
+		(Û@¯0j`02ı
+0/02ˆ
+0/0Há “
+		(˜Q˚0j`02ı
+0/02˘
+0/02ˆ
+0/0Há “
+		(˙VÅ0'0j`(2¸0“
+2˝02ˇ
+010Há “
+		(Ä_Ö
+0202"j00j`0
+j`02Ç0'0j`,Há “
+		(Ñ_à0'0j`,2"j00j`0
+j`02Ü
+020Há “
+		(á"ã
+030Há “
+		(ä+é
+0302å0Há “
+		(ç+ë02è
+030Há “
+		(ê+ì02è
+030Há “
+		(íÄö02î02ñ00j`402ó00j`402%ò 0'0j`(0
+j`.0Há “
+		(ôÄú02î02ñ00j`402ó00j`402%ò 0'0j`(0
+j`.0Há “
+		(õ+û02è
+030Há “
+		(ùö®02è
+0302ü02†02°02C•>20,*000'0j`(006050j`72¶0Há “
+		(ß4™02è
+0302ü0Há “
+		(©/Æ0j`02¨
+080Há “
+		(≠/∞0j`02¨
+080Há “
+		(Ø/≤0j`02¨
+080Há “
+		(±/µ0j`02≥
+080Há “
+		(¥/∑0j`02≥
+080Há “
+		(∂/π0j`02≥
+080Há “
+		(∏/ª0j`02≥
+080Há “
+		(∫/Ω0j`02≥
+080Há “
+		(º/ø0j`02≥
+080Há “
+		(æ/¬0%j`92≥
+080Há “
+		(¡/ƒ0%j`92≥
+080Há “
+		(√/«0j`02≈
+080Há “
+		(∆/…0j`02≈
+080Há “
+		(»/À0j`02≈
+080Há “
+		( /Õ0j`02≈
+080Há “
+		(Ã/œ0j`02≈
+080Há “
+		(Œ/—0%j`92≈
+080Há “
+		(–/”0%j`92≈
+080Há “
+		(“+÷0:2≈
+080Há “
+		(’+ÿ0:2≈
+080Há “
+		(◊+⁄0:2≈
+080Há “
+		(Ÿ+‹0:2≈
+080Há “
+		(€/ﬁ0!j`#2≈
+080Há “
+		(›<·0j`02≈
+0802ﬂ0!j`#Há “
+		(‡<„0j`02≈
+0802ﬂ0!j`#Há “
+		(‚8Â0:2≈
+0802ﬂ0!j`#Há “
+		(‰8Á0:2≈
+0802ﬂ0!j`#Há “
+		(Ê8È0:2≈
+0802ﬂ0!j`#Há “
+		(Ë8Î0:2≈
+0802ﬂ0!j`#Há “
+		(Í8Ì0:2≈
+0802ﬂ0!j`#Há “
+		(Ï8Ô0:2≈
+0802ﬂ0!j`#Há “
+		(Ó8Ò0:2≈
+0802ﬂ0!j`#Há “
+		(8Û0:2≈
+0802ﬂ0!j`#Há “
+		(Ú8ı0:2≈
+0802ﬂ0!j`#Há “
+		(Ù8˜0:2≈
+0802ﬂ0!j`#Há “
+		(ˆ8˘0:2≈
+0802ﬂ0!j`#Há “
+		(¯E¸0:2≈
+0802˙0j`02ﬂ0!j`#Há “
+		(˚/˛0!j`#2≈
+080Há “
+		(˝<Å0%j`92≈
+0802ˇ0!j`#Há “
+		(ÄEÉ0:2≈
+0802ﬂ0!j`#2ˇ0!j`#Há “
+		(ÇEÖ0:2≈
+0802ﬂ0!j`#2ˇ0!j`#Há “
+		(Ñÿ
+‡
+ Í
+platform.android

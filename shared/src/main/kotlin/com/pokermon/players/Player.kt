@@ -322,8 +322,8 @@ open class Player(
      */
     fun performAllChecks() {
         _hand?.let { hand ->
-            // Skip evaluation if hand contains zeros (incomplete hand during card exchange)
-            if (hand.any { it == 0 }) {
+            // Skip evaluation if hand contains -1 (incomplete hand during card exchange)
+            if (hand.any { it == -1 }) {
                 return
             }
             

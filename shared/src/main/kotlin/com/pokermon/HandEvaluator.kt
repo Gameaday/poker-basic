@@ -183,7 +183,7 @@ object HandEvaluator {
     ): Boolean {
         if (!isFlush(suitCounts)) return false
         val ranks = hand.map { cardToRank(it) }.toSet()
-        return ranks == setOf(10, 11, 12, 13, 1) // 10, J, Q, K, A
+        return ranks == setOf(1, 10, 11, 12, 13) // A, 10, J, Q, K (Ace = 1 in our system)
     }
 
     private fun isStraightFlush(
@@ -397,20 +397,19 @@ object HandEvaluator {
     }
 
     /**
-     * Convert card number to rank using consistent logic.
-     * Ace = 1, 2-10 = face value, Jack = 11, Queen = 12, King = 13
+     * Convert card number to rank using CardUtils for consistency.
+     * Returns rank + 1 to avoid zero multiplication issues.
+     * Ace = 1, Two = 2, ..., King = 13
      */
     private fun cardToRank(card: Int): Int {
-        var rank = card / 4
-        if (card % 4 != 0) rank++
-        return if (rank == 13) 1 else rank // Convert 13 to 1 for Ace
+        return CardUtils.numericRank(card) // This already adds 1 to prevent zero multiplication
     }
 
     /**
-     * Convert card number to suit (0-3).
+     * Convert card number to suit (0-3) using CardUtils for consistency.
      */
     private fun cardToSuit(card: Int): Int {
-        return (card - 1) % 4
+        return CardUtils.cardSuit(card)
     }
 
     /**

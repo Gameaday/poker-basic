@@ -515,14 +515,14 @@ object Main {
     }
 
     /**
-     * Replace missing cards (zeros) in hand with new cards from deck.
+     * Replace missing cards (-1) in hand with new cards from deck.
      */
     fun replaceCards(
         hand: IntArray,
         deck: IntArray,
     ) {
         for (i in hand.indices) {
-            if (hand[i] == 0) { // Empty slot needs replacement
+            if (hand[i] == -1) { // Empty slot needs replacement (changed from 0 to -1)
                 val newCard = drawCard(deck)
                 hand[i] = newCard
             }
@@ -543,8 +543,8 @@ object Main {
         val selectedCardIndex = availableCards[randomIndex]
         val selectedCard = deck[selectedCardIndex]
 
-        // Mark card as used in original deck
-        deck[selectedCardIndex] = 0
+        // Mark card as used in original deck (use -1 for empty since 0 is valid card)
+        deck[selectedCardIndex] = -1
 
         return selectedCard
     }
@@ -553,14 +553,14 @@ object Main {
      * Create working deck containing only available cards.
      */
     private fun workingDeck(deck: IntArray): IntArray {
-        return deck.indices.filter { deck[it] != 0 }.toIntArray()
+        return deck.indices.filter { deck[it] != -1 }.toIntArray()
     }
 
     /**
      * Count remaining cards in deck.
      */
     private fun remainingCards(deck: IntArray): Int {
-        return deck.count { it != 0 }
+        return deck.count { it != -1 }
     }
 
     /**
@@ -568,7 +568,7 @@ object Main {
      */
     @JvmStatic
     fun setDeck(): IntArray {
-        return IntArray(52) { it + 1 } // Cards 1-52
+        return CardUtils.createShuffledDeck() // Use CardUtils for 0-51 encoding
     }
 
     /**

@@ -19,16 +19,16 @@ package com.pokermon.modern
  * @version Dynamic (Kotlin-native implementation)
  */
 object CardUtils {
-    // Card constants - single source of truth
+    // Card constants - single source of truth (0-12 encoding for ranks)
     private val CARD_RANKS =
         arrayOf(
-            "Two", "Three", "Four", "Five", "Six", "Seven", "Eight",
-            "Nine", "Ten", "Jack", "Queen", "King", "Ace",
+            "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight",
+            "Nine", "Ten", "Jack", "Queen", "King",
         )
 
     private val CARD_SUITS = arrayOf("Clubs", "Diamonds", "Hearts", "Spades")
 
-    // Game constants
+    // Game constants (0-51 encoding)
     const val DECK_SIZE = 52
     const val DEFAULT_HAND_SIZE = 5
     const val MAX_MULTIPLES_ARRAY_SIZE = 3
@@ -57,10 +57,10 @@ object CardUtils {
             "Four of a kind",
         )
 
-    // Short rank names for compact display
+    // Short rank names for compact display (0-12 encoding)
     private val SHORT_RANKS =
         arrayOf(
-            "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A",
+            "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K",
         )
 
     // Unicode suit symbols for enhanced display
@@ -73,33 +73,33 @@ object CardUtils {
         )
 
     /**
-     * Get card rank from encoded card value (1-52 encoding).
-     * Uses the same logic as legacy CardUtils for compatibility.
+     * Get card rank from encoded card value (0-51 encoding).
+     * Returns rank 0-12 where: Ace=0, Two=1, ..., King=12
      */
     fun cardRank(card: Int): Int {
-        if (card < 1 || card > 52) {
-            throw IllegalArgumentException("Invalid card value: $card (must be 1-52)")
+        if (card < 0 || card > 51) {
+            throw IllegalArgumentException("Invalid card value: $card (must be 0-51)")
         }
-        return ((card - 1) / 4) + 1 // Ace=1, 2-10=face, J=11, Q=12, K=13
+        return card / 4 // Each rank has 4 suits, so rank = card / 4
     }
 
     /**
-     * Get card suit from encoded card value (1-52 encoding).
-     * Uses the same logic as legacy CardUtils for compatibility.
+     * Get card suit from encoded card value (0-51 encoding).
+     * Returns suit 0-3 where: Clubs=0, Diamonds=1, Hearts=2, Spades=3
      */
     fun cardSuit(card: Int): Int {
-        if (card < 1 || card > 52) {
-            throw IllegalArgumentException("Invalid card value: $card (must be 1-52)")
+        if (card < 0 || card > 51) {
+            throw IllegalArgumentException("Invalid card value: $card (must be 0-51)")
         }
-        return (card - 1) % 4 // Spades=0, Hearts=1, Diamonds=2, Clubs=3
+        return card % 4 // Clubs=0, Diamonds=1, Hearts=2, Spades=3
     }
 
     /**
-     * Get rank name from card value (1-52 encoding).
+     * Get rank name from card value (0-51 encoding).
      */
     fun rankName(card: Int): String {
         val rank = cardRank(card) // Will throw if invalid
-        return CARD_RANKS[rank - 1] // Adjust for 1-based rank
+        return CARD_RANKS[rank] // Direct array access since rank is 0-12
     }
 
     /**
@@ -111,11 +111,11 @@ object CardUtils {
     }
 
     /**
-     * Get short rank name for compact display (1-52 encoding).
+     * Get short rank name for compact display (0-51 encoding).
      */
     fun shortRankName(card: Int): String {
         val rank = cardRank(card) // Will throw if invalid
-        return SHORT_RANKS[rank - 1] // Adjust for 1-based rank
+        return SHORT_RANKS[rank] // Direct array access since rank is 0-12
     }
 
     /**
@@ -128,10 +128,10 @@ object CardUtils {
 
     /**
      * Get full card name (e.g., "Ace of Spades").
-     * Safe version that handles zero values (empty card slots).
+     * Safe version that handles negative values (empty card slots).
      */
     fun cardNameSafe(card: Int): String {
-        return if (card == 0) "Empty" else cardName(card)
+        return if (card < 0) "Empty" else cardName(card)
     }
 
     /**
@@ -149,10 +149,10 @@ object CardUtils {
     }
 
     /**
-     * Validate card value is within valid range (1-52 encoding).
+     * Validate card value is within valid range (0-51 encoding).
      */
     fun isValidCard(card: Int): Boolean {
-        return card in 1..52
+        return card in 0..51
     }
 
     /**
@@ -176,21 +176,27 @@ object CardUtils {
     }
 
     /**
-     * Get numeric rank value for calculations (Ace high = 12).
+     * Get numeric rank value for calculations (0-12 encoding).
+     * Returns rank + 1 to prevent zero multiplication issues in hand evaluation.
+     * Ace=1, Two=2, ..., King=13
      */
     fun numericRank(card: Int): Int {
-        return cardRank(card)
+        return cardRank(card) + 1 // Add 1 to prevent zero multiplication issues
     }
 
     /**
      * Get numeric rank value with Ace high option.
+     * Returns adjusted rank for hand evaluation calculations.
      */
     fun numericRank(
         card: Int,
         aceHigh: Boolean,
     ): Int {
-        val rank = cardRank(card)
-        return if (aceHigh && rank == 12) 13 else rank // Ace = 12 normally, 13 if ace high
+        val rank = cardRank(card) // 0-12 encoding
+        return when {
+            aceHigh && rank == 0 -> 14 // Ace high = 14
+            else -> rank + 1 // Normal ranks: Ace=1, Two=2, ..., King=13
+        }
     }
 
     /**
@@ -298,18 +304,18 @@ object CardUtils {
     }
 
     /**
-     * Creates a standard 52-card deck (1-52 encoding).
+     * Creates a standard 52-card deck (0-51 encoding).
      * @return array representing the deck
      */
     fun createDeck(): IntArray {
-        return IntArray(52) { it + 1 }
+        return IntArray(52) { it }
     }
 
     /**
-     * Create a new shuffled deck of 52 cards (1-52 encoding for legacy compatibility).
+     * Create a new shuffled deck of 52 cards (0-51 encoding).
      */
     fun createShuffledDeck(): IntArray {
-        val deck = IntArray(52) { it + 1 }
+        val deck = IntArray(52) { it }
         deck.shuffle()
         return deck
     }

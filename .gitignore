@@ -294,3 +294,6 @@ gradle-app.setting
 # Android build outputs  
 android/build/
 android/.gradle/
+
+# Kotlin Native Distribution
+kotlin-native-linux-x86_64-*/

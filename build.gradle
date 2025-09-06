@@ -18,6 +18,56 @@ allprojects {
     group = 'com.pokermon'
 }
 
+// Java home detection and configuration
+def findJavaHome() {
+    // Priority list of Java 21 locations
+    def java21Paths = [
+        System.getenv('JAVA_HOME_21_X64'),
+        '/usr/lib/jvm/temurin-21-jdk-amd64',
+        '/usr/lib/jvm/java-21-openjdk',
+        '/usr/lib/jvm/java-21-temurin'
+    ]
+    
+    for (String path : java21Paths) {
+        if (path && new File(path).exists() && new File(path, 'bin/java').exists()) {
+            println("✅ Using Java 21: ${path}")
+            return path
+        }
+    }
+    
+    // Fallback to Java 17 if Java 21 not available
+    def java17Paths = [
+        System.getenv('JAVA_HOME_17_X64'),
+        '/usr/lib/jvm/temurin-17-jdk-amd64',
+        '/usr/lib/jvm/java-17-openjdk'
+    ]
+    
+    for (String path : java17Paths) {
+        if (path && new File(path).exists() && new File(path, 'bin/java').exists()) {
+            println("⚠️  Using Java 17 fallback: ${path}")
+            return path
+        }
+    }
+    
+    // Final fallback to current JAVA_HOME
+    def currentJavaHome = System.getenv('JAVA_HOME')
+    if (currentJavaHome && new File(currentJavaHome).exists()) {
+        println("⚠️  Using current JAVA_HOME: ${currentJavaHome}")
+        return currentJavaHome
+    }
+    
+    println("❌ No suitable Java installation found")
+    return null
+}
+
+// Apply Java home configuration if not already set in gradle.properties
+if (!project.hasProperty('org.gradle.java.home')) {
+    def detectedJavaHome = findJavaHome()
+    if (detectedJavaHome) {
+        System.setProperty('org.gradle.java.home', detectedJavaHome)
+    }
+}
+
 buildscript {
     ext.kotlin_version = '2.2.10'
     repositories {
@@ -25,27 +75,22 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.13.0'
+        classpath 'com.android.tools.build:gradle:8.7.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
     }
 }
 
 allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-    
     // Apply Kotlin configuration to all projects
     afterEvaluate {
         if (plugins.hasPlugin('org.jetbrains.kotlin.android') || 
             plugins.hasPlugin('org.jetbrains.kotlin.jvm') ||
             plugins.hasPlugin('org.jetbrains.kotlin.multiplatform')) {
             
-            tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
+            tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
                 kotlinOptions {
-                    jvmTarget = '17'
+                    jvmTarget = '21'
                     freeCompilerArgs += [
                         '-Xjsr305=strict',
                         '-opt-in=kotlin.ExperimentalStdlibApi'
@@ -57,24 +102,24 @@ allprojects {
 }
 
 // Standard cleanup task
-task clean(type: Delete) {
-    delete rootProject.buildDir
+tasks.register('clean', Delete) {
+    delete layout.buildDirectory
     delete fileTree(dir: '.', include: 'app/build')
 }
 
-// Enhanced verification for pure Kotlin-native architecture
-task verifyKotlinNativeSetup {
+// Enhanced verification for pure Kotlin-native architecture - Updated for Gradle 9 compatibility
+tasks.register('verifyKotlinNativeSetup') {
     group = 'verification'
     description = 'Verifies pure Kotlin-native build configuration without Maven dependencies'
     
     doLast {
         println "=== Pure Kotlin-Native Architecture Verification ==="
         println "Project: Pokermon"
-        println "Version: ${version} (dynamic, no git dependency)"
+        println "Version: ${project.version} (dynamic, no git dependency)"
         
         // Check Kotlin source setup
         def kotlinSourcePath = 'shared/src/main/kotlin/com/pokermon'
-        def kotlinSource = new File(project.rootDir, kotlinSourcePath)
+        def kotlinSource = new File(rootDir, kotlinSourcePath)
         
         if (kotlinSource.exists()) {
             def kotlinFiles = kotlinSource.listFiles().findAll { it.name.endsWith('.kt') }
@@ -94,7 +139,7 @@ task verifyKotlinNativeSetup {
         }
         
         // Check for Maven removal 
-        def pomFile = new File(project.rootDir, 'shared/pom.xml')
+        def pomFile = new File(rootDir, 'shared/pom.xml')
         if (pomFile.exists()) {
             println "⚠️  Maven pom.xml still present - will be removed in pure Kotlin-native migration"
         } else {
@@ -106,9 +151,9 @@ task verifyKotlinNativeSetup {
         def gradleWrapperPath = 'gradlew'
         def androidActivityPath = 'android/src/main/java/com/pokermon/android/MainActivity.kt'
         
-        def androidBuildGradle = new File(project.rootDir, androidBuildGradlePath)
-        def gradleWrapper = new File(project.rootDir, gradleWrapperPath)
-        def androidActivity = new File(project.rootDir, androidActivityPath)
+        def androidBuildGradle = new File(rootDir, androidBuildGradlePath)
+        def gradleWrapper = new File(rootDir, gradleWrapperPath)
+        def androidActivity = new File(rootDir, androidActivityPath)
         
         if (androidBuildGradle.exists() && gradleWrapper.exists() && androidActivity.exists()) {
             println "✅ Android/Gradle build configuration complete"

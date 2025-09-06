@@ -44,7 +44,7 @@ def getVersionCode = providers.exec {
 }
 
 android {
-    namespace 'com.pokermon.android'
+    namespace = 'com.pokermon.android'
     compileSdk 35  // Latest stable compile SDK
     buildToolsVersion "35.0.0"
 
@@ -64,7 +64,7 @@ android {
     buildTypes {
         release {
             minifyEnabled true
-            shrinkResources true
+            shrinkResources = true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
@@ -86,7 +86,7 @@ android {
     }
     
     buildFeatures {
-        compose true
+        compose = true
         buildConfig = true
     }
     

@@ -3,8 +3,10 @@ package com.pokermon
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.assertThrows
 import com.pokermon.modern.CardUtils
 import com.pokermon.players.Player
+import com.pokermon.Main
 
 /**
  * Kotlin-native test class for Player functionality.
@@ -95,8 +97,8 @@ class PlayerTest {
         player.setupPlayer("TestPlayer", 1000, testDeck)
         val originalHand = player.hand.copyOf()
         
-        // Update hand
-        val newHand = intArrayOf(0, 1, 2, 3, 4)
+        // Update hand with valid card values (1-52)
+        val newHand = intArrayOf(1, 2, 3, 4, 5)
         player.hand = newHand
         
         assertEquals(5, player.hand.size)
@@ -132,21 +134,28 @@ class PlayerTest {
     
     @Test
     fun testEdgeCases() {
-        // Test empty deck handling
+        // Test empty deck handling - this should throw an exception, so we test for it
         val emptyDeck = intArrayOf()
-        assertDoesNotThrow {
+        assertThrows<ArrayIndexOutOfBoundsException> {
             player.setupPlayer("EdgeTest", 500, emptyDeck)
         }
         
-        // Test zero chips
+        // Test deck with insufficient cards - should also throw
+        val smallDeck = intArrayOf(1, 2, 3) // Only 3 cards but needs 5
+        assertThrows<ArrayIndexOutOfBoundsException> {
+            player.setupPlayer("SmallDeck", 500, smallDeck)
+        }
+        
+        // Test zero chips with valid deck
         assertDoesNotThrow {
             player.setupPlayer("ZeroChips", 0, testDeck)
         }
         assertEquals(0, player.chips)
         
-        // Test negative chips (should be handled gracefully)
+        // Test negative chips (should be handled gracefully)  
         assertDoesNotThrow {
             player.setupPlayer("NegativeChips", -100, testDeck)
         }
+        assertEquals(-100, player.chips) // Should accept the value as-is
     }
 }

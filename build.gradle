@@ -32,11 +32,6 @@ buildscript {
 }
 
 allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-    
     // Apply Kotlin configuration to all projects
     afterEvaluate {
         if (plugins.hasPlugin('org.jetbrains.kotlin.android') || 
@@ -74,7 +69,7 @@ task verifyKotlinNativeSetup {
         
         // Check Kotlin source setup
         def kotlinSourcePath = 'shared/src/main/kotlin/com/pokermon'
-        def kotlinSource = new File(project.rootDir, kotlinSourcePath)
+        def kotlinSource = new File(rootDir, kotlinSourcePath)
         
         if (kotlinSource.exists()) {
             def kotlinFiles = kotlinSource.listFiles().findAll { it.name.endsWith('.kt') }
@@ -94,7 +89,7 @@ task verifyKotlinNativeSetup {
         }
         
         // Check for Maven removal 
-        def pomFile = new File(project.rootDir, 'shared/pom.xml')
+        def pomFile = new File(rootDir, 'shared/pom.xml')
         if (pomFile.exists()) {
             println "⚠️  Maven pom.xml still present - will be removed in pure Kotlin-native migration"
         } else {
@@ -106,9 +101,9 @@ task verifyKotlinNativeSetup {
         def gradleWrapperPath = 'gradlew'
         def androidActivityPath = 'android/src/main/java/com/pokermon/android/MainActivity.kt'
         
-        def androidBuildGradle = new File(project.rootDir, androidBuildGradlePath)
-        def gradleWrapper = new File(project.rootDir, gradleWrapperPath)
-        def androidActivity = new File(project.rootDir, androidActivityPath)
+        def androidBuildGradle = new File(rootDir, androidBuildGradlePath)
+        def gradleWrapper = new File(rootDir, gradleWrapperPath)
+        def androidActivity = new File(rootDir, androidActivityPath)
         
         if (androidBuildGradle.exists() && gradleWrapper.exists() && androidActivity.exists()) {
             println "✅ Android/Gradle build configuration complete"

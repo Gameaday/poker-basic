@@ -54,15 +54,19 @@ sourceSets {
     }
 }
 
-// Dependencies - Pure Kotlin-native stack
+// Dependencies - Pure Kotlin-native stack with aligned JUnit 5
 dependencies {
     // Kotlin standard library and coroutines
     implementation "org.jetbrains.kotlin:kotlin-stdlib:${findProperty('kotlin.version') ?: '1.9.22'}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${findProperty('kotlinx.coroutines.version') ?: '1.7.3'}"
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0"
     
-    // Testing with Kotlin support
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.13.4'
+    // Testing with properly aligned JUnit 5 platform
+    testImplementation platform('org.junit:junit-bom:5.13.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine'
+    testImplementation 'org.junit.platform:junit-platform-launcher'
     testImplementation "org.jetbrains.kotlin:kotlin-test:${findProperty('kotlin.version') ?: '1.9.22'}"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit5:${findProperty('kotlin.version') ?: '1.9.22'}"
 }
@@ -75,7 +79,7 @@ test {
     // Test logging
     testLogging {
         events "passed", "skipped", "failed"
-        exceptionFormat "full"
+        exceptionFormat = "full"
     }
     
     // System properties for tests

@@ -11,19 +11,19 @@ import org.junit.jupiter.api.assertThrows
 class CardUtilsTest {
     @Test
     fun testCardRankAndSuit() {
-        // Test basic card encoding/decoding (1-52 encoding)
-        val aceOfSpades = 52 // Should be Ace of Spades in 1-52 encoding
+        // Test basic card encoding/decoding (0-51 encoding)
+        val aceOfSpades = 3 // Should be Ace of Spades in 0-51 encoding (rank 0, suit 3)
 
         val rank = CardUtils.cardRank(aceOfSpades)
         val suit = CardUtils.cardSuit(aceOfSpades)
 
-        assertEquals(13, rank) // Ace should be rank 13 in this encoding
+        assertEquals(0, rank) // Ace should be rank 0 in this encoding
         assertEquals(3, suit) // Spades should be suit 3
     }
 
     @Test
     fun testCardNames() {
-        val testCard = 1 // Two of Clubs (first card in 1-52 encoding)
+        val testCard = 0 // Ace of Clubs (first card in 0-51 encoding)
 
         val rankName = CardUtils.rankName(testCard)
         val suitName = CardUtils.suitName(testCard)
@@ -41,14 +41,14 @@ class CardUtilsTest {
 
     @Test
     fun testCardValidation() {
-        // Valid cards (1-52 encoding)
-        assertTrue(CardUtils.isValidCard(1))
-        assertTrue(CardUtils.isValidCard(26))
-        assertTrue(CardUtils.isValidCard(52))
+        // Valid cards (0-51 encoding)
+        assertTrue(CardUtils.isValidCard(0))
+        assertTrue(CardUtils.isValidCard(25))
+        assertTrue(CardUtils.isValidCard(51))
 
         // Invalid cards
-        assertFalse(CardUtils.isValidCard(0))
-        assertFalse(CardUtils.isValidCard(53))
+        assertFalse(CardUtils.isValidCard(-1))
+        assertFalse(CardUtils.isValidCard(52))
         assertFalse(CardUtils.isValidCard(-1))
     }
 
@@ -69,9 +69,9 @@ class CardUtilsTest {
 
     @Test
     fun testSameRankAndSuit() {
-        val card1 = 1 // Two of Spades
-        val card2 = 5 // Three of Spades
-        val card3 = 2 // Two of Hearts
+        val card1 = 0 // Ace of Clubs (rank 0, suit 0)
+        val card2 = 4 // Two of Clubs (rank 1, suit 0)  
+        val card3 = 1 // Ace of Diamonds (rank 0, suit 1)
 
         assertFalse(CardUtils.sameRank(card1, card2))
         assertTrue(CardUtils.sameRank(card1, card3))
@@ -100,7 +100,7 @@ class CardUtilsTest {
 
     @Test
     fun testHandFormatting() {
-        val hand = intArrayOf(1, 14, 27, 40, 52) // Various cards in 1-52 encoding
+        val hand = intArrayOf(0, 13, 26, 39, 51) // Various cards in 0-51 encoding
 
         val formatted = CardUtils.formatHand(hand, compact = false)
         val compactFormatted = CardUtils.formatHand(hand, compact = true)
@@ -113,7 +113,7 @@ class CardUtilsTest {
 
     @Test
     fun testHandAnalysis() {
-        val hand = intArrayOf(1, 5, 9, 13, 17) // Sequential ranks, same suit
+        val hand = intArrayOf(0, 4, 8, 12, 16) // Sequential ranks (0,1,2,3,4), same suit (0)
 
         val uniqueRanks = CardUtils.getUniqueRanks(hand)
         val uniqueSuits = CardUtils.getUniqueSuits(hand)
@@ -122,16 +122,16 @@ class CardUtilsTest {
         assertEquals(1, uniqueSuits.size) // All same suit
 
         // Test counting
-        val rankCount = CardUtils.countRank(hand, 1)
+        val rankCount = CardUtils.countRank(hand, 0)
         val suitCount = CardUtils.countSuit(hand, 0)
 
-        assertEquals(1, rankCount) // One card of rank 1
+        assertEquals(1, rankCount) // One card of rank 0
         assertEquals(5, suitCount) // All cards of suit 0
     }
 
     @Test
     fun testSorting() {
-        val hand = intArrayOf(52, 1, 26, 13, 39) // Random order (1-52 encoding)
+        val hand = intArrayOf(51, 0, 25, 12, 38) // Random order (0-51 encoding)
 
         val sortedByRank = CardUtils.sortByRank(hand)
         val sortedBySuit = CardUtils.sortBySuit(hand)
@@ -207,10 +207,10 @@ class CardUtilsTest {
     fun testEdgeCases() {
         // Test invalid card handling with direct methods
         assertThrows<IllegalArgumentException> {
-            CardUtils.cardName(0)
+            CardUtils.cardName(-1)
         }
         assertThrows<IllegalArgumentException> {
-            CardUtils.cardName(53)
+            CardUtils.cardName(52)
         }
 
         // Test empty arrays

@@ -22,7 +22,7 @@ def getVersionCode = providers.exec {
         DAYS_SINCE_BASE=$(( (CURRENT_EPOCH - BASE_EPOCH) / 86400 ))
         
         # Get current hour (0-23) to allow multiple builds per day
-        CURRENT_HOUR=$(date +%H)
+        CURRENT_HOUR=$(date +%H | sed 's/^0*//')
         
         # Version code = (days * 100) + hour
         # This allows up to 24 builds per day with predictable incrementing

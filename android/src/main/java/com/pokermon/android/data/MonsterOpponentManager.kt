@@ -1,7 +1,7 @@
 package com.pokermon.android.data
 
-import com.pokermon.Monster
-import com.pokermon.MonsterDatabase
+import com.pokermon.database.Monster
+import com.pokermon.database.MonsterDatabase
 import kotlin.random.Random
 
 /**
@@ -116,10 +116,13 @@ class MonsterOpponentManager {
             Monster.EffectType.CARD_ADVANTAGE -> 0.7f
             Monster.EffectType.LUCK_ENHANCEMENT -> 0.5f
             Monster.EffectType.VISUAL_THEME -> 0.4f
+            Monster.EffectType.DEFENSIVE_SHIELD -> 0.3f
+            Monster.EffectType.AI_ENHANCEMENT -> 0.9f
+            Monster.EffectType.ULTIMATE_POWER -> 1.0f
         }
         
         // Adjust by rarity
-        val rarityMultiplier = monster.rarity.powerMultiplier.toFloat() * 0.1f
+        val rarityMultiplier = (monster.rarity.powerMultiplier * 0.1).toFloat()
         return (baseAggressiveness + rarityMultiplier).coerceIn(0.1f, 1.0f)
     }
     
@@ -134,10 +137,13 @@ class MonsterOpponentManager {
             Monster.EffectType.BETTING_BOOST -> 0.5f
             Monster.EffectType.CHIP_BONUS -> 0.2f
             Monster.EffectType.VISUAL_THEME -> 0.1f
+            Monster.EffectType.DEFENSIVE_SHIELD -> 0.2f
+            Monster.EffectType.AI_ENHANCEMENT -> 0.6f
+            Monster.EffectType.ULTIMATE_POWER -> 0.7f
         }
         
         // Rare monsters are more sophisticated
-        return (baseBluffing * monster.rarity.powerMultiplier.toFloat() * 0.2f)
+        return (baseBluffing * (monster.rarity.powerMultiplier * 0.2).toFloat())
             .coerceIn(0.05f, 0.6f)
     }
     

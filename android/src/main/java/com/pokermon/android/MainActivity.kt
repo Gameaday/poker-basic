@@ -52,13 +52,14 @@ class MainActivity : ComponentActivity() {
             val gameSettings by userProfileManager.gameSettings.collectAsState()
             
             // Type-safe theme selection with Kotlin when expression
-            val selectedTheme = remember(gameSettings.selectedTheme) {
+            val selectedTheme: PokerTableTheme = remember(gameSettings.selectedTheme) {
                 when (gameSettings.selectedTheme) {
-                    PokerTableTheme.CLASSIC.name -> PokerTableTheme.CLASSIC
-                    PokerTableTheme.NEON.name -> PokerTableTheme.NEON
-                    PokerTableTheme.DARK.name -> PokerTableTheme.DARK
-                    PokerTableTheme.FOREST.name -> PokerTableTheme.FOREST
-                    else -> PokerTableTheme.CLASSIC // Safe default
+                    PokerTableTheme.CLASSIC_GREEN.name -> PokerTableTheme.CLASSIC_GREEN
+                    PokerTableTheme.ROYAL_BLUE.name -> PokerTableTheme.ROYAL_BLUE
+                    PokerTableTheme.CRIMSON_RED.name -> PokerTableTheme.CRIMSON_RED
+                    PokerTableTheme.MIDNIGHT_BLACK.name -> PokerTableTheme.MIDNIGHT_BLACK
+                    PokerTableTheme.BOURBON_BROWN.name -> PokerTableTheme.BOURBON_BROWN
+                    else -> PokerTableTheme.CLASSIC_GREEN // Safe default
                 }
             }
             
@@ -86,9 +87,11 @@ class MainActivity : ComponentActivity() {
             
             // Kotlin-native null safety and smart casts
             settings.let { gameSettings ->
-                if (gameSettings.playerName.isBlank()) {
+                val userProfile = userProfileManager.userProfile.first()
+                if (userProfile.username.isBlank()) {
                     // Initialize default settings if needed
-                    userProfileManager.updatePlayerName("New Player")
+                    val updatedProfile = userProfile.copy(username = "New Player")
+                    userProfileManager.updateUserProfile(updatedProfile)
                 }
             }
         } catch (e: Exception) {
@@ -133,7 +136,7 @@ fun PokerGameNavigation(userProfileManager: UserProfileManager) {
                     // Type-safe navigation using sealed classes
                     navController.navigate(NavigationRoute.fromGameMode(gameMode).route)
                 },
-                onBack = { navController.popBackStack() }
+                onBackPressed = { navController.popBackStack() }
             )
         }
         composable("gameplay/{gameMode}") { backStackEntry ->

@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.pokermon.CardPackManager
+import com.pokermon.database.CardPackManager
 import com.pokermon.android.data.UserProfileManager
 import com.pokermon.android.ui.theme.PokerTableTheme
 import java.util.Locale
@@ -51,10 +51,9 @@ fun SettingsScreen(
     }
     
     // Get available card packs
-    val cardPackManager = remember { CardPackManager.getInstance() }
-    val availableCardPacks = remember { cardPackManager.availableCardPacks }
+    val availableCardPacks = remember { CardPackManager.getAvailableCardPacks() }
     val selectedCardPack = gameSettings.selectedCardPack
-    val selectedCardPackDisplay = cardPackManager.getDisplayName(selectedCardPack)
+    val selectedCardPackDisplay = CardPackManager.getDisplayName(selectedCardPack)
     
     Column(
         modifier = Modifier

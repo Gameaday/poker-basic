@@ -89,7 +89,7 @@ android {
     }
     
     composeOptions {
-        kotlinCompilerExtensionVersion '1.5.4'
+        kotlinCompilerExtensionVersion '1.5.8'
     }
     
     // Optimization settings for faster builds
@@ -99,20 +99,22 @@ android {
         }
     }
     
-    // Include shared Kotlin source files directly for pure Kotlin-native architecture
+    // Remove source inclusion since we're using module dependency
+    /*
     sourceSets {
         main {
             java {
-                srcDirs += '../Poker-Basic/src/main/kotlin'
-                srcDirs += '../Poker-Basic/src/main/java'
+                srcDirs += '../shared/src/main/kotlin'
+                srcDirs += '../shared/src/main/java'
             }
         }
     }
+    */
 }
 
 dependencies {
-    // Direct Kotlin source integration - no external module dependencies needed
-    // All Kotlin source files are included directly via sourceSets configuration
+    // Shared module dependency
+    implementation project(':shared')
     
     // Kotlin-native dependencies - aligned with main project
     implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.22'
@@ -123,7 +125,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
     implementation 'androidx.activity:activity-compose:1.8.2'
-    implementation platform('androidx.compose:compose-bom:2024.02.00')
+    implementation platform('androidx.compose:compose-bom:2024.08.00')
     implementation 'androidx.compose.ui:ui'
     implementation 'androidx.compose.ui:ui-tooling-preview'
     implementation 'androidx.compose.material3:material3'
@@ -134,7 +136,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
-    androidTestImplementation platform('androidx.compose:compose-bom:2024.02.00')
+    androidTestImplementation platform('androidx.compose:compose-bom:2024.08.00')
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'

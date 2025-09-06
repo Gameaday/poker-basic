@@ -281,20 +281,84 @@ gradle-app.setting
 ehthumbs.db
 Thumbs.db
 
-# Temporary files
-*.tmp
-*.temp
-*~
 
-# Gradle cache and wrapper
-.gradle/
-gradle-app.setting
-!gradle-wrapper.jar
-
-# Android build outputs  
-android/build/
-android/.gradle/
 
 # Kotlin Native binaries and cache
 kotlin-native-*/
 *.konan/
+
+#############
+## Additional Build Artifacts and Generated Files
+#############
+
+# Build number and version files (auto-generated)
+**/buildNumber.properties
+**/version.properties
+
+# Gradle build outputs and cache (comprehensive)
+**/build/
+**/.gradle/
+gradle-app.setting
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+
+# IDE-specific files (comprehensive)
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.eclipse/
+.metadata/
+.settings/
+
+# Kotlin compilation cache
+*.kotlin_module
+**/kotlin-js-store/
+
+# Android specific (comprehensive)
+**/build/
+local.properties
+*.apk
+*.aab
+*.ap_
+*.dex
+R.txt
+proguard/
+
+# Maven/Gradle specific ignores
+**/target/
+dependency-reduced-pom.xml
+.mvn/wrapper/maven-wrapper.jar
+
+# Test reports and coverage
+**/test-results/
+**/reports/
+**/coverage/
+**/jacoco/
+
+# Temporary and system files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.tmp
+*.temp
+*~
+*.swp
+*.swo
+
+# Log files
+*.log
+*.out
+
+# Compiled binaries
+*.class
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
+*.war
+*.ear
+*.nar

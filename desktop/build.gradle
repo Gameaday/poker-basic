@@ -154,16 +154,28 @@ task packageNative {
         println "=== Detecting Platform: ${osName} ==="
         
         if (osName.contains('windows')) {
-            tasks.packagewindows.execute()
+            println "Detected Windows platform"
         } else if (osName.contains('linux')) {
-            tasks.packagelinux.execute()
+            println "Detected Linux platform"
         } else if (osName.contains('mac')) {
-            tasks.packagemacos.execute()
+            println "Detected macOS platform"
         } else {
             println "Unknown platform: ${osName}, defaulting to JAR"
-            project(':shared').tasks.getByName('fatJar').execute()
         }
+        println "Platform-specific package created successfully"
     }
+}
+
+// Configure dependencies based on platform
+def osName = System.getProperty('os.name').toLowerCase()
+if (osName.contains('windows')) {
+    packageNative.dependsOn packagewindows
+} else if (osName.contains('linux')) {
+    packageNative.dependsOn packagelinux
+} else if (osName.contains('mac')) {
+    packageNative.dependsOn packagemacos
+} else {
+    packageNative.dependsOn ':shared:fatJar'
 }
 
 // Development information task

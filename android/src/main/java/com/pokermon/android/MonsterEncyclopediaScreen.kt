@@ -17,8 +17,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.pokermon.Monster
-import com.pokermon.MonsterDatabase
+import com.pokermon.database.Monster
+import com.pokermon.database.MonsterDatabase
 import com.pokermon.android.data.MonsterOpponentManager
 import com.pokermon.android.data.UserProfileManager
 
@@ -39,7 +39,7 @@ fun MonsterEncyclopediaScreen(
     val defeatedMonsters = monsterOpponentManager.getDefeatedMonsters()
     val allMonsters = MonsterDatabase.getAllMonsters()
     
-    var selectedRarityFilter by remember { mutableStateOf<Monster.Rarity?>(null) }
+    var selectedRarityFilter by remember { mutableStateOf(null as Monster.Rarity?) }
     var showOnlyDiscovered by remember { mutableStateOf(false) }
     
     val filteredMonsters = allMonsters.filter { monster ->

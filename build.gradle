@@ -40,7 +40,7 @@ allprojects {
             
             tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
                 kotlinOptions {
-                    jvmTarget = '17'
+                    jvmTarget = '21'
                     freeCompilerArgs += [
                         '-Xjsr305=strict',
                         '-opt-in=kotlin.ExperimentalStdlibApi'
@@ -57,7 +57,7 @@ tasks.register('clean', Delete) {
     delete fileTree(dir: '.', include: 'app/build')
 }
 
-// Enhanced verification for pure Kotlin-native architecture
+// Enhanced verification for pure Kotlin-native architecture - Updated for Gradle 9 compatibility
 tasks.register('verifyKotlinNativeSetup') {
     group = 'verification'
     description = 'Verifies pure Kotlin-native build configuration without Maven dependencies'
@@ -65,7 +65,7 @@ tasks.register('verifyKotlinNativeSetup') {
     doLast {
         println "=== Pure Kotlin-Native Architecture Verification ==="
         println "Project: Pokermon"
-        println "Version: ${version} (dynamic, no git dependency)"
+        println "Version: ${project.version} (dynamic, no git dependency)"
         
         // Check Kotlin source setup
         def kotlinSourcePath = 'shared/src/main/kotlin/com/pokermon'

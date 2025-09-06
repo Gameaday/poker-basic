@@ -11,37 +11,37 @@ application {
     mainClass = 'com.pokermon.GameLauncher'
 }
 
-// Java compatibility
+// Java compatibility - Updated to Java 21
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
-// Kotlin configuration
+// Kotlin configuration - Updated to Java 21
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 // Dynamic version from root project
 version = rootProject.version
 group = rootProject.group
 
-// Dependencies - Use shared module
+// Dependencies - Use shared module - Updated versions
 dependencies {
     implementation project(':shared')
     
-    // Desktop-specific dependencies for native builds
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:${findProperty('kotlin.version') ?: '1.9.22'}"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${findProperty('kotlinx.coroutines.version') ?: '1.7.3'}"
+    // Desktop-specific dependencies for native builds - Updated versions
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:${findProperty('kotlin.version') ?: '2.2.10'}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${findProperty('kotlinx.coroutines.version') ?: '1.10.1'}"
     
     // For future native compilation support
     // implementation 'org.graalvm.nativeimage:svm:23.0.0' // Future: GraalVM Native Image
 }
 
-// Kotlin compilation options
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
+// Kotlin compilation options - Updated for Java 21
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
     kotlinOptions {
-        jvmTarget = '17'
+        jvmTarget = '21'
         freeCompilerArgs += [
             '-Xjsr305=strict',
             '-opt-in=kotlin.ExperimentalStdlibApi'

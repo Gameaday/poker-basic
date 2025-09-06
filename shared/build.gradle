@@ -13,15 +13,15 @@ application {
     mainClass = 'com.pokermon.GameLauncher'
 }
 
-// Java compatibility
+// Java compatibility - Updated to Java 21
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
-// Kotlin configuration
+// Kotlin configuration - Updated to Java 21
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 // Dynamic version from root project
@@ -54,19 +54,19 @@ sourceSets {
     }
 }
 
-// Dependencies - Pure Kotlin-native stack with aligned JUnit 5
+// Dependencies - Pure Kotlin-native stack with aligned JUnit 5 - Updated versions
 dependencies {
-    // Kotlin standard library and coroutines
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:${findProperty('kotlin.version') ?: '1.9.22'}"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${findProperty('kotlinx.coroutines.version') ?: '1.7.3'}"
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0"
+    // Kotlin standard library and coroutines - Latest versions
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:${findProperty('kotlin.version') ?: '2.2.10'}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${findProperty('kotlinx.coroutines.version') ?: '1.10.1'}"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0"
     
-    // Testing with properly aligned JUnit 5 platform
-    testImplementation platform('org.junit:junit-bom:5.13.4')
+    // Testing with properly aligned JUnit 5 platform - Latest versions
+    testImplementation platform('org.junit:junit-bom:5.11.3')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testImplementation 'org.junit.platform:junit-platform-launcher'
-    testImplementation "org.jetbrains.kotlin:kotlin-test:${findProperty('kotlin.version') ?: '1.9.22'}"
-    testImplementation "org.jetbrains.kotlin:kotlin-test-junit5:${findProperty('kotlin.version') ?: '1.9.22'}"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:${findProperty('kotlin.version') ?: '2.2.10'}"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit5:${findProperty('kotlin.version') ?: '2.2.10'}"
 }
 
 // Enhanced test configuration
@@ -89,8 +89,8 @@ processResources {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
-// Fat JAR for standalone execution
-task fatJar(type: Jar) {
+// Fat JAR for standalone execution - Updated for Gradle 9 compatibility
+tasks.register('fatJar', Jar) {
     group = 'build'
     description = 'Creates executable JAR with all dependencies'
     
@@ -109,7 +109,7 @@ task fatJar(type: Jar) {
             'Main-Class': 'com.pokermon.GameLauncher',
             'Built-By': System.getProperty('user.name'),
             'Built-Date': new Date().toString(),
-            'Kotlin-Version': findProperty('kotlin.version') ?: '1.9.22'
+            'Kotlin-Version': findProperty('kotlin.version') ?: '2.2.10'
         )
     }
     
@@ -117,8 +117,8 @@ task fatJar(type: Jar) {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
-// Task to run console version
-task runConsole(type: JavaExec) {
+// Task to run console version - Updated for Gradle 9 compatibility
+tasks.register('runConsole', JavaExec) {
     group = 'application'
     description = 'Run Pokermon in console mode'
     classpath = sourceSets.main.runtimeClasspath
@@ -126,8 +126,8 @@ task runConsole(type: JavaExec) {
     args '--basic'
 }
 
-// Task for development builds with version info
-task developmentInfo {
+// Task for development builds with version info - Updated for Gradle 9 compatibility
+tasks.register('developmentInfo') {
     group = 'help'
     description = 'Display development information'
     
@@ -135,7 +135,7 @@ task developmentInfo {
         println "=== Pokermon Kotlin-Native Development Info ==="
         println "Project: ${project.name}"
         println "Version: ${project.version}"
-        println "Kotlin: ${findProperty('kotlin.version') ?: '1.9.22'}"
+        println "Kotlin: ${findProperty('kotlin.version') ?: '2.2.10'}"
         println "Main class: ${application.mainClass.get()}"
         println ""
         println "Available tasks:"
@@ -146,10 +146,10 @@ task developmentInfo {
     }
 }
 
-// Kotlin compilation options
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
+// Kotlin compilation options - Updated for Java 21 and Gradle 9
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
     kotlinOptions {
-        jvmTarget = '17'
+        jvmTarget = '21'
         freeCompilerArgs += [
             '-Xjsr305=strict',
             '-opt-in=kotlin.ExperimentalStdlibApi',

@@ -1,77 +1,110 @@
-// Pokermon Shared - Pure Kotlin-Native Core Module
-// Replaces Maven with Gradle for unified build system
+// Pokermon Shared - Pure Kotlin-Native Core Module with Multiplatform Support
+// Implements true native compilation for all platforms
 
 plugins {
-    id 'org.jetbrains.kotlin.jvm'
+    id 'org.jetbrains.kotlin.multiplatform'
     id 'org.jetbrains.kotlin.plugin.serialization'
-    id 'java-library'
-    id 'application'
 }
 
-// Application configuration
-application {
-    mainClass = 'com.pokermon.GameLauncher'
-}
-
-// Java compatibility - Updated to Java 21
-java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
-}
-
-// Kotlin configuration - Updated to Java 21
+// Kotlin Multiplatform configuration for native builds
 kotlin {
+    // Configure JVM toolchain at the extension level
     jvmToolchain(21)
+    
+    // JVM target for JAR compatibility and testing
+    jvm {
+        testRuns["test"].executionTask.configure {
+            useJUnitPlatform()
+        }
+    }
+    
+    // Native targets for true native compilation
+    linuxX64("nativeLinux") {
+        binaries {
+            executable {
+                entryPoint = 'com.pokermon.main'
+                baseName = 'pokermon-linux'
+            }
+        }
+    }
+    
+    macosX64("nativeMacOS") {
+        binaries {
+            executable {
+                entryPoint = 'com.pokermon.main'
+                baseName = 'pokermon-macos'
+            }
+        }
+    }
+    
+    macosArm64("nativeMacOSArm") {
+        binaries {
+            executable {
+                entryPoint = 'com.pokermon.main'
+                baseName = 'pokermon-macos-arm64'
+            }
+        }
+    }
+    
+    mingwX64("nativeWindows") {
+        binaries {
+            executable {
+                entryPoint = 'com.pokermon.main'
+                baseName = 'pokermon-windows'
+            }
+        }
+    }
+    
+    // Source sets for multiplatform
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${findProperty('kotlinx.coroutines.version') ?: '1.10.1'}"
+                implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0"
+            }
+        }
+        
+        commonTest {
+            dependencies {
+                implementation kotlin('test')
+            }
+        }
+        
+        jvmMain {
+            dependencies {
+                implementation "org.jetbrains.kotlin:kotlin-stdlib:${findProperty('kotlin.version') ?: '2.2.10'}"
+            }
+        }
+        
+        jvmTest {
+            dependencies {
+                implementation platform('org.junit:junit-bom:5.11.3')
+                implementation 'org.junit.jupiter:junit-jupiter'
+                implementation 'org.junit.platform:junit-platform-launcher'
+                implementation "org.jetbrains.kotlin:kotlin-test-junit5:${findProperty('kotlin.version') ?: '2.2.10'}"
+            }
+        }
+        
+        nativeLinuxMain {
+        }
+        
+        nativeMacOSMain {
+        }
+        
+        nativeMacOSArmMain {
+        }
+        
+        nativeWindowsMain {
+        }
+    }
 }
 
 // Dynamic version from root project
 version = rootProject.version
 group = rootProject.group
 
-// Source sets prioritizing Kotlin
-sourceSets {
-    main {
-        kotlin {
-            srcDirs 'src/main/kotlin'
-        }
-        java {
-            srcDirs 'src/main/java'
-        }
-        resources {
-            srcDirs 'src/main/resources'
-        }
-    }
-    test {
-        kotlin {
-            srcDirs 'src/test/kotlin'
-        }
-        java {
-            srcDirs 'src/test/java'
-        }
-        resources {
-            srcDirs 'src/test/resources'
-        }
-    }
-}
-
-// Dependencies - Pure Kotlin-native stack with aligned JUnit 5 - Updated versions
-dependencies {
-    // Kotlin standard library and coroutines - Latest versions
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:${findProperty('kotlin.version') ?: '2.2.10'}"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${findProperty('kotlinx.coroutines.version') ?: '1.10.1'}"
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0"
-    
-    // Testing with properly aligned JUnit 5 platform - Latest versions
-    testImplementation platform('org.junit:junit-bom:5.11.3')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    testImplementation 'org.junit.platform:junit-platform-launcher'
-    testImplementation "org.jetbrains.kotlin:kotlin-test:${findProperty('kotlin.version') ?: '2.2.10'}"
-    testImplementation "org.jetbrains.kotlin:kotlin-test-junit5:${findProperty('kotlin.version') ?: '2.2.10'}"
-}
-
-// Enhanced test configuration
-test {
-    useJUnitPlatform()
+// Enhanced JVM test configuration
+tasks.named('jvmTest') {
     maxParallelForks = Runtime.runtime.availableProcessors()
     
     // Test logging
@@ -84,22 +117,23 @@ test {
     systemProperty 'kotlin.test.junit5.displayMode', 'verbose'
 }
 
-// Handle duplicate resources
-processResources {
+// Handle duplicate resources for JVM target
+tasks.named('jvmProcessResources') {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
-// Fat JAR for standalone execution - Updated for Gradle 9 compatibility
+// JVM Fat JAR for standalone execution - Updated for multiplatform
 tasks.register('fatJar', Jar) {
     group = 'build'
     description = 'Creates executable JAR with all dependencies'
+    dependsOn 'jvmJar'
     
     archiveClassifier = 'fat'
-    from sourceSets.main.output
+    from kotlin.jvm().compilations.main.output
     
-    dependsOn configurations.runtimeClasspath
+    dependsOn configurations.jvmRuntimeClasspath
     from {
-        configurations.runtimeClasspath.findAll { it.name.endsWith('jar') }.collect { zipTree(it) }
+        configurations.jvmRuntimeClasspath.findAll { it.name.endsWith('jar') }.collect { zipTree(it) }
     }
     
     manifest {
@@ -117,11 +151,12 @@ tasks.register('fatJar', Jar) {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
-// Task to run console version - Updated for Gradle 9 compatibility
+// Task to run console version - Updated for multiplatform
 tasks.register('runConsole', JavaExec) {
     group = 'application'
     description = 'Run Pokermon in console mode'
-    classpath = sourceSets.main.runtimeClasspath
+    dependsOn 'jvmJar'
+    classpath = kotlin.jvm().compilations.main.runtimeDependencyFiles
     mainClass = 'com.pokermon.ConsoleMainKt'
     args '--basic'
 }

@@ -97,7 +97,7 @@ fi
 echo ""
 echo "🎯 Expected Build Outputs"
 echo "-------------------------"
-echo "📦 JAR Output: Poker-Basic/target/pokermon-1.0.0-fat.jar"
+echo "📦 JAR Output: shared/build/libs/shared-*-fat.jar"
 echo "📱 APK Output: android/build/outputs/apk/debug/android-debug.apk"
 
 echo ""

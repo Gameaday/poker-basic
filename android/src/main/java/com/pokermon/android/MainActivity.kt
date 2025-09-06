@@ -136,12 +136,6 @@ fun PokerGameNavigation(userProfileManager: UserProfileManager) {
                 onBack = { navController.popBackStack() }
             )
         }
-                },
-                onBackPressed = {
-                    navController.popBackStack()
-                }
-            )
-        }
         composable("gameplay/{gameMode}") { backStackEntry ->
             val gameModeString = backStackEntry.arguments?.getString("gameMode") ?: "CLASSIC"
             val gameMode = try {

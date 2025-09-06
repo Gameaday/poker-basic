@@ -128,6 +128,14 @@ object CardUtils {
 
     /**
      * Get full card name (e.g., "Ace of Spades").
+     * Safe version that handles zero values (empty card slots).
+     */
+    fun cardNameSafe(card: Int): String {
+        return if (card == 0) "Empty" else cardName(card)
+    }
+
+    /**
+     * Get full card name (e.g., "Ace of Spades").
      */
     fun cardName(card: Int): String {
         return "${rankName(card)} of ${suitName(card)}"

@@ -184,7 +184,7 @@ open class Player(
     private fun updateConvertedHands() {
         _hand?.let { hand ->
             // Use unified CardUtils for consistent card conversion
-            _convertedHand = hand.map { CardUtils.cardName(it) }.toTypedArray()
+            _convertedHand = hand.map { CardUtils.cardNameSafe(it) }.toTypedArray()
 
             // Convert hand multiples if available
             _handMultiples?.let { multiples ->
@@ -197,7 +197,7 @@ open class Player(
      * Kotlin-native extension to get hand as card names.
      */
     fun getHandAsCardNames(): List<String> {
-        return _hand?.map { CardUtils.cardName(it) } ?: emptyList()
+        return _hand?.map { CardUtils.cardNameSafe(it) }?.filter { it != "Empty" } ?: emptyList()
     }
 
     /**
@@ -247,7 +247,11 @@ open class Player(
         // Deal initial hand
         val newHand = IntArray(handSize)
         for (i in 0 until handSize) {
-            newHand[i] = deck[i] // Simple dealing from deck
+            if (i < deck.size) {
+                newHand[i] = deck[i] // Simple dealing from deck
+            } else {
+                newHand[i] = 0 // Empty card if deck is too small
+            }
         }
         hand = newHand
     }
@@ -345,7 +349,7 @@ open class Player(
     fun convertHand() {
         _hand?.let { hand ->
             _convertedHand = hand.map { cardInt ->
-                if (cardInt != 0) CardUtils.cardName(cardInt) else "Empty"
+                CardUtils.cardNameSafe(cardInt)
             }.toTypedArray()
         }
     }

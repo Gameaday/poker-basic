@@ -385,7 +385,7 @@ class GameLogicBridge {
                 if (handInts.isNotEmpty()) {
                     playerHand =
                         handInts.map { cardInt ->
-                            if (cardInt != 0) CardUtils.cardName(cardInt) else "Empty"
+                            CardUtils.cardNameSafe(cardInt)
                         }.filter { it != "Empty" }
                 } else {
                     playerHand = emptyList()

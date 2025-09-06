@@ -167,6 +167,7 @@ jobs:
           ${{ runner.os }}-gradle-
     
     - name: Build Native Executable for ${{ matrix.platform }}
+      shell: bash
       run: |
         echo "=== Building Native Executable for ${{ matrix.platform }} ==="
         ./gradlew :desktop:package${{ matrix.platform }} --no-daemon --info || {
@@ -179,6 +180,7 @@ jobs:
     
     - name: Determine artifact retention  
       id: retention
+      shell: bash
       run: |
         if [ "${{ github.event_name }}" = "pull_request" ]; then
           PR_NUMBER="${{ github.event.number }}"
@@ -248,6 +250,7 @@ jobs:
     
     - name: Determine artifact retention
       id: retention
+      shell: bash
       run: |
         if [ "${{ github.event_name }}" = "pull_request" ]; then
           PR_NUMBER="${{ github.event.number }}"
@@ -408,6 +411,7 @@ jobs:
     
     - name: Determine artifact retention
       id: retention
+      shell: bash
       run: |
         if [ "${{ github.event_name }}" = "pull_request" ]; then
           PR_NUMBER="${{ github.event.number }}"

@@ -86,7 +86,7 @@ class GameLogicBridgeTest {
         bridge.initializeGame("TestPlayer", 4, 1000)
         val result = bridge.exchangeCards(listOf(0, 1, 2))
 
-        assertTrue(result.success, "Card exchange should be successful. Actual message: ${result.message}")
+        assertTrue(result.success, "Card exchange should be successful. Error: ${result.message}")
         assertTrue(result.message.contains("3"), "Result should mention number of cards exchanged")
     }
 

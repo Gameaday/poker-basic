@@ -318,6 +318,11 @@ open class Player(
      */
     fun performAllChecks() {
         _hand?.let { hand ->
+            // Skip evaluation if hand contains zeros (incomplete hand during card exchange)
+            if (hand.any { it == 0 }) {
+                return
+            }
+            
             // Use Main.java methods for now during migration
             try {
                 // Convert hand using unified CardUtils
@@ -339,7 +344,9 @@ open class Player(
      */
     fun convertHand() {
         _hand?.let { hand ->
-            _convertedHand = hand.map { CardUtils.cardName(it) }.toTypedArray()
+            _convertedHand = hand.map { cardInt ->
+                if (cardInt != 0) CardUtils.cardName(cardInt) else "Empty"
+            }.toTypedArray()
         }
     }
 

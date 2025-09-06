@@ -35,13 +35,13 @@ echo ""
 echo "📁 Build System Structure Tests"
 echo "-------------------------------"
 
-# Maven configuration tests
-test_item "Maven POM exists" "[ -f Poker-Basic/pom.xml ]"
-test_item "Maven has jpackage plugin" "grep -q 'jpackage-maven-plugin' Poker-Basic/pom.xml"
-test_item "Maven has shade plugin" "grep -q 'maven-shade-plugin' Poker-Basic/pom.xml"
-test_item "Maven has Windows profile" "grep -q 'windows-exe' Poker-Basic/pom.xml"
-test_item "Maven has Linux profile" "grep -q 'linux-exe' Poker-Basic/pom.xml"
-test_item "Maven has macOS profile" "grep -q 'macos-exe' Poker-Basic/pom.xml"
+# Gradle configuration tests
+test_item "Shared module build exists" "[ -f shared/build.gradle ]"
+test_item "Gradle has application plugin" "grep -q 'application' shared/build.gradle"
+test_item "Gradle has fat JAR task" "grep -q 'fatJar' shared/build.gradle"
+test_item "Desktop module exists" "[ -f desktop/build.gradle ]"
+test_item "Desktop has native packaging" "grep -q 'packageNative' desktop/build.gradle"
+test_item "Gradle has Kotlin JVM plugin" "grep -q 'kotlin.jvm' shared/build.gradle"
 
 # Gradle configuration tests
 test_item "Root Gradle build exists" "[ -f build.gradle ]"
@@ -51,13 +51,13 @@ test_item "Gradle wrapper exists" "[ -f gradlew ]"
 
 # CI/CD configuration tests
 test_item "GitHub Actions workflow exists" "[ -f .github/workflows/ci.yml ]"
-test_item "CI has Windows build job" "grep -q 'windows-native:' .github/workflows/ci.yml"
-test_item "CI has Linux build job" "grep -q 'linux-native:' .github/workflows/ci.yml"
-test_item "CI has macOS build job" "grep -q 'macos-native:' .github/workflows/ci.yml"
+test_item "CI has native builds job" "grep -q 'native-builds:' .github/workflows/ci.yml"
+test_item "CI has multiple platforms" "grep -q 'matrix:' .github/workflows/ci.yml && grep -q 'windows-latest' .github/workflows/ci.yml"
+test_item "CI has platform strategy" "grep -q 'ubuntu-latest' .github/workflows/ci.yml && grep -q 'macos-latest' .github/workflows/ci.yml"
 test_item "CI has Android build job" "grep -q 'android-build:' .github/workflows/ci.yml"
 
 echo ""
-echo "🔧 Java & Maven Environment Tests"
+echo "🔧 Java & Gradle Environment Tests"
 echo "---------------------------------"
 
 # Check Java version
@@ -75,13 +75,13 @@ else
     TESTS_TOTAL=$((TESTS_TOTAL + 1))
 fi
 
-# Check Maven
-if command -v mvn >/dev/null 2>&1; then
-    MAVEN_VERSION=$(mvn -version 2>/dev/null | head -n 1)
-    echo -e "✅ ${GREEN}PASS${NC}: Maven detected - $MAVEN_VERSION"
+# Check Gradle
+if command -v ./gradlew >/dev/null 2>&1; then
+    GRADLE_VERSION=$(./gradlew --version 2>/dev/null | grep Gradle | head -n 1)
+    echo -e "✅ ${GREEN}PASS${NC}: Gradle detected - $GRADLE_VERSION"
     TESTS_PASSED=$((TESTS_PASSED + 1))
 else
-    echo -e "❌ ${RED}FAIL${NC}: Maven not found"
+    echo -e "❌ ${RED}FAIL${NC}: Gradle wrapper not found"
 fi
 TESTS_TOTAL=$((TESTS_TOTAL + 1))
 
@@ -99,14 +99,12 @@ echo ""
 echo "📦 Build Configuration Analysis"
 echo "------------------------------"
 
-# Check Maven profiles
-if [ -f Poker-Basic/pom.xml ]; then
-    MAVEN_PROFILES=$(grep -o '<id>[^<]*</id>' Poker-Basic/pom.xml | sed 's/<[^>]*>//g' | tr '\n' ', ')
-    echo "📋 Maven Profiles: $MAVEN_PROFILES"
-    
-    # Check version consistency
-    MAVEN_VERSION=$(grep -o '<version>[^<]*</version>' Poker-Basic/pom.xml | head -n 1 | sed 's/<[^>]*>//g')
-    echo "📋 Maven Version: $MAVEN_VERSION"
+# Check Gradle configuration
+if [ -f shared/build.gradle ]; then
+    GRADLE_VERSION_CONFIGURED=$(grep -o 'kotlin_version.*=' build.gradle | sed 's/.*= *//' | tr -d "'" | head -n 1)
+    SHARED_VERSION=$(grep "version.*=" shared/build.gradle | head -n 1 | sed 's/.*= *//' | tr -d "'" || echo "dynamic")
+    echo "📋 Gradle Kotlin Version: $GRADLE_VERSION_CONFIGURED"
+    echo "📋 Shared Module Version: $SHARED_VERSION"
 fi
 
 # Check Gradle configuration
@@ -123,22 +121,21 @@ echo ""
 echo "🚀 Platform Build Tests"
 echo "-----------------------"
 
-# Test Maven JAR build
-echo "Testing Maven JAR build..."
-if cd Poker-Basic && mvn clean compile -q >/dev/null 2>&1; then
-    echo -e "✅ ${GREEN}PASS${NC}: Maven compilation successful"
+# Test Gradle JAR build
+echo "Testing Gradle JAR build..."
+if ./gradlew :shared:compileKotlin --no-daemon -q >/dev/null 2>&1; then
+    echo -e "✅ ${GREEN}PASS${NC}: Gradle compilation successful"
     TESTS_PASSED=$((TESTS_PASSED + 1))
 else
-    echo -e "❌ ${RED}FAIL${NC}: Maven compilation failed"
+    echo -e "❌ ${RED}FAIL${NC}: Gradle compilation failed"
 fi
 TESTS_TOTAL=$((TESTS_TOTAL + 1))
-cd ..
 
 # Test fat JAR creation
 echo "Testing fat JAR creation..."
-if cd Poker-Basic && mvn package -DskipTests -q >/dev/null 2>&1; then
-    if [ -f target/pokermon-*-fat.jar ]; then
-        FAT_JAR_SIZE=$(ls -lh target/pokermon-*-fat.jar | awk '{print $5}')
+if ./gradlew :shared:fatJar --no-daemon -q >/dev/null 2>&1; then
+    if [ -f shared/build/libs/shared-*-fat.jar ]; then
+        FAT_JAR_SIZE=$(ls -lh shared/build/libs/shared-*-fat.jar | awk '{print $5}')
         echo -e "✅ ${GREEN}PASS${NC}: Fat JAR created successfully ($FAT_JAR_SIZE)"
         TESTS_PASSED=$((TESTS_PASSED + 1))
     else
@@ -148,37 +145,34 @@ else
     echo -e "❌ ${RED}FAIL${NC}: Fat JAR build failed"
 fi
 TESTS_TOTAL=$((TESTS_TOTAL + 1))
-cd ..
 
-# Test platform-specific profiles (configuration only, not actual build)
-echo "Testing platform profile configurations..."
+# Test platform-specific modules (configuration only, not actual build)
+echo "Testing platform module configurations..."
 
-if cd Poker-Basic && mvn help:all-profiles -q >/dev/null 2>&1; then
-    echo -e "✅ ${GREEN}PASS${NC}: Maven profiles are valid"
+if ./gradlew projects --no-daemon -q >/dev/null 2>&1; then
+    echo -e "✅ ${GREEN}PASS${NC}: Gradle modules are valid"
     TESTS_PASSED=$((TESTS_PASSED + 1))
 else
-    echo -e "❌ ${RED}FAIL${NC}: Maven profile validation failed"
+    echo -e "❌ ${RED}FAIL${NC}: Gradle module validation failed"
 fi
 TESTS_TOTAL=$((TESTS_TOTAL + 1))
-cd ..
 
 echo ""
 echo "🔍 Source Code Organization Tests"
 echo "--------------------------------"
 
 # Check shared source code structure
-test_item "GameLauncher main class exists" "[ -f Poker-Basic/src/main/java/com/pokermon/GameLauncher.java ]"
-test_item "Console main class exists" "[ -f Poker-Basic/src/main/java/com/pokermon/ConsoleMain.java ]"
-test_item "Main class exists" "[ -f Poker-Basic/src/main/java/com/pokermon/Main.java ]"
-test_item "Game logic classes exist" "[ -f Poker-Basic/src/main/java/com/pokermon/Game.java ]"
+test_item "GameLauncher main class exists" "[ -f shared/src/main/kotlin/com/pokermon/GameLauncher.kt ] || [ -f shared/src/main/java/com/pokermon/GameLauncher.java ]"
+test_item "Console main class exists" "[ -f shared/src/main/kotlin/com/pokermon/console/ConsoleMain.kt ] || [ -f shared/src/main/java/com/pokermon/ConsoleMain.java ]"
+test_item "Game logic classes exist" "[ -f shared/src/main/kotlin/com/pokermon/Game.kt ] || [ -f shared/src/main/java/com/pokermon/Game.java ]"
 
 # Check Android-specific source
 test_item "Android MainActivity exists" "[ -f android/src/main/java/com/pokermon/android/MainActivity.kt ]"
 test_item "Android manifest exists" "[ -f android/src/main/AndroidManifest.xml ]"
 
 # Check test coverage
-test_item "Maven tests exist" "[ -d Poker-Basic/src/test/java ]"
-test_item "Test files present" "find Poker-Basic/src/test/java -name '*Test.java' | grep -q Test"
+test_item "Gradle tests exist" "[ -d shared/src/test/kotlin ] || [ -d shared/src/test/java ]"
+test_item "Test files present" "find shared/src/test -name '*Test.kt' -o -name '*Test.java' | grep -q Test"
 
 echo ""
 echo "🌐 Network Connectivity Test"
@@ -213,11 +207,11 @@ fi
 echo ""
 echo "🎯 Expected Build Outputs"
 echo "-------------------------"
-echo "📦 Cross-Platform JAR:    Poker-Basic/target/pokermon-0.1b.jar"
-echo "📦 Fat JAR (self-contained): Poker-Basic/target/pokermon-0.1b-fat.jar"
-echo "🪟 Windows EXE:           Poker-Basic/target/jpackage/PokerGame-0.1b.exe"
-echo "🐧 Linux DEB:             Poker-Basic/target/jpackage/pokergame_0.1b-1_amd64.deb"
-echo "🍎 macOS DMG:             Poker-Basic/target/jpackage/PokerGame-0.1b.dmg"
+echo "📦 Cross-Platform JAR:    shared/build/libs/shared-*-fat.jar"
+echo "📦 Executable JAR:        shared/build/libs/shared-*.jar"
+echo "🪟 Windows EXE:           desktop/build/distributions/*-windows.exe"
+echo "🐧 Linux DEB:             desktop/build/distributions/*-linux.deb"
+echo "🍎 macOS DMG:             desktop/build/distributions/*-macos.dmg"
 echo "📱 Android APK:           android/build/outputs/apk/debug/android-debug.apk"
 
 echo ""

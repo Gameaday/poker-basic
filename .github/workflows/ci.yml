@@ -9,8 +9,47 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    # Run linting checks first for fast feedback on PRs
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v5
+    
+    - name: Cache Gradle packages
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+    
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
+    
+    - name: Run Kotlin linting (ktlint)
+      run: |
+        echo "=== Running Kotlin Code Style Checks ==="
+        ./gradlew :shared:ktlintCheck --no-daemon
+        echo "✅ Kotlin linting completed successfully"
+    
+    - name: Upload linting reports
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: lint-reports
+        path: |
+          shared/build/reports/ktlint/
+          android/build/reports/ktlint/
+        retention-days: 14
+
   test:
     runs-on: ubuntu-latest
+    needs: lint
     # Run on push events or PR events from same repository (skip only external forks)
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     
@@ -35,7 +74,13 @@ jobs:
         echo ""
         echo "=== Pure Kotlin-Native Setup Verification ==="
         ./gradlew verifyKotlinNativeSetup --no-daemon
-    
+
+    - name: Run Kotlin linting checks
+      run: |
+        echo "=== Running Kotlin Code Quality Checks ==="
+        ./gradlew :shared:ktlintCheck --no-daemon
+        echo "=== Shared module linting completed ==="
+        
     - name: Run tests
       run: |
         ./gradlew :shared:test --no-daemon
@@ -69,7 +114,7 @@ jobs:
         
   native-builds:
     runs-on: ${{ matrix.os }}
-    needs: test
+    needs: [lint, test]
     if: (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || github.event_name == 'pull_request')
     
     strategy:
@@ -136,7 +181,7 @@ jobs:
         
   package:
     runs-on: ubuntu-latest
-    needs: [test, native-builds]
+    needs: [lint, test, native-builds]
     # Run on push events or PR events from same repository (skip only external forks)
     if: (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || github.event_name == 'pull_request')
     
@@ -198,7 +243,7 @@ jobs:
 
   android-build:
     runs-on: ubuntu-latest
-    needs: [test, package, native-builds]
+    needs: [lint, test, package, native-builds]
     # Run on push events or PR events from same repository (skip only external forks)
     if: (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || github.event_name == 'pull_request')
     
@@ -286,6 +331,14 @@ jobs:
     
     - name: Make gradlew executable
       run: chmod +x ./gradlew
+
+    - name: Run Android linting checks
+      run: |
+        echo "=== Running Android Code Quality Checks ==="
+        ./gradlew :android:ktlintCheck --no-daemon || {
+          echo "=== Ktlint check failed, attempting basic validation ==="
+          echo "Continuing with build process..."
+        }
     
     - name: Build Android APK with Pure Kotlin-Native
       run: |

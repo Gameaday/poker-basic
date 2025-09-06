@@ -1,9 +1,9 @@
 package com.pokermon.bridge
 
 import com.pokermon.*
+import com.pokermon.database.CardPackManager
 import com.pokermon.modern.CardUtils
 import com.pokermon.players.Player
-import com.pokermon.database.CardPackManager
 
 /**
  * Data class to track AI player actions for UI feedback.
@@ -12,14 +12,14 @@ data class AIActionResult(
     val playerName: String,
     val action: String,
     val amount: Int = 0,
-    val message: String
+    val message: String,
 )
 
 /**
  * Bridge class that connects the Modern UI with the actual game engine.
  * Provides a clean interface for UI operations while maintaining separation of concerns.
  * Uses public interfaces to avoid package-private access issues.
- * 
+ *
  * @author Carl Nelson (@Gameaday)
  * @version 1.0.0
  */
@@ -34,43 +34,44 @@ class GameLogicBridge {
     private var playerChips = 1000
     private var playerHand = listOf<String>()
     private var selectedCardPack = "TET" // Default to TET for backward compatibility
-    
+
     // Game state for save/load functionality
     private var gameStateSaved = false
     private var savedGameState: SavedGameState? = null
-    
+
     // Flag to enable automatic AI processing (disabled by default for compatibility)
     private var enableAutoAI = false
-    
+
     // Track if cards have been exchanged in the current round (limit to once per round)
     private var cardsExchangedThisRound = false
-    
+
     // Track last AI action for UI feedback
     private var lastAIAction: AIActionResult? = null
-    
+
     /**
      * Initialize a new game with the specified parameters.
      */
     fun initializeGame(
         playerName: String,
         playerCount: Int,
-        startingChips: Int
+        startingChips: Int,
     ): Boolean {
         return try {
             this.playerName = playerName
             this.currentPot = 0
             this.currentBet = 0
             this.playerChips = startingChips
-            
+
             // Create game configuration
             val gameConfig = Game(5, playerCount, startingChips, 2, gameMode)
             this.gameEngine = GameEngine(gameConfig)
-            
+
             // Create player names array
-            val playerNames = Array(playerCount) { i ->
-                if (i == 0) playerName else "CPU ${i}"
-            }
-            
+            val playerNames =
+                Array(playerCount) { i ->
+                    if (i == 0) playerName else "CPU $i"
+                }
+
             // Initialize the game and deal first hand
             val success = gameEngine!!.initializeGame(playerNames)
             if (success) {
@@ -84,7 +85,7 @@ class GameLogicBridge {
             false
         }
     }
-    
+
     /**
      * Check if the game should advance to the next phase after a player action.
      * This handles automatic game flow progression.
@@ -96,10 +97,10 @@ class GameLogicBridge {
                 if (shouldProcessAIOpponents(engine)) {
                     processAIOpponents()
                 }
-                
+
                 // Check if current betting round is complete or should advance
                 val shouldAdvance = engine.isRoundComplete() || shouldForceAdvancePhase(engine)
-                
+
                 if (shouldAdvance) {
                     val currentPhase = engine.currentPhase
                     when (currentPhase) {
@@ -123,7 +124,7 @@ class GameLogicBridge {
             }
         }
     }
-    
+
     /**
      * Determine if we should automatically process AI opponents.
      * Skip AI processing during tests or when only one player exists.
@@ -133,13 +134,13 @@ class GameLogicBridge {
         if (players == null || players.size <= 1) {
             return false
         }
-        
+
         // Only enable AI processing when explicitly requested (e.g., from Android UI)
         // To maintain compatibility with existing tests and console mode, we need
         // an explicit flag to enable automatic AI processing
         return enableAutoAI && hasMultipleActivePlayers(engine)
     }
-    
+
     /**
      * Check if there are multiple active players in the game.
      */
@@ -148,21 +149,21 @@ class GameLogicBridge {
         val activePlayers = players.count { !it.fold && it.chips > 0 }
         return activePlayers > 1
     }
-    
+
     /**
      * Get the last AI action for UI feedback.
      */
     fun getLastAIAction(): AIActionResult? {
         return lastAIAction
     }
-    
+
     /**
      * Clear the last AI action (called after UI has processed it).
      */
     fun clearLastAIAction() {
         lastAIAction = null
     }
-    
+
     /**
      * Enable or disable automatic AI processing.
      * This should be enabled for Android UI but disabled for tests and console mode.
@@ -170,10 +171,10 @@ class GameLogicBridge {
     fun setAutoAIEnabled(enabled: Boolean) {
         this.enableAutoAI = enabled
     }
-    
+
     /**
      * Process AI opponent turns automatically after a human player action.
-     * This ensures the game flows properly through all AI players before 
+     * This ensures the game flows properly through all AI players before
      * returning control to the human player.
      */
     private fun processAIOpponents() {
@@ -181,36 +182,36 @@ class GameLogicBridge {
             try {
                 val players = engine.players
                 if (players == null || players.isEmpty()) return
-                
+
                 var safetyCounter = 0
                 val maxIterations = players.size * 2 // Prevent infinite loops
-                
-                // Keep processing until we either reach the human player (index 0) 
+
+                // Keep processing until we either reach the human player (index 0)
                 // or determine the round is complete
                 while (safetyCounter < maxIterations) {
                     val currentPlayerIndex = engine.currentPlayerIndex
-                    
+
                     // If we're back to human player (index 0) or invalid index, stop
                     if (currentPlayerIndex <= 0 || currentPlayerIndex >= players.size) {
                         break
                     }
-                    
+
                     val currentPlayer = players[currentPlayerIndex]
-                    
+
                     // If current player has folded or is out of chips, advance to next
                     if (currentPlayer.fold || currentPlayer.chips <= 0) {
                         engine.nextPlayer()
                         safetyCounter++
                         continue
                     }
-                    
+
                     // Process AI player action based on simple logic
                     processAIPlayerAction(engine, currentPlayer, currentPlayerIndex)
-                    
+
                     // Move to next player
                     engine.nextPlayer()
                     safetyCounter++
-                    
+
                     // Check if round is complete after this AI action
                     if (engine.isRoundComplete()) {
                         break
@@ -221,49 +222,56 @@ class GameLogicBridge {
             }
         }
     }
-    
+
     /**
      * Process a single AI player's action using simple poker AI logic.
      */
-    private fun processAIPlayerAction(engine: com.pokermon.GameEngine, player: Player, playerIndex: Int) {
+    private fun processAIPlayerAction(
+        engine: com.pokermon.GameEngine,
+        player: Player,
+        playerIndex: Int,
+    ) {
         try {
             val highBet: Int = engine.getCurrentHighBet()
             val playerBet: Int = player.bet
             val playerChips: Int = player.chips
             val callAmount: Int = (highBet - playerBet).coerceAtMost(playerChips)
             val playerName = player.name ?: "AI $playerIndex"
-            
+
             // Simple AI decision making based on hand strength and chips
             val handValue = player.handValue
             val chipRatio = if (playerChips > 0) callAmount.toDouble() / playerChips else 1.0
-            
+
             when {
                 // Fold if hand is very weak and call amount is significant
                 handValue < 3 && chipRatio > 0.3 -> {
                     player.setFold(true)
-                    lastAIAction = AIActionResult(
-                        playerName = playerName,
-                        action = "Fold",
-                        message = "$playerName folded"
-                    )
+                    lastAIAction =
+                        AIActionResult(
+                            playerName = playerName,
+                            action = "Fold",
+                            message = "$playerName folded",
+                        )
                 }
                 // Call if call amount is reasonable
                 callAmount <= playerChips && chipRatio <= 0.5 -> {
                     if (callAmount > 0) {
                         player.placeBet(playerBet + callAmount)
                         engine.addToPot(callAmount)
-                        lastAIAction = AIActionResult(
-                            playerName = playerName,
-                            action = "Call",
-                            amount = callAmount,
-                            message = "$playerName called for $callAmount chips"
-                        )
+                        lastAIAction =
+                            AIActionResult(
+                                playerName = playerName,
+                                action = "Call",
+                                amount = callAmount,
+                                message = "$playerName called for $callAmount chips",
+                            )
                     } else {
-                        lastAIAction = AIActionResult(
-                            playerName = playerName,
-                            action = "Check",
-                            message = "$playerName checked"
-                        )
+                        lastAIAction =
+                            AIActionResult(
+                                playerName = playerName,
+                                action = "Check",
+                                message = "$playerName checked",
+                            )
                     }
                 }
                 // Raise if hand is strong and has chips
@@ -271,39 +279,43 @@ class GameLogicBridge {
                     val raiseAmount = callAmount + 20.coerceAtMost(playerChips / 4)
                     player.placeBet(playerBet + raiseAmount)
                     engine.addToPot(raiseAmount)
-                    lastAIAction = AIActionResult(
-                        playerName = playerName,
-                        action = "Raise",
-                        amount = raiseAmount,
-                        message = "$playerName raised by $raiseAmount chips"
-                    )
+                    lastAIAction =
+                        AIActionResult(
+                            playerName = playerName,
+                            action = "Raise",
+                            amount = raiseAmount,
+                            message = "$playerName raised by $raiseAmount chips",
+                        )
                 }
                 // Default: call if possible, otherwise fold
                 callAmount <= playerChips -> {
                     if (callAmount > 0) {
                         player.placeBet(playerBet + callAmount)
                         engine.addToPot(callAmount)
-                        lastAIAction = AIActionResult(
-                            playerName = playerName,
-                            action = "Call",
-                            amount = callAmount,
-                            message = "$playerName called for $callAmount chips"
-                        )
+                        lastAIAction =
+                            AIActionResult(
+                                playerName = playerName,
+                                action = "Call",
+                                amount = callAmount,
+                                message = "$playerName called for $callAmount chips",
+                            )
                     } else {
-                        lastAIAction = AIActionResult(
-                            playerName = playerName,
-                            action = "Check",
-                            message = "$playerName checked"
-                        )
+                        lastAIAction =
+                            AIActionResult(
+                                playerName = playerName,
+                                action = "Check",
+                                message = "$playerName checked",
+                            )
                     }
                 }
                 else -> {
                     player.setFold(true)
-                    lastAIAction = AIActionResult(
-                        playerName = playerName,
-                        action = "Fold",
-                        message = "$playerName folded"
-                    )
+                    lastAIAction =
+                        AIActionResult(
+                            playerName = playerName,
+                            action = "Fold",
+                            message = "$playerName folded",
+                        )
                 }
             }
         } catch (e: Exception) {
@@ -311,15 +323,16 @@ class GameLogicBridge {
             println("Warning: AI player $playerIndex decision error: ${e.message}")
             if (player.chips <= 0) {
                 player.setFold(true)
-                lastAIAction = AIActionResult(
-                    playerName = "AI $playerIndex",
-                    action = "Fold",
-                    message = "AI $playerIndex folded (error)"
-                )
+                lastAIAction =
+                    AIActionResult(
+                        playerName = "AI $playerIndex",
+                        action = "Fold",
+                        message = "AI $playerIndex folded (error)",
+                    )
             }
         }
     }
-    
+
     /**
      * Helper method to determine if we should force phase advancement
      * even if isRoundComplete() returns false.
@@ -328,31 +341,34 @@ class GameLogicBridge {
         return try {
             val players = engine.players
             val activePlayers = players?.filter { !it.fold && it.chips > 0 } ?: emptyList()
-            
+
             // If only one active player remains, advance phase
             if (activePlayers.size <= 1) {
                 return true
             }
-            
+
             // Check if all active players have acted and bets are equal
             val currentPlayerIndex = engine.currentPlayerIndex
-            val currentPlayer = if (currentPlayerIndex >= 0 && currentPlayerIndex < (players?.size ?: 0)) {
-                players?.get(currentPlayerIndex)
-            } else null
-            
+            val currentPlayer =
+                if (currentPlayerIndex >= 0 && currentPlayerIndex < (players?.size ?: 0)) {
+                    players?.get(currentPlayerIndex)
+                } else {
+                    null
+                }
+
             // If current player has folded or has no chips, we should advance
             currentPlayer?.let { player ->
                 if (player.fold || player.chips <= 0) {
                     return true
                 }
             }
-            
+
             false
         } catch (e: Exception) {
             false
         }
     }
-    
+
     /**
      * Updates local player data from the game engine.
      */
@@ -363,20 +379,21 @@ class GameLogicBridge {
             if (players != null && players.isNotEmpty()) {
                 val player = players[0] // Human player is always at index 0
                 playerChips = player.chips
-                
+
                 // Convert player's hand to poker notation format
                 val handInts = player.hand
                 if (handInts.isNotEmpty()) {
-                    playerHand = handInts.map { cardInt ->
-                        if (cardInt != 0) CardUtils.cardName(cardInt) else "Empty"
-                    }.filter { it != "Empty" }
+                    playerHand =
+                        handInts.map { cardInt ->
+                            if (cardInt != 0) CardUtils.cardName(cardInt) else "Empty"
+                        }.filter { it != "Empty" }
                 } else {
                     playerHand = emptyList()
                 }
             }
         }
     }
-    
+
     /**
      * Get the resource path for a card image based on card integer value.
      * Maps to the actual card art files in the repository resources.
@@ -387,30 +404,30 @@ class GameLogicBridge {
             // Return card back path or null for text symbols
             return CardPackManager.getCardBackImagePath(selectedCardPack) ?: "TEXT_BACK"
         }
-        
+
         // Use unified CardUtils for DRY compliance
         val rankName = CardUtils.rankName(cardInt)
         val suitName = CardUtils.suitName(cardInt)
-        
+
         // Use CardPackManager to get the correct path
-        return CardPackManager.getCardImagePath(selectedCardPack, rankName, suitName) 
-            ?: "TEXT_${rankName}_${suitName}"
+        return CardPackManager.getCardImagePath(selectedCardPack, rankName, suitName)
+            ?: "TEXT_${rankName}_$suitName"
     }
-    
+
     /**
      * Set the selected card pack for image display.
      */
     fun setSelectedCardPack(cardPack: String) {
         selectedCardPack = cardPack
     }
-    
+
     /**
      * Get the currently selected card pack.
      */
     fun getSelectedCardPack(): String {
         return selectedCardPack
     }
-    
+
     /**
      * Get card image paths for the current player's hand.
      */
@@ -427,7 +444,7 @@ class GameLogicBridge {
             }
         } ?: emptyList()
     }
-    
+
     /**
      * Get the current player's hand as displayable card strings.
      */
@@ -435,21 +452,21 @@ class GameLogicBridge {
         updatePlayerData()
         return playerHand
     }
-    
+
     /**
      * Get current pot value.
      */
     fun getCurrentPot(): Int {
         return currentPot
     }
-    
+
     /**
      * Get player's current chip count.
      */
     fun getPlayerChips(): Int {
         return playerChips
     }
-    
+
     /**
      * Get information about all players for display.
      */
@@ -463,7 +480,7 @@ class GameLogicBridge {
                         chips = player.chips,
                         isFolded = player.fold,
                         isCurrentPlayer = index == 0, // Human player is always at index 0
-                        handValue = player.handValue
+                        handValue = player.handValue,
                     )
                 } ?: emptyList()
             } ?: emptyList()
@@ -471,21 +488,21 @@ class GameLogicBridge {
             emptyList()
         }
     }
-    
+
     /**
      * Set the game mode for the next game.
      */
     fun setGameMode(mode: GameMode) {
         this.gameMode = mode
     }
-    
+
     /**
      * Get the current game mode.
      */
     fun getGameMode(): GameMode {
         return gameMode
     }
-    
+
     /**
      * Toggle card selection for exchange.
      */
@@ -498,21 +515,21 @@ class GameLogicBridge {
             true
         }
     }
-    
+
     /**
      * Get currently selected cards.
      */
     fun getSelectedCards(): Set<Int> {
         return selectedCards.toSet()
     }
-    
+
     /**
      * Clear card selection.
      */
     fun clearCardSelection() {
         selectedCards.clear()
     }
-    
+
     /**
      * Perform a call action.
      */
@@ -520,17 +537,17 @@ class GameLogicBridge {
         if (!isGameInitialized) {
             return GameActionResult(false, "Game not initialized")
         }
-        
+
         return try {
             gameEngine?.let { engine ->
                 val players = engine.players
                 if (players != null && players.isNotEmpty()) {
                     val player = players[0] // Human player
-                    
+
                     // For testing purposes, use a standard call amount if no high bet exists
                     val highBet = engine.getCurrentHighBet()
                     val callAmount = if (highBet <= 0) 50 else (highBet - player.bet).coerceAtMost(player.chips)
-                    
+
                     if (callAmount <= 0) {
                         // Check if we should advance phase after this action
                         checkAndAdvanceGamePhase()
@@ -555,7 +572,7 @@ class GameLogicBridge {
             GameActionResult(false, "Error performing call: ${e.message}")
         }
     }
-    
+
     /**
      * Perform a raise action.
      */
@@ -563,13 +580,13 @@ class GameLogicBridge {
         if (!isGameInitialized) {
             return GameActionResult(false, "Game not initialized")
         }
-        
+
         return try {
             gameEngine?.let { engine ->
                 val players = engine.players
                 if (players != null && players.isNotEmpty()) {
                     val player = players[0] // Human player
-                    
+
                     if (amount > player.chips) {
                         GameActionResult(false, "Not enough chips to raise by $amount")
                     } else {
@@ -591,7 +608,7 @@ class GameLogicBridge {
             GameActionResult(false, "Error performing raise: ${e.message}")
         }
     }
-    
+
     /**
      * Perform a fold action.
      */
@@ -599,7 +616,7 @@ class GameLogicBridge {
         if (!isGameInitialized) {
             return GameActionResult(false, "Game not initialized")
         }
-        
+
         return try {
             gameEngine?.let { engine ->
                 val players = engine.players
@@ -620,7 +637,7 @@ class GameLogicBridge {
             GameActionResult(false, "Error folding: ${e.message}")
         }
     }
-    
+
     /**
      * Perform a check action.
      */
@@ -628,7 +645,7 @@ class GameLogicBridge {
         if (!isGameInitialized) {
             return GameActionResult(false, "Game not initialized")
         }
-        
+
         return try {
             gameEngine?.let { engine ->
                 // Advance to next player after action
@@ -642,7 +659,7 @@ class GameLogicBridge {
             GameActionResult(false, "Error checking: ${e.message}")
         }
     }
-    
+
     /**
      * Exchange selected cards with new ones from the deck.
      * Limited to once per round to prevent multiple exchanges.
@@ -651,20 +668,20 @@ class GameLogicBridge {
         if (!isGameInitialized) {
             return GameActionResult(false, "Game not initialized")
         }
-        
+
         if (cardsExchangedThisRound) {
             return GameActionResult(false, "Cards can only be exchanged once per round")
         }
-        
+
         return try {
             gameEngine?.let { engine ->
                 val cardIndicesArray = cardIndices.toIntArray()
                 engine.exchangeCards(0, cardIndicesArray) // 0 = human player index
                 cardsExchangedThisRound = true // Mark that cards have been exchanged
-                
+
                 // Complete card exchange and move to final betting phase
                 engine.completeCardExchange()
-                
+
                 updatePlayerData()
                 clearCardSelection()
                 GameActionResult(true, "Exchanged ${cardIndices.size} cards - ready for final betting")
@@ -673,7 +690,7 @@ class GameLogicBridge {
             GameActionResult(false, "Error exchanging cards: ${e.message}")
         }
     }
-    
+
     /**
      * Advance to the next round of the game.
      */
@@ -681,7 +698,7 @@ class GameLogicBridge {
         if (!isGameInitialized) {
             return GameActionResult(false, "Game not initialized")
         }
-        
+
         return try {
             gameEngine?.let { engine ->
                 engine.startNewRound()
@@ -693,28 +710,28 @@ class GameLogicBridge {
             GameActionResult(false, "Error advancing round: ${e.message}")
         }
     }
-    
+
     /**
      * Check if the current round is complete.
      */
     fun isRoundComplete(): Boolean {
         return gameEngine?.isRoundComplete() ?: false
     }
-    
+
     /**
      * Get the current round number.
      */
     fun getCurrentRound(): Int {
         return gameEngine?.getCurrentRound() ?: 0
     }
-    
+
     /**
      * Get the current player's turn index.
      */
     fun getCurrentPlayerIndex(): Int {
         return gameEngine?.getCurrentPlayerIndex() ?: 0
     }
-    
+
     /**
      * Determine and return the winner of the current hand.
      * Automatically advances to the next round after determining winner.
@@ -723,30 +740,34 @@ class GameLogicBridge {
         if (!isGameInitialized) {
             return GameActionResult(false, "Game not initialized")
         }
-        
+
         return try {
             gameEngine?.let { engine ->
                 val winners = engine.determineWinners()
                 if (winners.isNotEmpty()) {
                     engine.distributePot(winners)
                     val isHumanWinner = winners.contains(0) // Human player is at index 0
-                    
-                    val message = when {
-                        isHumanWinner && winners.size == 1 -> "🎉 You won the hand!"
-                        isHumanWinner && winners.size > 1 -> "🤝 You tied for the win!"
-                        else -> {
-                            // Get the winner name(s) for display
-                            val winnerNames = winners.map { index ->
-                                if (index > 0 && index < (engine.players?.size ?: 0)) {
-                                    engine.players?.get(index)?.name ?: "Player $index"
-                                } else "Unknown"
+
+                    val message =
+                        when {
+                            isHumanWinner && winners.size == 1 -> "🎉 You won the hand!"
+                            isHumanWinner && winners.size > 1 -> "🤝 You tied for the win!"
+                            else -> {
+                                // Get the winner name(s) for display
+                                val winnerNames =
+                                    winners.map { index ->
+                                        if (index > 0 && index < (engine.players?.size ?: 0)) {
+                                            engine.players?.get(index)?.name ?: "Player $index"
+                                        } else {
+                                            "Unknown"
+                                        }
+                                    }
+                                "🏆 Winner(s): ${winnerNames.joinToString(", ")}"
                             }
-                            "🏆 Winner(s): ${winnerNames.joinToString(", ")}"
                         }
-                    }
-                    
+
                     updatePlayerData()
-                    
+
                     // Check if we can continue the game
                     if (engine.canContinue()) {
                         // Game continues - prepare for next round
@@ -763,49 +784,49 @@ class GameLogicBridge {
             GameActionResult(false, "Error determining winner: ${e.message}")
         }
     }
-    
+
     /**
      * Get the current game phase.
      */
     fun getCurrentPhase(): GamePhase {
         return gameEngine?.getCurrentPhase() ?: GamePhase.INITIALIZATION
     }
-    
+
     /**
      * Get the current game phase display name.
      */
     fun getPhaseDisplayName(): String {
         return getCurrentPhase().displayName
     }
-    
+
     /**
      * Get the current game phase description.
      */
     fun getPhaseDescription(): String {
         return getCurrentPhase().description
     }
-    
+
     /**
      * Check if cards should be visible in the current phase.
      */
     fun shouldShowCards(): Boolean {
         return getCurrentPhase().shouldShowCards()
     }
-    
+
     /**
      * Check if betting actions are allowed in the current phase.
      */
     fun canBet(): Boolean {
         return getCurrentPhase().allowsBetting()
     }
-    
+
     /**
      * Check if cards can be exchanged in the current phase.
      */
     fun canExchangeCards(): Boolean {
         return getCurrentPhase().allowsCardExchange() && !cardsExchangedThisRound
     }
-    
+
     /**
      * Get information about card exchange status for UI display.
      */
@@ -816,28 +837,28 @@ class GameLogicBridge {
             else -> "Ready to exchange cards"
         }
     }
-    
+
     /**
      * Check if round progression is allowed in the current phase.
      */
     fun canProgressRound(): Boolean {
         return getCurrentPhase().allowsRoundProgression()
     }
-    
+
     /**
      * Check if the current phase requires player input.
      */
     fun needsPlayerInput(): Boolean {
         return getCurrentPhase().requiresPlayerInput()
     }
-    
+
     /**
      * Check if the game is in an active phase.
      */
     fun isActivePhase(): Boolean {
         return getCurrentPhase().isActivePhase()
     }
-    
+
     /**
      * Advance to the next game phase manually.
      */
@@ -856,7 +877,7 @@ class GameLogicBridge {
             GameActionResult(false, "Error advancing phase: ${e.message}")
         }
     }
-    
+
     /**
      * Complete card exchange phase and move to final betting.
      */
@@ -872,7 +893,7 @@ class GameLogicBridge {
             GameActionResult(false, "Error completing card exchange: ${e.message}")
         }
     }
-    
+
     /**
      * Get the underlying game engine for testing purposes.
      * This method should only be used in tests.
@@ -880,7 +901,7 @@ class GameLogicBridge {
     internal fun getGameEngine(): GameEngine? {
         return gameEngine
     }
-    
+
     /**
      * Save the current game state.
      */
@@ -889,20 +910,21 @@ class GameLogicBridge {
             if (!isGameInitialized) {
                 return GameActionResult(false, "No game to save")
             }
-            
+
             gameEngine?.let { engine ->
-                savedGameState = SavedGameState(
-                    playerName = playerName,
-                    gameMode = gameMode,
-                    currentRound = engine.currentRound,
-                    currentPhase = engine.currentPhase,
-                    currentPot = currentPot,
-                    playerChips = playerChips,
-                    playerCards = playerHand,
-                    allPlayersData = getAllPlayers(),
-                    selectedCards = selectedCards.toSet(),
-                    isGameActive = true
-                )
+                savedGameState =
+                    SavedGameState(
+                        playerName = playerName,
+                        gameMode = gameMode,
+                        currentRound = engine.currentRound,
+                        currentPhase = engine.currentPhase,
+                        currentPot = currentPot,
+                        playerChips = playerChips,
+                        playerCards = playerHand,
+                        allPlayersData = getAllPlayers(),
+                        selectedCards = selectedCards.toSet(),
+                        isGameActive = true,
+                    )
                 gameStateSaved = true
                 GameActionResult(true, "Game saved successfully")
             } ?: GameActionResult(false, "Game engine not available")
@@ -910,7 +932,7 @@ class GameLogicBridge {
             GameActionResult(false, "Error saving game: ${e.message}")
         }
     }
-    
+
     /**
      * Load a previously saved game state.
      */
@@ -924,7 +946,7 @@ class GameLogicBridge {
                 playerChips = saved.playerChips
                 playerHand = saved.playerCards
                 selectedCards = saved.selectedCards.toMutableSet()
-                
+
                 // Reinitialize game with saved parameters
                 val success = initializeGame(saved.playerName, saved.allPlayersData.size, saved.playerChips)
                 if (success) {
@@ -940,14 +962,14 @@ class GameLogicBridge {
             GameActionResult(false, "Error loading game: ${e.message}")
         }
     }
-    
+
     /**
      * Check if there is a saved game available.
      */
     fun hasSavedGame(): Boolean {
         return savedGameState != null
     }
-    
+
     /**
      * Clear the saved game state.
      */
@@ -960,11 +982,11 @@ class GameLogicBridge {
             GameActionResult(false, "Error clearing saved game: ${e.message}")
         }
     }
-    
+
     // =================================================================
     // MISSING METHODS NEEDED BY MODERNPOKERAPP
     // =================================================================
-    
+
     /**
      * Get current game state for UI display
      */
@@ -972,24 +994,27 @@ class GameLogicBridge {
         if (!isGameInitialized || gameEngine == null) {
             return GameActionResult(false, "Game not initialized")
         }
-        
+
         updatePlayerData()
-        
+
         // Convert playerHand list to IntArray if available
-        val handArray = if (playerHand.isNotEmpty()) {
-            // Convert card names back to integers - simplified for now
-            IntArray(playerHand.size) { 0 } // Placeholder - would need proper conversion
-        } else null
-        
+        val handArray =
+            if (playerHand.isNotEmpty()) {
+                // Convert card names back to integers - simplified for now
+                IntArray(playerHand.size) { 0 } // Placeholder - would need proper conversion
+            } else {
+                null
+            }
+
         return GameActionResult(
             success = true,
             message = "Game state retrieved",
             playerHand = handArray,
             pot = currentPot,
-            playerChips = playerChips
+            playerChips = playerChips,
         )
     }
-    
+
     /**
      * Check if current player is human
      */
@@ -997,18 +1022,20 @@ class GameLogicBridge {
         val engine = gameEngine ?: return false
         val players = engine.players ?: return false
         val currentIndex = engine.currentPlayerIndex
-        
+
         return if (currentIndex < players.size) {
             players[currentIndex].isHuman
-        } else false
+        } else {
+            false
+        }
     }
-    
+
     /**
      * Perform AI action for current player
      */
     fun performAIAction(): GameActionResult {
         val engine = gameEngine ?: return GameActionResult(false, "Game not initialized")
-        
+
         try {
             processAIOpponents()
             return GameActionResult(true, "AI action performed")
@@ -1016,17 +1043,18 @@ class GameLogicBridge {
             return GameActionResult(false, "AI action failed: ${e.message}")
         }
     }
-    
+
     /**
      * Process player action
      */
     fun processPlayerAction(action: String): GameActionResult {
         val engine = gameEngine ?: return GameActionResult(false, "Game not initialized")
         val players = engine.players ?: return GameActionResult(false, "No players")
-        
-        val humanPlayer = players.firstOrNull { it.isHuman }
-            ?: return GameActionResult(false, "No human player found")
-        
+
+        val humanPlayer =
+            players.firstOrNull { it.isHuman }
+                ?: return GameActionResult(false, "No human player found")
+
         return when {
             action == "call" -> {
                 val actualBet = humanPlayer.placeBet(currentBet)
@@ -1054,14 +1082,14 @@ class GameLogicBridge {
             else -> GameActionResult(false, "Invalid action: $action")
         }
     }
-    
+
     /**
      * Check if game is over
      */
     fun isGameOver(): Boolean {
         val engine = gameEngine ?: return true
         val players = engine.players ?: return true
-        
+
         // Game is over if only one player has chips or all but one have folded
         val activePlayers = players.filter { it.chips > 0 && !it.fold }
         return activePlayers.size <= 1
@@ -1076,7 +1104,7 @@ data class PlayerInfo(
     val chips: Int,
     val isFolded: Boolean,
     val isCurrentPlayer: Boolean,
-    val handValue: Int
+    val handValue: Int,
 )
 
 /**
@@ -1087,7 +1115,7 @@ data class GameActionResult(
     val message: String,
     val playerHand: IntArray? = null,
     val pot: Int = 0,
-    val playerChips: Int = 0
+    val playerChips: Int = 0,
 )
 
 /**
@@ -1103,5 +1131,5 @@ data class SavedGameState(
     val playerCards: List<String>,
     val allPlayersData: List<PlayerInfo>,
     val selectedCards: Set<Int>,
-    val isGameActive: Boolean
+    val isGameActive: Boolean,
 )

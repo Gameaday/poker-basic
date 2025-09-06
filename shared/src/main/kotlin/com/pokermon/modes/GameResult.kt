@@ -1,8 +1,8 @@
 package com.pokermon.modes
 
-import com.pokermon.players.Player
-import com.pokermon.HandEvaluator
 import com.pokermon.GamePhase
+import com.pokermon.HandEvaluator
+import com.pokermon.players.Player
 
 /**
  * Result of a poker round
@@ -11,7 +11,7 @@ data class RoundResult(
     val winner: Player?,
     val potWon: Int,
     val gameEnded: Boolean = false,
-    val handResults: List<PlayerHandResult>? = null
+    val handResults: List<PlayerHandResult>? = null,
 )
 
 /**
@@ -19,7 +19,7 @@ data class RoundResult(
  */
 data class PlayerHandResult(
     val player: Player,
-    val evaluation: HandEvaluator.HandResult
+    val evaluation: HandEvaluator.HandResult,
 )
 
 /**
@@ -29,7 +29,7 @@ data class GameContext(
     val currentPhase: GamePhase,
     val pot: Int,
     val currentBet: Int,
-    val playersRemaining: Int
+    val playersRemaining: Int,
 )
 
 /**
@@ -37,7 +37,10 @@ data class GameContext(
  */
 sealed class MonsterEffect {
     data class CardReveal(val cardCount: Int) : MonsterEffect()
+
     data class BetModifier(val multiplier: Float) : MonsterEffect()
+
     data class ChipProtection(val percentage: Float) : MonsterEffect()
+
     data class SpeedBoost(val multiplier: Float) : MonsterEffect()
 }

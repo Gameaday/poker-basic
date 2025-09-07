@@ -1,6 +1,9 @@
 // Pokermon Shared - Pure Kotlin-Native Core Module
 // Replaces Maven with Gradle for unified build system
 
+import java.text.SimpleDateFormat
+import java.util.Date
+
 plugins {
     id 'org.jetbrains.kotlin.jvm'
     id 'org.jetbrains.kotlin.plugin.serialization'
@@ -84,6 +87,9 @@ test {
     systemProperty 'kotlin.test.junit5.displayMode', 'verbose'
 }
 
+// Make compilation depend on up-to-date check
+compileKotlin.dependsOn checkKotlinGradlePluginConfigurationErrors
+
 // Handle duplicate resources
 processResources {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
@@ -94,6 +100,7 @@ task fatJar(type: Jar) {
     group = 'build'
     description = 'Creates executable JAR with all dependencies'
     
+    archiveBaseName = 'pokermon'
     archiveClassifier = 'fat'
     from sourceSets.main.output
     

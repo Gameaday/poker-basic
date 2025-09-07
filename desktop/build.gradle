@@ -89,7 +89,7 @@ task packagewindows {
         
         // Check if jpackage is available
         try {
-            def jpackageCheck = "jpackage --version".execute()
+            def jpackageCheck = ["jpackage", "--version"].execute()
             jpackageCheck.waitFor()
             if (jpackageCheck.exitValue() != 0) {
                 throw new Exception("jpackage command failed")

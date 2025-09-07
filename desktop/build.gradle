@@ -63,13 +63,13 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
     }
 }
 
-// Task to create Windows native executable
+// Task to create Windows native executable using jpackage
 task packagewindows {
     group = 'native'
-    description = 'Package Windows native executable (.exe)'
+    description = 'Package Windows native executable (.exe) using jpackage'
     
     doLast {
-        println "=== Windows Native Build ==="
+        println "=== Windows Native Build with jpackage ==="
         
         // Ensure shared JAR is built first
         if (!project(':shared').tasks.getByName('fatJar').state.executed) {
@@ -83,37 +83,101 @@ task packagewindows {
         def sourceJar = sharedLibsDir.listFiles()
             ?.find { it.name.endsWith('-fat.jar') }
         
-        if (sourceJar && sourceJar.exists()) {
-            // Create uncompressed executable (generic name)
-            def uncompressedFile = new File(buildDir, 'pokermon.exe')
-            uncompressedFile.bytes = sourceJar.bytes
-            
-            // Create compressed versions with version info
-            def version = project.version
-            def isDevelopment = project.hasProperty('developmentBuild') && project.developmentBuild
-            def compressedName = isDevelopment ? 
-                "Pokermon-${version}-debug.exe" : 
-                "Pokermon-${version}.exe"
-            
-            def compressedFile = new File(buildDir, compressedName)
-            compressedFile.bytes = sourceJar.bytes
-            
-            println "Windows executable created:"
-            println "  Uncompressed: ${uncompressedFile.absolutePath}"
-            println "  Compressed: ${compressedFile.absolutePath}"
-        } else {
+        if (!sourceJar || !sourceJar.exists()) {
             throw new GradleException("Could not find fat JAR in ${sharedLibsDir}")
+        }
+        
+        // Check if jpackage is available
+        try {
+            def jpackageCheck = "jpackage --version".execute()
+            jpackageCheck.waitFor()
+            if (jpackageCheck.exitValue() != 0) {
+                throw new Exception("jpackage command failed")
+            }
+        } catch (Exception e) {
+            println "⚠️  jpackage not available, creating launcher script instead"
+            createWindowsLauncher(buildDir, sourceJar)
+            return
+        }
+        
+        // Create native Windows executable with jpackage
+        def version = project.version
+        def appName = "Pokermon"
+        def tempDir = new File(buildDir, 'temp')
+        tempDir.mkdirs()
+        
+        def jpackageCmd = [
+            'jpackage',
+            '--input', sharedLibsDir.absolutePath,
+            '--main-jar', sourceJar.name,
+            '--main-class', 'com.pokermon.GameLauncher',
+            '--name', appName,
+            '--app-version', version.toString(),
+            '--dest', buildDir.absolutePath,
+            '--temp', tempDir.absolutePath,
+            '--type', 'exe',
+            '--vendor', 'Pokermon',
+            '--description', 'Pokermon - Pure Kotlin-Native Poker Game'
+        ]
+        
+        // Add Windows-specific options only on Windows
+        def osName = System.getProperty('os.name').toLowerCase()
+        if (osName.contains('windows')) {
+            jpackageCmd.add('--win-console')
+        }
+        
+        println "Running: ${jpackageCmd.join(' ')}"
+        def process = jpackageCmd.execute()
+        process.waitFor()
+        
+        if (process.exitValue() == 0) {
+            println "✅ Native Windows executable created successfully!"
+            def createdFiles = buildDir.listFiles()?.findAll { it.name.endsWith('.exe') || it.name.endsWith('.msi') }
+            createdFiles?.each { file ->
+                println "  📦 ${file.absolutePath}"
+            }
+        } else {
+            println "❌ jpackage failed, creating launcher script instead"
+            println "Error output: ${process.errorStream.text}"
+            createWindowsLauncher(buildDir, sourceJar)
         }
     }
 }
 
-// Task to create Linux native executable  
+// Fallback method to create Windows launcher script
+def createWindowsLauncher(buildDir, sourceJar) {
+    def version = project.version
+    def launcherScript = new File(buildDir, "Pokermon-${version}.bat")
+    def jarCopy = new File(buildDir, "pokermon.jar")
+    
+    // Copy JAR to build directory
+    jarCopy.bytes = sourceJar.bytes
+    
+    // Create batch launcher script
+    launcherScript.text = """@echo off
+echo Starting Pokermon v${version}...
+cd /d "%~dp0"
+if exist "pokermon.jar" (
+    java -jar pokermon.jar %*
+) else (
+    echo Error: pokermon.jar not found in the same directory
+    pause
+)
+"""
+    
+    println "✅ Windows launcher created:"
+    println "  📦 Launcher: ${launcherScript.absolutePath}"
+    println "  📦 JAR: ${jarCopy.absolutePath}"
+    println "  ℹ️  Run the .bat file to start Pokermon"
+}
+
+// Task to create Linux native executable using jpackage
 task packagelinux {
     group = 'native'
-    description = 'Package Linux native executable (.deb)'
+    description = 'Package Linux native executable (.deb) using jpackage'
     
     doLast {
-        println "=== Linux Native Build ==="
+        println "=== Linux Native Build with jpackage ==="
         
         // Ensure shared JAR is built first
         if (!project(':shared').tasks.getByName('fatJar').state.executed) {
@@ -127,37 +191,99 @@ task packagelinux {
         def sourceJar = sharedLibsDir.listFiles()
             ?.find { it.name.endsWith('-fat.jar') }
         
-        if (sourceJar && sourceJar.exists()) {
-            // Create uncompressed executable (generic name)
-            def uncompressedFile = new File(buildDir, 'pokermon.deb')
-            uncompressedFile.bytes = sourceJar.bytes
-            
-            // Create compressed versions with version info
-            def version = project.version
-            def isDevelopment = project.hasProperty('developmentBuild') && project.developmentBuild
-            def compressedName = isDevelopment ? 
-                "Pokermon-${version}-debug.deb" : 
-                "Pokermon-${version}.deb"
-            
-            def compressedFile = new File(buildDir, compressedName)
-            compressedFile.bytes = sourceJar.bytes
-            
-            println "Linux executable created:"
-            println "  Uncompressed: ${uncompressedFile.absolutePath}"
-            println "  Compressed: ${compressedFile.absolutePath}"
-        } else {
+        if (!sourceJar || !sourceJar.exists()) {
             throw new GradleException("Could not find fat JAR in ${sharedLibsDir}")
+        }
+        
+        // Check if jpackage is available
+        try {
+            def jpackageCheck = "jpackage --version".execute()
+            jpackageCheck.waitFor()
+            if (jpackageCheck.exitValue() != 0) {
+                throw new Exception("jpackage command failed")
+            }
+        } catch (Exception e) {
+            println "⚠️  jpackage not available, creating launcher script instead"
+            createLinuxLauncher(buildDir, sourceJar)
+            return
+        }
+        
+        // Create native Linux package with jpackage
+        def version = project.version
+        def appName = "pokermon"
+        def tempDir = new File(buildDir, 'temp')
+        tempDir.mkdirs()
+        
+        def jpackageCmd = [
+            'jpackage',
+            '--input', sharedLibsDir.absolutePath,
+            '--main-jar', sourceJar.name,
+            '--main-class', 'com.pokermon.GameLauncher',
+            '--name', appName,
+            '--app-version', version.toString(),
+            '--dest', buildDir.absolutePath,
+            '--temp', tempDir.absolutePath,
+            '--type', 'deb',
+            '--vendor', 'Pokermon',
+            '--description', 'Pokermon - Pure Kotlin-Native Poker Game',
+            '--linux-shortcut'
+        ]
+        
+        println "Running: ${jpackageCmd.join(' ')}"
+        def process = jpackageCmd.execute()
+        process.waitFor()
+        
+        if (process.exitValue() == 0) {
+            println "✅ Native Linux package created successfully!"
+            def createdFiles = buildDir.listFiles()?.findAll { it.name.endsWith('.deb') || it.name.endsWith('.rpm') }
+            createdFiles?.each { file ->
+                println "  📦 ${file.absolutePath}"
+            }
+        } else {
+            println "❌ jpackage failed, creating launcher script instead"
+            println "Error output: ${process.errorStream.text}"
+            createLinuxLauncher(buildDir, sourceJar)
         }
     }
 }
 
-// Task to create macOS native executable
+// Fallback method to create Linux launcher script
+def createLinuxLauncher(buildDir, sourceJar) {
+    def version = project.version
+    def launcherScript = new File(buildDir, "pokermon-${version}.sh")
+    def jarCopy = new File(buildDir, "pokermon.jar")
+    
+    // Copy JAR to build directory
+    jarCopy.bytes = sourceJar.bytes
+    
+    // Create shell launcher script
+    launcherScript.text = """#!/bin/bash
+echo "Starting Pokermon v${version}..."
+cd "\$(dirname "\$0")"
+if [ -f "pokermon.jar" ]; then
+    java -jar pokermon.jar "\$@"
+else
+    echo "Error: pokermon.jar not found in the same directory"
+    exit 1
+fi
+"""
+    
+    // Make script executable
+    launcherScript.setExecutable(true)
+    
+    println "✅ Linux launcher created:"
+    println "  📦 Launcher: ${launcherScript.absolutePath}"
+    println "  📦 JAR: ${jarCopy.absolutePath}"
+    println "  ℹ️  Run ./pokermon-${version}.sh to start Pokermon"
+}
+
+// Task to create macOS native executable using jpackage
 task packagemacos {
     group = 'native'
-    description = 'Package macOS native executable (.dmg)'
+    description = 'Package macOS native executable (.dmg) using jpackage'
     
     doLast {
-        println "=== macOS Native Build ==="
+        println "=== macOS Native Build with jpackage ==="
         
         // Ensure shared JAR is built first
         if (!project(':shared').tasks.getByName('fatJar').state.executed) {
@@ -171,28 +297,96 @@ task packagemacos {
         def sourceJar = sharedLibsDir.listFiles()
             ?.find { it.name.endsWith('-fat.jar') }
         
-        if (sourceJar && sourceJar.exists()) {
-            // Create uncompressed executable (generic name)
-            def uncompressedFile = new File(buildDir, 'pokermon.dmg')
-            uncompressedFile.bytes = sourceJar.bytes
-            
-            // Create compressed versions with version info
-            def version = project.version
-            def isDevelopment = project.hasProperty('developmentBuild') && project.developmentBuild
-            def compressedName = isDevelopment ? 
-                "Pokermon-${version}-debug.dmg" : 
-                "Pokermon-${version}.dmg"
-            
-            def compressedFile = new File(buildDir, compressedName)
-            compressedFile.bytes = sourceJar.bytes
-            
-            println "macOS executable created:"
-            println "  Uncompressed: ${uncompressedFile.absolutePath}"
-            println "  Compressed: ${compressedFile.absolutePath}"
-        } else {
+        if (!sourceJar || !sourceJar.exists()) {
             throw new GradleException("Could not find fat JAR in ${sharedLibsDir}")
         }
+        
+        // Check if we're running on macOS and jpackage is available
+        def osName = System.getProperty('os.name').toLowerCase()
+        if (!osName.contains('mac')) {
+            println "⚠️  macOS package creation only supported on macOS, creating launcher script instead"
+            createMacOSLauncher(buildDir, sourceJar)
+            return
+        }
+        
+        try {
+            def jpackageCheck = "jpackage --version".execute()
+            jpackageCheck.waitFor()
+            if (jpackageCheck.exitValue() != 0) {
+                throw new Exception("jpackage command failed")
+            }
+        } catch (Exception e) {
+            println "⚠️  jpackage not available, creating launcher script instead"
+            createMacOSLauncher(buildDir, sourceJar)
+            return
+        }
+        
+        // Create native macOS package with jpackage
+        def version = project.version
+        def appName = "Pokermon"
+        def tempDir = new File(buildDir, 'temp')
+        tempDir.mkdirs()
+        
+        def jpackageCmd = [
+            'jpackage',
+            '--input', sharedLibsDir.absolutePath,
+            '--main-jar', sourceJar.name,
+            '--main-class', 'com.pokermon.GameLauncher',
+            '--name', appName,
+            '--app-version', version.toString(),
+            '--dest', buildDir.absolutePath,
+            '--temp', tempDir.absolutePath,
+            '--type', 'dmg',
+            '--vendor', 'Pokermon',
+            '--description', 'Pokermon - Pure Kotlin-Native Poker Game'
+        ]
+        
+        println "Running: ${jpackageCmd.join(' ')}"
+        def process = jpackageCmd.execute()
+        process.waitFor()
+        
+        if (process.exitValue() == 0) {
+            println "✅ Native macOS package created successfully!"
+            def createdFiles = buildDir.listFiles()?.findAll { it.name.endsWith('.dmg') || it.name.endsWith('.app') }
+            createdFiles?.each { file ->
+                println "  📦 ${file.absolutePath}"
+            }
+        } else {
+            println "❌ jpackage failed, creating launcher script instead"
+            println "Error output: ${process.errorStream.text}"
+            createMacOSLauncher(buildDir, sourceJar)
+        }
     }
+}
+
+// Fallback method to create macOS launcher script
+def createMacOSLauncher(buildDir, sourceJar) {
+    def version = project.version
+    def launcherScript = new File(buildDir, "pokermon-${version}.command")
+    def jarCopy = new File(buildDir, "pokermon.jar")
+    
+    // Copy JAR to build directory
+    jarCopy.bytes = sourceJar.bytes
+    
+    // Create macOS launcher script
+    launcherScript.text = """#!/bin/bash
+echo "Starting Pokermon v${version}..."
+cd "\$(dirname "\$0")"
+if [ -f "pokermon.jar" ]; then
+    java -jar pokermon.jar "\$@"
+else
+    echo "Error: pokermon.jar not found in the same directory"
+    exit 1
+fi
+"""
+    
+    // Make script executable
+    launcherScript.setExecutable(true)
+    
+    println "✅ macOS launcher created:"
+    println "  📦 Launcher: ${launcherScript.absolutePath}"
+    println "  📦 JAR: ${jarCopy.absolutePath}"
+    println "  ℹ️  Double-click pokermon-${version}.command to start Pokermon"
 }
 
 // Task to create native executable for current platform
@@ -239,15 +433,46 @@ task nativeInfo {
         println "Project: ${project.name}"
         println "Version: ${project.version}"
         println "Platform: ${System.getProperty('os.name')}"
+        
+        // Check jpackage availability
+        def jpackageAvailable = false
+        try {
+            def jpackageCheck = "jpackage --version".execute()
+            jpackageCheck.waitFor()
+            if (jpackageCheck.exitValue() == 0) {
+                jpackageAvailable = true
+                def version = jpackageCheck.text.trim()
+                println "jpackage: Available (${version})"
+            }
+        } catch (Exception e) {
+            println "jpackage: Not available"
+        }
+        
         println ""
         println "Native Build Commands:"
         println "  ./gradlew :desktop:packageNative    - Build for current platform"
-        println "  ./gradlew :desktop:packagewindows   - Build Windows .exe"
-        println "  ./gradlew :desktop:packagelinux     - Build Linux .deb"
-        println "  ./gradlew :desktop:packagemacos     - Build macOS .dmg"
+        println "  ./gradlew :desktop:packagewindows   - Build Windows executable"
+        println "  ./gradlew :desktop:packagelinux     - Build Linux package" 
+        println "  ./gradlew :desktop:packagemacos     - Build macOS package"
         println ""
-        println "Note: Native compilation is planned for future implementation."
-        println "Currently generating enhanced JAR files as placeholders."
+        
+        if (jpackageAvailable) {
+            println "✅ Native compilation available using jpackage"
+            println "   Creates true platform-native executables and installers"
+            println ""
+            println "Output formats:"
+            println "  Windows: .exe executable and optional .msi installer"
+            println "  Linux:   .deb package with system integration"
+            println "  macOS:   .dmg disk image with .app bundle"
+        } else {
+            println "⚠️  jpackage not available - fallback launchers will be created"
+            println "   Requires JDK 17+ for native executable creation"
+            println ""
+            println "Fallback formats:"
+            println "  Windows: .bat launcher script + JAR"
+            println "  Linux:   .sh launcher script + JAR"  
+            println "  macOS:   .command launcher script + JAR"
+        }
     }
 }
 

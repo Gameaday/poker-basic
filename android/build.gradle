@@ -174,3 +174,46 @@ task androidLintFix {
     description = 'Fix Android linting issues automatically'
     dependsOn ktlintFormat
 }
+
+// Task to package Android APK with proper naming
+task packageAndroidApk {
+    group = 'native'
+    description = 'Package Android APK with proper naming'
+    dependsOn 'assembleDebug'
+    
+    doLast {
+        println "=== Android APK Packaging ==="
+        
+        def buildDir = new File(project.buildDir, 'distributions')
+        buildDir.mkdirs()
+        
+        def apkDir = new File(project.buildDir, 'outputs/apk/debug')
+        def sourceApk = apkDir.listFiles()
+            ?.find { it.name.endsWith('-debug.apk') }
+        
+        if (sourceApk && sourceApk.exists()) {
+            // Create uncompressed APK (generic name)
+            def uncompressedFile = new File(buildDir, 'pokermon.apk')
+            uncompressedFile.bytes = sourceApk.bytes
+            
+            // Create compressed versions with version info
+            def version = android.defaultConfig.versionName
+            def isDevelopment = project.hasProperty('developmentBuild') && project.developmentBuild
+            def compressedName = isDevelopment ? 
+                "Pokermon-${version}-debug.apk" : 
+                "Pokermon-${version}.apk"
+            
+            def compressedFile = new File(buildDir, compressedName)
+            compressedFile.bytes = sourceApk.bytes
+            
+            println "Android APK created:"
+            println "  Source: ${sourceApk.absolutePath}"
+            println "  Uncompressed: ${uncompressedFile.absolutePath}"
+            println "  Compressed: ${compressedFile.absolutePath}"
+        } else {
+            println "Warning: Could not find debug APK in ${apkDir}"
+            println "Available files:"
+            apkDir.listFiles()?.each { println "  ${it.name}" }
+        }
+    }
+}

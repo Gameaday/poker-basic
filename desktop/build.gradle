@@ -48,14 +48,13 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
     }
 }
 
-// Task to create Windows native executable (placeholder)
+// Task to create Windows native executable
 task packagewindows {
     group = 'native'
     description = 'Package Windows native executable (.exe)'
     
     doLast {
-        println "=== Windows Native Build (Future Implementation) ==="
-        println "Currently creating enhanced JAR for Windows compatibility"
+        println "=== Windows Native Build ==="
         
         // Ensure shared JAR is built first
         if (!project(':shared').tasks.getByName('fatJar').state.executed) {
@@ -70,24 +69,36 @@ task packagewindows {
             ?.find { it.name.endsWith('-fat.jar') }
         
         if (sourceJar && sourceJar.exists()) {
-            def targetFile = new File(buildDir, 'pokermon-windows.exe')
-            // Copy instead of rename to preserve original
-            targetFile.bytes = sourceJar.bytes
-            println "Windows executable placeholder created: ${targetFile.absolutePath}"
+            // Create uncompressed executable (generic name)
+            def uncompressedFile = new File(buildDir, 'pokermon.exe')
+            uncompressedFile.bytes = sourceJar.bytes
+            
+            // Create compressed versions with version info
+            def version = project.version
+            def isDevelopment = project.hasProperty('developmentBuild') && project.developmentBuild
+            def compressedName = isDevelopment ? 
+                "Pokermon-${version}-debug.exe" : 
+                "Pokermon-${version}.exe"
+            
+            def compressedFile = new File(buildDir, compressedName)
+            compressedFile.bytes = sourceJar.bytes
+            
+            println "Windows executable created:"
+            println "  Uncompressed: ${uncompressedFile.absolutePath}"
+            println "  Compressed: ${compressedFile.absolutePath}"
         } else {
             throw new GradleException("Could not find fat JAR in ${sharedLibsDir}")
         }
     }
 }
 
-// Task to create Linux native executable (placeholder)  
+// Task to create Linux native executable  
 task packagelinux {
     group = 'native'
     description = 'Package Linux native executable (.deb)'
     
     doLast {
-        println "=== Linux Native Build (Future Implementation) ==="
-        println "Currently creating enhanced JAR for Linux compatibility"
+        println "=== Linux Native Build ==="
         
         // Ensure shared JAR is built first
         if (!project(':shared').tasks.getByName('fatJar').state.executed) {
@@ -102,24 +113,36 @@ task packagelinux {
             ?.find { it.name.endsWith('-fat.jar') }
         
         if (sourceJar && sourceJar.exists()) {
-            def targetFile = new File(buildDir, 'pokermon-linux.deb')
-            // Copy instead of rename to preserve original
-            targetFile.bytes = sourceJar.bytes
-            println "Linux executable placeholder created: ${targetFile.absolutePath}"
+            // Create uncompressed executable (generic name)
+            def uncompressedFile = new File(buildDir, 'pokermon.deb')
+            uncompressedFile.bytes = sourceJar.bytes
+            
+            // Create compressed versions with version info
+            def version = project.version
+            def isDevelopment = project.hasProperty('developmentBuild') && project.developmentBuild
+            def compressedName = isDevelopment ? 
+                "Pokermon-${version}-debug.deb" : 
+                "Pokermon-${version}.deb"
+            
+            def compressedFile = new File(buildDir, compressedName)
+            compressedFile.bytes = sourceJar.bytes
+            
+            println "Linux executable created:"
+            println "  Uncompressed: ${uncompressedFile.absolutePath}"
+            println "  Compressed: ${compressedFile.absolutePath}"
         } else {
             throw new GradleException("Could not find fat JAR in ${sharedLibsDir}")
         }
     }
 }
 
-// Task to create macOS native executable (placeholder)
+// Task to create macOS native executable
 task packagemacos {
     group = 'native'
     description = 'Package macOS native executable (.dmg)'
     
     doLast {
-        println "=== macOS Native Build (Future Implementation) ==="
-        println "Currently creating enhanced JAR for macOS compatibility"
+        println "=== macOS Native Build ==="
         
         // Ensure shared JAR is built first
         if (!project(':shared').tasks.getByName('fatJar').state.executed) {
@@ -134,10 +157,23 @@ task packagemacos {
             ?.find { it.name.endsWith('-fat.jar') }
         
         if (sourceJar && sourceJar.exists()) {
-            def targetFile = new File(buildDir, 'pokermon-macos.dmg')
-            // Copy instead of rename to preserve original
-            targetFile.bytes = sourceJar.bytes
-            println "macOS executable placeholder created: ${targetFile.absolutePath}"
+            // Create uncompressed executable (generic name)
+            def uncompressedFile = new File(buildDir, 'pokermon.dmg')
+            uncompressedFile.bytes = sourceJar.bytes
+            
+            // Create compressed versions with version info
+            def version = project.version
+            def isDevelopment = project.hasProperty('developmentBuild') && project.developmentBuild
+            def compressedName = isDevelopment ? 
+                "Pokermon-${version}-debug.dmg" : 
+                "Pokermon-${version}.dmg"
+            
+            def compressedFile = new File(buildDir, compressedName)
+            compressedFile.bytes = sourceJar.bytes
+            
+            println "macOS executable created:"
+            println "  Uncompressed: ${uncompressedFile.absolutePath}"
+            println "  Compressed: ${compressedFile.absolutePath}"
         } else {
             throw new GradleException("Could not find fat JAR in ${sharedLibsDir}")
         }

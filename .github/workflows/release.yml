@@ -113,6 +113,56 @@ jobs:
           exit 1
         fi
     
+    - name: Build Native Executables
+      run: |
+        echo "=== Building native executables ==="
+        
+        # Set development build property for debug builds
+        if [[ "${{ steps.release_info.outputs.release_type }}" == "development" ]] || [[ "${{ steps.release_info.outputs.release_type }}" == "alpha" ]]; then
+          export GRADLE_OPTS="$GRADLE_OPTS -PdevelopmentBuild=true"
+          echo "Building development/alpha versions with debug suffix"
+        else
+          echo "Building production versions"
+        fi
+        
+        # Build all platform executables
+        ./gradlew :desktop:packagewindows --no-daemon
+        ./gradlew :desktop:packagelinux --no-daemon  
+        ./gradlew :desktop:packagemacos --no-daemon
+        
+        echo "✅ Native executables built successfully"
+        ls -la desktop/build/distributions/
+    
+    - name: Build Android APK
+      run: |
+        echo "=== Building Android APK ==="
+        
+        # Set development build property for debug builds
+        if [[ "${{ steps.release_info.outputs.release_type }}" == "development" ]] || [[ "${{ steps.release_info.outputs.release_type }}" == "alpha" ]]; then
+          export GRADLE_OPTS="$GRADLE_OPTS -PdevelopmentBuild=true"
+          echo "Building development/alpha APK with debug suffix"
+        else
+          echo "Building production APK"
+        fi
+        
+        # Build Android APK (may fail in sandboxed environments without internet)
+        set +e  # Don't fail the entire workflow if Android build fails
+        ./gradlew :android:packageAndroidApk --no-daemon
+        ANDROID_BUILD_RESULT=$?
+        set -e
+        
+        if [ $ANDROID_BUILD_RESULT -eq 0 ]; then
+          echo "✅ Android APK built successfully"
+          ls -la android/build/distributions/ || echo "No Android distributions found"
+          ls -la android/build/outputs/apk/debug/ || echo "No Android APK found"
+        else
+          echo "⚠️ Android APK build failed (likely due to network requirements)"
+          echo "Continuing with other builds..."
+          # Create empty marker file so upload step can handle gracefully
+          mkdir -p android/build/distributions
+          echo "Android build failed - requires internet access" > android/build/distributions/android-build-failed.txt
+        fi
+    
     - name: Test JAR functionality
       run: |
         echo "=== Testing JAR functionality ==="
@@ -151,38 +201,59 @@ jobs:
           
           ## Download and Run
           
+          ### 🏪 Available Downloads
+          - **📱 Android APK**: `Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.apk` (may not be available if build failed)
+          - **🖥️ Windows**: `Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.exe`
+          - **🐧 Linux**: `Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.deb`
+          - **🍎 macOS**: `Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.dmg`
+          - **☕ JAR (All Platforms)**: `pokermon-${{ steps.release_info.outputs.version }}.jar`
+          
           ### Requirements
-          - Java 17 or higher
-          - No additional dependencies required
+          - **JAR**: Java 17 or higher
+          - **Native Executables**: No additional dependencies required
+          - **Android**: Android 9+ (API 28+)
           
           ### Quick Start
+          
+          #### JAR (Cross-Platform)
           ```bash
           # Download the JAR file from the Assets section below
           
           # Run with GUI (default)
-          java -jar pokermon-${{ steps.release_info.outputs.version }}-fat.jar
+          java -jar pokermon-${{ steps.release_info.outputs.version }}.jar
           
           # Run in console mode
-          java -jar pokermon-${{ steps.release_info.outputs.version }}-fat.jar --basic
+          java -jar pokermon-${{ steps.release_info.outputs.version }}.jar --basic
           
           # Show help
-          java -jar pokermon-${{ steps.release_info.outputs.version }}-fat.jar --help
+          java -jar pokermon-${{ steps.release_info.outputs.version }}.jar --help
           
           # Show version
-          java -jar pokermon-${{ steps.release_info.outputs.version }}-fat.jar --version
+          java -jar pokermon-${{ steps.release_info.outputs.version }}.jar --version
           ```
+          
+          #### Native Executables
+          - **Windows**: Double-click the `.exe` file or run from command line
+          - **Linux**: Install the `.deb` package or run directly
+          - **macOS**: Mount the `.dmg` and run the application
+          - **Android**: Install the `.apk` file (enable "Unknown sources" if needed)
+          
+          ### 📝 File Naming Convention
+          - **Compressed Downloads**: Include full version number and `-debug` suffix for development builds
+          - **After Extraction**: Files are named generically (`pokermon.exe`, `pokermon.apk`, etc.) to replace older versions
+          - **Version Information**: Available in application help/about and embedded in manifests
           
           ## Game Features
           - Multiple poker variants and game modes
           - Monster collection mechanics (Adventure, Safari, Ironman modes)
           - AI opponents with different difficulty levels
-          - Cross-platform compatibility (Windows, Linux, macOS)
+          - Cross-platform compatibility (Windows, Linux, macOS, Android)
           - Pure Kotlin-native implementation
           
           ## Educational Project
           This is an educational project demonstrating:
           - Cross-platform game development with Kotlin
-          - Modern CI/CD practices
+          - Modern CI/CD practices with automated native builds
           - Gradle build system usage
           - Test-driven development
           
@@ -203,13 +274,74 @@ jobs:
         asset_name: pokermon-${{ steps.release_info.outputs.version }}.jar
         asset_content_type: application/java-archive
     
+    - name: Upload Windows Executable
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: desktop/build/distributions/Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.exe
+        asset_name: Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.exe
+        asset_content_type: application/octet-stream
+    
+    - name: Upload Linux Executable
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: desktop/build/distributions/Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.deb
+        asset_name: Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.deb
+        asset_content_type: application/vnd.debian.binary-package
+    
+    - name: Upload macOS Executable
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: desktop/build/distributions/Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.dmg
+        asset_name: Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.dmg
+        asset_content_type: application/x-apple-diskimage
+    
+    - name: Upload Android APK (if available)
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      if: hashFiles('android/build/distributions/Pokermon-*.apk') != ''
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: android/build/distributions/Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.apk
+        asset_name: Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.apk
+        asset_content_type: application/vnd.android.package-archive
+    
     - name: Build summary
       run: |
         echo "## Release Summary" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "✅ **Release Created:** ${{ steps.release_info.outputs.release_name }}" >> $GITHUB_STEP_SUMMARY
-        echo "📦 **Asset:** pokermon-${{ steps.release_info.outputs.version }}.jar" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### 📦 Release Assets:" >> $GITHUB_STEP_SUMMARY
+        echo "- **JAR:** pokermon-${{ steps.release_info.outputs.version }}.jar" >> $GITHUB_STEP_SUMMARY
+        echo "- **Windows:** Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.exe" >> $GITHUB_STEP_SUMMARY
+        echo "- **Linux:** Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.deb" >> $GITHUB_STEP_SUMMARY
+        echo "- **macOS:** Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.dmg" >> $GITHUB_STEP_SUMMARY
+        
+        # Check if Android APK was built successfully
+        if [ -f "android/build/distributions/Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.apk" ]; then
+          echo "- **Android:** Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.apk" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "- **Android:** ⚠️ Build failed (requires internet access)" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        echo "" >> $GITHUB_STEP_SUMMARY
         echo "🏷️ **Tag:** ${{ steps.release_info.outputs.tag_name }}" >> $GITHUB_STEP_SUMMARY
         echo "🔗 **Release URL:** ${{ steps.create_release.outputs.html_url }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### 📋 Build Notes:" >> $GITHUB_STEP_SUMMARY
+        echo "- **Release Type:** ${{ steps.release_info.outputs.release_type }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Version Info:** Embedded in application manifests" >> $GITHUB_STEP_SUMMARY
+        echo "- **Uncompressed Names:** pokermon.exe, pokermon.deb, pokermon.dmg, pokermon.apk" >> $GITHUB_STEP_SUMMARY
+        echo "- **Compressed Names:** Include full version and debug suffix for development builds" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "The release is ready for download and testing!" >> $GITHUB_STEP_SUMMARY

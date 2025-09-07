@@ -1,6 +1,6 @@
 # 🐲 Pokermon - Pure Kotlin-Native Poker Game
 
-[![Build Status](https://img.shields.io/github/actions/workflow/status/Gameaday/poker-basic/ci.yml?branch=main&label=Build%20Status)](https://github.com/Gameaday/poker-basic/actions/workflows/ci.yml)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/Gameaday/poker-basic/ci.yml?branch=master&label=Build%20Status)](https://github.com/Gameaday/poker-basic/actions/workflows/ci.yml)
 [![GitHub Release](https://img.shields.io/github/v/release/Gameaday/poker-basic?include_prereleases&label=Latest%20Release)](https://github.com/Gameaday/poker-basic/releases/latest)
 [![Tests](https://img.shields.io/badge/tests-passing-brightgreen)](https://github.com/Gameaday/poker-basic/actions/workflows/ci.yml)
 [![Kotlin Native](https://img.shields.io/badge/architecture-Pure%20Kotlin%20Native-7F52FF)](https://kotlinlang.org/docs/native-overview.html)
@@ -42,10 +42,10 @@ git clone https://github.com/Gameaday/poker-basic.git && cd poker-basic
 
 # Or via JAR (development)
 ./gradlew :shared:fatJar --no-daemon
-java -jar Poker-Basic/build/libs/Poker-Basic-*-fat.jar --basic
+java -jar shared/build/libs/shared-*-fat.jar --basic
 
 # GUI Mode (when available)
-java -jar Poker-Basic/build/libs/Poker-Basic-*-fat.jar --gui
+java -jar shared/build/libs/shared-*-fat.jar --gui
 ```
 
 ## 🏗️ Pure Kotlin-Native Architecture
@@ -57,7 +57,7 @@ java -jar Poker-Basic/build/libs/Poker-Basic-*-fat.jar --gui
 | **Linux** | `./gradlew :desktop:packageLinux` | `pokermon.deb` | ✅ Ready |
 | **macOS** | `./gradlew :desktop:packageMacOS` | `Pokermon.dmg` | ✅ Ready |
 | **Android** | `./gradlew :android:assembleDebug` | `android-debug.apk` | ✅ Ready |
-| **Development** | `./gradlew :shared:fatJar` | `Poker-Basic-fat.jar` | ✅ Working |
+| **Development** | `./gradlew :shared:fatJar` | `shared-fat.jar` | ✅ Working |
 
 ### 🔧 Build System Features
 - **Pure Kotlin-Native**: No Java dependencies, unified codebase
@@ -110,18 +110,18 @@ Build from source for development and testing:
 ```bash
 # Quick development build
 git clone https://github.com/Gameaday/poker-basic.git && cd poker-basic
-./validate-android-build.sh            # Verify system (21 checks, <1 second)
-cd Poker-Basic && mvn clean package -B  # Build JAR (~15 seconds)
+./gradlew verifyKotlinNativeSetup --no-daemon  # Verify system (15 seconds)
+./gradlew :shared:fatJar --no-daemon             # Build JAR (~25 seconds)
 
 # Development workflow  
-mvn clean compile -B    # Compile only (~10 seconds)
-mvn test -B            # Run tests (~12 seconds) 
-mvn clean package -B   # Full build (~20 seconds)
+./gradlew :shared:compileKotlin --no-daemon     # Compile only (~15 seconds)
+./gradlew :shared:test --no-daemon              # Run tests (~20 seconds) 
+./gradlew :shared:fatJar --no-daemon            # Full build (~25 seconds)
 ```
 
 **Development Requirements:**
 - Java 17+ (OpenJDK recommended)
-- Maven 3.6+ for JAR builds
+- Gradle 7.0+ (wrapper included)
 - Internet connection for Android builds
 - 2GB+ RAM for native platform builds
 

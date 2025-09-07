@@ -102,7 +102,17 @@ jobs:
     - name: Build JAR
       run: |
         echo "=== Building release JAR ==="
-        ./gradlew :shared:fatJar --no-daemon
+        
+        # Set optimization flags for production builds
+        if [[ "${{ steps.release_info.outputs.release_type }}" == "release" ]]; then
+          echo "Building production JAR with full optimizations"
+          GRADLE_PROPERTIES=""
+        else
+          echo "Building development/alpha JAR with debug information"
+          GRADLE_PROPERTIES="-PdevelopmentBuild=true"
+        fi
+        
+        ./gradlew :shared:fatJar --no-daemon $GRADLE_PROPERTIES
         
         # Verify JAR was created
         if [ -f "shared/build/libs/pokermon-${{ steps.release_info.outputs.version }}-fat.jar" ]; then
@@ -119,16 +129,17 @@ jobs:
         
         # Set development build property for debug builds
         if [[ "${{ steps.release_info.outputs.release_type }}" == "development" ]] || [[ "${{ steps.release_info.outputs.release_type }}" == "alpha" ]]; then
-          export GRADLE_OPTS="$GRADLE_OPTS -PdevelopmentBuild=true"
           echo "Building development/alpha versions with debug suffix"
+          GRADLE_PROPERTIES="-PdevelopmentBuild=true"
         else
-          echo "Building production versions"
+          echo "Building production versions with full optimizations"
+          GRADLE_PROPERTIES=""
         fi
         
-        # Build all platform executables
-        ./gradlew :desktop:packagewindows --no-daemon
-        ./gradlew :desktop:packagelinux --no-daemon  
-        ./gradlew :desktop:packagemacos --no-daemon
+        # Build all platform executables with proper optimization flags
+        ./gradlew :desktop:packagewindows --no-daemon $GRADLE_PROPERTIES
+        ./gradlew :desktop:packagelinux --no-daemon $GRADLE_PROPERTIES
+        ./gradlew :desktop:packagemacos --no-daemon $GRADLE_PROPERTIES
         
         echo "✅ Native executables built successfully"
         ls -la desktop/build/distributions/
@@ -139,15 +150,16 @@ jobs:
         
         # Set development build property for debug builds
         if [[ "${{ steps.release_info.outputs.release_type }}" == "development" ]] || [[ "${{ steps.release_info.outputs.release_type }}" == "alpha" ]]; then
-          export GRADLE_OPTS="$GRADLE_OPTS -PdevelopmentBuild=true"
           echo "Building development/alpha APK with debug suffix"
+          GRADLE_PROPERTIES="-PdevelopmentBuild=true"
         else
-          echo "Building production APK"
+          echo "Building production APK with full optimizations"
+          GRADLE_PROPERTIES=""
         fi
         
         # Build Android APK (may fail in sandboxed environments without internet)
         set +e  # Don't fail the entire workflow if Android build fails
-        ./gradlew :android:packageAndroidApk --no-daemon
+        ./gradlew :android:packageAndroidApk --no-daemon $GRADLE_PROPERTIES
         ANDROID_BUILD_RESULT=$?
         set -e
         

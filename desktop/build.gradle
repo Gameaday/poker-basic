@@ -37,14 +37,29 @@ dependencies {
     // implementation 'org.graalvm.nativeimage:svm:23.0.0' // Future: GraalVM Native Image
 }
 
-// Kotlin compilation options
+// Kotlin compilation options with production optimizations
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
     kotlinOptions {
         jvmTarget = '17'
-        freeCompilerArgs += [
+        
+        // Base compiler arguments
+        def baseArgs = [
             '-Xjsr305=strict',
             '-opt-in=kotlin.ExperimentalStdlibApi'
         ]
+        
+        // Add production optimizations for non-development builds
+        def isDevelopment = project.hasProperty('developmentBuild') && project.developmentBuild
+        if (!isDevelopment) {
+            baseArgs += [
+                '-Xno-call-assertions',
+                '-Xno-param-assertions',
+                '-Xno-receiver-assertions',
+                '-Xassertions=legacy'
+            ]
+        }
+        
+        freeCompilerArgs = baseArgs
     }
 }
 

@@ -8,6 +8,11 @@ on:
     # Prevent duplicate runs for PR from same repository
     types: [opened, synchronize, reopened]
 
+# Concurrency control: Cancel previous runs for the same branch/PR
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   lint:
     runs-on: ubuntu-latest

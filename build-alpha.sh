@@ -25,7 +25,7 @@ echo ""
 echo "Building Kotlin-native JAR (Primary Alpha Build)..."
 ./gradlew :shared:fatJar --no-daemon
 if [ $? -eq 0 ]; then
-    cp "Poker-Basic/build/libs/shared-${VERSION}-fat.jar" "alpha-builds/pokermon-alpha-${VERSION}.jar"
+    cp "shared/build/libs/pokermon-${VERSION}-fat.jar" "alpha-builds/pokermon-alpha-${VERSION}.jar"
     echo "✅ Alpha JAR: alpha-builds/pokermon-alpha-${VERSION}.jar"
     
     # Test the JAR

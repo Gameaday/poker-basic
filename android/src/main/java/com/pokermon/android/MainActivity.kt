@@ -82,12 +82,12 @@ class MainActivity : ComponentActivity() {
         try {
             val userProfileManager = UserProfileManager.getInstance(this)
             
-            // Use Kotlin Flow operators for data processing
-            val settings = userProfileManager.gameSettings.first()
+            // Use StateFlow.value for immediate access to current state
+            val settings = userProfileManager.gameSettings.value
             
             // Kotlin-native null safety and smart casts
             settings.let { gameSettings ->
-                val userProfile = userProfileManager.userProfile.first()
+                val userProfile = userProfileManager.userProfile.value
                 if (userProfile.username.isBlank()) {
                     // Initialize default settings if needed
                     val updatedProfile = userProfile.copy(username = "New Player")

@@ -6,7 +6,7 @@ title: Pokermon - Pure Kotlin-Native Poker Game
 # 🐲 Pokermon 
 ## Where Poker meets Monster Collecting in Pure Kotlin-Native Excellence!
 
-[![Build Status](https://img.shields.io/github/actions/workflow/status/Gameaday/poker-basic/ci.yml?branch=main)](https://github.com/Gameaday/poker-basic/actions/workflows/ci.yml)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/Gameaday/poker-basic/ci.yml?branch=master)](https://github.com/Gameaday/poker-basic/actions/workflows/ci.yml)
 [![Kotlin Native](https://img.shields.io/badge/architecture-Pure%20Kotlin%20Native-7F52FF)](https://kotlinlang.org/docs/native-overview.html)
 [![Platform Support](https://img.shields.io/badge/platforms-Windows%20%7C%20Linux%20%7C%20macOS%20%7C%20Android-blue)](https://github.com/Gameaday/poker-basic/releases)
 

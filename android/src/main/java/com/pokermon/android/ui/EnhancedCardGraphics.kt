@@ -25,75 +25,11 @@ import androidx.compose.ui.unit.sp
 object CardGraphicsManager {
     
     /**
-     * Map card string names to Android drawable resource IDs.
-     */
-    private val cardResourceMap = mapOf(
-        // Spades
-        "Ace of Spades" to "ace_of_spades",
-        "King of Spades" to "king_of_spades", 
-        "Queen of Spades" to "queen_of_spades",
-        "Jack of Spades" to "jack_of_spades",
-        "Ten of Spades" to "ten_of_spades",
-        "Nine of Spades" to "nine_of_spades",
-        "Eight of Spades" to "eight_of_spades",
-        "Seven of Spades" to "seven_of_spades",
-        "Six of Spades" to "six_of_spades",
-        "Five of Spades" to "five_of_spades",
-        "Four of Spades" to "four_of_spades",
-        "Three of Spades" to "three_of_spades",
-        "Two of Spades" to "two_of_spades",
-        
-        // Hearts
-        "Ace of Hearts" to "ace_of_hearts",
-        "King of Hearts" to "king_of_hearts",
-        "Queen of Hearts" to "queen_of_hearts", 
-        "Jack of Hearts" to "jack_of_hearts",
-        "Ten of Hearts" to "ten_of_hearts",
-        "Nine of Hearts" to "nine_of_hearts",
-        "Eight of Hearts" to "eight_of_hearts",
-        "Seven of Hearts" to "seven_of_hearts",
-        "Six of Hearts" to "six_of_hearts",
-        "Five of Hearts" to "five_of_hearts",
-        "Four of Hearts" to "four_of_hearts",
-        "Three of Hearts" to "three_of_hearts",
-        "Two of Hearts" to "two_of_hearts",
-        
-        // Diamonds
-        "Ace of Diamonds" to "ace_of_diamonds",
-        "King of Diamonds" to "king_of_diamonds",
-        "Queen of Diamonds" to "queen_of_diamonds",
-        "Jack of Diamonds" to "jack_of_diamonds", 
-        "Ten of Diamonds" to "ten_of_diamonds",
-        "Nine of Diamonds" to "nine_of_diamonds",
-        "Eight of Diamonds" to "eight_of_diamonds",
-        "Seven of Diamonds" to "seven_of_diamonds",
-        "Six of Diamonds" to "six_of_diamonds",
-        "Five of Diamonds" to "five_of_diamonds",
-        "Four of Diamonds" to "four_of_diamonds",
-        "Three of Diamonds" to "three_of_diamonds",
-        "Two of Diamonds" to "two_of_diamonds",
-        
-        // Clubs
-        "Ace of Clubs" to "ace_of_clubs",
-        "King of Clubs" to "king_of_clubs",
-        "Queen of Clubs" to "queen_of_clubs",
-        "Jack of Clubs" to "jack_of_clubs",
-        "Ten of Clubs" to "ten_of_clubs",
-        "Nine of Clubs" to "nine_of_clubs",
-        "Eight of Clubs" to "eight_of_clubs",
-        "Seven of Clubs" to "seven_of_clubs",
-        "Six of Clubs" to "six_of_clubs",
-        "Five of Clubs" to "five_of_clubs",
-        "Four of Clubs" to "four_of_clubs",
-        "Three of Clubs" to "three_of_clubs",
-        "Two of Clubs" to "two_of_clubs"
-    )
-    
-    /**
      * Convert card name to drawable resource name.
+     * Simplified approach: convert to lowercase and replace spaces with underscores.
      */
     fun getCardResourceName(cardName: String): String {
-        return cardResourceMap[cardName] ?: "card_back"
+        return cardName.lowercase().replace(" ", "_")
     }
     
     /**

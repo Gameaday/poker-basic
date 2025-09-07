@@ -16,15 +16,18 @@ A comprehensive cross-platform poker game featuring monster collection mechanics
 ```bash
 # Download platform-specific native executable (no JVM required)
 # Windows: Download Pokermon.exe from releases
-# Linux: Download pokermon.deb from releases
+# Linux: Download pokermon_*.deb from releases
 # macOS: Download Pokermon.dmg from releases
 # Android: Download android-debug.apk from artifacts
 
-# Or build native executables locally:
-./gradlew :desktop:packageNative --no-daemon    # Current platform
-./gradlew :desktop:packageWindows --no-daemon   # Windows .exe
-./gradlew :desktop:packageLinux --no-daemon     # Linux .deb
-./gradlew :desktop:packageMacOS --no-daemon     # macOS .dmg
+# Or build native executables locally using jpackage:
+./gradlew :desktop:packageNative --no-daemon    # Current platform (auto-detect)
+./gradlew :desktop:packagewindows --no-daemon   # Windows .exe (requires Windows or creates .bat launcher)
+./gradlew :desktop:packagelinux --no-daemon     # Linux .deb (requires jpackage + Linux)
+./gradlew :desktop:packagemacos --no-daemon     # macOS .dmg (requires macOS + jpackage)
+
+# Check native build capabilities:
+./gradlew :desktop:nativeInfo --no-daemon       # Show jpackage availability and output formats
 ```
 
 ### ⚡ Development Build Commands
@@ -127,13 +130,13 @@ git clone https://github.com/Gameaday/poker-basic.git && cd poker-basic
 
 ## 📋 Platform Support
 
-| Platform | Download | Requirements |
-|----------|----------|--------------|
-| **Cross-Platform** | `pokermon-1.0.0.jar` | Java 17+ |
-| **Windows** | `PokerGame-1.0.0.exe` | Windows 10+ (64-bit) |
-| **Linux** | `pokergame_1.0.0-1_amd64.deb` | Ubuntu 18.04+ |
-| **macOS** | `PokerGame-1.0.0.dmg` | macOS 10.14+ |
-| **Android** | `android-debug.apk` | Android 5.0+ (API 21+) |
+| Platform | Download | Requirements | Native Build Status |
+|----------|----------|--------------|-------------------|
+| **Cross-Platform** | `pokermon-*.jar` | Java 17+ | ✅ JAR works on all platforms |
+| **Windows** | `Pokermon-*.exe` or `*.bat` | Windows 10+ (64-bit) | ✅ jpackage builds true .exe |
+| **Linux** | `pokermon_*_amd64.deb` | Ubuntu 18.04+ | ✅ jpackage builds native .deb |
+| **macOS** | `Pokermon-*.dmg` | macOS 10.14+ | ✅ jpackage builds native .dmg |
+| **Android** | `android-debug.apk` | Android 5.0+ (API 21+) | ✅ Native APK via Gradle |
 
 📱 **[Download Latest Release](https://github.com/Gameaday/poker-basic/releases/latest)** - All platforms available
 

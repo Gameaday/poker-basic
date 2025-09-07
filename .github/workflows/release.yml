@@ -1,0 +1,215 @@
+name: Release and Development Builds
+
+on:
+  push:
+    branches: [ main, master ]
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'Type of release'
+        required: true
+        default: 'development'
+        type: choice
+        options:
+          - development
+          - alpha
+          - release
+
+# Concurrency control: Only allow one release build at a time
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v5
+      with:
+        fetch-depth: 0
+    
+    - name: Set up Java 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    
+    - name: Cache Gradle packages
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+    
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
+    
+    - name: Determine release type and version
+      id: release_info
+      run: |
+        # Get version from Gradle
+        VERSION=$(./gradlew properties -q | grep "^version:" | head -1 | awk '{print $2}')
+        TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
+        
+        if [[ "${{ github.ref }}" == refs/tags/v* ]]; then
+          # Official release from tag
+          RELEASE_TYPE="release"
+          TAG_NAME="${{ github.ref_name }}"
+          RELEASE_NAME="Pokermon ${TAG_NAME}"
+          IS_PRERELEASE="false"
+        elif [[ "${{ github.event.inputs.release_type }}" == "alpha" ]] || [[ "${{ github.ref_name }}" == alpha-* ]]; then
+          # Alpha release
+          RELEASE_TYPE="alpha"
+          TAG_NAME="alpha-${VERSION}-${TIMESTAMP}"
+          RELEASE_NAME="Pokermon Alpha ${VERSION}"
+          IS_PRERELEASE="true"
+        else
+          # Development build (master/main branch push)
+          RELEASE_TYPE="development"
+          TAG_NAME="dev-${VERSION}-${TIMESTAMP}"
+          RELEASE_NAME="Pokermon Development Build ${VERSION}"
+          IS_PRERELEASE="true"
+        fi
+        
+        echo "version=${VERSION}" >> $GITHUB_OUTPUT
+        echo "timestamp=${TIMESTAMP}" >> $GITHUB_OUTPUT
+        echo "release_type=${RELEASE_TYPE}" >> $GITHUB_OUTPUT
+        echo "tag_name=${TAG_NAME}" >> $GITHUB_OUTPUT
+        echo "release_name=${RELEASE_NAME}" >> $GITHUB_OUTPUT
+        echo "is_prerelease=${IS_PRERELEASE}" >> $GITHUB_OUTPUT
+        
+        echo "Release Info:"
+        echo "  Type: ${RELEASE_TYPE}"
+        echo "  Version: ${VERSION}"
+        echo "  Tag: ${TAG_NAME}"
+        echo "  Name: ${RELEASE_NAME}"
+        echo "  Pre-release: ${IS_PRERELEASE}"
+    
+    - name: Run tests
+      run: |
+        echo "=== Running tests before release ==="
+        ./gradlew :shared:test --no-daemon
+    
+    - name: Build JAR
+      run: |
+        echo "=== Building release JAR ==="
+        ./gradlew :shared:fatJar --no-daemon
+        
+        # Verify JAR was created
+        if [ -f "shared/build/libs/pokermon-${{ steps.release_info.outputs.version }}-fat.jar" ]; then
+          echo "✅ JAR created successfully"
+          ls -la shared/build/libs/pokermon-*.jar
+        else
+          echo "❌ JAR build failed"
+          exit 1
+        fi
+    
+    - name: Test JAR functionality
+      run: |
+        echo "=== Testing JAR functionality ==="
+        JAR_FILE="shared/build/libs/pokermon-${{ steps.release_info.outputs.version }}-fat.jar"
+        
+        # Test help command
+        java -jar "$JAR_FILE" --help | head -10
+        echo ""
+        
+        # Test version command
+        echo "Version check:"
+        java -jar "$JAR_FILE" --version
+        echo ""
+        echo "✅ JAR functionality verified"
+    
+    - name: Create Release
+      uses: actions/create-release@v1
+      id: create_release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.release_info.outputs.tag_name }}
+        release_name: ${{ steps.release_info.outputs.release_name }}
+        draft: false
+        prerelease: ${{ steps.release_info.outputs.is_prerelease }}
+        body: |
+          # ${{ steps.release_info.outputs.release_name }}
+          
+          **Release Type:** ${{ steps.release_info.outputs.release_type }}
+          **Version:** ${{ steps.release_info.outputs.version }}
+          **Build Date:** ${{ steps.release_info.outputs.timestamp }}
+          **Commit:** ${{ github.sha }}
+          
+          ## What's New
+          This ${{ steps.release_info.outputs.release_type }} build includes the latest changes and improvements to the Pokermon poker game.
+          
+          ## Download and Run
+          
+          ### Requirements
+          - Java 17 or higher
+          - No additional dependencies required
+          
+          ### Quick Start
+          ```bash
+          # Download the JAR file from the Assets section below
+          
+          # Run with GUI (default)
+          java -jar pokermon-${{ steps.release_info.outputs.version }}-fat.jar
+          
+          # Run in console mode
+          java -jar pokermon-${{ steps.release_info.outputs.version }}-fat.jar --basic
+          
+          # Show help
+          java -jar pokermon-${{ steps.release_info.outputs.version }}-fat.jar --help
+          
+          # Show version
+          java -jar pokermon-${{ steps.release_info.outputs.version }}-fat.jar --version
+          ```
+          
+          ## Game Features
+          - Multiple poker variants and game modes
+          - Monster collection mechanics (Adventure, Safari, Ironman modes)
+          - AI opponents with different difficulty levels
+          - Cross-platform compatibility (Windows, Linux, macOS)
+          - Pure Kotlin-native implementation
+          
+          ## Educational Project
+          This is an educational project demonstrating:
+          - Cross-platform game development with Kotlin
+          - Modern CI/CD practices
+          - Gradle build system usage
+          - Test-driven development
+          
+          ## Creator
+          All game coding and concepts by Carl Nelson (@Gameaday)
+          
+          ---
+          
+          **Note:** ${{ steps.release_info.outputs.release_type == 'development' && 'This is a development build and may contain experimental features.' || steps.release_info.outputs.release_type == 'alpha' && 'This is an alpha release for testing purposes.' || 'This is an official release.' }}
+    
+    - name: Upload JAR Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: shared/build/libs/pokermon-${{ steps.release_info.outputs.version }}-fat.jar
+        asset_name: pokermon-${{ steps.release_info.outputs.version }}.jar
+        asset_content_type: application/java-archive
+    
+    - name: Build summary
+      run: |
+        echo "## Release Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "✅ **Release Created:** ${{ steps.release_info.outputs.release_name }}" >> $GITHUB_STEP_SUMMARY
+        echo "📦 **Asset:** pokermon-${{ steps.release_info.outputs.version }}.jar" >> $GITHUB_STEP_SUMMARY
+        echo "🏷️ **Tag:** ${{ steps.release_info.outputs.tag_name }}" >> $GITHUB_STEP_SUMMARY
+        echo "🔗 **Release URL:** ${{ steps.create_release.outputs.html_url }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "The release is ready for download and testing!" >> $GITHUB_STEP_SUMMARY

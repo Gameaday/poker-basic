@@ -51,7 +51,7 @@ android {
         minSdk 28
         targetSdk 34  // Using stable target SDK
         versionCode getVersionCode.get() // Dynamic version code based on timestamp
-        versionName "1.0.${getVersionCode.get()}" // Dynamic version name with timestamp-based version
+        versionName rootProject.version // Use consistent version across all modules
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         

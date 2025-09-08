@@ -13,81 +13,92 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# Workflow-level environment variables following DRY principles
+env:
+  JAVA_VERSION: '17'
+  JAVA_DISTRIBUTION: 'temurin'
+  ANDROID_API_LEVEL: '34'
+  ANDROID_BUILD_TOOLS: '34.0.0'
+  # Timeout values based on job complexity
+  LINT_TIMEOUT: 15
+  TEST_TIMEOUT: 20
+  BUILD_TIMEOUT: 30
+  ANDROID_TIMEOUT: 60
+
 jobs:
   lint:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-    # Run linting checks first for fast feedback on PRs
-    # Allow Copilot and same-repo PRs to run CI - simplified for bot compatibility
-    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot' || startsWith(github.actor, 'copilot') || github.event.pull_request.user.login == 'Copilot' }}
+    timeout-minutes: ${{ fromJson(env.LINT_TIMEOUT) }}
     
     steps:
     - name: Checkout code
       uses: actions/checkout@v5
     
-    - name: Set up Java 17
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
+    - name: Determine build context
+      uses: ./.github/actions/determine-build-context
+      id: context
     
-    - name: Cache Gradle packages
-      uses: actions/cache@v4
-      with:
-        path: |
-          ~/.gradle/caches
-          ~/.gradle/wrapper
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-
+    # Skip job if conditions not met
+    - name: Check execution conditions
+      if: steps.context.outputs.should-run != 'true'
+      run: |
+        echo "Skipping job - execution conditions not met"
+        exit 0
     
-    - name: Make gradlew executable
-      run: chmod +x ./gradlew
+    - name: Setup Java and Gradle
+      if: steps.context.outputs.should-run == 'true'
+      uses: ./.github/actions/setup-java-gradle
+      with:
+        java-version: ${{ env.JAVA_VERSION }}
+        java-distribution: ${{ env.JAVA_DISTRIBUTION }}
     
     - name: Run Kotlin linting (ktlint)
+      if: steps.context.outputs.should-run == 'true'
       run: |
         echo "=== Running Kotlin Code Style Checks ==="
         ./gradlew :shared:ktlintCheck --no-daemon
         echo "✅ Kotlin linting completed successfully"
     
     - name: Upload linting reports
-      uses: actions/upload-artifact@v4
-      if: always()
+      if: always() && steps.context.outputs.should-run == 'true'
+      uses: ./.github/actions/upload-build-artifacts
       with:
-        name: lint-reports
-        path: |
+        artifact-name: lint-reports
+        artifact-path: |
           shared/build/reports/ktlint/
           android/build/reports/ktlint/
-        retention-days: 14
+        retention-days: ${{ steps.context.outputs.retention-days }}
+        artifact-suffix: ${{ steps.context.outputs.artifact-suffix }}
 
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: ${{ fromJson(env.TEST_TIMEOUT) }}
     needs: lint
-    # Run on push events or PR events from same repository or Copilot PRs - simplified for bot compatibility
-    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot' || startsWith(github.actor, 'copilot') || github.event.pull_request.user.login == 'Copilot' }}
     
     steps:
     - name: Checkout code
       uses: actions/checkout@v5
     
-    - name: Set up Java 17
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
+    - name: Determine build context
+      uses: ./.github/actions/determine-build-context
+      id: context
     
-    - name: Cache Gradle packages
-      uses: actions/cache@v4
-      with:
-        path: |
-          ~/.gradle/caches
-          ~/.gradle/wrapper
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-
+    # Skip job if conditions not met
+    - name: Check execution conditions
+      if: steps.context.outputs.should-run != 'true'
+      run: |
+        echo "Skipping job - execution conditions not met"
+        exit 0
     
+    - name: Setup Java and Gradle
+      if: steps.context.outputs.should-run == 'true'
+      uses: ./.github/actions/setup-java-gradle
+      with:
+        java-version: ${{ env.JAVA_VERSION }}
+        java-distribution: ${{ env.JAVA_DISTRIBUTION }}
+
     - name: Verify Pure Kotlin-Native Architecture
+      if: steps.context.outputs.should-run == 'true'
       run: |
         echo "=== Gradle Version ==="
         ./gradlew --version
@@ -96,18 +107,20 @@ jobs:
         ./gradlew verifyKotlinNativeSetup --no-daemon
 
     - name: Run Kotlin linting checks
+      if: steps.context.outputs.should-run == 'true'
       run: |
         echo "=== Running Kotlin Code Quality Checks ==="
         ./gradlew :shared:ktlintCheck --no-daemon
         echo "=== Shared module linting completed ==="
         
     - name: Run tests
+      if: steps.context.outputs.should-run == 'true'
       run: |
         ./gradlew :shared:test --no-daemon
     
     - name: Generate test report
       uses: dorny/test-reporter@v2
-      if: always()
+      if: always() && steps.context.outputs.should-run == 'true'
       with:
         name: Pure Kotlin-Native Tests
         path: shared/build/test-results/test/*.xml
@@ -115,14 +128,16 @@ jobs:
         fail-on-error: false
     
     - name: Upload test results
-      uses: actions/upload-artifact@v4
-      if: always()
+      if: always() && steps.context.outputs.should-run == 'true'
+      uses: ./.github/actions/upload-build-artifacts
       with:
-        name: test-results
-        path: shared/build/test-results/test/
-        retention-days: 30
+        artifact-name: test-results
+        artifact-path: shared/build/test-results/test/
+        retention-days: ${{ steps.context.outputs.retention-days }}
+        artifact-suffix: ${{ steps.context.outputs.artifact-suffix }}
     
     - name: Build Pure Kotlin-Native JAR
+      if: steps.context.outputs.should-run == 'true'
       run: |
         echo "=== Building Pure Kotlin-Native JAR ==="
         ./gradlew :shared:fatJar --no-daemon
@@ -132,10 +147,8 @@ jobs:
         
   native-builds:
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 30
+    timeout-minutes: ${{ fromJson(env.BUILD_TIMEOUT) }}
     needs: [lint, test]
-    # Always run native builds for comprehensive artifact generation - simplified for bot compatibility
-    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot' || startsWith(github.actor, 'copilot') || github.event.pull_request.user.login == 'Copilot' }}
     
     strategy:
       matrix:
@@ -157,23 +170,26 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v5
     
-    - name: Set up Java 17
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
+    - name: Determine build context
+      uses: ./.github/actions/determine-build-context
+      id: context
     
-    - name: Cache Gradle packages
-      uses: actions/cache@v4
+    # Skip job if conditions not met
+    - name: Check execution conditions
+      if: steps.context.outputs.should-run != 'true'
+      run: |
+        echo "Skipping job - execution conditions not met"
+        exit 0
+    
+    - name: Setup Java and Gradle
+      if: steps.context.outputs.should-run == 'true'
+      uses: ./.github/actions/setup-java-gradle
       with:
-        path: |
-          ~/.gradle/caches
-          ~/.gradle/wrapper
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-
+        java-version: ${{ env.JAVA_VERSION }}
+        java-distribution: ${{ env.JAVA_DISTRIBUTION }}
     
     - name: Build Native Executable for ${{ matrix.platform }}
+      if: steps.context.outputs.should-run == 'true'
       shell: bash
       run: |
         echo "=== Building Native Executable for ${{ matrix.platform }} ==="
@@ -185,60 +201,50 @@ jobs:
           cp shared/build/libs/*-fat.jar desktop/build/distributions/pokermon-${{ matrix.platform }}${{ matrix.extension }} || true
         }
     
-    - name: Determine artifact retention  
-      id: retention
-      shell: bash
-      run: |
-        if [ "${{ github.event_name }}" = "pull_request" ]; then
-          PR_NUMBER="${{ github.event.number }}"
-          echo "retention_days=14" >> $GITHUB_OUTPUT
-          echo "artifact_name=${{ matrix.artifact_name }}-pr-${PR_NUMBER}" >> $GITHUB_OUTPUT
-        else
-          echo "retention_days=90" >> $GITHUB_OUTPUT
-          echo "artifact_name=${{ matrix.artifact_name }}" >> $GITHUB_OUTPUT
-        fi
-    
     - name: Upload Native Executable
-      uses: actions/upload-artifact@v4
+      if: steps.context.outputs.should-run == 'true'
+      uses: ./.github/actions/upload-build-artifacts
       with:
-        name: ${{ steps.retention.outputs.artifact_name }}
-        path: |
+        artifact-name: ${{ matrix.artifact_name }}
+        artifact-path: |
           desktop/build/distributions/*${{ matrix.extension }}
           desktop/build/distributions/*.bat
           desktop/build/distributions/*.sh
           desktop/build/distributions/*.command
           desktop/build/distributions/*.jar
           shared/build/libs/*-fat.jar
-        retention-days: ${{ steps.retention.outputs.retention_days }}
+        retention-days: ${{ steps.context.outputs.retention-days }}
+        artifact-suffix: ${{ steps.context.outputs.artifact-suffix }}
         
   package:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: ${{ fromJson(env.TEST_TIMEOUT) }}
     needs: [lint, test, native-builds]
-    # Always run packaging for comprehensive artifact generation - simplified for bot compatibility
-    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot' || startsWith(github.actor, 'copilot') || github.event.pull_request.user.login == 'Copilot' }}
     
     steps:
     - name: Checkout code
       uses: actions/checkout@v5
     
-    - name: Set up Java 17
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
+    - name: Determine build context
+      uses: ./.github/actions/determine-build-context
+      id: context
     
-    - name: Cache Gradle packages
-      uses: actions/cache@v4
-      with:
-        path: |
-          ~/.gradle/caches
-          ~/.gradle/wrapper
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-
+    # Skip job if conditions not met
+    - name: Check execution conditions
+      if: steps.context.outputs.should-run != 'true'
+      run: |
+        echo "Skipping job - execution conditions not met"
+        exit 0
     
+    - name: Setup Java and Gradle
+      if: steps.context.outputs.should-run == 'true'
+      uses: ./.github/actions/setup-java-gradle
+      with:
+        java-version: ${{ env.JAVA_VERSION }}
+        java-distribution: ${{ env.JAVA_DISTRIBUTION }}
+
     - name: Package application with Pure Kotlin-Native
+      if: steps.context.outputs.should-run == 'true'
       run: |
         echo "=== Pure Kotlin-Native Packaging ==="
         ./gradlew :shared:fatJar --no-daemon
@@ -246,6 +252,7 @@ jobs:
         echo "=== Packaging Complete ==="
     
     - name: Verify JAR was created
+      if: steps.context.outputs.should-run == 'true'
       run: |
         cd shared/build/libs
         ls -la *.jar
@@ -259,127 +266,51 @@ jobs:
           exit 1
         fi
     
-    - name: Determine artifact retention
-      id: retention
-      shell: bash
-      run: |
-        if [ "${{ github.event_name }}" = "pull_request" ]; then
-          PR_NUMBER="${{ github.event.number }}"
-          echo "retention_days=14" >> $GITHUB_OUTPUT
-          echo "artifact_name=pokermon-pure-kotlin-native-pr-${PR_NUMBER}" >> $GITHUB_OUTPUT
-          echo "apk_artifact_name=pokermon-android-pr-${PR_NUMBER}" >> $GITHUB_OUTPUT
-        else
-          echo "retention_days=90" >> $GITHUB_OUTPUT
-          echo "artifact_name=pokermon-pure-kotlin-native" >> $GITHUB_OUTPUT
-          echo "apk_artifact_name=pokermon-android" >> $GITHUB_OUTPUT
-        fi
-    
     - name: Upload JAR artifacts
-      uses: actions/upload-artifact@v4
+      if: steps.context.outputs.should-run == 'true'
+      uses: ./.github/actions/upload-build-artifacts
       with:
-        name: ${{ steps.retention.outputs.artifact_name }}
-        path: shared/build/libs/*.jar
-        retention-days: ${{ steps.retention.outputs.retention_days }}
+        artifact-name: pokermon-pure-kotlin-native
+        artifact-path: shared/build/libs/*.jar
+        retention-days: ${{ steps.context.outputs.retention-days }}
+        artifact-suffix: ${{ steps.context.outputs.artifact-suffix }}
 
   android-build:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: ${{ fromJson(env.ANDROID_TIMEOUT) }}
     needs: [lint, test, package, native-builds]
-    # Always run Android builds for comprehensive artifact generation - simplified for bot compatibility
-    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot' || startsWith(github.actor, 'copilot') || github.event.pull_request.user.login == 'Copilot' }}
     
     steps:
     - name: Checkout code
       uses: actions/checkout@v5
 
-    - name: Set up Java 17
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-
-    - name: Cache Android SDK
-      uses: actions/cache@v4
-      with:
-        path: |
-          ~/android-sdk
-        key: android-sdk-34-${{ runner.os }}-${{ hashFiles('android/build.gradle') }}
-        restore-keys: |
-          android-sdk-34-${{ runner.os }}-
+    - name: Determine build context
+      uses: ./.github/actions/determine-build-context
+      id: context
     
-    - name: Setup Android SDK (Manual)
-      id: setup-android
+    # Skip job if conditions not met
+    - name: Check execution conditions
+      if: steps.context.outputs.should-run != 'true'
       run: |
-        echo "=== Setting up Android SDK manually for maximum reliability ==="
-        
-        # Set up Android SDK directory
-        export ANDROID_HOME=$HOME/android-sdk
-        export ANDROID_SDK_ROOT=$ANDROID_HOME
-        export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools
-        echo "ANDROID_HOME=$ANDROID_HOME" >> $GITHUB_ENV
-        echo "ANDROID_SDK_ROOT=$ANDROID_HOME" >> $GITHUB_ENV
-        echo "PATH=$PATH" >> $GITHUB_ENV
-        
-        # Check if SDK is already cached
-        if [ -d "$ANDROID_HOME/cmdline-tools/latest" ] && [ -d "$ANDROID_HOME/platforms/android-34" ]; then
-          echo "Android SDK found in cache, verifying setup..."
-          sdkmanager --version
-          sdkmanager --list_installed
-          echo "=== Android SDK restored from cache successfully ==="
-          exit 0
-        fi
-        
-        # Create SDK directory structure
-        mkdir -p $ANDROID_HOME/cmdline-tools
-        mkdir -p $ANDROID_HOME/licenses
-        
-        # Download and install command line tools (latest version)
-        echo "Downloading Android cmdline-tools..."
-        cd $ANDROID_HOME/cmdline-tools
-        wget -q https://dl.google.com/android/repository/commandlinetools-linux-11479570_latest.zip
-        unzip -q commandlinetools-linux-11479570_latest.zip
-        mv cmdline-tools latest
-        rm commandlinetools-linux-11479570_latest.zip
-        
-        # Pre-accept all Android SDK licenses to avoid interactive prompts
-        echo "Pre-accepting Android SDK licenses..."
-        echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" > $ANDROID_HOME/licenses/android-sdk-license
-        echo "84831b9409646a918e30573bab4c9c91346d8abd" > $ANDROID_HOME/licenses/android-sdk-preview-license
-        echo "d56f5187479451eabf01fb78af6dfcb131a6481e" > $ANDROID_HOME/licenses/intel-android-extra-license
-        echo "33b6a2b64607f11b759f320ef9dff4ae5c47d97a" > $ANDROID_HOME/licenses/google-gdk-license
-        echo "d975f751698a77b662f1254ddbeed3901e976f5a" > $ANDROID_HOME/licenses/mips-android-sysimage-license
-        
-        # Verify sdkmanager is working
-        echo "Testing sdkmanager installation..."
-        sdkmanager --version
-        
-        # Install required Android SDK components
-        echo "Installing Android SDK components..."
-        sdkmanager --install "platforms;android-34"
-        sdkmanager --install "build-tools;34.0.0"
-        sdkmanager --install "ndk;25.2.9519653"
-        sdkmanager --install "platform-tools"
-        
-        # List installed packages for verification
-        echo "Installed Android SDK components:"
-        sdkmanager --list_installed
-        
-        echo "=== Android SDK setup completed successfully ==="
-    
-    - name: Cache Gradle packages
-      uses: actions/cache@v4
+        echo "Skipping job - execution conditions not met"
+        exit 0
+
+    - name: Setup Java and Gradle
+      if: steps.context.outputs.should-run == 'true'
+      uses: ./.github/actions/setup-java-gradle
       with:
-        path: |
-          ~/.gradle/caches
-          ~/.gradle/wrapper
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-
-    
-    - name: Make gradlew executable
-      run: chmod +x ./gradlew
+        java-version: ${{ env.JAVA_VERSION }}
+        java-distribution: ${{ env.JAVA_DISTRIBUTION }}
+
+    - name: Setup Android SDK
+      if: steps.context.outputs.should-run == 'true'
+      uses: ./.github/actions/setup-android-sdk
+      with:
+        api-level: ${{ env.ANDROID_API_LEVEL }}
+        build-tools-version: ${{ env.ANDROID_BUILD_TOOLS }}
 
     - name: Run Android linting checks
+      if: steps.context.outputs.should-run == 'true'
       run: |
         echo "=== Running Android Code Quality Checks ==="
         ./gradlew :android:ktlintCheck --no-daemon || {
@@ -388,6 +319,7 @@ jobs:
         }
     
     - name: Build Android APK with Pure Kotlin-Native
+      if: steps.context.outputs.should-run == 'true'
       run: |
         echo "=== Starting Android APK build with Pure Kotlin-Native ==="
         echo "Gradle version:"
@@ -416,26 +348,16 @@ jobs:
         }
     
     - name: Verify APK was created
+      if: steps.context.outputs.should-run == 'true'
       run: |
         ls -la android/build/outputs/apk/debug/
         echo "APK created successfully"
     
-    - name: Determine artifact retention
-      id: retention
-      shell: bash
-      run: |
-        if [ "${{ github.event_name }}" = "pull_request" ]; then
-          PR_NUMBER="${{ github.event.number }}"
-          echo "retention_days=14" >> $GITHUB_OUTPUT
-          echo "apk_artifact_name=pokermon-android-pr-${PR_NUMBER}" >> $GITHUB_OUTPUT
-        else
-          echo "retention_days=90" >> $GITHUB_OUTPUT
-          echo "apk_artifact_name=pokermon-android" >> $GITHUB_OUTPUT
-        fi
-    
     - name: Upload APK artifacts
-      uses: actions/upload-artifact@v4
+      if: steps.context.outputs.should-run == 'true'
+      uses: ./.github/actions/upload-build-artifacts
       with:
-        name: ${{ steps.retention.outputs.apk_artifact_name }}
-        path: android/build/outputs/apk/debug/*.apk
-        retention-days: ${{ steps.retention.outputs.retention_days }}
+        artifact-name: pokermon-android
+        artifact-path: android/build/outputs/apk/debug/*.apk
+        retention-days: ${{ steps.context.outputs.retention-days }}
+        artifact-suffix: ${{ steps.context.outputs.artifact-suffix }}

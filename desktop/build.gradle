@@ -31,7 +31,7 @@ dependencies {
     implementation project(':shared')
     
     // Desktop-specific dependencies for native builds
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:${findProperty('kotlin.version') ?: '1.9.22'}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:${findProperty('kotlin.version') ?: '2.2.10'}"
     
     // For future native compilation support
     // implementation 'org.graalvm.nativeimage:svm:23.0.0' // Future: GraalVM Native Image

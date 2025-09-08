@@ -102,7 +102,9 @@ task packagewindows {
         
         // Create native Windows executable with jpackage
         def version = project.version
-        def appName = "Pokermon"
+        def isDevelopment = project.hasProperty('developmentBuild') && project.developmentBuild
+        def debugSuffix = isDevelopment ? '-debug' : ''
+        def appName = "Pokermon-${version}${debugSuffix}"
         def tempDir = new File(buildDir, 'temp')
         tempDir.mkdirs()
         
@@ -135,6 +137,13 @@ task packagewindows {
             def createdFiles = buildDir.listFiles()?.findAll { it.name.endsWith('.exe') || it.name.endsWith('.msi') }
             createdFiles?.each { file ->
                 println "  📦 ${file.absolutePath}"
+                
+                // Rename the file to match workflow expectations
+                def targetName = "${appName}.${file.name.split('\\.').last()}"
+                def targetFile = new File(buildDir, targetName)
+                if (file.renameTo(targetFile)) {
+                    println "  📋 Renamed to: ${targetFile.absolutePath}"
+                }
             }
         } else {
             println "❌ jpackage failed, creating launcher script instead"
@@ -170,8 +179,12 @@ def createLauncherScript(buildDir, sourceJar, platformConfig) {
 
 // Fallback method to create Windows launcher script
 def createWindowsLauncher(buildDir, sourceJar) {
+    def version = project.version
+    def isDevelopment = project.hasProperty('developmentBuild') && project.developmentBuild
+    def debugSuffix = isDevelopment ? '-debug' : ''
+    
     def windowsConfig = [
-        scriptFileName: "Pokermon-\${version}.bat",
+        scriptFileName: "Pokermon-\${version}${debugSuffix}.bat",
         platformName: "Windows",
         needsExecutablePermission: false,
         usageInstructions: "Run the .bat file to start Pokermon",
@@ -229,7 +242,9 @@ task packagelinux {
         
         // Create native Linux package with jpackage
         def version = project.version
-        def appName = "pokermon"
+        def isDevelopment = project.hasProperty('developmentBuild') && project.developmentBuild
+        def debugSuffix = isDevelopment ? '-debug' : ''
+        def appName = "Pokermon-${version}${debugSuffix}"
         def tempDir = new File(buildDir, 'temp')
         tempDir.mkdirs()
         
@@ -257,6 +272,13 @@ task packagelinux {
             def createdFiles = buildDir.listFiles()?.findAll { it.name.endsWith('.deb') || it.name.endsWith('.rpm') }
             createdFiles?.each { file ->
                 println "  📦 ${file.absolutePath}"
+                
+                // Rename the file to match workflow expectations
+                def targetName = "${appName}.${file.name.split('\\.').last()}"
+                def targetFile = new File(buildDir, targetName)
+                if (file.renameTo(targetFile)) {
+                    println "  📋 Renamed to: ${targetFile.absolutePath}"
+                }
             }
         } else {
             println "❌ jpackage failed, creating launcher script instead"
@@ -268,11 +290,15 @@ task packagelinux {
 
 // Fallback method to create Linux launcher script
 def createLinuxLauncher(buildDir, sourceJar) {
+    def version = project.version
+    def isDevelopment = project.hasProperty('developmentBuild') && project.developmentBuild
+    def debugSuffix = isDevelopment ? '-debug' : ''
+    
     def linuxConfig = [
-        scriptFileName: "pokermon-\${version}.sh",
+        scriptFileName: "Pokermon-\${version}${debugSuffix}.sh",
         platformName: "Linux",
         needsExecutablePermission: true,
-        usageInstructions: "Run ./pokermon-\${version}.sh to start Pokermon",
+        usageInstructions: "Run ./Pokermon-\${version}${debugSuffix}.sh to start Pokermon",
         scriptContent: """#!/bin/bash
 echo "Starting Pokermon v\${version}..."
 cd "\$(dirname "\$0")"
@@ -334,7 +360,9 @@ task packagemacos {
         
         // Create native macOS package with jpackage
         def version = project.version
-        def appName = "Pokermon"
+        def isDevelopment = project.hasProperty('developmentBuild') && project.developmentBuild
+        def debugSuffix = isDevelopment ? '-debug' : ''
+        def appName = "Pokermon-${version}${debugSuffix}"
         def tempDir = new File(buildDir, 'temp')
         tempDir.mkdirs()
         
@@ -361,6 +389,13 @@ task packagemacos {
             def createdFiles = buildDir.listFiles()?.findAll { it.name.endsWith('.dmg') || it.name.endsWith('.app') }
             createdFiles?.each { file ->
                 println "  📦 ${file.absolutePath}"
+                
+                // Rename the file to match workflow expectations
+                def targetName = "${appName}.${file.name.split('\\.').last()}"
+                def targetFile = new File(buildDir, targetName)
+                if (file.renameTo(targetFile)) {
+                    println "  📋 Renamed to: ${targetFile.absolutePath}"
+                }
             }
         } else {
             println "❌ jpackage failed, creating launcher script instead"
@@ -372,11 +407,15 @@ task packagemacos {
 
 // Fallback method to create macOS launcher script
 def createMacOSLauncher(buildDir, sourceJar) {
+    def version = project.version
+    def isDevelopment = project.hasProperty('developmentBuild') && project.developmentBuild
+    def debugSuffix = isDevelopment ? '-debug' : ''
+    
     def macOSConfig = [
-        scriptFileName: "pokermon-\${version}.command",
+        scriptFileName: "Pokermon-\${version}${debugSuffix}.command",
         platformName: "macOS",
         needsExecutablePermission: true,
-        usageInstructions: "Double-click pokermon-\${version}.command to start Pokermon",
+        usageInstructions: "Double-click Pokermon-\${version}${debugSuffix}.command to start Pokermon",
         scriptContent: """#!/bin/bash
 echo "Starting Pokermon v\${version}..."
 cd "\$(dirname "\$0")"

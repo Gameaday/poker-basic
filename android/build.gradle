@@ -117,7 +117,7 @@ dependencies {
     implementation project(':shared')
     
     // Kotlin-native dependencies - aligned with main project
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.22'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:2.2.10'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
     
     // Android and UI dependencies - Conservative stable updates

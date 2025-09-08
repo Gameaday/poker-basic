@@ -62,14 +62,14 @@ sourceSets {
 // Dependencies - Pure Kotlin-native stack
 dependencies {
     // Kotlin standard library and coroutines
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:${findProperty('kotlin.version') ?: '1.9.22'}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:${findProperty('kotlin.version') ?: '2.2.10'}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${findProperty('kotlinx.coroutines.version') ?: '1.7.3'}"
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0"
     
     // Testing with Kotlin support
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
-    testImplementation "org.jetbrains.kotlin:kotlin-test:${findProperty('kotlin.version') ?: '1.9.22'}"
-    testImplementation "org.jetbrains.kotlin:kotlin-test-junit5:${findProperty('kotlin.version') ?: '1.9.22'}"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:${findProperty('kotlin.version') ?: '2.2.10'}"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit5:${findProperty('kotlin.version') ?: '2.2.10'}"
 }
 
 // Enhanced test configuration
@@ -116,7 +116,7 @@ task fatJar(type: Jar) {
             'Main-Class': 'com.pokermon.GameLauncher',
             'Built-By': System.getProperty('user.name'),
             'Built-Date': new Date().toString(),
-            'Kotlin-Version': findProperty('kotlin.version') ?: '1.9.22'
+            'Kotlin-Version': findProperty('kotlin.version') ?: '2.2.10'
         )
     }
     
@@ -142,7 +142,7 @@ task developmentInfo {
         println "=== Pokermon Kotlin-Native Development Info ==="
         println "Project: ${project.name}"
         println "Version: ${project.version}"
-        println "Kotlin: ${findProperty('kotlin.version') ?: '1.9.22'}"
+        println "Kotlin: ${findProperty('kotlin.version') ?: '2.2.10'}"
         println "Main class: ${application.mainClass.get()}"
         println ""
         println "Available tasks:"
@@ -212,7 +212,7 @@ task lintFix {
 }
 
 // Native compilation tasks using local kotlinc-native
-def kotlinNativeHome = findProperty('kotlin.native.home') ?: '../kotlin-native-linux-x86_64-1.9.22'
+def kotlinNativeHome = findProperty('kotlin.native.home') ?: '../kotlin-native-prebuilt-linux-x86_64-2.2.10'
 def kotlincNative = "${kotlinNativeHome}/bin/kotlinc-native"
 
 task buildNativeLinux {
@@ -380,7 +380,7 @@ task nativeInfo {
         println "=== Pokermon Kotlin/Native Build Information ==="
         println "Project: ${project.name}"
         println "Version: ${project.version}"
-        println "Kotlin: ${findProperty('kotlin.version') ?: '1.9.22'}"
+        println "Kotlin: ${findProperty('kotlin.version') ?: '2.2.10'}"
         println ""
         println "Available Native Targets:"
         println "  Linux x64:   kotlinc-native with LLVM backend"

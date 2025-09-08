@@ -18,8 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     # Run linting checks first for fast feedback on PRs
-    # Allow Copilot and same-repo PRs to run CI
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot' || contains(github.actor, 'copilot')
+    # Allow Copilot and same-repo PRs to run CI - simplified for bot compatibility
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot' || startsWith(github.actor, 'copilot') || github.event.pull_request.user.login == 'Copilot' }}
     
     steps:
     - name: Checkout code
@@ -64,8 +64,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     needs: lint
-    # Run on push events or PR events from same repository or Copilot PRs
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot' || contains(github.actor, 'copilot')
+    # Run on push events or PR events from same repository or Copilot PRs - simplified for bot compatibility
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot' || startsWith(github.actor, 'copilot') || github.event.pull_request.user.login == 'Copilot' }}
     
     steps:
     - name: Checkout code
@@ -134,8 +134,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
     needs: [lint, test]
-    # Always run native builds for comprehensive artifact generation
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot' || contains(github.actor, 'copilot')
+    # Always run native builds for comprehensive artifact generation - simplified for bot compatibility
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot' || startsWith(github.actor, 'copilot') || github.event.pull_request.user.login == 'Copilot' }}
     
     strategy:
       matrix:
@@ -215,8 +215,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     needs: [lint, test, native-builds]
-    # Always run packaging for comprehensive artifact generation
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot' || contains(github.actor, 'copilot')
+    # Always run packaging for comprehensive artifact generation - simplified for bot compatibility
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot' || startsWith(github.actor, 'copilot') || github.event.pull_request.user.login == 'Copilot' }}
     
     steps:
     - name: Checkout code
@@ -285,8 +285,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     needs: [lint, test, package, native-builds]
-    # Always run Android builds for comprehensive artifact generation
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot' || contains(github.actor, 'copilot')
+    # Always run Android builds for comprehensive artifact generation - simplified for bot compatibility
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot' || startsWith(github.actor, 'copilot') || github.event.pull_request.user.login == 'Copilot' }}
     
     steps:
     - name: Checkout code

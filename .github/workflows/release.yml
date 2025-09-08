@@ -137,6 +137,8 @@ jobs:
         fi
         
         # Build all platform executables with proper optimization flags
+        # Note: Desktop build.gradle now creates fallback files with expected names
+        # when jpackage fails, ensuring DRY compliance with upload steps below
         ./gradlew :desktop:packagewindows --no-daemon $GRADLE_PROPERTIES
         ./gradlew :desktop:packagelinux --no-daemon $GRADLE_PROPERTIES
         ./gradlew :desktop:packagemacos --no-daemon $GRADLE_PROPERTIES

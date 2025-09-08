@@ -212,7 +212,7 @@ task lintFix {
 }
 
 // Native compilation tasks using local kotlinc-native
-def kotlinNativeHome = findProperty('kotlin.native.home') ?: '../kotlin-native-linux-x86_64-1.9.22'
+def kotlinNativeHome = findProperty('kotlin.native.home') ?: "${projectDir}/../kotlin-native-linux-x86_64-1.9.22"
 def kotlincNative = "${kotlinNativeHome}/bin/kotlinc-native"
 
 task buildNativeLinux {
@@ -284,7 +284,7 @@ task buildNativeWindows {
             throw new GradleException("Source file not found: ${sourceFile.absolutePath}")
         }
         
-        def outputFile = new File(outputDir, "pokermon-windows")
+        def outputFile = new File(outputDir, "pokermon-windows.exe")
         
         def compileCmd = [
             kotlincNative,

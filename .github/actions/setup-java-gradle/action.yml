@@ -1,0 +1,40 @@
+name: 'Setup Java and Gradle'
+description: 'Sets up Java 17, Gradle wrapper, and caching for Kotlin projects'
+inputs:
+  java-version:
+    description: 'Java version to set up'
+    required: false
+    default: '17'
+  java-distribution:
+    description: 'Java distribution to use'
+    required: false
+    default: 'temurin'
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up Java ${{ inputs.java-version }}
+      uses: actions/setup-java@v4
+      with:
+        java-version: ${{ inputs.java-version }}
+        distribution: ${{ inputs.java-distribution }}
+    
+    - name: Cache Gradle packages
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+    
+    - name: Make gradlew executable
+      shell: bash
+      run: chmod +x ./gradlew
+    
+    - name: Verify Gradle setup
+      shell: bash
+      run: |
+        echo "=== Gradle Setup Verification ==="
+        ./gradlew --version | head -5
+        echo "✅ Java and Gradle setup completed"

@@ -1,0 +1,98 @@
+name: 'Setup Android SDK'
+description: 'Sets up Android SDK with proper caching for Kotlin Android projects'
+inputs:
+  api-level:
+    description: 'Android API level to install'
+    required: false
+    default: '34'
+  build-tools-version:
+    description: 'Build tools version to install'
+    required: false
+    default: '34.0.0'
+  ndk-version:
+    description: 'NDK version to install'
+    required: false
+    default: '25.2.9519653'
+runs:
+  using: 'composite'
+  steps:
+    - name: Cache Android SDK
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/android-sdk
+        key: android-sdk-${{ inputs.api-level }}-${{ runner.os }}-${{ hashFiles('android/build.gradle') }}
+        restore-keys: |
+          android-sdk-${{ inputs.api-level }}-${{ runner.os }}-
+    
+    - name: Setup Android SDK (Manual)
+      shell: bash
+      run: |
+        echo "=== Setting up Android SDK manually for maximum reliability ==="
+        
+        # Set up Android SDK directory
+        export ANDROID_HOME=$HOME/android-sdk
+        export ANDROID_SDK_ROOT=$ANDROID_HOME
+        export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools
+        echo "ANDROID_HOME=$ANDROID_HOME" >> $GITHUB_ENV
+        echo "ANDROID_SDK_ROOT=$ANDROID_HOME" >> $GITHUB_ENV
+        echo "PATH=$PATH" >> $GITHUB_ENV
+        
+        # Check if SDK is already cached
+        if [ -d "$ANDROID_HOME/cmdline-tools/latest" ] && [ -d "$ANDROID_HOME/platforms/android-${{ inputs.api-level }}" ]; then
+          echo "Android SDK found in cache, verifying setup..."
+          sdkmanager --version
+          sdkmanager --list_installed
+          echo "=== Android SDK restored from cache successfully ==="
+          exit 0
+        fi
+        
+        # Create SDK directory structure
+        mkdir -p $ANDROID_HOME/cmdline-tools
+        mkdir -p $ANDROID_HOME/licenses
+        
+        # Download and install command line tools (latest version)
+        echo "Downloading Android cmdline-tools..."
+        cd $ANDROID_HOME/cmdline-tools
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-11479570_latest.zip
+        unzip -q commandlinetools-linux-11479570_latest.zip
+        mv cmdline-tools latest
+        rm commandlinetools-linux-11479570_latest.zip
+        
+        # Pre-accept all Android SDK licenses to avoid interactive prompts
+        echo "Pre-accepting Android SDK licenses..."
+        echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" > $ANDROID_HOME/licenses/android-sdk-license
+        echo "84831b9409646a918e30573bab4c9c91346d8abd" > $ANDROID_HOME/licenses/android-sdk-preview-license
+        echo "d56f5187479451eabf01fb78af6dfcb131a6481e" > $ANDROID_HOME/licenses/intel-android-extra-license
+        echo "33b6a2b64607f11b759f320ef9dff4ae5c47d97a" > $ANDROID_HOME/licenses/google-gdk-license
+        echo "d975f751698a77b662f1254ddbeed3901e976f5a" > $ANDROID_HOME/licenses/mips-android-sysimage-license
+        
+        # Verify sdkmanager is working
+        echo "Testing sdkmanager installation..."
+        sdkmanager --version
+        
+        # Install required Android SDK components
+        echo "Installing Android SDK components..."
+        sdkmanager --install "platforms;android-${{ inputs.api-level }}"
+        sdkmanager --install "build-tools;${{ inputs.build-tools-version }}"
+        sdkmanager --install "ndk;${{ inputs.ndk-version }}"
+        sdkmanager --install "platform-tools"
+        
+        # List installed packages for verification
+        echo "Installed Android SDK components:"
+        sdkmanager --list_installed
+        
+        echo "=== Android SDK setup completed successfully ==="
+    
+    - name: Verify Android SDK
+      shell: bash
+      run: |
+        echo "=== Android SDK Verification ==="
+        echo "ANDROID_HOME: $ANDROID_HOME"
+        echo "Available platforms:"
+        ls -la "$ANDROID_HOME/platforms/" || echo "No platforms found"
+        echo "Available build-tools:"
+        ls -la "$ANDROID_HOME/build-tools/" || echo "No build tools found"
+        echo "SDK Manager packages:"
+        sdkmanager --list_installed | head -20
+        echo "✅ Android SDK verification completed"

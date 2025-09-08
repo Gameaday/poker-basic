@@ -1,0 +1,35 @@
+name: 'Upload Build Artifacts'
+description: 'Uploads build artifacts with standardized naming and retention'
+inputs:
+  artifact-name:
+    description: 'Base name for the artifact'
+    required: true
+  artifact-path:
+    description: 'Path to files to upload'
+    required: true
+  retention-days:
+    description: 'Number of days to retain the artifact'
+    required: false
+    default: '30'
+  artifact-suffix:
+    description: 'Suffix to add to artifact name (e.g., -pr-123)'
+    required: false
+    default: ''
+runs:
+  using: 'composite'
+  steps:
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.artifact-name }}${{ inputs.artifact-suffix }}
+        path: ${{ inputs.artifact-path }}
+        retention-days: ${{ inputs.retention-days }}
+        
+    - name: Artifact upload summary
+      shell: bash
+      run: |
+        echo "=== Artifact Upload Summary ==="
+        echo "Name: ${{ inputs.artifact-name }}${{ inputs.artifact-suffix }}"
+        echo "Path: ${{ inputs.artifact-path }}"
+        echo "Retention: ${{ inputs.retention-days }} days"
+        echo "✅ Artifact uploaded successfully"

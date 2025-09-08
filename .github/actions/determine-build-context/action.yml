@@ -1,0 +1,75 @@
+name: 'Determine Build Context'
+description: 'Determines build context including artifact retention, naming, and execution conditions'
+outputs:
+  should-run:
+    description: 'Whether the job should run based on event and actor conditions'
+    value: ${{ steps.context.outputs.should-run }}
+  retention-days:
+    description: 'Number of days to retain artifacts'
+    value: ${{ steps.context.outputs.retention-days }}
+  artifact-suffix:
+    description: 'Suffix to add to artifact names (e.g., -pr-123)'
+    value: ${{ steps.context.outputs.artifact-suffix }}
+  is-pr:
+    description: 'Whether this is a pull request build'
+    value: ${{ steps.context.outputs.is-pr }}
+  pr-number:
+    description: 'Pull request number (if applicable)'
+    value: ${{ steps.context.outputs.pr-number }}
+runs:
+  using: 'composite'
+  steps:
+    - name: Determine build context
+      id: context
+      shell: bash
+      run: |
+        echo "=== Build Context Analysis ==="
+        
+        # Determine if job should run
+        # Allow Copilot and same-repo PRs to run CI - simplified for bot compatibility
+        SHOULD_RUN="false"
+        if [[ "${{ github.event_name }}" != "pull_request" ]]; then
+          SHOULD_RUN="true"
+          echo "✅ Push event - job will run"
+        elif [[ "${{ github.event.pull_request.head.repo.full_name }}" == "${{ github.repository }}" ]]; then
+          SHOULD_RUN="true" 
+          echo "✅ Same-repo PR - job will run"
+        elif [[ "${{ github.actor }}" == "Copilot" ]] || [[ "${{ github.actor }}" == *"copilot"* ]]; then
+          SHOULD_RUN="true"
+          echo "✅ Copilot PR - job will run"
+        elif [[ "${{ github.event.pull_request.user.login }}" == "Copilot" ]]; then
+          SHOULD_RUN="true"
+          echo "✅ Copilot user PR - job will run"
+        else
+          echo "❌ External PR - job will be skipped"
+        fi
+        
+        # Determine artifact retention and naming
+        if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+          PR_NUMBER="${{ github.event.number }}"
+          RETENTION_DAYS="14"
+          ARTIFACT_SUFFIX="-pr-${PR_NUMBER}"
+          IS_PR="true"
+          echo "📦 PR build detected - 14 day retention, PR-specific naming"
+        else
+          PR_NUMBER=""
+          RETENTION_DAYS="90"
+          ARTIFACT_SUFFIX=""
+          IS_PR="false"
+          echo "📦 Main branch build - 90 day retention, standard naming"
+        fi
+        
+        # Output results
+        echo "should-run=${SHOULD_RUN}" >> $GITHUB_OUTPUT
+        echo "retention-days=${RETENTION_DAYS}" >> $GITHUB_OUTPUT
+        echo "artifact-suffix=${ARTIFACT_SUFFIX}" >> $GITHUB_OUTPUT
+        echo "is-pr=${IS_PR}" >> $GITHUB_OUTPUT
+        echo "pr-number=${PR_NUMBER}" >> $GITHUB_OUTPUT
+        
+        echo ""
+        echo "=== Build Context Results ==="
+        echo "Should run: ${SHOULD_RUN}"
+        echo "Retention: ${RETENTION_DAYS} days"
+        echo "Suffix: ${ARTIFACT_SUFFIX}"
+        echo "Is PR: ${IS_PR}"
+        echo "PR Number: ${PR_NUMBER}"

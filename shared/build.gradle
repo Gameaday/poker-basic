@@ -212,7 +212,7 @@ task lintFix {
 }
 
 // Native compilation tasks using local kotlinc-native
-def kotlinNativeHome = findProperty('kotlin.native.home') ?: '../kotlin-native-prebuilt-linux-x86_64-2.2.10'
+def kotlinNativeHome = findProperty('kotlin.native.home') ?: '../kotlin-native-linux-x86_64-1.9.22'
 def kotlincNative = "${kotlinNativeHome}/bin/kotlinc-native"
 
 task buildNativeLinux {

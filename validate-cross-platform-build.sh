@@ -134,8 +134,8 @@ TESTS_TOTAL=$((TESTS_TOTAL + 1))
 # Test fat JAR creation
 echo "Testing fat JAR creation..."
 if ./gradlew :shared:fatJar --no-daemon -q >/dev/null 2>&1; then
-    if [ -f shared/build/libs/shared-*-fat.jar ]; then
-        FAT_JAR_SIZE=$(ls -lh shared/build/libs/shared-*-fat.jar | awk '{print $5}')
+    if [ -f shared/build/libs/pokermon-*-fat.jar ]; then
+        FAT_JAR_SIZE=$(ls -lh shared/build/libs/pokermon-*-fat.jar | awk '{print $5}')
         echo -e "✅ ${GREEN}PASS${NC}: Fat JAR created successfully ($FAT_JAR_SIZE)"
         TESTS_PASSED=$((TESTS_PASSED + 1))
     else
@@ -207,7 +207,7 @@ fi
 echo ""
 echo "🎯 Expected Build Outputs"
 echo "-------------------------"
-echo "📦 Cross-Platform JAR:    shared/build/libs/shared-*-fat.jar"
+echo "📦 Cross-Platform JAR:    shared/build/libs/pokermon-*-fat.jar"
 echo "📦 Executable JAR:        shared/build/libs/shared-*.jar"
 echo "🪟 Windows EXE:           desktop/build/distributions/*-windows.exe"
 echo "🐧 Linux DEB:             desktop/build/distributions/*-linux.deb"

@@ -292,6 +292,7 @@ jobs:
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      if: hashFiles('desktop/build/distributions/Pokermon-*.exe') != ''
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: desktop/build/distributions/Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.exe
@@ -302,6 +303,7 @@ jobs:
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      if: hashFiles('desktop/build/distributions/Pokermon-*.deb') != ''
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: desktop/build/distributions/Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.deb
@@ -312,11 +314,45 @@ jobs:
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      if: hashFiles('desktop/build/distributions/Pokermon-*.dmg') != ''
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: desktop/build/distributions/Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.dmg
         asset_name: Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.dmg
         asset_content_type: application/x-apple-diskimage
+    
+    - name: Upload Windows Launcher (fallback)
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      if: hashFiles('desktop/build/distributions/Pokermon-*.bat') != ''
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: desktop/build/distributions/Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.bat
+        asset_name: Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.bat
+        asset_content_type: text/plain
+    
+    - name: Upload Linux Launcher (fallback)
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      if: hashFiles('desktop/build/distributions/Pokermon-*.sh') != ''
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: desktop/build/distributions/Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.sh
+        asset_name: Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.sh
+        asset_content_type: text/x-shellscript
+    
+    - name: Upload macOS Launcher (fallback)
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      if: hashFiles('desktop/build/distributions/Pokermon-*.command') != ''
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: desktop/build/distributions/Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.command
+        asset_name: Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.command
+        asset_content_type: text/plain
     
     - name: Upload Android APK (if available)
       uses: actions/upload-release-asset@v1
@@ -337,9 +373,31 @@ jobs:
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### 📦 Release Assets:" >> $GITHUB_STEP_SUMMARY
         echo "- **JAR:** pokermon-${{ steps.release_info.outputs.version }}.jar" >> $GITHUB_STEP_SUMMARY
-        echo "- **Windows:** Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.exe" >> $GITHUB_STEP_SUMMARY
-        echo "- **Linux:** Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.deb" >> $GITHUB_STEP_SUMMARY
-        echo "- **macOS:** Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.dmg" >> $GITHUB_STEP_SUMMARY
+        
+        # Check which platform executables were actually built and uploaded
+        if [ -f "desktop/build/distributions/Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.exe" ]; then
+          echo "- **Windows:** Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.exe (native)" >> $GITHUB_STEP_SUMMARY
+        elif [ -f "desktop/build/distributions/Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.bat" ]; then
+          echo "- **Windows:** Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.bat (launcher)" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "- **Windows:** ⚠️ Build failed" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        if [ -f "desktop/build/distributions/Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.deb" ]; then
+          echo "- **Linux:** Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.deb (native)" >> $GITHUB_STEP_SUMMARY
+        elif [ -f "desktop/build/distributions/Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.sh" ]; then
+          echo "- **Linux:** Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.sh (launcher)" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "- **Linux:** ⚠️ Build failed" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        if [ -f "desktop/build/distributions/Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.dmg" ]; then
+          echo "- **macOS:** Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.dmg (native)" >> $GITHUB_STEP_SUMMARY
+        elif [ -f "desktop/build/distributions/Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.command" ]; then
+          echo "- **macOS:** Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.command (launcher)" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "- **macOS:** ⚠️ Build failed" >> $GITHUB_STEP_SUMMARY
+        fi
         
         # Check if Android APK was built successfully
         if [ -f "android/build/distributions/Pokermon-${{ steps.release_info.outputs.version }}${{ steps.release_info.outputs.release_type != 'release' && '-debug' || '' }}.apk" ]; then

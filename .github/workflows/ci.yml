@@ -19,7 +19,7 @@ jobs:
     timeout-minutes: 15
     # Run linting checks first for fast feedback on PRs
     # Allow Copilot and same-repo PRs to run CI
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot'
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot' || contains(github.actor, 'copilot')
     
     steps:
     - name: Checkout code
@@ -65,7 +65,7 @@ jobs:
     timeout-minutes: 20
     needs: lint
     # Run on push events or PR events from same repository or Copilot PRs
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot'
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot' || contains(github.actor, 'copilot')
     
     steps:
     - name: Checkout code
@@ -135,7 +135,7 @@ jobs:
     timeout-minutes: 30
     needs: [lint, test]
     # Always run native builds for comprehensive artifact generation
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot'
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot' || contains(github.actor, 'copilot')
     
     strategy:
       matrix:
@@ -216,7 +216,7 @@ jobs:
     timeout-minutes: 20
     needs: [lint, test, native-builds]
     # Always run packaging for comprehensive artifact generation
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot'
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot' || contains(github.actor, 'copilot')
     
     steps:
     - name: Checkout code
@@ -286,7 +286,7 @@ jobs:
     timeout-minutes: 60
     needs: [lint, test, package, native-builds]
     # Always run Android builds for comprehensive artifact generation
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot'
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor == 'Copilot' || contains(github.actor, 'copilot')
     
     steps:
     - name: Checkout code

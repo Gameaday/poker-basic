@@ -17,8 +17,8 @@ concurrency:
 env:
   JAVA_VERSION: '17'
   JAVA_DISTRIBUTION: 'temurin'
-  ANDROID_API_LEVEL: '34'
-  ANDROID_BUILD_TOOLS: '34.0.0'
+  ANDROID_API_LEVEL: '36'
+  ANDROID_BUILD_TOOLS: '35.0.0'
   # Timeout values based on job complexity
   LINT_TIMEOUT: 15
   TEST_TIMEOUT: 20

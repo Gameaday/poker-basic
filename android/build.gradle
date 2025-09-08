@@ -43,13 +43,13 @@ def getVersionCode = providers.exec {
 
 android {
     namespace 'com.pokermon.android'
-    compileSdk 34  // Using stable compile SDK
-    buildToolsVersion "34.0.0"
+    compileSdk 36  // Updated to latest recommended SDK
+    buildToolsVersion "35.0.0"
 
     defaultConfig {
         applicationId "com.pokermon.android"
         minSdk 28
-        targetSdk 34  // Using stable target SDK
+        targetSdk 36  // Updated to latest target SDK
         versionCode getVersionCode.get() // Dynamic version code based on timestamp
         versionName rootProject.version // Use consistent version across all modules
 

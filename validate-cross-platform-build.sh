@@ -215,6 +215,113 @@ echo "🍎 macOS DMG:             desktop/build/distributions/*-macos.dmg"
 echo "📱 Android APK:           android/build/outputs/apk/debug/android-debug.apk"
 
 echo ""
+echo "🔥 Kotlin/Native Build Tests"
+echo "----------------------------"
+
+# Test native build capability
+echo "Testing Kotlin/Native compiler availability..."
+if [ -f kotlin-native-linux-x86_64-1.9.22/bin/kotlinc-native ]; then
+    echo -e "✅ ${GREEN}PASS${NC}: Kotlin/Native compiler available"
+    TESTS_PASSED=$((TESTS_PASSED + 1))
+else
+    echo -e "❌ ${RED}FAIL${NC}: Kotlin/Native compiler not found"
+fi
+TESTS_TOTAL=$((TESTS_TOTAL + 1))
+
+# Test native source structure
+echo "Testing native source structure..."
+if [ -f shared/src/main/kotlin/com/pokermon/native/NativeMain.kt ]; then
+    echo -e "✅ ${GREEN}PASS${NC}: Native entry point exists"
+    TESTS_PASSED=$((TESTS_PASSED + 1))
+else
+    echo -e "❌ ${RED}FAIL${NC}: Native entry point not found"
+fi
+TESTS_TOTAL=$((TESTS_TOTAL + 1))
+
+# Test Linux native build
+echo "Testing Linux native build..."
+if ./gradlew :shared:buildNativeLinux --no-daemon -q >/dev/null 2>&1; then
+    if [ -f shared/build/native/linux/pokermon-linux.kexe ]; then
+        NATIVE_SIZE=$(ls -lh shared/build/native/linux/pokermon-linux.kexe | awk '{print $5}')
+        echo -e "✅ ${GREEN}PASS${NC}: Native Linux executable built successfully ($NATIVE_SIZE)"
+        TESTS_PASSED=$((TESTS_PASSED + 1))
+        
+        # Test that it's a true native executable
+        if file shared/build/native/linux/pokermon-linux.kexe | grep -q "ELF.*executable"; then
+            echo -e "✅ ${GREEN}PASS${NC}: Executable is true native ELF binary"
+            TESTS_PASSED=$((TESTS_PASSED + 1))
+        else
+            echo -e "❌ ${RED}FAIL${NC}: Not a native ELF executable"
+        fi
+        TESTS_TOTAL=$((TESTS_TOTAL + 1))
+        
+        # Test that it runs without Java
+        echo "Testing native executable execution..."
+        if shared/build/native/linux/pokermon-linux.kexe >/dev/null 2>&1; then
+            echo -e "✅ ${GREEN}PASS${NC}: Native executable runs successfully"
+            TESTS_PASSED=$((TESTS_PASSED + 1))
+        else
+            echo -e "❌ ${RED}FAIL${NC}: Native executable failed to run"
+        fi
+        TESTS_TOTAL=$((TESTS_TOTAL + 1))
+        
+        # Test dependencies (should not include Java)
+        echo "Testing native executable dependencies..."
+        if ldd shared/build/native/linux/pokermon-linux.kexe | grep -v "java" | grep -q "libc"; then
+            echo -e "✅ ${GREEN}PASS${NC}: Only system dependencies (no Java required)"
+            TESTS_PASSED=$((TESTS_PASSED + 1))
+        else
+            echo -e "❌ ${RED}FAIL${NC}: Unexpected dependencies found"
+        fi
+        TESTS_TOTAL=$((TESTS_TOTAL + 1))
+    else
+        echo -e "❌ ${RED}FAIL${NC}: Native Linux executable not created"
+    fi
+else
+    echo -e "❌ ${RED}FAIL${NC}: Native Linux build failed"
+fi
+TESTS_TOTAL=$((TESTS_TOTAL + 1))
+
+# Test Windows native cross-compilation
+echo "Testing Windows native cross-compilation..."
+if ./gradlew :shared:buildNativeWindows --no-daemon -q >/dev/null 2>&1; then
+    if [ -f shared/build/native/windows/pokermon-windows.exe ]; then
+        WINDOWS_SIZE=$(ls -lh shared/build/native/windows/pokermon-windows.exe | awk '{print $5}')
+        echo -e "✅ ${GREEN}PASS${NC}: Native Windows executable built successfully ($WINDOWS_SIZE)"
+        TESTS_PASSED=$((TESTS_PASSED + 1))
+        
+        # Test that it's a Windows PE executable
+        if file shared/build/native/windows/pokermon-windows.exe | grep -q "PE32.*executable"; then
+            echo -e "✅ ${GREEN}PASS${NC}: Executable is true Windows PE binary"
+            TESTS_PASSED=$((TESTS_PASSED + 1))
+        else
+            echo -e "❌ ${RED}FAIL${NC}: Not a Windows PE executable"
+        fi
+        TESTS_TOTAL=$((TESTS_TOTAL + 1))
+    else
+        echo -e "❌ ${RED}FAIL${NC}: Native Windows executable not created"
+    fi
+else
+    echo -e "❌ ${RED}FAIL${NC}: Native Windows build failed"
+fi
+TESTS_TOTAL=$((TESTS_TOTAL + 1))
+
+# Test desktop native packaging
+echo "Testing desktop native packaging..."
+if ./gradlew :desktop:packageNativeLinux --no-daemon -q >/dev/null 2>&1; then
+    if [ -f desktop/build/distributions/pokermon-linux-native ]; then
+        PACKAGED_SIZE=$(ls -lh desktop/build/distributions/pokermon-linux-native | awk '{print $5}')
+        echo -e "✅ ${GREEN}PASS${NC}: Desktop native packaging successful ($PACKAGED_SIZE)"
+        TESTS_PASSED=$((TESTS_PASSED + 1))
+    else
+        echo -e "❌ ${RED}FAIL${NC}: Desktop native package not created"
+    fi
+else
+    echo -e "❌ ${RED}FAIL${NC}: Desktop native packaging failed"
+fi
+TESTS_TOTAL=$((TESTS_TOTAL + 1))
+
+echo ""
 echo "📊 Test Results Summary"
 echo "======================"
 echo -e "Tests Passed: ${GREEN}$TESTS_PASSED${NC}/$TESTS_TOTAL"

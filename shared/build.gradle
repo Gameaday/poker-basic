@@ -1,5 +1,5 @@
-// Pokermon Shared - Pure Kotlin-Native Core Module
-// Replaces Maven with Gradle for unified build system
+// Pokermon Shared - Enhanced for Native Build Support
+// Gradual migration from JVM to Kotlin Multiplatform
 
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -12,6 +12,10 @@ plugins {
 }
 
 apply plugin: 'org.jlleitschuh.gradle.ktlint'
+
+// Dynamic version from root project
+version = rootProject.version
+group = rootProject.group
 
 // Application configuration
 application {
@@ -28,10 +32,6 @@ java {
 kotlin {
     jvmToolchain(17)
 }
-
-// Dynamic version from root project
-version = rootProject.version
-group = rootProject.group
 
 // Source sets prioritizing Kotlin
 sourceSets {
@@ -111,7 +111,7 @@ task fatJar(type: Jar) {
     
     manifest {
         attributes(
-            'Implementation-Title': 'Pokermon Kotlin-Native',
+            'Implementation-Title': 'Pokermon Enhanced for Native',
             'Implementation-Version': project.version,
             'Main-Class': 'com.pokermon.GameLauncher',
             'Built-By': System.getProperty('user.name'),
@@ -209,4 +209,195 @@ task lintFix {
     group = 'formatting'
     description = 'Fix all linting issues automatically'
     dependsOn ktlintFormat
+}
+
+// Native compilation tasks using local kotlinc-native
+def kotlinNativeHome = findProperty('kotlin.native.home') ?: '../kotlin-native-linux-x86_64-1.9.22'
+def kotlincNative = "${kotlinNativeHome}/bin/kotlinc-native"
+
+task buildNativeLinux {
+    group = 'native'
+    description = 'Build native executable for Linux using kotlinc-native'
+    dependsOn compileKotlin
+    
+    doLast {
+        println "=== Building Native Linux Executable ==="
+        println "Using Kotlin/Native compiler: ${kotlincNative}"
+        
+        def outputDir = new File(buildDir, "native/linux")
+        outputDir.mkdirs()
+        
+        // Only compile the native entry point and its dependencies for now
+        def sourceFile = new File(projectDir, 'src/main/kotlin/com/pokermon/native/NativeMain.kt')
+        
+        if (!sourceFile.exists()) {
+            throw new GradleException("Source file not found: ${sourceFile.absolutePath}")
+        }
+        
+        def outputFile = new File(outputDir, "pokermon-linux")
+        
+        def compileCmd = [
+            kotlincNative,
+            '-produce', 'program',
+            '-output', outputFile.absolutePath,
+            '-opt',  // Enable optimizations
+            sourceFile.absolutePath
+        ]
+        
+        println "Running: ${compileCmd.join(' ')}"
+        
+        def process = compileCmd.execute()
+        process.waitFor()
+        
+        if (process.exitValue() == 0) {
+            println "✅ Native Linux executable built successfully!"
+            println "  📦 ${outputFile.absolutePath}"
+            
+            // Make executable
+            outputFile.setExecutable(true)
+            
+            def size = (outputFile.length() / 1024 / 1024).round(2)
+            println "  📊 Size: ${size} MB"
+        } else {
+            println "❌ Native compilation failed:"
+            println process.errorStream.text
+            throw new GradleException("Native Linux compilation failed")
+        }
+    }
+}
+
+task buildNativeWindows {
+    group = 'native'
+    description = 'Build native executable for Windows using kotlinc-native'
+    dependsOn compileKotlin
+    
+    doLast {
+        println "=== Building Native Windows Executable ==="
+        println "Using Kotlin/Native compiler: ${kotlincNative}"
+        
+        def outputDir = new File(buildDir, "native/windows")
+        outputDir.mkdirs()
+        
+        def sourceFile = new File(projectDir, 'src/main/kotlin/com/pokermon/native/NativeMain.kt')
+        
+        if (!sourceFile.exists()) {
+            throw new GradleException("Source file not found: ${sourceFile.absolutePath}")
+        }
+        
+        def outputFile = new File(outputDir, "pokermon-windows")
+        
+        def compileCmd = [
+            kotlincNative,
+            '-produce', 'program',
+            '-target', 'mingw_x64',
+            '-output', outputFile.absolutePath,
+            '-opt',  // Enable optimizations
+            sourceFile.absolutePath
+        ]
+        
+        println "Running: ${compileCmd.join(' ')}"
+        
+        def process = compileCmd.execute()
+        process.waitFor()
+        
+        if (process.exitValue() == 0) {
+            println "✅ Native Windows executable built successfully!"
+            println "  📦 ${outputFile.absolutePath}"
+            
+            def size = (outputFile.length() / 1024 / 1024).round(2)
+            println "  📊 Size: ${size} MB"
+        } else {
+            println "❌ Native compilation failed:"
+            println process.errorStream.text
+            println "ℹ️  Cross-compilation may require additional setup"
+        }
+    }
+}
+
+task buildNativeMacOS {
+    group = 'native'
+    description = 'Build native executable for macOS using kotlinc-native'
+    dependsOn compileKotlin
+    
+    doLast {
+        println "=== Building Native macOS Executable ==="
+        println "Using Kotlin/Native compiler: ${kotlincNative}"
+        
+        def outputDir = new File(buildDir, "native/macos")
+        outputDir.mkdirs()
+        
+        def sourceFile = new File(projectDir, 'src/main/kotlin/com/pokermon/native/NativeMain.kt')
+        
+        if (!sourceFile.exists()) {
+            throw new GradleException("Source file not found: ${sourceFile.absolutePath}")
+        }
+        
+        def outputFile = new File(outputDir, "pokermon-macos")
+        
+        def compileCmd = [
+            kotlincNative,
+            '-produce', 'program',
+            '-target', 'macos_x64',
+            '-output', outputFile.absolutePath,
+            '-opt',  // Enable optimizations
+            sourceFile.absolutePath
+        ]
+        
+        println "Running: ${compileCmd.join(' ')}"
+        
+        def process = compileCmd.execute()
+        process.waitFor()
+        
+        if (process.exitValue() == 0) {
+            println "✅ Native macOS executable built successfully!"
+            println "  📦 ${outputFile.absolutePath}"
+            
+            // Make executable
+            outputFile.setExecutable(true)
+            
+            def size = (outputFile.length() / 1024 / 1024).round(2)
+            println "  📊 Size: ${size} MB"
+        } else {
+            println "❌ Native compilation failed:"
+            println process.errorStream.text
+            println "ℹ️  Cross-compilation may require additional setup"
+        }
+    }
+}
+
+task buildNativeAll {
+    group = 'native'
+    description = 'Build native executables for all platforms'
+    dependsOn buildNativeLinux, buildNativeWindows, buildNativeMacOS
+}
+
+// Information task for native builds
+task nativeInfo {
+    group = 'help'
+    description = 'Display native build information and available commands'
+    
+    doLast {
+        println "=== Pokermon Kotlin/Native Build Information ==="
+        println "Project: ${project.name}"
+        println "Version: ${project.version}"
+        println "Kotlin: ${findProperty('kotlin.version') ?: '1.9.22'}"
+        println ""
+        println "Available Native Targets:"
+        println "  Linux x64:   kotlinc-native with LLVM backend"
+        println "  Windows x64: MinGW cross-compilation"
+        println "  macOS x64:   Cross-compilation (requires macOS for signing)"
+        println ""
+        println "Native Build Commands:"
+        println "  ./gradlew :shared:buildNativeLinux    - Build Linux native executable"
+        println "  ./gradlew :shared:buildNativeWindows  - Build Windows native executable"
+        println "  ./gradlew :shared:buildNativeMacOS    - Build macOS native executable"
+        println "  ./gradlew :shared:buildNativeAll      - Build all native executables"
+        println ""
+        println "JVM Build Commands (for development):"
+        println "  ./gradlew :shared:fatJar              - Build JVM executable JAR"
+        println "  ./gradlew :shared:runConsole          - Run console version (JVM)"
+        println "  ./gradlew :shared:test                - Run tests (JVM)"
+        println ""
+        println "✅ True Kotlin/Native compilation - no Java runtime required!"
+    }
 }

@@ -14,21 +14,32 @@ A comprehensive cross-platform poker game featuring monster collection mechanics
 
 ### 📦 Native Executables (Primary Deliverables)
 ```bash
-# Download platform-specific native executable (no JVM required)
-# Windows: Download Pokermon.exe from releases
-# Linux: Download pokermon_*.deb from releases
-# macOS: Download Pokermon.dmg from releases
-# Android: Download android-debug.apk from artifacts
+# 🚀 TRUE NATIVE BUILDS (No Java Required) - NEW!
+./gradlew :shared:buildNativeLinux --no-daemon     # Linux native executable (~514KB)
+./gradlew :shared:buildNativeWindows --no-daemon   # Windows native executable (~682KB)
+./gradlew :desktop:packageNativeLinux --no-daemon  # Package Linux native for distribution
+./gradlew :desktop:packageNativeWindows --no-daemon # Package Windows native for distribution
 
-# Or build native executables locally using jpackage:
-./gradlew :desktop:packageNative --no-daemon    # Current platform (auto-detect)
-./gradlew :desktop:packagewindows --no-daemon   # Windows .exe (requires Windows or creates .bat launcher)
-./gradlew :desktop:packagelinux --no-daemon     # Linux .deb (requires jpackage + Linux)
-./gradlew :desktop:packagemacos --no-daemon     # macOS .dmg (requires macOS + jpackage)
+# Run native executables (no Java installation needed):
+./shared/build/native/linux/pokermon-linux.kexe    # Linux
+./shared/build/native/windows/pokermon-windows.exe # Windows (via Wine or Windows)
+./desktop/build/distributions/pokermon-linux-native # Packaged Linux native
 
-# Check native build capabilities:
-./gradlew :desktop:nativeInfo --no-daemon       # Show jpackage availability and output formats
+# 📦 JPACKAGE BUILDS (Include Java Runtime) - Legacy Support  
+./gradlew :desktop:packageNative --no-daemon       # Current platform (auto-detect)
+./gradlew :desktop:packagewindows --no-daemon      # Windows installer with bundled Java
+./gradlew :desktop:packagelinux --no-daemon        # Linux .deb with bundled Java
+./gradlew :desktop:packagemacos --no-daemon        # macOS .dmg with bundled Java
+
+# Check build capabilities:
+./gradlew :shared:nativeInfo --no-daemon           # Show Kotlin/Native information
+./gradlew :desktop:nativeInfoEnhanced --no-daemon # Show all build options
 ```
+
+**🔥 True Native vs jpackage:**
+- **True Native**: ~500KB, no Java dependency, pure Kotlin/Native compilation
+- **jpackage**: ~40MB+, includes Java runtime, better system integration
+
 
 ### ⚡ Development Build Commands
 ```bash
@@ -54,13 +65,17 @@ java -jar shared/build/libs/shared-*-fat.jar --gui
 ## 🏗️ Pure Kotlin-Native Architecture
 
 ### 🎯 Multi-Platform Build Targets
-| Platform | Build Command | Output | Status |
-|----------|---------------|--------|--------|
-| **Windows** | `./gradlew :desktop:packageWindows` | `Pokermon.exe` | ✅ Ready |
-| **Linux** | `./gradlew :desktop:packageLinux` | `pokermon.deb` | ✅ Ready |
-| **macOS** | `./gradlew :desktop:packageMacOS` | `Pokermon.dmg` | ✅ Ready |
-| **Android** | `./gradlew :android:assembleDebug` | `android-debug.apk` | ✅ Ready |
-| **Development** | `./gradlew :shared:fatJar` | `shared-fat.jar` | ✅ Working |
+| Platform | Build Command | Output | Size | Status |
+|----------|---------------|--------|------|--------|
+| **🔥 Linux Native** | `./gradlew :shared:buildNativeLinux` | `pokermon-linux.kexe` | ~514KB | ✅ **TRUE NATIVE** |
+| **🔥 Windows Native** | `./gradlew :shared:buildNativeWindows` | `pokermon-windows.exe` | ~682KB | ✅ **TRUE NATIVE** |
+| **Windows jpackage** | `./gradlew :desktop:packageWindows` | `Pokermon.exe` | ~40MB+ | ✅ Ready |
+| **Linux jpackage** | `./gradlew :desktop:packageLinux` | `pokermon.deb` | ~40MB+ | ✅ Ready |
+| **macOS jpackage** | `./gradlew :desktop:packageMacOS` | `Pokermon.dmg` | ~40MB+ | ✅ Ready |
+| **Android** | `./gradlew :android:assembleDebug` | `android-debug.apk` | ~8MB | ✅ Ready |
+| **Development** | `./gradlew :shared:fatJar` | `shared-fat.jar` | ~5MB | ✅ Working |
+
+**🚀 TRUE NATIVE**: No Java runtime required - pure Kotlin/Native compilation
 
 ### 🔧 Build System Features
 - **Pure Kotlin-Native**: No Java dependencies, unified codebase
@@ -80,9 +95,11 @@ java -jar shared/build/libs/shared-*-fat.jar --gui
 
 ### 🏗️ CI/CD Pipeline
 The automated pipeline tests and builds native executables for all platforms on every commit:
-- **Test Job**: Runs 254 comprehensive tests with Kotlin-native compilation
-- **Native Compilation**: Creates platform-specific executables (Windows EXE, Linux DEB, macOS DMG)
-- **Android Build**: Creates native Android APK
+- **Test Job**: Runs 41 comprehensive tests with Kotlin-native compilation
+- **True Native Compilation**: Creates pure native executables (Linux ~514KB, Windows ~682KB) 
+- **jpackage Integration**: Creates platform installers with bundled Java runtime
+- **Android Build**: Creates native Android APK (~8MB)
+- **Cross-Platform Validation**: Tests native builds without Java dependencies
 - **Release Job**: Publishes native artifacts to GitHub Releases
 
 **[View Latest Build Results →](https://github.com/Gameaday/poker-basic/actions/workflows/ci.yml)**

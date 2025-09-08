@@ -484,3 +484,116 @@ packagewindows.dependsOn ':shared:fatJar'
 packagelinux.dependsOn ':shared:fatJar'
 packagemacos.dependsOn ':shared:fatJar'
 packageNative.dependsOn ':shared:fatJar'
+
+// New tasks that use true native executables from shared module
+task packageNativeLinux {
+    group = 'native'
+    description = 'Package true native Linux executable (no Java required)'
+    dependsOn ':shared:buildNativeLinux'
+    
+    doLast {
+        println "=== Packaging Native Linux Executable ==="
+        
+        def buildDir = new File(project.buildDir, 'distributions')
+        buildDir.mkdirs()
+        
+        def sourceExecutable = new File(project(':shared').buildDir, 'native/linux/pokermon-linux.kexe')
+        def targetExecutable = new File(buildDir, 'pokermon-linux-native')
+        
+        if (sourceExecutable.exists()) {
+            targetExecutable.bytes = sourceExecutable.bytes
+            targetExecutable.setExecutable(true)
+            
+            println "✅ Native Linux executable packaged successfully!"
+            println "  📦 ${targetExecutable.absolutePath}"
+            println "  📊 Size: ${(targetExecutable.length() / 1024).round(2)} KB"
+            println "  ℹ️  Runs without Java installation!"
+        } else {
+            throw new GradleException("Native Linux executable not found: ${sourceExecutable.absolutePath}")
+        }
+    }
+}
+
+task packageNativeWindows {
+    group = 'native'
+    description = 'Package true native Windows executable (no Java required)'
+    dependsOn ':shared:buildNativeWindows'
+    
+    doLast {
+        println "=== Packaging Native Windows Executable ==="
+        
+        def buildDir = new File(project.buildDir, 'distributions')
+        buildDir.mkdirs()
+        
+        def sourceExecutable = new File(project(':shared').buildDir, 'native/windows/pokermon-windows.exe')
+        def targetExecutable = new File(buildDir, 'pokermon-windows-native.exe')
+        
+        if (sourceExecutable.exists()) {
+            targetExecutable.bytes = sourceExecutable.bytes
+            
+            println "✅ Native Windows executable packaged successfully!"
+            println "  📦 ${targetExecutable.absolutePath}"
+            println "  📊 Size: ${(targetExecutable.length() / 1024).round(2)} KB"
+            println "  ℹ️  Runs without Java installation!"
+        } else {
+            throw new GradleException("Native Windows executable not found: ${sourceExecutable.absolutePath}")
+        }
+    }
+}
+
+task packageAllNative {
+    group = 'native'
+    description = 'Package all native executables (no Java required)'
+    dependsOn packageNativeLinux, packageNativeWindows
+}
+
+// Enhanced native info that shows both jpackage and true native options
+task nativeInfoEnhanced {
+    group = 'help'
+    description = 'Display comprehensive native build information'
+    
+    doLast {
+        println "=== Pokermon Desktop Native Build Information ==="
+        println "Project: ${project.name}"
+        println "Version: ${project.version}"
+        println "Platform: ${System.getProperty('os.name')}"
+        println ""
+        
+        println "🚀 TRUE NATIVE EXECUTABLES (No Java Required):"
+        println "  ./gradlew :desktop:packageNativeLinux    - True native Linux executable"
+        println "  ./gradlew :desktop:packageNativeWindows  - True native Windows executable"
+        println "  ./gradlew :desktop:packageAllNative      - All true native executables"
+        println ""
+        
+        // Check jpackage availability
+        def jpackageAvailable = false
+        try {
+            def jpackageCheck = "jpackage --version".execute()
+            jpackageCheck.waitFor()
+            if (jpackageCheck.exitValue() == 0) {
+                jpackageAvailable = true
+                def version = jpackageCheck.text.trim()
+                println "📦 JPACKAGE BUILDS (Include Java Runtime):"
+                println "  jpackage: Available (${version})"
+            }
+        } catch (Exception e) {
+            println "📦 JPACKAGE BUILDS:"
+            println "  jpackage: Not available"
+        }
+        
+        println "  ./gradlew :desktop:packageNative         - Build for current platform"
+        println "  ./gradlew :desktop:packagewindows        - Build Windows installer"
+        println "  ./gradlew :desktop:packagelinux          - Build Linux package" 
+        println "  ./gradlew :desktop:packagemacos          - Build macOS package"
+        println ""
+        
+        if (jpackageAvailable) {
+            println "✅ Both true native and jpackage builds available"
+            println "   True native: Smaller, no Java dependency"
+            println "   jpackage: Larger, includes Java runtime, better integration"
+        } else {
+            println "✅ True native builds available (recommended)"
+            println "   Pure Kotlin/Native compilation - minimal dependencies"
+        }
+    }
+}

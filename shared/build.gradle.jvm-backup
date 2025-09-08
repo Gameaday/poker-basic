@@ -1,0 +1,212 @@
+// Pokermon Shared - Pure Kotlin-Native Core Module
+// Replaces Maven with Gradle for unified build system
+
+import java.text.SimpleDateFormat
+import java.util.Date
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+    id 'org.jetbrains.kotlin.plugin.serialization'
+    id 'java-library'
+    id 'application'
+}
+
+apply plugin: 'org.jlleitschuh.gradle.ktlint'
+
+// Application configuration
+application {
+    mainClass = 'com.pokermon.GameLauncher'
+}
+
+// Java compatibility
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+// Kotlin configuration
+kotlin {
+    jvmToolchain(17)
+}
+
+// Dynamic version from root project
+version = rootProject.version
+group = rootProject.group
+
+// Source sets prioritizing Kotlin
+sourceSets {
+    main {
+        kotlin {
+            srcDirs 'src/main/kotlin'
+        }
+        java {
+            srcDirs 'src/main/java'
+        }
+        resources {
+            srcDirs 'src/main/resources'
+        }
+    }
+    test {
+        kotlin {
+            srcDirs 'src/test/kotlin'
+        }
+        java {
+            srcDirs 'src/test/java'
+        }
+        resources {
+            srcDirs 'src/test/resources'
+        }
+    }
+}
+
+// Dependencies - Pure Kotlin-native stack
+dependencies {
+    // Kotlin standard library and coroutines
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:${findProperty('kotlin.version') ?: '1.9.22'}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${findProperty('kotlinx.coroutines.version') ?: '1.7.3'}"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0"
+    
+    // Testing with Kotlin support
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    testImplementation "org.jetbrains.kotlin:kotlin-test:${findProperty('kotlin.version') ?: '1.9.22'}"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit5:${findProperty('kotlin.version') ?: '1.9.22'}"
+}
+
+// Enhanced test configuration
+test {
+    useJUnitPlatform()
+    maxParallelForks = Runtime.runtime.availableProcessors()
+    
+    // Test logging
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
+    }
+    
+    // System properties for tests
+    systemProperty 'kotlin.test.junit5.displayMode', 'verbose'
+}
+
+// Make compilation depend on up-to-date check
+compileKotlin.dependsOn checkKotlinGradlePluginConfigurationErrors
+
+// Handle duplicate resources
+processResources {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+// Fat JAR for standalone execution
+task fatJar(type: Jar) {
+    group = 'build'
+    description = 'Creates executable JAR with all dependencies'
+    
+    archiveBaseName = 'pokermon'
+    archiveClassifier = 'fat'
+    from sourceSets.main.output
+    
+    dependsOn configurations.runtimeClasspath
+    from {
+        configurations.runtimeClasspath.findAll { it.name.endsWith('jar') }.collect { zipTree(it) }
+    }
+    
+    manifest {
+        attributes(
+            'Implementation-Title': 'Pokermon Kotlin-Native',
+            'Implementation-Version': project.version,
+            'Main-Class': 'com.pokermon.GameLauncher',
+            'Built-By': System.getProperty('user.name'),
+            'Built-Date': new Date().toString(),
+            'Kotlin-Version': findProperty('kotlin.version') ?: '1.9.22'
+        )
+    }
+    
+    // Exclude duplicate files
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+// Task to run console version
+task runConsole(type: JavaExec) {
+    group = 'application'
+    description = 'Run Pokermon in console mode'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.pokermon.ConsoleMainKt'
+    args '--basic'
+}
+
+// Task for development builds with version info
+task developmentInfo {
+    group = 'help'
+    description = 'Display development information'
+    
+    doLast {
+        println "=== Pokermon Kotlin-Native Development Info ==="
+        println "Project: ${project.name}"
+        println "Version: ${project.version}"
+        println "Kotlin: ${findProperty('kotlin.version') ?: '1.9.22'}"
+        println "Main class: ${application.mainClass.get()}"
+        println ""
+        println "Available tasks:"
+        println "  ./gradlew :shared:fatJar       - Build executable JAR"
+        println "  ./gradlew :shared:runConsole   - Run console version"
+        println "  ./gradlew :shared:test         - Run tests"
+        println "  ./gradlew :shared:run          - Run GUI version"
+    }
+}
+
+// Kotlin compilation options with production optimizations
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
+    kotlinOptions {
+        jvmTarget = '17'
+        
+        // Base compiler arguments
+        def baseArgs = [
+            '-Xjsr305=strict',
+            '-opt-in=kotlin.ExperimentalStdlibApi',
+            '-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi'
+        ]
+        
+        // Add production optimizations for non-development builds
+        def isDevelopment = project.hasProperty('developmentBuild') && project.developmentBuild
+        if (!isDevelopment) {
+            baseArgs += [
+                '-Xno-call-assertions',
+                '-Xno-param-assertions', 
+                '-Xno-receiver-assertions',
+                '-Xassertions=legacy'
+            ]
+        }
+        
+        freeCompilerArgs = baseArgs
+    }
+}
+
+// Ktlint configuration for code quality
+ktlint {
+    version = "1.0.1"
+    debug = false
+    verbose = false
+    android = false
+    outputToConsole = true
+    ignoreFailures = true
+    reporters {
+        reporter "checkstyle"
+        reporter "plain"
+    }
+    filter {
+        exclude("**/build/**")
+        exclude("**/test/**/*.kt")
+    }
+}
+
+// Linting tasks
+task lint {
+    group = 'verification'
+    description = 'Run all linting checks'
+    dependsOn ktlintCheck
+}
+
+task lintFix {
+    group = 'formatting'
+    description = 'Fix all linting issues automatically'
+    dependsOn ktlintFormat
+}

@@ -174,18 +174,6 @@ object ConsoleUI {
 
         val config = mutableMapOf<String, Any>()
 
-        // Number of AI opponents
-        print("Number of AI opponents (1-3): ")
-        val aiCount =
-            try {
-                scanner.nextInt().coerceIn(1, 3)
-            } catch (e: Exception) {
-                scanner.nextLine()
-                2 // default
-            }
-        scanner.nextLine() // consume newline
-        config["aiOpponents"] = aiCount
-
         // Starting chips
         print("Starting chips (100-10000): ")
         val startingChips =
@@ -198,23 +186,73 @@ object ConsoleUI {
         scanner.nextLine() // consume newline
         config["startingChips"] = startingChips
 
-        // Difficulty level
-        println("Difficulty level:")
-        println("1. Easy")
-        println("2. Medium")
-        println("3. Hard")
-        print("Select difficulty (1-3): ")
-        val difficulty =
-            try {
-                scanner.nextInt().coerceIn(1, 3)
-            } catch (e: Exception) {
-                scanner.nextLine()
-                2 // default medium
+        when (gameMode) {
+            GameMode.CLASSIC -> {
+                // Number of AI opponents
+                print("Number of AI opponents (1-3): ")
+                val aiCount =
+                    try {
+                        scanner.nextInt().coerceIn(1, 3)
+                    } catch (e: Exception) {
+                        scanner.nextLine()
+                        2 // default
+                    }
+                scanner.nextLine() // consume newline
+                config["aiOpponents"] = aiCount
             }
-        scanner.nextLine() // consume newline
-        config["difficulty"] = difficulty
+            
+            GameMode.IRONMAN -> {
+                // Difficulty level for Ironman
+                println("Ironman Difficulty level:")
+                println("1. Easy - Reduced risk, more revival chances")
+                println("2. Normal - Standard ironman challenge") 
+                println("3. Hard - Higher stakes, less forgiveness")
+                println("4. Nightmare - Maximum difficulty for experts")
+                print("Select difficulty (1-4): ")
+                val difficulty =
+                    try {
+                        scanner.nextInt().coerceIn(1, 4)
+                    } catch (e: Exception) {
+                        scanner.nextLine()
+                        2 // default normal
+                    }
+                scanner.nextLine() // consume newline
+                config["difficulty"] = difficulty
+                
+                println("Selected: ${getDifficultyName(difficulty)}")
+            }
+            
+            GameMode.SAFARI -> {
+                println("Safari Mode Configuration:")
+                println("• 30 Safari Balls provided")
+                println("• Environmental factors affect capture rates")
+                println("• Hand strength determines capture success")
+                println("Configuration complete!")
+            }
+            
+            GameMode.ADVENTURE -> {
+                println("Adventure Mode Configuration:")
+                println("• Battle monsters with poker combat")
+                println("• Level progression and rewards")
+                println("• Monster collection system")
+                println("Configuration complete!")
+            }
+        }
 
         return config
+    }
+    
+    /**
+     * Gets difficulty name for display
+     */
+    private fun getDifficultyName(level: Int): String {
+        return when (level) {
+            1 -> "Easy"
+            2 -> "Normal"
+            3 -> "Hard"
+            4 -> "Nightmare"
+            else -> "Unknown"
+        }
     }
 
     /**

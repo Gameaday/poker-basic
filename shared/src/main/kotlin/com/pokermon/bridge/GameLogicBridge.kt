@@ -756,7 +756,7 @@ class GameLogicBridge {
                                 // Get the winner name(s) for display
                                 val winnerNames =
                                     winners.map { index ->
-                                        if (index > 0 && index < (engine.players?.size ?: 0)) {
+                                        if (index >= 0 && index < (engine.players?.size ?: 0)) {
                                             engine.players?.get(index)?.name ?: "Player $index"
                                         } else {
                                             "Unknown"

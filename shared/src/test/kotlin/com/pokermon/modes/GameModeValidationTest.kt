@@ -3,9 +3,13 @@ package com.pokermon.modes
 import com.pokermon.GameMode
 import com.pokermon.modes.adventure.AdventureMode
 import com.pokermon.modes.adventure.QuestSystem
-import com.pokermon.modes.safari.SafariGameMode
 import com.pokermon.modes.ironman.IronmanGameMode
-import org.junit.jupiter.api.Assertions.*
+import com.pokermon.modes.safari.SafariGameMode
+import org.junit.jupiter.api.Assertions.assertDoesNotThrow
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 /**
@@ -13,12 +17,11 @@ import org.junit.jupiter.api.Test
  * without stubs and provide complete functionality.
  */
 class GameModeValidationTest {
-
     @Test
     fun `all game modes should be defined and accessible`() {
         val gameMode = GameMode.values()
         assertEquals(4, gameMode.size, "Should have exactly 4 game modes")
-        
+
         val modeNames = gameMode.map { it.name }.toSet()
         assertTrue(modeNames.contains("CLASSIC"))
         assertTrue(modeNames.contains("ADVENTURE"))
@@ -66,9 +69,9 @@ class GameModeValidationTest {
         assertDoesNotThrow {
             questSystem.initialize()
         }
-        
+
         assertTrue(questSystem.getActiveQuests().isNotEmpty())
-        
+
         val summary = questSystem.getQuestSummary()
         assertNotNull(summary)
         assertTrue(summary.contains("ACTIVE QUESTS"))
@@ -85,24 +88,30 @@ class GameModeValidationTest {
     @Test
     fun `all game modes should have unique display names`() {
         val displayNames = GameMode.values().map { it.displayName }.toSet()
-        assertEquals(GameMode.values().size, displayNames.size, 
-                    "All game modes should have unique display names")
+        assertEquals(
+            GameMode.values().size,
+            displayNames.size,
+            "All game modes should have unique display names",
+        )
     }
 
     @Test
     fun `all game modes should have unique descriptions`() {
         val descriptions = GameMode.values().map { it.description }.toSet()
-        assertEquals(GameMode.values().size, descriptions.size,
-                    "All game modes should have unique descriptions")
+        assertEquals(
+            GameMode.values().size,
+            descriptions.size,
+            "All game modes should have unique descriptions",
+        )
     }
-    
+
     @Test
     fun `safari and ironman achievement systems should be available`() {
         assertDoesNotThrow {
             val safariAchievements = com.pokermon.modes.safari.SafariAchievements
             assertNotNull(safariAchievements)
         }
-        
+
         assertDoesNotThrow {
             val ironmanAchievements = com.pokermon.modes.ironman.IronmanAchievements
             assertNotNull(ironmanAchievements)

@@ -200,12 +200,12 @@ object ConsoleUI {
                 scanner.nextLine() // consume newline
                 config["aiOpponents"] = aiCount
             }
-            
+
             GameMode.IRONMAN -> {
                 // Difficulty level for Ironman
                 println("Ironman Difficulty level:")
                 println("1. Easy - Reduced risk, more revival chances")
-                println("2. Normal - Standard ironman challenge") 
+                println("2. Normal - Standard ironman challenge")
                 println("3. Hard - Higher stakes, less forgiveness")
                 println("4. Nightmare - Maximum difficulty for experts")
                 print("Select difficulty (1-4): ")
@@ -218,10 +218,10 @@ object ConsoleUI {
                     }
                 scanner.nextLine() // consume newline
                 config["difficulty"] = difficulty
-                
+
                 println("Selected: ${getDifficultyName(difficulty)}")
             }
-            
+
             GameMode.SAFARI -> {
                 println("Safari Mode Configuration:")
                 println("• 30 Safari Balls provided")
@@ -229,7 +229,7 @@ object ConsoleUI {
                 println("• Hand strength determines capture success")
                 println("Configuration complete!")
             }
-            
+
             GameMode.ADVENTURE -> {
                 println("Adventure Mode Configuration:")
                 println("• Battle monsters with poker combat")
@@ -241,7 +241,7 @@ object ConsoleUI {
 
         return config
     }
-    
+
     /**
      * Gets difficulty name for display
      */

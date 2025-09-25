@@ -84,7 +84,10 @@ class ConsoleGame {
     /**
      * Starts Safari Mode gameplay
      */
-    private fun startSafariMode(playerName: String, startingChips: Int) {
+    private fun startSafariMode(
+        playerName: String,
+        startingChips: Int,
+    ) {
         val safariBalls = 30
         println("\n🏕️ Starting Safari Mode!")
         println("You have $safariBalls safari balls to capture monsters.")
@@ -98,7 +101,11 @@ class ConsoleGame {
     /**
      * Starts Ironman Mode gameplay
      */
-    private fun startIronmanMode(playerName: String, startingChips: Int, difficulty: Int) {
+    private fun startIronmanMode(
+        playerName: String,
+        startingChips: Int,
+        difficulty: Int,
+    ) {
         println("\n⚡ Starting Ironman Mode!")
         println("High stakes survival with gacha rewards!")
         println()
@@ -111,7 +118,10 @@ class ConsoleGame {
     /**
      * Starts Adventure Mode gameplay
      */
-    private fun startAdventureMode(playerName: String, startingChips: Int) {
+    private fun startAdventureMode(
+        playerName: String,
+        startingChips: Int,
+    ) {
         println("\n⚔️ Starting Adventure Mode!")
         println("Battle monsters and explore the world!")
         println()
@@ -124,7 +134,10 @@ class ConsoleGame {
     /**
      * Starts Classic Mode gameplay
      */
-    private suspend fun startClassicMode(playerName: String, config: Map<String, Any>) {
+    private suspend fun startClassicMode(
+        playerName: String,
+        config: Map<String, Any>,
+    ) {
         // Create players
         val humanPlayer = Player(playerName, config["startingChips"] as Int)
         val players = mutableListOf(humanPlayer)

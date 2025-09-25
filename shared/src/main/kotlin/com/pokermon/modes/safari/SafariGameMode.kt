@@ -1,17 +1,12 @@
 package com.pokermon.modes.safari
 
-import com.pokermon.*
+import com.pokermon.Game
+import com.pokermon.GameEngine
+import com.pokermon.GameMode
+import com.pokermon.HandEvaluator
 import com.pokermon.database.Monster
 import com.pokermon.database.MonsterCollection
 import com.pokermon.modern.CardUtils
-import com.pokermon.modes.Achievement
-import com.pokermon.modes.GameContext
-import com.pokermon.modes.MonsterEffect
-import com.pokermon.modes.PlayerHandResult
-import com.pokermon.modes.RoundResult
-import com.pokermon.players.Player
-import kotlin.math.max
-import kotlin.math.min
 import kotlin.random.Random
 
 /**
@@ -25,7 +20,7 @@ import kotlin.random.Random
 class SafariGameMode(
     private val playerName: String,
     private val initialChips: Int,
-    private val safariBalls: Int = 30
+    private val safariBalls: Int = 30,
 ) {
     private val playerCollection = MonsterCollection()
     private val random = Random.Default
@@ -33,7 +28,7 @@ class SafariGameMode(
     private var encounterCount = 0
     private var capturesSuccessful = 0
     private var escapedMonsters = 0
-    
+
     // Environmental factors
     private var currentWeather = WeatherCondition.CLEAR
     private var timeOfDay = TimeOfDay.DAY
@@ -54,9 +49,9 @@ class SafariGameMode(
         while (continueAdventure && ballsRemaining > 0) {
             // Generate random environment
             updateEnvironment()
-            
+
             val wildMonster = generateWildMonster()
-            
+
             println("🌿 In the ${terrainType.displayName} (${currentWeather.displayName}, ${timeOfDay.displayName})")
             println("🐾 A wild ${wildMonster.name} appears!")
             println("   Rarity: ${wildMonster.rarity.displayName}")
@@ -65,13 +60,13 @@ class SafariGameMode(
             println()
 
             val encounterResult = attemptCapture(wildMonster, playerChips)
-            
+
             when (encounterResult.outcome) {
                 CaptureOutcome.SUCCESS -> {
                     println("🎉 Success! You caught ${wildMonster.name}!")
                     playerCollection.addMonster(wildMonster.toMonster())
                     capturesSuccessful++
-                    
+
                     // Bonus chips for rare captures
                     val bonusChips = calculateCaptureReward(wildMonster)
                     if (bonusChips > 0) {
@@ -91,15 +86,15 @@ class SafariGameMode(
                     break
                 }
             }
-            
+
             ballsRemaining--
             encounterCount++
-            
+
             if (ballsRemaining <= 0) {
                 println("⚠️ No more safari balls remaining!")
                 break
             }
-            
+
             continueAdventure = promptContinue()
         }
 
@@ -114,12 +109,12 @@ class SafariGameMode(
         if (random.nextInt(100) < 20) {
             currentWeather = WeatherCondition.values().random()
         }
-        
+
         // Change time of day
         if (random.nextInt(100) < 30) {
             timeOfDay = if (timeOfDay == TimeOfDay.DAY) TimeOfDay.NIGHT else TimeOfDay.DAY
         }
-        
+
         // Change terrain occasionally
         if (random.nextInt(100) < 15) {
             terrainType = TerrainType.values().random()
@@ -130,32 +125,34 @@ class SafariGameMode(
      * Generates a wild monster based on environmental factors
      */
     private fun generateWildMonster(): WildMonster {
-        val (rarity, baseName, captureRate) = when {
-            // Rare spawns in specific conditions
-            currentWeather == WeatherCondition.STORM && timeOfDay == TimeOfDay.NIGHT && random.nextInt(100) < 5 -> {
-                Triple(Monster.Rarity.LEGENDARY, "Storm Dragon", 0.05)
+        val (rarity, baseName, captureRate) =
+            when {
+                // Rare spawns in specific conditions
+                currentWeather == WeatherCondition.STORM && timeOfDay == TimeOfDay.NIGHT && random.nextInt(100) < 5 -> {
+                    Triple(Monster.Rarity.LEGENDARY, "Storm Dragon", 0.05)
+                }
+                terrainType == TerrainType.CAVE && random.nextInt(100) < 10 -> {
+                    Triple(Monster.Rarity.EPIC, "Crystal Bat", 0.15)
+                }
+                timeOfDay == TimeOfDay.NIGHT && random.nextInt(100) < 25 -> {
+                    Triple(Monster.Rarity.RARE, "Night Prowler", 0.25)
+                }
+                currentWeather == WeatherCondition.RAIN && random.nextInt(100) < 40 -> {
+                    Triple(Monster.Rarity.UNCOMMON, "Rain Sprite", 0.40)
+                }
+                else -> {
+                    Triple(Monster.Rarity.COMMON, "Wild Creature", 0.60)
+                }
             }
-            terrainType == TerrainType.CAVE && random.nextInt(100) < 10 -> {
-                Triple(Monster.Rarity.EPIC, "Crystal Bat", 0.15)
-            }
-            timeOfDay == TimeOfDay.NIGHT && random.nextInt(100) < 25 -> {
-                Triple(Monster.Rarity.RARE, "Night Prowler", 0.25)
-            }
-            currentWeather == WeatherCondition.RAIN && random.nextInt(100) < 40 -> {
-                Triple(Monster.Rarity.UNCOMMON, "Rain Sprite", 0.40)
-            }
-            else -> {
-                Triple(Monster.Rarity.COMMON, "Wild Creature", 0.60)
-            }
-        }
 
-        val environmentName = when (terrainType) {
-            TerrainType.GRASSLAND -> "Meadow $baseName"
-            TerrainType.FOREST -> "Forest $baseName"
-            TerrainType.MOUNTAIN -> "Mountain $baseName"
-            TerrainType.CAVE -> "Cave $baseName"
-            TerrainType.WATER -> "River $baseName"
-        }
+        val environmentName =
+            when (terrainType) {
+                TerrainType.GRASSLAND -> "Meadow $baseName"
+                TerrainType.FOREST -> "Forest $baseName"
+                TerrainType.MOUNTAIN -> "Mountain $baseName"
+                TerrainType.CAVE -> "Cave $baseName"
+                TerrainType.WATER -> "River $baseName"
+            }
 
         return WildMonster(
             name = environmentName,
@@ -163,7 +160,7 @@ class SafariGameMode(
             baseCaptureRate = captureRate,
             preferredWeather = currentWeather,
             preferredTerrain = terrainType,
-            behavior = determineBehavior(rarity)
+            behavior = determineBehavior(rarity),
         )
     }
 
@@ -183,7 +180,10 @@ class SafariGameMode(
     /**
      * Attempts to capture a wild monster through poker gameplay
      */
-    private fun attemptCapture(monster: WildMonster, playerChips: Int): CaptureResult {
+    private fun attemptCapture(
+        monster: WildMonster,
+        playerChips: Int,
+    ): CaptureResult {
         if (ballsRemaining <= 0) {
             return CaptureResult(CaptureOutcome.OUT_OF_BALLS, 0)
         }
@@ -193,12 +193,14 @@ class SafariGameMode(
         println()
 
         // Create a poker hand using the game engine
-        val gameEngine = GameEngine(
-            gameConfig = Game(
-                gameMode = GameMode.SAFARI,
-                startingChips = playerChips,
+        val gameEngine =
+            GameEngine(
+                gameConfig =
+                    Game(
+                        gameMode = GameMode.SAFARI,
+                        startingChips = playerChips,
+                    ),
             )
-        )
 
         gameEngine.initializeGame(arrayOf(playerName))
         val hand = gameEngine.players!![0].hand
@@ -217,28 +219,29 @@ class SafariGameMode(
 
         // Calculate final capture chance
         val finalCaptureChance = calculateCaptureChance(monster, captureStrength)
-        
+
         println("Final capture chance: ${String.format("%.1f%%", finalCaptureChance * 100)}")
         println("🎯 Throwing Safari Ball...")
         Thread.sleep(1500) // Build suspense
 
         val success = random.nextDouble() < finalCaptureChance
-        
+
         return if (success) {
             CaptureResult(CaptureOutcome.SUCCESS, captureStrength)
         } else {
             // Determine if monster escapes
-            val escapeChance = when (monster.behavior) {
-                MonsterBehavior.DOCILE -> 0.1
-                MonsterBehavior.NEUTRAL -> 0.3
-                MonsterBehavior.AGGRESSIVE -> 0.5
-                MonsterBehavior.LEGENDARY -> 0.7
-                MonsterBehavior.RARE -> 0.4
-            }
-            
+            val escapeChance =
+                when (monster.behavior) {
+                    MonsterBehavior.DOCILE -> 0.1
+                    MonsterBehavior.NEUTRAL -> 0.3
+                    MonsterBehavior.AGGRESSIVE -> 0.5
+                    MonsterBehavior.LEGENDARY -> 0.7
+                    MonsterBehavior.RARE -> 0.4
+                }
+
             val escaped = random.nextDouble() < escapeChance
             val outcome = if (escaped) CaptureOutcome.ESCAPED else CaptureOutcome.FAILED
-            
+
             CaptureResult(outcome, captureStrength)
         }
     }
@@ -246,28 +249,31 @@ class SafariGameMode(
     /**
      * Calculates the final capture chance based on multiple factors
      */
-    private fun calculateCaptureChance(monster: WildMonster, handStrength: Int): Double {
+    private fun calculateCaptureChance(
+        monster: WildMonster,
+        handStrength: Int,
+    ): Double {
         var captureChance = monster.baseCaptureRate
-        
+
         // Hand strength bonus (stronger hands improve chances)
         val handBonus = (handStrength / 999.0) * 0.3 // Up to 30% bonus
         captureChance += handBonus
-        
+
         // Environmental bonuses
         if (currentWeather == monster.preferredWeather) {
             captureChance += 0.1 // 10% bonus for preferred weather
         }
-        
+
         if (terrainType == monster.preferredTerrain) {
             captureChance += 0.1 // 10% bonus for preferred terrain
         }
-        
+
         // Time of day effects
         when (timeOfDay) {
             TimeOfDay.DAY -> if (monster.rarity == Monster.Rarity.COMMON) captureChance += 0.05
             TimeOfDay.NIGHT -> if (monster.rarity in listOf(Monster.Rarity.RARE, Monster.Rarity.EPIC)) captureChance += 0.05
         }
-        
+
         // Weather effects
         when (currentWeather) {
             WeatherCondition.CLEAR -> captureChance += 0.02
@@ -275,7 +281,7 @@ class SafariGameMode(
             WeatherCondition.STORM -> captureChance -= 0.1 // Much harder
             WeatherCondition.FOG -> captureChance -= 0.07 // Visibility issues
         }
-        
+
         // Behavior effects
         when (monster.behavior) {
             MonsterBehavior.DOCILE -> captureChance += 0.15
@@ -284,7 +290,7 @@ class SafariGameMode(
             MonsterBehavior.LEGENDARY -> captureChance -= 0.2
             MonsterBehavior.RARE -> captureChance -= 0.05
         }
-        
+
         // Ensure capture chance stays within reasonable bounds
         return captureChance.coerceIn(0.01, 0.95)
     }
@@ -307,7 +313,7 @@ class SafariGameMode(
      */
     private fun promptContinue(): Boolean {
         if (ballsRemaining <= 0) return false
-        
+
         print("Continue safari? (y/n) [y]: ")
         val input = readlnOrNull()?.trim()?.lowercase() ?: ""
         return input.isEmpty() || input == "y" || input == "yes"
@@ -323,7 +329,7 @@ class SafariGameMode(
         println("Successful captures: $capturesSuccessful")
         println("Monsters escaped: $escapedMonsters")
         println("Safari balls used: ${safariBalls - ballsRemaining}")
-        
+
         val successRate = if (encounterCount > 0) (capturesSuccessful * 100.0) / encounterCount else 0.0
         println("Success rate: ${String.format("%.1f%%", successRate)}")
         println()
@@ -348,12 +354,12 @@ enum class WeatherCondition(val displayName: String) {
     CLEAR("Clear"),
     RAIN("Rain"),
     STORM("Storm"),
-    FOG("Fog")
+    FOG("Fog"),
 }
 
 enum class TimeOfDay(val displayName: String) {
     DAY("Day"),
-    NIGHT("Night")
+    NIGHT("Night"),
 }
 
 enum class TerrainType(val displayName: String) {
@@ -361,18 +367,18 @@ enum class TerrainType(val displayName: String) {
     FOREST("Forest"),
     MOUNTAIN("Mountain"),
     CAVE("Cave"),
-    WATER("Water")
+    WATER("Water"),
 }
 
 /**
  * Monster behavior patterns affecting capture difficulty
  */
 enum class MonsterBehavior {
-    DOCILE,      // Easy to capture
-    NEUTRAL,     // Standard behavior
-    AGGRESSIVE,  // Hard to capture, likely to escape
-    RARE,        // Special rare behavior
-    LEGENDARY    // Extremely difficult legendary behavior
+    DOCILE, // Easy to capture
+    NEUTRAL, // Standard behavior
+    AGGRESSIVE, // Hard to capture, likely to escape
+    RARE, // Special rare behavior
+    LEGENDARY, // Extremely difficult legendary behavior
 }
 
 /**
@@ -384,7 +390,7 @@ data class WildMonster(
     val baseCaptureRate: Double,
     val preferredWeather: WeatherCondition,
     val preferredTerrain: TerrainType,
-    val behavior: MonsterBehavior
+    val behavior: MonsterBehavior,
 ) {
     fun toMonster(): Monster {
         return Monster(
@@ -393,7 +399,7 @@ data class WildMonster(
             baseHealth = 100,
             effectType = Monster.EffectType.CARD_ADVANTAGE,
             effectPower = rarity.powerMultiplier.toInt() * 10,
-            description = "A wild monster captured in safari mode"
+            description = "A wild monster captured in safari mode",
         )
     }
 }
@@ -403,15 +409,15 @@ data class WildMonster(
  */
 data class CaptureResult(
     val outcome: CaptureOutcome,
-    val handStrength: Int
+    val handStrength: Int,
 )
 
 /**
  * Possible outcomes of a capture attempt
  */
 enum class CaptureOutcome {
-    SUCCESS,        // Monster captured successfully
-    FAILED,         // Capture failed but monster didn't escape
-    ESCAPED,        // Monster escaped
-    OUT_OF_BALLS    // No more safari balls
+    SUCCESS, // Monster captured successfully
+    FAILED, // Capture failed but monster didn't escape
+    ESCAPED, // Monster escaped
+    OUT_OF_BALLS, // No more safari balls
 }

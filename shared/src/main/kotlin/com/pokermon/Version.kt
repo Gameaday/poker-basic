@@ -117,12 +117,13 @@ object Version {
      * @return Detailed version info with build details
      */
     fun getDetailedVersionInfo(): String {
-        val buildTime = try {
-            val clazz = Version::class.java
-            clazz.`package`?.implementationTitle ?: "Unknown"
-        } catch (e: Exception) {
-            "Unknown"
-        }
+        val buildTime =
+            try {
+                val clazz = Version::class.java
+                clazz.`package`?.implementationTitle ?: "Unknown"
+            } catch (e: Exception) {
+                "Unknown"
+            }
         return "$APP_NAME v${getValidatedVersion()} - $buildTime"
     }
 }

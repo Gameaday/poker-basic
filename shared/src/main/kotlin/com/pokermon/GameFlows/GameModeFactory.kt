@@ -229,7 +229,7 @@ class SafariModeLogic : GameModeFactory.GameModeLogic {
     override fun processCustomAction(action: GameActions): GameEvents? {
         return when (action) {
             is GameActions.SafariActions.ThrowSafariBall -> 
-                GameEvents.SafariEvents.SafariBallThrown(action.player, 0)
+                GameEvents.SafariEvents.SafariBallThrown(action.player, "standard", 0)
             else -> null
         }
     }

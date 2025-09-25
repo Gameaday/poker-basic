@@ -93,7 +93,7 @@ sealed class GameActions {
     }
     
     sealed class IronmanActions : GameActions() {
-        data class ConvertToGachaPoints(val chips: Int, val points: Int) : GameActions()
+        data class ConvertToGachaPoints(val chips: Int, val points: Int) : IronmanActions()
         data class PerformGachaPull(val player: Player, val pointsSpent: Int, val pullType: String = "standard") : IronmanActions()
         data class TriggerPermadeath(val player: Player, val reason: String) : IronmanActions()
         data class AcknowledgeRisk(val player: Player, val riskLevel: Double) : IronmanActions()

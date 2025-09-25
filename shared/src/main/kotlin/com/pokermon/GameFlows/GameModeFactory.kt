@@ -2,6 +2,7 @@ package com.pokermon.GameFlows
 
 import com.pokermon.GameMode
 import com.pokermon.players.Player
+import com.pokermon.database.Monster
 
 /**
  * Factory for creating mode-specific configurations and behaviors.
@@ -283,7 +284,7 @@ class IronmanModeLogic : GameModeFactory.GameModeLogic {
     override fun processCustomAction(action: GameActions): GameEvents? {
         return when (action) {
             is GameActions.IronmanActions.PerformGachaPull -> 
-                GameEvents.IronmanEvents.GachaPullPerformed(action.player, action.pointsSpent, "Mystery Prize", Monster.Rarity.COMMON)
+                GameEvents.IronmanEvents.GachaPullPerformed(action.player, action.pointsSpent, "Mystery Prize", "COMMON")
             else -> null
         }
     }

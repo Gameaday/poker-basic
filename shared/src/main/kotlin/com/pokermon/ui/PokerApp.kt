@@ -696,7 +696,9 @@ class PokerApp {
         setupMainWindow()
         
         // State-Driven UI Components
-        setupStateObservers()
+        CoroutineScope(Dispatchers.Main).launch {
+            setupStateObservers()
+        }
         setupGameBoard()
         setupPlayerDisplays()
         setupBettingInterface()

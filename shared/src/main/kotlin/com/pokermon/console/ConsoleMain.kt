@@ -614,8 +614,15 @@ object ConsoleMain {
             
             // Generate wild monster encounter
             val wildMonster = generateWildMonster(currentRound)
+            val baseCapture = when (wildMonster.rarity) {
+                Monster.Rarity.COMMON -> 0.6
+                Monster.Rarity.UNCOMMON -> 0.4
+                Monster.Rarity.RARE -> 0.2
+                Monster.Rarity.LEGENDARY -> 0.05
+                else -> 0.5
+            }
             println("👀 Wild ${wildMonster.name} appeared! (Rarity: ${wildMonster.rarity})")
-            println("📊 Capture rate: ${(wildMonster.captureRate * 100).toInt()}%")
+            println("📊 Capture rate: ${(baseCapture * 100).toInt()}%")
             
             // Deal cards for capture attempt
             dealCardsToPlayers(activePlayers.filter { (safariBalls[it] ?: 0) > 0 }, deck, 5)
@@ -642,7 +649,7 @@ object ConsoleMain {
                 
                 val handStrength = evaluateHandForCapture(player)
                 val captureBonus = calculateCaptureBonus(handStrength)
-                val finalCaptureRate = (wildMonster.captureRate + captureBonus).coerceIn(0.0, 1.0)
+                val finalCaptureRate = (baseCapture + captureBonus).coerceIn(0.0, 1.0)
                 
                 println("🎯 Hand strength: ${handStrength.description}")
                 println("📈 Capture bonus: +${(captureBonus * 100).toInt()}%")
@@ -657,10 +664,10 @@ object ConsoleMain {
                     
                     // Capture rewards
                     val captureReward = when (wildMonster.rarity) {
-                        "common" -> 50
-                        "uncommon" -> 100
-                        "rare" -> 250
-                        "legendary" -> 500
+                        Monster.Rarity.COMMON -> 50
+                        Monster.Rarity.UNCOMMON -> 100
+                        Monster.Rarity.RARE -> 250
+                        Monster.Rarity.LEGENDARY -> 500
                         else -> 25
                     }
                     player.chips += captureReward
@@ -1060,7 +1067,7 @@ object ConsoleMain {
 
     private fun displayPlayerHand(player: Player, title: String) {
         println("\n$title - ${player.name}:")
-        println("  ${CardUtils.formatHandSymbols(player.hand.toList())}")
+        println("  ${CardUtils.formatHandSymbols(player.hand)}")
         val result = HandEvaluator.evaluateHand(player.hand)
         println("  ${result.description} (Score: ${result.score})")
     }
@@ -1075,7 +1082,7 @@ object ConsoleMain {
         
         // Shuffle deck if getting low
         if (deck.size < 20) {
-            deck.addAll(CardUtils.createDeck())
+            deck.addAll(CardUtils.createDeck().toList())
             deck.shuffle()
         }
     }

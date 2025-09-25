@@ -5,6 +5,7 @@ import com.pokermon.GameEngine
 import com.pokermon.GameMode
 import com.pokermon.HandEvaluator
 import com.pokermon.database.Monster
+import com.pokermon.database.MonsterBattleSystem
 import com.pokermon.database.MonsterDatabase
 import com.pokermon.modes.Achievement
 import com.pokermon.modes.GameContext
@@ -12,6 +13,8 @@ import com.pokermon.modes.MonsterEffect
 import com.pokermon.modes.PlayerHandResult
 import com.pokermon.modes.RoundResult
 import com.pokermon.players.Player
+import com.pokermon.players.PlayerProfile
+import kotlin.random.Random
 
 /**
  * Classic mode implementation - Traditional 5-card draw poker with monster companions.
@@ -22,6 +25,8 @@ import com.pokermon.players.Player
  */
 class ClassicGameMode {
     private val monsterDatabase = MonsterDatabase
+    private val battleSystem = MonsterBattleSystem()
+    private val random = Random.Default
 
     /**
      * Creates a classic game engine instance
@@ -88,7 +93,40 @@ class ClassicGameMode {
     }
 
     /**
-     * Applies classic mode specific monster abilities
+     * Triggers classic mode monster battles when appropriate
+     */
+    fun triggerMonsterBattle(
+        player: Player,
+        playerProfile: PlayerProfile,
+        handStrength: Int
+    ): ClassicMonsterBattleResult? {
+        // Classic mode has 25% chance for companion battle after winning a significant hand
+        if (handStrength >= HandEvaluator.HandType.FULL_HOUSE.ordinal && random.nextFloat() < 0.25f) {
+            val playerMonster = playerProfile.monsterCollection.activeMonsters.firstOrNull()
+            if (playerMonster != null) {
+                // Generate random opponent based on classic mode themes
+                val opponents = listOf(
+                    monsterDatabase.getMonster("Classic Champion") ?: Monster.createBasic("Classic Champion", Monster.Rarity.RARE),
+                    monsterDatabase.getMonster("Poker Master") ?: Monster.createBasic("Poker Master", Monster.Rarity.UNCOMMON),
+                    monsterDatabase.getMonster("Card Guardian") ?: Monster.createBasic("Card Guardian", Monster.Rarity.COMMON)
+                )
+                
+                val opponent = opponents.random()
+                val battleResult = battleSystem.executeBattle(playerMonster, opponent, handStrength)
+                
+                return ClassicMonsterBattleResult(
+                    battleResult = battleResult,
+                    chipReward = if (battleResult.winner == playerMonster) handStrength * 50 else 0,
+                    experienceGained = handStrength * 25,
+                    opponent = opponent
+                )
+            }
+        }
+        return null
+    }
+
+    /**
+     * Enhanced monster ability application with battle integration
      */
     fun applyMonsterAbilities(
         player: Player,
@@ -165,4 +203,33 @@ class ClassicGameMode {
 
         return achievements
     }
+
+    /**
+     * Enhanced monster training specific to Classic mode
+     */
+    fun trainMonster(monster: Monster, rounds: Int = 1): Monster {
+        // Classic mode training focuses on poker-related stats
+        var trainedMonster = monster
+        repeat(rounds) {
+            trainedMonster = trainedMonster.copy(
+                stats = trainedMonster.stats.copy(
+                    attack = trainedMonster.stats.attack + 2, // Poker aggression
+                    defense = trainedMonster.stats.defense + 1, // Bluff defense
+                    special = trainedMonster.stats.special + 3, // Card reading ability
+                    speed = trainedMonster.stats.speed + 1 // Quick decisions
+                )
+            )
+        }
+        return trainedMonster
+    }
 }
+
+/**
+ * Result of a classic mode monster battle
+ */
+data class ClassicMonsterBattleResult(
+    val battleResult: com.pokermon.database.BattleResult,
+    val chipReward: Int,
+    val experienceGained: Int,
+    val opponent: Monster
+)

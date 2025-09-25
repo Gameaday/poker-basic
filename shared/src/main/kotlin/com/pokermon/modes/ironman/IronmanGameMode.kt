@@ -5,8 +5,10 @@ import com.pokermon.GameEngine
 import com.pokermon.GameMode
 import com.pokermon.HandEvaluator
 import com.pokermon.database.Monster
+import com.pokermon.database.MonsterBattleSystem
 import com.pokermon.database.MonsterCollection
 import com.pokermon.modern.CardUtils
+import com.pokermon.players.PlayerProfile
 import kotlin.math.min
 import kotlin.random.Random
 
@@ -25,6 +27,7 @@ class IronmanGameMode(
     private val difficultyLevel: Int = 3,
 ) {
     private val playerCollection = MonsterCollection()
+    private val battleSystem = MonsterBattleSystem()
     private val random = Random.Default
 
     // Ironman progression tracking
@@ -593,7 +596,75 @@ class IronmanGameMode(
         score = (score * DIFFICULTY_MULTIPLIERS[difficultyLevel]!!).toInt()
         return score
     }
+
+    /**
+     * Integrates with comprehensive monster battle system for high-stakes encounters
+     */
+    fun triggerIronmanBattle(playerProfile: PlayerProfile, bossMonster: Monster, handStrength: Int): IronmanBattleResult? {
+        val playerMonster = playerProfile.monsterCollection.activeMonsters.firstOrNull()
+        if (playerMonster != null) {
+            // Ironman battles are more intense with higher stakes
+            val enhancedBoss = bossMonster.copy(
+                stats = bossMonster.stats.copy(
+                    hp = (bossMonster.stats.hp * riskLevel).toInt(),
+                    attack = (bossMonster.stats.attack * riskLevel).toInt(),
+                    defense = (bossMonster.stats.defense * riskLevel).toInt()
+                )
+            )
+            
+            val battleResult = battleSystem.executeBattle(playerMonster, enhancedBoss, handStrength)
+            
+            val gachaReward = if (battleResult.winner == playerMonster) {
+                val baseReward = (handStrength * 100 * riskLevel).toInt()
+                when (difficultyLevel) {
+                    4 -> baseReward * 3 // Nightmare mode
+                    3 -> baseReward * 2 // Hard mode  
+                    2 -> (baseReward * 1.5).toInt() // Normal mode
+                    else -> baseReward // Easy mode
+                }
+            } else 0
+            
+            return IronmanBattleResult(
+                battleResult = battleResult,
+                gachaPointsEarned = gachaReward,
+                riskLevelIncrease = if (battleResult.winner == playerMonster) 0.1f else 0.0f,
+                permadeathRisk = !battleResult.winner.equals(playerMonster) && riskLevel > 2.5f
+            )
+        }
+        return null
+    }
+
+    /**
+     * Ironman-specific monster training emphasizes survival and power
+     */
+    fun trainIronmanMonster(monster: Monster, rounds: Int = 1): Monster {
+        // Ironman training focuses on maximum power and survival
+        var trainedMonster = monster
+        repeat(rounds) {
+            val multiplier = riskLevel.toFloat()
+            trainedMonster = trainedMonster.copy(
+                stats = trainedMonster.stats.copy(
+                    hp = trainedMonster.stats.hp + (5 * multiplier).toInt(), // Survival focus
+                    attack = trainedMonster.stats.attack + (4 * multiplier).toInt(), // High damage
+                    defense = trainedMonster.stats.defense + (4 * multiplier).toInt(), // Tank capability
+                    speed = trainedMonster.stats.speed + (2 * multiplier).toInt(), // Tactical speed
+                    special = trainedMonster.stats.special + (3 * multiplier).toInt() // Power abilities
+                )
+            )
+        }
+        return trainedMonster
+    }
 }
+
+/**
+ * Result of an Ironman mode monster battle
+ */
+data class IronmanBattleResult(
+    val battleResult: com.pokermon.database.BattleResult,
+    val gachaPointsEarned: Int,
+    val riskLevelIncrease: Float,
+    val permadeathRisk: Boolean
+)
 
 /**
  * Result of a poker round in Ironman mode

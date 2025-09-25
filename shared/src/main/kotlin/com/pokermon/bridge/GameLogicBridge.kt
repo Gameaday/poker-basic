@@ -436,6 +436,59 @@ class GameLogicBridge {
     private fun shouldCallOrCheck(context: AIDecisionContext): Boolean =
         context.canAffordCall && context.isReasonableBet
 
+    // ================================================================
+    // VALIDATION HELPERS - Common validation patterns abstracted
+    // ================================================================
+
+    /**
+     * Validates that the game is initialized and returns the engine.
+     * @return GameEngine if valid, null otherwise
+     */
+    private fun validateGameEngine(): GameEngine? {
+        return if (isGameInitialized) gameEngine else null
+    }
+
+    /**
+     * Validates that players exist and returns them.
+     * @param engine The game engine to check
+     * @return Array<Player> if valid, null otherwise
+     */
+    private fun validatePlayers(engine: GameEngine): Array<Player>? {
+        val players = engine.players
+        return if (players != null && players.isNotEmpty()) players else null
+    }
+
+    /**
+     * Gets the human player (always at index 0) with validation.
+     * @param players Array of players
+     * @return Player if valid, null otherwise
+     */
+    private fun getHumanPlayer(players: Array<Player>): Player? {
+        return if (players.isNotEmpty()) players[0] else null
+    }
+
+    /**
+     * Executes a player action with common validation pattern.
+     * @param action The action to execute
+     * @return GameActionResult indicating success or failure
+     */
+    private fun executePlayerAction(action: (GameEngine, Array<Player>, Player) -> GameActionResult): GameActionResult {
+        val engine = validateGameEngine() 
+            ?: return GameActionResult(false, "Game not initialized")
+        
+        val players = validatePlayers(engine) 
+            ?: return GameActionResult(false, "No players found")
+            
+        val humanPlayer = getHumanPlayer(players) 
+            ?: return GameActionResult(false, "No human player found")
+
+        return try {
+            action(engine, players, humanPlayer)
+        } catch (e: Exception) {
+            GameActionResult(false, "Action failed: ${e.message}")
+        }
+    }
+
     /**
      * Helper method to determine if we should force phase advancement
      * even if isRoundComplete() returns false.
@@ -637,42 +690,27 @@ class GameLogicBridge {
      * Perform a call action.
      */
     fun performCall(): GameActionResult {
-        if (!isGameInitialized) {
-            return GameActionResult(false, "Game not initialized")
-        }
+        return executePlayerAction { engine, _, player ->
+            // For testing purposes, use a standard call amount if no high bet exists
+            val highBet = engine.getCurrentHighBet()
+            val callAmount = if (highBet <= 0) 50 else (highBet - player.bet).coerceAtMost(player.chips)
 
-        return try {
-            gameEngine?.let { engine ->
-                val players = engine.players
-                if (players != null && players.isNotEmpty()) {
-                    val player = players[0] // Human player
-
-                    // For testing purposes, use a standard call amount if no high bet exists
-                    val highBet = engine.getCurrentHighBet()
-                    val callAmount = if (highBet <= 0) 50 else (highBet - player.bet).coerceAtMost(player.chips)
-
-                    if (callAmount <= 0) {
-                        // Check if we should advance phase after this action
-                        checkAndAdvanceGamePhase()
-                        updatePlayerData()
-                        GameActionResult(true, "No bet to call")
-                    } else {
-                        player.placeBet(player.bet + callAmount)
-                        // Add the call amount to the pot
-                        engine.addToPot(callAmount)
-                        // Advance to next player after action
-                        engine.nextPlayer()
-                        // Check if we should advance phase after this action
-                        checkAndAdvanceGamePhase()
-                        updatePlayerData()
-                        GameActionResult(true, "Called for $callAmount chips")
-                    }
-                } else {
-                    GameActionResult(false, "No players found")
-                }
-            } ?: GameActionResult(false, "Game engine not available")
-        } catch (e: Exception) {
-            GameActionResult(false, "Error performing call: ${e.message}")
+            if (callAmount <= 0) {
+                // Check if we should advance phase after this action
+                checkAndAdvanceGamePhase()
+                updatePlayerData()
+                GameActionResult(true, "No bet to call")
+            } else {
+                player.placeBet(player.bet + callAmount)
+                // Add the call amount to the pot
+                engine.addToPot(callAmount)
+                // Advance to next player after action
+                engine.nextPlayer()
+                // Check if we should advance phase after this action
+                checkAndAdvanceGamePhase()
+                updatePlayerData()
+                GameActionResult(true, "Called for $callAmount chips")
+            }
         }
     }
 
@@ -680,35 +718,20 @@ class GameLogicBridge {
      * Perform a raise action.
      */
     fun performRaise(amount: Int): GameActionResult {
-        if (!isGameInitialized) {
-            return GameActionResult(false, "Game not initialized")
-        }
-
-        return try {
-            gameEngine?.let { engine ->
-                val players = engine.players
-                if (players != null && players.isNotEmpty()) {
-                    val player = players[0] // Human player
-
-                    if (amount > player.chips) {
-                        GameActionResult(false, "Not enough chips to raise by $amount")
-                    } else {
-                        player.placeBet(amount)
-                        // Add the raise amount to the pot
-                        engine.addToPot(amount)
-                        // Advance to next player after action
-                        engine.nextPlayer()
-                        // Check if we should advance phase after this action
-                        checkAndAdvanceGamePhase()
-                        updatePlayerData()
-                        GameActionResult(true, "Raised by $amount chips")
-                    }
-                } else {
-                    GameActionResult(false, "No players found")
-                }
-            } ?: GameActionResult(false, "Game engine not available")
-        } catch (e: Exception) {
-            GameActionResult(false, "Error performing raise: ${e.message}")
+        return executePlayerAction { engine, _, player ->
+            if (amount > player.chips) {
+                GameActionResult(false, "Not enough chips to raise by $amount")
+            } else {
+                player.placeBet(amount)
+                // Add the raise amount to the pot
+                engine.addToPot(amount)
+                // Advance to next player after action
+                engine.nextPlayer()
+                // Check if we should advance phase after this action
+                checkAndAdvanceGamePhase()
+                updatePlayerData()
+                GameActionResult(true, "Raised by $amount chips")
+            }
         }
     }
 
@@ -716,28 +739,14 @@ class GameLogicBridge {
      * Perform a fold action.
      */
     fun performFold(): GameActionResult {
-        if (!isGameInitialized) {
-            return GameActionResult(false, "Game not initialized")
-        }
-
-        return try {
-            gameEngine?.let { engine ->
-                val players = engine.players
-                if (players != null && players.isNotEmpty()) {
-                    val player = players[0] // Human player
-                    player.setFold(true)
-                    // Advance to next player after action
-                    engine.nextPlayer()
-                    // Check if we should advance phase after this action
-                    checkAndAdvanceGamePhase()
-                    updatePlayerData()
-                    GameActionResult(true, "Folded")
-                } else {
-                    GameActionResult(false, "No players found")
-                }
-            } ?: GameActionResult(false, "Game engine not available")
-        } catch (e: Exception) {
-            GameActionResult(false, "Error folding: ${e.message}")
+        return executePlayerAction { engine, _, player ->
+            player.setFold(true)
+            // Advance to next player after action
+            engine.nextPlayer()
+            // Check if we should advance phase after this action
+            checkAndAdvanceGamePhase()
+            updatePlayerData()
+            GameActionResult(true, "Folded")
         }
     }
 
@@ -745,19 +754,16 @@ class GameLogicBridge {
      * Perform a check action.
      */
     fun performCheck(): GameActionResult {
-        if (!isGameInitialized) {
-            return GameActionResult(false, "Game not initialized")
-        }
+        val engine = validateGameEngine() 
+            ?: return GameActionResult(false, "Game not initialized")
 
         return try {
-            gameEngine?.let { engine ->
-                // Advance to next player after action
-                engine.nextPlayer()
-                // Check if we should advance phase after this action
-                checkAndAdvanceGamePhase()
-                updatePlayerData()
-                GameActionResult(true, "Checked")
-            } ?: GameActionResult(false, "Game engine not available")
+            // Advance to next player after action
+            engine.nextPlayer()
+            // Check if we should advance phase after this action
+            checkAndAdvanceGamePhase()
+            updatePlayerData()
+            GameActionResult(true, "Checked")
         } catch (e: Exception) {
             GameActionResult(false, "Error checking: ${e.message}")
         }

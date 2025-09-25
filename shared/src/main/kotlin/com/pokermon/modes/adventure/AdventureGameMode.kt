@@ -14,18 +14,22 @@ import kotlin.random.Random
  * Poker hand strength determines battle outcomes.
  *
  * @author Carl Nelson (@Gameaday)
- * @version 1.0.0 - Beta Implementation (Kotlin-native)
+ * @version 1.1.0 - Enhanced with Quest System
  */
 class AdventureMode(
     private val playerName: String,
     private val initialChips: Int,
 ) {
     private val playerCollection = MonsterCollection()
+    private val questSystem = QuestSystem()
     private var currentLevel = 1
     private var monstersDefeated = 0
+    private var experience = 0
+    private var consecutiveWins = 0
 
     companion object {
         private val random = Random.Default
+        private const val LEVEL_UP_EXP = 200
     }
 
     /**
@@ -35,47 +39,83 @@ class AdventureMode(
         println("🏔️ $playerName's Adventure Begins! 🏔️")
         println("You start with $initialChips chips to use in battle.")
         println()
+        
+        // Initialize quest system
+        questSystem.initialize()
+        println("📋 Quest system activated! Check your objectives regularly.")
+        println()
 
         var continueAdventure = true
         var playerChips = initialChips
 
         while (continueAdventure && playerChips > 0) {
+            displayAdventureStatus(playerChips)
+            
             val enemy = generateEnemyMonster()
             println("💀 A wild ${enemy.name} appears!")
             println("   Rarity: ${enemy.rarity.displayName}")
             println("   Health: ${enemy.effectiveHealth} HP")
-            println("   Your chips: $playerChips")
+            println("   Level: $currentLevel")
+            
+            // Show relevant quest progress
+            if (questSystem.getActiveQuests().isNotEmpty()) {
+                println("   🎯 Active quests: ${questSystem.getActiveQuests().size}")
+            }
             println()
 
             val result = battleMonster(enemy, playerChips)
+            
+            // Create battle outcome for quest system
+            val battleOutcome = BattleOutcome(
+                victory = result.victory,
+                handStrength = result.handStrength,
+                handType = "Unknown", // Would need to track from hand evaluation
+                chipsGained = if (result.victory) calculateChipReward(enemy) else 0,
+                damageDealt = result.damageDealt
+            )
+            
+            // Update quest progress
+            questSystem.updateProgress(battleOutcome)
 
             if (result.victory) {
                 println("🎉 Victory! You defeated the ${enemy.name}!")
 
                 // Calculate rewards
                 val chipReward = calculateChipReward(enemy)
+                val expReward = calculateExpReward(enemy)
+                
                 playerChips += chipReward
+                experience += expReward
                 monstersDefeated++
+                consecutiveWins++
 
                 println("   Chip reward: +$chipReward chips")
+                println("   Experience: +$expReward XP (Total: $experience)")
                 println("   Total chips: $playerChips")
+
+                // Check for level up
+                checkLevelUp()
 
                 // Chance to capture the monster
                 if (attemptCapture(enemy, result.handStrength)) {
                     playerCollection.addMonster(enemy)
                     println("   🎁 Bonus: ${enemy.name} joined your collection!")
                 }
+                
+                // Generate dynamic quests
+                questSystem.generateDynamicQuests(currentLevel, monstersDefeated)
 
-                println()
-                currentLevel++
             } else {
                 println("💀 Defeat! The ${enemy.name} was too strong.")
                 val chipsLost = min(playerChips / 4, 100) // Lose 25% or max 100
                 playerChips -= chipsLost
+                consecutiveWins = 0
+                
                 println("   You lost $chipsLost chips in the retreat.")
                 println("   Remaining chips: $playerChips")
-                println()
             }
+            
+            println()
 
             if (playerChips <= 0) {
                 println("💀 Game Over! You've run out of chips for battle.")
@@ -86,6 +126,61 @@ class AdventureMode(
         }
 
         showAdventureStats()
+    }
+    
+    /**
+     * Displays current adventure status
+     */
+    private fun displayAdventureStatus(playerChips: Int) {
+        println("\n" + "=".repeat(50))
+        println("🏔️ ADVENTURE STATUS - Level $currentLevel")
+        println("Chips: $playerChips | XP: $experience/${getExpToNextLevel()}")
+        println("Monsters defeated: $monstersDefeated | Win streak: $consecutiveWins")
+        println("Collection: ${playerCollection.getMonsterCount()} monsters")
+        println("=".repeat(50))
+    }
+    
+    /**
+     * Calculates experience reward
+     */
+    private fun calculateExpReward(enemy: Monster): Int {
+        val baseExp = when (enemy.rarity) {
+            Monster.Rarity.COMMON -> 20
+            Monster.Rarity.UNCOMMON -> 35
+            Monster.Rarity.RARE -> 60
+            Monster.Rarity.EPIC -> 100
+            Monster.Rarity.LEGENDARY -> 200
+        }
+        return baseExp + (currentLevel * 5)
+    }
+    
+    /**
+     * Gets experience needed for next level
+     */
+    private fun getExpToNextLevel(): Int {
+        return LEVEL_UP_EXP * currentLevel
+    }
+    
+    /**
+     * Checks and handles level ups
+     */
+    private fun checkLevelUp() {
+        val expNeeded = getExpToNextLevel()
+        if (experience >= expNeeded) {
+            currentLevel++
+            experience -= expNeeded
+            
+            println("\n🆙 LEVEL UP! You are now level $currentLevel!")
+            println("   New monsters and challenges await!")
+            
+            // Level up rewards
+            val levelReward = currentLevel * 50
+            println("   Level bonus: +$levelReward chips")
+            
+            // Restore some health (represented as extra chips)
+            val healthBonus = 100
+            println("   Health restored: +$healthBonus chips")
+        }
     }
 
     /**
@@ -228,31 +323,149 @@ class AdventureMode(
      * Prompts player to continue the adventure.
      */
     private fun promptContinue(): Boolean {
-        print("Continue your adventure? (y/n) [y]: ")
-        val input = readlnOrNull()?.trim()?.lowercase() ?: ""
-        return input.isEmpty() || input == "y" || input == "yes"
+        println("Choose your action:")
+        println("1. Continue adventure")
+        println("2. View quests")
+        println("3. View collection") 
+        println("4. Rest (save and exit)")
+        print("Select option (1-4) [1]: ")
+        
+        val input = readlnOrNull()?.trim() ?: "1"
+        
+        return when (input) {
+            "2" -> {
+                showQuestStatus()
+                true
+            }
+            "3" -> {
+                showCollection()
+                true
+            }
+            "4" -> {
+                println("💾 Adventure progress saved. Thanks for playing!")
+                false
+            }
+            else -> true // Continue adventure
+        }
+    }
+    
+    /**
+     * Shows current quest status
+     */
+    private fun showQuestStatus() {
+        println("\n" + questSystem.getQuestSummary())
+        print("Press Enter to continue...")
+        readlnOrNull()
+    }
+    
+    /**
+     * Shows monster collection
+     */
+    private fun showCollection() {
+        println("\n🎴 MONSTER COLLECTION")
+        println("=".repeat(30))
+        
+        if (playerCollection.getMonsterCount() > 0) {
+            val monsters = playerCollection.getOwnedMonsters()
+            val rarityGroups = monsters.groupBy { it.rarity }
+            
+            Monster.Rarity.values().forEach { rarity ->
+                val count = rarityGroups[rarity]?.size ?: 0
+                if (count > 0) {
+                    println("${rarity.displayName}: $count monsters")
+                    rarityGroups[rarity]?.forEach { monster ->
+                        println("  - ${monster.name}")
+                    }
+                }
+            }
+            
+            val totalPower = monsters.sumOf { it.effectPower }
+            println("\nTotal Collection Power: $totalPower")
+        } else {
+            println("No monsters captured yet. Keep battling!")
+        }
+        
+        print("\nPress Enter to continue...")
+        readlnOrNull()
     }
 
     /**
      * Displays final adventure statistics.
      */
     private fun showAdventureStats() {
-        println("🏆 ADVENTURE COMPLETE! 🏆")
+        println("\n🏆 ADVENTURE COMPLETE! 🏆")
         println("=".repeat(40))
+        println("Final Level: $currentLevel")
+        println("Experience: $experience")
         println("Monsters defeated: $monstersDefeated")
         println("Highest level reached: $currentLevel")
         println("Monsters captured: ${playerCollection.getMonsterCount()}")
+        println("Best win streak: $consecutiveWins")
+        
+        // Show quest completion stats
+        val completedCount = questSystem.getActiveQuests().size
+        println("Quests completed: $completedCount")
+        
         println()
 
         if (playerCollection.getMonsterCount() > 0) {
             println("Your Monster Collection:")
             println("  Total monsters: ${playerCollection.getMonsterCount()}")
-            playerCollection.getOwnedMonsters().forEach { monster ->
-                println("  - ${monster.name} (${monster.rarity.displayName})")
+            val rarityGroups = playerCollection.getOwnedMonsters().groupBy { it.rarity }
+            
+            Monster.Rarity.values().forEach { rarity ->
+                val count = rarityGroups[rarity]?.size ?: 0
+                if (count > 0) {
+                    println("  ${rarity.displayName}: $count")
+                }
+            }
+            
+            // Show most powerful monsters
+            val topMonsters = playerCollection.getOwnedMonsters()
+                .sortedByDescending { it.effectPower }
+                .take(3)
+                
+            if (topMonsters.isNotEmpty()) {
+                println("\nStrongest Companions:")
+                topMonsters.forEachIndexed { index, monster ->
+                    val rank = when (index) {
+                        0 -> "👑"
+                        1 -> "⭐"
+                        2 -> "🌟"
+                        else -> "  "
+                    }
+                    println("  $rank ${monster.name} (${monster.rarity.displayName}) - Power: ${monster.effectPower}")
+                }
             }
         }
+        
+        // Calculate final score
+        val score = calculateAdventureScore()
+        println("\nFinal Adventure Score: $score")
+        
+        when {
+            score >= 5000 -> println("🏅 RANK: LEGENDARY ADVENTURER")
+            score >= 3000 -> println("🏅 RANK: MASTER ADVENTURER")
+            score >= 1500 -> println("🏅 RANK: EXPERT ADVENTURER")
+            score >= 800 -> println("🏅 RANK: SKILLED ADVENTURER")
+            score >= 400 -> println("🏅 RANK: BRAVE ADVENTURER")
+            else -> println("🏅 RANK: NOVICE ADVENTURER")
+        }
 
-        println("Thank you for playing Adventure Mode!")
+        println("\nThank you for playing Adventure Mode!")
+    }
+    
+    /**
+     * Calculates final adventure score
+     */
+    private fun calculateAdventureScore(): Int {
+        var score = 0
+        score += monstersDefeated * 50
+        score += currentLevel * 100
+        score += experience
+        score += playerCollection.getMonsterCount() * 100
+        score += playerCollection.getOwnedMonsters().sumOf { it.rarity.powerMultiplier.toInt() * 50 }
+        return score
     }
 
     /**

@@ -4,9 +4,17 @@ import com.pokermon.*
 import com.pokermon.database.CardPackManager
 import com.pokermon.modern.CardUtils
 import com.pokermon.players.Player
+import com.pokermon.GameFlows.GameStateManager
+import com.pokermon.GameFlows.GameState
+import com.pokermon.GameFlows.GameActions
+import com.pokermon.GameFlows.GameEvents
+import com.pokermon.GameFlows.PlayingSubState
+import com.pokermon.GameFlows.VictoryType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.SharedFlow
 
 /**
  * Data class to track AI player actions for UI feedback.
@@ -51,11 +59,13 @@ private enum class AIDecision {
  * Bridge class that connects the Modern UI with the actual game engine.
  * Provides a clean interface for UI operations while maintaining separation of concerns.
  * Uses public interfaces to avoid package-private access issues.
+ * Enhanced with comprehensive Flow-based state management system.
  *
  * @author Carl Nelson (@Gameaday)
- * @version 1.0.0
+ * @version 2.0.0 - Complete state management integration
  */
 class GameLogicBridge {
+    // Core game state
     private var gameEngine: GameEngine? = null
     private var isGameInitialized = false
     private var playerName = "Player"
@@ -79,26 +89,190 @@ class GameLogicBridge {
 
     // Track last AI action for UI feedback
     private var lastAIAction: AIActionResult? = null
+    
+    // Basic game phase tracking for compatibility
+    private var currentGamePhase: String = "INITIALIZING"
 
     // ================================================================
-    // STATE MANAGEMENT FOUNDATION - Basic state tracking for future expansion
+    // COMPREHENSIVE STATE MANAGEMENT SYSTEM
     // ================================================================
     
-    // Basic state tracking - can be expanded to full Flow-based system when needed
-    private var currentGamePhase: String = "WAITING_FOR_PLAYERS"
-    private var gameInitialized: Boolean = false
-
+    private val gameStateManager = GameStateManager()
+    private val coroutineScope = CoroutineScope(Dispatchers.Default)
+    
     /**
-     * Processes a game action through the state management system.
+     * Access to reactive game state for UI components.
      */
-    private fun logGameAction(actionName: String, details: String = "") {
-        // Simple logging for game actions - can be enhanced with full event system later
-        println("Game Action: $actionName${if (details.isNotEmpty()) " - $details" else ""}")
+    val gameStateFlow: StateFlow<GameState> = gameStateManager.gameState
+    
+    /**
+     * Access to game events for UI notifications.
+     */
+    val gameEventsFlow: SharedFlow<GameEvents> = gameStateManager.gameEvents
+    
+    /**
+     * Get current game state synchronously.
+     */
+    fun getCurrentGameState(): GameState = gameStateManager.getCurrentState()
+    
+    /**
+     * Process a game action through the state management system.
+     */
+    fun processGameAction(action: GameActions) {
+        coroutineScope.launch {
+            gameStateManager.processAction(action)
+        }
+    }
+    
+    /**
+     * Start a new game session with comprehensive state management.
+     */
+    fun startGameSession(mode: GameMode, playerName: String, playerCount: Int = 2, startingChips: Int = 1000) {
+        coroutineScope.launch {
+            // Initialize state management flow
+            gameStateManager.processAction(GameActions.StartGame)
+            gameStateManager.processAction(GameActions.SelectMode(mode))
+            gameStateManager.processAction(GameActions.ConfigurePlayers(playerName, playerCount, startingChips))
+            
+            // Initialize traditional game engine
+            val success = initializeGame(playerName, playerCount, startingChips)
+            if (success) {
+                val gameConfig = Game(5, playerCount, startingChips, 2, mode)
+                gameStateManager.processAction(GameActions.ConfirmSetup(gameConfig))
+                
+                // Transition to playing state
+                val players = gameEngine?.players?.toList() ?: emptyList()
+                val playingState = GameState.Playing(
+                    players = players,
+                    currentPhase = gameEngine?.getCurrentPhase() ?: GamePhase.BETTING_ROUND,
+                    pot = currentPot,
+                    currentBet = currentBet,
+                    activePlayerIndex = gameEngine?.currentPlayerIndex ?: 0,
+                    gameMode = mode,
+                    roundNumber = 1
+                )
+                gameStateManager.updateGameState(playingState)
+            }
+        }
+    }
+    
+    /**
+     * Perform a player action with state management integration.
+     */
+    fun performPlayerActionWithState(actionType: String, amount: Int = 0) {
+        coroutineScope.launch {
+            val currentState = gameStateManager.getCurrentState()
+            if (currentState is GameState.Playing && currentState.players.isNotEmpty()) {
+                val humanPlayer = currentState.players.first { it.isHuman }
+                
+                when (actionType.lowercase()) {
+                    "call" -> {
+                        gameStateManager.processAction(GameActions.Call(humanPlayer))
+                        performCall()
+                    }
+                    "raise" -> {
+                        gameStateManager.processAction(GameActions.Raise(humanPlayer, amount))
+                        performRaise(amount)
+                    }
+                    "fold" -> {
+                        gameStateManager.processAction(GameActions.Fold(humanPlayer))
+                        performFold()
+                    }
+                    "check" -> {
+                        gameStateManager.processAction(GameActions.Check(humanPlayer))
+                        performCheck()
+                    }
+                }
+                
+                // Update playing state after action
+                updatePlayingStateFromEngine()
+            }
+        }
+    }
+    
+    /**
+     * Enter a sub-state for mode-specific functionality.
+     */
+    fun enterSubState(subState: PlayingSubState) {
+        coroutineScope.launch {
+            gameStateManager.processAction(GameActions.EnterSubState(subState))
+        }
+    }
+    
+    /**
+     * Switch game modes with state preservation option for state management.
+     */
+    fun switchGameModeWithState(newMode: GameMode, preserveState: Boolean = false) {
+        coroutineScope.launch {
+            gameStateManager.processAction(GameActions.SwitchToMode(newMode, preserveState))
+            gameMode = newMode
+        }
+    }
+    
+    /**
+     * Handle victory conditions with comprehensive celebration.
+     */
+    fun handleVictory(winner: Player, victoryType: VictoryType) {
+        coroutineScope.launch {
+            gameStateManager.processAction(GameActions.TriggerVictory(winner, victoryType))
+        }
+    }
+    
+    /**
+     * Update the playing state from current engine state.
+     */
+    private suspend fun updatePlayingStateFromEngine() {
+        gameEngine?.let { engine ->
+            val players = engine.players?.toList() ?: emptyList()
+            val playingState = GameState.Playing(
+                players = players,
+                currentPhase = engine.getCurrentPhase(),
+                pot = currentPot,
+                currentBet = currentBet,
+                activePlayerIndex = engine.currentPlayerIndex,
+                gameMode = gameMode,
+                roundNumber = 1, // Would track this properly in full implementation
+                subState = getCurrentSubState()
+            )
+            gameStateManager.updateGameState(playingState)
+        }
+    }
+    
+    /**
+     * Get current sub-state based on game engine state.
+     */
+    private fun getCurrentSubState(): PlayingSubState? {
+        return when (gameEngine?.getCurrentPhase()) {
+            GamePhase.CARD_EXCHANGE -> {
+                val humanPlayer = gameEngine?.players?.firstOrNull { it.isHuman }
+                if (humanPlayer != null) {
+                    PlayingSubState.CardExchangePhase(
+                        player = humanPlayer,
+                        maxExchanges = 3,
+                        exchangesRemaining = if (cardsExchangedThisRound) 0 else 1,
+                        selectedCards = selectedCards.toList(),
+                        exchangeComplete = cardsExchangedThisRound
+                    )
+                } else null
+            }
+            GamePhase.WINNER_DETERMINATION -> {
+                val players = gameEngine?.players?.toList() ?: emptyList()
+                val results = players.associate { player ->
+                    player to "Hand: ${player.handValue}"
+                }
+                PlayingSubState.ShowingResults(
+                    handResults = results,
+                    winnings = players.associate { it to it.chips },
+                    showDuration = 5000
+                )
+            }
+            else -> null
+        }
     }
 
     /**
      * Initialize a new game with the specified parameters.
-     * Now integrates with Flow-based state management for reactive updates.
+     * Enhanced with state management integration for reactive updates.
      */
     fun initializeGame(
         playerName: String,
@@ -106,9 +280,6 @@ class GameLogicBridge {
         startingChips: Int,
     ): Boolean {
         return try {
-            // Update to initializing state
-            this.currentGamePhase = "INITIALIZING"
-            
             this.playerName = playerName
             this.currentPot = 0
             this.currentBet = 0
@@ -132,16 +303,41 @@ class GameLogicBridge {
                 updatePlayerData()
                 this.isGameInitialized = true
                 
-                // Update basic state tracking
-                this.gameInitialized = true
-                this.currentGamePhase = "PLAYING"
+                // Log action for state management
+                logGameAction("GAME_INITIALIZED", "Players: $playerCount, Mode: ${gameMode.displayName}")
             }
             success
         } catch (e: Exception) {
-            // Handle basic state tracking on error
-            this.gameInitialized = false
-            this.currentGamePhase = "ERROR"
+            logGameAction("INITIALIZATION_FAILED", "Error: ${e.message}")
             false
+        }
+    }
+
+    /**
+     * Enhanced action logging with state management integration.
+     */
+    private fun logGameAction(actionName: String, details: String = "") {
+        // Enhanced logging for game actions with state management integration
+        println("Game Action: $actionName${if (details.isNotEmpty()) " - $details" else ""}")
+        
+        // Emit action to state management system if available
+        coroutineScope.launch {
+            try {
+                // Simple action logging - can be enhanced with specific action types
+                when (actionName) {
+                    "GAME_INITIALIZED" -> gameStateManager.emitEvent(GameEvents.GameStarted)
+                    "PLAYER_CALLED" -> gameStateManager.emitEvent(GameEvents.SystemNotification("Player called", "GAME"))
+                    "PLAYER_RAISED" -> gameStateManager.emitEvent(GameEvents.SystemNotification("Player raised", "GAME"))
+                    "PLAYER_FOLDED" -> gameStateManager.emitEvent(GameEvents.SystemNotification("Player folded", "GAME"))
+                    "PLAYER_CHECKED" -> gameStateManager.emitEvent(GameEvents.SystemNotification("Player checked", "GAME"))
+                    "CARDS_EXCHANGED" -> gameStateManager.emitEvent(GameEvents.SystemNotification("Cards exchanged", "GAME"))
+                    "ROUND_COMPLETED" -> gameStateManager.emitEvent(GameEvents.SystemNotification("Round completed", "GAME"))
+                    else -> gameStateManager.emitEvent(GameEvents.SystemNotification(actionName, "SYSTEM"))
+                }
+            } catch (e: Exception) {
+                // Don't let logging errors affect game flow
+                println("Warning: Failed to emit action event: ${e.message}")
+            }
         }
     }
 

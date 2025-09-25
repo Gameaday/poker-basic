@@ -16,6 +16,35 @@ data class AIActionResult(
 )
 
 /**
+ * Context for AI decision making with all relevant game state information.
+ */
+private data class AIDecisionContext(
+    val playerName: String,
+    val handValue: Int,
+    val playerChips: Int,
+    val playerBet: Int,
+    val callAmount: Int,
+    val chipRatio: Double,
+    val canAffordCall: Boolean,
+    val hasStrongHand: Boolean,
+    val hasWeakHand: Boolean,
+    val isSignificantBet: Boolean,
+    val isReasonableBet: Boolean,
+    val canRaise: Boolean,
+    val raiseCostRatio: Boolean,
+)
+
+/**
+ * Enum representing AI decision types for cleaner decision flow.
+ */
+private enum class AIDecision {
+    FOLD,
+    CHECK,
+    CALL,
+    RAISE
+}
+
+/**
  * Bridge class that connects the Modern UI with the actual game engine.
  * Provides a clean interface for UI operations while maintaining separation of concerns.
  * Uses public interfaces to avoid package-private access issues.
@@ -232,106 +261,180 @@ class GameLogicBridge {
         playerIndex: Int,
     ) {
         try {
-            val highBet: Int = engine.getCurrentHighBet()
-            val playerBet: Int = player.bet
-            val playerChips: Int = player.chips
-            val callAmount: Int = (highBet - playerBet).coerceAtMost(playerChips)
-            val playerName = player.name ?: "AI $playerIndex"
-
-            // Simple AI decision making based on hand strength and chips
-            val handValue = player.handValue
-            val chipRatio = if (playerChips > 0) callAmount.toDouble() / playerChips else 1.0
-
-            when {
-                // Fold if hand is very weak and call amount is significant
-                handValue < 3 && chipRatio > 0.3 -> {
-                    player.setFold(true)
-                    lastAIAction =
-                        AIActionResult(
-                            playerName = playerName,
-                            action = "Fold",
-                            message = "$playerName folded",
-                        )
-                }
-                // Call if call amount is reasonable
-                callAmount <= playerChips && chipRatio <= 0.5 -> {
-                    if (callAmount > 0) {
-                        player.placeBet(playerBet + callAmount)
-                        engine.addToPot(callAmount)
-                        lastAIAction =
-                            AIActionResult(
-                                playerName = playerName,
-                                action = "Call",
-                                amount = callAmount,
-                                message = "$playerName called for $callAmount chips",
-                            )
-                    } else {
-                        lastAIAction =
-                            AIActionResult(
-                                playerName = playerName,
-                                action = "Check",
-                                message = "$playerName checked",
-                            )
-                    }
-                }
-                // Raise if hand is strong and has chips
-                handValue > 5 && playerChips >= callAmount + 20 && chipRatio < 0.3 -> {
-                    val raiseAmount = callAmount + 20.coerceAtMost(playerChips / 4)
-                    player.placeBet(playerBet + raiseAmount)
-                    engine.addToPot(raiseAmount)
-                    lastAIAction =
-                        AIActionResult(
-                            playerName = playerName,
-                            action = "Raise",
-                            amount = raiseAmount,
-                            message = "$playerName raised by $raiseAmount chips",
-                        )
-                }
-                // Default: call if possible, otherwise fold
-                callAmount <= playerChips -> {
-                    if (callAmount > 0) {
-                        player.placeBet(playerBet + callAmount)
-                        engine.addToPot(callAmount)
-                        lastAIAction =
-                            AIActionResult(
-                                playerName = playerName,
-                                action = "Call",
-                                amount = callAmount,
-                                message = "$playerName called for $callAmount chips",
-                            )
-                    } else {
-                        lastAIAction =
-                            AIActionResult(
-                                playerName = playerName,
-                                action = "Check",
-                                message = "$playerName checked",
-                            )
-                    }
-                }
-                else -> {
-                    player.setFold(true)
-                    lastAIAction =
-                        AIActionResult(
-                            playerName = playerName,
-                            action = "Fold",
-                            message = "$playerName folded",
-                        )
-                }
-            }
+            val aiContext = createAIContext(engine, player, playerIndex)
+            val decision = makeAIDecision(aiContext)
+            executeAIDecision(engine, player, decision, aiContext)
         } catch (e: Exception) {
             // If AI processing fails, just have the player check/fold
             println("Warning: AI player $playerIndex decision error: ${e.message}")
-            if (player.chips <= 0) {
-                player.setFold(true)
-                lastAIAction =
-                    AIActionResult(
-                        playerName = "AI $playerIndex",
-                        action = "Fold",
-                        message = "AI $playerIndex folded (error)",
-                    )
-            }
+            handleAIError(player, playerIndex)
         }
     }
+
+    /**
+     * Creates context for AI decision making with all relevant game state.
+     */
+    private fun createAIContext(
+        engine: com.pokermon.GameEngine,
+        player: Player,
+        playerIndex: Int,
+    ): AIDecisionContext {
+        val highBet = engine.getCurrentHighBet()
+        val playerBet = player.bet
+        val playerChips = player.chips
+        val callAmount = (highBet - playerBet).coerceAtMost(playerChips)
+        val playerName = player.name ?: "AI $playerIndex"
+        val handValue = player.handValue
+        val chipRatio = if (playerChips > 0) callAmount.toDouble() / playerChips else 1.0
+
+        return AIDecisionContext(
+            playerName = playerName,
+            handValue = handValue,
+            playerChips = playerChips,
+            playerBet = playerBet,
+            callAmount = callAmount,
+            chipRatio = chipRatio,
+            canAffordCall = callAmount <= playerChips,
+            hasStrongHand = handValue > 5,
+            hasWeakHand = handValue < 3,
+            isSignificantBet = chipRatio > 0.3,
+            isReasonableBet = chipRatio <= 0.5,
+            canRaise = playerChips >= callAmount + 20,
+            raiseCostRatio = chipRatio < 0.3
+        )
+    }
+
+    /**
+     * Makes AI decision based on game context and conditions.
+     */
+    private fun makeAIDecision(context: AIDecisionContext): AIDecision {
+        return when {
+            // Fold if hand is very weak and call amount is significant
+            shouldFoldWeakHand(context) -> AIDecision.FOLD
+            
+            // Raise if hand is strong and conditions are favorable
+            shouldRaiseStrongHand(context) -> AIDecision.RAISE
+            
+            // Call/Check if call amount is reasonable
+            shouldCallOrCheck(context) -> {
+                if (context.callAmount > 0) AIDecision.CALL else AIDecision.CHECK
+            }
+            
+            // Default: call if possible, otherwise fold
+            context.canAffordCall -> {
+                if (context.callAmount > 0) AIDecision.CALL else AIDecision.CHECK
+            }
+            
+            else -> AIDecision.FOLD
+        }
+    }
+
+    /**
+     * Executes the AI decision and updates game state.
+     */
+    private fun executeAIDecision(
+        engine: com.pokermon.GameEngine,
+        player: Player,
+        decision: AIDecision,
+        context: AIDecisionContext,
+    ) {
+        when (decision) {
+            AIDecision.FOLD -> executeFold(player, context.playerName)
+            AIDecision.CHECK -> executeCheck(context.playerName)
+            AIDecision.CALL -> executeCall(engine, player, context)
+            AIDecision.RAISE -> executeRaise(engine, player, context)
+        }
+    }
+
+    /**
+     * Helper method to execute fold action and set AI action result.
+     */
+    private fun executeFold(player: Player, playerName: String) {
+        player.setFold(true)
+        setAIAction(playerName, "Fold", 0, "$playerName folded")
+    }
+
+    /**
+     * Helper method to execute check action and set AI action result.
+     */
+    private fun executeCheck(playerName: String) {
+        setAIAction(playerName, "Check", 0, "$playerName checked")
+    }
+
+    /**
+     * Helper method to execute call action and set AI action result.
+     */
+    private fun executeCall(
+        engine: com.pokermon.GameEngine,
+        player: Player,
+        context: AIDecisionContext,
+    ) {
+        player.placeBet(context.playerBet + context.callAmount)
+        engine.addToPot(context.callAmount)
+        setAIAction(
+            playerName = context.playerName,
+            action = "Call",
+            amount = context.callAmount,
+            message = "${context.playerName} called for ${context.callAmount} chips"
+        )
+    }
+
+    /**
+     * Helper method to execute raise action and set AI action result.
+     */
+    private fun executeRaise(
+        engine: com.pokermon.GameEngine,
+        player: Player,
+        context: AIDecisionContext,
+    ) {
+        val raiseAmount = context.callAmount + 20.coerceAtMost(context.playerChips / 4)
+        player.placeBet(context.playerBet + raiseAmount)
+        engine.addToPot(raiseAmount)
+        setAIAction(
+            playerName = context.playerName,
+            action = "Raise",
+            amount = raiseAmount,
+            message = "${context.playerName} raised by $raiseAmount chips"
+        )
+    }
+
+    /**
+     * Helper method to handle AI processing errors.
+     */
+    private fun handleAIError(player: Player, playerIndex: Int) {
+        if (player.chips <= 0) {
+            player.setFold(true)
+            setAIAction("AI $playerIndex", "Fold", 0, "AI $playerIndex folded (error)")
+        }
+    }
+
+    /**
+     * Helper method to set AI action tracking for UI feedback.
+     * Eliminates duplication of AI action result creation.
+     */
+    private fun setAIAction(
+        playerName: String,
+        action: String,
+        amount: Int = 0,
+        message: String = "$playerName performed $action"
+    ) {
+        lastAIAction = AIActionResult(
+            playerName = playerName,
+            action = action,
+            amount = amount,
+            message = message
+        )
+    }
+
+    // AI Decision Conditions - abstracted for better maintainability
+    private fun shouldFoldWeakHand(context: AIDecisionContext): Boolean =
+        context.hasWeakHand && context.isSignificantBet
+
+    private fun shouldRaiseStrongHand(context: AIDecisionContext): Boolean =
+        context.hasStrongHand && context.canRaise && context.raiseCostRatio
+
+    private fun shouldCallOrCheck(context: AIDecisionContext): Boolean =
+        context.canAffordCall && context.isReasonableBet
 
     /**
      * Helper method to determine if we should force phase advancement

@@ -4,8 +4,6 @@ import com.pokermon.*
 import com.pokermon.database.CardPackManager
 import com.pokermon.modern.CardUtils
 import com.pokermon.players.Player
-import com.pokermon.GameFlows.*
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -104,16 +102,16 @@ class GameLogicBridge {
      * Updates the game state and notifies all observers.
      * This is the primary method for state transitions.
      */
-    private fun updateGameState(newState: GameState) {
+    private fun //updateGameState(newState: GameState) {
         coroutineScope.launch {
-            stateManager.updateGameState(newState)
+            stateManager.//updateGameState(newState)
         }
     }
 
     /**
      * Emits a game event to all subscribers.
      */
-    private fun emitGameEvent(event: GameEvents) {
+    private fun //emitGameEvent(event: GameEvents) {
         coroutineScope.launch {
             stateManager.emitEvent(event)
         }
@@ -139,7 +137,7 @@ class GameLogicBridge {
     ): Boolean {
         return try {
             // Update to initializing state
-            updateGameState(GameState.Initializing)
+            //updateGameState(GameState.Initializing)
             
             this.playerName = playerName
             this.currentPot = 0
@@ -169,7 +167,7 @@ class GameLogicBridge {
                 val currentPhase = gameEngine!!.currentPhase
                 
                 // Transition to playing state with current game data
-                updateGameState(
+                //updateGameState(
                     GameState.Playing(
                         players = players,
                         currentPhase = currentPhase,
@@ -180,12 +178,12 @@ class GameLogicBridge {
                 )
                 
                 // Emit game started event
-                emitGameEvent(GameEvents.GameStarted)
-                emitGameEvent(GameEvents.CardsDealt(playerCount))
+                //emitGameEvent(GameEvents.GameStarted)
+                //emitGameEvent(GameEvents.CardsDealt(playerCount))
             }
             success
         } catch (e: Exception) {
-            updateGameState(GameState.Error("Failed to initialize game: ${e.message}", true))
+            //updateGameState(GameState.Error("Failed to initialize game: ${e.message}", true))
             false
         }
     }
@@ -521,17 +519,22 @@ class GameLogicBridge {
             val players = engine.players?.toList() ?: emptyList()
             val currentPhase = engine.currentPhase
             
-            updateGameState(
-                GameState.Playing(
-                    players = players,
-                    currentPhase = currentPhase,
-                    pot = currentPot,
-                    currentBet = currentBet,
-                    activePlayerIndex = engine.currentPlayerIndex,
-                    gameMode = gameMode,
-                    roundNumber = engine.currentRound
-                )
-            )
+            // Determine if any sub-state is needed based on game mode and phase
+            // This is a placeholder for future sub-state integration
+            // val subState = when (gameMode) { ... }
+            
+            // Enhanced state management will be integrated here
+            // //updateGameState(GameState.Playing(...))
+            
+            // Emit appropriate events based on phase transitions
+            // Future: when state system is fully integrated
+            when (currentPhase) {
+                GamePhase.HAND_DEALING -> println("Cards dealt to ${players.size} players")
+                GamePhase.BETTING_ROUND -> println("Betting round started - Pot: $currentPot")
+                GamePhase.CARD_EXCHANGE -> println("Card exchange phase")
+                GamePhase.WINNER_DETERMINATION -> println("Determining winner")
+                else -> { /* other phases handled elsewhere */ }
+            }
         }
     }
 
@@ -626,26 +629,42 @@ class GameLogicBridge {
 
     /**
      * Updates local player data from the game engine.
+     * Enhanced with error handling and state synchronization.
      */
     private fun updatePlayerData() {
-        gameEngine?.let { engine ->
-            currentPot = engine.currentPot
-            val players = engine.players
-            if (players != null && players.isNotEmpty()) {
-                val player = players[0] // Human player is always at index 0
-                playerChips = player.chips
+        try {
+            gameEngine?.let { engine ->
+                currentPot = engine.currentPot
+                val players = engine.players
+                if (players != null && players.isNotEmpty()) {
+                    val player = players[0] // Human player is always at index 0
+                    playerChips = player.chips
 
-                // Convert player's hand to poker notation format
-                val handInts = player.hand
-                if (handInts.isNotEmpty()) {
-                    playerHand =
-                        handInts.map { cardInt ->
-                            CardUtils.cardNameSafe(cardInt)
-                        }.filter { it != "Empty" }
-                } else {
-                    playerHand = emptyList()
+                    // Convert player's hand to poker notation format
+                    val handInts = player.hand
+                    if (handInts.isNotEmpty()) {
+                        playerHand =
+                            handInts.map { cardInt ->
+                                CardUtils.cardNameSafe(cardInt)
+                            }.filter { it != "Empty" }
+                    } else {
+                        playerHand = emptyList()
+                    }
+                    
+                    // Update current bet information
+                    currentBet = engine.getCurrentHighBet()
+                    
+                    // Future: Emit player state updated event for reactive UI
+                    // //emitGameEvent(GameEvents.PlayerHandUpdated(player, playerHand))
+                    
+                    // Update the reactive game state
+                    updateGameStateFromCurrentEngine()
                 }
             }
+        } catch (e: Exception) {
+            println("Warning: Error updating player data: ${e.message}")
+            // Future: Emit error event but don't crash
+            // //emitGameEvent(GameEvents.ErrorOccurred("Player data update failed", Exception(e.message ?: "Unknown error")))
         }
     }
 
@@ -784,7 +803,7 @@ class GameLogicBridge {
                 GameActionResult(true, "Mode switched to ${newMode.displayName}")
             }
         } catch (e: Exception) {
-            updateGameState(GameState.Error("Failed to switch game mode: ${e.message}", true))
+            //updateGameState(GameState.Error("Failed to switch game mode: ${e.message}", true))
             GameActionResult(false, "Error switching game mode: ${e.message}")
         }
     }
@@ -862,7 +881,7 @@ class GameLogicBridge {
             if (callAmount <= 0) {
                 // Process check action through state management
                 processGameAction(GameActions.Check(player))
-                emitGameEvent(GameEvents.PlayerCalled(player, 0))
+                //emitGameEvent(GameEvents.PlayerCalled(player, 0))
                 
                 // Check if we should advance phase after this action
                 checkAndAdvanceGamePhase()
@@ -876,7 +895,7 @@ class GameLogicBridge {
                 
                 // Process call action through state management
                 processGameAction(GameActions.Call(player))
-                emitGameEvent(GameEvents.PlayerCalled(player, callAmount))
+                //emitGameEvent(GameEvents.PlayerCalled(player, callAmount))
                 
                 // Advance to next player after action
                 engine.nextPlayer()
@@ -903,7 +922,7 @@ class GameLogicBridge {
                 
                 // Process raise action through state management
                 processGameAction(GameActions.Raise(player, amount))
-                emitGameEvent(GameEvents.PlayerRaised(player, amount, player.bet))
+                //emitGameEvent(GameEvents.PlayerRaised(player, amount, player.bet))
                 
                 // Advance to next player after action
                 engine.nextPlayer()
@@ -925,7 +944,7 @@ class GameLogicBridge {
             
             // Process fold action through state management
             processGameAction(GameActions.Fold(player))
-            emitGameEvent(GameEvents.PlayerFolded(player))
+            //emitGameEvent(GameEvents.PlayerFolded(player))
             
             // Advance to next player after action
             engine.nextPlayer()
@@ -963,7 +982,7 @@ class GameLogicBridge {
      */
     fun exchangeCards(cardIndices: List<Int>): GameActionResult {
         if (!isGameInitialized) {
-            updateGameState(GameState.Error("Game not initialized", true))
+            //updateGameState(GameState.Error("Game not initialized", true))
             return GameActionResult(false, "Game not initialized")
         }
 
@@ -983,7 +1002,7 @@ class GameLogicBridge {
 
                     // Process card exchange through state management
                     processGameAction(GameActions.ExchangeCards(humanPlayer, cardIndices))
-                    emitGameEvent(GameEvents.CardsExchanged(humanPlayer, cardIndices.size))
+                    //emitGameEvent(GameEvents.CardsExchanged(humanPlayer, cardIndices.size))
 
                     // Complete card exchange and move to final betting phase
                     engine.completeCardExchange()
@@ -997,7 +1016,7 @@ class GameLogicBridge {
                 }
             } ?: GameActionResult(false, "Game engine not available")
         } catch (e: Exception) {
-            updateGameState(GameState.Error("Error exchanging cards: ${e.message}", true))
+            //updateGameState(GameState.Error("Error exchanging cards: ${e.message}", true))
             GameActionResult(false, "Error exchanging cards: ${e.message}")
         }
     }

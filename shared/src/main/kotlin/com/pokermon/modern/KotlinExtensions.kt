@@ -16,11 +16,9 @@ import com.pokermon.players.Player
 // Player Extensions - Add Kotlin-style functionality to Java Player class
 
 /**
- * Checks if the player can afford a specific bet amount.
- * @param amount the bet amount to check
- * @return true if the player has sufficient chips
+ * Note: canAfford method is already implemented in Player class
+ * Extension removed to avoid shadowing the member function
  */
-fun Player.canAfford(amount: Int): Boolean = this.chips >= amount
 
 /**
  * Checks if the player is active (not folded and has chips).

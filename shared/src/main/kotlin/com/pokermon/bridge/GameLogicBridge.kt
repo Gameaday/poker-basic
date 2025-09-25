@@ -4,6 +4,11 @@ import com.pokermon.*
 import com.pokermon.database.CardPackManager
 import com.pokermon.modern.CardUtils
 import com.pokermon.players.Player
+import com.pokermon.GameFlows.*
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * Data class to track AI player actions for UI feedback.
@@ -77,8 +82,55 @@ class GameLogicBridge {
     // Track last AI action for UI feedback
     private var lastAIAction: AIActionResult? = null
 
+    // ================================================================
+    // STATE MANAGEMENT INTEGRATION - Flow-based reactive game state
+    // ================================================================
+    
+    private val stateManager = GameStateManager()
+    private val coroutineScope = CoroutineScope(Dispatchers.Default)
+
+    /**
+     * Exposes the game state as a Flow for UI observation.
+     * This enables reactive UI updates when game state changes.
+     */
+    val gameStateFlow: StateFlow<GameState> = stateManager.gameState
+
+    /**
+     * Get the current game state synchronously.
+     */
+    fun getCurrentGameState(): GameState = stateManager.getCurrentState()
+
+    /**
+     * Updates the game state and notifies all observers.
+     * This is the primary method for state transitions.
+     */
+    private fun updateGameState(newState: GameState) {
+        coroutineScope.launch {
+            stateManager.updateGameState(newState)
+        }
+    }
+
+    /**
+     * Emits a game event to all subscribers.
+     */
+    private fun emitGameEvent(event: GameEvents) {
+        coroutineScope.launch {
+            stateManager.emitEvent(event)
+        }
+    }
+
+    /**
+     * Processes a game action through the state management system.
+     */
+    private fun processGameAction(action: GameActions) {
+        coroutineScope.launch {
+            stateManager.processAction(action)
+        }
+    }
+
     /**
      * Initialize a new game with the specified parameters.
+     * Now integrates with Flow-based state management for reactive updates.
      */
     fun initializeGame(
         playerName: String,
@@ -86,6 +138,9 @@ class GameLogicBridge {
         startingChips: Int,
     ): Boolean {
         return try {
+            // Update to initializing state
+            updateGameState(GameState.Initializing)
+            
             this.playerName = playerName
             this.currentPot = 0
             this.currentBet = 0
@@ -108,9 +163,29 @@ class GameLogicBridge {
                 gameEngine!!.startNewRound()
                 updatePlayerData()
                 this.isGameInitialized = true
+                
+                // Create players list for state management
+                val players = gameEngine!!.players?.toList() ?: emptyList()
+                val currentPhase = gameEngine!!.currentPhase
+                
+                // Transition to playing state with current game data
+                updateGameState(
+                    GameState.Playing(
+                        players = players,
+                        currentPhase = currentPhase,
+                        pot = currentPot,
+                        currentBet = currentBet,
+                        activePlayerIndex = 0
+                    )
+                )
+                
+                // Emit game started event
+                emitGameEvent(GameEvents.GameStarted)
+                emitGameEvent(GameEvents.CardsDealt(playerCount))
             }
             success
         } catch (e: Exception) {
+            updateGameState(GameState.Error("Failed to initialize game: ${e.message}", true))
             false
         }
     }
@@ -436,6 +511,30 @@ class GameLogicBridge {
     private fun shouldCallOrCheck(context: AIDecisionContext): Boolean =
         context.canAffordCall && context.isReasonableBet
 
+    /**
+     * Updates the game state from the current engine state.
+     * This bridges the gap between the GameEngine and Flow-based state management.
+     * Enhanced to include game mode and round information.
+     */
+    private fun updateGameStateFromCurrentEngine() {
+        gameEngine?.let { engine ->
+            val players = engine.players?.toList() ?: emptyList()
+            val currentPhase = engine.currentPhase
+            
+            updateGameState(
+                GameState.Playing(
+                    players = players,
+                    currentPhase = currentPhase,
+                    pot = currentPot,
+                    currentBet = currentBet,
+                    activePlayerIndex = engine.currentPlayerIndex,
+                    gameMode = gameMode,
+                    roundNumber = engine.currentRound
+                )
+            )
+        }
+    }
+
     // ================================================================
     // VALIDATION HELPERS - Common validation patterns abstracted
     // ================================================================
@@ -646,10 +745,75 @@ class GameLogicBridge {
     }
 
     /**
-     * Set the game mode for the next game.
+     * Set the game mode for the next game and update state management.
+     * Enhanced to support state management integration and mode-specific initialization.
      */
     fun setGameMode(mode: GameMode) {
         this.gameMode = mode
+        
+        // Process mode selection through state management
+        processGameAction(GameActions.SelectGameMode(mode))
+        
+        // If game is already initialized, switch mode with state preservation option
+        if (isGameInitialized) {
+            processGameAction(GameActions.SwitchToMode(mode, preserveState = false))
+        }
+    }
+
+    /**
+     * Switch to a different game mode during gameplay.
+     * This allows dynamic mode switching with optional state preservation.
+     */
+    fun switchGameMode(newMode: GameMode, preserveState: Boolean = false): GameActionResult {
+        return try {
+            val oldMode = this.gameMode
+            this.gameMode = newMode
+            
+            processGameAction(GameActions.SwitchToMode(newMode, preserveState))
+            
+            if (!preserveState && isGameInitialized) {
+                // Reset game with new mode
+                val success = initializeGame(playerName, getAllPlayers().size, playerChips)
+                if (success) {
+                    GameActionResult(true, "Switched from ${oldMode.displayName} to ${newMode.displayName}")
+                } else {
+                    GameActionResult(false, "Failed to switch to ${newMode.displayName}")
+                }
+            } else {
+                updateGameStateFromCurrentEngine()
+                GameActionResult(true, "Mode switched to ${newMode.displayName}")
+            }
+        } catch (e: Exception) {
+            updateGameState(GameState.Error("Failed to switch game mode: ${e.message}", true))
+            GameActionResult(false, "Error switching game mode: ${e.message}")
+        }
+    }
+
+    /**
+     * Enter a specific sub-state for the current game mode.
+     * This enables fine-grained control over game flow and mode-specific behaviors.
+     */
+    fun enterSubState(subState: PlayingSubState): GameActionResult {
+        return try {
+            processGameAction(GameActions.EnterSubState(subState))
+            updateGameStateFromCurrentEngine()
+            GameActionResult(true, "Entered ${subState::class.simpleName}")
+        } catch (e: Exception) {
+            GameActionResult(false, "Failed to enter sub-state: ${e.message}")
+        }
+    }
+
+    /**
+     * Exit the current sub-state.
+     */
+    fun exitSubState(reason: String = "Completed"): GameActionResult {
+        return try {
+            processGameAction(GameActions.ExitSubState(reason))
+            updateGameStateFromCurrentEngine()
+            GameActionResult(true, "Exited sub-state: $reason")
+        } catch (e: Exception) {
+            GameActionResult(false, "Failed to exit sub-state: ${e.message}")
+        }
     }
 
     /**
@@ -687,7 +851,7 @@ class GameLogicBridge {
     }
 
     /**
-     * Perform a call action.
+     * Perform a call action with state management integration.
      */
     fun performCall(): GameActionResult {
         return executePlayerAction { engine, _, player ->
@@ -696,26 +860,37 @@ class GameLogicBridge {
             val callAmount = if (highBet <= 0) 50 else (highBet - player.bet).coerceAtMost(player.chips)
 
             if (callAmount <= 0) {
+                // Process check action through state management
+                processGameAction(GameActions.Check(player))
+                emitGameEvent(GameEvents.PlayerCalled(player, 0))
+                
                 // Check if we should advance phase after this action
                 checkAndAdvanceGamePhase()
                 updatePlayerData()
+                updateGameStateFromCurrentEngine()
                 GameActionResult(true, "No bet to call")
             } else {
                 player.placeBet(player.bet + callAmount)
                 // Add the call amount to the pot
                 engine.addToPot(callAmount)
+                
+                // Process call action through state management
+                processGameAction(GameActions.Call(player))
+                emitGameEvent(GameEvents.PlayerCalled(player, callAmount))
+                
                 // Advance to next player after action
                 engine.nextPlayer()
                 // Check if we should advance phase after this action
                 checkAndAdvanceGamePhase()
                 updatePlayerData()
+                updateGameStateFromCurrentEngine()
                 GameActionResult(true, "Called for $callAmount chips")
             }
         }
     }
 
     /**
-     * Perform a raise action.
+     * Perform a raise action with state management integration.
      */
     fun performRaise(amount: Int): GameActionResult {
         return executePlayerAction { engine, _, player ->
@@ -725,27 +900,39 @@ class GameLogicBridge {
                 player.placeBet(amount)
                 // Add the raise amount to the pot
                 engine.addToPot(amount)
+                
+                // Process raise action through state management
+                processGameAction(GameActions.Raise(player, amount))
+                emitGameEvent(GameEvents.PlayerRaised(player, amount, player.bet))
+                
                 // Advance to next player after action
                 engine.nextPlayer()
                 // Check if we should advance phase after this action
                 checkAndAdvanceGamePhase()
                 updatePlayerData()
+                updateGameStateFromCurrentEngine()
                 GameActionResult(true, "Raised by $amount chips")
             }
         }
     }
 
     /**
-     * Perform a fold action.
+     * Perform a fold action with state management integration.
      */
     fun performFold(): GameActionResult {
         return executePlayerAction { engine, _, player ->
             player.setFold(true)
+            
+            // Process fold action through state management
+            processGameAction(GameActions.Fold(player))
+            emitGameEvent(GameEvents.PlayerFolded(player))
+            
             // Advance to next player after action
             engine.nextPlayer()
             // Check if we should advance phase after this action
             checkAndAdvanceGamePhase()
             updatePlayerData()
+            updateGameStateFromCurrentEngine()
             GameActionResult(true, "Folded")
         }
     }
@@ -772,9 +959,11 @@ class GameLogicBridge {
     /**
      * Exchange selected cards with new ones from the deck.
      * Limited to once per round to prevent multiple exchanges.
+     * Now includes state management integration.
      */
     fun exchangeCards(cardIndices: List<Int>): GameActionResult {
         if (!isGameInitialized) {
+            updateGameState(GameState.Error("Game not initialized", true))
             return GameActionResult(false, "Game not initialized")
         }
 
@@ -784,18 +973,31 @@ class GameLogicBridge {
 
         return try {
             gameEngine?.let { engine ->
-                val cardIndicesArray = cardIndices.toIntArray()
-                engine.exchangeCards(0, cardIndicesArray) // 0 = human player index
-                cardsExchangedThisRound = true // Mark that cards have been exchanged
+                val players = engine.players
+                val humanPlayer = players?.get(0) // Human player at index 0
+                
+                if (humanPlayer != null) {
+                    val cardIndicesArray = cardIndices.toIntArray()
+                    engine.exchangeCards(0, cardIndicesArray) // 0 = human player index
+                    cardsExchangedThisRound = true // Mark that cards have been exchanged
 
-                // Complete card exchange and move to final betting phase
-                engine.completeCardExchange()
+                    // Process card exchange through state management
+                    processGameAction(GameActions.ExchangeCards(humanPlayer, cardIndices))
+                    emitGameEvent(GameEvents.CardsExchanged(humanPlayer, cardIndices.size))
 
-                updatePlayerData()
-                clearCardSelection()
-                GameActionResult(true, "Exchanged ${cardIndices.size} cards - ready for final betting")
+                    // Complete card exchange and move to final betting phase
+                    engine.completeCardExchange()
+
+                    updatePlayerData()
+                    clearCardSelection()
+                    updateGameStateFromCurrentEngine()
+                    GameActionResult(true, "Exchanged ${cardIndices.size} cards - ready for final betting")
+                } else {
+                    GameActionResult(false, "Human player not found")
+                }
             } ?: GameActionResult(false, "Game engine not available")
         } catch (e: Exception) {
+            updateGameState(GameState.Error("Error exchanging cards: ${e.message}", true))
             GameActionResult(false, "Error exchanging cards: ${e.message}")
         }
     }

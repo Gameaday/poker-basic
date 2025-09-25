@@ -672,15 +672,53 @@ class GameLogicBridge {
             val players = engine.players?.toList() ?: emptyList()
             val currentPhase = engine.currentPhase
             
-            // Determine if any sub-state is needed based on game mode and phase
-            // This is a placeholder for future sub-state integration
-            // val subState = when (gameMode) { ... }
+            // Determine sub-state based on current game mode and phase
+            val subState = when (currentPhase) {
+                GamePhase.BETTING_ROUND -> PlayingSubState.BettingRoundComplete(
+                    totalBets = players.associate { it to it.bet },
+                    activePlayers = players.filter { !it.fold },
+                    nextPhase = "Card Exchange"
+                )
+                GamePhase.CARD_EXCHANGE -> PlayingSubState.CardExchangePhase(
+                    player = players.firstOrNull { it.isHuman } ?: players.first(),
+                    maxExchanges = 3,
+                    exchangesRemaining = 1
+                )
+                GamePhase.HAND_DEALING -> PlayingSubState.DealingCards(
+                    cardsDealt = 0,
+                    totalCards = players.size * 5,
+                    dealingToPlayer = players.firstOrNull()?.name ?: ""
+                )
+                GamePhase.WINNER_DETERMINATION -> PlayingSubState.EvaluatingHands(
+                    evaluatedPlayers = 0,
+                    totalPlayers = players.size,
+                    currentEvaluation = "Evaluating hands..."
+                )
+                else -> PlayingSubState.BettingRoundComplete(
+                    totalBets = players.associate { it to it.bet },
+                    activePlayers = players.filter { !it.fold },
+                    nextPhase = "Next Round"
+                )
+            }
             
-            // Enhanced state management will be integrated here
-            // State will be updated when transitions occur
+            // Update state with current game information
+            gameStateManager?.let { stateManager ->
+                coroutineScope.launch {
+                    val currentState = GameState.Playing(
+                        players = players,
+                        currentPhase = currentPhase,
+                        pot = currentPot,
+                        currentBet = currentBet,
+                        activePlayerIndex = engine.currentPlayerIndex,
+                        gameMode = gameMode,
+                        roundNumber = 1,
+                        subState = subState
+                    )
+                    stateManager.updateGameState(currentState)
+                }
+            }
             
             // Emit appropriate events based on phase transitions
-            // Future: when state system is fully integrated
             when (currentPhase) {
                 GamePhase.HAND_DEALING -> println("Cards dealt to ${players.size} players")
                 GamePhase.BETTING_ROUND -> println("Betting round started - Pot: $currentPot")

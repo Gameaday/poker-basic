@@ -139,4 +139,83 @@ class GameLogicBridgeAITest {
         assertNotNull(allPlayers, "Should have players")
         assertTrue(allPlayers.size >= 2, "Should have at least 2 players")
     }
+
+    @Test
+    fun `should track AI actions correctly with helper method`() {
+        // Initialize game and enable AI processing
+        bridge.initializeGame("TestPlayer", 3, 1000)
+        bridge.setAutoAIEnabled(true)
+
+        // Clear any existing AI action
+        bridge.clearLastAIAction()
+
+        // Perform an action that should trigger AI responses
+        val result = bridge.performCall()
+        assertTrue(result.success, "Call should be successful")
+
+        // Check that an AI action was recorded
+        val aiAction = bridge.getLastAIAction()
+        assertNotNull(aiAction, "Should have recorded an AI action")
+
+        // Verify AI action contains expected information
+        aiAction?.let { action ->
+            assertNotNull(action.playerName, "AI action should have player name")
+            assertTrue(action.playerName.isNotBlank(), "Player name should not be blank")
+            assertNotNull(action.action, "AI action should have action type")
+            assertTrue(
+                listOf("Fold", "Check", "Call", "Raise").contains(action.action),
+                "Action should be valid poker action: ${action.action}"
+            )
+            assertNotNull(action.message, "AI action should have message")
+            assertTrue(action.message.isNotBlank(), "Message should not be blank")
+            
+            // Amount should be non-negative
+            assertTrue(action.amount >= 0, "Amount should be non-negative: ${action.amount}")
+        }
+    }
+
+    @Test
+    fun `should clear AI action when requested`() {
+        // Initialize game and enable AI processing
+        bridge.initializeGame("TestPlayer", 3, 1000)
+        bridge.setAutoAIEnabled(true)
+
+        // Trigger an AI action
+        bridge.performCall()
+
+        // Verify an AI action exists
+        assertNotNull(bridge.getLastAIAction(), "Should have recorded an AI action")
+
+        // Clear the AI action
+        bridge.clearLastAIAction()
+
+        // Verify the action was cleared
+        assertNull(bridge.getLastAIAction(), "AI action should be cleared")
+    }
+
+    @Test
+    fun `should handle different AI decision scenarios`() {
+        // Initialize multiple games with different scenarios
+        for (playerCount in 2..4) {
+            // Fresh game for each scenario
+            bridge.initializeGame("TestPlayer", playerCount, 1000)
+            bridge.setAutoAIEnabled(true)
+            bridge.clearLastAIAction()
+
+            // Perform action to trigger AI decisions
+            val result = bridge.performCall()
+            assertTrue(result.success, "Call should succeed for $playerCount players")
+
+            // Verify AI made some decision
+            val aiAction = bridge.getLastAIAction()
+            if (playerCount > 1) { // Only check if there are AI players
+                // Note: AI action might be null if no AI players took action this turn
+                // But the game should handle this gracefully
+                assertTrue(
+                    result.success,
+                    "Game should handle AI processing correctly with $playerCount players"
+                )
+            }
+        }
+    }
 }

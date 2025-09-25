@@ -33,8 +33,12 @@ class PokerApp {
             stateManager.processAction(GameActions.StartGame)
 
             // Set up state observers for reactive UI updates (async)
-            uiScope.launch {
-                setupStateObservers()
+            try {
+                uiScope.launch {
+                    setupStateObservers()
+                }
+            } catch (e: Exception) {
+                updateUI("Error setting up state observers: ${e.message}", "ERROR")
             }
 
             // Initialize complete UI system

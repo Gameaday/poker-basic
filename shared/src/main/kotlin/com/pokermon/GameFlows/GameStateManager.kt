@@ -434,6 +434,10 @@ class GameStateManager {
             is GameActions.SafariActions -> handleSafariAction(action)
             is GameActions.IronmanActions -> handleIronmanAction(action)
             
+            is GameActions.ConvertToGachaPoints -> {
+                emitEvent(GameEvents.IronmanEvents.ChipsConverted(action.player, action.chips, action.chips / 10))
+            }
+            
             // Handle remaining actions  
             is GameActions.DealCards -> {
                 emitEvent(GameEvents.CardsDealt(2)) // Default player count
@@ -503,6 +507,21 @@ class GameStateManager {
             is GameActions.AdventureActions.CompleteQuest -> {
                 emitEvent(GameEvents.AdventureEvents.QuestCompleted(action.questName, Player(), action.reward))
             }
+            is GameActions.AdventureActions.BattleMonster -> {
+                emitEvent(GameEvents.AdventureEvents.BattleStarted(action.player, action.monster, "battle"))
+            }
+            is GameActions.AdventureActions.FleeFromBattle -> {
+                emitEvent(GameEvents.AdventureEvents.BattleEnded(action.player, null, "flee"))
+            }
+            is GameActions.AdventureActions.StartQuest -> {
+                emitEvent(GameEvents.AdventureEvents.QuestStarted(action.player, action.questId, "adventure"))
+            }
+            is GameActions.AdventureActions.UpdateQuestProgress -> {
+                emitEvent(GameEvents.AdventureEvents.QuestProgressed(action.player, action.questId, action.progress))
+            }
+            is GameActions.AdventureActions.UseSpecialAbility -> {
+                emitEvent(GameEvents.AdventureEvents.SpecialAbilityUsed(action.player, action.ability, "adventure"))
+            }
         }
     }
 
@@ -515,16 +534,31 @@ class GameStateManager {
                 emitEvent(GameEvents.SafariEvents.WildMonsterSighted(action.monsterName))
             }
             is GameActions.SafariActions.ThrowSafariBall -> {
-                emitEvent(GameEvents.SafariEvents.SafariBallThrown(action.player, 0))
+                emitEvent(GameEvents.SafariEvents.SafariBallThrown(action.player, "standard", 0))
             }
             is GameActions.SafariActions.AttemptCapture -> {
                 // Simulate capture logic
                 val success = action.captureChance > 0.5
                 if (success) {
-                    emitEvent(GameEvents.SafariEvents.MonsterCaptured(action.player, "Unknown"))
+                    emitEvent(GameEvents.SafariEvents.MonsterCaptured(action.player, "Unknown", 0))
                 } else {
                     emitEvent(GameEvents.SafariEvents.MonsterEscaped("Unknown", "Failed capture"))
                 }
+            }
+            is GameActions.SafariActions.SpotWildMonster -> {
+                emitEvent(GameEvents.SafariEvents.WildMonsterSpotted(action.monster, Monster.Rarity.COMMON, "neutral"))
+            }
+            is GameActions.SafariActions.ApproachMonster -> {
+                emitEvent(GameEvents.SafariEvents.MonsterApproached(action.player, action.monster))
+            }
+            is GameActions.SafariActions.CheckMonsterStats -> {
+                emitEvent(GameEvents.SafariEvents.MonsterStatsChecked(action.monster, Monster.Rarity.COMMON, "neutral"))
+            }
+            is GameActions.SafariActions.FleeFromWildMonster -> {
+                emitEvent(GameEvents.SafariEvents.PlayerFledFromWild(action.player, action.monster))
+            }
+            is GameActions.SafariActions.UseSpecialBall -> {
+                emitEvent(GameEvents.SafariEvents.SpecialBallUsed(action.player, action.ballType, 0))
             }
         }
     }
@@ -535,13 +569,22 @@ class GameStateManager {
     private suspend fun handleIronmanAction(action: GameActions.IronmanActions) {
         when (action) {
             is GameActions.IronmanActions.ConvertToGachaPoints -> {
-                emitEvent(GameEvents.IronmanEvents.ChipsConverted(action.chips, action.points))
+                emitEvent(GameEvents.IronmanEvents.ChipsConverted(action.player, action.chips, action.chips / 10, 0.1))
             }
             is GameActions.IronmanActions.PerformGachaPull -> {
-                emitEvent(GameEvents.IronmanEvents.GachaPullPerformed(action.player, action.pointsSpent, "Common Monster"))
+                emitEvent(GameEvents.IronmanEvents.GachaPullPerformed(action.player, action.pointsSpent, "Common Monster", Monster.Rarity.COMMON))
             }
             is GameActions.IronmanActions.TriggerPermadeath -> {
-                emitEvent(GameEvents.IronmanEvents.PermadeathTriggered(action.player, "Health reached zero"))
+                emitEvent(GameEvents.IronmanEvents.PermadeathTriggered(action.player, "Health reached zero", mapOf()))
+            }
+            is GameActions.IronmanActions.AcknowledgeRisk -> {
+                emitEvent(GameEvents.IronmanEvents.RiskAcknowledged(action.player, action.riskLevel))
+            }
+            is GameActions.IronmanActions.ActivateRiskMode -> {
+                emitEvent(GameEvents.IronmanEvents.RiskModeActivated(action.player, action.riskLevel))
+            }
+            is GameActions.IronmanActions.CheckSurvivalStatus -> {
+                emitEvent(GameEvents.IronmanEvents.SurvivalStatusChecked(action.player, action.player.chips > 0))
             }
         }
     }

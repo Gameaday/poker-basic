@@ -283,7 +283,7 @@ class IronmanModeLogic : GameModeFactory.GameModeLogic {
     override fun processCustomAction(action: GameActions): GameEvents? {
         return when (action) {
             is GameActions.IronmanActions.PerformGachaPull -> 
-                GameEvents.IronmanEvents.GachaPullPerformed(action.player, action.pointsSpent, "Mystery Prize")
+                GameEvents.IronmanEvents.GachaPullPerformed(action.player, action.pointsSpent, "Mystery Prize", Monster.Rarity.COMMON)
             else -> null
         }
     }

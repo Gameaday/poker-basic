@@ -374,6 +374,7 @@ object ConsoleMain {
         val opponentCount: Int,
         val opponentTypes: List<String>,
         val startingChips: Int,
+        val maxRounds: Int = 10, // Default maximum rounds
     )
 
     // =================================================================
@@ -521,7 +522,7 @@ object ConsoleMain {
             
             // Generate monster encounter
             val monster = generateRandomMonster(currentRound)
-            println("🐲 A wild ${monster.name} appears! (Health: ${monster.health}, Type: ${monster.type})")
+            println("🐲 A wild ${monster.name} appears! (Health: ${monster.effectiveHealth}, Type: ${monster.rarity})")
             
             // Deal cards for battle preparation
             dealCardsToPlayers(activePlayers, deck, 5)
@@ -554,9 +555,9 @@ object ConsoleMain {
                 }
                 
                 // Check if monster is defeated
-                if (damage >= monster.health) {
+                if (damage >= monster.effectiveHealth) {
                     println("🏆 ${player.name} defeated ${monster.name}!")
-                    val reward = monster.health * 10
+                    val reward = monster.effectiveHealth * 10
                     player.chips += reward
                     monstersDefeated[player] = (monstersDefeated[player] ?: 0) + 1
                     println("💰 Reward: $reward chips (Total: ${player.chips})")
@@ -787,40 +788,40 @@ object ConsoleMain {
 
     private fun generateRandomMonster(round: Int): Monster {
         val monsters = listOf(
-            Monster("Forest Dragon", "Dragon", "uncommon", 80 + (round * 10)),
-            Monster("Cave Beast", "Beast", "common", 60 + (round * 5)),
-            Monster("Ancient Golem", "Rock", "rare", 120 + (round * 15)),
-            Monster("Shadow Wolf", "Dark", "uncommon", 70 + (round * 8)),
-            Monster("Crystal Spider", "Crystal", "rare", 100 + (round * 12))
+            Monster("Forest Dragon", Monster.Rarity.UNCOMMON, 80 + (round * 10), Monster.EffectType.CHIP_BONUS, 25, "A fierce dragon that lurks in ancient forests"),
+            Monster("Cave Beast", Monster.Rarity.COMMON, 60 + (round * 5), Monster.EffectType.DEFENSIVE_SHIELD, 15, "A sturdy creature that dwells in deep caves"),
+            Monster("Ancient Golem", Monster.Rarity.RARE, 120 + (round * 15), Monster.EffectType.BETTING_BOOST, 35, "An ancient stone guardian with immense power"),
+            Monster("Shadow Wolf", Monster.Rarity.UNCOMMON, 70 + (round * 8), Monster.EffectType.LUCK_ENHANCEMENT, 20, "A mystical wolf that moves through shadows"),
+            Monster("Crystal Spider", Monster.Rarity.RARE, 100 + (round * 12), Monster.EffectType.CARD_ADVANTAGE, 30, "A beautiful yet dangerous crystalline arachnid")
         )
         return monsters.random()
     }
 
     private fun generateWildMonster(round: Int): Monster {
         val rarity = when ((1..100).random()) {
-            in 1..60 -> "common"
-            in 61..85 -> "uncommon"
-            in 86..95 -> "rare"
-            else -> "legendary"
+            in 1..60 -> Monster.Rarity.COMMON
+            in 61..85 -> Monster.Rarity.UNCOMMON
+            in 86..95 -> Monster.Rarity.RARE
+            else -> Monster.Rarity.LEGENDARY
         }
         
         val captureRate = when (rarity) {
-            "common" -> 0.6
-            "uncommon" -> 0.4
-            "rare" -> 0.2
-            "legendary" -> 0.05
+            Monster.Rarity.COMMON -> 0.6
+            Monster.Rarity.UNCOMMON -> 0.4
+            Monster.Rarity.RARE -> 0.2
+            Monster.Rarity.LEGENDARY -> 0.05
             else -> 0.5
         }
         
         val names = mapOf(
-            "common" to listOf("Field Mouse", "Garden Snake", "House Cat"),
-            "uncommon" to listOf("Wild Boar", "Mountain Lion", "Eagle"),
-            "rare" to listOf("White Tiger", "Golden Eagle", "Crystal Fox"),
-            "legendary" to listOf("Phoenix", "Dragon", "Unicorn")
+            Monster.Rarity.COMMON to listOf("Field Mouse", "Garden Snake", "House Cat"),
+            Monster.Rarity.UNCOMMON to listOf("Wild Boar", "Mountain Lion", "Eagle"),
+            Monster.Rarity.RARE to listOf("White Tiger", "Golden Eagle", "Crystal Fox"),
+            Monster.Rarity.LEGENDARY to listOf("Phoenix", "Dragon", "Unicorn")
         )
         
         val name = names[rarity]?.random() ?: "Unknown"
-        return Monster(name, "Wild", rarity, 50, captureRate)
+        return Monster(name, rarity, 50, Monster.EffectType.CHIP_BONUS, (captureRate * 100).toInt(), "A wild creature encountered in the safari")
     }
 
     private fun evaluateHandForBattle(player: Player): HandEvaluator.HandResult {
@@ -854,17 +855,17 @@ object ConsoleMain {
     }
 
     private fun calculateMonsterDamage(monster: Monster, damageDealt: Int): Int {
-        // Monster counter-attack based on type and remaining health
-        val baseCounterDamage = when (monster.type) {
-            "Dragon" -> 30
-            "Beast" -> 20
-            "Rock" -> 15
-            "Dark" -> 25
-            else -> 10
+        // Monster counter-attack based on rarity and remaining health
+        val baseCounterDamage = when (monster.rarity) {
+            Monster.Rarity.LEGENDARY -> 30
+            Monster.Rarity.EPIC -> 25
+            Monster.Rarity.RARE -> 20
+            Monster.Rarity.UNCOMMON -> 15
+            Monster.Rarity.COMMON -> 10
         }
         
         // Reduce counter-damage if monster was hurt badly
-        return if (damageDealt >= monster.health) 0 else baseCounterDamage
+        return if (damageDealt >= monster.effectiveHealth) 0 else baseCounterDamage
     }
 
     private fun runIronmanBettingRound(

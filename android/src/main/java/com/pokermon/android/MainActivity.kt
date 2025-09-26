@@ -174,7 +174,7 @@ fun PokerGameNavigation(userProfileManager: UserProfileManager) {
             )
         }
         composable("about") {
-            AboutScreen(
+            aboutScreen(
                 onBackPressed = {
                     navController.popBackStack()
                 },

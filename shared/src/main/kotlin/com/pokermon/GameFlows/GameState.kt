@@ -18,7 +18,7 @@ sealed class GameState {
     object Initializing : GameState()
 
     data class ModeSelection(
-        val availableModes: List<GameMode> = GameMode.values().toList(),
+        val availableModes: List<GameMode> = GameMode.entries.toList(),
         val selectedMode: GameMode? = null,
         val playerName: String = "",
     ) : GameState()

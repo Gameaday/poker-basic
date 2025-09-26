@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test
 class GameModeValidationTest {
     @Test
     fun `all game modes should be defined and accessible`() {
-        val gameMode = GameMode.values()
+        val gameMode = GameMode.entries
         assertEquals(4, gameMode.size, "Should have exactly 4 game modes")
 
         val modeNames = gameMode.map { it.name }.toSet()
@@ -31,7 +31,7 @@ class GameModeValidationTest {
 
     @Test
     fun `all game modes should have proper display names and descriptions`() {
-        GameMode.values().forEach { mode ->
+        GameMode.entries.forEach { mode ->
             assertNotNull(mode.displayName)
             assertNotNull(mode.description)
             assertTrue(mode.displayName.isNotEmpty())
@@ -87,9 +87,9 @@ class GameModeValidationTest {
 
     @Test
     fun `all game modes should have unique display names`() {
-        val displayNames = GameMode.values().map { it.displayName }.toSet()
+        val displayNames = GameMode.entries.map { it.displayName }.toSet()
         assertEquals(
-            GameMode.values().size,
+            GameMode.entries.size,
             displayNames.size,
             "All game modes should have unique display names",
         )
@@ -97,9 +97,9 @@ class GameModeValidationTest {
 
     @Test
     fun `all game modes should have unique descriptions`() {
-        val descriptions = GameMode.values().map { it.description }.toSet()
+        val descriptions = GameMode.entries.map { it.description }.toSet()
         assertEquals(
-            GameMode.values().size,
+            GameMode.entries.size,
             descriptions.size,
             "All game modes should have unique descriptions",
         )

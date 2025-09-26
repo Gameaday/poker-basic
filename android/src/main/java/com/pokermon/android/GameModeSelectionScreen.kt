@@ -45,7 +45,7 @@ fun GameModeSelectionScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp),
             modifier = Modifier.weight(1f),
         ) {
-            items(GameMode.values()) { gameMode ->
+            items(GameMode.entries) { gameMode ->
                 GameModeCard(
                     gameMode = gameMode,
                     onSelected = { onGameModeSelected(gameMode) },

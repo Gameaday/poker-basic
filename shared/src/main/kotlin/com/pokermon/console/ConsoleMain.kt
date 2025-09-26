@@ -173,7 +173,7 @@ object ConsoleMain {
         println("🎮".repeat(20))
         println()
 
-        val modes = GameMode.values()
+        val modes = GameMode.entries
         modes.forEachIndexed { index, mode ->
             val icon =
                 when (mode) {

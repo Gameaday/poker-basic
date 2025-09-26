@@ -168,7 +168,7 @@ class AdventureMode(
     /**
      * Checks and handles level ups
      */
-    private fun checkLevelUp() {
+    private fun checkLevelUp(): Boolean {
         val expNeeded = getExpToNextLevel()
         if (experience >= expNeeded) {
             currentLevel++
@@ -184,7 +184,9 @@ class AdventureMode(
             // Restore some health (represented as extra chips)
             val healthBonus = 100
             println("   Health restored: +$healthBonus chips")
+            return true
         }
+        return false
     }
 
     /**
@@ -478,20 +480,21 @@ class AdventureMode(
      * Integrates with the comprehensive monster battle system
      */
     fun triggerFullMonsterBattle(playerProfile: PlayerProfile, enemyMonster: Monster, handStrength: Int): AdventureBattleResult? {
-        val playerMonster = playerProfile.monsterCollection.activeMonsters.firstOrNull()
+        val playerMonster = playerProfile.monsterCollection.getActiveMonster()
         if (playerMonster != null) {
             val battleResult = battleSystem.executeBattle(playerMonster, enemyMonster, handStrength)
             val experienceGained = when (enemyMonster.rarity) {
                 Monster.Rarity.COMMON -> 50 + (handStrength * 10)
                 Monster.Rarity.UNCOMMON -> 100 + (handStrength * 15) 
                 Monster.Rarity.RARE -> 200 + (handStrength * 25)
+                Monster.Rarity.EPIC -> 350 + (handStrength * 35)
                 Monster.Rarity.LEGENDARY -> 500 + (handStrength * 50)
             }
             
             return AdventureBattleResult(
                 battleResult = battleResult,
                 experienceGained = experienceGained,
-                questProgress = questSystem.updateProgress("defeat_monsters", 1),
+                questProgress = emptyMap(), // Quest progress is handled separately
                 levelUp = checkLevelUp()
             )
         }
@@ -507,23 +510,15 @@ class AdventureMode(
         repeat(rounds) {
             trainedMonster = trainedMonster.copy(
                 stats = trainedMonster.stats.copy(
-                    hp = trainedMonster.stats.hp + 5, // Endurance for long adventures
-                    attack = trainedMonster.stats.attack + 3, // Combat prowess
-                    defense = trainedMonster.stats.defense + 2, // Survivability
-                    speed = trainedMonster.stats.speed + 2, // Exploration speed
-                    special = trainedMonster.stats.special + 1 // Magical abilities
+                    baseHp = trainedMonster.stats.baseHp + 5, // Endurance for long adventures
+                    baseAttack = trainedMonster.stats.baseAttack + 3, // Combat prowess
+                    baseDefense = trainedMonster.stats.baseDefense + 2, // Survivability
+                    baseSpeed = trainedMonster.stats.baseSpeed + 2, // Exploration speed
+                    baseSpecial = trainedMonster.stats.baseSpecial + 1 // Magical abilities
                 )
             )
         }
         return trainedMonster
-    }
-
-    /**
-     * Level up check based on current experience
-     */
-    private fun checkLevelUp(): Boolean {
-        val requiredExp = currentLevel * LEVEL_UP_EXP
-        return experience >= requiredExp
     }
 
     /**

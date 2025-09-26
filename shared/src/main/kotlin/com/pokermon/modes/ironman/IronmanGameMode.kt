@@ -601,14 +601,14 @@ class IronmanGameMode(
      * Integrates with comprehensive monster battle system for high-stakes encounters
      */
     fun triggerIronmanBattle(playerProfile: PlayerProfile, bossMonster: Monster, handStrength: Int): IronmanBattleResult? {
-        val playerMonster = playerProfile.monsterCollection.activeMonsters.firstOrNull()
+        val playerMonster = playerProfile.monsterCollection.getActiveMonster()
         if (playerMonster != null) {
             // Ironman battles are more intense with higher stakes
             val enhancedBoss = bossMonster.copy(
                 stats = bossMonster.stats.copy(
-                    hp = (bossMonster.stats.hp * riskLevel).toInt(),
-                    attack = (bossMonster.stats.attack * riskLevel).toInt(),
-                    defense = (bossMonster.stats.defense * riskLevel).toInt()
+                    baseHp = (bossMonster.stats.baseHp * riskLevel).toInt(),
+                    baseAttack = (bossMonster.stats.baseAttack * riskLevel).toInt(),
+                    baseDefense = (bossMonster.stats.baseDefense * riskLevel).toInt()
                 )
             )
             
@@ -628,7 +628,7 @@ class IronmanGameMode(
                 battleResult = battleResult,
                 gachaPointsEarned = gachaReward,
                 riskLevelIncrease = if (battleResult.winner == playerMonster) 0.1f else 0.0f,
-                permadeathRisk = !battleResult.winner.equals(playerMonster) && riskLevel > 2.5f
+                permadeathRisk = battleResult.winner != playerMonster && riskLevel > 2.5f
             )
         }
         return null
@@ -644,11 +644,11 @@ class IronmanGameMode(
             val multiplier = riskLevel.toFloat()
             trainedMonster = trainedMonster.copy(
                 stats = trainedMonster.stats.copy(
-                    hp = trainedMonster.stats.hp + (5 * multiplier).toInt(), // Survival focus
-                    attack = trainedMonster.stats.attack + (4 * multiplier).toInt(), // High damage
-                    defense = trainedMonster.stats.defense + (4 * multiplier).toInt(), // Tank capability
-                    speed = trainedMonster.stats.speed + (2 * multiplier).toInt(), // Tactical speed
-                    special = trainedMonster.stats.special + (3 * multiplier).toInt() // Power abilities
+                    baseHp = trainedMonster.stats.baseHp + (5 * multiplier).toInt(), // Survival focus
+                    baseAttack = trainedMonster.stats.baseAttack + (4 * multiplier).toInt(), // High damage
+                    baseDefense = trainedMonster.stats.baseDefense + (4 * multiplier).toInt(), // Tank capability
+                    baseSpeed = trainedMonster.stats.baseSpeed + (2 * multiplier).toInt(), // Tactical speed
+                    baseSpecial = trainedMonster.stats.baseSpecial + (3 * multiplier).toInt() // Power abilities
                 )
             )
         }

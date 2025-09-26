@@ -297,6 +297,27 @@ class SafariGameMode(
         // Ensure capture chance stays within reasonable bounds
         return captureChance.coerceIn(0.01, 0.95)
     }
+    
+    // Overload for Monster type (simplified calculation)
+    private fun calculateCaptureChance(
+        monster: Monster,
+        handStrength: Int,
+    ): Double {
+        // Base capture rate based on rarity
+        var captureChance = when (monster.rarity) {
+            Monster.Rarity.COMMON -> 0.7
+            Monster.Rarity.UNCOMMON -> 0.5
+            Monster.Rarity.RARE -> 0.3
+            Monster.Rarity.EPIC -> 0.2
+            Monster.Rarity.LEGENDARY -> 0.1
+        }
+
+        // Hand strength bonus
+        val handBonus = (handStrength / 999.0) * 0.3
+        captureChance += handBonus
+
+        return captureChance.coerceIn(0.05, 0.95)
+    }
 
     /**
      * Calculates chip reward for successful captures
@@ -348,6 +369,65 @@ class SafariGameMode(
 
         println("\nThank you for playing Safari Mode!")
     }
+    
+    /**
+     * Integrates with comprehensive monster battle system for Safari encounters
+     */
+    fun triggerSafariEncounter(playerProfile: PlayerProfile, wildMonster: Monster, handStrength: Int): SafariBattleResult {
+        val playerMonster = playerProfile.monsterCollection.getActiveMonster()
+        
+        if (playerMonster != null) {
+            // Safari mode uses brief battles to weaken monsters before capture
+            val battleResult = battleSystem.executeBattle(
+                playerMonster, 
+                wildMonster.copy(stats = wildMonster.stats.copy(baseHp = wildMonster.stats.effectiveHp / 2)), // Weaken for capture
+                handStrength
+            )
+            
+            // Calculate capture bonus based on battle performance
+            val captureBonus = if (battleResult.winner == playerMonster) 0.3f else 0.0f
+            val baseCaptureRate = calculateCaptureChance(wildMonster, handStrength)
+            val finalCaptureRate = (baseCaptureRate + captureBonus).coerceAtMost(0.9f)
+            
+            val captured = random.nextFloat() < finalCaptureRate
+            
+            return SafariBattleResult(
+                battleResult = battleResult,
+                captured = captured,
+                captureRate = finalCaptureRate,
+                wildMonster = wildMonster
+            )
+        } else {
+            // No monster to battle with - use traditional capture mechanics
+            val baseCaptureRate = calculateCaptureChance(wildMonster, handStrength)
+            val captured = random.nextFloat() < baseCaptureRate
+            
+            return SafariBattleResult(
+                battleResult = null,
+                captured = captured,
+                captureRate = baseCaptureRate,
+                wildMonster = wildMonster
+            )
+        }
+    }
+    
+    /**
+     * Train safari monster for improved stats
+     */
+    fun trainSafariMonster(monster: Monster, rounds: Int = 3): Monster {
+        var trainedMonster = monster
+        repeat(rounds) {
+            trainedMonster = trainedMonster.copy(
+                stats = trainedMonster.stats.copy(
+                    baseSpeed = trainedMonster.stats.baseSpeed + 4, // Tracking and agility
+                    baseDefense = trainedMonster.stats.baseDefense + 3, // Environmental resistance  
+                    baseSpecial = trainedMonster.stats.baseSpecial + 2, // Monster sensing
+                    baseAttack = trainedMonster.stats.baseAttack + 1 // Controlled force
+                )
+            )
+        }
+        return trainedMonster
+    }
 }
 
 /**
@@ -396,93 +476,34 @@ data class WildMonster(
     val behavior: MonsterBehavior,
 ) {
     fun toMonster(): Monster {
+        val stats = MonsterStats(
+            baseHp = 80 + (rarity.ordinal * 20),
+            baseAttack = 50 + (rarity.ordinal * 10),
+            baseDefense = 45 + (rarity.ordinal * 8),
+            baseSpeed = 60 + (rarity.ordinal * 15),
+            baseSpecial = 55 + (rarity.ordinal * 12)
+        )
+        
         return Monster(
             name = name,
             rarity = rarity,
-            baseHealth = 100,
+            baseHealth = stats.baseHp,
             effectType = Monster.EffectType.CARD_ADVANTAGE,
             effectPower = rarity.powerMultiplier.toInt() * 10,
             description = "A wild monster captured in safari mode",
+            stats = stats
         )
-    }
-
-    /**
-     * Integrates with comprehensive monster battle system for Safari encounters
-     */
-    fun triggerSafariEncounter(playerProfile: PlayerProfile, wildMonster: Monster, handStrength: Int): SafariBattleResult {
-        val playerMonster = playerProfile.monsterCollection.activeMonsters.firstOrNull()
-        
-        if (playerMonster != null) {
-            // Safari mode uses brief battles to weaken monsters before capture
-            val battleResult = battleSystem.executeBattle(
-                playerMonster, 
-                wildMonster.copy(stats = wildMonster.stats.copy(hp = wildMonster.stats.hp / 2)), // Weaken for capture
-                handStrength
-            )
-            
-            // Calculate capture bonus based on battle performance
-            val captureBonus = if (battleResult.winner == playerMonster) 0.3f else 0.0f
-            val baseCaptureRate = calculateCaptureChance(wildMonster, handStrength)
-            val finalCaptureRate = (baseCaptureRate + captureBonus).coerceAtMost(0.9f)
-            
-            val captured = random.nextFloat() < finalCaptureRate
-            
-            return SafariBattleResult(
-                battleResult = battleResult,
-                captured = captured,
-                captureRate = finalCaptureRate,
-                wildMonster = wildMonster
-            )
-        } else {
-            // No monster to battle with - use traditional capture mechanics
-            val baseCaptureRate = calculateCaptureChance(wildMonster, handStrength)
-            val captured = random.nextFloat() < baseCaptureRate
-            
-            return SafariBattleResult(
-                battleResult = null,
-                captured = captured,
-                captureRate = baseCaptureRate,
-                wildMonster = wildMonster
-            )
-        }
-    }
-
-    /**
-     * Safari-specific monster training focuses on capture skills
-     */
-    fun trainSafariMonster(monster: Monster, rounds: Int = 1): Monster {
-        // Safari mode training emphasizes agility and tracking
-        var trainedMonster = monster
-        repeat(rounds) {
-            trainedMonster = trainedMonster.copy(
-                stats = trainedMonster.stats.copy(
-                    speed = trainedMonster.stats.speed + 4, // Tracking and agility
-                    defense = trainedMonster.stats.defense + 3, // Environmental resistance  
-                    special = trainedMonster.stats.special + 2, // Monster sensing
-                    attack = trainedMonster.stats.attack + 1 // Controlled force
-                )
-            )
-        }
-        return trainedMonster
     }
 }
 
 /**
- * Result of a safari mode monster encounter with battle integration
+ * Safari battle result with comprehensive capture mechanics
  */
 data class SafariBattleResult(
     val battleResult: com.pokermon.database.BattleResult?,
     val captured: Boolean,
     val captureRate: Float,
     val wildMonster: Monster
-)
-
-/**
- * Result of a capture attempt
- */
-data class CaptureResult(
-    val outcome: CaptureOutcome,
-    val handStrength: Int,
 )
 
 /**
@@ -494,3 +515,11 @@ enum class CaptureOutcome {
     ESCAPED, // Monster escaped
     OUT_OF_BALLS, // No more safari balls
 }
+
+/**
+ * Result of a capture attempt
+ */
+data class CaptureResult(
+    val outcome: CaptureOutcome,
+    val captureStrength: Int
+)

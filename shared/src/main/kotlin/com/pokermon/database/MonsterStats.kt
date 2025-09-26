@@ -42,7 +42,7 @@ data class MonsterStats(
     
     // Calculate effective stats with level, nature, and IV bonuses
     val effectiveHp: Int get() = calculateStat(baseHp, level, nature.hpModifier)
-    val effectiveAttack: Int get() = calculateStat(baseAttack, level, nature.attackModifier) 
+    val effectiveAttack: Int get() = calculateStat(baseAttack, level, nature.attackModifier)
     val effectiveDefense: Int get() = calculateStat(baseDefense, level, nature.defenseModifier)
     val effectiveSpeed: Int get() = calculateStat(baseSpeed, level, nature.speedModifier)
     val effectiveSpecial: Int get() = calculateStat(baseSpecial, level, nature.specialModifier)

@@ -123,7 +123,8 @@ class GameLogicBridgeAITest {
         assertTrue(totalAfter > 0, "Total chips should be positive")
         assertTrue(currentPot > initialPot, "Pot should have increased")
         assertTrue(
-            totalAfter >= totalBefore - 500, // Allow some tolerance for game mechanics
+            // Allow some tolerance for game mechanics
+            totalAfter >= totalBefore - 500,
             "Total chips should be roughly conserved (before: $totalBefore, after: $totalAfter)",
         )
     }

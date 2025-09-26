@@ -7,6 +7,7 @@ import com.pokermon.HandEvaluator
 import com.pokermon.database.Monster
 import com.pokermon.database.MonsterBattleSystem
 import com.pokermon.database.MonsterCollection
+import com.pokermon.database.MonsterStats
 import com.pokermon.modern.CardUtils
 import com.pokermon.players.PlayerProfile
 import kotlin.random.Random
@@ -379,7 +380,7 @@ class SafariGameMode(
         if (playerMonster != null) {
             // Safari mode uses brief battles to weaken monsters before capture
             val battleResult = battleSystem.executeBattle(
-                playerMonster, 
+                playerMonster,
                 wildMonster.copy(stats = wildMonster.stats.copy(baseHp = wildMonster.stats.effectiveHp / 2)), // Weaken for capture
                 handStrength
             )
@@ -387,14 +388,14 @@ class SafariGameMode(
             // Calculate capture bonus based on battle performance
             val captureBonus = if (battleResult.winner == playerMonster) 0.3f else 0.0f
             val baseCaptureRate = calculateCaptureChance(wildMonster, handStrength)
-            val finalCaptureRate = (baseCaptureRate + captureBonus).coerceAtMost(0.9f)
+            val finalCaptureRate = (baseCaptureRate + captureBonus).coerceAtMost(0.9)
             
             val captured = random.nextFloat() < finalCaptureRate
             
             return SafariBattleResult(
                 battleResult = battleResult,
                 captured = captured,
-                captureRate = finalCaptureRate,
+                captureRate = finalCaptureRate.toFloat(),
                 wildMonster = wildMonster
             )
         } else {
@@ -405,7 +406,7 @@ class SafariGameMode(
             return SafariBattleResult(
                 battleResult = null,
                 captured = captured,
-                captureRate = baseCaptureRate,
+                captureRate = baseCaptureRate.toFloat(),
                 wildMonster = wildMonster
             )
         }

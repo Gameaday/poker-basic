@@ -108,7 +108,7 @@ class MainActivity : ComponentActivity() {
  */
 sealed class NavigationRoute(val route: String) {
     object MainMenu : NavigationRoute("main_menu")
-    object GameModeSelection : NavigationRoute("game_mode_selection") 
+    object GameModeSelection : NavigationRoute("game_mode_selection")
     object Settings : NavigationRoute("settings")
     object About : NavigationRoute("about")
     object MonsterEncyclopedia : NavigationRoute("monster_encyclopedia")
@@ -245,7 +245,7 @@ fun MainMenuScreen(navController: NavHostController) {
         Spacer(modifier = Modifier.height(24.dp))
         
         Button(
-            onClick = { 
+            onClick = {
                 navController.navigate("game_mode_selection")
             },
             modifier = Modifier.fillMaxWidth()

@@ -339,24 +339,6 @@ private fun AudioSystemSection(
                             contentDescription = "Play Music"
                         )
                     }
-                    
-                    IconButton(
-                        onClick = { onStopMusic() }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Pause,
-                            contentDescription = "Stop Music"
-                        )
-                    }
-                    
-                    IconButton(
-                        onClick = { onPlayMusic(AudioManager.BackgroundMusic.ADVENTURE_MODE) }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.MusicNote,
-                            contentDescription = "Adventure Music"
-                        )
-                    }
                 }
                 
                 settings.currentMusic?.let { music ->

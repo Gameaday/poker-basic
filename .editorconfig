@@ -14,11 +14,10 @@ indent_style = space
 indent_size = 4
 max_line_length = 140
 
-# Disable function naming rule for Compose functions (they should be PascalCase)
+# ktlint configuration for Kotlin files
+# Note: Some rules are disabled to accommodate Compose functions and documented code
 ktlint_standard_function-naming = disabled
-
-# Allow comments in parameter lists (common in well-documented code)
-ktlint_standard_discouraged-comment-location = disabled
+ktlint_standard_max-line-length = disabled
 
 [*.{xml,json,yml,yaml}]
 indent_style = space

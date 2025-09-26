@@ -61,7 +61,7 @@ class GameLogicIntegrationTest {
     @Test
     fun testAllGameModes() {
         // Test that all game modes are accessible
-        val allModes = GameMode.values()
+        val allModes = GameMode.entries
         assertEquals("Should have 4 game modes", 4, allModes.size)
 
         val modeNames = allModes.map { it.name }.toSet()

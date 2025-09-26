@@ -53,13 +53,14 @@ fun GameplayScreen(
     // ================================================================
 
     // Reactive state from state management system
-    val gameState by gameBridge.gameStateFlow.collectAsState()
-    val gameEvents by gameBridge.gameEventsFlow.collectAsState()
+    val gameState by gameBridge.gameStateFlow.collectAsState(initial = GameState.Initializing)
+    val gameEvents by gameBridge.gameEventsFlow.collectAsState(initial = emptyList<GameActions>())
 
     // UI state derived from game state
     var statusMessage by remember { mutableStateOf("Initializing game...") }
     var playerChips by remember { mutableIntStateOf(1000) }
     var currentPot by remember { mutableIntStateOf(0) }
+    var currentBet by remember { mutableIntStateOf(0) }
     var playerCards by remember { mutableStateOf(listOf<String>()) }
     var allPlayers by remember { mutableStateOf(listOf<PlayerInfo>()) }
     var monsterOpponents by remember { mutableStateOf(listOf<MonsterOpponent>()) }

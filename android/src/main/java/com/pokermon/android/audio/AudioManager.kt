@@ -205,10 +205,10 @@ class AudioManager private constructor(
     fun stopBackgroundMusic(fadeOut: Boolean = false) {
         musicPlayer?.let { player ->
             if (fadeOut) {
-                fadeOutMusic(player) {
+                fadeOutMusic(player, {
                     player.stop()
                     player.release()
-                }
+                })
             } else {
                 player.stop()
                 player.release()

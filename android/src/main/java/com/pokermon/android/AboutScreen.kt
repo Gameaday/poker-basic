@@ -66,7 +66,11 @@ fun aboutScreen(onBackPressed: () -> Unit) {
                 ),
         ) {
             Text(
-                text = "A cross-platform educational poker game demonstrating modern software development practices with shared business logic across desktop and mobile platforms. Short for \"Poker Monster\" after the game features.",
+                text =
+                    "A cross-platform educational poker game demonstrating modern " +
+                        "software development practices with shared business logic across " +
+                        "desktop and mobile platforms. Short for \"Poker Monster\" after " +
+                        "the game features.",
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(16.dp),

@@ -1,7 +1,6 @@
 package com.pokermon
 
 import com.pokermon.GameLauncher
-import kotlinx.coroutines.runBlocking
 
 /**
  * Desktop launcher for Pokermon - Pure Kotlin-native desktop application entry point.
@@ -16,7 +15,7 @@ import kotlinx.coroutines.runBlocking
 object DesktopLauncher {
     
     @JvmStatic
-    fun main(args: Array<String>) = runBlocking {
+    fun main(args: Array<String>) {
         println("=== Pokermon Desktop - Pure Kotlin-Native ===")
         println("Version: ${getVersionInfo()}")
         println("Platform: Desktop Native")

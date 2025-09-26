@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import java.util.*
+import java.util.UUID
 
 /**
  * Comprehensive user profile manager for persistent Pokermon user experience.
@@ -14,11 +14,11 @@ import java.util.*
 class UserProfileManager private constructor(private val context: Context) {
     companion object {
         @Volatile
-        private var INSTANCE: UserProfileManager? = null
+        private var instance: UserProfileManager? = null
 
         fun getInstance(context: Context): UserProfileManager {
-            return INSTANCE ?: synchronized(this) {
-                INSTANCE ?: UserProfileManager(context.applicationContext).also { INSTANCE = it }
+            return instance ?: synchronized(this) {
+                instance ?: UserProfileManager(context.applicationContext).also { instance = it }
             }
         }
 

@@ -18,45 +18,46 @@ import com.pokermon.GameMode
 @Composable
 fun GameModeSelectionScreen(
     onGameModeSelected: (GameMode) -> Unit,
-    onBackPressed: () -> Unit
+    onBackPressed: () -> Unit,
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         // Header
         Text(
             text = "🃏 Select Game Mode",
             style = MaterialTheme.typography.headlineLarge,
-            modifier = Modifier.padding(bottom = 8.dp)
+            modifier = Modifier.padding(bottom = 8.dp),
         )
-        
+
         Text(
             text = "Choose your poker adventure",
             style = MaterialTheme.typography.bodyMedium,
-            modifier = Modifier.padding(bottom = 24.dp)
+            modifier = Modifier.padding(bottom = 24.dp),
         )
-        
+
         // Game mode cards
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(12.dp),
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f),
         ) {
             items(GameMode.values()) { gameMode ->
                 GameModeCard(
                     gameMode = gameMode,
-                    onSelected = { onGameModeSelected(gameMode) }
+                    onSelected = { onGameModeSelected(gameMode) },
                 )
             }
         }
-        
+
         // Back button
         Spacer(modifier = Modifier.height(16.dp))
         OutlinedButton(
             onClick = onBackPressed,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         ) {
             Text("Back to Menu")
         }
@@ -67,57 +68,60 @@ fun GameModeSelectionScreen(
 @Composable
 fun GameModeCard(
     gameMode: GameMode,
-    onSelected: () -> Unit
+    onSelected: () -> Unit,
 ) {
     val isImplemented = gameMode == GameMode.CLASSIC
-    
+
     Card(
         onClick = { if (isImplemented) onSelected() },
         modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = if (isImplemented) 
-                MaterialTheme.colorScheme.primaryContainer 
-            else 
-                MaterialTheme.colorScheme.surfaceVariant
-        )
+        colors =
+            CardDefaults.cardColors(
+                containerColor =
+                    if (isImplemented) {
+                        MaterialTheme.colorScheme.primaryContainer
+                    } else {
+                        MaterialTheme.colorScheme.surfaceVariant
+                    },
+            ),
     ) {
         Column(
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(16.dp),
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
                     text = gameMode.displayName,
                     style = MaterialTheme.typography.titleMedium,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
                 )
-                
+
                 if (!isImplemented) {
                     Text(
                         text = "Coming Soon",
                         style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
             }
-            
+
             Spacer(modifier = Modifier.height(8.dp))
-            
+
             Text(
                 text = gameMode.description,
                 style = MaterialTheme.typography.bodyMedium,
-                textAlign = TextAlign.Start
+                textAlign = TextAlign.Start,
             )
-            
+
             if (isImplemented) {
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = "✓ Available Now",
                     style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.primary
+                    color = MaterialTheme.colorScheme.primary,
                 )
             }
         }

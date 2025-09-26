@@ -26,7 +26,7 @@ data class Monster(
     val currentHp: Int = stats.effectiveHp,
     val isShiny: Boolean = false,
     val captureLocation: String = "Unknown",
-    val trainerId: String? = null
+    val trainerId: String? = null,
 ) {
     /**
      * Sealed class defining monster rarity levels with Kotlin-native power multipliers.
@@ -77,12 +77,12 @@ data class Monster(
         effectPower: Int,
         description: String,
     ) : this(
-        name, rarity, baseHealth, effectType, effectPower, description, 
+        name, rarity, baseHealth, effectType, effectPower, description,
         AIPersonality.values().random(),
         MonsterStats(baseHealth, 50, 50, 50, 50),
         emptyList(),
         null,
-        baseHealth
+        baseHealth,
     )
 
     /**
@@ -231,12 +231,12 @@ data class Monster(
  */
 data class EvolutionChain(
     val species: String,
-    val evolutions: List<Evolution>
+    val evolutions: List<Evolution>,
 ) {
     fun canEvolve(monster: Monster): Boolean {
         return evolutions.any { it.condition.isMet(monster) }
     }
-    
+
     fun evolve(monster: Monster): Monster? {
         val availableEvolution = evolutions.firstOrNull { it.condition.isMet(monster) }
         return availableEvolution?.createEvolved(monster)
@@ -249,24 +249,28 @@ data class EvolutionChain(
 data class Evolution(
     val toSpecies: String,
     val condition: EvolutionCondition,
-    val statModifiers: Map<String, Double> = emptyMap()
+    val statModifiers: Map<String, Double> = emptyMap(),
 ) {
     fun createEvolved(baseMonster: Monster): Monster {
         // Create evolved monster with enhanced stats
-        val newStats = baseMonster.stats.copy(
-            baseHp = (baseMonster.stats.baseHp * (statModifiers["hp"] ?: 1.2)).toInt(),
-            baseAttack = (baseMonster.stats.baseAttack * (statModifiers["attack"] ?: 1.2)).toInt(),
-            baseDefense = (baseMonster.stats.baseDefense * (statModifiers["defense"] ?: 1.2)).toInt(),
-            baseSpeed = (baseMonster.stats.baseSpeed * (statModifiers["speed"] ?: 1.2)).toInt(),
-            baseSpecial = (baseMonster.stats.baseSpecial * (statModifiers["special"] ?: 1.2)).toInt()
-        )
-        
+        val newStats =
+            baseMonster.stats.copy(
+                baseHp = (baseMonster.stats.baseHp * (statModifiers["hp"] ?: 1.2)).toInt(),
+                baseAttack = (baseMonster.stats.baseAttack * (statModifiers["attack"] ?: 1.2)).toInt(),
+                baseDefense = (baseMonster.stats.baseDefense * (statModifiers["defense"] ?: 1.2)).toInt(),
+                baseSpeed = (baseMonster.stats.baseSpeed * (statModifiers["speed"] ?: 1.2)).toInt(),
+                baseSpecial = (baseMonster.stats.baseSpecial * (statModifiers["special"] ?: 1.2)).toInt(),
+            )
+
         return baseMonster.copy(
             name = toSpecies,
             stats = newStats,
-            rarity = if (baseMonster.rarity != Monster.Rarity.LEGENDARY) {
-                Monster.Rarity.values()[kotlin.math.min(baseMonster.rarity.ordinal + 1, Monster.Rarity.values().size - 1)]
-            } else baseMonster.rarity
+            rarity =
+                if (baseMonster.rarity != Monster.Rarity.LEGENDARY) {
+                    Monster.Rarity.values()[kotlin.math.min(baseMonster.rarity.ordinal + 1, Monster.Rarity.values().size - 1)]
+                } else {
+                    baseMonster.rarity
+                },
         )
     }
 }
@@ -276,15 +280,15 @@ data class Evolution(
  */
 sealed class EvolutionCondition {
     abstract fun isMet(monster: Monster): Boolean
-    
+
     data class LevelRequirement(val level: Int) : EvolutionCondition() {
         override fun isMet(monster: Monster): Boolean = monster.stats.level >= level
     }
-    
+
     data class ExperienceRequirement(val experience: Int) : EvolutionCondition() {
         override fun isMet(monster: Monster): Boolean = monster.stats.experience >= experience
     }
-    
+
     data class CombinedCondition(val conditions: List<EvolutionCondition>) : EvolutionCondition() {
         override fun isMet(monster: Monster): Boolean = conditions.all { it.isMet(monster) }
     }

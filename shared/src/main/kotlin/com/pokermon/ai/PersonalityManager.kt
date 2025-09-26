@@ -246,7 +246,7 @@ object PersonalityManager {
         val baseHealth = 100 + random.nextInt(100)
         val effectType = Monster.EffectType.values().random()
         val effectPower = 50 + random.nextInt(50)
-        
+
         return Monster(
             name = name,
             rarity = rarity,
@@ -255,16 +255,17 @@ object PersonalityManager {
             effectPower = effectPower,
             description = "AI companion monster",
             personality = AIPersonality.values().random(),
-            stats = MonsterStats(
-                baseHp = baseHealth,
-                baseAttack = 50 + random.nextInt(30),
-                baseDefense = 50 + random.nextInt(30),
-                baseSpeed = 50 + random.nextInt(30),
-                baseSpecial = 50 + random.nextInt(30)
-            ),
+            stats =
+                MonsterStats(
+                    baseHp = baseHealth,
+                    baseAttack = 50 + random.nextInt(30),
+                    baseDefense = 50 + random.nextInt(30),
+                    baseSpeed = 50 + random.nextInt(30),
+                    baseSpecial = 50 + random.nextInt(30),
+                ),
             abilities = emptyList(),
             evolutionChain = null,
-            currentHp = baseHealth
+            currentHp = baseHealth,
         )
     }
 

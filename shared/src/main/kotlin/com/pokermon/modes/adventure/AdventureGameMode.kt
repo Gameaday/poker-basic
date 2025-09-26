@@ -479,23 +479,28 @@ class AdventureMode(
     /**
      * Integrates with the comprehensive monster battle system
      */
-    fun triggerFullMonsterBattle(playerProfile: PlayerProfile, enemyMonster: Monster, handStrength: Int): AdventureBattleResult? {
+    fun triggerFullMonsterBattle(
+        playerProfile: PlayerProfile,
+        enemyMonster: Monster,
+        handStrength: Int,
+    ): AdventureBattleResult? {
         val playerMonster = playerProfile.monsterCollection.getActiveMonster()
         if (playerMonster != null) {
             val battleResult = battleSystem.executeBattle(playerMonster, enemyMonster, handStrength)
-            val experienceGained = when (enemyMonster.rarity) {
-                Monster.Rarity.COMMON -> 50 + (handStrength * 10)
-                Monster.Rarity.UNCOMMON -> 100 + (handStrength * 15) 
-                Monster.Rarity.RARE -> 200 + (handStrength * 25)
-                Monster.Rarity.EPIC -> 350 + (handStrength * 35)
-                Monster.Rarity.LEGENDARY -> 500 + (handStrength * 50)
-            }
-            
+            val experienceGained =
+                when (enemyMonster.rarity) {
+                    Monster.Rarity.COMMON -> 50 + (handStrength * 10)
+                    Monster.Rarity.UNCOMMON -> 100 + (handStrength * 15)
+                    Monster.Rarity.RARE -> 200 + (handStrength * 25)
+                    Monster.Rarity.EPIC -> 350 + (handStrength * 35)
+                    Monster.Rarity.LEGENDARY -> 500 + (handStrength * 50)
+                }
+
             return AdventureBattleResult(
                 battleResult = battleResult,
                 experienceGained = experienceGained,
                 questProgress = emptyMap(), // Quest progress is handled separately
-                levelUp = checkLevelUp()
+                levelUp = checkLevelUp(),
             )
         }
         return null
@@ -504,19 +509,24 @@ class AdventureMode(
     /**
      * Monster training specific to Adventure mode
      */
-    fun trainAdventureMonster(monster: Monster, rounds: Int = 1): Monster {
+    fun trainAdventureMonster(
+        monster: Monster,
+        rounds: Int = 1,
+    ): Monster {
         // Adventure mode training focuses on combat and exploration
         var trainedMonster = monster
         repeat(rounds) {
-            trainedMonster = trainedMonster.copy(
-                stats = trainedMonster.stats.copy(
-                    baseHp = trainedMonster.stats.baseHp + 5, // Endurance for long adventures
-                    baseAttack = trainedMonster.stats.baseAttack + 3, // Combat prowess
-                    baseDefense = trainedMonster.stats.baseDefense + 2, // Survivability
-                    baseSpeed = trainedMonster.stats.baseSpeed + 2, // Exploration speed
-                    baseSpecial = trainedMonster.stats.baseSpecial + 1 // Magical abilities
+            trainedMonster =
+                trainedMonster.copy(
+                    stats =
+                        trainedMonster.stats.copy(
+                            baseHp = trainedMonster.stats.baseHp + 5, // Endurance for long adventures
+                            baseAttack = trainedMonster.stats.baseAttack + 3, // Combat prowess
+                            baseDefense = trainedMonster.stats.baseDefense + 2, // Survivability
+                            baseSpeed = trainedMonster.stats.baseSpeed + 2, // Exploration speed
+                            baseSpecial = trainedMonster.stats.baseSpecial + 1, // Magical abilities
+                        ),
                 )
-            )
         }
         return trainedMonster
     }
@@ -538,5 +548,5 @@ data class AdventureBattleResult(
     val battleResult: com.pokermon.database.BattleResult,
     val experienceGained: Int,
     val questProgress: Map<String, Int>,
-    val levelUp: Boolean
+    val levelUp: Boolean,
 )

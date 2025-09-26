@@ -78,6 +78,8 @@ jobs:
           echo "✅ Found $KOTLIN_FILES Kotlin source files"
         else
           echo "❌ Kotlin source directory missing"
+          echo "Looking for alternative source directories..."
+          find . -type d -name "kotlin" 2>/dev/null || echo "No Kotlin directories found"
           exit 1
         fi
         

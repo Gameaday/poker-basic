@@ -12,17 +12,16 @@ import java.util.*
  * Handles user data, game progress, statistics, and settings persistence.
  */
 class UserProfileManager private constructor(private val context: Context) {
-    
     companion object {
         @Volatile
         private var INSTANCE: UserProfileManager? = null
-        
+
         fun getInstance(context: Context): UserProfileManager {
             return INSTANCE ?: synchronized(this) {
                 INSTANCE ?: UserProfileManager(context.applicationContext).also { INSTANCE = it }
             }
         }
-        
+
         // SharedPreferences keys
         private const val PREFS_NAME = "pokermon_user_profile"
         private const val KEY_USER_ID = "user_id"
@@ -45,23 +44,23 @@ class UserProfileManager private constructor(private val context: Context) {
         private const val KEY_SAFARI_ENCOUNTERS = "safari_encounters"
         private const val KEY_IRONMAN_PULLS = "ironman_pulls"
     }
-    
+
     private val prefs: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-    
+
     // Reactive state flows for UI
     private val _userProfile = MutableStateFlow(loadUserProfile())
     val userProfile: StateFlow<UserProfile> = _userProfile.asStateFlow()
-    
+
     private val _gameSettings = MutableStateFlow(loadGameSettings())
     val gameSettings: StateFlow<GameSettings> = _gameSettings.asStateFlow()
-    
+
     init {
         // Initialize user ID if first launch
         if (isFirstLaunch()) {
             initializeNewUser()
         }
     }
-    
+
     /**
      * Load user profile from persistent storage.
      */
@@ -79,10 +78,10 @@ class UserProfileManager private constructor(private val context: Context) {
             monstersCollected = prefs.getInt(KEY_MONSTERS_COLLECTED, 0),
             adventureProgress = prefs.getInt(KEY_ADVENTURE_PROGRESS, 0),
             safariEncounters = prefs.getInt(KEY_SAFARI_ENCOUNTERS, 0),
-            ironmanPulls = prefs.getInt(KEY_IRONMAN_PULLS, 0)
+            ironmanPulls = prefs.getInt(KEY_IRONMAN_PULLS, 0),
         )
     }
-    
+
     /**
      * Load game settings from persistent storage.
      */
@@ -92,10 +91,10 @@ class UserProfileManager private constructor(private val context: Context) {
             animationsEnabled = prefs.getBoolean(KEY_ANIMATIONS_ENABLED, true),
             autoSaveEnabled = prefs.getBoolean(KEY_AUTO_SAVE_ENABLED, true),
             selectedTheme = prefs.getString(KEY_SELECTED_THEME, "CLASSIC_GREEN") ?: "CLASSIC_GREEN",
-            selectedCardPack = prefs.getString(KEY_SELECTED_CARD_PACK, "TEXT_SYMBOLS") ?: "TEXT_SYMBOLS"
+            selectedCardPack = prefs.getString(KEY_SELECTED_CARD_PACK, "TEXT_SYMBOLS") ?: "TEXT_SYMBOLS",
         )
     }
-    
+
     /**
      * Load achievements from comma-separated string.
      */
@@ -107,20 +106,20 @@ class UserProfileManager private constructor(private val context: Context) {
             achievementsString.split(",").filter { it.isNotBlank() }
         }
     }
-    
+
     /**
      * Check if this is the first app launch.
      */
     private fun isFirstLaunch(): Boolean {
         return prefs.getBoolean(KEY_FIRST_LAUNCH, true)
     }
-    
+
     /**
      * Initialize a new user profile.
      */
     private fun initializeNewUser() {
         val userId = UUID.randomUUID().toString()
-        
+
         prefs.edit().apply {
             putString(KEY_USER_ID, userId)
             putString(KEY_USERNAME, "Pokermon Trainer")
@@ -142,12 +141,12 @@ class UserProfileManager private constructor(private val context: Context) {
             putInt(KEY_SAFARI_ENCOUNTERS, 0)
             putInt(KEY_IRONMAN_PULLS, 0)
         }.apply()
-        
+
         // Update reactive state
         _userProfile.value = loadUserProfile()
         _gameSettings.value = loadGameSettings()
     }
-    
+
     /**
      * Update user profile and persist to storage.
      */
@@ -166,10 +165,10 @@ class UserProfileManager private constructor(private val context: Context) {
             putInt(KEY_SAFARI_ENCOUNTERS, profile.safariEncounters)
             putInt(KEY_IRONMAN_PULLS, profile.ironmanPulls)
         }.apply()
-        
+
         _userProfile.value = profile
     }
-    
+
     /**
      * Update game settings and persist to storage.
      */
@@ -181,78 +180,85 @@ class UserProfileManager private constructor(private val context: Context) {
             putString(KEY_SELECTED_THEME, settings.selectedTheme)
             putString(KEY_SELECTED_CARD_PACK, settings.selectedCardPack)
         }.apply()
-        
+
         _gameSettings.value = settings
     }
-    
+
     /**
      * Record a game completion and update statistics.
      */
-    fun recordGameCompletion(won: Boolean, chipsWon: Long, handAchieved: String, gameMode: String) {
+    fun recordGameCompletion(
+        won: Boolean,
+        chipsWon: Long,
+        handAchieved: String,
+        gameMode: String,
+    ) {
         val currentProfile = _userProfile.value
-        val updatedProfile = currentProfile.copy(
-            totalGamesPlayed = currentProfile.totalGamesPlayed + 1,
-            gamesWon = if (won) currentProfile.gamesWon + 1 else currentProfile.gamesWon,
-            totalChipsWon = currentProfile.totalChipsWon + chipsWon,
-            highestHand = if (isHigherHand(handAchieved, currentProfile.highestHand)) handAchieved else currentProfile.highestHand,
-            favoriteGameMode = gameMode,
-            lastPlayed = Date()
-        )
-        
+        val updatedProfile =
+            currentProfile.copy(
+                totalGamesPlayed = currentProfile.totalGamesPlayed + 1,
+                gamesWon = if (won) currentProfile.gamesWon + 1 else currentProfile.gamesWon,
+                totalChipsWon = currentProfile.totalChipsWon + chipsWon,
+                highestHand = if (isHigherHand(handAchieved, currentProfile.highestHand)) handAchieved else currentProfile.highestHand,
+                favoriteGameMode = gameMode,
+                lastPlayed = Date(),
+            )
+
         updateUserProfile(updatedProfile)
-        
+
         // Check for new achievements
         checkAndAwardAchievements(updatedProfile)
     }
-    
+
     /**
      * Award an achievement to the user.
      */
     fun awardAchievement(achievement: String) {
         val currentProfile = _userProfile.value
         if (!currentProfile.achievements.contains(achievement)) {
-            val updatedProfile = currentProfile.copy(
-                achievements = currentProfile.achievements + achievement
-            )
+            val updatedProfile =
+                currentProfile.copy(
+                    achievements = currentProfile.achievements + achievement,
+                )
             updateUserProfile(updatedProfile)
         }
     }
-    
+
     /**
      * Export user profile and settings as JSON string for backup.
      */
     fun exportUserData(): String {
         val profile = _userProfile.value
         val settings = _gameSettings.value
-        
+
         return """
-        {
-            "userProfile": {
-                "userId": "${profile.userId}",
-                "username": "${profile.username}",
-                "totalGamesPlayed": ${profile.totalGamesPlayed},
-                "gamesWon": ${profile.gamesWon},
-                "totalChipsWon": ${profile.totalChipsWon},
-                "highestHand": "${profile.highestHand}",
-                "favoriteGameMode": "${profile.favoriteGameMode}",
-                "achievements": [${profile.achievements.joinToString(",") { "\"$it\"" }}],
-                "lastPlayed": ${profile.lastPlayed.time},
-                "monstersCollected": ${profile.monstersCollected},
-                "adventureProgress": ${profile.adventureProgress},
-                "safariEncounters": ${profile.safariEncounters},
-                "ironmanPulls": ${profile.ironmanPulls}
-            },
-            "gameSettings": {
-                "soundEnabled": ${settings.soundEnabled},
-                "animationsEnabled": ${settings.animationsEnabled},
-                "autoSaveEnabled": ${settings.autoSaveEnabled},
-                "selectedTheme": "${settings.selectedTheme}",
-                "selectedCardPack": "${settings.selectedCardPack}"
+            {
+                "userProfile": {
+                    "userId": "${profile.userId}",
+                    "username": "${profile.username}",
+                    "totalGamesPlayed": ${profile.totalGamesPlayed},
+                    "gamesWon": ${profile.gamesWon},
+                    "totalChipsWon": ${profile.totalChipsWon},
+                    "highestHand": "${profile.highestHand}",
+                    "favoriteGameMode": "${profile.favoriteGameMode}",
+                    "achievements": [${profile.achievements.joinToString(",") { "\"$it\"" }}],
+                    "lastPlayed": ${profile.lastPlayed.time},
+                    "monstersCollected": ${profile.monstersCollected},
+                    "adventureProgress": ${profile.adventureProgress},
+                    "safariEncounters": ${profile.safariEncounters},
+                    "ironmanPulls": ${profile.ironmanPulls}
+                },
+                "gameSettings": {
+                    "soundEnabled": ${settings.soundEnabled},
+                    "animationsEnabled": ${settings.animationsEnabled},
+                    "autoSaveEnabled": ${settings.autoSaveEnabled},
+                    "selectedTheme": "${settings.selectedTheme}",
+                    "selectedCardPack": "${settings.selectedCardPack}"
+                }
             }
-        }
-        """.trimIndent()
+            """.trimIndent()
     }
-    
+
     /**
      * Clear all user data (for delete functionality).
      */
@@ -260,23 +266,27 @@ class UserProfileManager private constructor(private val context: Context) {
         prefs.edit().clear().apply()
         initializeNewUser()
     }
-    
+
     /**
      * Check if a poker hand is higher than another.
      */
-    private fun isHigherHand(newHand: String, currentHand: String): Boolean {
-        val handRankings = listOf(
-            "High Card", "Pair", "Two Pair", "Three of a Kind", 
-            "Straight", "Flush", "Full House", "Four of a Kind", 
-            "Straight Flush", "Royal Flush"
-        )
-        
+    private fun isHigherHand(
+        newHand: String,
+        currentHand: String,
+    ): Boolean {
+        val handRankings =
+            listOf(
+                "High Card", "Pair", "Two Pair", "Three of a Kind",
+                "Straight", "Flush", "Full House", "Four of a Kind",
+                "Straight Flush", "Royal Flush",
+            )
+
         val newRank = handRankings.indexOf(newHand)
         val currentRank = handRankings.indexOf(currentHand)
-        
+
         return newRank > currentRank
     }
-    
+
     /**
      * Check for new achievements based on user progress.
      */
@@ -285,22 +295,22 @@ class UserProfileManager private constructor(private val context: Context) {
         if (profile.totalGamesPlayed == 1) {
             awardAchievement("First Steps")
         }
-        
+
         // Win streak achievements
         if (profile.gamesWon >= 10) {
             awardAchievement("Winning Streak")
         }
-        
+
         // Chip accumulation achievements
         if (profile.totalChipsWon >= 10000) {
             awardAchievement("High Roller")
         }
-        
+
         // Hand achievements
         if (profile.highestHand == "Royal Flush") {
             awardAchievement("Royal Achievement")
         }
-        
+
         // Monster achievements (for future monster modes)
         if (profile.monstersCollected >= 10) {
             awardAchievement("Monster Collector")
@@ -324,7 +334,7 @@ data class UserProfile(
     val monstersCollected: Int,
     val adventureProgress: Int,
     val safariEncounters: Int,
-    val ironmanPulls: Int
+    val ironmanPulls: Int,
 ) {
     val winRate: Double
         get() = if (totalGamesPlayed > 0) gamesWon.toDouble() / totalGamesPlayed else 0.0
@@ -338,5 +348,5 @@ data class GameSettings(
     val animationsEnabled: Boolean,
     val autoSaveEnabled: Boolean,
     val selectedTheme: String,
-    val selectedCardPack: String
+    val selectedCardPack: String,
 )

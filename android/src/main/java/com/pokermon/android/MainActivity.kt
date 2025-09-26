@@ -22,12 +22,11 @@ import com.pokermon.android.data.UserProfileManager
 import com.pokermon.android.ui.theme.PokerGameTheme
 import com.pokermon.android.ui.theme.PokerTableTheme
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.flow.first
 
 /**
  * Main Android activity for the Pokermon Game.
  * Enhanced with Kotlin-native features: coroutines, flow, and modern state management.
- * 
+ *
  * Features Kotlin-native enhancements:
  * - Coroutines for async operations
  * - StateFlow for reactive UI updates
@@ -35,45 +34,45 @@ import kotlinx.coroutines.flow.first
  * - Type-safe navigation with sealed classes
  */
 class MainActivity : ComponentActivity() {
-    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
+
         // Use Kotlin coroutines for async initialization
         lifecycleScope.launch {
             initializeUserData()
         }
-        
+
         setContent {
             val context = LocalContext.current
             val userProfileManager = remember { UserProfileManager.getInstance(context) }
-            
+
             // Kotlin Flow integration for reactive UI
             val gameSettings by userProfileManager.gameSettings.collectAsState()
-            
+
             // Type-safe theme selection with Kotlin when expression
-            val selectedTheme: PokerTableTheme = remember(gameSettings.selectedTheme) {
-                when (gameSettings.selectedTheme) {
-                    PokerTableTheme.CLASSIC_GREEN.name -> PokerTableTheme.CLASSIC_GREEN
-                    PokerTableTheme.ROYAL_BLUE.name -> PokerTableTheme.ROYAL_BLUE
-                    PokerTableTheme.CRIMSON_RED.name -> PokerTableTheme.CRIMSON_RED
-                    PokerTableTheme.MIDNIGHT_BLACK.name -> PokerTableTheme.MIDNIGHT_BLACK
-                    PokerTableTheme.BOURBON_BROWN.name -> PokerTableTheme.BOURBON_BROWN
-                    else -> PokerTableTheme.CLASSIC_GREEN // Safe default
+            val selectedTheme: PokerTableTheme =
+                remember(gameSettings.selectedTheme) {
+                    when (gameSettings.selectedTheme) {
+                        PokerTableTheme.CLASSIC_GREEN.name -> PokerTableTheme.CLASSIC_GREEN
+                        PokerTableTheme.ROYAL_BLUE.name -> PokerTableTheme.ROYAL_BLUE
+                        PokerTableTheme.CRIMSON_RED.name -> PokerTableTheme.CRIMSON_RED
+                        PokerTableTheme.MIDNIGHT_BLACK.name -> PokerTableTheme.MIDNIGHT_BLACK
+                        PokerTableTheme.BOURBON_BROWN.name -> PokerTableTheme.BOURBON_BROWN
+                        else -> PokerTableTheme.CLASSIC_GREEN // Safe default
+                    }
                 }
-            }
-            
+
             PokerGameTheme(pokerTableTheme = selectedTheme) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.background,
                 ) {
                     PokerGameNavigation(userProfileManager)
                 }
             }
         }
     }
-    
+
     /**
      * Kotlin coroutine function for async user data initialization.
      * Demonstrates Kotlin-native async patterns.
@@ -81,10 +80,10 @@ class MainActivity : ComponentActivity() {
     private suspend fun initializeUserData() {
         try {
             val userProfileManager = UserProfileManager.getInstance(this)
-            
+
             // Use StateFlow.value for immediate access to current state
             val settings = userProfileManager.gameSettings.value
-            
+
             // Kotlin-native null safety and smart casts
             settings.let { gameSettings ->
                 val userProfile = userProfileManager.userProfile.value
@@ -108,12 +107,17 @@ class MainActivity : ComponentActivity() {
  */
 sealed class NavigationRoute(val route: String) {
     object MainMenu : NavigationRoute("main_menu")
+
     object GameModeSelection : NavigationRoute("game_mode_selection")
+
     object Settings : NavigationRoute("settings")
+
     object About : NavigationRoute("about")
+
     object MonsterEncyclopedia : NavigationRoute("monster_encyclopedia")
+
     data class Gameplay(val gameMode: GameMode) : NavigationRoute("gameplay/${gameMode.name}")
-    
+
     companion object {
         fun fromGameMode(gameMode: GameMode): Gameplay = Gameplay(gameMode)
     }
@@ -122,10 +126,10 @@ sealed class NavigationRoute(val route: String) {
 @Composable
 fun PokerGameNavigation(userProfileManager: UserProfileManager) {
     val navController = rememberNavController()
-    
+
     NavHost(
         navController = navController,
-        startDestination = NavigationRoute.MainMenu.route
+        startDestination = NavigationRoute.MainMenu.route,
     ) {
         composable(NavigationRoute.MainMenu.route) {
             MainMenuScreen(navController = navController)
@@ -136,43 +140,44 @@ fun PokerGameNavigation(userProfileManager: UserProfileManager) {
                     // Type-safe navigation using sealed classes
                     navController.navigate(NavigationRoute.fromGameMode(gameMode).route)
                 },
-                onBackPressed = { navController.popBackStack() }
+                onBackPressed = { navController.popBackStack() },
             )
         }
         composable("gameplay/{gameMode}") { backStackEntry ->
             val gameModeString = backStackEntry.arguments?.getString("gameMode") ?: "CLASSIC"
-            val gameMode = try {
-                GameMode.valueOf(gameModeString)
-            } catch (e: IllegalArgumentException) {
-                GameMode.CLASSIC
-            }
-            
+            val gameMode =
+                try {
+                    GameMode.valueOf(gameModeString)
+                } catch (e: IllegalArgumentException) {
+                    GameMode.CLASSIC
+                }
+
             GameplayScreen(
                 gameMode = gameMode,
                 onBackPressed = {
                     navController.popBackStack("main_menu", false)
-                }
+                },
             )
         }
         composable("settings") {
             SettingsScreen(
                 onBackPressed = {
                     navController.popBackStack()
-                }
+                },
             )
         }
         composable("encyclopedia") {
             MonsterEncyclopediaScreen(
                 onBackPressed = {
                     navController.popBackStack()
-                }
+                },
             )
         }
         composable("about") {
             AboutScreen(
                 onBackPressed = {
                     navController.popBackStack()
-                }
+                },
             )
         }
     }
@@ -183,53 +188,55 @@ fun MainMenuScreen(navController: NavHostController) {
     val context = LocalContext.current
     val userProfileManager = remember { UserProfileManager.getInstance(context) }
     val userProfile by userProfileManager.userProfile.collectAsState()
-    
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
         Text(
             text = "🐲 Pokermon",
-            style = MaterialTheme.typography.headlineLarge
+            style = MaterialTheme.typography.headlineLarge,
         )
-        
+
         Spacer(modifier = Modifier.height(8.dp))
-        
+
         Text(
             text = "Poker Monster Adventure",
-            style = MaterialTheme.typography.headlineSmall
+            style = MaterialTheme.typography.headlineSmall,
         )
-        
+
         Spacer(modifier = Modifier.height(4.dp))
-        
+
         Text(
             text = "Mobile Edition v1.0.0",
-            style = MaterialTheme.typography.bodyLarge
+            style = MaterialTheme.typography.bodyLarge,
         )
-        
+
         Spacer(modifier = Modifier.height(16.dp))
-        
+
         // Welcome back message with user stats
         Card(
             modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.primaryContainer
-            )
+            colors =
+                CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                ),
         ) {
             Column(
                 modifier = Modifier.padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Text(
                     text = "Welcome back, ${userProfile.username}!",
-                    style = MaterialTheme.typography.titleMedium
+                    style = MaterialTheme.typography.titleMedium,
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                    horizontalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
                     Text("🎮 Games: ${userProfile.totalGamesPlayed}")
                     Text("🏆 Wins: ${userProfile.gamesWon}")
@@ -241,57 +248,57 @@ fun MainMenuScreen(navController: NavHostController) {
                 }
             }
         }
-        
+
         Spacer(modifier = Modifier.height(24.dp))
-        
+
         Button(
             onClick = {
                 navController.navigate("game_mode_selection")
             },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         ) {
             Text("🎮 New Game")
         }
-        
+
         Spacer(modifier = Modifier.height(16.dp))
-        
+
         Button(
-            onClick = { 
+            onClick = {
                 navController.navigate("settings")
             },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         ) {
             Text("⚙️ Settings")
         }
-        
+
         Spacer(modifier = Modifier.height(16.dp))
-        
+
         Button(
-            onClick = { 
+            onClick = {
                 navController.navigate("encyclopedia")
             },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         ) {
             Text("🐲 Monster Encyclopedia")
         }
-        
+
         Spacer(modifier = Modifier.height(16.dp))
-        
+
         OutlinedButton(
-            onClick = { 
+            onClick = {
                 navController.navigate("about")
             },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         ) {
             Text("ℹ️ About")
         }
-        
+
         Spacer(modifier = Modifier.height(24.dp))
-        
+
         Text(
             text = "Android edition of Pokermon - where poker meets monster collecting! Battle through Adventure mode, discover creatures in Safari mode, and test your luck in Ironman gacha mode.",
             style = MaterialTheme.typography.bodyMedium,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
         )
     }
 }

@@ -3,18 +3,15 @@ package com.pokermon.players
 import com.pokermon.GameMode
 import com.pokermon.database.Monster
 import com.pokermon.database.MonsterCollection
-import com.pokermon.modes.Achievement
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import java.time.LocalDateTime
-import kotlin.collections.mutableMapOf
-import kotlin.collections.mutableSetOf
 
 /**
  * Comprehensive player profile system supporting cross-game progression,
  * monster collection, and persistent save data.
- * 
+ *
  * @author Pokermon Profile System
  * @version 1.0.0
  */
@@ -31,41 +28,42 @@ data class PlayerProfile(
     val achievements: Set<String> = emptySet(),
     val statistics: PlayerStatistics = PlayerStatistics(),
     val settings: PlayerSettings = PlayerSettings(),
-    val saveData: Map<String, Any> = emptyMap()
+    val saveData: Map<String, Any> = emptyMap(),
 ) {
     companion object {
         private const val EXP_TO_NEXT_LEVEL = 1000
         private const val MAX_OVERALL_LEVEL = 200
     }
-    
+
     val expToNextLevel: Int get() = EXP_TO_NEXT_LEVEL * overallLevel
     val canLevelUp: Boolean get() = overallLevel < MAX_OVERALL_LEVEL && overallExperience >= expToNextLevel
-    
+
     /**
      * Gain overall experience across all game modes
      */
     fun gainExperience(exp: Int): PlayerProfile {
         val newExp = overallExperience + exp
         var newProfile = copy(overallExperience = newExp, lastPlayedDate = LocalDateTime.now())
-        
+
         while (newProfile.canLevelUp) {
             newProfile = newProfile.copy(overallLevel = newProfile.overallLevel + 1)
         }
-        
+
         return newProfile
     }
-    
+
     /**
      * Add a monster to the collection
      */
     fun addMonster(monster: Monster): PlayerProfile {
-        val updatedCollection = MonsterCollection(monsterCollection.maxActiveMonsters).apply {
-            monsterCollection.getOwnedMonsters().forEach { addMonster(it) }
-            addMonster(monster)
-        }
+        val updatedCollection =
+            MonsterCollection(monsterCollection.maxActiveMonsters).apply {
+                monsterCollection.getOwnedMonsters().forEach { addMonster(it) }
+                addMonster(monster)
+            }
         return copy(monsterCollection = updatedCollection)
     }
-    
+
     /**
      * Unlock an achievement
      */
@@ -73,26 +71,32 @@ data class PlayerProfile(
         if (achievementId in achievements) return this
         return copy(achievements = achievements + achievementId)
     }
-    
+
     /**
      * Update game mode progress
      */
-    fun updateGameProgress(mode: GameMode, progress: GameModeProgress): PlayerProfile {
+    fun updateGameProgress(
+        mode: GameMode,
+        progress: GameModeProgress,
+    ): PlayerProfile {
         val updatedProgress = gameProgress + (mode to progress)
         return copy(gameProgress = updatedProgress)
     }
-    
+
     /**
      * Update player statistics
      */
     fun updateStatistics(update: (PlayerStatistics) -> PlayerStatistics): PlayerProfile {
         return copy(statistics = update(statistics))
     }
-    
+
     /**
      * Save custom data
      */
-    fun saveData(key: String, value: Any): PlayerProfile {
+    fun saveData(
+        key: String,
+        value: Any,
+    ): PlayerProfile {
         return copy(saveData = saveData + (key to value))
     }
 }
@@ -112,12 +116,16 @@ data class GameModeProgress(
     val totalChipsLost: Int = 0,
     val averageGameLength: Double = 0.0,
     val lastPlayed: LocalDateTime = LocalDateTime.now(),
-    val modeSpecificData: Map<String, Any> = emptyMap()
+    val modeSpecificData: Map<String, Any> = emptyMap(),
 ) {
     val winRate: Double get() = if (gamesPlayed > 0) gamesWon.toDouble() / gamesPlayed else 0.0
     val netChips: Int get() = totalChipsWon - totalChipsLost
-    
-    fun recordGame(won: Boolean, chipsChange: Int, gameLength: Long): GameModeProgress {
+
+    fun recordGame(
+        won: Boolean,
+        chipsChange: Int,
+        gameLength: Long,
+    ): GameModeProgress {
         val newGamesPlayed = gamesPlayed + 1
         val newGamesWon = if (won) gamesWon + 1 else gamesWon
         val newStreak = if (won) currentStreak + 1 else 0
@@ -125,7 +133,7 @@ data class GameModeProgress(
         val newTotalWon = if (chipsChange > 0) totalChipsWon + chipsChange else totalChipsWon
         val newTotalLost = if (chipsChange < 0) totalChipsLost + kotlin.math.abs(chipsChange) else totalChipsLost
         val newAvgLength = ((averageGameLength * gamesPlayed) + gameLength) / newGamesPlayed
-        
+
         return copy(
             gamesPlayed = newGamesPlayed,
             gamesWon = newGamesWon,
@@ -134,7 +142,7 @@ data class GameModeProgress(
             totalChipsWon = newTotalWon,
             totalChipsLost = newTotalLost,
             averageGameLength = newAvgLength,
-            lastPlayed = LocalDateTime.now()
+            lastPlayed = LocalDateTime.now(),
         )
     }
 }
@@ -158,7 +166,7 @@ data class PlayerStatistics(
     val favoriteGameMode: GameMode? = null,
     val longestSession: Long = 0, // in seconds
     val firstGameDate: LocalDateTime? = null,
-    val milestones: Map<String, LocalDateTime> = emptyMap()
+    val milestones: Map<String, LocalDateTime> = emptyMap(),
 ) {
     val overallWinRate: Double get() = if (totalGamesPlayed > 0) totalGamesWon.toDouble() / totalGamesPlayed else 0.0
     val battleWinRate: Double get() = if (battlesFought > 0) battlesWon.toDouble() / battlesFought else 0.0
@@ -180,12 +188,13 @@ data class PlayerSettings(
     val interfaceTheme: String = "Default",
     val languagePreference: String = "English",
     val tutorialCompleted: Map<GameMode, Boolean> = emptyMap(),
-    val notificationSettings: Map<String, Boolean> = mapOf(
-        "achievements" to true,
-        "levelUp" to true,
-        "evolution" to true,
-        "newMonster" to true
-    )
+    val notificationSettings: Map<String, Boolean> =
+        mapOf(
+            "achievements" to true,
+            "levelUp" to true,
+            "evolution" to true,
+            "newMonster" to true,
+        ),
 )
 
 /**
@@ -195,29 +204,32 @@ class ProfileManager private constructor() {
     companion object {
         @Volatile
         private var INSTANCE: ProfileManager? = null
-        
+
         fun getInstance(): ProfileManager {
             return INSTANCE ?: synchronized(this) {
                 INSTANCE ?: ProfileManager().also { INSTANCE = it }
             }
         }
     }
-    
+
     private val _currentProfile = MutableStateFlow<PlayerProfile?>(null)
     val currentProfile: StateFlow<PlayerProfile?> = _currentProfile.asStateFlow()
-    
+
     private val _profiles = MutableStateFlow<Map<String, PlayerProfile>>(emptyMap())
     val profiles: StateFlow<Map<String, PlayerProfile>> = _profiles.asStateFlow()
-    
+
     /**
      * Create a new player profile
      */
-    fun createProfile(playerId: String, playerName: String): PlayerProfile {
+    fun createProfile(
+        playerId: String,
+        playerName: String,
+    ): PlayerProfile {
         val profile = PlayerProfile(playerId = playerId, playerName = playerName)
         _profiles.value = _profiles.value + (playerId to profile)
         return profile
     }
-    
+
     /**
      * Load an existing profile
      */
@@ -226,7 +238,7 @@ class ProfileManager private constructor() {
         _currentProfile.value = profile
         return profile
     }
-    
+
     /**
      * Save profile changes
      */
@@ -236,7 +248,7 @@ class ProfileManager private constructor() {
             _currentProfile.value = profile
         }
     }
-    
+
     /**
      * Update current profile
      */

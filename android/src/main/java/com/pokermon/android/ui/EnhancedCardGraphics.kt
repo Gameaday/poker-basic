@@ -14,7 +14,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -23,7 +22,6 @@ import androidx.compose.ui.unit.sp
  * Provides proper integration with TET card pack and improved visual design.
  */
 object CardGraphicsManager {
-    
     /**
      * Convert card name to drawable resource name.
      * Simplified approach: convert to lowercase and replace spaces with underscores.
@@ -31,11 +29,14 @@ object CardGraphicsManager {
     fun getCardResourceName(cardName: String): String {
         return cardName.lowercase().replace(" ", "_")
     }
-    
+
     /**
      * Get drawable resource ID for a card name.
      */
-    fun getCardResourceId(context: android.content.Context, cardName: String): Int {
+    fun getCardResourceId(
+        context: android.content.Context,
+        cardName: String,
+    ): Int {
         val resourceName = getCardResourceName(cardName)
         return context.resources.getIdentifier(resourceName, "drawable", context.packageName)
     }
@@ -50,69 +51,76 @@ fun EnhancedCardDisplay(
     isSelected: Boolean = false,
     onClick: () -> Unit = {},
     canClick: Boolean = true,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
-    val cardResourceId = remember(card) {
-        CardGraphicsManager.getCardResourceId(context, card)
-    }
-    
+    val cardResourceId =
+        remember(card) {
+            CardGraphicsManager.getCardResourceId(context, card)
+        }
+
     Card(
-        modifier = modifier
-            .size(width = 60.dp, height = 84.dp)
-            .clickable(enabled = canClick) { onClick() },
+        modifier =
+            modifier
+                .size(width = 60.dp, height = 84.dp)
+                .clickable(enabled = canClick) { onClick() },
         shape = RoundedCornerShape(8.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = if (isSelected) 
-                MaterialTheme.colorScheme.primaryContainer 
-            else 
-                Color.White
-        ),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = if (isSelected) 8.dp else 4.dp
-        )
+        colors =
+            CardDefaults.cardColors(
+                containerColor =
+                    if (isSelected) {
+                        MaterialTheme.colorScheme.primaryContainer
+                    } else {
+                        Color.White
+                    },
+            ),
+        elevation =
+            CardDefaults.cardElevation(
+                defaultElevation = if (isSelected) 8.dp else 4.dp,
+            ),
     ) {
         Box(
             modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
         ) {
             if (cardResourceId != 0) {
                 Image(
                     painter = painterResource(id = cardResourceId),
                     contentDescription = card,
                     modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Crop
+                    contentScale = ContentScale.Crop,
                 )
             } else {
                 // Fallback to text display if image not found
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
+                    verticalArrangement = Arrangement.Center,
                 ) {
                     val (rank, suitSymbol, suitColor) = parseCardDisplay(card)
                     Text(
                         text = rank,
                         style = MaterialTheme.typography.titleMedium,
                         color = suitColor,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
                     )
                     Text(
                         text = suitSymbol,
                         style = MaterialTheme.typography.titleLarge,
-                        color = suitColor
+                        color = suitColor,
                     )
                 }
             }
-            
+
             // Selection overlay
             if (isSelected) {
                 Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(
-                            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
-                            shape = RoundedCornerShape(8.dp)
-                        )
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .background(
+                                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
+                                shape = RoundedCornerShape(8.dp),
+                            ),
                 )
             }
         }
@@ -150,46 +158,46 @@ private fun parseCardDisplay(card: String): Triple<String, String, Color> {
  * Card back display for hidden cards.
  */
 @Composable
-fun CardBackDisplay(
-    modifier: Modifier = Modifier
-) {
+fun CardBackDisplay(modifier: Modifier = Modifier) {
     val context = LocalContext.current
-    val cardBackResourceId = remember {
-        context.resources.getIdentifier("card_back", "drawable", context.packageName)
-    }
-    
+    val cardBackResourceId =
+        remember {
+            context.resources.getIdentifier("card_back", "drawable", context.packageName)
+        }
+
     Card(
         modifier = modifier.size(width = 60.dp, height = 84.dp),
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
     ) {
         Box(
             modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
         ) {
             if (cardBackResourceId != 0) {
                 Image(
                     painter = painterResource(id = cardBackResourceId),
                     contentDescription = "Card back",
                     modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Crop
+                    contentScale = ContentScale.Crop,
                 )
             } else {
                 // Fallback pattern
                 Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(
-                            color = MaterialTheme.colorScheme.primary,
-                            shape = RoundedCornerShape(8.dp)
-                        ),
-                    contentAlignment = Alignment.Center
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .background(
+                                color = MaterialTheme.colorScheme.primary,
+                                shape = RoundedCornerShape(8.dp),
+                            ),
+                    contentAlignment = Alignment.Center,
                 ) {
                     Text(
                         text = "🐲",
                         fontSize = 24.sp,
-                        color = Color.White
+                        color = Color.White,
                     )
                 }
             }

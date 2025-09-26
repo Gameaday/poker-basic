@@ -1,6 +1,10 @@
 package com.pokermon.bridge
 
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
@@ -119,7 +123,8 @@ class GameLogicBridgeAITest {
         assertTrue(totalAfter > 0, "Total chips should be positive")
         assertTrue(currentPot > initialPot, "Pot should have increased")
         assertTrue(
-            totalAfter >= totalBefore - 500, // Allow some tolerance for game mechanics
+            // Allow some tolerance for game mechanics
+            totalAfter >= totalBefore - 500,
             "Total chips should be roughly conserved (before: $totalBefore, after: $totalAfter)",
         )
     }
@@ -164,11 +169,11 @@ class GameLogicBridgeAITest {
             assertNotNull(action.action, "AI action should have action type")
             assertTrue(
                 listOf("Fold", "Check", "Call", "Raise").contains(action.action),
-                "Action should be valid poker action: ${action.action}"
+                "Action should be valid poker action: ${action.action}",
             )
             assertNotNull(action.message, "AI action should have message")
             assertTrue(action.message.isNotBlank(), "Message should not be blank")
-            
+
             // Amount should be non-negative
             assertTrue(action.amount >= 0, "Amount should be non-negative: ${action.amount}")
         }
@@ -213,7 +218,7 @@ class GameLogicBridgeAITest {
                 // But the game should handle this gracefully
                 assertTrue(
                     result.success,
-                    "Game should handle AI processing correctly with $playerCount players"
+                    "Game should handle AI processing correctly with $playerCount players",
                 )
             }
         }

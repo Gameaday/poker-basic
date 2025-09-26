@@ -64,8 +64,8 @@ cd /home/runner/work/poker-basic/poker-basic
 
 ### Run the Application
 ```bash
-java -jar Poker-Basic/build/libs/Poker-Basic-*-fat.jar --help    # Show comprehensive help
-java -jar Poker-Basic/build/libs/Poker-Basic-*-fat.jar --basic   # Console mode (interactive)
+java -jar shared/build/libs/shared-*-fat.jar --help    # Show comprehensive help
+java -jar shared/build/libs/shared-*-fat.jar --basic   # Console mode (interactive)
 ./gradlew :shared:runConsole --no-daemon                         # Direct console execution
 ```
 
@@ -103,14 +103,14 @@ java -jar Poker-Basic/build/libs/Poker-Basic-*-fat.jar --basic   # Console mode 
 - **Always run**: `./gradlew :shared:test --no-daemon` (all tests must pass)
 - **Always test**: Run console game scenario (see Validation section)
 - **Kotlin-native compatibility**: Ensure pure Kotlin compilation
-- **JAR functionality**: Test `java -jar Poker-Basic/build/libs/*-fat.jar --help`
+- **JAR functionality**: Test `java -jar shared/build/libs/*-fat.jar --help`
 
 ## Pure Kotlin-Native Project Structure
 
 ### Organized Hierarchy (Following DRY Principles)
 ```
 poker-basic/
-├── Poker-Basic/                    # Gradle shared module - Pure Kotlin-native
+├── shared/                          # Gradle shared module - Pure Kotlin-native
 │   ├── src/main/kotlin/com/pokermon/   # PRIMARY Kotlin source (Kotlin-native only)
 │   │   ├── GameEngine.kt           # Core game logic (pure Kotlin-native)
 │   │   ├── Game.kt                 # Game configuration data class
@@ -295,7 +295,7 @@ enum class GameMode(val displayName: String, val isMultiplayer: Boolean) {
 
 #### Console Mode Validation
 ```bash
-cd Poker-Basic
+cd shared
 java -jar target/pokermon-1.0.0-fat.jar --basic
 # 1. Enter player name (e.g., "TestPlayer")
 # 2. Choose number of AI opponents (1-3) 
@@ -316,34 +316,34 @@ java -jar target/pokermon-1.0.0-fat.jar --version  # Must show version 1.0.0
 ```bash
 cd /home/runner/work/poker-basic/poker-basic
 ./validate-android-build.sh  # Must pass all 21 checks
-cd Poker-Basic && mvn test -B # Must pass all 254 tests
+./gradlew :shared:test --no-daemon # Must pass all 54 tests
 ```
 
 ## Build Outputs and Artifacts
 
 ### Successful Build Outputs
-- **JAR**: `Poker-Basic/target/pokermon-1.0.0-fat.jar` (works standalone, ~700KB)
+- **JAR**: `shared/build/libs/shared-1.1.0.*.jar` (works standalone, ~1.6MB)
 - **APK**: `android/build/outputs/apk/debug/android-debug.apk` (requires internet to build)
-- **Test Reports**: `Poker-Basic/target/surefire-reports/` (XML format)
+- **Test Reports**: `shared/build/test-results/` (XML format)
 
 ### Build Verification Commands
 ```bash
-cd Poker-Basic
-ls -la target/*.jar                        # Verify JAR exists (~700KB)
-java -jar target/pokermon-1.0.0-fat.jar --help  # Verify JAR is executable
+cd shared
+ls -la build/libs/*.jar                        # Verify JAR exists (~1.6MB)
+java -jar build/libs/shared-1.1.0.*.jar --help  # Verify JAR is executable
 ```
 
 ## Time Expectations
 
 ### Typical Command Times (Add 50% buffer for timeouts)
-- `mvn clean compile`: ~10 seconds
-- `mvn test`: ~12 seconds (254 tests)
-- `mvn clean package`: ~15 seconds
+- `./gradlew :shared:compileKotlin`: ~15 seconds
+- `./gradlew :shared:test`: ~20 seconds (54 tests)
+- `./gradlew :shared:jar`: ~25 seconds
 - `./validate-android-build.sh`: <1 second
 - Android build: 30+ minutes (with internet)
 
 ### Timeout Recommendations
-- Maven commands: 60+ seconds minimum
+- Gradle commands: 60+ seconds minimum
 - Android builds: 60+ minutes minimum
 - Validation scripts: 30 seconds
 
@@ -402,7 +402,7 @@ com.pokermon/
 ## Success Metrics: Kotlin-Native Excellence
 
 ### Build and Test Validation
-- ✅ All 254 tests pass (`mvn test -B`) - **Critical requirement**
+- ✅ All 54 tests pass (`./gradlew :shared:test --no-daemon`) - **Critical requirement**
 - ✅ JAR builds successfully (~700KB) - **Functional deliverable**
 - ✅ Console mode works interactively with Kotlin logic - **User experience**
 - ✅ Help system displays comprehensive information - **Documentation**

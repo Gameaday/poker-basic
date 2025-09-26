@@ -72,20 +72,22 @@ jobs:
         
         # Validate project structure for Kotlin-native approach
         echo "Validating Kotlin-native project structure (no Maven dependencies)..."
-        if [ -d "Poker-Basic/src/main/kotlin" ]; then
+        if [ -d "shared/src/main/kotlin" ]; then
           echo "✅ Kotlin source directory found"
-          KOTLIN_FILES=$(find Poker-Basic/src/main/kotlin -name "*.kt" | wc -l)
+          KOTLIN_FILES=$(find shared/src/main/kotlin -name "*.kt" | wc -l)
           echo "✅ Found $KOTLIN_FILES Kotlin source files"
         else
           echo "❌ Kotlin source directory missing"
+          echo "Looking for alternative source directories..."
+          find . -type d -name "kotlin" 2>/dev/null || echo "No Kotlin directories found"
           exit 1
         fi
         
-        # Verify Maven pom.xml removed
-        if [ ! -f "Poker-Basic/pom.xml" ] && [ ! -f "Poker-Basic/pom.xml.old" ]; then
+        # Verify Maven pom.xml removed and Gradle structure present
+        if [ -f "build.gradle" ] && [ -f "settings.gradle" ] && [ ! -f "pom.xml" ]; then
           echo "✅ Maven pom.xml removed - pure Gradle/Kotlin-native"
         else
-          echo "❌ Maven files still present - migration incomplete"
+          echo "❌ Maven files still present or Gradle files missing - migration incomplete"
           exit 1
         fi
         

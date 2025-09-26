@@ -64,6 +64,80 @@ class ConsoleGame {
         print("\nEnter your name: ")
         val playerName = scanner.nextLine().trim().ifEmpty { "Player" }
 
+        // Handle mode-specific gameplay
+        when (gameMode) {
+            GameMode.SAFARI -> {
+                startSafariMode(playerName, config["startingChips"] as Int)
+            }
+            GameMode.IRONMAN -> {
+                startIronmanMode(playerName, config["startingChips"] as Int, config["difficulty"] as? Int ?: 2)
+            }
+            GameMode.ADVENTURE -> {
+                startAdventureMode(playerName, config["startingChips"] as Int)
+            }
+            GameMode.CLASSIC -> {
+                startClassicMode(playerName, config)
+            }
+        }
+    }
+
+    /**
+     * Starts Safari Mode gameplay
+     */
+    private fun startSafariMode(
+        playerName: String,
+        startingChips: Int,
+    ) {
+        val safariBalls = 30
+        println("\n🏕️ Starting Safari Mode!")
+        println("You have $safariBalls safari balls to capture monsters.")
+        println()
+
+        // Use the Safari mode implementation
+        val safariMode = com.pokermon.modes.safari.SafariGameMode(playerName, startingChips, safariBalls)
+        safariMode.startSafari()
+    }
+
+    /**
+     * Starts Ironman Mode gameplay
+     */
+    private fun startIronmanMode(
+        playerName: String,
+        startingChips: Int,
+        difficulty: Int,
+    ) {
+        println("\n⚡ Starting Ironman Mode!")
+        println("High stakes survival with gacha rewards!")
+        println()
+
+        // Use the Ironman mode implementation
+        val ironmanMode = com.pokermon.modes.ironman.IronmanGameMode(playerName, startingChips, difficulty)
+        ironmanMode.startIronman()
+    }
+
+    /**
+     * Starts Adventure Mode gameplay
+     */
+    private fun startAdventureMode(
+        playerName: String,
+        startingChips: Int,
+    ) {
+        println("\n⚔️ Starting Adventure Mode!")
+        println("Battle monsters and explore the world!")
+        println()
+
+        // Use the Adventure mode implementation
+        val adventureMode = com.pokermon.modes.adventure.AdventureMode(playerName, startingChips)
+        adventureMode.startAdventure()
+    }
+
+    /**
+     * Starts Classic Mode gameplay
+     */
+    private suspend fun startClassicMode(
+        playerName: String,
+        config: Map<String, Any>,
+    ) {
         // Create players
         val humanPlayer = Player(playerName, config["startingChips"] as Int)
         val players = mutableListOf(humanPlayer)
@@ -84,7 +158,7 @@ class ConsoleGame {
         )
 
         // Run game loop
-        runGameLoop(players, gameMode)
+        runGameLoop(players, GameMode.CLASSIC)
     }
 
     /**

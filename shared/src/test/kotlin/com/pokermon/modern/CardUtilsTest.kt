@@ -1,6 +1,9 @@
 package com.pokermon.modern
 
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -70,7 +73,7 @@ class CardUtilsTest {
     @Test
     fun testSameRankAndSuit() {
         val card1 = 0 // Ace of Clubs (rank 0, suit 0)
-        val card2 = 4 // Two of Clubs (rank 1, suit 0)  
+        val card2 = 4 // Two of Clubs (rank 1, suit 0)
         val card3 = 1 // Ace of Diamonds (rank 0, suit 1)
 
         assertFalse(CardUtils.sameRank(card1, card2))

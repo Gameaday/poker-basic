@@ -1,12 +1,14 @@
 package com.pokermon.ui
 
-import com.pokermon.*
-import com.pokermon.GameFlows.*
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.launch
+import com.pokermon.GameFlows.GameActions
+import com.pokermon.GameFlows.GameEvents
+import com.pokermon.GameFlows.GameState
+import com.pokermon.GameFlows.GameStateManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 /**
  * Desktop UI application logic for Pokermon.
@@ -47,10 +49,10 @@ class PokerApp {
             // Integrate with console game using state management
             println("Desktop GUI ready - integrating with console interface...")
             val consoleGame = com.pokermon.console.ConsoleGame()
-            
+
             // Connect console game to our state management system
             integrateConsoleWithStateManager(consoleGame)
-            
+
             consoleGame.start()
         }
 
@@ -84,7 +86,7 @@ class PokerApp {
             is GameState.Initializing -> {
                 updateUI("Initializing game system...", "LOADING")
             }
-            
+
             is GameState.ModeSelection -> {
                 updateUI("Select Game Mode", "MENU")
                 val modes = state.availableModes.joinToString(", ") { it.displayName }
@@ -93,7 +95,7 @@ class PokerApp {
                     updateUI("Selected: ${mode.displayName}", "SELECTED")
                 }
             }
-            
+
             is GameState.PlayerSetup -> {
                 updateUI("Player Setup: ${state.selectedMode.displayName}", "SETUP")
                 updateUI("Player: ${state.playerName}, Count: ${state.playerCount}, Chips: ${state.startingChips}", "CONFIG")
@@ -101,30 +103,33 @@ class PokerApp {
                     updateUI("Setup complete - ready to start!", "READY")
                 }
             }
-            
+
             is GameState.GameStarting -> {
                 val progress = "${(state.loadingProgress * 100).toInt()}%"
                 updateUI("${state.loadingMessage} ($progress)", "LOADING")
             }
-            
+
             is GameState.Playing -> {
                 val mode = state.gameMode.displayName
                 val phase = state.currentPhase.displayName
                 val pot = state.pot
                 val round = state.roundNumber
-                val activePlayer = if (state.activePlayerIndex < state.players.size) {
-                    state.players[state.activePlayerIndex].name
-                } else "Unknown"
-                
+                val activePlayer =
+                    if (state.activePlayerIndex < state.players.size) {
+                        state.players[state.activePlayerIndex].name
+                    } else {
+                        "Unknown"
+                    }
+
                 updateUI("Playing: $mode - $phase", "ACTIVE")
                 updateUI("Round: $round, Pot: $pot, Active: $activePlayer", "INFO")
-                
+
                 // Handle sub-states for mode-specific UI
                 state.subState?.let { subState ->
                     handleSubStateUI(subState)
                 }
             }
-            
+
             is GameState.RoundTransition -> {
                 updateUI("Round ${state.completedRound} Complete!", "ROUND_END")
                 state.roundWinner?.let { winner ->
@@ -132,7 +137,7 @@ class PokerApp {
                 }
                 updateUI("Options: ${state.continueOptions.joinToString(", ")}", "OPTIONS")
             }
-            
+
             is GameState.WaitingForInput -> {
                 updateUI("Waiting: ${state.message}", "INPUT_REQUIRED")
                 if (state.validOptions.isNotEmpty()) {
@@ -145,7 +150,7 @@ class PokerApp {
                     updateUI("Timeout: ${timeout}ms", "TIMER")
                 }
             }
-            
+
             is GameState.ShowingStats -> {
                 updateUI("Game Statistics - ${state.gameMode.displayName}", "STATS")
                 state.sessionStats.forEach { (key, value) ->
@@ -155,7 +160,7 @@ class PokerApp {
                     updateUI("Press any key to return", "RETURN_PROMPT")
                 }
             }
-            
+
             is GameState.ShowingHelp -> {
                 updateUI("Help: ${state.helpCategory}", "HELP")
                 state.helpContent.forEach { (key, value) ->
@@ -165,7 +170,7 @@ class PokerApp {
                     updateUI("Press any key to return", "RETURN_PROMPT")
                 }
             }
-            
+
             is GameState.GameOver -> {
                 val winner = state.winner?.name ?: "No winner"
                 val mode = state.gameMode.displayName
@@ -174,7 +179,7 @@ class PokerApp {
                 updateUI("Total rounds: ${state.totalRounds}", "INFO")
                 updateUI("Options: ${state.nextOptions.joinToString(", ")}", "OPTIONS")
             }
-            
+
             is GameState.Victory -> {
                 updateUI("🎉 VICTORY! ${state.winner.name} wins by ${state.victoryType}!", "VICTORY")
                 if (state.achievements.isNotEmpty()) {
@@ -184,14 +189,14 @@ class PokerApp {
                     updateUI("Celebration: ${celebration.animationType} (${celebration.duration}ms)", "CELEBRATION")
                 }
             }
-            
+
             is GameState.Paused -> {
                 updateUI("Game Paused: ${state.pauseReason}", "PAUSED")
                 val pauseDuration = System.currentTimeMillis() - state.pauseTime
                 updateUI("Paused for: ${pauseDuration}ms", "PAUSE_DURATION")
                 updateUI("Options: ${state.resumeOptions.joinToString(", ")}", "OPTIONS")
             }
-            
+
             is GameState.Error -> {
                 val recovery = if (state.recoverable) " (Recoverable)" else " (Fatal)"
                 updateUI("Error: ${state.message}$recovery", "ERROR")
@@ -202,7 +207,7 @@ class PokerApp {
                     updateUI("Suggested actions: ${state.suggestedActions.joinToString(", ")}", "ERROR_ACTIONS")
                 }
             }
-            
+
             is GameState.Loading -> {
                 val progress = "${(state.progress * 100).toInt()}%"
                 updateUI("Loading: ${state.operation} ($progress)", "LOADING")
@@ -210,7 +215,7 @@ class PokerApp {
                     updateUI("Press ESC to cancel", "CANCEL_OPTION")
                 }
             }
-            
+
             is GameState.Exiting -> {
                 updateUI("Exiting game... Goodbye!", "EXIT")
             }
@@ -239,7 +244,7 @@ class PokerApp {
             is GameEvents.LoadingProgress -> {
                 showNotification("📊 ${event.operation}: ${(event.progress * 100).toInt()}%", "PROGRESS")
             }
-            
+
             // Player events
             is GameEvents.PlayerJoined -> {
                 showNotification("👤 ${event.player.name} joined", "INFO")
@@ -250,7 +255,7 @@ class PokerApp {
             is GameEvents.PlayerEliminated -> {
                 showNotification("💀 ${event.player.name} eliminated: ${event.reason}", "ELIMINATION")
             }
-            
+
             // Card events
             is GameEvents.CardsDealt -> {
                 showNotification("🃏 Cards dealt to ${event.playerCount} players", "CARDS")
@@ -267,7 +272,7 @@ class PokerApp {
             is GameEvents.CardExchangeComplete -> {
                 showNotification("✅ ${event.player.name} completed card exchange", "COMPLETE")
             }
-            
+
             // Betting events
             is GameEvents.PlayerFolded -> {
                 showNotification("❌ ${event.player.name} folded", "WARNING")
@@ -287,7 +292,7 @@ class PokerApp {
             is GameEvents.BettingRoundComplete -> {
                 showNotification("🔚 Betting round complete - ${event.activePlayers.size} active, pot: ${event.totalPot}", "ROUND_END")
             }
-            
+
             // Round and phase events
             is GameEvents.RoundStarted -> {
                 showNotification("🆕 Round ${event.roundNumber} started (${event.gameMode.displayName})", "ROUND_START")
@@ -303,7 +308,7 @@ class PokerApp {
                 val totalDistributed = event.amounts.values.sum()
                 showNotification("💰 Pot distributed: $totalDistributed chips to ${event.winners.size} winners", "DISTRIBUTION")
             }
-            
+
             // Game completion events
             is GameEvents.GameEnded -> {
                 val winner = event.finalWinner?.name ?: "No winner"
@@ -325,7 +330,7 @@ class PokerApp {
             is GameEvents.GameRestarted -> {
                 showNotification("🔄 Game restarted (${event.newConfig.gameMode.displayName})", "RESTART")
             }
-            
+
             // Mode events
             is GameEvents.GameModeSelected -> {
                 showNotification("🎯 Mode selected: ${event.mode.displayName}", "MODE_SELECT")
@@ -333,7 +338,7 @@ class PokerApp {
             is GameEvents.GameModeSwitched -> {
                 showNotification("🔄 Switched from ${event.from.displayName} to ${event.to.displayName}", "MODE_SWITCH")
             }
-            
+
             // Navigation events
             is GameEvents.StateChanged -> {
                 showNotification("🔄 ${event.fromState} → ${event.toState}", "NAVIGATION")
@@ -347,7 +352,7 @@ class PokerApp {
             is GameEvents.MenuShown -> {
                 showNotification("📋 ${event.menuType} menu (${event.options.size} options)", "MENU")
             }
-            
+
             // Sub-state events
             is GameEvents.SubStateEntered -> {
                 handleSubStateEvent("Entered", event.subState)
@@ -358,7 +363,7 @@ class PokerApp {
             is GameEvents.SubStateTransition -> {
                 showNotification("🔄 ${event.from::class.simpleName} → ${event.to::class.simpleName}", "SUBSTATE")
             }
-            
+
             // AI events
             is GameEvents.AIProcessingStarted -> {
                 showNotification("🤖 AI processing started (${event.aiPlayers.size} players)", "AI")
@@ -369,7 +374,7 @@ class PokerApp {
             is GameEvents.AIProcessingComplete -> {
                 showNotification("🤖 AI processing complete (${event.actionsPerformed} actions)", "AI_COMPLETE")
             }
-            
+
             // Mode-specific events
             is GameEvents.AdventureEvents.MonsterEncountered -> {
                 showNotification("🐲 Monster encountered: ${event.monsterName} (${event.health} HP, ${event.type})", "ADVENTURE")
@@ -378,9 +383,12 @@ class PokerApp {
                 showNotification("⚔️ ${event.monsterName} defeated! Reward: ${event.reward} (+${event.experience} XP)", "ADVENTURE_WIN")
             }
             is GameEvents.AdventureEvents.QuestCompleted -> {
-                showNotification("🎯 Quest '${event.questName}' completed by ${event.player.name}! Reward: ${event.reward}", "QUEST_COMPLETE")
+                showNotification(
+                    "🎯 Quest '${event.questName}' completed by ${event.player.name}! Reward: ${event.reward}",
+                    "QUEST_COMPLETE",
+                )
             }
-            
+
             is GameEvents.SafariEvents.WildMonsterSighted -> {
                 showNotification("👀 Wild ${event.monsterName} appeared! (${event.rarity}, ${event.behavior})", "SAFARI")
             }
@@ -390,17 +398,23 @@ class PokerApp {
             is GameEvents.SafariEvents.MonsterEscaped -> {
                 showNotification("💨 ${event.monsterName} escaped after ${event.captureAttempts} attempts (${event.reason})", "SAFARI_FAIL")
             }
-            
+
             is GameEvents.IronmanEvents.PermadeathTriggered -> {
                 showNotification("💀 PERMADEATH: ${event.player.name} - ${event.reason}", "IRONMAN_CRITICAL")
             }
             is GameEvents.IronmanEvents.GachaPullPerformed -> {
-                showNotification("🎰 ${event.player.name} pulled ${event.result} (${event.rarity}) for ${event.pointsSpent} points", "IRONMAN_GACHA")
+                showNotification(
+                    "🎰 ${event.player.name} pulled ${event.result} (${event.rarity}) for ${event.pointsSpent} points",
+                    "IRONMAN_GACHA",
+                )
             }
             is GameEvents.IronmanEvents.RareMonsterWon -> {
-                showNotification("✨ ${event.player.name} won rare ${event.monsterName} (${event.rarity}, value: ${event.value})!", "IRONMAN_RARE")
+                showNotification(
+                    "✨ ${event.player.name} won rare ${event.monsterName} (${event.rarity}, value: ${event.value})!",
+                    "IRONMAN_RARE",
+                )
             }
-            
+
             // Special events
             is GameEvents.SpecialEventTriggered -> {
                 showNotification("🌟 Special Event: ${event.eventName} (${event.eventType})", "SPECIAL_EVENT")
@@ -411,7 +425,7 @@ class PokerApp {
             is GameEvents.SpecialEventCompleted -> {
                 showNotification("🎊 Event '${event.eventName}' completed: ${event.outcome}", "EVENT_COMPLETE")
             }
-            
+
             // Achievement events
             is GameEvents.AchievementUnlocked -> {
                 showNotification("🏆 ${event.player.name} unlocked '${event.achievementName}': ${event.description}", "ACHIEVEMENT")
@@ -423,7 +437,7 @@ class PokerApp {
             is GameEvents.MilestoneReached -> {
                 showNotification("🎯 ${event.player.name} reached milestone: ${event.milestoneName} (${event.value})", "MILESTONE")
             }
-            
+
             // System events
             is GameEvents.ErrorOccurred -> {
                 val recovery = if (event.recoverable) " (Recoverable)" else " (Fatal)"
@@ -437,9 +451,12 @@ class PokerApp {
                 showNotification("🔔 ${event.category}: ${event.message}$priority", "SYSTEM")
             }
             is GameEvents.PerformanceWarning -> {
-                showNotification("⚡ Performance: ${event.operation} took ${event.duration}ms (threshold: ${event.threshold}ms)", "PERFORMANCE")
+                showNotification(
+                    "⚡ Performance: ${event.operation} took ${event.duration}ms (threshold: ${event.threshold}ms)",
+                    "PERFORMANCE",
+                )
             }
-            
+
             // UI and presentation events
             is GameEvents.AnimationTriggered -> {
                 showNotification("🎬 Animation: ${event.animationType} on ${event.target} (${event.duration}ms)", "ANIMATION")
@@ -453,7 +470,7 @@ class PokerApp {
             is GameEvents.CelebrationStarted -> {
                 showNotification("🎉 Celebration: ${event.celebrationType} (${event.duration}ms)", "CELEBRATION")
             }
-            
+
             else -> {
                 // Handle any other events
                 println("Unhandled event: ${event::class.simpleName}")
@@ -517,7 +534,7 @@ class PokerApp {
                 val status = if (subState.distributionComplete) "Complete" else "In progress"
                 updateUI("Pot distribution ($status): ${subState.potAmount} to ${subState.winners.size} winners", "POT_DIST")
             }
-            
+
             // Adventure mode sub-states
             is PlayingSubState.AdventureMode -> {
                 val healthBar = "${subState.monsterHealth}/${subState.maxHealth}"
@@ -546,7 +563,7 @@ class PokerApp {
                     updateUI("Ready to continue quest", "QUEST_CONTINUE")
                 }
             }
-            
+
             // Safari mode sub-states
             is PlayingSubState.SafariMode -> {
                 val capturePercent = "${(subState.captureChance * 100).toInt()}%"
@@ -558,16 +575,17 @@ class PokerApp {
                 }
             }
             is PlayingSubState.MonsterCapture -> {
-                val status = when {
-                    subState.captureInProgress -> "Attempting capture..."
-                    subState.captureSuccess == true -> "Capture successful!"
-                    subState.captureSuccess == false -> "Capture failed!"
-                    else -> "Ready to capture"
-                }
+                val status =
+                    when {
+                        subState.captureInProgress -> "Attempting capture..."
+                        subState.captureSuccess == true -> "Capture successful!"
+                        subState.captureSuccess == false -> "Capture failed!"
+                        else -> "Ready to capture"
+                    }
                 updateUI("🎯 Capturing ${subState.monster.name}: $status", "CAPTURE")
                 updateUI("Balls used: ${subState.ballsUsed}", "BALLS_USED")
             }
-            
+
             // Ironman mode sub-states
             is PlayingSubState.IronmanMode -> {
                 val warning = if (subState.permadeathWarning) " ⚠️ DANGER!" else ""
@@ -599,7 +617,7 @@ class PokerApp {
                     updateUI("Warning acknowledged - proceeding at your own risk", "ACKNOWLEDGED")
                 }
             }
-            
+
             // Special event sub-states
             is PlayingSubState.SpecialEvent -> {
                 updateUI("🌟 ${subState.eventName} (${subState.eventType})", "SPECIAL_EVENT")
@@ -623,13 +641,17 @@ class PokerApp {
     /**
      * Handles sub-state specific events.
      */
-    private fun handleSubStateEvent(action: String, subState: PlayingSubState) {
-        val message = when (subState) {
-            is PlayingSubState.AdventureMode -> "$action Adventure: ${subState.currentMonster}"
-            is PlayingSubState.SafariMode -> "$action Safari: ${subState.wildMonster}"
-            is PlayingSubState.IronmanMode -> "$action Ironman: Risk ${subState.riskLevel}x"
-            else -> "$action: ${subState::class.simpleName}"
-        }
+    private fun handleSubStateEvent(
+        action: String,
+        subState: PlayingSubState,
+    ) {
+        val message =
+            when (subState) {
+                is PlayingSubState.AdventureMode -> "$action Adventure: ${subState.currentMonster}"
+                is PlayingSubState.SafariMode -> "$action Safari: ${subState.wildMonster}"
+                is PlayingSubState.IronmanMode -> "$action Ironman: Risk ${subState.riskLevel}x"
+                else -> "$action: ${subState::class.simpleName}"
+            }
         showNotification(message, "SUBSTATE")
     }
 
@@ -637,28 +659,32 @@ class PokerApp {
      * Updates the UI with new information (placeholder for actual GUI).
      * In a real GUI implementation, this would update specific UI components.
      */
-    private fun updateUI(message: String, category: String) {
+    private fun updateUI(
+        message: String,
+        category: String,
+    ) {
         val timestamp = System.currentTimeMillis()
-        val prefix = when (category) {
-            "LOADING" -> "⏳"
-            "ACTIVE" -> "🎮"
-            "INFO" -> "ℹ️"
-            "INPUT_REQUIRED" -> "⌨️"
-            "OPTIONS" -> "📋"
-            "GAME_OVER" -> "🏁"
-            "PAUSED" -> "⏸️"
-            "ERROR" -> "❌"
-            "PLAYER_ACTION" -> "👤"
-            "AI_PROCESSING" -> "🤖"
-            "CARD_EXCHANGE" -> "🔄"
-            "ADVENTURE" -> "🐲"
-            "SAFARI" -> "🏞️"
-            "IRONMAN" -> "💀"
-            "RESULTS" -> "📊"
-            "PHASE" -> "⚡"
-            else -> "📢"
-        }
-        
+        val prefix =
+            when (category) {
+                "LOADING" -> "⏳"
+                "ACTIVE" -> "🎮"
+                "INFO" -> "ℹ️"
+                "INPUT_REQUIRED" -> "⌨️"
+                "OPTIONS" -> "📋"
+                "GAME_OVER" -> "🏁"
+                "PAUSED" -> "⏸️"
+                "ERROR" -> "❌"
+                "PLAYER_ACTION" -> "👤"
+                "AI_PROCESSING" -> "🤖"
+                "CARD_EXCHANGE" -> "🔄"
+                "ADVENTURE" -> "🐲"
+                "SAFARI" -> "🏞️"
+                "IRONMAN" -> "💀"
+                "RESULTS" -> "📊"
+                "PHASE" -> "⚡"
+                else -> "📢"
+            }
+
         // In a real GUI, this would update actual UI components
         // For now, we demonstrate the reactive pattern with console output
         println("[$prefix UI UPDATE] $message")
@@ -667,19 +693,23 @@ class PokerApp {
     /**
      * Shows a notification to the user (placeholder for actual GUI notifications).
      */
-    private fun showNotification(message: String, type: String) {
-        val icon = when (type) {
-            "SUCCESS" -> "✅"
-            "WARNING" -> "⚠️"
-            "ERROR" -> "❌"
-            "ACTION" -> "⚡"
-            "ADVENTURE" -> "🐲"
-            "SAFARI" -> "🎯"
-            "IRONMAN_CRITICAL" -> "💀"
-            "SUBSTATE" -> "🔄"
-            else -> "📢"
-        }
-        
+    private fun showNotification(
+        message: String,
+        type: String,
+    ) {
+        val icon =
+            when (type) {
+                "SUCCESS" -> "✅"
+                "WARNING" -> "⚠️"
+                "ERROR" -> "❌"
+                "ACTION" -> "⚡"
+                "ADVENTURE" -> "🐲"
+                "SAFARI" -> "🎯"
+                "IRONMAN_CRITICAL" -> "💀"
+                "SUBSTATE" -> "🔄"
+                else -> "📢"
+            }
+
         // In a real GUI, this would show actual notifications
         println("[$icon NOTIFICATION] $message")
     }
@@ -691,10 +721,10 @@ class PokerApp {
     private fun initializeUI() {
         // Complete GUI implementation ready for desktop framework integration
         // This implementation provides the foundation for:
-        
+
         // Main Window Setup
         setupMainWindow()
-        
+
         // State-Driven UI Components
         CoroutineScope(Dispatchers.Main).launch {
             setupStateObservers()
@@ -703,33 +733,33 @@ class PokerApp {
         setupPlayerDisplays()
         setupBettingInterface()
         setupCardExchangeInterface()
-        
+
         // Mode-Specific UI Panels
         setupModeSpecificPanels()
         setupAdventureModeUI()
         setupSafariModeUI()
         setupIronmanModeUI()
-        
+
         // Notification and Event Systems
         setupNotificationSystem()
         setupEventHandlers()
-        
+
         // Navigation and Menu Systems
         setupNavigationMenus()
         setupSettingsPanels()
-        
+
         // Real-time Data Displays
         setupPotAndChipCounters()
         setupProgressIndicators()
-        
+
         // Modal Systems
         setupModalDialogs()
         setupGameModeTransitions()
-        
+
         // Performance and Accessibility
         setupPerformanceMonitoring()
         setupAccessibilityFeatures()
-        
+
         println("🎨 Desktop UI components initialized and ready for framework integration")
     }
 
@@ -738,92 +768,92 @@ class PokerApp {
         // Main window configuration with state-driven layout
         println("🪟 Main window setup complete")
     }
-    
+
     private fun setupGameBoard() {
         // Interactive game board with card visualization
         println("🎮 Game board setup complete")
     }
-    
+
     private fun setupPlayerDisplays() {
         // Player information panels with real-time updates
         println("👥 Player displays setup complete")
     }
-    
+
     private fun setupBettingInterface() {
         // Betting controls that adapt to current GamePhase
         println("💰 Betting interface setup complete")
     }
-    
+
     private fun setupCardExchangeInterface() {
         // Card selection and exchange UI
         println("🃏 Card exchange interface setup complete")
     }
-    
+
     private fun setupModeSpecificPanels() {
         // Panels that show/hide based on current GameMode
         println("🎯 Mode-specific panels setup complete")
     }
-    
+
     private fun setupAdventureModeUI() {
         // Monster battle UI, quest tracking, health bars
         println("🐲 Adventure mode UI setup complete")
     }
-    
+
     private fun setupSafariModeUI() {
         // Monster capture interface, safari ball management
         println("🏞️ Safari mode UI setup complete")
     }
-    
+
     private fun setupIronmanModeUI() {
         // Risk indicators, gacha interface, permadeath warnings
         println("💀 Ironman mode UI setup complete")
     }
-    
+
     private fun setupNotificationSystem() {
         // Toast notifications for GameEvents
         println("🔔 Notification system setup complete")
     }
-    
+
     private fun setupEventHandlers() {
         // UI event handling and state synchronization
         println("⚡ Event handlers setup complete")
     }
-    
+
     private fun setupNavigationMenus() {
         // Main menu, pause menu, settings navigation
         println("🧭 Navigation menus setup complete")
     }
-    
+
     private fun setupSettingsPanels() {
         // Game settings, mode selection, preferences
         println("⚙️ Settings panels setup complete")
     }
-    
+
     private fun setupPotAndChipCounters() {
         // Real-time updating displays for game values
         println("💎 Pot and chip counters setup complete")
     }
-    
+
     private fun setupProgressIndicators() {
         // Loading bars, AI processing indicators
         println("📊 Progress indicators setup complete")
     }
-    
+
     private fun setupModalDialogs() {
         // Confirmation dialogs, error modals, help screens
         println("💬 Modal dialogs setup complete")
     }
-    
+
     private fun setupGameModeTransitions() {
         // Smooth transitions between game modes
         println("🔄 Game mode transitions setup complete")
     }
-    
+
     private fun setupPerformanceMonitoring() {
         // Performance metrics and optimization
         println("⚡ Performance monitoring setup complete")
     }
-    
+
     private fun setupAccessibilityFeatures() {
         // Screen reader support, keyboard navigation, high contrast
         println("♿ Accessibility features setup complete")

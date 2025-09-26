@@ -32,13 +32,14 @@ class GameStateManager {
     suspend fun updateGameState(newState: GameState) {
         val previousState = _gameState.value
         _gameState.emit(newState)
-        
+
         // Emit phase change events when transitioning between Playing states
         if (previousState is GameState.Playing && newState is GameState.Playing &&
-            previousState.currentPhase != newState.currentPhase) {
+            previousState.currentPhase != newState.currentPhase
+        ) {
             emitEvent(GameEvents.PhaseChanged(newState.currentPhase, previousState.currentPhase))
         }
-        
+
         // Emit sub-state transition events
         handleSubStateTransitions(previousState, newState)
     }
@@ -82,8 +83,8 @@ class GameStateManager {
                         playerName = action.playerName,
                         playerCount = action.playerCount,
                         startingChips = action.startingChips,
-                        setupComplete = true
-                    )
+                        setupComplete = true,
+                    ),
                 )
                 emitEvent(GameEvents.PlayersConfigured(action.playerCount, action.startingChips))
             }
@@ -93,8 +94,8 @@ class GameStateManager {
                     GameState.GameStarting(
                         gameConfig = action.gameConfig,
                         loadingProgress = 0.0f,
-                        loadingMessage = "Initializing ${currentGameMode.displayName}..."
-                    )
+                        loadingMessage = "Initializing ${currentGameMode.displayName}...",
+                    ),
                 )
                 emitEvent(GameEvents.GameConfigured(action.gameConfig))
             }
@@ -109,7 +110,7 @@ class GameStateManager {
                 val previousMode = currentGameMode
                 currentGameMode = action.mode
                 emitEvent(GameEvents.GameModeSwitched(previousMode, action.mode))
-                
+
                 if (!action.preserveState) {
                     updateGameState(GameState.ModeSelection(selectedMode = action.mode))
                 }
@@ -136,7 +137,7 @@ class GameStateManager {
                             sessionStats = generateSessionStats(currentState),
                             gameMode = currentState.gameMode,
                             totalRounds = currentState.roundNumber,
-                            gameOverReason = "Game completed normally"
+                            gameOverReason = "Game completed normally",
                         ),
                     )
                     emitEvent(GameEvents.GameEnded(winner, System.currentTimeMillis(), "completed"))
@@ -152,8 +153,8 @@ class GameStateManager {
                             completedRound = currentState.roundNumber,
                             nextRound = nextRound,
                             roundWinner = determineWinner(currentState.players),
-                            roundWinnings = currentState.pot
-                        )
+                            roundWinnings = currentState.pot,
+                        ),
                     )
                     emitEvent(GameEvents.RoundEnded(currentState.players.firstOrNull(), currentState.pot, currentState.roundNumber))
                 }
@@ -168,8 +169,8 @@ class GameStateManager {
                         GameState.GameStarting(
                             gameConfig = gameConfig,
                             loadingProgress = 0.5f,
-                            loadingMessage = "Starting round ${currentState.nextRound}..."
-                        )
+                            loadingMessage = "Starting round ${currentState.nextRound}...",
+                        ),
                     )
                     emitEvent(GameEvents.RoundStarted(currentState.nextRound, currentGameMode))
                 }
@@ -183,8 +184,8 @@ class GameStateManager {
                         GameState.Paused(
                             savedState = savedGame,
                             pauseReason = "User requested",
-                            pauseTime = System.currentTimeMillis()
-                        )
+                            pauseTime = System.currentTimeMillis(),
+                        ),
                     )
                     emitEvent(GameEvents.GamePaused("User requested", true))
                 }
@@ -198,8 +199,8 @@ class GameStateManager {
                         GameState.Playing(
                             players = emptyList(), // Would be restored from savedState
                             currentPhase = com.pokermon.GamePhase.BETTING_ROUND,
-                            gameMode = currentState.savedState.gameMode
-                        )
+                            gameMode = currentState.savedState.gameMode,
+                        ),
                     )
                     emitEvent(GameEvents.GameResumed("paused"))
                 }
@@ -217,17 +218,18 @@ class GameStateManager {
             // Navigation actions
             is GameActions.ShowStats -> {
                 val currentState = _gameState.value
-                val stats = when (currentState) {
-                    is GameState.Playing -> generateSessionStats(currentState)
-                    is GameState.GameOver -> currentState.sessionStats
-                    else -> mapOf("message" to "No stats available")
-                }
+                val stats =
+                    when (currentState) {
+                        is GameState.Playing -> generateSessionStats(currentState)
+                        is GameState.GameOver -> currentState.sessionStats
+                        else -> mapOf("message" to "No stats available")
+                    }
                 updateGameState(
                     GameState.ShowingStats(
                         sessionStats = stats,
                         playerStats = emptyMap(), // Would be populated in real implementation
-                        gameMode = currentGameMode
-                    )
+                        gameMode = currentGameMode,
+                    ),
                 )
                 emitEvent(GameEvents.StatsDisplayed(stats))
             }
@@ -236,8 +238,8 @@ class GameStateManager {
                 updateGameState(
                     GameState.ShowingHelp(
                         helpCategory = "general",
-                        helpContent = getHelpContent("general")
-                    )
+                        helpContent = getHelpContent("general"),
+                    ),
                 )
                 emitEvent(GameEvents.HelpDisplayed("general", getHelpContent("general")))
             }
@@ -246,8 +248,8 @@ class GameStateManager {
                 updateGameState(
                     GameState.ShowingHelp(
                         helpCategory = action.category,
-                        helpContent = getHelpContent(action.category)
-                    )
+                        helpContent = getHelpContent(action.category),
+                    ),
                 )
                 emitEvent(GameEvents.HelpDisplayed(action.category, getHelpContent(action.category)))
             }
@@ -261,8 +263,8 @@ class GameStateManager {
                             GameState.Playing(
                                 players = emptyList(), // Would be restored
                                 currentPhase = com.pokermon.GamePhase.BETTING_ROUND,
-                                gameMode = currentGameMode
-                            )
+                                gameMode = currentGameMode,
+                            ),
                         )
                     }
                     else -> {
@@ -321,8 +323,8 @@ class GameStateManager {
                         winner = action.winner,
                         victoryType = action.victoryType,
                         achievements = getAchievementsForVictory(action.victoryType),
-                        rewards = getRewardsForVictory(action.victoryType)
-                    )
+                        rewards = getRewardsForVictory(action.victoryType),
+                    ),
                 )
                 emitEvent(GameEvents.VictoryTriggered(action.winner, action.victoryType))
             }
@@ -374,12 +376,13 @@ class GameStateManager {
             is GameActions.TriggerSpecialEvent -> {
                 val currentState = _gameState.value
                 if (currentState is GameState.Playing) {
-                    val eventSubState = PlayingSubState.SpecialEvent(
-                        eventType = action.eventType,
-                        eventName = action.eventName,
-                        eventDescription = getEventDescription(action.eventName),
-                        eventChoices = getEventChoices(action.eventName)
-                    )
+                    val eventSubState =
+                        PlayingSubState.SpecialEvent(
+                            eventType = action.eventType,
+                            eventName = action.eventName,
+                            eventDescription = getEventDescription(action.eventName),
+                            eventChoices = getEventChoices(action.eventName),
+                        )
                     updateGameState(currentState.copy(subState = eventSubState))
                     emitEvent(GameEvents.SpecialEventTriggered(action.eventType, action.eventName, getEventDescription(action.eventName)))
                 }
@@ -399,7 +402,14 @@ class GameStateManager {
 
             // Achievement actions
             is GameActions.UnlockAchievement -> {
-                emitEvent(GameEvents.AchievementUnlocked(action.player, action.achievementName, getAchievementDescription(action.achievementName), ""))
+                emitEvent(
+                    GameEvents.AchievementUnlocked(
+                        action.player,
+                        action.achievementName,
+                        getAchievementDescription(action.achievementName),
+                        "",
+                    ),
+                )
             }
 
             is GameActions.ShowAchievements -> {
@@ -413,8 +423,8 @@ class GameStateManager {
                     GameState.Error(
                         message = action.error,
                         recoverable = true,
-                        suggestedActions = listOf("Retry", "Return to Menu")
-                    )
+                        suggestedActions = listOf("Retry", "Return to Menu"),
+                    ),
                 )
                 emitEvent(GameEvents.ErrorOccurred(action.error, null, action.context, true))
             }
@@ -433,17 +443,17 @@ class GameStateManager {
             is GameActions.AdventureActions -> handleAdventureAction(action)
             is GameActions.SafariActions -> handleSafariAction(action)
             is GameActions.IronmanActions -> handleIronmanAction(action)
-            
-            // Handle remaining actions  
+
+            // Handle remaining actions
             is GameActions.DealCards -> {
                 emitEvent(GameEvents.CardsDealt(2)) // Default player count
             }
-            
+
             is GameActions.ValidateAction -> {
                 // Validation logic would go here
                 emitEvent(GameEvents.SystemNotification("Action validated", "VALIDATION"))
             }
-            
+
             is GameActions.NavigateToState -> {
                 emitEvent(GameEvents.StateChanged("current", action.targetState))
             }
@@ -470,11 +480,14 @@ class GameStateManager {
     /**
      * Handles sub-state transitions and emits appropriate events.
      */
-    private suspend fun handleSubStateTransitions(previousState: GameState, newState: GameState) {
+    private suspend fun handleSubStateTransitions(
+        previousState: GameState,
+        newState: GameState,
+    ) {
         if (previousState is GameState.Playing && newState is GameState.Playing) {
             val prevSubState = previousState.subState
             val newSubState = newState.subState
-            
+
             when {
                 prevSubState == null && newSubState != null -> {
                     emitEvent(GameEvents.SubStateEntered(newSubState))
@@ -591,7 +604,7 @@ class GameStateManager {
             "currentPhase" to state.currentPhase.name,
             "gameMode" to state.gameMode.name,
             "roundNumber" to state.roundNumber,
-            "hasSubState" to (state.subState != null)
+            "hasSubState" to (state.subState != null),
         )
     }
 
@@ -601,41 +614,47 @@ class GameStateManager {
      */
     private fun getHelpContent(category: String): Map<String, String> {
         return when (category) {
-            "general" -> mapOf(
-                "title" to "General Help",
-                "content" to "Welcome to Pokermon! This is a poker game with monster collection elements.",
-                "actions" to "Use Call, Raise, or Fold to play poker. Exchange cards to improve your hand.",
-                "modes" to "Try different game modes: Classic, Adventure, Safari, and Ironman for unique experiences."
-            )
-            "classic" -> mapOf(
-                "title" to "Classic Mode",
-                "content" to "Traditional poker gameplay with betting and card exchange.",
-                "goal" to "Win chips by having the best poker hand or by making opponents fold.",
-                "tips" to "Pay attention to betting patterns and manage your chip stack carefully."
-            )
-            "adventure" -> mapOf(
-                "title" to "Adventure Mode",
-                "content" to "Battle monsters using poker skills. Your hand strength determines battle effectiveness.",
-                "goal" to "Defeat monsters to complete quests and earn rewards.",
-                "tips" to "Strong poker hands deal more damage. Weak hands may result in taking damage."
-            )
-            "safari" -> mapOf(
-                "title" to "Safari Mode", 
-                "content" to "Capture wild monsters through strategic poker play.",
-                "goal" to "Use safari balls (betting actions) to capture monsters. Better hands improve capture rates.",
-                "tips" to "Different monsters have different capture rates. Save your best balls for rare encounters."
-            )
-            "ironman" -> mapOf(
-                "title" to "Ironman Mode",
-                "content" to "High-risk, high-reward gameplay with permadeath mechanics.",
-                "goal" to "Convert winnings to gacha points for rare monster rewards, but avoid going broke.",
-                "tips" to "Risk management is crucial. Permadeath means losing everything if you run out of chips."
-            )
-            else -> mapOf(
-                "title" to "Help",
-                "content" to "Help information not available for this category.",
-                "suggestion" to "Try 'general', 'classic', 'adventure', 'safari', or 'ironman' categories."
-            )
+            "general" ->
+                mapOf(
+                    "title" to "General Help",
+                    "content" to "Welcome to Pokermon! This is a poker game with monster collection elements.",
+                    "actions" to "Use Call, Raise, or Fold to play poker. Exchange cards to improve your hand.",
+                    "modes" to "Try different game modes: Classic, Adventure, Safari, and Ironman for unique experiences.",
+                )
+            "classic" ->
+                mapOf(
+                    "title" to "Classic Mode",
+                    "content" to "Traditional poker gameplay with betting and card exchange.",
+                    "goal" to "Win chips by having the best poker hand or by making opponents fold.",
+                    "tips" to "Pay attention to betting patterns and manage your chip stack carefully.",
+                )
+            "adventure" ->
+                mapOf(
+                    "title" to "Adventure Mode",
+                    "content" to "Battle monsters using poker skills. Your hand strength determines battle effectiveness.",
+                    "goal" to "Defeat monsters to complete quests and earn rewards.",
+                    "tips" to "Strong poker hands deal more damage. Weak hands may result in taking damage.",
+                )
+            "safari" ->
+                mapOf(
+                    "title" to "Safari Mode",
+                    "content" to "Capture wild monsters through strategic poker play.",
+                    "goal" to "Use safari balls (betting actions) to capture monsters. Better hands improve capture rates.",
+                    "tips" to "Different monsters have different capture rates. Save your best balls for rare encounters.",
+                )
+            "ironman" ->
+                mapOf(
+                    "title" to "Ironman Mode",
+                    "content" to "High-risk, high-reward gameplay with permadeath mechanics.",
+                    "goal" to "Convert winnings to gacha points for rare monster rewards, but avoid going broke.",
+                    "tips" to "Risk management is crucial. Permadeath means losing everything if you run out of chips.",
+                )
+            else ->
+                mapOf(
+                    "title" to "Help",
+                    "content" to "Help information not available for this category.",
+                    "suggestion" to "Try 'general', 'classic', 'adventure', 'safari', or 'ironman' categories.",
+                )
         }
     }
 
@@ -690,21 +709,25 @@ class GameStateManager {
      */
     private fun getEventChoices(eventName: String): List<EventChoice> {
         return when (eventName) {
-            "lucky_draw" -> listOf(
-                EventChoice("accept", "Accept the lucky draw", mapOf("luck_bonus" to 0.2)),
-                EventChoice("decline", "Decline and continue normally", mapOf("safe_play" to true))
-            )
-            "double_or_nothing" -> listOf(
-                EventChoice("risk_it", "Risk it all for double chips", mapOf("risk_multiplier" to 2.0)),
-                EventChoice("play_safe", "Play it safe and keep current chips", mapOf("safe_play" to true))
-            )
-            "monster_challenge" -> listOf(
-                EventChoice("accept_duel", "Accept the monster's challenge", mapOf("battle_mode" to true)),
-                EventChoice("flee", "Flee from the monster", mapOf("flee_penalty" to -100))
-            )
-            else -> listOf(
-                EventChoice("continue", "Continue the game", mapOf("default" to true))
-            )
+            "lucky_draw" ->
+                listOf(
+                    EventChoice("accept", "Accept the lucky draw", mapOf("luck_bonus" to 0.2)),
+                    EventChoice("decline", "Decline and continue normally", mapOf("safe_play" to true)),
+                )
+            "double_or_nothing" ->
+                listOf(
+                    EventChoice("risk_it", "Risk it all for double chips", mapOf("risk_multiplier" to 2.0)),
+                    EventChoice("play_safe", "Play it safe and keep current chips", mapOf("safe_play" to true)),
+                )
+            "monster_challenge" ->
+                listOf(
+                    EventChoice("accept_duel", "Accept the monster's challenge", mapOf("battle_mode" to true)),
+                    EventChoice("flee", "Flee from the monster", mapOf("flee_penalty" to -100)),
+                )
+            else ->
+                listOf(
+                    EventChoice("continue", "Continue the game", mapOf("default" to true)),
+                )
         }
     }
 

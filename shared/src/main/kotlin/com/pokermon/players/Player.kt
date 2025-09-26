@@ -326,7 +326,7 @@ open class Player(
             if (hand.any { it == -1 }) {
                 return
             }
-            
+
             // Use Main.java methods for now during migration
             try {
                 // Convert hand using unified CardUtils
@@ -348,9 +348,10 @@ open class Player(
      */
     fun convertHand() {
         _hand?.let { hand ->
-            _convertedHand = hand.map { cardInt ->
-                CardUtils.cardNameSafe(cardInt)
-            }.toTypedArray()
+            _convertedHand =
+                hand.map { cardInt ->
+                    CardUtils.cardNameSafe(cardInt)
+                }.toTypedArray()
         }
     }
 

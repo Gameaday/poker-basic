@@ -508,44 +508,44 @@ object ConsoleMain {
     ) {
         println("\n⚔️ ADVENTURE MODE SESSION STARTED")
         println("Embark on a quest where poker skills determine battle outcomes!")
-        
+
         var currentRound = 1
         val maxRounds = setup.maxRounds
         val activePlayers = players.toMutableList()
-        
+
         // Adventure-specific state
         val questProgress = mutableMapOf<String, Int>()
         val monstersDefeated = mutableMapOf<Player, Int>()
-        
+
         while (currentRound <= maxRounds && activePlayers.size > 1) {
             println("\n🗡️ ADVENTURE ROUND $currentRound")
-            
+
             // Generate monster encounter
             val monster = generateRandomMonster(currentRound)
             println("🐲 A wild ${monster.name} appears! (Health: ${monster.effectiveHealth}, Type: ${monster.rarity})")
-            
+
             // Deal cards for battle preparation
             dealCardsToPlayers(activePlayers, deck, 5)
-            
+
             // Display hands for battle planning
             activePlayers.forEach { player ->
                 if (player.isHuman) {
                     displayPlayerHand(player, "Battle Hand")
                 }
             }
-            
+
             // Battle phase - poker hands determine damage
             for (player in activePlayers) {
                 if (player.fold) continue
-                
+
                 println("\n⚔️ ${player.name}'s battle turn!")
-                
+
                 val handStrength = evaluateHandForBattle(player)
                 val damage = calculateBattleDamage(handStrength)
-                
+
                 println("🎯 Hand strength: ${handStrength.description}")
                 println("⚡ Damage dealt: $damage")
-                
+
                 // Monster counter-attack based on remaining health
                 val monsterDamage = calculateMonsterDamage(monster, damage)
                 if (monsterDamage > 0) {
@@ -553,7 +553,7 @@ object ConsoleMain {
                     println("🔥 ${monster.name} counter-attacks for $monsterDamage damage!")
                     println("💰 ${player.name} chips: ${player.chips}")
                 }
-                
+
                 // Check if monster is defeated
                 if (damage >= monster.effectiveHealth) {
                     println("🏆 ${player.name} defeated ${monster.name}!")
@@ -563,7 +563,7 @@ object ConsoleMain {
                     println("💰 Reward: $reward chips (Total: ${player.chips})")
                     break
                 }
-                
+
                 // Check if player is defeated
                 if (player.chips <= 0) {
                     println("💀 ${player.name} has been defeated in battle!")
@@ -571,14 +571,14 @@ object ConsoleMain {
                     activePlayers.remove(player)
                 }
             }
-            
+
             // Update quest progress
             updateQuestProgress(questProgress, currentRound, monstersDefeated)
-            
+
             currentRound++
             resetRound(activePlayers, deck)
         }
-        
+
         // Display adventure results
         displayAdventureResults(players, monstersDefeated, questProgress)
     }
@@ -594,45 +594,46 @@ object ConsoleMain {
     ) {
         println("\n🏞️ SAFARI MODE SESSION STARTED")
         println("Capture wild monsters using your poker skills!")
-        
+
         var currentRound = 1
         val maxRounds = setup.maxRounds
         val activePlayers = players.toMutableList()
-        
+
         // Safari-specific state
         val capturedMonsters = mutableMapOf<Player, MutableList<Monster>>()
         val safariBalls = mutableMapOf<Player, Int>()
-        
+
         // Initialize safari balls for each player
         activePlayers.forEach { player ->
             safariBalls[player] = 30 // Starting safari balls
             capturedMonsters[player] = mutableListOf()
         }
-        
+
         while (currentRound <= maxRounds && activePlayers.any { (safariBalls[it] ?: 0) > 0 }) {
             println("\n🎯 SAFARI ROUND $currentRound")
-            
+
             // Generate wild monster encounter
             val wildMonster = generateWildMonster(currentRound)
-            val baseCapture = when (wildMonster.rarity) {
-                Monster.Rarity.COMMON -> 0.6
-                Monster.Rarity.UNCOMMON -> 0.4
-                Monster.Rarity.RARE -> 0.2
-                Monster.Rarity.LEGENDARY -> 0.05
-                else -> 0.5
-            }
+            val baseCapture =
+                when (wildMonster.rarity) {
+                    Monster.Rarity.COMMON -> 0.6
+                    Monster.Rarity.UNCOMMON -> 0.4
+                    Monster.Rarity.RARE -> 0.2
+                    Monster.Rarity.LEGENDARY -> 0.05
+                    else -> 0.5
+                }
             println("👀 Wild ${wildMonster.name} appeared! (Rarity: ${wildMonster.rarity})")
             println("📊 Capture rate: ${(baseCapture * 100).toInt()}%")
-            
+
             // Deal cards for capture attempt
             dealCardsToPlayers(activePlayers.filter { (safariBalls[it] ?: 0) > 0 }, deck, 5)
-            
+
             // Capture attempts
             for (player in activePlayers) {
                 if ((safariBalls[player] ?: 0) <= 0) continue
-                
+
                 println("\n🎣 ${player.name}'s capture attempt!")
-                
+
                 if (player.isHuman) {
                     displayPlayerHand(player, "Capture Hand")
                     println("Safari balls remaining: ${safariBalls[player]}")
@@ -643,33 +644,34 @@ object ConsoleMain {
                         continue
                     }
                 }
-                
+
                 // Use safari ball
                 safariBalls[player] = (safariBalls[player] ?: 0) - 1
-                
+
                 val handStrength = evaluateHandForCapture(player)
                 val captureBonus = calculateCaptureBonus(handStrength)
                 val finalCaptureRate = (baseCapture + captureBonus).coerceIn(0.0, 1.0)
-                
+
                 println("🎯 Hand strength: ${handStrength.description}")
                 println("📈 Capture bonus: +${(captureBonus * 100).toInt()}%")
                 println("🎪 Final capture rate: ${(finalCaptureRate * 100).toInt()}%")
-                
+
                 // Attempt capture
                 val captureSuccess = Math.random() < finalCaptureRate
-                
+
                 if (captureSuccess) {
                     println("🎉 Successfully captured ${wildMonster.name}!")
                     capturedMonsters[player]?.add(wildMonster)
-                    
+
                     // Capture rewards
-                    val captureReward = when (wildMonster.rarity) {
-                        Monster.Rarity.COMMON -> 50
-                        Monster.Rarity.UNCOMMON -> 100
-                        Monster.Rarity.RARE -> 250
-                        Monster.Rarity.LEGENDARY -> 500
-                        else -> 25
-                    }
+                    val captureReward =
+                        when (wildMonster.rarity) {
+                            Monster.Rarity.COMMON -> 50
+                            Monster.Rarity.UNCOMMON -> 100
+                            Monster.Rarity.RARE -> 250
+                            Monster.Rarity.LEGENDARY -> 500
+                            else -> 25
+                        }
                     player.chips += captureReward
                     println("💰 Capture reward: $captureReward chips (Total: ${player.chips})")
                     break // Monster captured, round ends
@@ -678,11 +680,11 @@ object ConsoleMain {
                     println("🏀 Safari balls remaining: ${safariBalls[player]}")
                 }
             }
-            
+
             currentRound++
             resetRound(activePlayers, deck)
         }
-        
+
         // Display safari results
         displaySafariResults(players, capturedMonsters, safariBalls)
     }
@@ -698,17 +700,17 @@ object ConsoleMain {
     ) {
         println("\n💀 IRONMAN MODE SESSION STARTED")
         println("High-risk, high-reward gameplay - lose all chips and face PERMADEATH!")
-        
+
         var currentRound = 1
         val maxRounds = setup.maxRounds
         val activePlayers = players.toMutableList()
-        
+
         // Ironman-specific state
         val gachaPoints = mutableMapOf<Player, Int>()
         val riskLevels = mutableMapOf<Player, Double>()
         val survivalStreak = mutableMapOf<Player, Int>()
         val rarePulls = mutableMapOf<Player, MutableList<String>>()
-        
+
         // Initialize ironman stats
         activePlayers.forEach { player ->
             gachaPoints[player] = 0
@@ -716,23 +718,23 @@ object ConsoleMain {
             survivalStreak[player] = 0
             rarePulls[player] = mutableListOf()
         }
-        
+
         while (currentRound <= maxRounds && activePlayers.size > 1) {
             println("\n⚡ IRONMAN ROUND $currentRound")
-            
+
             // Display risk levels
             activePlayers.forEach { player ->
                 val risk = riskLevels[player] ?: 1.0
                 val warningText = if (risk > 2.0) " ⚠️ HIGH RISK!" else ""
                 println("💀 ${player.name} risk level: ${String.format("%.1f", risk)}x$warningText")
             }
-            
+
             // Deal cards with risk multipliers
             dealCardsToPlayers(activePlayers, deck, 5)
-            
+
             // High-stakes betting round
             runIronmanBettingRound(activePlayers, riskLevels, gachaPoints)
-            
+
             // Convert winnings to gacha points
             activePlayers.forEach { player ->
                 if (!player.fold && player.chips > 0) {
@@ -741,7 +743,7 @@ object ConsoleMain {
                     println("🎰 ${player.name} earned $conversion gacha points")
                 }
             }
-            
+
             // Gacha pulls for those with enough points
             activePlayers.forEach { player ->
                 val points = gachaPoints[player] ?: 0
@@ -754,7 +756,7 @@ object ConsoleMain {
                     }
                 }
             }
-            
+
             // Check for permadeath conditions
             val eliminatedPlayers = mutableListOf<Player>()
             activePlayers.forEach { player ->
@@ -767,24 +769,24 @@ object ConsoleMain {
                     survivalStreak[player] = (survivalStreak[player] ?: 0) + 1
                     val streak = survivalStreak[player] ?: 0
                     if (streak > 0 && streak % 5 == 0) {
-                        println("🏆 ${player.name} survives round $currentRound (${streak} round streak!)")
+                        println("🏆 ${player.name} survives round $currentRound ($streak round streak!)")
                     }
                 }
             }
-            
+
             // Remove eliminated players
             eliminatedPlayers.forEach { player ->
                 activePlayers.remove(player)
                 player.setFold(true)
             }
-            
+
             // Update risk levels based on performance
             updateRiskLevels(activePlayers, riskLevels, currentRound)
-            
+
             currentRound++
             resetRound(activePlayers, deck)
         }
-        
+
         // Display ironman results
         displayIronmanResults(players, gachaPoints, survivalStreak, rarePulls)
     }
@@ -794,41 +796,87 @@ object ConsoleMain {
     // =================================================================
 
     private fun generateRandomMonster(round: Int): Monster {
-        val monsters = listOf(
-            Monster("Forest Dragon", Monster.Rarity.UNCOMMON, 80 + (round * 10), Monster.EffectType.CHIP_BONUS, 25, "A fierce dragon that lurks in ancient forests"),
-            Monster("Cave Beast", Monster.Rarity.COMMON, 60 + (round * 5), Monster.EffectType.DEFENSIVE_SHIELD, 15, "A sturdy creature that dwells in deep caves"),
-            Monster("Ancient Golem", Monster.Rarity.RARE, 120 + (round * 15), Monster.EffectType.BETTING_BOOST, 35, "An ancient stone guardian with immense power"),
-            Monster("Shadow Wolf", Monster.Rarity.UNCOMMON, 70 + (round * 8), Monster.EffectType.LUCK_ENHANCEMENT, 20, "A mystical wolf that moves through shadows"),
-            Monster("Crystal Spider", Monster.Rarity.RARE, 100 + (round * 12), Monster.EffectType.CARD_ADVANTAGE, 30, "A beautiful yet dangerous crystalline arachnid")
-        )
+        val monsters =
+            listOf(
+                Monster(
+                    "Forest Dragon",
+                    Monster.Rarity.UNCOMMON,
+                    80 + (round * 10),
+                    Monster.EffectType.CHIP_BONUS,
+                    25,
+                    "A fierce dragon that lurks in ancient forests",
+                ),
+                Monster(
+                    "Cave Beast",
+                    Monster.Rarity.COMMON,
+                    60 + (round * 5),
+                    Monster.EffectType.DEFENSIVE_SHIELD,
+                    15,
+                    "A sturdy creature that dwells in deep caves",
+                ),
+                Monster(
+                    "Ancient Golem",
+                    Monster.Rarity.RARE,
+                    120 + (round * 15),
+                    Monster.EffectType.BETTING_BOOST,
+                    35,
+                    "An ancient stone guardian with immense power",
+                ),
+                Monster(
+                    "Shadow Wolf",
+                    Monster.Rarity.UNCOMMON,
+                    70 + (round * 8),
+                    Monster.EffectType.LUCK_ENHANCEMENT,
+                    20,
+                    "A mystical wolf that moves through shadows",
+                ),
+                Monster(
+                    "Crystal Spider",
+                    Monster.Rarity.RARE,
+                    100 + (round * 12),
+                    Monster.EffectType.CARD_ADVANTAGE,
+                    30,
+                    "A beautiful yet dangerous crystalline arachnid",
+                ),
+            )
         return monsters.random()
     }
 
     private fun generateWildMonster(round: Int): Monster {
-        val rarity = when ((1..100).random()) {
-            in 1..60 -> Monster.Rarity.COMMON
-            in 61..85 -> Monster.Rarity.UNCOMMON
-            in 86..95 -> Monster.Rarity.RARE
-            else -> Monster.Rarity.LEGENDARY
-        }
-        
-        val captureRate = when (rarity) {
-            Monster.Rarity.COMMON -> 0.6
-            Monster.Rarity.UNCOMMON -> 0.4
-            Monster.Rarity.RARE -> 0.2
-            Monster.Rarity.LEGENDARY -> 0.05
-            else -> 0.5
-        }
-        
-        val names = mapOf(
-            Monster.Rarity.COMMON to listOf("Field Mouse", "Garden Snake", "House Cat"),
-            Monster.Rarity.UNCOMMON to listOf("Wild Boar", "Mountain Lion", "Eagle"),
-            Monster.Rarity.RARE to listOf("White Tiger", "Golden Eagle", "Crystal Fox"),
-            Monster.Rarity.LEGENDARY to listOf("Phoenix", "Dragon", "Unicorn")
-        )
-        
+        val rarity =
+            when ((1..100).random()) {
+                in 1..60 -> Monster.Rarity.COMMON
+                in 61..85 -> Monster.Rarity.UNCOMMON
+                in 86..95 -> Monster.Rarity.RARE
+                else -> Monster.Rarity.LEGENDARY
+            }
+
+        val captureRate =
+            when (rarity) {
+                Monster.Rarity.COMMON -> 0.6
+                Monster.Rarity.UNCOMMON -> 0.4
+                Monster.Rarity.RARE -> 0.2
+                Monster.Rarity.LEGENDARY -> 0.05
+                else -> 0.5
+            }
+
+        val names =
+            mapOf(
+                Monster.Rarity.COMMON to listOf("Field Mouse", "Garden Snake", "House Cat"),
+                Monster.Rarity.UNCOMMON to listOf("Wild Boar", "Mountain Lion", "Eagle"),
+                Monster.Rarity.RARE to listOf("White Tiger", "Golden Eagle", "Crystal Fox"),
+                Monster.Rarity.LEGENDARY to listOf("Phoenix", "Dragon", "Unicorn"),
+            )
+
         val name = names[rarity]?.random() ?: "Unknown"
-        return Monster(name, rarity, 50, Monster.EffectType.CHIP_BONUS, (captureRate * 100).toInt(), "A wild creature encountered in the safari")
+        return Monster(
+            name,
+            rarity,
+            50,
+            Monster.EffectType.CHIP_BONUS,
+            (captureRate * 100).toInt(),
+            "A wild creature encountered in the safari",
+        )
     }
 
     private fun evaluateHandForBattle(player: Player): HandEvaluator.HandResult {
@@ -861,16 +909,20 @@ object ConsoleMain {
         }
     }
 
-    private fun calculateMonsterDamage(monster: Monster, damageDealt: Int): Int {
+    private fun calculateMonsterDamage(
+        monster: Monster,
+        damageDealt: Int,
+    ): Int {
         // Monster counter-attack based on rarity and remaining health
-        val baseCounterDamage = when (monster.rarity) {
-            Monster.Rarity.LEGENDARY -> 30
-            Monster.Rarity.EPIC -> 25
-            Monster.Rarity.RARE -> 20
-            Monster.Rarity.UNCOMMON -> 15
-            Monster.Rarity.COMMON -> 10
-        }
-        
+        val baseCounterDamage =
+            when (monster.rarity) {
+                Monster.Rarity.LEGENDARY -> 30
+                Monster.Rarity.EPIC -> 25
+                Monster.Rarity.RARE -> 20
+                Monster.Rarity.UNCOMMON -> 15
+                Monster.Rarity.COMMON -> 10
+            }
+
         // Reduce counter-damage if monster was hurt badly
         return if (damageDealt >= monster.effectiveHealth) 0 else baseCounterDamage
     }
@@ -878,21 +930,21 @@ object ConsoleMain {
     private fun runIronmanBettingRound(
         players: List<Player>,
         riskLevels: MutableMap<Player, Double>,
-        gachaPoints: MutableMap<Player, Int>
+        gachaPoints: MutableMap<Player, Int>,
     ) {
         println("\n💰 High-Stakes Ironman Betting Round")
-        
+
         players.forEach { player ->
             if (player.fold) return@forEach
-            
+
             val risk = riskLevels[player] ?: 1.0
             val baseBet = 50
             val riskMultipliedBet = (baseBet * risk).toInt()
             val actualBet = minOf(riskMultipliedBet, player.chips)
-            
+
             player.chips -= actualBet
             println("💀 ${player.name} bets $actualBet chips (${risk}x risk multiplier)")
-            
+
             // Update risk based on betting behavior
             if (actualBet >= riskMultipliedBet) {
                 riskLevels[player] = (risk + 0.1).coerceAtMost(3.0)
@@ -903,30 +955,32 @@ object ConsoleMain {
     private fun performGachaPull(
         player: Player,
         gachaPoints: MutableMap<Player, Int>,
-        rarePulls: MutableMap<Player, MutableList<String>>
+        rarePulls: MutableMap<Player, MutableList<String>>,
     ) {
         val points = gachaPoints[player] ?: 0
         if (points < 100) return
-        
+
         gachaPoints[player] = points - 100
-        
-        val pullResult = when ((1..1000).random()) {
-            in 1..500 -> "Common Monster"
-            in 501..800 -> "Uncommon Monster" 
-            in 801..950 -> "Rare Monster"
-            in 951..990 -> "Epic Monster"
-            else -> "LEGENDARY MONSTER!"
-        }
-        
+
+        val pullResult =
+            when ((1..1000).random()) {
+                in 1..500 -> "Common Monster"
+                in 501..800 -> "Uncommon Monster"
+                in 801..950 -> "Rare Monster"
+                in 951..990 -> "Epic Monster"
+                else -> "LEGENDARY MONSTER!"
+            }
+
         println("🎰 GACHA RESULT: $pullResult")
-        
+
         if (pullResult.contains("Rare") || pullResult.contains("Epic") || pullResult.contains("LEGENDARY")) {
             rarePulls[player]?.add(pullResult)
-            val bonus = when {
-                pullResult.contains("LEGENDARY") -> 1000
-                pullResult.contains("Epic") -> 500
-                else -> 200
-            }
+            val bonus =
+                when {
+                    pullResult.contains("LEGENDARY") -> 1000
+                    pullResult.contains("Epic") -> 500
+                    else -> 200
+                }
             player.chips += bonus
             println("🎉 Bonus chips for rare pull: $bonus")
         }
@@ -935,12 +989,12 @@ object ConsoleMain {
     private fun updateQuestProgress(
         questProgress: MutableMap<String, Int>,
         round: Int,
-        monstersDefeated: Map<Player, Int>
+        monstersDefeated: Map<Player, Int>,
     ) {
         val totalDefeated = monstersDefeated.values.sum()
         questProgress["monsters_defeated"] = totalDefeated
         questProgress["rounds_completed"] = round
-        
+
         if (totalDefeated >= 5) {
             println("🎯 Quest milestone: 5 monsters defeated!")
         }
@@ -949,21 +1003,22 @@ object ConsoleMain {
     private fun updateRiskLevels(
         players: List<Player>,
         riskLevels: MutableMap<Player, Double>,
-        round: Int
+        round: Int,
     ) {
         players.forEach { player ->
             val currentRisk = riskLevels[player] ?: 1.0
-            
+
             // Increase risk over time
             val timeRisk = 1.0 + (round * 0.05)
-            
+
             // Adjust based on chip count
-            val chipRisk = when {
-                player.chips > 1000 -> 0.9 // Lower risk for wealthy players
-                player.chips < 200 -> 1.3  // Higher risk for poor players
-                else -> 1.0
-            }
-            
+            val chipRisk =
+                when {
+                    player.chips > 1000 -> 0.9 // Lower risk for wealthy players
+                    player.chips < 200 -> 1.3 // Higher risk for poor players
+                    else -> 1.0
+                }
+
             val newRisk = (currentRisk * timeRisk * chipRisk).coerceIn(1.0, 3.0)
             riskLevels[player] = newRisk
         }
@@ -972,22 +1027,22 @@ object ConsoleMain {
     private fun displayAdventureResults(
         players: List<Player>,
         monstersDefeated: Map<Player, Int>,
-        questProgress: Map<String, Int>
+        questProgress: Map<String, Int>,
     ) {
         println("\n⚔️ ADVENTURE MODE RESULTS")
         println("=".repeat(40))
-        
+
         players.forEach { player ->
             val defeated = monstersDefeated[player] ?: 0
             println("🗡️ ${player.name}: $defeated monsters defeated, ${player.chips} chips")
         }
-        
+
         val totalDefeated = questProgress["monsters_defeated"] ?: 0
         val roundsCompleted = questProgress["rounds_completed"] ?: 0
         println("\n🎯 Quest Summary:")
         println("   Total monsters defeated: $totalDefeated")
         println("   Rounds completed: $roundsCompleted")
-        
+
         if (totalDefeated >= 10) {
             println("🏆 QUEST MASTERY ACHIEVED!")
         }
@@ -996,16 +1051,16 @@ object ConsoleMain {
     private fun displaySafariResults(
         players: List<Player>,
         capturedMonsters: Map<Player, List<Monster>>,
-        safariBalls: Map<Player, Int>
+        safariBalls: Map<Player, Int>,
     ) {
         println("\n🏞️ SAFARI MODE RESULTS")
         println("=".repeat(40))
-        
+
         players.forEach { player ->
             val captured = capturedMonsters[player]?.size ?: 0
             val ballsLeft = safariBalls[player] ?: 0
             println("🎯 ${player.name}: $captured monsters captured, $ballsLeft balls remaining, ${player.chips} chips")
-            
+
             // Show captured monsters by rarity
             val monsters = capturedMonsters[player] ?: emptyList()
             val byRarity = monsters.groupBy { it.rarity }
@@ -1013,7 +1068,7 @@ object ConsoleMain {
                 println("   $rarity: ${mons.size} (${mons.joinToString(", ") { it.name }})")
             }
         }
-        
+
         val totalCaptured = capturedMonsters.values.sumOf { it.size }
         println("\n🎪 Safari Summary: $totalCaptured total monsters captured")
     }
@@ -1022,36 +1077,40 @@ object ConsoleMain {
         players: List<Player>,
         gachaPoints: Map<Player, Int>,
         survivalStreak: Map<Player, Int>,
-        rarePulls: Map<Player, List<String>>
+        rarePulls: Map<Player, List<String>>,
     ) {
         println("\n💀 IRONMAN MODE RESULTS")
         println("=".repeat(40))
-        
+
         players.forEach { player ->
             val points = gachaPoints[player] ?: 0
             val streak = survivalStreak[player] ?: 0
             val rares = rarePulls[player]?.size ?: 0
-            
+
             if (player.chips > 0) {
                 println("🏆 ${player.name}: SURVIVED with ${player.chips} chips")
                 println("   Survival streak: $streak rounds")
             } else {
                 println("💀 ${player.name}: ELIMINATED (Permadeath)")
             }
-            
+
             println("   Gacha points: $points")
             println("   Rare pulls: $rares")
-            
+
             rarePulls[player]?.forEach { pull ->
                 println("     ✨ $pull")
             }
         }
-        
+
         val survivors = players.count { it.chips > 0 }
         println("\n⚡ Ironman Summary: $survivors/${players.size} players survived")
     }
 
-    private fun dealCardsToPlayers(players: List<Player>, deck: MutableList<Int>, count: Int) {
+    private fun dealCardsToPlayers(
+        players: List<Player>,
+        deck: MutableList<Int>,
+        count: Int,
+    ) {
         players.forEach { player ->
             if (!player.fold) {
                 val hand = mutableListOf<Int>()
@@ -1065,21 +1124,27 @@ object ConsoleMain {
         }
     }
 
-    private fun displayPlayerHand(player: Player, title: String) {
+    private fun displayPlayerHand(
+        player: Player,
+        title: String,
+    ) {
         println("\n$title - ${player.name}:")
         println("  ${CardUtils.formatHandSymbols(player.hand)}")
         val result = HandEvaluator.evaluateHand(player.hand)
         println("  ${result.description} (Score: ${result.score})")
     }
 
-    private fun resetRound(players: List<Player>, deck: MutableList<Int>) {
+    private fun resetRound(
+        players: List<Player>,
+        deck: MutableList<Int>,
+    ) {
         // Reset fold status for next round
         players.forEach { player ->
             if (player.chips > 0) {
                 player.setFold(false)
             }
         }
-        
+
         // Shuffle deck if getting low
         if (deck.size < 20) {
             deck.addAll(CardUtils.createDeck().toList())

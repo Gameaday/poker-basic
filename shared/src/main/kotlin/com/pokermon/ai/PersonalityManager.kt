@@ -2,6 +2,7 @@ package com.pokermon.ai
 
 import com.pokermon.database.Monster
 import com.pokermon.database.MonsterDatabase
+import com.pokermon.database.MonsterStats
 import com.pokermon.players.Player
 import kotlin.random.Random
 
@@ -241,14 +242,30 @@ object PersonalityManager {
      * This ensures the AI system always has monsters to work with.
      */
     private fun createDefaultMonster(name: String): Monster {
+        val rarity = Monster.Rarity.values().random()
+        val baseHealth = 100 + random.nextInt(100)
+        val effectType = Monster.EffectType.values().random()
+        val effectPower = 50 + random.nextInt(50)
+
         return Monster(
             name = name,
-            rarity = Monster.Rarity.values().random(),
-            baseHealth = 100 + random.nextInt(100),
-            effectType = Monster.EffectType.values().random(),
-            effectPower = 50 + random.nextInt(50),
+            rarity = rarity,
+            baseHealth = baseHealth,
+            effectType = effectType,
+            effectPower = effectPower,
             description = "AI companion monster",
             personality = AIPersonality.values().random(),
+            stats =
+                MonsterStats(
+                    baseHp = baseHealth,
+                    baseAttack = 50 + random.nextInt(30),
+                    baseDefense = 50 + random.nextInt(30),
+                    baseSpeed = 50 + random.nextInt(30),
+                    baseSpecial = 50 + random.nextInt(30),
+                ),
+            abilities = emptyList(),
+            evolutionChain = null,
+            currentHp = baseHealth,
         )
     }
 

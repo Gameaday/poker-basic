@@ -5,7 +5,7 @@ package com.pokermon.database
  * This class handles monster inventory, active monster selection, and collection management.
  */
 class MonsterCollection(
-    private val maxActiveMonsters: Int = 1,
+    val maxActiveMonsters: Int = 1,
 ) {
     private val ownedMonsters: MutableList<Monster> = mutableListOf()
     private var activeMonster: Monster? = null

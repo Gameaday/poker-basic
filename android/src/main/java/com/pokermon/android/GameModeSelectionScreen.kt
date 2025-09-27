@@ -70,19 +70,15 @@ fun GameModeCard(
     gameMode: GameMode,
     onSelected: () -> Unit,
 ) {
-    val isImplemented = gameMode == GameMode.CLASSIC
+    // All game modes are now implemented with flow-based architecture
+    val isImplemented = true
 
     Card(
-        onClick = { if (isImplemented) onSelected() },
+        onClick = onSelected,
         modifier = Modifier.fillMaxWidth(),
         colors =
             CardDefaults.cardColors(
-                containerColor =
-                    if (isImplemented) {
-                        MaterialTheme.colorScheme.primaryContainer
-                    } else {
-                        MaterialTheme.colorScheme.surfaceVariant
-                    },
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
             ),
     ) {
         Column(
@@ -99,13 +95,16 @@ fun GameModeCard(
                     modifier = Modifier.weight(1f),
                 )
 
-                if (!isImplemented) {
-                    Text(
-                        text = "Coming Soon",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                }
+                // Add mode-specific icons
+                Text(
+                    text = when (gameMode) {
+                        GameMode.CLASSIC -> "🃏"
+                        GameMode.ADVENTURE -> "⚔️"
+                        GameMode.SAFARI -> "🏞️"
+                        GameMode.IRONMAN -> "🎰"
+                    },
+                    style = MaterialTheme.typography.titleMedium,
+                )
             }
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -116,14 +115,12 @@ fun GameModeCard(
                 textAlign = TextAlign.Start,
             )
 
-            if (isImplemented) {
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = "✓ Available Now",
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.primary,
-                )
-            }
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "✓ Available Now",
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.primary,
+            )
         }
     }
 }

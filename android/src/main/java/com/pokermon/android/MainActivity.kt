@@ -24,6 +24,15 @@ import com.pokermon.android.ui.theme.PokerTableTheme
 import kotlinx.coroutines.launch
 
 /**
+ * Temporary storage for saved game data during navigation.
+ * This is a simple solution for passing complex objects through navigation.
+ */
+object GameplayNavigation {
+    @Volatile
+    var savedGameToLoad: com.pokermon.android.data.SavedGame? = null
+}
+
+/**
  * Main Android activity for the Pokermon Game.
  * Enhanced with Kotlin-native features: coroutines, flow, and modern state management.
  *
@@ -115,6 +124,12 @@ sealed class NavigationRoute(val route: String) {
     object About : NavigationRoute("about")
 
     object MonsterEncyclopedia : NavigationRoute("monster_encyclopedia")
+    
+    object Statistics : NavigationRoute("statistics")
+    
+    object SavedGames : NavigationRoute("saved_games")
+    
+    object Tutorial : NavigationRoute("tutorial")
 
     data class Gameplay(val gameMode: GameMode) : NavigationRoute("gameplay/${gameMode.name}")
 
@@ -154,7 +169,10 @@ fun PokerGameNavigation(userProfileManager: UserProfileManager) {
 
             GameplayScreen(
                 gameMode = gameMode,
+                savedGame = GameplayNavigation.savedGameToLoad,
                 onBackPressed = {
+                    // Clear the saved game data when exiting
+                    GameplayNavigation.savedGameToLoad = null
                     navController.popBackStack("main_menu", false)
                 },
             )
@@ -180,6 +198,38 @@ fun PokerGameNavigation(userProfileManager: UserProfileManager) {
                 },
             )
         }
+        composable(NavigationRoute.Statistics.route) {
+            StatisticsScreen(
+                onBackPressed = {
+                    navController.popBackStack()
+                },
+            )
+        }
+        composable(NavigationRoute.SavedGames.route) {
+            SavedGamesScreen(
+                onBackPressed = {
+                    navController.popBackStack()
+                },
+                onLoadGame = { savedGame ->
+                    // Store the saved game data for gameplay restoration
+                    GameplayNavigation.savedGameToLoad = savedGame
+                    // Navigate to gameplay with the saved game
+                    try {
+                        val gameMode = GameMode.valueOf(savedGame.gameMode)
+                        navController.navigate(NavigationRoute.fromGameMode(gameMode).route)
+                    } catch (e: Exception) {
+                        navController.navigate(NavigationRoute.fromGameMode(GameMode.CLASSIC).route)
+                    }
+                }
+            )
+        }
+        composable(NavigationRoute.Tutorial.route) {
+            TutorialScreen(
+                onBackPressed = {
+                    navController.popBackStack()
+                },
+            )
+        }
     }
 }
 
@@ -187,7 +237,12 @@ fun PokerGameNavigation(userProfileManager: UserProfileManager) {
 fun MainMenuScreen(navController: NavHostController) {
     val context = LocalContext.current
     val userProfileManager = remember { UserProfileManager.getInstance(context) }
+    val gameSaveManager = remember { com.pokermon.android.data.GameSaveManager.getInstance(context) }
     val userProfile by userProfileManager.userProfile.collectAsState()
+    val savedGames by gameSaveManager.savedGames.collectAsState()
+    
+    val hasAutoSave = gameSaveManager.hasAutoSave()
+    val hasSavedGames = savedGames.isNotEmpty() || hasAutoSave
 
     Column(
         modifier =
@@ -251,6 +306,43 @@ fun MainMenuScreen(navController: NavHostController) {
 
         Spacer(modifier = Modifier.height(24.dp))
 
+        // Continue Game button (if saved games available)
+        if (hasSavedGames) {
+            Button(
+                onClick = {
+                    // Try to load the most recent game (auto-save first, then manual saves)
+                    val autoSave = gameSaveManager.loadAutoSavedGame()
+                    val mostRecentSave = autoSave ?: savedGames.firstOrNull()
+                    
+                    mostRecentSave?.let { save ->
+                        GameplayNavigation.savedGameToLoad = save
+                        try {
+                            val gameMode = GameMode.valueOf(save.gameMode)
+                            navController.navigate(NavigationRoute.fromGameMode(gameMode).route)
+                        } catch (e: Exception) {
+                            navController.navigate(NavigationRoute.fromGameMode(GameMode.CLASSIC).route)
+                        }
+                    } ?: run {
+                        // Fallback to saved games screen if no direct save found
+                        navController.navigate(NavigationRoute.SavedGames.route)
+                    }
+                },
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.tertiary
+                )
+            ) {
+                val autoSave = gameSaveManager.loadAutoSavedGame()
+                val buttonText = if (autoSave != null) {
+                    "▶️ Continue Game (Auto-Save)"
+                } else {
+                    "▶️ Continue Game"
+                }
+                Text(buttonText)
+            }
+            Spacer(modifier = Modifier.height(12.dp))
+        }
+
         Button(
             onClick = {
                 navController.navigate("game_mode_selection")
@@ -261,6 +353,38 @@ fun MainMenuScreen(navController: NavHostController) {
         }
 
         Spacer(modifier = Modifier.height(16.dp))
+
+        // Two-column layout for secondary buttons
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Button(
+                onClick = {
+                    navController.navigate(NavigationRoute.Statistics.route)
+                },
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.secondary
+                )
+            ) {
+                Text("📊 Stats")
+            }
+
+            Button(
+                onClick = {
+                    navController.navigate(NavigationRoute.Tutorial.route)
+                },
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.secondary
+                )
+            ) {
+                Text("📚 Tutorial")
+            }
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
 
         Button(
             onClick = {

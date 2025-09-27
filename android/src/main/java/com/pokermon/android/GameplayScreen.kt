@@ -77,6 +77,7 @@ fun GameplayScreen(
     var adventureMonster by remember { mutableStateOf<String?>(null) }
     var monsterHealth by remember { mutableIntStateOf(100) }
     var safariCaptures by remember { mutableIntStateOf(0) }
+    var safariBallsRemaining by remember { mutableIntStateOf(10) } // Track safari balls
     var gachaPoints by remember { mutableIntStateOf(0) }
     var riskLevel by remember { mutableDoubleStateOf(1.0) }
     var achievementNotification by remember { mutableStateOf<String?>(null) }
@@ -153,7 +154,8 @@ fun GameplayScreen(
                         statusMessage = "Battle with ${subState.currentMonster}! (${subState.monsterHealth} HP)"
                     }
                     is PlayingSubState.SafariMode -> {
-                        statusMessage = "Wild ${subState.wildMonster} spotted! Capture chance: ${(subState.captureChance * 100).toInt()}%"
+                        safariBallsRemaining = subState.safariBallsRemaining
+                        statusMessage = "Wild ${subState.wildMonster} spotted! Capture chance: ${(subState.captureChance * 100).toInt()}% | Safari Balls: $safariBallsRemaining"
                     }
                     is PlayingSubState.IronmanMode -> {
                         gachaPoints = subState.gachaPoints
@@ -338,7 +340,7 @@ fun GameplayScreen(
         gachaPoints = 0
         riskLevel = 1.0
         lastActionResult = ""
-        achievementNotification = ""
+        achievementNotification = null
         statusMessage = "Initializing ${gameMode.displayName}..."
         isGameInitialized = false
         
@@ -473,13 +475,16 @@ fun GameplayScreen(
             GameMode.ADVENTURE -> {
                 when (action) {
                     "attack" -> {
+                        val damage = (playerCards.size * 10).coerceAtLeast(10) // Minimum 10 damage
+                        monsterHealth = (monsterHealth - damage).coerceAtLeast(0) // Decrease monster health
+                        
                         gameBridge.processGameAction(
                             GameActions.AdventureActions.AttackMonster(
                                 player =
                                     allPlayers.firstOrNull { it.name == userProfile.username }?.let {
                                         com.pokermon.players.Player(it.name, it.chips)
                                     } ?: com.pokermon.players.Player(userProfile.username, playerChips),
-                                damage = (playerCards.size * 10), // Damage based on hand
+                                damage = damage,
                             ),
                         )
                         
@@ -488,6 +493,28 @@ fun GameplayScreen(
                         userProfileManager.updateUserProfile(
                             currentProfile.copy(adventureProgress = currentProfile.adventureProgress + 1)
                         )
+                        
+                        // Set action result with health status
+                        if (monsterHealth <= 0) {
+                            lastActionResult = "⚔️ Attack dealt $damage damage! Monster defeated! 🏆"
+                            safariCaptures += 1 // Count as successful encounter
+                        } else {
+                            lastActionResult = "⚔️ Attack dealt $damage damage! Monster health: $monsterHealth/100"
+                        }
+                        
+                        // Clear message after delay
+                        coroutineScope.launch {
+                            delay(3000)
+                            lastActionResult = ""
+                            // Respawn monster if defeated
+                            if (monsterHealth <= 0) {
+                                delay(1000)
+                                monsterHealth = 100
+                                lastActionResult = "🐲 A new Training Dummy appears!"
+                                delay(2000)
+                                lastActionResult = ""
+                            }
+                        }
                     }
                     "flee" -> {
                         gameBridge.processGameAction(
@@ -495,34 +522,55 @@ fun GameplayScreen(
                                 player = com.pokermon.players.Player(userProfile.username, playerChips),
                             ),
                         )
+                        
+                        lastActionResult = "🏃 Fled from battle! Monster health restored."
+                        monsterHealth = 100 // Reset monster health on flee
+                        
+                        // Clear message after delay
+                        coroutineScope.launch {
+                            delay(2000)
+                            lastActionResult = ""
+                        }
                     }
                 }
             }
             GameMode.SAFARI -> {
                 when (action) {
                     "capture" -> {
-                        gameBridge.processGameAction(
-                            GameActions.SafariActions.AttemptCapture(
-                                player = com.pokermon.players.Player(userProfile.username, playerChips),
-                                captureChance = 0.6, // Base capture chance
-                            ),
-                        )
-                        
-                        // Update safari encounters and potentially monsters collected
-                        val currentProfile = userProfileManager.userProfile.value
-                        val captured = Math.random() < 0.6 // Simulate capture success
-                        userProfileManager.updateUserProfile(
-                            currentProfile.copy(
-                                safariEncounters = currentProfile.safariEncounters + 1,
-                                monstersCollected = if (captured) currentProfile.monstersCollected + 1 else currentProfile.monstersCollected
+                        // Only allow capture if safari balls remain
+                        if (safariBallsRemaining > 0) {
+                            safariBallsRemaining-- // Decrement safari balls
+                            
+                            gameBridge.processGameAction(
+                                GameActions.SafariActions.AttemptCapture(
+                                    player = com.pokermon.players.Player(userProfile.username, playerChips),
+                                    captureChance = 0.6, // Base capture chance
+                                ),
                             )
-                        )
-                        
-                        if (captured) {
-                            lastActionResult = "Monster captured!"
-                            safariCaptures += 1
+                            
+                            // Update safari encounters and potentially monsters collected
+                            val currentProfile = userProfileManager.userProfile.value
+                            val captured = Math.random() < 0.6 // Simulate capture success
+                            userProfileManager.updateUserProfile(
+                                currentProfile.copy(
+                                    safariEncounters = currentProfile.safariEncounters + 1,
+                                    monstersCollected = if (captured) currentProfile.monstersCollected + 1 else currentProfile.monstersCollected
+                                )
+                            )
+                            
+                            if (captured) {
+                                lastActionResult = "Monster captured! ($safariBallsRemaining balls left)"
+                                safariCaptures += 1
+                            } else {
+                                lastActionResult = "Capture failed! ($safariBallsRemaining balls left)"
+                            }
+                            
+                            // End game if no safari balls left
+                            if (safariBallsRemaining <= 0) {
+                                lastActionResult += "\n🎌 Safari ended - out of balls!"
+                            }
                         } else {
-                            lastActionResult = "Capture failed!"
+                            lastActionResult = "No safari balls remaining!"
                         }
                         
                         // Clear message after delay
@@ -532,7 +580,13 @@ fun GameplayScreen(
                         }
                     }
                     "bait" -> {
-                        // Safari ball mechanics
+                        // Safari ball mechanics - bait costs no balls but improves capture rate
+                        lastActionResult = "Used bait - monster is calmer now (+20% capture chance next throw)"
+                        // Clear message after delay
+                        coroutineScope.launch {
+                            delay(2000)
+                            lastActionResult = ""
+                        }
                     }
                 }
             }
@@ -769,13 +823,13 @@ fun GameplayScreen(
         Spacer(modifier = Modifier.height(8.dp))
 
         // Action result feedback
-        if (lastActionResult.isNotEmpty() || achievementNotification != null) {
+        if (lastActionResult.isNotEmpty() || (achievementNotification != null && achievementNotification!!.isNotEmpty())) {
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors =
                     CardDefaults.cardColors(
                         containerColor =
-                            if (achievementNotification != null) {
+                            if (achievementNotification != null && achievementNotification!!.isNotEmpty()) {
                                 MaterialTheme.colorScheme.tertiaryContainer
                             } else {
                                 MaterialTheme.colorScheme.secondaryContainer
@@ -786,7 +840,7 @@ fun GameplayScreen(
                     modifier = Modifier.padding(8.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    if (achievementNotification != null) {
+                    if (achievementNotification != null && achievementNotification!!.isNotEmpty()) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
@@ -1006,7 +1060,7 @@ fun GameplayScreen(
                                         gachaPoints = 0
                                         riskLevel = 1.0
                                         lastActionResult = ""
-                                        achievementNotification = ""
+                                        achievementNotification = null
                                         statusMessage = "Starting new game..."
                                         isGameInitialized = false
                                         

@@ -58,16 +58,22 @@ enum class PokerTableTheme(
 
 private val DarkColorScheme =
     darkColorScheme(
-        primary = Color(0xFF1976D2),
-        secondary = Color(0xFF388E3C),
-        tertiary = Color(0xFFFF9800),
+        primary = Color(0xFF2196F3),     // Blue - good contrast
+        secondary = Color(0xFF424242),   // Dark gray - better readability
+        tertiary = Color(0xFFFF9800),    // Orange
+        onSecondary = Color.White,       // Ensure white text on secondary
+        onPrimary = Color.White,         // Ensure white text on primary
+        onTertiary = Color.Black,        // Ensure black text on tertiary
     )
 
 private val LightColorScheme =
     lightColorScheme(
-        primary = Color(0xFF2196F3),
-        secondary = Color(0xFF4CAF50),
-        tertiary = Color(0xFFFFC107),
+        primary = Color(0xFF1976D2),     // Darker blue - better contrast
+        secondary = Color(0xFF6C757D),   // Gray - much better readability
+        tertiary = Color(0xFFF57C00),    // Darker orange - better contrast
+        onSecondary = Color.White,       // Ensure white text on secondary
+        onPrimary = Color.White,         // Ensure white text on primary
+        onTertiary = Color.White,        // Ensure white text on tertiary
     )
 
 // Poker table themed color schemes
@@ -81,6 +87,11 @@ private fun createPokerTableColorScheme(
         tertiary = theme.tableColor,
         surface = theme.tableColor.copy(alpha = 0.8f),
         background = theme.tableColor.copy(alpha = 0.9f),
+        // Ensure text is readable on themed colors
+        onPrimary = Color.White,
+        onSecondary = Color.White,
+        onTertiary = Color.White,
+        onSurface = Color.White,
     )
 } else {
     lightColorScheme(
@@ -89,6 +100,11 @@ private fun createPokerTableColorScheme(
         tertiary = theme.tableColor,
         surface = theme.tableColor.copy(alpha = 0.1f),
         background = Color.White,
+        // Ensure text is readable on themed colors
+        onPrimary = Color.White,
+        onSecondary = Color.White,
+        onTertiary = Color.White,
+        onSurface = Color.Black,
     )
 }
 

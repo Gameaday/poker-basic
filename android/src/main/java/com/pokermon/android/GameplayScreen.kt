@@ -38,6 +38,7 @@ private const val BET_INCREMENT = 10
 @Composable
 fun GameplayScreen(
     gameMode: GameMode,
+    savedGame: com.pokermon.android.data.SavedGame? = null,
     onBackPressed: () -> Unit,
 ) {
     val context = LocalContext.current
@@ -47,7 +48,6 @@ fun GameplayScreen(
 
     val gameBridge = remember { GameLogicBridge() }
     val monsterOpponentManager = remember { MonsterOpponentManager() }
-    val gameSaveManager = remember { com.pokermon.android.data.GameSaveManager.getInstance(context) }
     val coroutineScope = rememberCoroutineScope()
 
     // ================================================================
@@ -83,6 +83,39 @@ fun GameplayScreen(
 
     // Back button protection
     var showExitConfirmDialog by remember { mutableStateOf(false) }
+
+    // ================================================================
+    // SAVED GAME RESTORATION
+    // ================================================================
+
+    // Restore game state from saved game if provided
+    LaunchedEffect(savedGame) {
+        savedGame?.let { save ->
+            try {
+                // Restore basic game state
+                currentRound = save.currentRound
+                playerChips = save.playerChips
+                currentPot = save.totalPot
+                playerCards = save.playerCards
+                
+                // Restore mode-specific data
+                adventureMonster = save.modeSpecificData["adventureMonster"]?.takeIf { it.isNotEmpty() }
+                monsterHealth = save.modeSpecificData["monsterHealth"]?.toIntOrNull() ?: 100
+                safariCaptures = save.modeSpecificData["safariCaptures"]?.toIntOrNull() ?: 0
+                gachaPoints = save.modeSpecificData["gachaPoints"]?.toIntOrNull() ?: 0
+                riskLevel = save.modeSpecificData["riskLevel"]?.toDoubleOrNull() ?: 1.0
+                
+                statusMessage = "Game restored from ${save.formattedSaveTime}"
+                isGameInitialized = true
+                
+                // Clear the status message after a delay
+                delay(3000)
+                statusMessage = "Game in progress - ${save.gamePhase}"
+            } catch (e: Exception) {
+                statusMessage = "Failed to restore saved game: ${e.message}"
+            }
+        }
+    }
 
     // ================================================================
     // REACTIVE STATE PROCESSING
@@ -179,42 +212,6 @@ fun GameplayScreen(
                 statusMessage = "Game state: ${gameState::class.simpleName}"
             }
         }
-        
-        // Auto-save game state when appropriate
-        if (isGameInitialized && gameSettings.autoSaveEnabled) {
-            coroutineScope.launch {
-                try {
-                    val savedGame = com.pokermon.android.data.SavedGame(
-                        slotName = "Auto-Save",
-                        gameMode = gameMode.name,
-                        playerName = userProfile.username,
-                        currentRound = currentRound,
-                        playerChips = playerChips,
-                        totalPot = currentPot,
-                        playerCards = playerCards,
-                        gamePhase = when (val state = gameState) {
-                            is GameState.Playing -> state.currentPhase.name
-                            else -> "UNKNOWN"
-                        },
-                        isAutoSave = true,
-                        gameProgress = when (val state = gameState) {
-                            is GameState.Playing -> (currentRound.toFloat() / 10f).coerceIn(0f, 1f)
-                            else -> 0f
-                        },
-                        modeSpecificData = mapOf(
-                            "adventureMonster" to (adventureMonster ?: ""),
-                            "monsterHealth" to monsterHealth.toString(),
-                            "safariCaptures" to safariCaptures.toString(),
-                            "gachaPoints" to gachaPoints.toString(),
-                            "riskLevel" to riskLevel.toString()
-                        )
-                    )
-                    gameSaveManager.autoSaveGame(savedGame)
-                } catch (e: Exception) {
-                    // Auto-save failure shouldn't disrupt gameplay
-                }
-            }
-        }
     }
 
     // ================================================================
@@ -223,6 +220,10 @@ fun GameplayScreen(
 
     // Initialize game when screen loads with full state management
     LaunchedEffect(gameMode) {
+        // Skip initialization if loading from saved game
+        if (savedGame != null) {
+            return@LaunchedEffect
+        }
         try {
             // Generate monster opponents based on player's experience level
             val skillLevel = (userProfile.gamesWon / 10).coerceAtMost(4) // 0-4 skill level

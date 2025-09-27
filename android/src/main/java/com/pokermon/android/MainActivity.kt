@@ -24,6 +24,15 @@ import com.pokermon.android.ui.theme.PokerTableTheme
 import kotlinx.coroutines.launch
 
 /**
+ * Temporary storage for saved game data during navigation.
+ * This is a simple solution for passing complex objects through navigation.
+ */
+object GameplayNavigation {
+    @Volatile
+    var savedGameToLoad: com.pokermon.android.data.SavedGame? = null
+}
+
+/**
  * Main Android activity for the Pokermon Game.
  * Enhanced with Kotlin-native features: coroutines, flow, and modern state management.
  *
@@ -160,7 +169,10 @@ fun PokerGameNavigation(userProfileManager: UserProfileManager) {
 
             GameplayScreen(
                 gameMode = gameMode,
+                savedGame = GameplayNavigation.savedGameToLoad,
                 onBackPressed = {
+                    // Clear the saved game data when exiting
+                    GameplayNavigation.savedGameToLoad = null
                     navController.popBackStack("main_menu", false)
                 },
             )
@@ -199,6 +211,8 @@ fun PokerGameNavigation(userProfileManager: UserProfileManager) {
                     navController.popBackStack()
                 },
                 onLoadGame = { savedGame ->
+                    // Store the saved game data for gameplay restoration
+                    GameplayNavigation.savedGameToLoad = savedGame
                     // Navigate to gameplay with the saved game
                     try {
                         val gameMode = GameMode.valueOf(savedGame.gameMode)
@@ -296,14 +310,35 @@ fun MainMenuScreen(navController: NavHostController) {
         if (hasSavedGames) {
             Button(
                 onClick = {
-                    navController.navigate(NavigationRoute.SavedGames.route)
+                    // Try to load the most recent game (auto-save first, then manual saves)
+                    val autoSave = gameSaveManager.loadAutoSavedGame()
+                    val mostRecentSave = autoSave ?: savedGames.firstOrNull()
+                    
+                    mostRecentSave?.let { save ->
+                        GameplayNavigation.savedGameToLoad = save
+                        try {
+                            val gameMode = GameMode.valueOf(save.gameMode)
+                            navController.navigate(NavigationRoute.fromGameMode(gameMode).route)
+                        } catch (e: Exception) {
+                            navController.navigate(NavigationRoute.fromGameMode(GameMode.CLASSIC).route)
+                        }
+                    } ?: run {
+                        // Fallback to saved games screen if no direct save found
+                        navController.navigate(NavigationRoute.SavedGames.route)
+                    }
                 },
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.tertiary
                 )
             ) {
-                Text("▶️ Continue Game")
+                val autoSave = gameSaveManager.loadAutoSavedGame()
+                val buttonText = if (autoSave != null) {
+                    "▶️ Continue Game (Auto-Save)"
+                } else {
+                    "▶️ Continue Game"
+                }
+                Text(buttonText)
             }
             Spacer(modifier = Modifier.height(12.dp))
         }

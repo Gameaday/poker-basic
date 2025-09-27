@@ -266,11 +266,6 @@ fun MainMenuScreen(navController: NavHostController) {
 
         Spacer(modifier = Modifier.height(4.dp))
 
-        Text(
-            text = "Mobile Edition v1.0.0",
-            style = MaterialTheme.typography.bodyLarge,
-        )
-
         Spacer(modifier = Modifier.height(16.dp))
 
         // Welcome back message with user stats
@@ -418,12 +413,6 @@ fun MainMenuScreen(navController: NavHostController) {
         }
 
         Spacer(modifier = Modifier.height(24.dp))
-
-        Text(
-            text = "Android edition of Pokermon - where poker meets monster collecting! Battle through Adventure mode, discover creatures in Safari mode, and test your luck in Ironman gacha mode.",
-            style = MaterialTheme.typography.bodyMedium,
-            textAlign = TextAlign.Center,
-        )
     }
 }
 

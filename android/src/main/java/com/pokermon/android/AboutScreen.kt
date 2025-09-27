@@ -70,10 +70,11 @@ fun aboutScreen(onBackPressed: () -> Unit) {
         ) {
             Text(
                 text =
+                    "Android edition of Pokermon - where poker meets monster collecting! " +
                     "A cross-platform educational poker game demonstrating modern " +
-                        "software development practices with shared business logic across " +
-                        "desktop and mobile platforms. Short for \"Poker Monster\" after " +
-                        "the game features.",
+                    "software development practices with shared business logic across " +
+                    "desktop and mobile platforms. Battle through Adventure mode, discover creatures in Safari mode, " +
+                    "and test your luck in Ironman gacha mode.",
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(16.dp),

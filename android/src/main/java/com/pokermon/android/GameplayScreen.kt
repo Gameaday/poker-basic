@@ -163,6 +163,19 @@ fun GameplayScreen(
                     is PlayingSubState.CardExchangePhase -> {
                         statusMessage = "Exchange up to ${subState.maxExchanges} cards (${subState.exchangesRemaining} remaining)"
                         awaitingPlayerAction = !subState.exchangeComplete
+                        
+                        // Auto-progress if exchange is complete
+                        if (subState.exchangeComplete) {
+                            coroutineScope.launch {
+                                delay(2000) // Show results for 2 seconds
+                                try {
+                                    gameBridge.processGameAction(GameActions.ContinueGame)
+                                } catch (e: Exception) {
+                                    // Fallback to advancing the game state
+                                    gameBridge.processGameAction(GameActions.DealCards)
+                                }
+                            }
+                        }
                     }
                     is PlayingSubState.WaitingForPlayerAction -> {
                         statusMessage = "Your turn - ${subState.validActions.joinToString(", ")}"
@@ -171,6 +184,17 @@ fun GameplayScreen(
                     is PlayingSubState.ShowingResults -> {
                         statusMessage = "Round results - check winnings!"
                         awaitingPlayerAction = false
+                        
+                        // Auto-progress after showing results
+                        coroutineScope.launch {
+                            delay(3000) // Show results for 3 seconds
+                            try {
+                                gameBridge.processGameAction(GameActions.ContinueGame)
+                            } catch (e: Exception) {
+                                // Continue to next round or restart
+                                gameBridge.processGameAction(GameActions.NextRound)
+                            }
+                        }
                     }
                     else -> {
                         awaitingPlayerAction = state.currentPhase == GamePhase.BETTING_ROUND ||
@@ -181,13 +205,37 @@ fun GameplayScreen(
                 // Update player data from traditional bridge for compatibility
                 if (isGameInitialized) {
                     try {
-                        playerChips = gameBridge.getPlayerChips()
-                        playerCards = gameBridge.getPlayerHand()
-                        allPlayers = gameBridge.getAllPlayers()
-                        selectedCards = gameBridge.getSelectedCards()
+                        // Synchronize UI state with GameBridge state
+                        val bridgeChips = gameBridge.getPlayerChips()
+                        val bridgeHand = gameBridge.getPlayerHand()
+                        val bridgePlayers = gameBridge.getAllPlayers()
+                        val bridgeSelected = gameBridge.getSelectedCards()
+                        
+                        // Only update if values have actually changed to prevent unnecessary recomposition
+                        if (bridgeChips != playerChips) playerChips = bridgeChips
+                        if (bridgeHand != playerCards) playerCards = bridgeHand
+                        if (bridgePlayers != allPlayers) allPlayers = bridgePlayers
+                        if (bridgeSelected != selectedCards) selectedCards = bridgeSelected
+                        
+                        // Update current pot from game state
+                        if (state.currentPhase == GamePhase.BETTING_ROUND || 
+                            state.currentPhase == GamePhase.FINAL_BETTING) {
+                            val pot = gameBridge.getCurrentPot()
+                            if (pot != currentPot) currentPot = pot
+                        }
+                        
                     } catch (e: Exception) {
                         // Handle gracefully if bridge methods aren't available
-                        statusMessage = "Updating game data..."
+                        if (statusMessage.isEmpty()) {
+                            statusMessage = "Syncing game data..."
+                            // Clear sync message quickly
+                            coroutineScope.launch {
+                                delay(1000)
+                                if (statusMessage == "Syncing game data...") {
+                                    statusMessage = ""
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -277,6 +325,23 @@ fun GameplayScreen(
         if (savedGame != null) {
             return@LaunchedEffect
         }
+        
+        // Reset all state variables to ensure clean start
+        currentRound = 1
+        playerChips = 1000
+        currentPot = 0
+        playerCards = emptyList()
+        selectedCards = emptySet()
+        adventureMonster = null
+        monsterHealth = 100
+        safariCaptures = 0
+        gachaPoints = 0
+        riskLevel = 1.0
+        lastActionResult = ""
+        achievementNotification = ""
+        statusMessage = "Initializing ${gameMode.displayName}..."
+        isGameInitialized = false
+        
         try {
             // Generate monster opponents based on player's experience level
             val skillLevel = (userProfile.gamesWon / 10).coerceAtMost(4) // 0-4 skill level
@@ -344,8 +409,21 @@ fun GameplayScreen(
                     }
                 }
             }
+            
+            // Mark initialization as complete
+            delay(500) // Brief delay to ensure state is set
+            isGameInitialized = true
+            statusMessage = "${gameMode.displayName} game ready!"
+            
+            // Clear initialization message
+            delay(2000)
+            statusMessage = ""
+            
         } catch (e: Exception) {
             statusMessage = "Failed to initialize game: ${e.message}"
+            // Clear error message after delay
+            delay(5000)
+            statusMessage = ""
         }
     }
 
@@ -357,27 +435,36 @@ fun GameplayScreen(
         actionType: String,
         amount: Int = 0,
     ) {
-        try {
-            // Use state management system for actions
-            gameBridge.performPlayerActionWithState(actionType, amount)
+        // Cancel any pending feedback clear operations
+        coroutineScope.launch {
+            try {
+                // Use state management system for actions
+                gameBridge.performPlayerActionWithState(actionType, amount)
 
-            // Update UI feedback
-            lastActionResult =
-                when (actionType.lowercase()) {
-                    "call" -> "Called!"
-                    "raise" -> "Raised $amount!"
-                    "fold" -> "Folded"
-                    "check" -> "Checked"
-                    else -> "Action performed"
-                }
+                // Update UI feedback with timestamp to prevent conflicts
+                val timestamp = System.currentTimeMillis()
+                lastActionResult =
+                    when (actionType.lowercase()) {
+                        "call" -> "Called!"
+                        "raise" -> "Raised $amount!"
+                        "fold" -> "Folded"
+                        "check" -> "Checked"
+                        else -> "Action performed"
+                    }
 
-            // Clear feedback after delay
-            coroutineScope.launch {
+                // Clear feedback after delay, but only if it's still the same message
                 delay(2000)
-                lastActionResult = ""
+                if (lastActionResult.contains(actionType.lowercase().capitalize()) || 
+                    lastActionResult.contains(amount.toString())) {
+                    lastActionResult = ""
+                }
+            } catch (e: Exception) {
+                lastActionResult = "Action failed: ${e.message}"
+                delay(3000)
+                if (lastActionResult.startsWith("Action failed")) {
+                    lastActionResult = ""
+                }
             }
-        } catch (e: Exception) {
-            lastActionResult = "Action failed: ${e.message}"
         }
     }
 
@@ -905,7 +992,38 @@ fun GameplayScreen(
                         ) {
                             Button(
                                 onClick = {
-                                    gameBridge.processGameAction(GameActions.RestartGame(sameSettings = true))
+                                    // Reset all game state before restarting
+                                    coroutineScope.launch {
+                                        // Clear current state
+                                        currentRound = 1
+                                        playerChips = 1000
+                                        currentPot = 0
+                                        playerCards = emptyList()
+                                        selectedCards = emptySet()
+                                        adventureMonster = null
+                                        monsterHealth = 100
+                                        safariCaptures = 0
+                                        gachaPoints = 0
+                                        riskLevel = 1.0
+                                        lastActionResult = ""
+                                        achievementNotification = ""
+                                        statusMessage = "Starting new game..."
+                                        isGameInitialized = false
+                                        
+                                        delay(1000) // Give time for UI to update
+                                        
+                                        // Process restart action
+                                        gameBridge.processGameAction(GameActions.RestartGame(sameSettings = true))
+                                        
+                                        // Reinitialize game state
+                                        delay(500)
+                                        isGameInitialized = true
+                                        statusMessage = "New ${gameMode.displayName} game started!"
+                                        
+                                        // Clear message after delay
+                                        delay(3000)
+                                        statusMessage = ""
+                                    }
                                 },
                                 modifier = Modifier.weight(1f).padding(end = 4.dp),
                                 colors =

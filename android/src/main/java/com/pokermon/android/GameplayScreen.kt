@@ -180,7 +180,7 @@ fun GameplayScreen(
                         }
                     }
                     is PlayingSubState.WaitingForPlayerAction -> {
-                        statusMessage = "Your turn - ${subState.validActions.joinToString(", ")}"
+                        statusMessage = "🎯 Your turn! Current pot: $currentPot | Your chips: $playerChips | Actions: ${subState.validActions.joinToString(", ")}"
                         awaitingPlayerAction = true
                     }
                     is PlayingSubState.ShowingResults -> {
@@ -447,10 +447,10 @@ fun GameplayScreen(
                 val timestamp = System.currentTimeMillis()
                 lastActionResult =
                     when (actionType.lowercase()) {
-                        "call" -> "Called!"
-                        "raise" -> "Raised $amount!"
-                        "fold" -> "Folded"
-                        "check" -> "Checked"
+                        "call" -> "📞 Called! (Matched the current bet)"
+                        "raise" -> "⬆️ Raised to $amount! (Previous bet + $amount)"
+                        "fold" -> "🔽 Folded (Withdrew from this round)"
+                        "check" -> "✅ Checked (No bet needed)"
                         else -> "Action performed"
                     }
 
@@ -498,8 +498,13 @@ fun GameplayScreen(
                         if (monsterHealth <= 0) {
                             lastActionResult = "⚔️ Attack dealt $damage damage! Monster defeated! 🏆"
                             safariCaptures += 1 // Count as successful encounter
+                            // Mark monster as seen and defeated for encyclopedia
+                            monsterOpponentManager.markMonsterSeen("Training Dummy")
+                            monsterOpponentManager.markMonsterDefeated("Training Dummy")
                         } else {
                             lastActionResult = "⚔️ Attack dealt $damage damage! Monster health: $monsterHealth/100"
+                            // Mark monster as seen when first encountered
+                            monsterOpponentManager.markMonsterSeen("Training Dummy")
                         }
                         
                         // Clear message after delay
@@ -561,8 +566,13 @@ fun GameplayScreen(
                             if (captured) {
                                 lastActionResult = "Monster captured! ($safariBallsRemaining balls left)"
                                 safariCaptures += 1
+                                // Mark monster as seen and defeated for encyclopedia
+                                monsterOpponentManager.markMonsterSeen("Common Starter")
+                                monsterOpponentManager.markMonsterDefeated("Common Starter")
                             } else {
                                 lastActionResult = "Capture failed! ($safariBallsRemaining balls left)"
+                                // Still mark as seen even if capture failed
+                                monsterOpponentManager.markMonsterSeen("Common Starter")
                             }
                             
                             // End game if no safari balls left

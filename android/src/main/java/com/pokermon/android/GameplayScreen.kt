@@ -14,6 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.pokermon.GameFlows.GameActions
+import com.pokermon.GameFlows.GameEvents
 import com.pokermon.GameFlows.GameState
 import com.pokermon.GameFlows.PlayingSubState
 import com.pokermon.GameMode
@@ -54,7 +55,8 @@ fun GameplayScreen(
 
     // Reactive state from state management system
     val gameState by gameBridge.gameStateFlow.collectAsState(initial = GameState.Initializing)
-    val gameEvents by gameBridge.gameEventsFlow.collectAsState(initial = emptyList<GameActions>())
+    // Note: GameEvents are handled internally by the GameStateManager
+    // val gameEvents by gameBridge.gameEventsFlow.collectAsState(initial = emptyList<GameEvents>())
 
     // UI state derived from game state
     var statusMessage by remember { mutableStateOf("Initializing game...") }

@@ -195,10 +195,63 @@ fun GameplayScreen(
                 statusMessage = "🏆 Victory! ${state.winner.name} wins with ${state.victoryType.name}!"
                 achievementNotification = state.achievements.firstOrNull()
                 awaitingPlayerAction = false
+                
+                // Record game completion in statistics
+                val isPlayerWinner = state.winner.name == userProfile.username
+                val chipsWon = if (isPlayerWinner) maxOf(0, playerChips - 1000) else 0 // Assuming starting chips were 1000
+                
+                // Try to get hand evaluation, fallback to basic evaluation
+                val handAchieved = try {
+                    val hand = gameBridge.getPlayerHand()
+                    if (hand.isNotEmpty()) {
+                        // Simple hand evaluation based on card names
+                        when {
+                            hand.any { it.contains("A") && it.contains("K") } -> "High Pair"
+                            hand.size >= 2 && hand.groupBy { it.split(" ")[0] }.any { it.value.size >= 2 } -> "Pair"
+                            else -> "High Card"
+                        }
+                    } else "High Card"
+                } catch (e: Exception) {
+                    "High Card"
+                }
+                
+                userProfileManager.recordGameCompletion(
+                    won = isPlayerWinner,
+                    chipsWon = chipsWon.toLong(),
+                    handAchieved = handAchieved,
+                    gameMode = gameMode.name
+                )
+                
+                // Award achievements if any
+                state.achievements.forEach { achievement ->
+                    userProfileManager.awardAchievement(achievement)
+                }
             }
             is GameState.GameOver -> {
                 statusMessage = "Game Over - ${state.gameOverReason}"
                 awaitingPlayerAction = false
+                
+                // Record game completion as loss
+                val handAchieved = try {
+                    val hand = gameBridge.getPlayerHand()
+                    if (hand.isNotEmpty()) {
+                        // Simple hand evaluation based on card names
+                        when {
+                            hand.any { it.contains("A") && it.contains("K") } -> "High Pair"
+                            hand.size >= 2 && hand.groupBy { it.split(" ")[0] }.any { it.value.size >= 2 } -> "Pair"
+                            else -> "High Card"
+                        }
+                    } else "High Card"
+                } catch (e: Exception) {
+                    "High Card"
+                }
+                
+                userProfileManager.recordGameCompletion(
+                    won = false,
+                    chipsWon = 0L,
+                    handAchieved = handAchieved,
+                    gameMode = gameMode.name
+                )
             }
             is GameState.Paused -> {
                 statusMessage = "Game paused - ${state.pauseReason}"
@@ -237,9 +290,14 @@ fun GameplayScreen(
                 startingChips = 1000,
             )
 
-            // Initialize mode-specific state
+            // Initialize mode-specific state and award first-time achievements
             when (gameMode) {
                 GameMode.ADVENTURE -> {
+                    // Award first-time adventure achievement
+                    if (userProfile.adventureProgress == 0) {
+                        userProfileManager.awardAchievement("Adventure Begins")
+                    }
+                    
                     delay(1000) // Allow initialization
                     gameBridge.enterSubState(
                         PlayingSubState.AdventureMode(
@@ -250,6 +308,11 @@ fun GameplayScreen(
                     )
                 }
                 GameMode.SAFARI -> {
+                    // Award first-time safari achievement
+                    if (userProfile.safariEncounters == 0) {
+                        userProfileManager.awardAchievement("Safari Explorer")
+                    }
+                    
                     delay(1000)
                     gameBridge.enterSubState(
                         PlayingSubState.SafariMode(
@@ -260,6 +323,11 @@ fun GameplayScreen(
                     )
                 }
                 GameMode.IRONMAN -> {
+                    // Award first-time ironman achievement
+                    if (userProfile.ironmanPulls == 0) {
+                        userProfileManager.awardAchievement("High Stakes")
+                    }
+                    
                     delay(1000)
                     gameBridge.enterSubState(
                         PlayingSubState.IronmanMode(
@@ -270,7 +338,10 @@ fun GameplayScreen(
                     )
                 }
                 else -> {
-                    // Classic mode - no special sub-state needed
+                    // Classic mode - award first game achievement if needed
+                    if (userProfile.totalGamesPlayed == 0) {
+                        userProfileManager.awardAchievement("First Steps")
+                    }
                 }
             }
         } catch (e: Exception) {
@@ -324,6 +395,12 @@ fun GameplayScreen(
                                 damage = (playerCards.size * 10), // Damage based on hand
                             ),
                         )
+                        
+                        // Update adventure progress
+                        val currentProfile = userProfileManager.userProfile.value
+                        userProfileManager.updateUserProfile(
+                            currentProfile.copy(adventureProgress = currentProfile.adventureProgress + 1)
+                        )
                     }
                     "flee" -> {
                         gameBridge.processGameAction(
@@ -343,6 +420,29 @@ fun GameplayScreen(
                                 captureChance = 0.6, // Base capture chance
                             ),
                         )
+                        
+                        // Update safari encounters and potentially monsters collected
+                        val currentProfile = userProfileManager.userProfile.value
+                        val captured = Math.random() < 0.6 // Simulate capture success
+                        userProfileManager.updateUserProfile(
+                            currentProfile.copy(
+                                safariEncounters = currentProfile.safariEncounters + 1,
+                                monstersCollected = if (captured) currentProfile.monstersCollected + 1 else currentProfile.monstersCollected
+                            )
+                        )
+                        
+                        if (captured) {
+                            lastActionResult = "Monster captured!"
+                            safariCaptures += 1
+                        } else {
+                            lastActionResult = "Capture failed!"
+                        }
+                        
+                        // Clear message after delay
+                        coroutineScope.launch {
+                            delay(3000)
+                            lastActionResult = ""
+                        }
                     }
                     "bait" -> {
                         // Safari ball mechanics
@@ -358,6 +458,17 @@ fun GameplayScreen(
                                 pointsSpent = gachaPoints.coerceAtLeast(1),
                             ),
                         )
+                        
+                        // Update ironman pulls
+                        val currentProfile = userProfileManager.userProfile.value
+                        userProfileManager.updateUserProfile(
+                            currentProfile.copy(ironmanPulls = currentProfile.ironmanPulls + 1)
+                        )
+                        
+                        // Award achievement for first gacha pull
+                        if (currentProfile.ironmanPulls == 0) {
+                            userProfileManager.awardAchievement("First Gacha")
+                        }
                     }
                     "risk_mode" -> {
                         gameBridge.processGameAction(

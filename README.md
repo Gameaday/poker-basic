@@ -11,6 +11,8 @@
 
 A comprehensive cross-platform gaming platform featuring four distinct game modes, Flow-based reactive state management, and complete cross-platform UI integration. Built with **pure Kotlin-native architecture** using advanced state management patterns, comprehensive AI systems, and professional code quality standards.
 
+> **📋 For current project status and path forward, see [PROJECT_STATUS.md](PROJECT_STATUS.md)**
+
 ## 🚀 Quick Start
 
 ### 📦 Native Executables (Primary Deliverables)

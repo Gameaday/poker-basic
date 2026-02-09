@@ -9,6 +9,8 @@ import com.pokermon.database.MonsterBattleSystem
 import com.pokermon.database.MonsterCollection
 import com.pokermon.modern.CardUtils
 import com.pokermon.players.PlayerProfile
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import kotlin.math.min
 import kotlin.random.Random
 
@@ -414,7 +416,7 @@ class IronmanGameMode(
         gachaPoints -= pullCount * pullCost
 
         repeat(pullCount) { pullIndex ->
-            Thread.sleep(1000) // Build suspense
+            runBlocking { delay(1000) } // Build suspense
             val monster = performSinglePull()
             println("Pull ${pullIndex + 1}: ${monster.name} (${monster.rarity.displayName})!")
             playerCollection.addMonster(monster)

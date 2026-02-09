@@ -10,6 +10,8 @@ import com.pokermon.database.MonsterCollection
 import com.pokermon.database.MonsterStats
 import com.pokermon.modern.CardUtils
 import com.pokermon.players.PlayerProfile
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import kotlin.random.Random
 
 /**
@@ -226,7 +228,7 @@ class SafariGameMode(
 
         println("Final capture chance: ${String.format("%.1f%%", finalCaptureChance * 100)}")
         println("🎯 Throwing Safari Ball...")
-        Thread.sleep(1500) // Build suspense
+        runBlocking { delay(1500) } // Build suspense
 
         val success = random.nextDouble() < finalCaptureChance
 

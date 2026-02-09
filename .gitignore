@@ -350,6 +350,8 @@ Thumbs.db
 *~
 *.swp
 *.swo
+*.backup
+*.original
 
 # Log files
 *.log

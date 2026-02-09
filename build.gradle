@@ -34,11 +34,6 @@ buildscript {
 }
 
 allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-    
     // Apply Kotlin configuration to all projects
     afterEvaluate {
         if (plugins.hasPlugin('org.jetbrains.kotlin.android') || 

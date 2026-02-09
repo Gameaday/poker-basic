@@ -79,8 +79,8 @@ test {
     
     // Test logging
     testLogging {
-        events "passed", "skipped", "failed"
-        exceptionFormat "full"
+        events = ["passed", "skipped", "failed"]
+        exceptionFormat = "full"
     }
     
     // System properties for tests

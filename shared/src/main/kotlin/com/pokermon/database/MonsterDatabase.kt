@@ -295,11 +295,15 @@ object MonsterDatabase {
 
     /**
      * Get random monster using provided Random instance.
-     * Enhanced to support both Java and Kotlin Random for compatibility.
+     * Enhanced to properly utilize the provided Java Random instance.
      */
     fun getRandomMonster(random: java.util.Random): Monster? {
         val monsters = getAllMonsters()
-        return monsters.randomOrNull(kotlin.random.Random(random.nextInt()))
+        return if (monsters.isNotEmpty()) {
+            monsters[random.nextInt(monsters.size)]
+        } else {
+            null
+        }
     }
 
     /**

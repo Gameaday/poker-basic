@@ -533,14 +533,21 @@ open class Player(
     val isActive: Boolean get() = !_fold && !isBusted
 
     /**
-     * Get current bet as a percentage of total chips.
+     * Get current bet as a percentage of total original chips (before bet).
+     * Calculates what percentage of the player's pre-bet chip stack was wagered.
      */
-    val betPercentage: Double get() = if (chips > 0) (_bet.toDouble() / chips) * 100 else 0.0
+    val betPercentage: Double
+        get() {
+            val totalBeforeBet = chips + _bet
+            return if (totalBeforeBet > 0) (_bet.toDouble() / totalBeforeBet) * 100 else 0.0
+        }
 
     /**
-     * Kotlin-native DSL for setting up a player.
+     * Kotlin-native DSL for reconfiguring a player.
+     * Note: This mutates the existing player instance. Use only when you want to
+     * reset/reconfigure an existing player, not for initial setup.
      */
-    fun setup(block: PlayerSetup.() -> Unit) {
+    fun reconfigure(block: PlayerSetup.() -> Unit) {
         val setup = PlayerSetup()
         setup.block()
         name = setup.name
@@ -550,12 +557,28 @@ open class Player(
     }
 
     /**
-     * Builder class for player setup.
+     * Builder class for player setup/reconfiguration.
      */
     class PlayerSetup {
         var name: String = ""
         var chips: Int = 0
         var isHuman: Boolean = false
         var isAI: Boolean = false
+    }
+
+    companion object {
+        /**
+         * Factory method to create a new player using DSL.
+         */
+        fun create(block: PlayerSetup.() -> Unit): Player {
+            val setup = PlayerSetup()
+            setup.block()
+            return Player(
+                name = setup.name,
+                chips = setup.chips,
+                isHuman = setup.isHuman,
+                isAI = setup.isAI,
+            )
+        }
     }
 }

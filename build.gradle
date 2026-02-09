@@ -77,13 +77,21 @@ task verifyKotlinNativeSetup {
             def kotlinFiles = kotlinSource.listFiles().findAll { it.name.endsWith('.kt') }
             println "✅ Kotlin source: ${kotlinFiles.size()} files in com.pokermon package"
             
-            // Check for key Kotlin-native classes
-            def keyClasses = ['Monster.kt', 'MonsterDatabase.kt', 'GameEngine.kt', 'Player.kt']
-            keyClasses.each { className ->
-                if (new File(kotlinSource, className).exists()) {
-                    println "✅ ${className} - Kotlin-native implementation ready"
+            // Check for key Kotlin-native classes with their actual locations
+            def keyClasses = [
+                'GameEngine.kt': '',  // Root of pokermon package
+                'database/Monster.kt': 'database/',
+                'database/MonsterDatabase.kt': 'database/',
+                'players/Player.kt': 'players/'
+            ]
+            
+            keyClasses.each { className, subPath ->
+                def classFile = new File(kotlinSource, className)
+                def displayName = className.contains('/') ? className.split('/')[1] : className
+                if (classFile.exists()) {
+                    println "✅ ${displayName} - Kotlin-native implementation ready"
                 } else {
-                    println "⚠️  ${className} - needs migration"
+                    println "⚠️  ${displayName} - needs migration"
                 }
             }
         } else {

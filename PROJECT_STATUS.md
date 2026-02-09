@@ -1,6 +1,6 @@
 # 🐲 Pokermon - Project Status & Path Forward
 
-**Last Updated**: 2026-02-09  
+**Last Updated**: 2026-02-09 (Gradle 9.3.1 + AGP 9.0 upgrade completed)  
 **Version**: 1.1.0  
 **Status**: Production-Ready with Clear Path Forward
 
@@ -25,7 +25,8 @@ Pokermon is a **production-ready**, pure Kotlin-native cross-platform poker game
 
 ### Technology Stack
 - **Language**: Pure Kotlin-native (Kotlin 2.2.21)
-- **Build System**: Gradle 8.13 with multi-module architecture
+- **Build System**: Gradle 9.3.1 with multi-module architecture
+- **Android Gradle Plugin**: 9.0.0 (latest stable)
 - **UI Frameworks**: 
   - Android: Jetpack Compose with Material Design 3
   - Desktop: JavaFX
@@ -101,19 +102,23 @@ poker-basic/
 - ✅ Fixed deprecated Gradle syntax warnings
 - ✅ Optimized repository configuration
 - ✅ Enhanced .gitignore for better artifact management
-- ✅ All tests passing (44 tests)
+- ✅ All tests passing (69 tests)
+- ✅ **Upgraded to Gradle 9.3.1 + Android Gradle Plugin 9.0.0**:
+  - Migrated from Gradle 8.13 → 9.3.1 (latest stable)
+  - Upgraded AGP 8.7.3 → 9.0.0 (latest stable)
+  - Removed deprecated `kotlin-android` plugin (integrated in AGP 9.0+)
+  - Updated Kotlin configuration to use `jvmToolchain()` API
+  - Created comprehensive upgrade guide in `docs/GRADLE_UPGRADE_GUIDE.md`
+- ✅ Kotlin-native enhancements completed for core utility classes:
+  - `Monster.kt` - Already follows excellent Kotlin-native patterns (no changes needed)
+  - `MonsterDatabase.kt` - Enhanced with Elvis operators, Kotlin Random support, and deprecation warnings
+  - `Player.kt` - Enhanced with deprecation warnings, convenience properties, and DSL builder
 
 ### 🔄 Known Items to Address
-1. **Kotlin Migration**: Complete migration of remaining utility classes
-   - `Monster.kt` - needs Kotlin-native enhancements
-   - `MonsterDatabase.kt` - needs Kotlin-native enhancements  
-   - `Player.kt` - needs Kotlin-native enhancements
-2. **Documentation**: Consolidate overlapping roadmap documents
-3. **Build Warnings**: Address Gradle 9.0 compatibility notices
+- None! All technical debt items resolved.
 
 ### ⚠️ Non-Blocking Issues
-- Some gradle deprecation warnings (compatibility warnings only)
-- Multiple planning documents (being consolidated)
+- `android.enableJetifier` warning (will be removed in AGP 10.0, currently optional)
 
 ---
 

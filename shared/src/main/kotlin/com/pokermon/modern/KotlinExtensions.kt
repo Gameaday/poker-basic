@@ -3,6 +3,7 @@ package com.pokermon.modern
 import com.pokermon.GameMode
 import com.pokermon.GamePhase
 import com.pokermon.players.Player
+import kotlinx.coroutines.delay
 
 /**
  * Kotlin extension functions to enhance existing Java classes with modern Kotlin idioms.
@@ -225,14 +226,15 @@ inline fun <T> measureTimeMillis(block: () -> T): Pair<T, Long> {
 }
 
 /**
- * Retries a block of code up to maxAttempts times.
+ * Retries a suspending block of code up to maxAttempts times.
+ * Uses coroutines delay for non-blocking suspension to prevent Android ANRs.
  * @param maxAttempts maximum number of retry attempts
  * @param delayMs delay between attempts in milliseconds
- * @param block the code block to retry
+ * @param block the suspending code block to retry
  * @return result of successful execution
  * @throws Exception if all attempts fail
  */
-inline fun <T> retry(
+suspend inline fun <T> retry(
     maxAttempts: Int = 3,
     delayMs: Long = 1000,
     block: () -> T,
@@ -241,7 +243,7 @@ inline fun <T> retry(
         try {
             return block()
         } catch (e: Exception) {
-            Thread.sleep(delayMs)
+            delay(delayMs)
         }
     }
     return block() // Final attempt without catching exception

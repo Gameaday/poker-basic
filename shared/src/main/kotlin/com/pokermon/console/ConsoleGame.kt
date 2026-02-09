@@ -3,6 +3,7 @@ package com.pokermon.console
 import com.pokermon.*
 import com.pokermon.GameFlows.*
 import com.pokermon.players.Player
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import java.util.*
 
@@ -84,7 +85,7 @@ class ConsoleGame {
     /**
      * Starts Safari Mode gameplay
      */
-    private fun startSafariMode(
+    private suspend fun startSafariMode(
         playerName: String,
         startingChips: Int,
     ) {
@@ -101,7 +102,7 @@ class ConsoleGame {
     /**
      * Starts Ironman Mode gameplay
      */
-    private fun startIronmanMode(
+    private suspend fun startIronmanMode(
         playerName: String,
         startingChips: Int,
         difficulty: Int,
@@ -275,7 +276,7 @@ class ConsoleGame {
                     // AI decision making
                     val action = makeAIDecision(player, currentBet, pot)
                     handlePlayerAction(player, action, currentBet, playersBet)
-                    Thread.sleep(1000) // Brief pause for readability
+                    delay(1000) // Brief pause for readability
                 } else {
                     // Human player
                     ConsoleUI.displayHand(player)

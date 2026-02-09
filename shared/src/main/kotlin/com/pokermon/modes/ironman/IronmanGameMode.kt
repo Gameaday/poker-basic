@@ -9,6 +9,7 @@ import com.pokermon.database.MonsterBattleSystem
 import com.pokermon.database.MonsterCollection
 import com.pokermon.modern.CardUtils
 import com.pokermon.players.PlayerProfile
+import kotlinx.coroutines.delay
 import kotlin.math.min
 import kotlin.random.Random
 
@@ -84,7 +85,7 @@ class IronmanGameMode(
     /**
      * Starts the Ironman Mode gameplay loop.
      */
-    fun startIronman() {
+    suspend fun startIronman() {
         println("⚡ IRONMAN MODE - HIGH STAKES SURVIVAL ⚡")
         println("Difficulty: ${getDifficultyName(difficultyLevel)}")
         println("Permadeath: ${if (hasPermadeath) "ENABLED" else "DISABLED"}")
@@ -358,7 +359,7 @@ class IronmanGameMode(
     /**
      * Handles post-round player options
      */
-    private fun handlePostRoundOptions(playerChips: Int): Boolean {
+    private suspend fun handlePostRoundOptions(playerChips: Int): Boolean {
         println("\n🎯 POST-ROUND OPTIONS:")
         println("1. Continue ironman run")
         println("2. Gacha pull ($100 points per pull)")
@@ -388,7 +389,7 @@ class IronmanGameMode(
     /**
      * Performs a gacha pull for monster rewards
      */
-    private fun performGachaPull() {
+    private suspend fun performGachaPull() {
         val pullCost = 100
         val maxPulls = gachaPoints / pullCost
 
@@ -414,7 +415,7 @@ class IronmanGameMode(
         gachaPoints -= pullCount * pullCost
 
         repeat(pullCount) { pullIndex ->
-            Thread.sleep(1000) // Build suspense
+            delay(1000) // Build suspense
             val monster = performSinglePull()
             println("Pull ${pullIndex + 1}: ${monster.name} (${monster.rarity.displayName})!")
             playerCollection.addMonster(monster)

@@ -10,6 +10,7 @@ import com.pokermon.database.MonsterCollection
 import com.pokermon.database.MonsterStats
 import com.pokermon.modern.CardUtils
 import com.pokermon.players.PlayerProfile
+import kotlinx.coroutines.delay
 import kotlin.random.Random
 
 /**
@@ -41,7 +42,7 @@ class SafariGameMode(
     /**
      * Starts the Safari Mode gameplay loop.
      */
-    fun startSafari() {
+    suspend fun startSafari() {
         println("🏕️ Welcome to Safari Mode! 🏕️")
         println("You have $ballsRemaining safari balls to catch monsters.")
         println("Use poker skills and strategy to improve capture chances!")
@@ -184,7 +185,7 @@ class SafariGameMode(
     /**
      * Attempts to capture a wild monster through poker gameplay
      */
-    private fun attemptCapture(
+    private suspend fun attemptCapture(
         monster: WildMonster,
         playerChips: Int,
     ): CaptureResult {
@@ -226,7 +227,7 @@ class SafariGameMode(
 
         println("Final capture chance: ${String.format("%.1f%%", finalCaptureChance * 100)}")
         println("🎯 Throwing Safari Ball...")
-        Thread.sleep(1500) // Build suspense
+        delay(1500) // Build suspense
 
         val success = random.nextDouble() < finalCaptureChance
 

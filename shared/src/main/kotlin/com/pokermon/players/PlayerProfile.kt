@@ -3,8 +3,11 @@ package com.pokermon.players
 import com.pokermon.GameMode
 import com.pokermon.database.Monster
 import com.pokermon.database.MonsterCollection
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import java.time.LocalDateTime
 
@@ -212,8 +215,13 @@ class ProfileManager private constructor() {
         }
     }
 
-    private val _currentProfile = MutableStateFlow<PlayerProfile?>(null)
-    val currentProfile: StateFlow<PlayerProfile?> = _currentProfile.asStateFlow()
+    // Using SharedFlow instead of StateFlow to avoid requiring an initial value
+    // replay = 1 allows new subscribers to get the most recent profile if one exists
+    private val _currentProfile = MutableSharedFlow<PlayerProfile?>(replay = 1)
+    val currentProfile: SharedFlow<PlayerProfile?> = _currentProfile.asSharedFlow()
+
+    // Track the current profile ID to determine when to emit updates
+    private var currentProfileId: String? = null
 
     private val _profiles = MutableStateFlow<Map<String, PlayerProfile>>(emptyMap())
     val profiles: StateFlow<Map<String, PlayerProfile>> = _profiles.asStateFlow()
@@ -235,7 +243,8 @@ class ProfileManager private constructor() {
      */
     fun loadProfile(playerId: String): PlayerProfile? {
         val profile = _profiles.value[playerId]
-        _currentProfile.value = profile
+        currentProfileId = playerId
+        _currentProfile.tryEmit(profile)
         return profile
     }
 
@@ -244,8 +253,8 @@ class ProfileManager private constructor() {
      */
     fun saveProfile(profile: PlayerProfile) {
         _profiles.value = _profiles.value + (profile.playerId to profile)
-        if (_currentProfile.value?.playerId == profile.playerId) {
-            _currentProfile.value = profile
+        if (currentProfileId == profile.playerId) {
+            _currentProfile.tryEmit(profile)
         }
     }
 
@@ -253,9 +262,11 @@ class ProfileManager private constructor() {
      * Update current profile
      */
     fun updateCurrentProfile(update: (PlayerProfile) -> PlayerProfile) {
-        _currentProfile.value?.let { current ->
-            val updated = update(current)
-            saveProfile(updated)
+        currentProfileId?.let { profileId ->
+            _profiles.value[profileId]?.let { current ->
+                val updated = update(current)
+                saveProfile(updated)
+            }
         }
     }
 }

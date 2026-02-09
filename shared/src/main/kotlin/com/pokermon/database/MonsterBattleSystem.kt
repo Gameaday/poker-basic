@@ -7,11 +7,21 @@ import kotlin.random.Random
  * Handles turn-based combat, ability usage, and battle resolution.
  * Integrates poker hand strength with monster battle mechanics.
  *
+ * @param maxTurns Maximum number of turns before battle ends in a draw (default: 50)
  * @author Pokermon Battle System
  * @version 1.0.0
  */
-class MonsterBattleSystem {
+class MonsterBattleSystem(
+    private val maxTurns: Int = DEFAULT_MAX_TURNS
+) {
     private val random = Random.Default
+
+    companion object {
+        /**
+         * Default maximum turns for standard battles
+         */
+        const val DEFAULT_MAX_TURNS = 50
+    }
 
     /**
      * Execute a complete battle between two monsters
@@ -25,7 +35,6 @@ class MonsterBattleSystem {
         var enemy = enemyMonster.heal()
         val battleLog = mutableListOf<BattleAction>()
         var turnCount = 0
-        val maxTurns = 50 // Prevent infinite battles
 
         // Apply poker hand strength bonus to player monster
         val handBonus = calculateHandBonus(playerHandStrength)

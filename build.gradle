@@ -34,12 +34,7 @@ buildscript {
 }
 
 allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-    
-    // Apply Kotlin configuration to all projects
+    // Configure Kotlin compilation options for all subprojects
     afterEvaluate {
         if (plugins.hasPlugin('org.jetbrains.kotlin.android') || 
             plugins.hasPlugin('org.jetbrains.kotlin.jvm') ||

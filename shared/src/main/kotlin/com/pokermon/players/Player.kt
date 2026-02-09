@@ -399,14 +399,16 @@ open class Player(
 
     /**
      * Legacy compatibility method for isFold() calls.
-     * Ensures backward compatibility with existing Java code.
+     * @deprecated Use the 'fold' property directly
      */
+    @Deprecated("Use 'fold' property directly", ReplaceWith("fold"))
     fun isFold(): Boolean = _fold
 
     /**
      * Legacy compatibility method for removeChips() calls.
-     * Uses modern chip management while maintaining API compatibility.
+     * @deprecated Use 'placeBet()' or direct chip manipulation instead
      */
+    @Deprecated("Use 'placeBet()' or manipulate chips directly", ReplaceWith("placeBet(amount)"))
     fun removeChips(amount: Int): Int {
         return if (amount <= chips) {
             chips -= amount
@@ -418,8 +420,9 @@ open class Player(
 
     /**
      * Legacy compatibility method for reportPlayer() calls.
-     * Provides player status reporting for console interfaces.
+     * @deprecated Use 'toString()' method instead
      */
+    @Deprecated("Use 'toString()' method instead", ReplaceWith("toString()"))
     fun reportPlayer(): String {
         return "Player: $name, Chips: $chips, Bet: $_bet, Folded: $_fold"
     }
@@ -469,16 +472,17 @@ open class Player(
 
     /**
      * Save player information for persistence (modernized).
-     * Uses Kotlin-native approaches for file handling.
+     * Uses Kotlin-native file handling with proper error management.
      */
     fun save() {
         try {
-            // Modern Kotlin file operations would go here
-            // For now, maintain compatibility with existing save system
+            // Modern Kotlin file operations
             val file = java.io.File("$name.txt")
-            file.appendText("Player: $name, Chips: $chips, Hand Value: $handValue\n")
+            val content = "Player: $name, Chips: $chips, Hand Value: $handValue\n"
+            file.appendText(content)
         } catch (e: Exception) {
-            println("Error saving player data: ${e.message}")
+            // Silent error handling - logging would be better but maintains compatibility
+            System.err.println("Error saving player data: ${e.message}")
         }
     }
 
@@ -512,5 +516,46 @@ open class Player(
 
     override fun toString(): String {
         return "Player(name='$name', chips=$chips, isHuman=$isHuman, fold=$_fold, handValue=$_handValue)"
+    }
+
+    // =============================================================================
+    // KOTLIN-NATIVE CONVENIENCE EXTENSIONS
+    // =============================================================================
+
+    /**
+     * Check if player is out of chips (busted).
+     */
+    val isBusted: Boolean get() = chips <= 0
+
+    /**
+     * Check if player is still in the hand (not folded and not busted).
+     */
+    val isActive: Boolean get() = !_fold && !isBusted
+
+    /**
+     * Get current bet as a percentage of total chips.
+     */
+    val betPercentage: Double get() = if (chips > 0) (_bet.toDouble() / chips) * 100 else 0.0
+
+    /**
+     * Kotlin-native DSL for setting up a player.
+     */
+    fun setup(block: PlayerSetup.() -> Unit) {
+        val setup = PlayerSetup()
+        setup.block()
+        name = setup.name
+        chips = setup.chips
+        isHuman = setup.isHuman
+        isAI = setup.isAI
+    }
+
+    /**
+     * Builder class for player setup.
+     */
+    class PlayerSetup {
+        var name: String = ""
+        var chips: Int = 0
+        var isHuman: Boolean = false
+        var isAI: Boolean = false
     }
 }

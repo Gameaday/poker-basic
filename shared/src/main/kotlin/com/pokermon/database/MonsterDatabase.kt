@@ -201,10 +201,9 @@ object MonsterDatabase {
 
     /**
      * Get a monster by name (null-safe).
+     * Enhanced with Kotlin-native null handling using map's built-in null safety.
      */
-    fun getMonster(name: String?): Monster? {
-        return if (name != null) monsterDatabase[name] else null
-    }
+    fun getMonster(name: String?): Monster? = monsterDatabase[name]
 
     /**
      * Get all monsters as immutable list.
@@ -233,10 +232,9 @@ object MonsterDatabase {
 
     /**
      * Check if monster exists in database.
+     * Enhanced with Kotlin-native safe call operator.
      */
-    fun containsMonster(name: String?): Boolean {
-        return name != null && monsterDatabase.containsKey(name)
-    }
+    fun containsMonster(name: String?): Boolean = name?.let { monsterDatabase.containsKey(it) } ?: false
 
     /**
      * Get monsters by effect type for strategic selection.
@@ -267,13 +265,17 @@ object MonsterDatabase {
 
     /**
      * Java compatibility methods for legacy code during migration.
+     * Marked as deprecated to encourage direct use of Kotlin functions.
      */
+    @Deprecated("Use getMonster() directly", ReplaceWith("getMonster(name)"))
     @JvmStatic
     fun getMonsterStatic(name: String?): Monster? = getMonster(name)
 
+    @Deprecated("Use getAllMonsters() directly", ReplaceWith("getAllMonsters()"))
     @JvmStatic
     fun getAllMonstersStatic(): List<Monster> = getAllMonsters()
 
+    @Deprecated("Use getRandomMonsterByRarity() directly", ReplaceWith("getRandomMonsterByRarity(rarity)"))
     @JvmStatic
     fun getRandomMonsterByRarityStatic(rarity: Monster.Rarity): Monster? = getRandomMonsterByRarity(rarity)
 
@@ -293,15 +295,17 @@ object MonsterDatabase {
 
     /**
      * Get random monster using provided Random instance.
+     * Enhanced to support both Java and Kotlin Random for compatibility.
      */
     fun getRandomMonster(random: java.util.Random): Monster? {
         val monsters = getAllMonsters()
-        return if (monsters.isNotEmpty()) {
-            monsters[random.nextInt(monsters.size)]
-        } else {
-            null
-        }
+        return monsters.randomOrNull(kotlin.random.Random(random.nextInt()))
     }
+
+    /**
+     * Get random monster using Kotlin-native Random (preferred).
+     */
+    fun getRandomMonster(): Monster? = getAllMonsters().randomOrNull()
 
     /**
      * Get monster names starting with specified prefix.

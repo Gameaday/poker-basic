@@ -85,7 +85,7 @@ class ConsoleGame {
     /**
      * Starts Safari Mode gameplay
      */
-    private fun startSafariMode(
+    private suspend fun startSafariMode(
         playerName: String,
         startingChips: Int,
     ) {
@@ -102,7 +102,7 @@ class ConsoleGame {
     /**
      * Starts Ironman Mode gameplay
      */
-    private fun startIronmanMode(
+    private suspend fun startIronmanMode(
         playerName: String,
         startingChips: Int,
         difficulty: Int,

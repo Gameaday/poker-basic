@@ -128,7 +128,7 @@ dependencies {
     // Android and UI dependencies - Conservative stable updates
     implementation 'androidx.core:core-ktx:1.17.0'
     implementation 'androidx.appcompat:appcompat:1.7.1'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.9.4'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.10.0'
     implementation 'androidx.activity:activity-compose:1.11.0'
     implementation platform('androidx.compose:compose-bom:2025.11.00')
 
@@ -144,8 +144,8 @@ dependencies {
     implementation 'io.coil-kt:coil-compose:2.7.0'
     
     // Enhanced lifecycle support for audio management
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.9.4'
-    implementation 'androidx.lifecycle:lifecycle-common-java8:2.9.4'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0'
+    implementation 'androidx.lifecycle:lifecycle-common-java8:2.10.0'
     
     // Kotlinx Serialization for save/load functionality
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0'

@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     // Note: 'kotlin-android' plugin removed as it's integrated in AGP 9.0+
-    id 'org.jetbrains.kotlin.plugin.compose' version '2.3.10'
+    id 'org.jetbrains.kotlin.plugin.compose' version '2.3.20'
     id 'org.jetbrains.kotlin.plugin.serialization'
     id 'org.jlleitschuh.gradle.ktlint'
 }
@@ -123,7 +123,7 @@ dependencies {
     implementation project(':shared')
     
     // Kotlin-native dependencies - aligned with main project
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:2.3.10'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:2.3.20'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2'
     
     // Android and UI dependencies - Conservative stable updates

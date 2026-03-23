@@ -119,7 +119,7 @@ jobs:
         ./gradlew :shared:test --no-daemon
     
     - name: Generate test report
-      uses: dorny/test-reporter@v2
+      uses: dorny/test-reporter@v3
       if: always() && steps.context.outputs.should-run == 'true'
       with:
         name: Pure Kotlin-Native Tests
